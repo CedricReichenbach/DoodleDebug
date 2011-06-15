@@ -38,9 +38,14 @@ public class Drawer {
 		graphics.setClip(clip);
 
 		try {
-			Class<Drawer>[] da = new Class<Drawer>[1];
+			Class[] da = new Class[]{this.getClass()};
 			o.getClass().getMethod("draw", da);
+			try {
 			((Drawable) o).draw(this);
+			} catch (ClassCastException e) {
+				e.printStackTrace();
+				throw new NoSuchMethodException();
+			}
 		} catch (NoSuchMethodException nsme) {
 			if (o.getClass().isInstance(new ArrayList<Object>())) {
 				this.drawArrayList((ArrayList<Object>) o);
