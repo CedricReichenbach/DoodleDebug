@@ -98,7 +98,7 @@
 			CodeGeneration
 		</plugin>
 </profile>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Tue Oct 11 09:42:49 CEST 2011'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Tue Oct 11 10:52:56 CEST 2011'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.32.2(6) revised on $Date: 2010-01-11 22:20:14 +0100 (Mon, 11 Jan 2010) $ </XMI.exporterVersion>
@@ -204,21 +204,6 @@
             </UML:Dependency>
           </UML:Namespace.ownedElement>
           <UML:Classifier.feature>
-            <UML:Attribute xmi.id = '-126-92-99--99--1106da55:130982fa4e1:-8000:0000000000000A70'
-              name = 'graphics' visibility = 'private' isSpecification = 'false' ownerScope = 'instance'
-              changeability = 'changeable' targetScope = 'instance'>
-              <UML:StructuralFeature.multiplicity>
-                <UML:Multiplicity xmi.id = '-126-92-99--99--1106da55:130982fa4e1:-8000:0000000000000A71'>
-                  <UML:Multiplicity.range>
-                    <UML:MultiplicityRange xmi.id = '-126-92-99--99--1106da55:130982fa4e1:-8000:0000000000000A72'
-                      lower = '1' upper = '1'/>
-                  </UML:Multiplicity.range>
-                </UML:Multiplicity>
-              </UML:StructuralFeature.multiplicity>
-              <UML:StructuralFeature.type>
-                <UML:Class xmi.idref = '-126-92-99--99--1106da55:130982fa4e1:-8000:0000000000000A77'/>
-              </UML:StructuralFeature.type>
-            </UML:Attribute>
             <UML:Operation xmi.id = '-126-92-99--99--1106da55:130982fa4e1:-8000:0000000000000A74'
               name = 'draw' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
               isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
@@ -656,8 +641,8 @@
           name = 'AnyRendering' visibility = 'public' isSpecification = 'false' isRoot = 'false'
           isLeaf = 'false' isAbstract = 'false' isActive = 'false'>
           <UML:ModelElement.clientDependency>
-            <UML:Abstraction xmi.idref = '-126-92-99-4--2ece25f1:132f1e34f4c:-8000:00000000000009C7'/>
             <UML:Dependency xmi.idref = '-126-92-99-4--2ece25f1:132f1e34f4c:-8000:00000000000009CF'/>
+            <UML:Abstraction xmi.idref = '-126-92-99-4--2ece25f1:132f1e34f4c:-8000:00000000000009C7'/>
           </UML:ModelElement.clientDependency>
           <UML:Namespace.ownedElement>
             <UML:Dependency xmi.id = '-126-92-99-4--2ece25f1:132f1e34f4c:-8000:00000000000009CF'
@@ -982,7 +967,7 @@
       strokecolor="black"
     />
     <group name="Fig1.4"
-         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[177, 417, 142, 25]"
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[177, 417, 142, 22]"
          href="-126-92-99--99--1106da55:130982fa4e1:-8000:0000000000000A6F"
          fill="0"
          fillcolor="white"
@@ -996,32 +981,16 @@
         x="177"
         y="417"
         width="142"
-        height="25"
+        height="22"
         fill="0"
         fillcolor="white"
         stroke="0"
         strokecolor="black"
       />
-      <text name="Fig1.4.1"
-        x="177"
-        y="417"
-        width="142"
-        height="23"
-        fill="0"
-        fillcolor="white"
-        stroke="0"
-        strokecolor="black"
-        textcolor="black"
-        font="Dialog"
-        italic="false"
-        bold="false"
-        textsize="12"
-        justification="Left"
-      >-graphics : Graphics2D</text>
     </group>
     <rectangle name="Fig1.5"
       x="176"
-      y="441"
+      y="439"
       width="144"
       height="1"
       fill="1"
@@ -1030,7 +999,7 @@
       strokecolor="black"
     />
     <group name="Fig1.6"
-         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[177, 442, 142, 93]"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[177, 440, 142, 94]"
          href="-126-92-99--99--1106da55:130982fa4e1:-8000:0000000000000A6F"
          fill="0"
          fillcolor="white"
@@ -1042,9 +1011,9 @@
       
       <rectangle name="Fig1.6.0"
         x="177"
-        y="442"
+        y="440"
         width="142"
-        height="93"
+        height="94"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -1052,7 +1021,7 @@
       />
       <text name="Fig1.6.1"
         x="177"
-        y="442"
+        y="440"
         width="142"
         height="17"
         fill="0"
@@ -1068,7 +1037,7 @@
       >+draw(o) : void</text>
       <text name="Fig1.6.2"
         x="177"
-        y="459"
+        y="457"
         width="142"
         height="17"
         fill="0"
@@ -1084,7 +1053,7 @@
       >+drawSmall(o) : void</text>
       <text name="Fig1.6.3"
         x="177"
-        y="476"
+        y="474"
         width="142"
         height="17"
         fill="0"
@@ -1100,7 +1069,7 @@
       >-drawArray(a) : void</text>
       <text name="Fig1.6.4"
         x="177"
-        y="493"
+        y="491"
         width="142"
         height="17"
         fill="0"
@@ -1116,7 +1085,7 @@
       >-drawCollection(c) : void</text>
       <text name="Fig1.6.5"
         x="177"
-        y="510"
+        y="508"
         width="142"
         height="23"
         fill="0"
@@ -2235,7 +2204,7 @@
       justification="Center"
     >+ DefaultRendering</text>
     <group name="Fig13.2"
-         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[465, 497, 64, 0]"
+         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[465, 497, 142, 0]"
          href="-126-92-99-4--2ece25f1:132f1e34f4c:-8000:00000000000009B3"
          fill="0"
          fillcolor="white"
@@ -2249,7 +2218,7 @@
       <rectangle name="Fig13.2.0"
         x="465"
         y="497"
-        width="64"
+        width="142"
         height="0"
         fill="0"
         fillcolor="white"
@@ -2383,7 +2352,7 @@
                         offset="5" />
     </private>
     <path name="Fig14.0"
-      description="org.tigris.gef.presentation.FigPoly"
+      description="org.argouml.gefext.ArgoFigPoly"
       fill="0"
       fillcolor="white"
       stroke="1"
@@ -2414,7 +2383,7 @@
                         offset="25" />
     </private>
     <path name="Fig15.0"
-      description="org.tigris.gef.presentation.FigPoly"
+      description="org.argouml.gefext.ArgoFigPoly"
       fill="0"
       fillcolor="white"
       stroke="1"
@@ -2445,7 +2414,7 @@
                         offset="25" />
     </private>
     <path name="Fig16.0"
-      description="org.tigris.gef.presentation.FigPoly"
+      description="org.argouml.gefext.ArgoFigPoly"
       fill="0"
       fillcolor="white"
       stroke="1"
@@ -2476,7 +2445,7 @@
                         offset="25" />
     </private>
     <path name="Fig17.0"
-      description="org.tigris.gef.presentation.FigPoly"
+      description="org.argouml.gefext.ArgoFigPoly"
       fill="0"
       fillcolor="white"
       stroke="1"
@@ -2526,7 +2495,7 @@
       justification="Center"
     >+ AnyRendering</text>
     <group name="Fig18.2"
-         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[465, 617, 64, 0]"
+         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[465, 617, 142, 0]"
          href="-126-92-99-4--2ece25f1:132f1e34f4c:-8000:00000000000009C6"
          fill="0"
          fillcolor="200 200 255"
@@ -2540,7 +2509,7 @@
       <rectangle name="Fig18.2.0"
         x="465"
         y="617"
-        width="64"
+        width="142"
         height="0"
         fill="0"
         fillcolor="200 200 255"
@@ -2617,7 +2586,7 @@
         width="142"
         height="23"
         fill="0"
-        fillcolor="white"
+        fillcolor="200 200 255"
         stroke="0"
         strokecolor="black"
         textcolor="black"
@@ -2648,7 +2617,7 @@
                         offset="9" />
     </private>
     <path name="Fig19.0"
-      description="org.tigris.gef.presentation.FigPoly"
+      description="org.argouml.gefext.ArgoFigPoly"
       fill="0"
       fillcolor="white"
       stroke="1"
@@ -2705,7 +2674,7 @@
                         offset="5" />
     </private>
     <path name="Fig20.0"
-      description="org.tigris.gef.presentation.FigPoly"
+      description="org.argouml.gefext.ArgoFigPoly"
       fill="0"
       fillcolor="white"
       stroke="1"
@@ -2736,7 +2705,7 @@
                         offset="25" />
     </private>
     <path name="Fig21.0"
-      description="org.tigris.gef.presentation.FigPoly"
+      description="org.argouml.gefext.ArgoFigPoly"
       fill="0"
       fillcolor="white"
       stroke="1"

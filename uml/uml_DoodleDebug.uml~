@@ -98,7 +98,7 @@
 			CodeGeneration
 		</plugin>
 </profile>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Tue Oct 11 09:42:07 CEST 2011'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Tue Oct 11 09:42:49 CEST 2011'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.32.2(6) revised on $Date: 2010-01-11 22:20:14 +0100 (Mon, 11 Jan 2010) $ </XMI.exporterVersion>
@@ -657,7 +657,19 @@
           isLeaf = 'false' isAbstract = 'false' isActive = 'false'>
           <UML:ModelElement.clientDependency>
             <UML:Abstraction xmi.idref = '-126-92-99-4--2ece25f1:132f1e34f4c:-8000:00000000000009C7'/>
+            <UML:Dependency xmi.idref = '-126-92-99-4--2ece25f1:132f1e34f4c:-8000:00000000000009CF'/>
           </UML:ModelElement.clientDependency>
+          <UML:Namespace.ownedElement>
+            <UML:Dependency xmi.id = '-126-92-99-4--2ece25f1:132f1e34f4c:-8000:00000000000009CF'
+              isSpecification = 'false'>
+              <UML:Dependency.client>
+                <UML:Class xmi.idref = '-126-92-99-4--2ece25f1:132f1e34f4c:-8000:00000000000009C6'/>
+              </UML:Dependency.client>
+              <UML:Dependency.supplier>
+                <UML:Class xmi.idref = '-126-92-99--99-17a56abd:130989c7433:-8000:0000000000000AAD'/>
+              </UML:Dependency.supplier>
+            </UML:Dependency>
+          </UML:Namespace.ownedElement>
           <UML:Classifier.feature>
             <UML:Operation xmi.id = '-126-92-99-4--2ece25f1:132f1e34f4c:-8000:00000000000009CC'
               name = 'render' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
@@ -2703,6 +2715,39 @@
               y="535" />
       <lineto x="464"
               y="616" />
+    </path>
+  </group>
+  <group name="Fig21"
+       description="org.argouml.uml.diagram.ui.FigDependency"
+       href="-126-92-99-4--2ece25f1:132f1e34f4c:-8000:00000000000009CF"
+       stroke="1"
+       strokecolor="black"
+  >
+    <private>
+      sourcePortFig="Fig18.0"
+      destPortFig="Fig10"
+      sourceFigNode="Fig18"
+      destFigNode="Fig10"
+      <argouml:pathitem figname="Fig21.1"
+                        classname="org.argouml.uml.diagram.ui.PathItemPlacement"
+                        figclassname="org.argouml.uml.diagram.ui.FigTextGroup"
+                        ownerhref="-126-92-99-4--2ece25f1:132f1e34f4c:-8000:00000000000009CF"
+                        angle="270.0"
+                        offset="25" />
+    </private>
+    <path name="Fig21.0"
+      description="org.tigris.gef.presentation.FigPoly"
+      fill="0"
+      fillcolor="white"
+      stroke="1"
+      strokecolor="black"
+    >
+      <moveto x="464"
+              y="616" />
+      <lineto x="448"
+              y="536" />
+      <lineto x="464"
+              y="444" />
     </path>
   </group>
 </pgml>
