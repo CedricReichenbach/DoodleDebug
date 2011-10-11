@@ -5,11 +5,11 @@ import java.awt.event.ComponentListener;
 
 public class ResizeListener implements ComponentListener {
 
-	private Drawer drawer;
+	private Doodler doodler;
 	private Object o;
 
-	public ResizeListener(Drawer drawer, Object o) {
-		this.drawer = drawer;
+	public ResizeListener(Doodler doodler, Object o) {
+		this.doodler = doodler;
 		this.o = o;
 	}
 
@@ -25,7 +25,7 @@ public class ResizeListener implements ComponentListener {
 
 	@Override
 	public void componentResized(ComponentEvent e) {
-		drawer.draw(o); // TODO: won't work for maximizing and not always with
+		doodler.draw(o); // TODO: won't work for maximizing and not always with
 						// other resizing. Annotation: Maximizing is async!
 		}
 

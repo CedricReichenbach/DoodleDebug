@@ -2,6 +2,6 @@ package visualization;
 
 public interface Drawable {
 
-	public void draw(Drawer d);
+	public void draw(Doodler d);
 	
 }

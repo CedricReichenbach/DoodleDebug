@@ -8,13 +8,13 @@ import java.awt.geom.Point2D;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class Drawer {
+public class Doodler {
 
 	private BasicWindow window;
 	private Graphics2D graphics;
 	private DefaultRenderings defaultRenderings;
 
-	public Drawer(BasicWindow window) {
+	public Doodler(BasicWindow window) {
 		this.window = window;
 		this.graphics = window.getGraphics();
 		this.defaultRenderings = new DefaultRenderings(graphics);

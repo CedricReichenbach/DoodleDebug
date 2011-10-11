@@ -2,7 +2,7 @@ package app;
 
 import java.awt.Color;
 
-import visualization.Drawer;
+import visualization.Doodler;
 
 public class Bubble {
 
@@ -21,7 +21,7 @@ public class Bubble {
 		return "Bubble (" + this.color + ")";
 	}
 	
-	public void draw(Drawer d) {
+	public void draw(Doodler d) {
 		d.draw(this.color);
 	}
 

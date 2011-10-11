@@ -9,10 +9,10 @@ public class D {
 				700, 400), 2);
 		
 		// set up Drawer
-		Drawer drawer = new Drawer(window);
-		drawer.draw(o);
+		Doodler doodler = new Doodler(window);
+		doodler.draw(o);
 		
 		// set up resize listener
-		window.addComponentListener(new ResizeListener(drawer, o));
+		window.addComponentListener(new ResizeListener(doodler, o));
 	}
 }
