@@ -1,4 +1,4 @@
-package example;
+package app_example;
 
 import java.awt.Color;
 import java.util.ArrayList;
