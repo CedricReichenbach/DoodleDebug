@@ -98,7 +98,7 @@
 			CodeGeneration
 		</plugin>
 </profile>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Mon Oct 17 23:45:49 CEST 2011'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Tue Oct 18 09:16:36 CEST 2011'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.32.2(6) revised on $Date: 2010-01-11 22:20:14 +0100 (Mon, 11 Jan 2010) $ </XMI.exporterVersion>
@@ -726,7 +726,25 @@
           isLeaf = 'false' isAbstract = 'false' isActive = 'false'/>
         <UML:Class xmi.id = '-126-92-99-46-75ac50ac:132f22eabd7:-8000:00000000000009D4'
           name = 'SmallDoodler' visibility = 'public' isSpecification = 'false' isRoot = 'false'
-          isLeaf = 'false' isAbstract = 'false' isActive = 'false'/>
+          isLeaf = 'false' isAbstract = 'false' isActive = 'false'>
+          <UML:Classifier.feature>
+            <UML:Operation xmi.id = '-126-92-99--61-2a84590e:13315de75b8:-8000:00000000000009DF'
+              name = 'draw' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '-126-92-99--61-2a84590e:13315de75b8:-8000:00000000000009E0'
+                  name = 'return' isSpecification = 'false' kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:Class xmi.idref = '-64--88-1-103-b6fe47:130927f0288:-8000:0000000000000876'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '-126-92-99--61-2a84590e:13315de75b8:-8000:00000000000009E1'
+                  name = 'o' isSpecification = 'false' kind = 'in'/>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+          </UML:Classifier.feature>
+        </UML:Class>
         <UML:Generalization xmi.id = '-126-92-99-46-75ac50ac:132f22eabd7:-8000:00000000000009D5'
           isSpecification = 'false'>
           <UML:Generalization.child>
@@ -2835,7 +2853,7 @@
     </path>
   </group>
   <group name="Fig22"
-       description="org.argouml.uml.diagram.static_structure.ui.FigClass[664, 264, 184, 144]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
+       description="org.argouml.uml.diagram.static_structure.ui.FigClass[664, 264, 136, 144]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
        href="-126-92-99-46-75ac50ac:132f22eabd7:-8000:00000000000009D4"
        fill="1"
        fillcolor="white"
@@ -2848,7 +2866,7 @@
     <rectangle name="Fig22.0"
       x="664"
       y="264"
-      width="184"
+      width="136"
       height="144"
       fill="1"
       fillcolor="white"
@@ -2858,7 +2876,7 @@
     <text name="Fig22.1"
       x="665"
       y="265"
-      width="182"
+      width="134"
       height="23"
       fill="0"
       fillcolor="white"
@@ -2897,7 +2915,7 @@
     <rectangle name="Fig22.3"
       x="664"
       y="288"
-      width="184"
+      width="136"
       height="1"
       fill="1"
       fillcolor="black"
@@ -2905,7 +2923,7 @@
       strokecolor="black"
     />
     <group name="Fig22.4"
-         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[665, 289, 182, 58]"
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[665, 289, 134, 56]"
          href="-126-92-99-46-75ac50ac:132f22eabd7:-8000:00000000000009D4"
          fill="0"
          fillcolor="white"
@@ -2918,8 +2936,8 @@
       <rectangle name="Fig22.4.0"
         x="665"
         y="289"
-        width="182"
-        height="58"
+        width="134"
+        height="56"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -2928,8 +2946,8 @@
     </group>
     <rectangle name="Fig22.5"
       x="664"
-      y="347"
-      width="184"
+      y="345"
+      width="136"
       height="1"
       fill="1"
       fillcolor="black"
@@ -2937,7 +2955,7 @@
       strokecolor="black"
     />
     <group name="Fig22.6"
-         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[665, 348, 182, 58]"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[665, 346, 134, 60]"
          href="-126-92-99-46-75ac50ac:132f22eabd7:-8000:00000000000009D4"
          fill="0"
          fillcolor="white"
@@ -2949,14 +2967,30 @@
       
       <rectangle name="Fig22.6.0"
         x="665"
-        y="348"
-        width="182"
-        height="58"
+        y="346"
+        width="134"
+        height="60"
         fill="0"
         fillcolor="white"
         stroke="0"
         strokecolor="black"
       />
+      <text name="Fig22.6.1"
+        x="665"
+        y="346"
+        width="134"
+        height="23"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >+draw(o) : void</text>
     </group>
   </group>
   <group name="Fig23"
