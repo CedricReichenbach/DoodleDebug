@@ -8,7 +8,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.Registry;
 
 /**
- * Manages different Renderings, can be organized by user (e.g. bring in their own renderings)
+ * Manages different Renderings, can be organized by user (e.g. different renderings for specific objects and bring in their own renderings)
  * @author Cedric Reichenbach
  *
  */
