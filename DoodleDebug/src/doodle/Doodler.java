@@ -1,5 +1,8 @@
 package doodle;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class used for visualizing any Object
  * @author Cedric Reichenbach
@@ -8,11 +11,16 @@ package doodle;
 public class Doodler {
 	
 	/**
+	 * represents top Scratch for main object to be drawn on
+	 */
+	private Scratch topScratch;
+	
+	/**
 	 * Creates a new Doodler for visualizing objects
 	 * 1 Doodler = 1 window
 	 */
 	public Doodler() {
-		// TODO: Initialize rendering and displaying
+		this.topScratch = new Scratch();
 	}
 	
 	/**
@@ -20,32 +28,8 @@ public class Doodler {
 	 * does a default drawing.
 	 * @param Object o
 	 */
-	public void draw(Object o) {
-		// TODO: Use o's draw method, if existing or else, use drawDefault
+	public void visualize(Object o) {
+		topScratch.drawWhole(o);
 	}
 	
-	/**
-	 * Makes a default drawing for objects that don't implement their own draw method.
-	 * @param Object o
-	 */
-	private void drawDefault(Object o) {
-		// TODO: draw default rendering of o
-	}
-	
-	/**
-	 * Visualizes any Object with few details, either using drawSmall Method of the object itself (if existing) or
-	 * does a default drawing.
-	 * @param Object o
-	 */
-	public void drawSmall(Object o) {
-		// TODO: Use o's drawSmall method, if existing or else, use drawSmallDefault
-	}
-	
-	/**
-	 * Makes a default drawing with few details for objects that don't implement their own drawSmall method.
-	 * @param Object o
-	 */
-	private void drawSmallDefault(Object o) {
-		// TODO: draw default rendering of o
-	}
 }
