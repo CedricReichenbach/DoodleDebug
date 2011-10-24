@@ -27,7 +27,7 @@ public class Scratch {
 	public Scratch() {
 		this.top = null;
 		this.subs = new ArrayList<Scratch>();
-		// TODO: Initialize rendering and displaying
+		this.initalize();
 	}
 
 	/**
@@ -39,6 +39,10 @@ public class Scratch {
 	public Scratch(Scratch top) {
 		this.top = top;
 		this.subs = new ArrayList<Scratch>();
+		this.initalize();
+	}
+
+	private void initalize() {
 		// TODO: Initialize rendering and displaying
 	}
 
