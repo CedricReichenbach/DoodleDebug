@@ -17,16 +17,22 @@ public class Scratch {
 	private Scratch top;
 
 	/**
-	 * List of Scratches contained in this one
+	 * List of Scratches contained inside this one
 	 */
-	private List<Scratch> subs;
+	private List<Scratch> inner;
+	
+	/**
+	 * List of Scratches contained on the outside of this one
+	 */
+	private List<Scratch> outer;
 
 	/**
 	 * Creates a new Scratch for visualizing objects
 	 */
 	public Scratch() {
 		this.top = null;
-		this.subs = new ArrayList<Scratch>();
+		this.inner = new ArrayList<Scratch>();
+		this.outer = new ArrayList<Scratch>();
 		this.initalize();
 	}
 
@@ -38,7 +44,8 @@ public class Scratch {
 	 */
 	public Scratch(Scratch top) {
 		this.top = top;
-		this.subs = new ArrayList<Scratch>();
+		this.inner = new ArrayList<Scratch>();
+		this.outer = new ArrayList<Scratch>();
 		this.initalize();
 	}
 
@@ -70,7 +77,7 @@ public class Scratch {
 	 */
 	public void draw(Object o) {
 		Scratch subScratch = new Scratch(this);
-		this.subs.add(subScratch);
+		this.inner.add(subScratch);
 		if (o instanceof Drawable) {
 			((Drawable) o).drawOn(subScratch);
 		} else {
