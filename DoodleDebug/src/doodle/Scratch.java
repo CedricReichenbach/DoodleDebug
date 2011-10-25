@@ -84,6 +84,24 @@ public class Scratch {
 			this.drawDefault(o, subScratch);
 		}
 	}
+	
+	/**
+	 * Visualizes any Object outside of the caller, either using draw Method of the
+	 * object itself (if existing) or does a default drawing. Should only be
+	 * called from another draw Method.
+	 * 
+	 * @param Object
+	 *            o
+	 */
+	public void drawOuter(Object o) {
+		Scratch subScratch = new Scratch(this);
+		this.outer.add(subScratch);
+		if (o instanceof Drawable) {
+			((Drawable) o).drawOn(subScratch);
+		} else {
+			this.drawDefault(o, subScratch);
+		}
+	}
 
 	/**
 	 * Makes a default drawing for objects that don't implement their own draw
@@ -93,7 +111,7 @@ public class Scratch {
 	 *            o
 	 */
 	private void drawDefault(Object o, Scratch s) {
-		// TODO: draw default rendering of o on s
+		// TODO: get Rendering from RenderingRegistry
 	}
 
 	/**
@@ -104,8 +122,13 @@ public class Scratch {
 	 *            o
 	 */
 	public void drawSmall(Object o) {
-		// TODO: Use o's drawSmall method, if existing or else, use
-		// drawSmallDefault
+		Scratch subScratch = new Scratch(this);
+		this.inner.add(subScratch);
+		if (o instanceof Drawable) {
+			((Drawable) o).drawSmallOn(subScratch);
+		} else {
+			this.drawSmallDefault(o, subScratch);
+		}
 	}
 
 	/**
@@ -116,7 +139,7 @@ public class Scratch {
 	 *            o
 	 */
 	private void drawSmallDefault(Object o, Scratch s) {
-		// TODO: draw default rendering of o on s
+		// TODO: get Rendering from RenderingRegistry
 	}
 
 }
