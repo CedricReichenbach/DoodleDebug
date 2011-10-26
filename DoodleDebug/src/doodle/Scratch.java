@@ -142,4 +142,16 @@ public class Scratch {
 		// TODO: get Rendering from RenderingRegistry
 	}
 
+	public Scratch getTop() {
+		return top;
+	}
+
+	public List<Scratch> getInner() {
+		return this.inner;
+	}
+
+	public List<Scratch> getOuter() {
+		return outer;
+	}
+
 }
