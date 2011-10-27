@@ -5,6 +5,11 @@ import java.util.Set;
 
 import doodle.Scratch;
 
+/**
+ * Represents default drawing of any Object, if no other is defined.
+ * @author Cedric Reichenbach
+ *
+ */
 public class ObjectPlugin implements Plugin {
 
 	@Override
