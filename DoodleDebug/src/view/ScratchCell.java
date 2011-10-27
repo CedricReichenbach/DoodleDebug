@@ -20,7 +20,7 @@ public class ScratchCell {
 	private List<ScratchCell> inner;
 	private List<ScratchCell> outer;
 	/** Defines area in top ScratchCell (relatively, both axes in [0,1]) */
-	private ScratchArea areaInTop;
+	private ScratchCellArea areaInTop;
 
 	/**
 	 * Creates a ScratchCell representing scratch (for drawing)
@@ -45,7 +45,7 @@ public class ScratchCell {
 		
 		// areas
 		if (this.top == null) {
-			this.areaInTop = new ScratchArea(0, 0, 1, 1);
+			this.areaInTop = new ScratchCellArea(0, 0, 1, 1);
 		}
 		this.defineSubAreas();
 	}

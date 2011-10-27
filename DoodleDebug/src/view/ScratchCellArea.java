@@ -9,7 +9,7 @@ import java.awt.geom.PathIterator;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
-public class ScratchArea {
+public class ScratchCellArea {
 
 	private Point2D.Double upperLeft, lowerRight;
 
@@ -21,7 +21,7 @@ public class ScratchArea {
 	 * @param Point
 	 *            lowerRight
 	 */
-	public ScratchArea(Point2D.Double upperLeft, Point2D.Double lowerRight) {
+	public ScratchCellArea(Point2D.Double upperLeft, Point2D.Double lowerRight) {
 		this.upperLeft = upperLeft;
 		this.lowerRight = lowerRight;
 	}
@@ -33,7 +33,7 @@ public class ScratchArea {
 	 * @param double low
 	 * @param double right
 	 */
-	public ScratchArea(double up, double left, double low, double right) {
+	public ScratchCellArea(double up, double left, double low, double right) {
 		this.upperLeft = new Point2D.Double(up, left);
 		this.upperLeft = new Point2D.Double(low, right);
 	}
