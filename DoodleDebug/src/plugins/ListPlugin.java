@@ -1,13 +1,14 @@
-package doodle;
+package plugins;
 
 import java.util.Set;
 
-import plugins.Plugin;
+import doodle.Scratch;
+
 
 public class ListPlugin implements Plugin {
 
 	@Override
-	public Set<Class> getDrawableClasses() {
+	public Set<Class<?>> getDrawableClasses() {
 		// TODO Auto-generated method stub
 		return null;
 	}

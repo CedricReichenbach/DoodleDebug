@@ -1,5 +1,6 @@
 package doodle;
 
+import plugins.ListPlugin;
 import plugins.Plugin;
 import rendering.RenderingRegistry;
 import rendering.RenderingRegistryProvider;

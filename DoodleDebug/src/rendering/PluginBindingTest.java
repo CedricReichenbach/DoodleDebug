@@ -2,6 +2,8 @@ package rendering;
 
 import org.junit.Test;
 
+import plugins.ListPlugin;
+
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
