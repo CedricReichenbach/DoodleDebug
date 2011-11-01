@@ -3,6 +3,10 @@ package doodle;
 import java.util.ArrayList;
 import java.util.List;
 
+import rendering.ScratchRendering;
+
+import view.DoodleCanvas;
+
 /**
  * Organized in a tree structure, draws object and its nested objects inside.
  * 
@@ -11,16 +15,13 @@ import java.util.List;
  */
 public class Scratch {
 
-	/**
-	 * Scratch containing this one (for root: null)
-	 */
-	private Scratch top;
+	private DoodleCanvas canvas;
 
 	/**
 	 * List of Scratches contained inside this one
 	 */
 	private List<Scratch> inner;
-	
+
 	/**
 	 * List of Scratches contained on the outside of this one
 	 */
@@ -29,28 +30,10 @@ public class Scratch {
 	/**
 	 * Creates a new Scratch for visualizing objects
 	 */
-	public Scratch() {
-		this.top = null;
+	public Scratch(Object o) {
 		this.inner = new ArrayList<Scratch>();
 		this.outer = new ArrayList<Scratch>();
-		this.initalize();
-	}
-
-	/**
-	 * Creates a new Scratch for visualizing objects inside "top" scratch
-	 * 
-	 * @param Scratch
-	 *            top
-	 */
-	public Scratch(Scratch top) {
-		this.top = top;
-		this.inner = new ArrayList<Scratch>();
-		this.outer = new ArrayList<Scratch>();
-		this.initalize();
-	}
-
-	private void initalize() {
-		// TODO: Initialize rendering and displaying
+		this.canvas = this.drawWhole(o);
 	}
 
 	/**
@@ -58,13 +41,16 @@ public class Scratch {
 	 * Should only be called the first time (top object).
 	 * 
 	 * @param o
+	 * @return
 	 */
-	public void drawWhole(Object o) {
+	private DoodleCanvas drawWhole(Object o) {
 		if (o instanceof Drawable) {
 			((Drawable) o).drawOn(this);
 		} else {
 			this.drawDefault(o, this);
 		}
+			// TODO: Ask registry for Scratch visualization
+		return new ScratchRendering().render(this);
 	}
 
 	/**
@@ -78,16 +64,12 @@ public class Scratch {
 	public void draw(Object o) {
 		Scratch subScratch = new Scratch(this);
 		this.inner.add(subScratch);
-		if (o instanceof Drawable) {
-			((Drawable) o).drawOn(subScratch);
-		} else {
-			this.drawDefault(o, subScratch);
-		}
+		subScratch.drawWhole(o);
 	}
-	
+
 	/**
-	 * Visualizes any Object outside of the caller, either using draw Method of the
-	 * object itself (if existing) or does a default drawing. Should only be
+	 * Visualizes any Object outside of the caller, either using draw Method of
+	 * the object itself (if existing) or does a default drawing. Should only be
 	 * called from another draw Method.
 	 * 
 	 * @param Object
@@ -96,11 +78,7 @@ public class Scratch {
 	public void drawOuter(Object o) {
 		Scratch subScratch = new Scratch(this);
 		this.outer.add(subScratch);
-		if (o instanceof Drawable) {
-			((Drawable) o).drawOn(subScratch);
-		} else {
-			this.drawDefault(o, subScratch);
-		}
+		subScratch.drawWhole(o);
 	}
 
 	/**
@@ -142,16 +120,16 @@ public class Scratch {
 		// TODO: get Rendering from RenderingRegistry
 	}
 
-	public Scratch getTop() {
-		return top;
-	}
-
 	public List<Scratch> getInner() {
 		return this.inner;
 	}
 
 	public List<Scratch> getOuter() {
 		return outer;
+	}
+
+	public DoodleCanvas getCanvas() {
+		return this.canvas;
 	}
 
 }

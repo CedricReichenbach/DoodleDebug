@@ -13,12 +13,12 @@ import java.awt.geom.Point2D.Float;
  */
 public class Rect {
 
-	private Float position;
-	private float width;
-	private float height;
+	private Point2D.Double position;
+	private double width;
+	private double height;
 	private Color fillColor;
 
-	public Rect(Point2D.Float position, float width, float height) {
+	public Rect(Point2D.Double position, double width, double height) {
 		this.position = position;
 		this.width = width;
 		this.height = height;

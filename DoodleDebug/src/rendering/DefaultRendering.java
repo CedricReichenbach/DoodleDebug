@@ -5,18 +5,12 @@ import view.DoodleCanvas;
 import doodle.Doodler;
 import doodle.Scratch;
 
-public class DefaultRendering implements Rendering {
+public class DefaultRendering implements Rendering<Object> {
 
 	@Override
-	public void render(Object o, DoodleCanvas c, Doodler d) {
+	public DoodleCanvas render(Object object) {
 		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void render(Scratch top, DoodleCanvas c, Doodler d) {
-		// TODO Auto-generated method stub
-		
+		return new DoodleCanvas();
 	}
 
 
