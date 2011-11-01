@@ -4,7 +4,6 @@ import java.awt.geom.Point2D;
 
 import view.DoodleCanvas;
 import view.Rect;
-import doodle.Doodler;
 import doodle.Scratch;
 
 public class ScratchRendering implements Rendering<Scratch> {

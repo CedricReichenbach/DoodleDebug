@@ -26,6 +26,7 @@ public class Doodler {
 	 */
 	public void visualize(Object o) {
 		DoodleCanvas canvas = new Scratch(o).getCanvas();
+		// TODO
 	}
 	
 }
