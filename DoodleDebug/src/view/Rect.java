@@ -25,4 +25,12 @@ public class Rect {
 		this.fillColor = Color.WHITE;
 	}
 
+	public Color getFillColor() {
+		return fillColor;
+	}
+
+	public void setFillColor(Color fillColor) {
+		this.fillColor = fillColor;
+	}
+
 }

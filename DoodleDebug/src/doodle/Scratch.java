@@ -3,6 +3,7 @@ package doodle;
 import java.util.ArrayList;
 import java.util.List;
 
+import rendering.DefaultRendering;
 import rendering.ScratchRendering;
 
 import view.DoodleCanvas;
@@ -16,6 +17,7 @@ import view.DoodleCanvas;
 public class Scratch {
 
 	private DoodleCanvas canvas;
+	private Object object;
 
 	/**
 	 * List of Scratches contained inside this one
@@ -33,7 +35,8 @@ public class Scratch {
 	public Scratch(Object o) {
 		this.inner = new ArrayList<Scratch>();
 		this.outer = new ArrayList<Scratch>();
-		this.canvas = this.drawWhole(o);
+		this.object = o;
+		this.drawWhole();
 	}
 
 	/**
@@ -43,14 +46,14 @@ public class Scratch {
 	 * @param o
 	 * @return
 	 */
-	private DoodleCanvas drawWhole(Object o) {
-		if (o instanceof Drawable) {
-			((Drawable) o).drawOn(this);
-		} else {
-			this.drawDefault(o, this);
-		}
+	private void drawWhole() {
+		if (object instanceof Drawable) {
+			((Drawable) object).drawOn(this);
 			// TODO: Ask registry for Scratch visualization
-		return new ScratchRendering().render(this);
+			this.canvas = new ScratchRendering().render(this);
+		} else {
+			this.drawDefault();
+		}
 	}
 
 	/**
@@ -62,9 +65,9 @@ public class Scratch {
 	 *            o
 	 */
 	public void draw(Object o) {
-		Scratch subScratch = new Scratch(this);
+		Scratch subScratch = new Scratch(o);
 		this.inner.add(subScratch);
-		subScratch.drawWhole(o);
+		subScratch.drawWhole();
 	}
 
 	/**
@@ -76,9 +79,9 @@ public class Scratch {
 	 *            o
 	 */
 	public void drawOuter(Object o) {
-		Scratch subScratch = new Scratch(this);
+		Scratch subScratch = new Scratch(o);
 		this.outer.add(subScratch);
-		subScratch.drawWhole(o);
+		subScratch.drawWhole();
 	}
 
 	/**
@@ -88,8 +91,9 @@ public class Scratch {
 	 * @param Object
 	 *            o
 	 */
-	private void drawDefault(Object o, Scratch s) {
-		// TODO: get Rendering from RenderingRegistry
+	private void drawDefault() {
+		// TODO: Ask Registry for visualization.
+		this.canvas = new DefaultRendering().render(object);
 	}
 
 	/**
@@ -100,24 +104,10 @@ public class Scratch {
 	 *            o
 	 */
 	public void drawSmall(Object o) {
-		Scratch subScratch = new Scratch(this);
+		// TODO: SmallScratch for this case
+		Scratch subScratch = new SmallScratch(o);
 		this.inner.add(subScratch);
-		if (o instanceof Drawable) {
-			((Drawable) o).drawSmallOn(subScratch);
-		} else {
-			this.drawSmallDefault(o, subScratch);
-		}
-	}
-
-	/**
-	 * Makes a default drawing with few details for objects that don't implement
-	 * their own drawSmall method.
-	 * 
-	 * @param Object
-	 *            o
-	 */
-	private void drawSmallDefault(Object o, Scratch s) {
-		// TODO: get Rendering from RenderingRegistry
+		subScratch.drawWhole();
 	}
 
 	public List<Scratch> getInner() {
