@@ -7,7 +7,7 @@ public class D {
 	 * @param Object o
 	 */
 	public static void raw(Object o) {
-		// TODO
+		new Doodler().visualize(o);
 	}
 	
 	/**

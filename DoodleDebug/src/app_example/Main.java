@@ -3,6 +3,8 @@ package app_example;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import doodle.D;
+
 public class Main {
 
 	/**
@@ -14,7 +16,7 @@ public class Main {
 		fillRandomColors(al, 5);
 		
 		System.out.println(al);
-		// TODO: D.raw it!
+		D.raw(al);
 	}
 
 	private static void fillRandomColors(ArrayList<Color> al, int n) {
