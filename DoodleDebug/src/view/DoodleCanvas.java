@@ -15,6 +15,22 @@ import java.util.HashMap;
 public class DoodleCanvas {
 
 	ArrayList<Rect> rects;
+	public ArrayList<Rect> getRects() {
+		return rects;
+	}
+
+	public void setRects(ArrayList<Rect> rects) {
+		this.rects = rects;
+	}
+
+	public HashMap<DoodleCanvas, Rect> getCanvasMap() {
+		return canvasMap;
+	}
+
+	public void setCanvasMap(HashMap<DoodleCanvas, Rect> canvasMap) {
+		this.canvasMap = canvasMap;
+	}
+
 	ArrayList<DoodleCanvas> cans;
 	HashMap<DoodleCanvas, Rect> canvasMap;
 

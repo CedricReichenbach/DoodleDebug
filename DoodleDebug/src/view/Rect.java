@@ -2,7 +2,6 @@ package view;
 
 import java.awt.Color;
 import java.awt.geom.Point2D;
-import java.awt.geom.Point2D.Float;
 
 /**
  * Represents a rectangular in a DoodleCanvas. Contains information about
@@ -23,6 +22,30 @@ public class Rect {
 		this.width = width;
 		this.height = height;
 		this.fillColor = Color.WHITE;
+	}
+
+	public Point2D.Double getPosition() {
+		return position;
+	}
+
+	public void setPosition(Point2D.Double position) {
+		this.position = position;
+	}
+
+	public double getWidth() {
+		return width;
+	}
+
+	public void setWidth(double width) {
+		this.width = width;
+	}
+
+	public double getHeight() {
+		return height;
+	}
+
+	public void setHeight(double height) {
+		this.height = height;
 	}
 
 	public Color getFillColor() {
