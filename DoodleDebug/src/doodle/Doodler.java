@@ -1,9 +1,7 @@
 package doodle;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import view.DoodleCanvas;
+import view.DoodleFrame;
 
 /**
  * Class used for visualizing any Object
@@ -26,7 +24,7 @@ public class Doodler {
 	 */
 	public void visualize(Object o) {
 		DoodleCanvas canvas = new Scratch(o).getCanvas();
-		// TODO
+		new DoodleFrame(canvas);
 	}
 	
 }
