@@ -13,6 +13,8 @@ public class DoodleFrame extends JFrame {
 	private void initialize() {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
+		this.setLocation(160, 100);
+		this.setSize(800, 500);
 	}
 
 }

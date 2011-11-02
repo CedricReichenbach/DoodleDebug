@@ -26,8 +26,19 @@ public class DoodleComponent extends JComponent {
 	}
 
 	private void drawSub(DoodleCanvas c, Rect rect) {
-		// TODO Auto-generated method stub
+		double compWidth = this.getWidth();
+		double compHeight = this.getHeight();
 
+		double rectWidth = rect.getWidth() * compWidth;
+		double rectHeight = rect.getHeight() * compHeight;
+
+		Point2D.Double pos = this.scalePoint(rect.getPosition(), compWidth,
+				compHeight);
+
+		DoodleComponent subComponent = new DoodleComponent(c);
+		subComponent.setBounds((int) pos.x, (int) pos.y, (int) rectWidth,
+				(int) rectHeight);
+		this.add(subComponent);
 	}
 
 	private void drawRect(Rect rect, Graphics g) {
