@@ -6,11 +6,13 @@ import java.awt.geom.Point2D.Double;
 import java.util.HashMap;
 
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 
 /**
  * Test component for painting DoodleCanvas
+ * 
  * @author Cedric Reichenbach
- *
+ * 
  */
 public class DoodleComponent extends JComponent {
 
@@ -21,13 +23,27 @@ public class DoodleComponent extends JComponent {
 	}
 
 	private void evaluateCanvas(Graphics g) {
+		// draw rects
 		for (Rect rect : canvas.getRects()) {
 			this.drawRect(rect, g);
 		}
-		HashMap<DoodleCanvas, Rect> map = canvas.getCanvasMap();
-		for (DoodleCanvas c : map.keySet()) {
-			this.drawSub(c, map.get(c));
+
+		// draw sub-canvas'
+		HashMap<DoodleCanvas, Rect> canMap = canvas.getCanvasMap();
+		for (DoodleCanvas c : canMap.keySet()) {
+			this.drawSub(c, canMap.get(c));
 		}
+
+		// draw texts
+		HashMap<String, Point2D.Double> textMap = canvas.getTextMap();
+		for (String s : textMap.keySet()) {
+			this.drawText(s, textMap.get(s), g);
+		}
+	}
+
+	private void drawText(String string, Point2D.Double position, Graphics g) {
+		position = this.scalePoint(position, this.getWidth(), this.getHeight());
+		g.drawString(string, (int) position.x, (int) position.y + 8);
 	}
 
 	private void drawSub(DoodleCanvas c, Rect rect) {
