@@ -2,6 +2,11 @@ package view;
 
 import javax.swing.JFrame;
 
+/**
+ * First test frame for visualization
+ * @author Cedric Reichenbach
+ *
+ */
 public class DoodleFrame extends JFrame {
 
 	public DoodleFrame(DoodleCanvas canvas) {

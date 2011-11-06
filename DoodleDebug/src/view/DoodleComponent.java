@@ -7,6 +7,11 @@ import java.util.HashMap;
 
 import javax.swing.JComponent;
 
+/**
+ * Test component for painting DoodleCanvas
+ * @author Cedric Reichenbach
+ *
+ */
 public class DoodleComponent extends JComponent {
 
 	private DoodleCanvas canvas;

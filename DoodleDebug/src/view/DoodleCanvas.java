@@ -15,29 +15,13 @@ import java.util.HashMap;
 public class DoodleCanvas {
 
 	ArrayList<Rect> rects;
-	public ArrayList<Rect> getRects() {
-		return rects;
-	}
-
-	public void setRects(ArrayList<Rect> rects) {
-		this.rects = rects;
-	}
-
-	public HashMap<DoodleCanvas, Rect> getCanvasMap() {
-		return canvasMap;
-	}
-
-	public void setCanvasMap(HashMap<DoodleCanvas, Rect> canvasMap) {
-		this.canvasMap = canvasMap;
-	}
-
-	ArrayList<DoodleCanvas> cans;
 	HashMap<DoodleCanvas, Rect> canvasMap;
+	HashMap<String, Point2D.Double> textMap;
 
 	public DoodleCanvas() {
 		this.rects = new ArrayList<Rect>();
-		this.cans = new ArrayList<DoodleCanvas>();
 		this.canvasMap = new HashMap<DoodleCanvas, Rect>();
+		this.textMap = new HashMap<String, Point2D.Double>();
 	}
 
 	public void drawRect(Rect rect) {
@@ -45,8 +29,23 @@ public class DoodleCanvas {
 	}
 
 	public void drawCanvas(DoodleCanvas canvas, Rect rect) {
-		this.cans.add(canvas);
 		this.canvasMap.put(canvas, rect);
+	}
+	
+	public void drawText(String string, Point2D.Double position) {
+		this.textMap.put(string, position);
+	}
+
+	public ArrayList<Rect> getRects() {
+		return rects;
+	}
+
+	public HashMap<DoodleCanvas, Rect> getCanvasMap() {
+		return canvasMap;
+	}
+
+	public HashMap<String, Point2D.Double> getTextMap() {
+		return textMap;
 	}
 
 }

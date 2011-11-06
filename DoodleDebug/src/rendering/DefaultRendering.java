@@ -12,11 +12,9 @@ public class DefaultRendering implements Rendering<Object> {
 	public DoodleCanvas render(Object object) {
 		// TODO Auto-generated method stub
 		DoodleCanvas canvas = new DoodleCanvas();
-		Rect rect = new Rect(new Point2D.Double(.1,.1), .8, .8);
-		rect.setFillColor(Color.RED);
-		canvas.drawRect(rect);
+		Rect mainRect = new Rect(new Point2D.Double(0.01, 0.01), .8, .98);
+		canvas.drawRect(mainRect);
 		return canvas;
 	}
-
 
 }
