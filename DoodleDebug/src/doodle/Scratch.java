@@ -28,6 +28,7 @@ public class Scratch {
 	 * List of Scratches contained on the outside of this one
 	 */
 	private List<Scratch> outer;
+	private String title;
 
 	/**
 	 * Creates a new Scratch for visualizing objects
@@ -36,6 +37,7 @@ public class Scratch {
 		this.inner = new ArrayList<Scratch>();
 		this.outer = new ArrayList<Scratch>();
 		this.object = o;
+		this.title = o.getClass().getSimpleName();
 		this.drawWhole();
 	}
 
@@ -110,6 +112,16 @@ public class Scratch {
 		subScratch.drawWhole();
 	}
 
+	/**
+	 * Sets a title for object to be visualized
+	 * 
+	 * @param String
+	 *            title
+	 */
+	public void drawTitle(String title) {
+		this.title = title;
+	}
+
 	public List<Scratch> getInner() {
 		return this.inner;
 	}
@@ -120,6 +132,10 @@ public class Scratch {
 
 	public DoodleCanvas getCanvas() {
 		return this.canvas;
+	}
+
+	public String getTitle() {
+		return title;
 	}
 
 }

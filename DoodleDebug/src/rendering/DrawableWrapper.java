@@ -21,6 +21,7 @@ public class DrawableWrapper implements Drawable {
 	@Override
 	public void drawOn(Scratch s) {
 		Field[] fields = this.object.getClass().getFields();
+		System.out.println(this.object.getClass());
 		for (Field f : fields) {
 			try {
 				s.draw(f.get(object));
