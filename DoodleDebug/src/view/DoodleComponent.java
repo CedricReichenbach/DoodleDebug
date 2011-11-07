@@ -59,6 +59,8 @@ public class DoodleComponent extends JComponent {
 		DoodleComponent subComponent = new DoodleComponent(c);
 		subComponent.setBounds((int) pos.x, (int) pos.y, (int) rectWidth,
 				(int) rectHeight);
+		
+		// TODO: not working that way...
 		this.add(subComponent);
 	}
 
