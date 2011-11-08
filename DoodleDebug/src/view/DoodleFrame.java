@@ -12,7 +12,7 @@ public class DoodleFrame extends JFrame {
 	public DoodleFrame(DoodleCanvas canvas) {
 		super("first testframe");
 		this.initialize();
-		this.setContentPane(new DoodleComponent(canvas));
+		this.setContentPane(new SwingAdapter(canvas));
 	}
 
 	private void initialize() {

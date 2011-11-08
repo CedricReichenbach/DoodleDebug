@@ -2,9 +2,10 @@ package plugins;
 
 import java.util.Set;
 
+import rendering.Rendering;
+
 import doodle.Scratch;
 
-public interface Plugin {
+public interface RenderingPlugin extends Rendering {
 	public Set<Class<?>> getDrawableClasses();
-	public void draw(Object o, Scratch s);
 }

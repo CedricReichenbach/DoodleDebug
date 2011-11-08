@@ -15,11 +15,11 @@ import javax.swing.JLabel;
  * @author Cedric Reichenbach
  * 
  */
-public class DoodleComponent extends JComponent {
+public class SwingAdapter extends JComponent {
 
 	private DoodleCanvas canvas;
 
-	public DoodleComponent(DoodleCanvas canvas) {
+	public SwingAdapter(DoodleCanvas canvas) {
 		this.canvas = canvas;
 	}
 
@@ -60,7 +60,7 @@ public class DoodleComponent extends JComponent {
 		Point2D.Double pos = this.scalePoint(rect.getPosition(), compWidth,
 				compHeight);
 
-		DoodleComponent subComponent = new DoodleComponent(c);
+		SwingAdapter subComponent = new SwingAdapter(c);
 		subComponent.setBounds((int) pos.x, (int) pos.y, (int) rectWidth,
 				(int) rectHeight);
 		

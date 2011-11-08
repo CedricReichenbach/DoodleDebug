@@ -6,17 +6,19 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import plugins.Plugin;
+import plugins.RenderingPlugin;
 
 public class RenderingRegistryProvider implements Provider<RenderingRegistry> {
 
 	@Inject
-	Set<Plugin> allPlugins;
+	Set<RenderingPlugin> allPlugins;
 
 	@Override
 	public RenderingRegistry get() {
-		HashMap<Class<?>, Plugin> m = new HashMap<Class<?>, Plugin>();
-		for (Plugin p : allPlugins) {
+		HashMap<Class<?>, RenderingPlugin> m = new HashMap<Class<?>, RenderingPlugin>();
+		for (RenderingPlugin p : allPlugins) {
+			assert p != null;
+			System.out.println(p.getDrawableClasses());
 			for (Class<?> type : p.getDrawableClasses()) {
 				m.put(type, p);
 			}

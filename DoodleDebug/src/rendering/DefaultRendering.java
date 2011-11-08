@@ -10,8 +10,8 @@ import view.Rect;
 public class DefaultRendering implements Rendering<Object> {
 
 	@Override
-	public DoodleCanvas render(Object object) {
-		return new Scratch(new DrawableWrapper(object)).getCanvas();
+	public void render(Object object, DoodleCanvas canvas) {
+		canvas = new Scratch(new DrawableWrapper(object)).getCanvas();
 	}
 
 }

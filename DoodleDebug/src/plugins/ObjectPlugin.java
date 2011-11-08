@@ -3,6 +3,8 @@ package plugins;
 import java.util.HashSet;
 import java.util.Set;
 
+import view.DoodleCanvas;
+
 import doodle.Scratch;
 
 /**
@@ -10,7 +12,7 @@ import doodle.Scratch;
  * @author Cedric Reichenbach
  *
  */
-public class ObjectPlugin implements Plugin {
+public class ObjectPlugin implements RenderingPlugin {
 
 	@Override
 	public Set<Class<?>> getDrawableClasses() {
@@ -20,9 +22,10 @@ public class ObjectPlugin implements Plugin {
 	}
 
 	@Override
-	public void draw(Object o, Scratch s) {
+	public void render(Object object, DoodleCanvas canvas) {
 		// TODO Auto-generated method stub
-
+		
 	}
+
 
 }

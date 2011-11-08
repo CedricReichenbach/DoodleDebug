@@ -7,7 +7,7 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
-import plugins.Plugin;
+import plugins.RenderingPlugin;
 
 /**
  * Manages different Renderings, can be organized by user (e.g. different renderings for specific objects and bring in their own renderings)
@@ -17,21 +17,21 @@ import plugins.Plugin;
 public class RenderingRegistry {
 	
 	
-	private final HashMap<Class<?>, Plugin> map;
+	private final HashMap<Class<?>, RenderingPlugin> map;
 
-	public RenderingRegistry(HashMap<Class<?>, Plugin> m) {
+	public RenderingRegistry(HashMap<Class<?>, RenderingPlugin> m) {
 		this.map = m;
 		assert map.containsKey(Object.class);
 	}
 
-	public Plugin lookup(Class<?> type) {
-		Plugin plugin = map.get(type);
+	public RenderingPlugin lookup(Class<?> type) {
+		RenderingPlugin renderingPlugin = map.get(type);
 		
-		if (plugin == null) {
+		if (renderingPlugin == null) {
 			return this.lookup(type.getSuperclass());
 		}
 		
-		return plugin;
+		return renderingPlugin;
 		
 	}
 

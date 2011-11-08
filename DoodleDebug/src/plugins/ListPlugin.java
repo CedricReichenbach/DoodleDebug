@@ -5,7 +5,7 @@ import java.util.Set;
 import doodle.Scratch;
 
 
-public class ListPlugin implements Plugin {
+public class ListPlugin implements RenderingPlugin {
 
 	@Override
 	public Set<Class<?>> getDrawableClasses() {

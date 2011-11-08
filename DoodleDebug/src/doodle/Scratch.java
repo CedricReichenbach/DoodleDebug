@@ -3,20 +3,28 @@ package doodle;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import com.google.inject.Provider;
+
 import rendering.DefaultRendering;
+import rendering.Rendering;
+import rendering.RenderingRegistry;
 import rendering.ScratchRendering;
 
 import view.DoodleCanvas;
 
 /**
- * Organized in a tree structure, draws object and its nested objects inside.
+ * The graphical representation of an object. 
+ * Draws its object and its object's nested objects.
+ * 
+ * Organized in a tree structure, which the renderer traverses to create the real pixels on a doodle canvas.
  * 
  * @author Cedric Reichenbach
  * 
  */
 public class Scratch {
 
-	private DoodleCanvas canvas;
 	private Object object;
 
 	/**
@@ -30,6 +38,12 @@ public class Scratch {
 	private List<Scratch> outer;
 
 	private String title;
+	
+	@Inject 
+	RenderingRegistry renderingRegistry;
+	
+	@Inject
+	Provider<Scratch> scratchProvider;
 
 	/**
 	 * Creates a new Scratch for visualizing objects
@@ -39,24 +53,34 @@ public class Scratch {
 		this.outer = new ArrayList<Scratch>();
 		this.object = o;
 		this.title = "";
-		this.drawWhole();
 	}
 
 	/**
-	 * Visualizes any Object on this whole Scratch (not inside other object).
-	 * Should only be called the first time (top object).
+	 * Visualize any Object on this whole Scratch (not inside another object).
 	 * 
-	 * @param o
-	 * @return
+	 * 
+	 * @param canvas 
 	 */
-	private void drawWhole() {
+	private void drawWhole(DoodleCanvas canvas) {
 		if (object instanceof Drawable) {
 			((Drawable) object).drawOn(this);
+			Rendering rendering = new ScratchRendering(); //XXX
+			rendering.render(object, canvas);
 			// TODO: Ask registry for Scratch visualization
-			this.canvas = new ScratchRendering().render(this);
 		} else {
-			this.drawDefault();
+			this.drawDefault(canvas);
 		}
+	}
+
+	/**
+	 * Makes a default drawing for objects that don't implement their own draw
+	 * method.
+	 * 
+	 * @param Object
+	 *            o
+	 */
+	private void drawDefault(DoodleCanvas canvas) {
+		// TODO: Ask Registry for visualization.
 	}
 
 	/**
@@ -68,9 +92,9 @@ public class Scratch {
 	 *            o
 	 */
 	public void draw(Object o) {
+		Scratch s = scratchProvider.get();
 		Scratch subScratch = new Scratch(o);
 		this.inner.add(subScratch);
-		subScratch.drawWhole();
 	}
 
 	/**
@@ -84,19 +108,6 @@ public class Scratch {
 	public void drawOuter(Object o) {
 		Scratch subScratch = new Scratch(o);
 		this.outer.add(subScratch);
-		subScratch.drawWhole();
-	}
-
-	/**
-	 * Makes a default drawing for objects that don't implement their own draw
-	 * method.
-	 * 
-	 * @param Object
-	 *            o
-	 */
-	private void drawDefault() {
-		// TODO: Ask Registry for visualization.
-		this.canvas = new DefaultRendering().render(object);
 	}
 
 	/**
@@ -110,7 +121,6 @@ public class Scratch {
 		// TODO: SmallScratch for this case
 		Scratch subScratch = new SmallScratch(o);
 		this.inner.add(subScratch);
-		subScratch.drawWhole();
 	}
 
 	/**
@@ -129,10 +139,6 @@ public class Scratch {
 
 	public List<Scratch> getOuter() {
 		return outer;
-	}
-
-	public DoodleCanvas getCanvas() {
-		return this.canvas;
 	}
 
 	public String getTitle() {

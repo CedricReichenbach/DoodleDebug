@@ -18,5 +18,5 @@ public interface Rendering<T> {
 	 * @param Object
 	 *            o
 	 */
-	public DoodleCanvas render(T object);
+	public void render(T object, DoodleCanvas canvas);
 }
