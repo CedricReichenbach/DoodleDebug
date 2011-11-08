@@ -28,6 +28,7 @@ public class Scratch {
 	 * List of Scratches contained on the outside of this one
 	 */
 	private List<Scratch> outer;
+
 	private String title;
 
 	/**
@@ -37,7 +38,7 @@ public class Scratch {
 		this.inner = new ArrayList<Scratch>();
 		this.outer = new ArrayList<Scratch>();
 		this.object = o;
-		this.title = o.getClass().getSimpleName();
+		this.title = "";
 		this.drawWhole();
 	}
 

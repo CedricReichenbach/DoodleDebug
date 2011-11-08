@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
 import java.util.HashMap;
@@ -23,6 +24,9 @@ public class DoodleComponent extends JComponent {
 	}
 
 	private void evaluateCanvas(Graphics g) {
+		// delete everything
+		this.removeAll();
+		
 		// draw rects
 		for (Rect rect : canvas.getRects()) {
 			this.drawRect(rect, g);
