@@ -3,6 +3,8 @@ package plugins;
 import java.util.HashSet;
 import java.util.Set;
 
+import rendering.DefaultRendering;
+
 import view.DoodleCanvas;
 
 import doodle.Scratch;
@@ -23,8 +25,7 @@ public class ObjectPlugin implements RenderingPlugin {
 
 	@Override
 	public void render(Object object, DoodleCanvas canvas) {
-		// TODO Auto-generated method stub
-		
+		new DefaultRendering().render(object, canvas);
 	}
 
 

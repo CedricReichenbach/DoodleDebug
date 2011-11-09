@@ -23,7 +23,8 @@ public class Doodler {
 	 * @param Object o
 	 */
 	public void visualize(Object o) {
-		DoodleCanvas canvas = new Scratch(o).getCanvas();
+		DoodleCanvas canvas = new DoodleCanvas();
+		new Scratch(o).drawWhole(canvas);
 		new DoodleFrame(canvas);
 	}
 	

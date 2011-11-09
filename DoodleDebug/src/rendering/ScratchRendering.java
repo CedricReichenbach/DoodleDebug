@@ -10,9 +10,8 @@ import doodle.Scratch;
 public class ScratchRendering implements Rendering<Scratch> {
 
 	@Override
-	public DoodleCanvas render(Scratch scratch) {
+	public void render(Scratch scratch, DoodleCanvas canvas) {
 		// TODO: not finished...
-		DoodleCanvas canvas = new DoodleCanvas();
 
 		// frame
 		Rect mainRect = new Rect(new Point2D.Double(0.01, 0.01), .8, .98);
@@ -28,14 +27,14 @@ public class ScratchRendering implements Rendering<Scratch> {
 		Point2D.Double curPoint = new Point2D.Double(.06, .06);
 		for (Scratch s : scratch.getInner()) {
 			Rect rect = new Rect(curPoint, subWidth, subHeight);
-			canvas.drawCanvas(s.getCanvas(), rect);
+			DoodleCanvas c = new DoodleCanvas();
+			s.drawWhole(c);
+			canvas.drawCanvas(c, rect);
 			curPoint = new Point2D.Double(curPoint.x, curPoint.y + subHeight
 					+ dHeight);
 		}
 
 		// outer
-
-		return canvas;
 
 	}
 }

@@ -11,7 +11,7 @@ public class DefaultRendering implements Rendering<Object> {
 
 	@Override
 	public void render(Object object, DoodleCanvas canvas) {
-		canvas = new Scratch(new DrawableWrapper(object)).getCanvas();
+		new Scratch(new DrawableWrapper(object)).drawWhole(canvas);
 	}
 
 }

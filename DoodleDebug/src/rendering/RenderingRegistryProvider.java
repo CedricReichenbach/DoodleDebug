@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import org.apache.commons.collections.CollectionUtils;
+
 import plugins.RenderingPlugin;
 
 public class RenderingRegistryProvider implements Provider<RenderingRegistry> {
@@ -18,7 +20,6 @@ public class RenderingRegistryProvider implements Provider<RenderingRegistry> {
 		HashMap<Class<?>, RenderingPlugin> m = new HashMap<Class<?>, RenderingPlugin>();
 		for (RenderingPlugin p : allPlugins) {
 			assert p != null;
-			System.out.println(p.getDrawableClasses());
 			for (Class<?> type : p.getDrawableClasses()) {
 				m.put(type, p);
 			}

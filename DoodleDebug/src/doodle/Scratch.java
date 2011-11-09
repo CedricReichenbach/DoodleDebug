@@ -61,7 +61,7 @@ public class Scratch {
 	 * 
 	 * @param canvas 
 	 */
-	private void drawWhole(DoodleCanvas canvas) {
+	public void drawWhole(DoodleCanvas canvas) {
 		if (object instanceof Drawable) {
 			((Drawable) object).drawOn(this);
 			Rendering rendering = new ScratchRendering(); //XXX
