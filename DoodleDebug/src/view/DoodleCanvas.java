@@ -31,7 +31,7 @@ public class DoodleCanvas {
 	public void drawCanvas(DoodleCanvas canvas, Rect rect) {
 		this.canvasMap.put(canvas, rect);
 	}
-	
+
 	public void drawText(String string, Point2D.Double position) {
 		this.textMap.put(string, position);
 	}
@@ -46,6 +46,10 @@ public class DoodleCanvas {
 
 	public HashMap<String, Point2D.Double> getTextMap() {
 		return textMap;
+	}
+
+	public String toString() {
+		return "Subcanvas': " + this.canvasMap.keySet().toString();
 	}
 
 }

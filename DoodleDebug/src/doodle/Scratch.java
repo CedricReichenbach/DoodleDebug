@@ -64,8 +64,8 @@ public class Scratch {
 	public void drawWhole(DoodleCanvas canvas) {
 		if (object instanceof Drawable) {
 			((Drawable) object).drawOn(this);
-			Rendering rendering = new ScratchRendering(); //XXX
-			rendering.render(object, canvas);
+			Rendering<Scratch> rendering = new ScratchRendering(); //XXX
+			rendering.render(this, canvas);
 			// TODO: Ask registry for Scratch visualization
 		} else {
 			this.drawDefault(canvas);
@@ -80,6 +80,7 @@ public class Scratch {
 	 *            o
 	 */
 	private void drawDefault(DoodleCanvas canvas) {
+		new DefaultRendering().render(object, canvas);
 		// TODO: Ask Registry for visualization.
 	}
 
@@ -92,7 +93,7 @@ public class Scratch {
 	 *            o
 	 */
 	public void draw(Object o) {
-		Scratch s = scratchProvider.get();
+//		Scratch s = scratchProvider.get(); TODO: what is this for?
 		Scratch subScratch = new Scratch(o);
 		this.inner.add(subScratch);
 	}
