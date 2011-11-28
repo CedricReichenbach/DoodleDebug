@@ -1,4 +1,4 @@
-- Should RenderingPlugins be typified or not?
+- Should RenderingPlugins be typified or not? Atm, objects are always casted there, because Renderings are typified.
 
 - Why does @Inject renderingRegistry not work?
 

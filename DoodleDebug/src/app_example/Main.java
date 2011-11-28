@@ -16,9 +16,10 @@ public class Main {
 		Color[] ar = new Color[5];
 		fillRandomColors(ar);
 		
-		System.out.println(ar.getClass());
+		D.raw(ar);
 		
-		System.out.println(ar);
+		ar[2] = Color.RED;
+		
 		D.raw(ar);
 	}
 

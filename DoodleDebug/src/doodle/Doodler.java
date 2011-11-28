@@ -10,11 +10,22 @@ import view.HtmlRenderer;
  * 
  */
 public class Doodler {
+	
+	private static final Doodler doodler = new Doodler();
+
+	/**
+	 * Implement singleton pattern.
+	 * 
+	 * @return Singleton Doodler instance
+	 */
+	public static Doodler instance() {
+		return doodler;
+	}
 
 	/**
 	 * Creates a new Doodler for visualizing objects 1 Doodler = 1 window
 	 */
-	public Doodler() {
+	protected Doodler() {
 	}
 
 	/**
@@ -27,6 +38,7 @@ public class Doodler {
 	public void visualize(Object o) {
 		Tag html = new Tag("html");
 		new Scratch(o).drawWhole(html);
+		// TODO: in one frame
 		HtmlRenderer.render(html.toString());
 		System.out.println(html);
 	}
