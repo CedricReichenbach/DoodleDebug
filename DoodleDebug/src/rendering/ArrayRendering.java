@@ -10,7 +10,7 @@ public class ArrayRendering implements Rendering<Object[]> {
 	@Override
 	public void render(Object[] array, Tag tag) {
 		Tag p = new Tag("p");
-		System.out.println(array[0]);
+		p.add("here comes array visualisation");
 		tag.add(p);
 	}
 
