@@ -6,8 +6,6 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import org.apache.commons.collections.CollectionUtils;
-
 import plugins.RenderingPlugin;
 
 public class RenderingRegistryProvider implements Provider<RenderingRegistry> {

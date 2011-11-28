@@ -1,6 +1,7 @@
 package app_example;
 
 import java.awt.Color;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import doodle.D;
@@ -12,16 +13,18 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		ArrayList<Color> al = new ArrayList<Color>(5);
-		fillRandomColors(al, 5);
+		Color[] ar = new Color[5];
+		fillRandomColors(ar);
 		
-		System.out.println(al);
-		D.raw(al);
+		System.out.println(ar.getClass());
+		
+		System.out.println(ar);
+		D.raw(ar);
 	}
 
-	private static void fillRandomColors(ArrayList<Color> al, int n) {
-		for (int i = 0; i < n; i++) {
-			al.add(new Color(randomInt(255), randomInt(255), randomInt(255)));
+	private static void fillRandomColors(Color[] ar) {
+		for (int i = 0; i < ar.length; i++) {
+			ar[i] = new Color(randomInt(255), randomInt(255), randomInt(255));
 		}
 	}
 

@@ -2,13 +2,8 @@ package rendering;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.inject.Inject;
 
 import plugins.RenderingPlugin;
 
@@ -70,7 +65,6 @@ public class RenderingRegistry {
 		for (List<Class<?>> level : levels){
 			for (Class<?> curType : level) {
 				RenderingPlugin plugin = map.get(curType);
-				System.out.println(map);
 				if (plugin != null) {
 					return plugin;
 				}

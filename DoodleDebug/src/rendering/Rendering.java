@@ -1,5 +1,6 @@
 package rendering;
 
+import html_generator.Tag;
 import view.DoodleCanvas;
 
 import doodle.Doodler;
@@ -18,5 +19,5 @@ public interface Rendering<T> {
 	 * @param Object
 	 *            o
 	 */
-	public void render(T object, DoodleCanvas canvas);
+	public void render(T object, Tag tag);
 }

@@ -1,10 +1,17 @@
 package doodle;
 
+import html_generator.Tag;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import plugins.ArrayPlugin;
+import plugins.RenderingPlugin;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import com.google.inject.Provider;
 
 import rendering.DefaultRendering;
@@ -61,14 +68,14 @@ public class Scratch {
 	 * 
 	 * @param canvas 
 	 */
-	public void drawWhole(DoodleCanvas canvas) {
+	public void drawWhole(Tag tag) {
 		if (object instanceof Drawable) {
 			((Drawable) object).drawOn(this);
 			Rendering<Scratch> rendering = new ScratchRendering(); //XXX
-			rendering.render(this, canvas);
+			rendering.render(this, tag);
 			// TODO: Ask registry for Scratch visualization
 		} else {
-			this.drawDefault(canvas);
+			this.drawDefault(tag);
 		}
 	}
 
@@ -79,9 +86,21 @@ public class Scratch {
 	 * @param Object
 	 *            o
 	 */
-	private void drawDefault(DoodleCanvas canvas) {
-		new DefaultRendering().render(object, canvas);
-		// TODO: Ask Registry for visualization.
+	private void drawDefault(Tag tag) {
+		Injector injector = Guice.createInjector(new DoodleModule());
+		renderingRegistry = injector
+				.getInstance(RenderingRegistry.class);
+		// TODO: above code should not be necessary... -.-
+		
+		assert(renderingRegistry != null);
+		RenderingPlugin plugin = renderingRegistry.lookup(object.getClass());
+		
+		// XXX special case of arrays, should be managed better
+		if (object.getClass().isArray()) {
+			plugin = new ArrayPlugin();
+		}
+		
+		plugin.render(object, tag);
 	}
 
 	/**

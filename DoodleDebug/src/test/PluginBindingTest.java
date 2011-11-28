@@ -1,25 +1,19 @@
-package rendering;
+package test;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+
 import java.util.Vector;
 
-import org.hamcrest.Matcher;
 import org.junit.Test;
 
 import plugins.ListPlugin;
+import rendering.RenderingRegistry;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
-import static org.junit.Assert.*;
-import static org.hamcrest.core.Is.*;
-import static org.hamcrest.core.IsInstanceOf.*;
-import static org.junit.matchers.JUnitMatchers.*;
-
-import doodle.*;
+import doodle.DoodleModule;
 
 public class PluginBindingTest {
 

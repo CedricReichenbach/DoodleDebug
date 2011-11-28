@@ -1,5 +1,7 @@
 package plugins;
 
+import html_generator.Tag;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,8 +26,8 @@ public class ObjectPlugin implements RenderingPlugin {
 	}
 
 	@Override
-	public void render(Object object, DoodleCanvas canvas) {
-		new DefaultRendering().render(object, canvas);
+	public void render(Object object, Tag tag) {
+		new DefaultRendering().render(object, tag);
 	}
 
 

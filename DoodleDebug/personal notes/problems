@@ -1,0 +1,5 @@
+- Should RenderingPlugins be typified or not?
+
+- Why does @Inject renderingRegistry not work?
+
+- Array.type makes no sense...
