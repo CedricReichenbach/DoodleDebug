@@ -43,6 +43,7 @@ public class Doodler {
 	 */
 	public void visualize(Object o) {
 		new Scratch(o).drawWhole(html);
+		html.add("<br />");
 		htmlRenderer.render(html.toString());
 		System.out.println(html);
 	}

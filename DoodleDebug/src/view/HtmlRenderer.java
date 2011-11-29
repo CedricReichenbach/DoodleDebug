@@ -1,24 +1,30 @@
 package view;
 
+import java.awt.ScrollPane;
+
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 
 public class HtmlRenderer {
 
 	JFrame frame;
 	private JEditorPane pane;
+	private JScrollPane scrollPane;
 
 	public HtmlRenderer() {
 		frame = new JFrame("DoodleDebug");
 		pane = new JEditorPane("text/html", "");
-		frame.getContentPane().add(pane);
+		scrollPane = new JScrollPane(pane);
+		frame.getContentPane().add(scrollPane);
 	}
 
 	public void render(String html) {
-		frame.getContentPane().remove(pane);
+		frame.getContentPane().remove(scrollPane);
 		pane = new JEditorPane("text/html", html);
 		pane.setEditable(false);
-		frame.getContentPane().add(pane);
+		scrollPane = new JScrollPane(pane);
+		frame.getContentPane().add(scrollPane);
 
 		initialize(frame);
 	}
