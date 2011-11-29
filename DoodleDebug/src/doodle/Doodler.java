@@ -44,7 +44,6 @@ public class Doodler {
 		HtmlDocument htmlDocument = new HtmlDocument();
 		htmlDocument.setBody(body);
 		htmlRenderer.render(htmlDocument.toString());
-		System.out.println(body);
 	}
 
 }

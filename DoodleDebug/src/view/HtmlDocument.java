@@ -2,9 +2,14 @@ package view;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.util.Scanner;
 
 import javax.management.RuntimeErrorException;
+import javax.swing.filechooser.FileSystemView;
+
+import sun.management.FileSystem;
 
 import html_generator.Tag;
 
@@ -45,7 +50,9 @@ public class HtmlDocument {
 		String result = "";
 		// load from file "style.css"
 		try {
-			Scanner sc = new Scanner(new File("./style.css"));
+			String sep = File.separator;
+			Scanner sc = new Scanner(new File(System.getProperty("user.dir")
+					+ sep + "src" + sep + "view" + sep + "style.css"));
 			while (sc.hasNext()) {
 				result += sc.next();
 			}
