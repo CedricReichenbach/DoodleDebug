@@ -8,7 +8,7 @@ import java.util.Set;
 
 import view.DoodleCanvas;
 
-import doodle.Scratch;
+import doodle.RealScratch;
 
 
 public class ListPlugin implements RenderingPlugin {

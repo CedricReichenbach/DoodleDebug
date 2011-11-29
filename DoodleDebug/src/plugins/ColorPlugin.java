@@ -6,9 +6,15 @@ import java.awt.Color;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.inject.Inject;
+import javax.inject.Provider;
+
 import rendering.ColorRendering;
 
 public class ColorPlugin implements RenderingPlugin {
+	
+	@Inject
+	Provider<ColorRendering> colorRenderingProvider;
 
 	@Override
 	public Set<Class<?>> getDrawableClasses() {
@@ -19,7 +25,7 @@ public class ColorPlugin implements RenderingPlugin {
 
 	@Override
 	public void render(Object color, Tag tag) {
-		new ColorRendering().render((Color) color, tag);
+		colorRenderingProvider.get().render((Color) color, tag);
 	}
 
 }

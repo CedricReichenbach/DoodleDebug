@@ -7,9 +7,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.inject.Inject;
+import javax.inject.Provider;
+
 import rendering.ArrayRendering;
 
 public class ArrayPlugin implements RenderingPlugin {
+	
+	@Inject
+	Provider<ArrayRendering> arrayRenderingProvider;
 
 	@Override
 	public Set<Class<?>> getDrawableClasses() {
@@ -20,6 +26,6 @@ public class ArrayPlugin implements RenderingPlugin {
 
 	@Override
 	public void render(Object array, Tag tag) {
-		new ArrayRendering().render((Object[]) array, tag);
+		arrayRenderingProvider.get().render((Object[]) array, tag);
 	}
 }

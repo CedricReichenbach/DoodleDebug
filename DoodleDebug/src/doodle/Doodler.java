@@ -1,6 +1,10 @@
 package doodle;
 
+import javax.inject.Inject;
+import javax.inject.Provider;
+
 import html_generator.Tag;
+import view.HtmlDocument;
 import view.HtmlRenderer;
 
 /**
@@ -11,26 +15,18 @@ import view.HtmlRenderer;
  */
 public class Doodler {
 	
-	private static final Doodler doodler = new Doodler();
+	@Inject
+	ScratchFactory scratchFactory;
 	
-	private Tag html;
+	private Tag body;
 
 	private HtmlRenderer htmlRenderer;
-
-	/**
-	 * Implement singleton pattern.
-	 * 
-	 * @return Singleton Doodler instance
-	 */
-	public static Doodler instance() {
-		return doodler;
-	}
 
 	/**
 	 * Creates a new Doodler for visualizing objects 1 Doodler = 1 window
 	 */
 	protected Doodler() {
-		html = new Tag("html");
+		body = new Tag("body");
 		htmlRenderer = new HtmlRenderer();
 	}
 
@@ -39,13 +35,16 @@ public class Doodler {
 	 * existing) or does a default drawing.
 	 * 
 	 * @param Object
-	 *            o
+	 *            
 	 */
+	@SuppressWarnings("unchecked")
 	public void visualize(Object o) {
-		new Scratch(o).drawWhole(html);
-		html.add("<br />");
-		htmlRenderer.render(html.toString());
-		System.out.println(html);
+		scratchFactory.create(o).drawWhole(body);
+		body.add(Tag.br());
+		HtmlDocument htmlDocument = new HtmlDocument();
+		htmlDocument.setBody(body);
+		htmlRenderer.render(htmlDocument.toString());
+		System.out.println(body);
 	}
 
 }

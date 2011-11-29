@@ -7,11 +7,10 @@ import html_generator.Tag;
 
 public class ColorRendering implements Rendering<Color> {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void render(Color color, Tag tag) {
-		tag.getAttributes()
-				.add(new Attribute("bgcolor", hexColorString(color)));
-		tag.getAttributes().add(new Attribute("style", "width:100"));
+		tag.getAttributes().add(new Attribute("style", "width:100; background-color:"+hexColorString(color)));
 	}
 
 	private String hexColorString(Color color) {

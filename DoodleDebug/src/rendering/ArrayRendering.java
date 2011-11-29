@@ -2,27 +2,32 @@ package rendering;
 
 import java.lang.reflect.Array;
 
-import doodle.Scratch;
+import javax.inject.Inject;
+
+import doodle.RealScratch;
+import doodle.ScratchFactory;
 
 import html_generator.Tag;
 
 
 public class ArrayRendering implements Rendering<Object[]> {
 
+	@Inject
+	ScratchFactory scratchFactory;
+	
 	@Override
 	public void render(Object[] array, Tag tag) {
-		Tag table = new Tag("table", "border=\"1\"");
-		Tag tr = new Tag("tr");
+		Tag div = new Tag("div", "class=arrayRendering");
 		for (int i = 0; i < array.length; i++) {
-			Tag td = new Tag("td");
+			Tag span = new Tag("span");
 			
 			// render inner objects
-			new Scratch(array[i]).drawWhole(td);
+			scratchFactory.create(array[i]).drawWhole(span);
 			
-			tr.add(td);
+			div.add(span);
 		}
-		table.add(tr);
-		tag.add(table);
+		
+		tag.add(div);
 	}
 
 }

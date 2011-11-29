@@ -7,12 +7,12 @@ import java.awt.geom.Point2D.Double;
 
 import view.DoodleCanvas;
 import view.Rect;
-import doodle.Scratch;
+import doodle.RealScratch;
 
-public class ScratchRendering implements Rendering<Scratch> {
+public class ScratchRendering implements Rendering<RealScratch> {
 
 	@Override
-	public void render(Scratch scratch, Tag tag) {
+	public void render(RealScratch realScratch, Tag tag) {
 		// TODO
 
 //		// frame

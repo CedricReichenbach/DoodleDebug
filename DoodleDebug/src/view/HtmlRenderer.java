@@ -1,7 +1,5 @@
 package view;
 
-import java.awt.ScrollPane;
-
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;

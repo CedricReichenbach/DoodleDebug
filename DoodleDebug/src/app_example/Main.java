@@ -17,7 +17,8 @@ public class Main {
 	public static void main(String[] args) {
 		Color[] ar = new Color[5];
 		fillRandomColors(ar);
-
+		System.out.println(ar.getClass());
+		
 		D.raw(ar);
 
 		ar[2] = Color.RED;

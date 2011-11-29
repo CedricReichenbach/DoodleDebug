@@ -95,4 +95,8 @@ public class Tag extends LinkedList {
 	attributes.add(attr);
     }
     
+    public static String br() {
+    	return "<br>";
+    }
+    
 }

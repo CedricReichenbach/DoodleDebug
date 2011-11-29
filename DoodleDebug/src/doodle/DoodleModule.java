@@ -1,5 +1,7 @@
 package doodle;
 
+import javax.inject.Singleton;
+
 import plugins.ArrayPlugin;
 import plugins.ColorPlugin;
 import plugins.ListPlugin;
@@ -9,6 +11,7 @@ import rendering.RenderingRegistry;
 import rendering.RenderingRegistryProvider;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.multibindings.Multibinder;
 
 public class DoodleModule extends AbstractModule {
@@ -18,9 +21,12 @@ public class DoodleModule extends AbstractModule {
 		Multibinder<RenderingPlugin> uriBinder = Multibinder.newSetBinder(binder(), RenderingPlugin.class);
 		uriBinder.addBinding().to(ListPlugin.class);
 		uriBinder.addBinding().to(ObjectPlugin.class);
-		uriBinder.addBinding().to(ArrayPlugin.class); // XXX Array.type makes no sense
+		bind(Doodler.class).in(Singleton.class);
 		uriBinder.addBinding().to(ColorPlugin.class);
 		bind(RenderingRegistry.class).toProvider(RenderingRegistryProvider.class);
+		install(new FactoryModuleBuilder()
+	     .implement(Scratch.class,RealScratch.class)
+	     .build(ScratchFactory.class));
 
 	}
 
