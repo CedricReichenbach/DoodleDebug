@@ -12,6 +12,10 @@ import view.HtmlRenderer;
 public class Doodler {
 	
 	private static final Doodler doodler = new Doodler();
+	
+	private Tag html;
+
+	private HtmlRenderer htmlRenderer;
 
 	/**
 	 * Implement singleton pattern.
@@ -26,6 +30,8 @@ public class Doodler {
 	 * Creates a new Doodler for visualizing objects 1 Doodler = 1 window
 	 */
 	protected Doodler() {
+		html = new Tag("html");
+		htmlRenderer = new HtmlRenderer();
 	}
 
 	/**
@@ -36,10 +42,8 @@ public class Doodler {
 	 *            o
 	 */
 	public void visualize(Object o) {
-		Tag html = new Tag("html");
 		new Scratch(o).drawWhole(html);
-		// TODO: in one frame
-		HtmlRenderer.render(html.toString());
+		htmlRenderer.render(html.toString());
 		System.out.println(html);
 	}
 
