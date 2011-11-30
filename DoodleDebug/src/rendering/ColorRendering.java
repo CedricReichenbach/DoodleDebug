@@ -11,6 +11,7 @@ public class ColorRendering implements Rendering<Color> {
 	@Override
 	public void render(Color color, Tag tag) {
 		tag.getAttributes().add(new Attribute("style", "width:100; background-color:"+hexColorString(color)));
+		tag.add(color.toString());
 	}
 
 	private String hexColorString(Color color) {
