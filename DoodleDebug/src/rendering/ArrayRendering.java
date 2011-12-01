@@ -4,7 +4,7 @@ import java.lang.reflect.Array;
 
 import javax.inject.Inject;
 
-import doodle.RealScratch;
+import doodle.Scratch;
 import doodle.ScratchFactory;
 
 import html_generator.Tag;

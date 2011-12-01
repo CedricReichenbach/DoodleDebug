@@ -1,5 +1,5 @@
 package doodle;
 
 public interface ScratchFactory {
-	public Scratch create(Object o);
+	public ScratchInterface create(Object o);
 }

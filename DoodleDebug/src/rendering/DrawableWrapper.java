@@ -3,7 +3,7 @@ package rendering;
 import java.lang.reflect.Field;
 
 import doodle.Drawable;
-import doodle.Scratch;
+import doodle.ScratchInterface;
 
 /**
  * Has default drawOn methods for object that are not drawable.
@@ -19,7 +19,7 @@ public class DrawableWrapper implements Drawable {
 	}
 	
 	@Override
-	public void drawOn(Scratch s) {
+	public void drawOn(ScratchInterface s) {
 		s.drawTitle(this.object.toString());
 		Field[] fields = this.object.getClass().getFields();
 		for (Field f : fields) {
@@ -34,7 +34,7 @@ public class DrawableWrapper implements Drawable {
 	}
 
 	@Override
-	public void drawSmallOn(Scratch s) {
+	public void drawSmallOn(ScratchInterface s) {
 		// TODO Auto-generated method stub
 
 	}

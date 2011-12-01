@@ -9,7 +9,7 @@ import rendering.DefaultRendering;
 
 import view.DoodleCanvas;
 
-import doodle.RealScratch;
+import doodle.Scratch;
 
 /**
  * Represents default drawing of any Object, if no other is defined.
