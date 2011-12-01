@@ -29,6 +29,8 @@ public class Main {
 			changeRandomColor(ar);
 			D.raw(ar);
 		}
+		
+		D.raw(Color.RED);
 	}
 
 	private static void fillRandomColors(Color[] ar) {

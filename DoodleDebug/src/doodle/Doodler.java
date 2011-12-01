@@ -3,6 +3,7 @@ package doodle;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import html_generator.Attribute;
 import html_generator.Tag;
 import view.HtmlDocument;
 import view.HtmlRenderer;
@@ -40,6 +41,13 @@ public class Doodler {
 	@SuppressWarnings("unchecked")
 	public void visualize(Object o) {
 		scratchFactory.create(o).drawWhole(body);
+		
+		// XXX: ugly workaround to identify renderings of this object type later
+		Object appended = body.getLast();
+		if (appended instanceof Tag) {
+			((Tag) appended).getAttributes().add(new Attribute("id", o.getClass().getCanonicalName()));
+		}
+		
 		body.add(Tag.br());
 		HtmlDocument htmlDocument = new HtmlDocument();
 		htmlDocument.setBody(body);

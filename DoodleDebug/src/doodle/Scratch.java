@@ -23,10 +23,11 @@ import rendering.ScratchRendering;
 import view.DoodleCanvas;
 
 /**
- * The graphical representation of an object. 
- * Draws its object and its object's nested objects.
+ * The graphical representation of an object. Draws its object and its object's
+ * nested objects.
  * 
- * Organized in a tree structure, which the renderer traverses to create the real pixels on a doodle canvas.
+ * Organized in a tree structure, which the renderer traverses to create the
+ * real pixels on a doodle canvas.
  * 
  * @author Cedric Reichenbach
  * 
@@ -46,14 +47,15 @@ public class Scratch implements ScratchInterface {
 	private List<Scratch> outer;
 
 	private String title;
-	
-	@Inject 
+
+	@Inject
 	RenderingRegistry renderingRegistry;
-	
+
 	@Inject
 	Provider<ArrayPlugin> arrayPluginProvider;
-	
 
+	@Inject
+	ScratchFactory scratchFactory;
 
 	/**
 	 * Creates a new Scratch for visualizing objects
@@ -65,16 +67,17 @@ public class Scratch implements ScratchInterface {
 		this.outer = new ArrayList<Scratch>();
 		this.title = "";
 	}
-	
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see doodle.Scratch#drawWhole(html_generator.Tag)
 	 */
 	@Override
 	public void drawWhole(Tag tag) {
 		if (object instanceof Drawable) {
 			((Drawable) object).drawOn(this);
-			Rendering<Scratch> rendering = new ScratchRendering(); //XXX
+			Rendering<Scratch> rendering = new ScratchRendering(); // XXX
 			rendering.render(this, tag);
 			// TODO: Ask registry for Scratch visualization
 		} else {
@@ -90,36 +93,39 @@ public class Scratch implements ScratchInterface {
 	 *            o
 	 */
 	private void drawDefault(Tag tag) {
-		assert(renderingRegistry != null);
+		assert (renderingRegistry != null);
 		RenderingPlugin plugin = renderingRegistry.lookup(object.getClass());
-		
+
 		if (object.getClass().isArray()) {
 			plugin = arrayPluginProvider.get();
 		}
-		
+
 		plugin.render(object, tag);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see doodle.Scratch#draw(java.lang.Object)
 	 */
 	@Override
 	public void draw(Object o) {
-//		Scratch s = scratchProvider.get(); TODO: what is this for?
-		Scratch subScratch = new Scratch(o);
-		this.inner.add(subScratch);
+		this.inner.add((Scratch) scratchFactory.create(o));
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see doodle.Scratch#drawOuter(java.lang.Object)
 	 */
 	@Override
 	public void drawOuter(Object o) {
-		Scratch subScratch = new Scratch(o);
-		this.outer.add(subScratch);
+		this.outer.add((Scratch) scratchFactory.create(o));
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see doodle.Scratch#drawSmall(java.lang.Object)
 	 */
 	@Override
@@ -129,7 +135,9 @@ public class Scratch implements ScratchInterface {
 		this.inner.add(subScratch);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see doodle.Scratch#drawTitle(java.lang.String)
 	 */
 	@Override
@@ -137,7 +145,9 @@ public class Scratch implements ScratchInterface {
 		this.title = title;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see doodle.Scratch#getInner()
 	 */
 	@Override
@@ -145,7 +155,9 @@ public class Scratch implements ScratchInterface {
 		return this.inner;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see doodle.Scratch#getOuter()
 	 */
 	@Override
@@ -153,7 +165,9 @@ public class Scratch implements ScratchInterface {
 		return outer;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see doodle.Scratch#getTitle()
 	 */
 	@Override
