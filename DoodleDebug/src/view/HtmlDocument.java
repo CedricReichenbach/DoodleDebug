@@ -1,17 +1,10 @@
 package view;
 
+import html_generator.Tag;
+
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
 import java.util.Scanner;
-
-import javax.management.RuntimeErrorException;
-import javax.swing.filechooser.FileSystemView;
-
-import sun.management.FileSystem;
-
-import html_generator.Tag;
 
 public class HtmlDocument {
 

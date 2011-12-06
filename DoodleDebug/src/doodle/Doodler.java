@@ -42,12 +42,6 @@ public class Doodler {
 	public void visualize(Object o) {
 		scratchFactory.create(o).drawWhole(body);
 		
-		// XXX: ugly workaround to identify renderings of this object type later
-		Object appended = body.getLast();
-		if (appended instanceof Tag) {
-			((Tag) appended).getAttributes().add(new Attribute("id", o.getClass().getCanonicalName()));
-		}
-		
 		body.add(Tag.br());
 		HtmlDocument htmlDocument = new HtmlDocument();
 		htmlDocument.setBody(body);

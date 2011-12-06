@@ -1,5 +1,6 @@
 package doodle;
 
+import html_generator.Attribute;
 import html_generator.Tag;
 
 import java.util.ArrayList;
@@ -79,9 +80,25 @@ public class Scratch implements ScratchInterface {
 			((Drawable) object).drawOn(this);
 			Rendering<Scratch> rendering = new ScratchRendering(); // XXX
 			rendering.render(this, tag);
-			// TODO: Ask registry for Scratch visualization
 		} else {
 			this.drawDefault(tag);
+		}
+
+		this.setClassAttributes(tag, object);
+	}
+
+	/**
+	 * Brutal method for writing information about object type into class
+	 * attribute of just written tags inside this one
+	 * 
+	 * @param tag
+	 * @param object2
+	 */
+	private void setClassAttributes(Tag tag, Object object) {
+		for (Object sub : tag) {
+			if (sub instanceof Tag) {
+				((Tag) sub).addAttribute(new Attribute("class",object.getClass().getCanonicalName()));
+			}
 		}
 	}
 
