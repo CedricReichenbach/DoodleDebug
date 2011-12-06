@@ -17,7 +17,7 @@ public class ArrayRendering implements Rendering<Object[]> {
 	
 	@Override
 	public void render(Object[] array, Tag tag) {
-		Tag div = new Tag("div", "class=arrayRendering");
+		Tag div = new Tag("div");
 		for (int i = 0; i < array.length; i++) {
 			Tag span = new Tag("span");
 			
