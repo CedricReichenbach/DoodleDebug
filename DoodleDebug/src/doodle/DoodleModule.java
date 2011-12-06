@@ -25,7 +25,7 @@ public class DoodleModule extends AbstractModule {
 		uriBinder.addBinding().to(ColorPlugin.class);
 		bind(RenderingRegistry.class).toProvider(RenderingRegistryProvider.class);
 		install(new FactoryModuleBuilder()
-	     .implement(ScratchInterface.class,Scratch.class)
+	     .implement(Scratch.class,RealScratch.class)
 	     .build(ScratchFactory.class));
 
 	}

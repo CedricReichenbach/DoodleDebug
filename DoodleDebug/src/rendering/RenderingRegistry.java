@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import plugins.ArrayPlugin;
 import plugins.RenderingPlugin;
 
 /**
@@ -59,6 +60,10 @@ public class RenderingRegistry {
 	}
 
 	public RenderingPlugin lookup(Class<?> type) {
+		if(type.isArray()) {
+			return new ArrayPlugin();
+		}
+		
 
 		List<List<Class<?>>> levels = superTypesLevelwise(type);
 		

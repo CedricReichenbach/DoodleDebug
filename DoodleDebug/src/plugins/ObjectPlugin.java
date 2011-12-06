@@ -9,14 +9,14 @@ import rendering.DefaultRendering;
 
 import view.DoodleCanvas;
 
-import doodle.Scratch;
+import doodle.RealScratch;
 
 /**
  * Represents default drawing of any Object, if no other is defined.
  * @author Cedric Reichenbach
  *
  */
-public class ObjectPlugin implements RenderingPlugin {
+public class ObjectPlugin extends AbstractPlugin {
 
 	@Override
 	public Set<Class<?>> getDrawableClasses() {

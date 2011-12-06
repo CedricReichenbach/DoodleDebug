@@ -4,8 +4,10 @@ import java.util.Set;
 
 import rendering.Rendering;
 
-import doodle.Scratch;
+import doodle.RealScratch;
 
 public interface RenderingPlugin extends Rendering {
 	public Set<Class<?>> getDrawableClasses();
+
+	public String getClassAttribute();
 }

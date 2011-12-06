@@ -12,7 +12,7 @@ import javax.inject.Provider;
 
 import rendering.ArrayRendering;
 
-public class ArrayPlugin implements RenderingPlugin {
+public class ArrayPlugin extends AbstractPlugin {
 	
 	@Inject
 	Provider<ArrayRendering> arrayRenderingProvider;

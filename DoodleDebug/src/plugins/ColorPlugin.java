@@ -11,7 +11,7 @@ import javax.inject.Provider;
 
 import rendering.ColorRendering;
 
-public class ColorPlugin implements RenderingPlugin {
+public class ColorPlugin extends AbstractPlugin {
 	
 	@Inject
 	Provider<ColorRendering> colorRenderingProvider;

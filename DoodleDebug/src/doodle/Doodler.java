@@ -42,10 +42,18 @@ public class Doodler {
 	public void visualize(Object o) {
 		scratchFactory.create(o).drawWhole(body);
 		
-		body.add(Tag.br());
+		body.add(Tag.hr());
 		HtmlDocument htmlDocument = new HtmlDocument();
 		htmlDocument.setBody(body);
 		htmlRenderer.render(htmlDocument.toString());
+	}
+
+	public void renderInlineInto(Object object, Tag tag) {
+		Tag span = new Tag("span");
+		Scratch scratch = scratchFactory.create(object);
+		scratch.drawWhole(span);
+		span.addAttribute(new Attribute("class", scratch.getClassAttribute()));
+		tag.add(span);
 	}
 
 }

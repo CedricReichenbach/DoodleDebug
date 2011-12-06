@@ -98,5 +98,9 @@ public class Tag extends LinkedList {
     public static String br() {
     	return "<br>";
     }
+
+	public static Object hr() {
+		return "<hr>";
+	}
     
 }

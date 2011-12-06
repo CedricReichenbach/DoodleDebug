@@ -5,7 +5,7 @@ import html_generator.Tag;
 import java.awt.Color;
 import java.awt.geom.Point2D;
 
-import doodle.Scratch;
+import doodle.RealScratch;
 import view.DoodleCanvas;
 import view.Rect;
 

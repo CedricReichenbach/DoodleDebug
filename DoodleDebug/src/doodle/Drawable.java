@@ -12,12 +12,12 @@ public interface Drawable {
 	 * Defines how to draw self object using methods of received Doodler object (similar to System.out.println)
 	 * @param Doodler d
 	 */
-	public void drawOn(ScratchInterface s);
+	public void drawOn(Scratch s);
 	
 	/**
 	 * Similar to "draw(d)", used for small drawings with less detail.
 	 * @param Doodler d
 	 */
-	public void drawSmallOn(ScratchInterface s);
+	public void drawSmallOn(Scratch s);
 	
 }

@@ -4,7 +4,7 @@ import html_generator.Tag;
 import view.DoodleCanvas;
 
 import doodle.Doodler;
-import doodle.Scratch;
+import doodle.RealScratch;
 
 /**
  * Contains information of how an object should be rendered

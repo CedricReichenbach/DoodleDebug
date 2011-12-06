@@ -1,6 +1,6 @@
 package doodle;
 
-public class SmallScratch extends Scratch {
+public class SmallScratch extends RealScratch {
 
 	public SmallScratch(Object o) {
 		super(o);
