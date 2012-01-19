@@ -1,5 +1,6 @@
 package ch.unibe.scg.doodle.server;
 
+import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -42,9 +43,8 @@ public class Activator extends AbstractUIPlugin {
 	}
 
 	void startServer() throws RemoteException {
-//		System.getSecurityManager();
 		if (System.getSecurityManager() == null) {
-			System.setSecurityManager(new SecurityManager());
+			System.setSecurityManager(new DoodleSecurityManager());
 		}
 
 		String name = "DoodleDebug";
@@ -52,7 +52,12 @@ public class Activator extends AbstractUIPlugin {
 		PluginServer stub = (PluginServer) UnicastRemoteObject.exportObject(
 				engine, 1098);
 		Registry registry = LocateRegistry.getRegistry();
-		registry.rebind(name, stub);
+//		registry.rebind(name, stub); // XXX: Error occurs here!
+		try {
+			registry.bind(name, stub);
+		} catch (AlreadyBoundException e) {
+			registry.rebind(name, stub);
+		}
 
 	}
 

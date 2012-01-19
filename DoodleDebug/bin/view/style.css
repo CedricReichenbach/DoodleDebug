@@ -3,6 +3,11 @@ hr {
 	border: 0;
 }
 
+span {
+	float: left;
+	width: 40px;
+}
+
 .ColorPlugin {
 	
 }
