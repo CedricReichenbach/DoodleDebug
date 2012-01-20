@@ -11,8 +11,9 @@ public interface Scratch {
 	 * 
 	 * 
 	 * @param canvas 
+	 * @throws Exception 
 	 */
-	public abstract void drawWhole(Tag tag);
+	public abstract void drawWhole(Tag tag) ;
 
 	/**
 	 * Visualizes any Object inside the caller, either using draw Method of the

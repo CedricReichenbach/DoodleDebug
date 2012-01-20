@@ -5,6 +5,10 @@ import html_generator.Tag;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.inject.Inject;
+import javax.inject.Provider;
+
+import rendering.ArrayRendering;
 import rendering.DefaultRendering;
 
 import view.DoodleCanvas;
@@ -17,6 +21,9 @@ import doodle.RealScratch;
  *
  */
 public class ObjectPlugin extends AbstractPlugin {
+	
+	@Inject
+	Provider<DefaultRendering> defaultRenderingProvider;
 
 	@Override
 	public Set<Class<?>> getDrawableClasses() {
@@ -27,7 +34,7 @@ public class ObjectPlugin extends AbstractPlugin {
 
 	@Override
 	public void render(Object object, Tag tag) {
-		new DefaultRendering().render(object, tag);
+		defaultRenderingProvider.get().render(object, tag);
 	}
 
 
