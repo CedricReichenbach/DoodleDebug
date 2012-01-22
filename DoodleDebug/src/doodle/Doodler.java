@@ -1,8 +1,6 @@
 package doodle;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
-
 import html_generator.Attribute;
 import html_generator.Tag;
 import view.HtmlDocument;
