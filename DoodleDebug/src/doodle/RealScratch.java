@@ -46,6 +46,8 @@ public class RealScratch implements Scratch {
 	 * List of Scratches contained on the outside of this one
 	 */
 	private List<RealScratch> outer;
+	
+	Drawable errorObject; //XXX
 
 	private String title;
 
@@ -77,7 +79,16 @@ public class RealScratch implements Scratch {
 	@Override
 	public void drawWhole(Tag tag) {
 		if (object instanceof Drawable) {
-			((Drawable) object).drawOn(this);
+			try {
+				((Drawable) object).drawOn(this);
+			} catch (Exception e) {
+				//XXX
+				try {
+					errorObject.drawOn(this);
+				} catch (Exception e1) {
+					throw new RuntimeException();
+				}
+			}
 			Rendering<RealScratch> rendering = new ScratchRendering(); // XXX
 			rendering.render(this, tag);
 		} else {
@@ -112,7 +123,7 @@ public class RealScratch implements Scratch {
 	private void drawDefault(Tag tag) {
 		assert (renderingRegistry != null);
 		RenderingPlugin plugin = renderingRegistry.lookup(object.getClass());
-
+		
 		if (object.getClass().isArray()) {
 			plugin = arrayPluginProvider.get();
 		}

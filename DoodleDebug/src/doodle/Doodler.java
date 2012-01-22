@@ -48,6 +48,7 @@ public class Doodler {
 
 	public void renderInlineInto(Object object, Tag tag) {
 		Tag span = new Tag("span");
+		System.out.println(tag);
 		Scratch scratch = scratchFactory.create(object);
 		scratch.drawWhole(span);
 		span.addAttribute(new Attribute("class", scratch.getClassAttribute()));
