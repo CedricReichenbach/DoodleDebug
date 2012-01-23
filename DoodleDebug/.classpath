@@ -2,24 +2,24 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Cedric Reichenbach/students-cedric-DoodleDebug/guice-3.0/aopalliance.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Cedric Reichenbach/students-cedric-DoodleDebug/guice-3.0/guice-3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Cedric Reichenbach/students-cedric-DoodleDebug/guice-3.0/guice-assistedinject-3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Cedric Reichenbach/students-cedric-DoodleDebug/guice-3.0/guice-grapher-3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Cedric Reichenbach/students-cedric-DoodleDebug/guice-3.0/guice-jmx-3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Cedric Reichenbach/students-cedric-DoodleDebug/guice-3.0/guice-jndi-3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Cedric Reichenbach/students-cedric-DoodleDebug/guice-3.0/guice-multibindings-3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Cedric Reichenbach/students-cedric-DoodleDebug/guice-3.0/guice-persist-3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Cedric Reichenbach/students-cedric-DoodleDebug/guice-3.0/guice-servlet-3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Cedric Reichenbach/students-cedric-DoodleDebug/guice-3.0/guice-spring-3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Cedric Reichenbach/students-cedric-DoodleDebug/guice-3.0/guice-struts2-plugin-3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Cedric Reichenbach/students-cedric-DoodleDebug/guice-3.0/guice-throwingproviders-3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Cedric Reichenbach/students-cedric-DoodleDebug/guice-3.0/javax.inject.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="libs/commons-collections-3.2.1.jar" sourcepath="libs/commons-collections-3.2.1-sources.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:platform:/resource/DoodleDebug/libs/commons-collections-3.2.1-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="libs/guice-3.0/aopalliance.jar"/>
+	<classpathentry kind="lib" path="libs/guice-3.0/guice-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/guice-3.0/guice-assistedinject-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/guice-3.0/guice-grapher-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/guice-3.0/guice-jmx-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/guice-3.0/guice-jndi-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/guice-3.0/guice-multibindings-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/guice-3.0/guice-persist-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/guice-3.0/guice-servlet-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/guice-3.0/guice-spring-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/guice-3.0/guice-struts2-plugin-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/guice-3.0/guice-throwingproviders-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/guice-3.0/javax.inject.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
