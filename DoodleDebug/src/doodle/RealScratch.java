@@ -3,10 +3,14 @@ package doodle;
 import html_generator.Attribute;
 import html_generator.Tag;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.management.RuntimeErrorException;
 
 import plugins.ArrayPlugin;
 import plugins.RenderingPlugin;
@@ -24,8 +28,8 @@ import rendering.ScratchRendering;
 import view.DoodleCanvas;
 
 /**
- * The graphical representation of an object. Draws its object and its object's
- * nested objects.
+ * Placeholder for an object. Finds the correct plugin to display an object and
+ *  prepares the tag the object can write itself into.
  * 
  * Organized in a tree structure, which the renderer traverses to create the
  * real pixels on a doodle canvas.
@@ -111,12 +115,17 @@ public class RealScratch implements Scratch {
 	private void drawDefault(Tag tag) {
 		assert (renderingRegistry != null);
 		RenderingPlugin plugin = renderingRegistry.lookup(object.getClass());
+		prepareTag(tag, plugin);
 	
 		if (object.getClass().isArray()) {
 			plugin = arrayPluginProvider.get();
 		}
 	
 		plugin.render(object, tag);
+	}
+
+	void prepareTag(Tag tag, RenderingPlugin plugin) {
+		tag.addAttribute(new Attribute("class",plugin.getClass().getSimpleName()));
 	}
 
 	/**
@@ -208,6 +217,24 @@ public class RealScratch implements Scratch {
 		List<List<Scratch>> column = new ArrayList<List<Scratch>>();
 		column.add(line);
 		columns.add(column);
+	}
+
+	@Override
+	public void drawImage(byte[] image, String mimeType) throws IOException {
+		File file = File.createTempFile("image", this.getSuffix(mimeType));
+		FileOutputStream out = new FileOutputStream(file);
+		out.write(image);
+		out.close();
+		
+		HtmlImage htmlImage = new HtmlImage(file, mimeType);
+		this.draw(htmlImage);
+	}
+
+	private String getSuffix(String mimeType) {
+		if (mimeType.equals("image/png")) {
+			return ".png";
+		}
+		throw new RuntimeException();
 	}
 
 }

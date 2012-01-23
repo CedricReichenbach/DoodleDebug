@@ -2,6 +2,7 @@ package doodle;
 
 import html_generator.Tag;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface Scratch {
@@ -51,5 +52,7 @@ public interface Scratch {
 	public abstract void newLine();
 
 	public abstract void newColumn();
+	
+	public abstract void drawImage(byte[] image, String mimeType) throws IOException;
 
 }

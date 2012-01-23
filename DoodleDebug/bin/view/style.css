@@ -11,3 +11,7 @@ span {
 	
 }
 
+.ImagePlugin img {
+	max-width: 200pt;
+	max-height: 200pt;
+}

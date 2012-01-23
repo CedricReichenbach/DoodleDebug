@@ -37,7 +37,7 @@ public class Person implements Drawable {
 		BufferedImage image = null;
 		image = ImageIO.read(in);
 
-		s.draw(image);
+		s.drawImage(this.image, "image/png");
 		s.newColumn();
 		s.draw(name);
 		s.newLine();

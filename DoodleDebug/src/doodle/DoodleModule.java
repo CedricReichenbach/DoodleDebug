@@ -4,10 +4,12 @@ import javax.inject.Singleton;
 
 import plugins.ArrayPlugin;
 import plugins.ColorPlugin;
+import plugins.ImagePlugin;
 import plugins.ListPlugin;
 import plugins.ObjectPlugin;
 import plugins.RenderingPlugin;
 import plugins.StringPlugin;
+import rendering.ImageRendering;
 import rendering.RenderingRegistry;
 import rendering.RenderingRegistryProvider;
 
@@ -34,6 +36,7 @@ public class DoodleModule extends AbstractModule {
 		uriBinder.addBinding().to(ObjectPlugin.class);
 		uriBinder.addBinding().to(ColorPlugin.class);
 		uriBinder.addBinding().to(StringPlugin.class);
+		uriBinder.addBinding().to(ImagePlugin.class);
 	}
 
 }
