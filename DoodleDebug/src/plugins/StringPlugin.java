@@ -3,31 +3,28 @@ package plugins;
 import html_generator.Tag;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import rendering.ListRendering;
+import rendering.StringRendering;
 
-
-public class ListPlugin extends AbstractPlugin {
+public class StringPlugin extends AbstractPlugin {
 
 	@Inject
-	Provider<ListRendering> listRenderingProvider;
+	Provider<StringRendering> stringRenderingProvider;
 	
 	@Override
 	public Set<Class<?>> getDrawableClasses() {
 		HashSet<Class<?>> hs = new HashSet<Class<?>>();
-		hs.add(List.class);
+		hs.add(String.class);
 		return hs;
 	}
 
 	@Override
-	public void render(Object list, Tag tag) {
-		listRenderingProvider.get().render((List) list, tag);
+	public void render(Object string, Tag tag) {
+		stringRenderingProvider.get().render((String) string, tag);
 	}
-
 
 }

@@ -37,19 +37,15 @@ public class RealScratch implements Scratch {
 
 	private Object object;
 
-	/**
-	 * List of Scratches contained inside this one
-	 */
-	private List<RealScratch> inner;
-
-	/**
-	 * List of Scratches contained on the outside of this one
-	 */
-	private List<RealScratch> outer;
-	
-	Drawable errorObject; //XXX
+	Drawable errorObject; // XXX
 
 	private String title;
+
+	/**
+	 * List of columns, a column is a list of lines, a line is a list of
+	 * sketches.
+	 */
+	private List<List<List<Scratch>>> columns;
 
 	@Inject
 	RenderingRegistry renderingRegistry;
@@ -59,16 +55,23 @@ public class RealScratch implements Scratch {
 
 	@Inject
 	ScratchFactory scratchFactory;
+	
+	@Inject
+	Provider<ScratchRendering> scratchRenderingProvider;
 
 	/**
 	 * Creates a new Scratch for visualizing objects
 	 */
 	@Inject
 	RealScratch(@Assisted Object o) {
-		this.inner = new ArrayList<RealScratch>();
 		this.object = o;
-		this.outer = new ArrayList<RealScratch>();
 		this.title = "";
+
+		List<Scratch> line = new ArrayList<Scratch>();
+		List<List<Scratch>> column = new ArrayList<List<Scratch>>();
+		column.add(line);
+		this.columns = new ArrayList<List<List<Scratch>>>();
+		columns.add(column);
 	}
 
 	/*
@@ -82,35 +85,20 @@ public class RealScratch implements Scratch {
 			try {
 				((Drawable) object).drawOn(this);
 			} catch (Exception e) {
-				//XXX
+				// XXX
 				try {
 					errorObject.drawOn(this);
 				} catch (Exception e1) {
 					throw new RuntimeException();
 				}
 			}
-			Rendering<RealScratch> rendering = new ScratchRendering(); // XXX
+			Rendering<Scratch> rendering = scratchRenderingProvider.get();
 			rendering.render(this, tag);
 		} else {
 			this.drawDefault(tag);
 		}
 
-		this.setClassAttributes(tag, object);
-	}
-
-	/**
-	 * Brutal method for writing information about object type into class
-	 * attribute of just written tags inside this one
-	 * 
-	 * @param tag
-	 * @param object2
-	 */
-	private void setClassAttributes(Tag tag, Object object) {
-		for (Object sub : tag) {
-			if (sub instanceof Tag) {
-				((Tag) sub).addAttribute(new Attribute("class",object.getClass().getCanonicalName()));
-			}
-		}
+//		this.setClassAttributes(tag, object); // XXX
 	}
 
 	/**
@@ -123,12 +111,28 @@ public class RealScratch implements Scratch {
 	private void drawDefault(Tag tag) {
 		assert (renderingRegistry != null);
 		RenderingPlugin plugin = renderingRegistry.lookup(object.getClass());
-		
+	
 		if (object.getClass().isArray()) {
 			plugin = arrayPluginProvider.get();
 		}
-
+	
 		plugin.render(object, tag);
+	}
+
+	/**
+	 * Brutal method for writing information about object type into class
+	 * attribute of just written tags inside this one
+	 * 
+	 * @param tag
+	 * @param object2
+	 */
+	private void setClassAttributes(Tag tag, Object object) {
+		for (Object sub : tag) {
+			if (sub instanceof Tag) {
+				((Tag) sub).addAttribute(new Attribute("class", object
+						.getClass().getCanonicalName()));
+			}
+		}
 	}
 
 	/*
@@ -138,17 +142,9 @@ public class RealScratch implements Scratch {
 	 */
 	@Override
 	public void draw(Object o) {
-		this.inner.add((RealScratch) scratchFactory.create(o));
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see doodle.Scratch#drawOuter(java.lang.Object)
-	 */
-	@Override
-	public void drawOuter(Object o) {
-		this.outer.add((RealScratch) scratchFactory.create(o));
+		List<List<Scratch>> lastColumn = columns.get(columns.size()-1);
+		List<Scratch> lastLine = lastColumn.get(lastColumn.size()-1);
+		lastLine.add((RealScratch) scratchFactory.create(o));
 	}
 
 	/*
@@ -160,7 +156,7 @@ public class RealScratch implements Scratch {
 	public void drawSmall(Object o) {
 		// TODO: SmallScratch for this case
 		RealScratch subScratch = new SmallScratch(o);
-		this.inner.add(subScratch);
+		// this.inner.add(subScratch);
 	}
 
 	/*
@@ -179,18 +175,8 @@ public class RealScratch implements Scratch {
 	 * @see doodle.Scratch#getInner()
 	 */
 	@Override
-	public List<RealScratch> getInner() {
-		return this.inner;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see doodle.Scratch#getOuter()
-	 */
-	@Override
-	public List<RealScratch> getOuter() {
-		return outer;
+	public List<List<List<Scratch>>> getColumns() {
+		return this.columns;
 	}
 
 	/*
@@ -207,6 +193,21 @@ public class RealScratch implements Scratch {
 	public String getClassAttribute() {
 
 		return renderingRegistry.lookup(object.getClass()).getClassAttribute();
+	}
+
+	@Override
+	public void newLine() {
+		List<List<Scratch>> lastColumn = columns.get(columns.size() - 1);
+		List<Scratch> line = new ArrayList<Scratch>();
+		lastColumn.add(line);
+	}
+
+	@Override
+	public void newColumn() {
+		List<Scratch> line = new ArrayList<Scratch>();
+		List<List<Scratch>> column = new ArrayList<List<Scratch>>();
+		column.add(line);
+		columns.add(column);
 	}
 
 }

@@ -26,16 +26,6 @@ public interface Scratch {
 	public abstract void draw(Object o);
 
 	/**
-	 * Visualizes any Object outside of the caller, either using draw Method of
-	 * the object itself (if existing) or does a default drawing. Should only be
-	 * called from another draw Method.
-	 * 
-	 * @param Object
-	 *            o
-	 */
-	public abstract void drawOuter(Object o);
-
-	/**
 	 * Visualizes any Object with few details, either using drawSmall Method of
 	 * the object itself (if existing) or does a default drawing.
 	 * 
@@ -52,12 +42,14 @@ public interface Scratch {
 	 */
 	public abstract void drawTitle(String title);
 
-	public abstract List<RealScratch> getInner();
-
-	public abstract List<RealScratch> getOuter();
+	public abstract List<List<List<Scratch>>> getColumns();
 
 	public abstract String getTitle();
 
 	public abstract String getClassAttribute();
+
+	public abstract void newLine();
+
+	public abstract void newColumn();
 
 }

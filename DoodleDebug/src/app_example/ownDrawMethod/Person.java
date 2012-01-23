@@ -10,34 +10,38 @@ import javax.imageio.ImageIO;
 import doodle.Drawable;
 import doodle.Scratch;
 
-public class Person implements Drawable{
+public class Person implements Drawable {
 
 	private final String name;
 	private final PhoneNumber number;
 	private final byte[] image;
-	
+
 	/**
 	 * 
-	 * @param image in PNG format
+	 * @param image
+	 *            in PNG format
 	 */
 	public Person(String name, PhoneNumber number, byte[] image) {
 		this.name = name;
 		this.number = number;
 		this.image = image;
 	}
-	
+
 	public String toString() {
 		return name + ", " + number.toString();
 	}
 
 	@Override
-	public void drawOn(Scratch s) {
+	public void drawOn(Scratch s) throws IOException {
 		InputStream in = new ByteArrayInputStream(image);
-		BufferedImage image = ImageIO.read(in);
-		s.drawLeft(image);
-		s.drawRight(name);
-		s.drawRight(number);
-		
+		BufferedImage image = null;
+		image = ImageIO.read(in);
+
+		s.draw(image);
+		s.newColumn();
+		s.draw(name);
+		s.newLine();
+		s.draw(number);
 	}
 
 	@Override
@@ -45,6 +49,6 @@ public class Person implements Drawable{
 		InputStream in = new ByteArrayInputStream(image);
 		BufferedImage image = ImageIO.read(in);
 		s.draw(image);
-		
+
 	}
 }

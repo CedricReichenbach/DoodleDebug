@@ -7,6 +7,7 @@ import plugins.ColorPlugin;
 import plugins.ListPlugin;
 import plugins.ObjectPlugin;
 import plugins.RenderingPlugin;
+import plugins.StringPlugin;
 import rendering.RenderingRegistry;
 import rendering.RenderingRegistryProvider;
 
@@ -19,15 +20,20 @@ public class DoodleModule extends AbstractModule {
 	@Override
 	protected void configure() {
 		Multibinder<RenderingPlugin> uriBinder = Multibinder.newSetBinder(binder(), RenderingPlugin.class);
-		uriBinder.addBinding().to(ListPlugin.class);
-		uriBinder.addBinding().to(ObjectPlugin.class);
+		addPlugins(uriBinder);
 		bind(Doodler.class).in(Singleton.class);
-		uriBinder.addBinding().to(ColorPlugin.class);
 		bind(RenderingRegistry.class).toProvider(RenderingRegistryProvider.class);
 		install(new FactoryModuleBuilder()
 	     .implement(Scratch.class,RealScratch.class)
 	     .build(ScratchFactory.class));
 
+	}
+
+	private void addPlugins(Multibinder<RenderingPlugin> uriBinder) {
+		uriBinder.addBinding().to(ListPlugin.class);
+		uriBinder.addBinding().to(ObjectPlugin.class);
+		uriBinder.addBinding().to(ColorPlugin.class);
+		uriBinder.addBinding().to(StringPlugin.class);
 	}
 
 }

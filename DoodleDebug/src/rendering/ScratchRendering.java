@@ -1,42 +1,43 @@
 package rendering;
 
+import html_generator.Attributes;
 import html_generator.Tag;
 
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
+import java.util.List;
 
 import view.DoodleCanvas;
 import view.Rect;
 import doodle.RealScratch;
+import doodle.Scratch;
 
-public class ScratchRendering implements Rendering<RealScratch> {
+public class ScratchRendering implements Rendering<Scratch> {
 
 	@Override
-	public void render(RealScratch realScratch, Tag tag) {
-		// TODO
+	public void render(Scratch scratch, Tag tag) {
+		List<List<List<Scratch>>> columns = scratch.getColumns();
+		
+		for (List<List<Scratch>> column : columns) {
+			Tag table = new Tag("table", "style=display:inline-table");
+			this.renderColumn(column, table);
+			tag.add(table);
+		}
+	}
 
-//		// frame
-//		Rect mainRect = new Rect(new Point2D.Double(0.01, 0.01), .8, .98);
-//		canvas.drawRect(mainRect);
-//
-//		// title
-//		canvas.drawText(scratch.getTitle(), new Point2D.Double(.02, .02));
-//
-//		// inner
-//		double dHeight = .01;
-//		double subWidth = .7;
-//		double subHeight = .88 / scratch.getInner().size() - dHeight;
-//		Point2D.Double curPoint = new Point2D.Double(.06, .06);
-//		for (Scratch s : scratch.getInner()) {
-//			Rect rect = new Rect(curPoint, subWidth, subHeight);
-//			DoodleCanvas c = new DoodleCanvas();
-//			s.drawWhole(c);
-//			canvas.drawCanvas(c, rect);
-//			curPoint = new Point2D.Double(curPoint.x, curPoint.y + subHeight
-//					+ dHeight);
-//		}
-//
-//		// outer
+	private void renderColumn(List<List<Scratch>> column, Tag tag) {
+		for (List<Scratch> line : column) {
+			Tag tr = new Tag("tr");
+			this.renderLine(line, tr);
+			tag.add(tr);
+		}
+	}
 
+	private void renderLine(List<Scratch> line, Tag tag) {
+		for (Scratch scratch : line) {
+			Tag td = new Tag("td");
+			scratch.drawWhole(td);
+			tag.add(td);
+		}
 	}
 }

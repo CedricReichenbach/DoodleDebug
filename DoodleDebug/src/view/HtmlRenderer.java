@@ -25,7 +25,6 @@ public class HtmlRenderer {
 		frame.getContentPane().add(scrollPane);
 
 		initialize(frame);
-		System.out.println(html);
 	}
 
 	private void initialize(JFrame frame) {
