@@ -4,17 +4,23 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 
 import javax.imageio.ImageIO;
 
 import doodle.Drawable;
 import doodle.Scratch;
 
-public class Person implements Drawable {
+public class Person implements Drawable, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private final String name;
 	private final PhoneNumber number;
-	private final byte[] image;
+	private byte[] image;
 
 	/**
 	 * 
@@ -28,15 +34,11 @@ public class Person implements Drawable {
 	}
 
 	public String toString() {
-		return name + ", " + number.toString();
+		return "Person("+name + ", " + number.toString()+", "+image.length+")";
 	}
 
 	@Override
 	public void drawOn(Scratch s) throws IOException {
-		InputStream in = new ByteArrayInputStream(image);
-		BufferedImage image = null;
-		image = ImageIO.read(in);
-
 		s.drawImage(this.image, "image/png");
 		s.newColumn();
 		s.draw(name);
@@ -50,5 +52,13 @@ public class Person implements Drawable {
 		BufferedImage image = ImageIO.read(in);
 		s.draw(image);
 
+	}
+
+	public byte[] getImage() {
+		return this.image;
+	}
+	
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 }

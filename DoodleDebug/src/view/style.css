@@ -1,22 +1,37 @@
 hr {
-	padding: 2pt;
-	border: 0;
-}
-
-span {
-	width: 40px;
-}
-
-.ColorPlugin {
-	
+	width: 100%;
+	height: 0;
+	margin: 0;
+	padding: 0;
+	visibility: hidden;
+	display: none;
+	clear: both;
 }
 
 .ImagePlugin img {
-	max-width: 200pt;
-	max-height: 200pt;
+	max-width: 90pt;
+	max-height: 90pt;
 }
 
-img {
-	max-width: 200pt;
-	max-height: 200pt;
+.ClassName {
+	font-size: 8pt;
+	color: blue;
+}
+
+.rendering {
+	float:left;
+	padding: 5pt;
+}
+
+.rendering > div {
+	padding: 2pt;
+	overflow: hidden;
+	border-width: 1px;
+	border-color: #0C5;
+	border-style: solid;
+}
+
+.column {
+	float:left;
+	padding-left:10pt;
 }

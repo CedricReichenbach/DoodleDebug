@@ -41,18 +41,19 @@ public class Doodler {
 	 * Visualizes any Object, either using draw Method of the object itself (if
 	 * existing) or does a default drawing.
 	 * 
-	 * @param Object
+	 * @param Object not null
 	 *            
 	 */
 	@SuppressWarnings("unchecked")
 	public void visualize(Object o) {
+		assert (o != null);
 		scratchFactory.create(o).drawWhole(body);
 		
 		body.add(Tag.hr());
 		HtmlDocument htmlDocument = new HtmlDocument();
 		htmlDocument.setBody(body);
 		
-		System.out.println(htmlDocument.toString());
+//		System.out.println(htmlDocument.toString());
 		
 		// for testing
 		openInBrowser(htmlDocument.toString());
@@ -61,11 +62,11 @@ public class Doodler {
 	}
 
 	public void renderInlineInto(Object object, Tag tag) {
-		Tag span = new Tag("span");
+		Tag div = new Tag("div");
 		Scratch scratch = scratchFactory.create(object);
-		scratch.drawWhole(span);
-		span.addAttribute(new Attribute("class", scratch.getClassAttribute()));
-		tag.add(span);
+		scratch.drawWhole(div);
+		div.addAttribute(new Attribute("class", scratch.getClassAttribute()));
+		tag.add(div);
 	}
 
 	private void openInBrowser(String html) {

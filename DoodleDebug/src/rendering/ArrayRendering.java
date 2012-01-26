@@ -6,8 +6,10 @@ import javax.inject.Inject;
 
 import doodle.Doodler;
 import doodle.RealScratch;
+import doodle.Scratch;
 import doodle.ScratchFactory;
 
+import html_generator.Attribute;
 import html_generator.Tag;
 
 

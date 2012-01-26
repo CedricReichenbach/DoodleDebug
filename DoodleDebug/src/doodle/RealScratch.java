@@ -85,7 +85,14 @@ public class RealScratch implements Scratch {
 	 */
 	@Override
 	public void drawWhole(Tag tag) {
+		writeClassName(object.getClass().getSimpleName(), tag);
+		tag.addAttribute(new Attribute("class","rendering"));
+		Tag subTag = new Tag("div");
+		tag.add(subTag);
+		tag = subTag;
+		
 		if (object instanceof Drawable) {
+			tag.addAttribute(new Attribute("class","Scratch"));
 			try {
 				((Drawable) object).drawOn(this);
 			} catch (Exception e) {
@@ -103,6 +110,12 @@ public class RealScratch implements Scratch {
 		}
 
 //		this.setClassAttributes(tag, object); // XXX
+	}
+
+	private void writeClassName(String name, Tag tag) {
+		Tag span = new Tag("span", "class=ClassName");
+		span.add(name);
+		tag.add(span);
 	}
 
 	/**
@@ -200,7 +213,6 @@ public class RealScratch implements Scratch {
 
 	@Override
 	public String getClassAttribute() {
-
 		return renderingRegistry.lookup(object.getClass()).getClassAttribute();
 	}
 

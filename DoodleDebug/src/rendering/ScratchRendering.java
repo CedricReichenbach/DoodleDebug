@@ -19,25 +19,25 @@ public class ScratchRendering implements Rendering<Scratch> {
 		List<List<List<Scratch>>> columns = scratch.getColumns();
 		
 		for (List<List<Scratch>> column : columns) {
-			Tag table = new Tag("table", "style=display:inline-table");
-			this.renderColumn(column, table);
-			tag.add(table);
+			Tag div = new Tag("div", "class=column");
+			this.renderColumn(column, div);
+			tag.add(div);
 		}
 	}
 
 	private void renderColumn(List<List<Scratch>> column, Tag tag) {
 		for (List<Scratch> line : column) {
-			Tag tr = new Tag("tr");
-			this.renderLine(line, tr);
-			tag.add(tr);
+			Tag div = new Tag("div");
+			this.renderLine(line, div);
+			tag.add(div);
 		}
 	}
 
 	private void renderLine(List<Scratch> line, Tag tag) {
 		for (Scratch scratch : line) {
-			Tag td = new Tag("td");
-			scratch.drawWhole(td);
-			tag.add(td);
+			Tag span = new Tag("span");
+			scratch.drawWhole(span);
+			tag.add(span);
 		}
 	}
 }
