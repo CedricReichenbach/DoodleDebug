@@ -49,7 +49,7 @@ public class Doodler {
 		assert (o != null);
 		scratchFactory.create(o).drawWhole(body);
 		
-		body.add(Tag.hr());
+		body.add(new Tag("hr","class=betweenDrawCalls"));
 		HtmlDocument htmlDocument = new HtmlDocument();
 		htmlDocument.setBody(body);
 		

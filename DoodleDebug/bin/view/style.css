@@ -8,6 +8,11 @@ hr {
 	clear: both;
 }
 
+hr.betweenDrawCalls {
+	display: block;
+	padding: 10pt;
+}
+
 .ImagePlugin img {
 	max-width: 90pt;
 	max-height: 90pt;
