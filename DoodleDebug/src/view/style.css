@@ -68,11 +68,11 @@ hr.betweenDrawCalls {
 }
 
 .rendering > div {
+	border-color: #0C5;
+	border-style: dotted;
 	padding: 2pt;
 	overflow: hidden;
 	border-width: 1px;
-	border-color: #0C5;
-	border-style: dotted;
 }
 
 .column {
