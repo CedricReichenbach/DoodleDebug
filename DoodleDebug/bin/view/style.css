@@ -72,7 +72,7 @@ hr.betweenDrawCalls {
 	overflow: hidden;
 	border-width: 1px;
 	border-color: #0C5;
-	border-style: solid;
+	border-style: dotted;
 }
 
 .column {
