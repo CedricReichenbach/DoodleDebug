@@ -17,7 +17,7 @@ public class ListRendering implements Rendering<List> {
 	public void render(List list, Tag tag) {
 		Tag div = new Tag("div");
 		for (Object o : list) {
-			doodler.renderInlineInto(o, div);
+			doodler.renderInlineIntoWithoutClassName(o, div);
 		}
 		
 		tag.add(div);

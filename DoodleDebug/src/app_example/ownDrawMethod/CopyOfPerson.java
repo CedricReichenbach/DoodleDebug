@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 import doodle.Drawable;
 import doodle.Scratch;
 
-public class Person implements Serializable, Drawable {
+public class CopyOfPerson implements Drawable, Serializable {
 
 	/**
 	 * 
@@ -27,7 +27,7 @@ public class Person implements Serializable, Drawable {
 	 * @param image
 	 *            in PNG format
 	 */
-	public Person(String name, PhoneNumber number, byte[] image) {
+	public CopyOfPerson(String name, PhoneNumber number, byte[] image) {
 		this.name = name;
 		this.number = number;
 		this.image = image;
@@ -37,17 +37,9 @@ public class Person implements Serializable, Drawable {
 		return "Person("+name + ", " + number.toString()+", "+image.length+")";
 	}
 
-	public byte[] getImage() {
-		return this.image;
-	}
-	
-	public void setImage(byte[] image) {
-		this.image = image;
-	}
-
 	@Override
-	public void drawOn(Scratch s) throws Exception {
-		s.drawImage(image, "image/png");
+	public void drawOn(Scratch s) throws IOException {
+		s.drawImage(this.image, "image/png");
 		s.newColumn();
 		s.draw(name);
 		s.newLine();
@@ -55,8 +47,18 @@ public class Person implements Serializable, Drawable {
 	}
 
 	@Override
-	public void drawSmallOn(Scratch s) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public void drawSmallOn(Scratch s) throws IOException {
+		InputStream in = new ByteArrayInputStream(image);
+		BufferedImage image = ImageIO.read(in);
+		s.draw(image);
+
+	}
+
+	public byte[] getImage() {
+		return this.image;
+	}
+	
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 }

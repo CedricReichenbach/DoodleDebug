@@ -47,7 +47,7 @@ public class Doodler {
 	@SuppressWarnings("unchecked")
 	public void visualize(Object o) {
 		assert (o != null);
-		scratchFactory.create(o).drawWhole(body);
+		scratchFactory.create(o).drawWholeWithName(body);
 		
 		body.add(new Tag("hr","class=betweenDrawCalls"));
 		HtmlDocument htmlDocument = new HtmlDocument();
@@ -62,6 +62,14 @@ public class Doodler {
 	}
 
 	public void renderInlineInto(Object object, Tag tag) {
+		Tag div = new Tag("div");
+		Scratch scratch = scratchFactory.create(object);
+		scratch.drawWholeWithName(div);
+		div.addAttribute(new Attribute("class", scratch.getClassAttribute()));
+		tag.add(div);
+	}
+
+	public void renderInlineIntoWithoutClassName(Object object, Tag tag) {
 		Tag div = new Tag("div");
 		Scratch scratch = scratchFactory.create(object);
 		scratch.drawWhole(div);

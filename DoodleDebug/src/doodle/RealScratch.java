@@ -41,8 +41,6 @@ public class RealScratch implements Scratch {
 
 	private Object object;
 
-	Drawable errorObject; // XXX
-
 	private String title;
 
 	/**
@@ -85,22 +83,33 @@ public class RealScratch implements Scratch {
 	 */
 	@Override
 	public void drawWhole(Tag tag) {
+		tag.addAttribute(new Attribute("class","rendering"));
+		Tag subTag = new Tag("div");
+		tag.add(subTag);
+		
+		drawRendering(subTag);
+	}
+
+	@Override
+	public void drawWholeWithName(Tag tag) {
 		writeClassName(object.getClass().getSimpleName(), tag);
 		tag.addAttribute(new Attribute("class","rendering"));
 		Tag subTag = new Tag("div");
 		tag.add(subTag);
-		tag = subTag;
-		
+		this.drawRendering(subTag);
+	}
+
+	void drawRendering(Tag tag) {
 		if (object instanceof Drawable) {
 			tag.addAttribute(new Attribute("class","Scratch"));
 			try {
 				((Drawable) object).drawOn(this);
 			} catch (Exception e) {
-				// XXX
+				ErrorDrawer errorDrawer = new ErrorDrawer(e);
 				try {
-					errorObject.drawOn(this);
+					errorDrawer.drawOn(this);
 				} catch (Exception e1) {
-					throw new RuntimeException();
+					throw new RuntimeException(e1);
 				}
 			}
 			Rendering<Scratch> rendering = scratchRenderingProvider.get();

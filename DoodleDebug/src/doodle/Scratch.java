@@ -16,6 +16,8 @@ public interface Scratch {
 	 */
 	public abstract void drawWhole(Tag tag) ;
 
+	public abstract void drawWholeWithName(Tag div);
+
 	/**
 	 * Visualizes any Object inside the caller, either using draw Method of the
 	 * object itself (if existing) or does a default drawing. Should only be
