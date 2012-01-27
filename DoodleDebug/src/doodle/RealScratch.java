@@ -92,7 +92,7 @@ public class RealScratch implements Scratch {
 
 	@Override
 	public void drawWholeWithName(Tag tag) {
-		writeClassName(object.getClass().getSimpleName(), tag);
+		writeClassName(renderingRegistry.lookup(object.getClass()).getObjectTypeName(object), tag);
 		tag.addAttribute(new Attribute("class","rendering"));
 		Tag subTag = new Tag("div");
 		tag.add(subTag);
@@ -117,8 +117,6 @@ public class RealScratch implements Scratch {
 		} else {
 			this.drawDefault(tag);
 		}
-
-//		this.setClassAttributes(tag, object); // XXX
 	}
 
 	private void writeClassName(String name, Tag tag) {
@@ -148,22 +146,6 @@ public class RealScratch implements Scratch {
 
 	void prepareTag(Tag tag, RenderingPlugin plugin) {
 		tag.addAttribute(new Attribute("class",plugin.getClass().getSimpleName()));
-	}
-
-	/**
-	 * Brutal method for writing information about object type into class
-	 * attribute of just written tags inside this one
-	 * 
-	 * @param tag
-	 * @param object2
-	 */
-	private void setClassAttributes(Tag tag, Object object) {
-		for (Object sub : tag) {
-			if (sub instanceof Tag) {
-				((Tag) sub).addAttribute(new Attribute("class", object
-						.getClass().getCanonicalName()));
-			}
-		}
 	}
 
 	/*

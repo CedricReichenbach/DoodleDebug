@@ -29,5 +29,10 @@ public class ListPlugin extends AbstractPlugin {
 		listRenderingProvider.get().render((List) list, tag);
 	}
 
+	public String getObjectTypeName(Object o) {
+		if (ListRendering.checkIfElementsSameType((List)o))
+			return super.getObjectTypeName(o) + " of "+((List)o).get(0).getClass().getSimpleName();
+		return super.getObjectTypeName(o);
+	}
 
 }

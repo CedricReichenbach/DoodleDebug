@@ -10,4 +10,6 @@ public interface RenderingPlugin extends Rendering {
 	public Set<Class<?>> getDrawableClasses();
 
 	public String getClassAttribute();
+	
+	public String getObjectTypeName(Object o);
 }
