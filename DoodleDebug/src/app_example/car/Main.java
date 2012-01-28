@@ -1,4 +1,4 @@
-package app_example.car_example;
+package app_example.car;
 
 import doodle.D;
 

@@ -1,4 +1,4 @@
-package app_example;
+package app_example.color_array;
 
 import java.awt.Color;
 import java.lang.reflect.Array;
@@ -20,7 +20,7 @@ public class Main {
 		
 		D.raw(ar);
 
-		ar[2] = Color.RED;
+		ar[2] = new ExtendedColor(0);
 
 		D.raw(ar);
 

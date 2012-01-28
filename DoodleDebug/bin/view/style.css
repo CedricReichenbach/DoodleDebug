@@ -79,3 +79,7 @@ hr.betweenDrawCalls {
 	float:left;
 	padding-left:10pt;
 }
+
+ .rendering > .ColorPlugin {
+ 	padding: 10pt;
+ }

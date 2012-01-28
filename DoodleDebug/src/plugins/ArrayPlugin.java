@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 import rendering.ArrayRendering;
+import rendering.ListRendering;
 
 public class ArrayPlugin extends AbstractPlugin {
 	
@@ -28,4 +29,12 @@ public class ArrayPlugin extends AbstractPlugin {
 	public void render(Object array, Tag tag) {
 		arrayRenderingProvider.get().render((Object[]) array, tag);
 	}
+	
+	@Override
+	public String getObjectTypeName(Object o) {
+		if (ArrayRendering.checkIfElementsSameType((Object[])o))
+			return super.getObjectTypeName(o) + " of "+((Object[])o)[0].getClass().getSimpleName();
+		return super.getObjectTypeName(o);
+	}
+
 }
