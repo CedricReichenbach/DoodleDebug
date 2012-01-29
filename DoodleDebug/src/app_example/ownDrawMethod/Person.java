@@ -1,12 +1,6 @@
 package app_example.ownDrawMethod;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.Serializable;
-
-import javax.imageio.ImageIO;
 
 import doodle.Drawable;
 import doodle.Scratch;
@@ -19,7 +13,7 @@ public class Person implements Serializable, Drawable {
 	private static final long serialVersionUID = 1L;
 	
 	private final String name;
-	private final PhoneNumber number;
+	private final PhoneNumber phoneNumber;
 	private byte[] image;
 
 	/**
@@ -29,12 +23,12 @@ public class Person implements Serializable, Drawable {
 	 */
 	public Person(String name, PhoneNumber number, byte[] image) {
 		this.name = name;
-		this.number = number;
+		this.phoneNumber = number;
 		this.image = image;
 	}
 
 	public String toString() {
-		return "Person("+name + ", " + number.toString()+", "+image.length+")";
+		return "Person("+name + ", " + phoneNumber.toString()+", "+image.length+")";
 	}
 
 	public byte[] getImage() {
@@ -51,7 +45,7 @@ public class Person implements Serializable, Drawable {
 		s.newColumn();
 		s.draw(name);
 		s.newLine();
-		s.draw(number);
+		s.draw(phoneNumber);
 	}
 
 	@Override

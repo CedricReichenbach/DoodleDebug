@@ -21,13 +21,14 @@ public class DefaultRendering implements Rendering<Object> {
 	Doodler doodler;
 	
 	@Inject
-	ScratchFactory scratchFactory;
+	Provider<StringRendering> stringRenderingProvider;
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void render(Object object, Tag tag) {
 		
 		// simple testing example
-		scratchFactory.create(object.toString()).drawWhole(tag);
+		stringRenderingProvider.get().render(object.toString(), tag);
 		
 		// TODO
 		//(new DrawableWrapper(object)).drawWhole(tag);

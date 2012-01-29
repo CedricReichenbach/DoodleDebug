@@ -80,6 +80,14 @@ hr.betweenDrawCalls {
 	padding-left:10pt;
 }
 
- .rendering > .ColorPlugin {
+.rendering > .ColorPlugin {
  	padding: 10pt;
- }
+}
+
+.rendering > .StringPlugin {
+
+}
+
+.StringRendering {
+	margin: 0;
+}

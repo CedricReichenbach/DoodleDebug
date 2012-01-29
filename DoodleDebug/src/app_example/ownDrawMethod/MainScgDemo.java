@@ -2,21 +2,14 @@ package app_example.ownDrawMethod;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileChannel.MapMode;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import doodle.D;
-
-import sun.awt.image.URLImageSource;
 
 public class MainScgDemo {
 
