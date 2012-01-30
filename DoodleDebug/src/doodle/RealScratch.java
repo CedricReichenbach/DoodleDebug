@@ -100,10 +100,10 @@ public class RealScratch implements Scratch {
 	}
 
 	void drawRendering(Tag tag) {
-		if (object instanceof Drawable) {
+		if (object instanceof Doodleable) {
 			tag.addAttribute(new Attribute("class","Scratch"));
 			try {
-				((Drawable) object).drawOn(this);
+				((Doodleable) object).drawOn(this);
 			} catch (Exception e) {
 				ErrorDrawer errorDrawer = new ErrorDrawer(e);
 				try {

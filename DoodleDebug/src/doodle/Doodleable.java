@@ -7,7 +7,7 @@ import java.io.IOException;
  * @author Cedric Reichenbach
  *
  */
-public interface Drawable {
+public interface Doodleable {
 	
 	/**
 	 * Equivalent method to toString, but for drawing.

@@ -1,5 +1,7 @@
 package app_example.ownDrawMethod;
 
+import static org.junit.Assert.*;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -8,6 +10,8 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.FileChannel.MapMode;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Test;
 
 import doodle.D;
 
@@ -24,15 +28,40 @@ public class MainScgDemo {
 
 		File file = File.createTempFile("persons", ".txt");
 		PersonListSerializer serializer = new PersonListSerializer(file);
-		serializer.serialize(persons);
 
 		System.out.println(persons);
-		D.raw(persons);
+
+		serializer.serialize(persons);
 
 		List<Person> list = serializer.deSerialize();
 		
 		System.out.println(list);
-		D.raw(list);
+	}
+	
+
+	@Test
+	public void main() 
+			throws IOException, ClassNotFoundException {
+		ArrayList<Person> beforeSerializing = 
+				new ArrayList<Person>();
+		makeAddressBook(beforeSerializing);
+
+		File file = File.createTempFile("persons", ".txt");
+		PersonListSerializer serializer = 
+				new PersonListSerializer(file);
+
+
+		serializer.serialize(beforeSerializing);
+
+		List<Person> afterSerializing = serializer.deSerialize();
+
+		System.out.println(beforeSerializing);
+		System.out.println(afterSerializing);
+		
+		D.raw(beforeSerializing);
+		D.raw(afterSerializing);
+		
+		assertEquals(beforeSerializing,afterSerializing);
 	}
 
 	static void makeAddressBook(ArrayList<Person> persons) throws IOException {

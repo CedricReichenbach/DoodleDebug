@@ -2,7 +2,7 @@ package rendering;
 
 import java.lang.reflect.Field;
 
-import doodle.Drawable;
+import doodle.Doodleable;
 import doodle.Scratch;
 
 /**
@@ -10,7 +10,7 @@ import doodle.Scratch;
  * @author Cedric Reichenbach
  *
  */
-public class DrawableWrapper implements Drawable {
+public class DrawableWrapper implements Doodleable {
 	
 	Object object;
 

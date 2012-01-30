@@ -1,6 +1,6 @@
 package doodle;
 
-public class ErrorDrawer implements Drawable {
+public class ErrorDrawer implements Doodleable {
 	
 	private final Exception exception;
 	

@@ -8,10 +8,10 @@ import java.io.Serializable;
 
 import javax.imageio.ImageIO;
 
-import doodle.Drawable;
+import doodle.Doodleable;
 import doodle.Scratch;
 
-public class CopyOfPerson implements Drawable, Serializable {
+public class CopyOfPerson implements Doodleable, Serializable {
 
 	/**
 	 * 
