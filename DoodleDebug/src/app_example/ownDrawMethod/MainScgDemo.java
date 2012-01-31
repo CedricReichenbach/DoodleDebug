@@ -40,7 +40,7 @@ public class MainScgDemo {
 	
 
 	@Test
-	public void main() 
+	public void testSerializer() 
 			throws IOException, ClassNotFoundException {
 		ArrayList<Person> beforeSerializing = 
 				new ArrayList<Person>();
@@ -54,7 +54,7 @@ public class MainScgDemo {
 		serializer.serialize(beforeSerializing);
 
 		List<Person> afterSerializing = serializer.deSerialize();
-
+		
 		System.out.println(beforeSerializing);
 		System.out.println(afterSerializing);
 		

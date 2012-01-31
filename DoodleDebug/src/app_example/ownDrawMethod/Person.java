@@ -28,11 +28,9 @@ public class Person implements Serializable, Cloneable, Doodleable {
 		this.image = image;
 	}
 	
-
 	public String toString() {
 		return "Person("+name+", "+phoneNumber+", "+image.length+")";
 	}
-
 
 	public byte[] getImage() {
 		return this.image;
@@ -87,7 +85,6 @@ public class Person implements Serializable, Cloneable, Doodleable {
 		return true;
 	}
 
-
 	@Override
 	public void drawOn(Scratch s) throws Exception {
 		s.drawImage(image, "image/png");
@@ -97,10 +94,10 @@ public class Person implements Serializable, Cloneable, Doodleable {
 		s.draw(phoneNumber);
 	}
 
-
 	@Override
 	public void drawSmallOn(Scratch s) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
+
 }
