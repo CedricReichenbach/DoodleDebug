@@ -17,7 +17,7 @@ public class D {
 	}
 	
 	/**
-	 * Code shugar for D.raw-ing any Object similar to System.out.println
+	 * Code sugar for D.raw-ing any Object similar to System.out.println
 	 * @param Object o
 	 */
 	public static void raw(Object o) {
