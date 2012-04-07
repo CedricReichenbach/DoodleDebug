@@ -23,7 +23,7 @@ public class SimonServer implements SimonServerInterface {
 	@Override
 	public void ShowHtml(String html) {
 		// TODO display in eclipse browser
-		System.out.println(html);
+		System.out.println("Server: Received html code.");
 	}
 
 }

@@ -60,14 +60,14 @@ public class Doodler {
 		openInBrowser(htmlDocument.toString());
 		
 		// send to eclipse plugin
-//		int port = 58800;
-//		try {
-//			SimonClient client = new SimonClient(port);
-//			client.sendHtml(htmlDocument.toString());
-//		} catch (Exception e) {
-//			System.out.println("Failed to send html to eclipse plugin.");
-//			e.printStackTrace();
-//		}
+		int port = 58800;
+		try {
+			SimonClient client = new SimonClient(port);
+			client.sendHtml(htmlDocument.toString());
+		} catch (Exception e) {
+			System.out.println("Failed to send html to eclipse plugin.");
+			e.printStackTrace();
+		}
 		
 //		htmlRenderer.render(htmlDocument.toString());
 	}
