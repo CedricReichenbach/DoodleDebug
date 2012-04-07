@@ -44,7 +44,7 @@ public class Activator extends AbstractUIPlugin {
 		// use SIMON instead of RMI
 		int port = 58800;
 		try {
-			System.out.println("Starting SIMON server at port "+port);
+			System.out.println("Starting SIMON server at port "+port+"...");
 			new SimonServer(port);
 			System.out.println("Server started successfully.");
 		} catch (Exception e) {
