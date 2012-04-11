@@ -18,6 +18,13 @@ public class SimonServer implements SimonServerInterface {
 			NameBindingException {
 		this.registry = Simon.createRegistry(port);
 		registry.bind("DoodleServer", this);
+		
+		// XXX: Had problems when trying to access server too soon, waiting for a short interval seems to help, idk why...
+//		try {
+//			Thread.sleep(50);
+//		} catch (InterruptedException e) {
+//			throw new RuntimeException(e);
+//		}
 	}
 
 	@Override

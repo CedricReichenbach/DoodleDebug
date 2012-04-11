@@ -57,10 +57,15 @@ public class Doodler {
 //		System.out.println(htmlDocument.toString());
 		
 		// for testing
-		openInBrowser(htmlDocument.toString());
+//		openInBrowser(htmlDocument.toString());
 		
-		// send to eclipse plugin
-		int port = 58800;
+		sentHtmlToEclipsePlugin(htmlDocument);
+		
+//		htmlRenderer.render(htmlDocument.toString());
+	}
+
+	private void sentHtmlToEclipsePlugin(HtmlDocument htmlDocument) {
+		int port = 58801;
 		try {
 			SimonClient client = new SimonClient(port);
 			client.sendHtml(htmlDocument.toString());
@@ -68,8 +73,6 @@ public class Doodler {
 			System.out.println("Failed to send html to eclipse plugin.");
 			e.printStackTrace();
 		}
-		
-//		htmlRenderer.render(htmlDocument.toString());
 	}
 
 	public void renderInlineInto(Object object, Tag tag) {

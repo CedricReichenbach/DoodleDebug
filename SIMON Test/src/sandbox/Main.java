@@ -1,5 +1,7 @@
 package sandbox;
 
+import java.awt.AWTException;
+import java.awt.Robot;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
@@ -18,11 +20,14 @@ public class Main {
 	 * @throws LookupFailedException 
 	 * @throws EstablishConnectionFailed 
 	 * @throws SimonRemoteException 
+	 * @throws AWTException 
 	 */
-	public static void main(String[] args) throws UnknownHostException, NameBindingException, IOException, SimonRemoteException, EstablishConnectionFailed, LookupFailedException {
+	public static void main(String[] args) throws UnknownHostException, NameBindingException, IOException, SimonRemoteException, EstablishConnectionFailed, LookupFailedException, AWTException {
 		System.out.println("Starting server...");
 		new Server();
 		System.out.println("Server started");
+		// wait for server to properly start
+		new Robot().delay(10);
 		System.out.println("Starting client...");
 		new Client();
 		System.out.println("Client started");

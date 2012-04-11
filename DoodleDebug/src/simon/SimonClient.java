@@ -2,7 +2,8 @@ package simon;
 
 import java.net.UnknownHostException;
 
-import server.SimonServerInterface;
+import ch.unibe.scg.doodle.simon.SimonServerInterface;
+
 import de.root1.simon.Lookup;
 import de.root1.simon.Simon;
 import de.root1.simon.annotation.SimonRemote;
@@ -17,7 +18,7 @@ public class SimonClient implements SimonClientInterface {
 
 	public SimonClient(int port) throws LookupFailedException, EstablishConnectionFailed, UnknownHostException {
 		this.lookup = Simon.createNameLookup("localhost", port);
-		server = (SimonServerInterface) lookup.lookup("Server");
+		server = (SimonServerInterface) lookup.lookup("DoodleServer");
 	}
 
 	@Override

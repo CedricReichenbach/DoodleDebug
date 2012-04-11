@@ -5,6 +5,7 @@ Bundle-SymbolicName: DoodleServer;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: ch.unibe.scg.doodle.server.Activator
 Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ SimonPlugin;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

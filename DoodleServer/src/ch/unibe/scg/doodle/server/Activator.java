@@ -1,6 +1,5 @@
 package ch.unibe.scg.doodle.server;
 
-import java.rmi.AlreadyBoundException;
 import java.rmi.ConnectException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -42,7 +41,15 @@ public class Activator extends AbstractUIPlugin {
 		plugin = this;
 		
 		// use SIMON instead of RMI
-		int port = 58800;
+		startSimonServer();
+		
+//		System.out.println("Trying to start server...");
+//		this.startServer();
+//		System.out.println("Server started");
+	}
+
+	private void startSimonServer() {
+		int port = 58801;
 		try {
 			System.out.println("Starting SIMON server at port "+port+"...");
 			new SimonServer(port);
@@ -51,10 +58,6 @@ public class Activator extends AbstractUIPlugin {
 			System.out.println("Server could not be started.");
 			e.printStackTrace();
 		}
-		
-//		System.out.println("Trying to start server...");
-//		this.startServer();
-//		System.out.println("Server started");
 	}
 
 	void startServer() throws RemoteException {
