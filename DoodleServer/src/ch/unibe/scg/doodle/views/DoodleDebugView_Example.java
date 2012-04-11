@@ -1,4 +1,4 @@
-package aplugin.views;
+package ch.unibe.scg.doodle.views;
 
 
 import org.eclipse.swt.widgets.Composite;
@@ -30,7 +30,7 @@ import org.eclipse.swt.SWT;
  * <p>
  */
 
-public class SampleView extends ViewPart {
+public class DoodleDebugView_Example extends ViewPart {
 
 	/**
 	 * The ID of the view as specified by the extension.
@@ -79,7 +79,7 @@ public class SampleView extends ViewPart {
 	/**
 	 * The constructor.
 	 */
-	public SampleView() {
+	public DoodleDebugView_Example() {
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class SampleView extends ViewPart {
 		menuMgr.setRemoveAllWhenShown(true);
 		menuMgr.addMenuListener(new IMenuListener() {
 			public void menuAboutToShow(IMenuManager manager) {
-				SampleView.this.fillContextMenu(manager);
+				DoodleDebugView_Example.this.fillContextMenu(manager);
 			}
 		});
 		Menu menu = menuMgr.createContextMenu(viewer.getControl());

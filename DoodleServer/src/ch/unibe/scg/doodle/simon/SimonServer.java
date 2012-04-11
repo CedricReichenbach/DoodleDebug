@@ -3,6 +3,8 @@ package ch.unibe.scg.doodle.simon;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
+import ch.unibe.scg.doodle.views.DoodleDebugView;
+
 
 import de.root1.simon.Registry;
 import de.root1.simon.Simon;
@@ -29,8 +31,10 @@ public class SimonServer implements SimonServerInterface {
 
 	@Override
 	public void ShowHtml(String html) {
-		// TODO display in eclipse browser
 		System.out.println("Server: Received html code.");
+		
+		// TODO display in eclipse browser
+		DoodleDebugView.showHtml(html);
 	}
 
 }

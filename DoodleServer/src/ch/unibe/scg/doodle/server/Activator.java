@@ -18,7 +18,7 @@ import ch.unibe.scg.doodle.simon.SimonServer;
 public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "aPlugin"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "DoodleDebug"; //$NON-NLS-1$
 
 	// The shared instance
 	private static Activator plugin;
