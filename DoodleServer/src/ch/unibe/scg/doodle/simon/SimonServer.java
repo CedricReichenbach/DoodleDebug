@@ -3,9 +3,9 @@ package ch.unibe.scg.doodle.simon;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
-import ch.unibe.scg.doodle.views.DoodleDebugView;
+import org.eclipse.swt.widgets.Display;
 
-
+import ch.unibe.scg.doodle.views.HtmlShow;
 import de.root1.simon.Registry;
 import de.root1.simon.Simon;
 import de.root1.simon.annotation.SimonRemote;
@@ -34,7 +34,8 @@ public class SimonServer implements SimonServerInterface {
 		System.out.println("Server: Received html code.");
 		
 		// TODO display in eclipse browser
-		DoodleDebugView.showHtml(html);
+		Runnable htmlShow = new HtmlShow(html);
+		Display.getDefault().syncExec(htmlShow);
 	}
 
 }

@@ -8,6 +8,7 @@ import java.rmi.server.UnicastRemoteObject;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.ui.views.IViewDescriptor;
 import org.osgi.framework.BundleContext;
 
 import ch.unibe.scg.doodle.simon.SimonServer;
