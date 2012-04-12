@@ -26,4 +26,8 @@ public class SimonClient implements SimonClientInterface {
 		server.ShowHtml(html);
 	}
 
+	public void stop() {
+		lookup.release(server);
+	}
+
 }

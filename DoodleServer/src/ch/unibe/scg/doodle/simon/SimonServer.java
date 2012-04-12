@@ -38,4 +38,9 @@ public class SimonServer implements SimonServerInterface {
 		Display.getDefault().syncExec(htmlShow);
 	}
 
+	public void stop() {
+		registry.unbind("DoodleServer");
+		registry.stop();
+	}
+
 }

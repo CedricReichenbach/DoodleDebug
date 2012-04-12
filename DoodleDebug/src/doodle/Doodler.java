@@ -69,6 +69,7 @@ public class Doodler {
 		try {
 			SimonClient client = new SimonClient(port);
 			client.sendHtml(htmlDocument.toString());
+			client.stop();
 		} catch (Exception e) {
 			System.out.println("Failed to send html to eclipse plugin.");
 			e.printStackTrace();

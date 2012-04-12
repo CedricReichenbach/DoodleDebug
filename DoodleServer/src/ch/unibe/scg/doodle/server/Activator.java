@@ -17,6 +17,8 @@ public class Activator extends AbstractUIPlugin {
 	// The shared instance
 	private static Activator plugin;
 
+	private SimonServer simonServer;
+
 	/**
 	 * The constructor
 	 */
@@ -38,18 +40,6 @@ public class Activator extends AbstractUIPlugin {
 		startSimonServer();
 	}
 
-	private void startSimonServer() {
-		int port = 58801;
-		try {
-			System.out.println("Starting SIMON server at port "+port+"...");
-			new SimonServer(port);
-			System.out.println("Server started successfully.");
-		} catch (Exception e) {
-			System.out.println("Server could not be started.");
-			e.printStackTrace();
-		}
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -58,8 +48,25 @@ public class Activator extends AbstractUIPlugin {
 	 * )
 	 */
 	public void stop(BundleContext context) throws Exception {
+		stopSimonServer();
 		plugin = null;
 		super.stop(context);
+	}
+
+	private void startSimonServer() {
+		int port = 58801;
+		try {
+			System.out.println("Starting SIMON server at port "+port+"...");
+			simonServer = new SimonServer(port);
+			System.out.println("Server started successfully.");
+		} catch (Exception e) {
+			System.out.println("Server could not be started.");
+			e.printStackTrace();
+		}
+	}
+
+	private void stopSimonServer() {
+		simonServer.stop();
 	}
 
 	/**
