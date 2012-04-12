@@ -1,14 +1,7 @@
 package ch.unibe.scg.doodle.server;
 
-import java.rmi.ConnectException;
-import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import java.rmi.server.UnicastRemoteObject;
-
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.ui.views.IViewDescriptor;
 import org.osgi.framework.BundleContext;
 
 import ch.unibe.scg.doodle.simon.SimonServer;
@@ -43,10 +36,6 @@ public class Activator extends AbstractUIPlugin {
 		
 		// use SIMON instead of RMI
 		startSimonServer();
-		
-//		System.out.println("Trying to start server...");
-//		this.startServer();
-//		System.out.println("Server started");
 	}
 
 	private void startSimonServer() {
@@ -59,29 +48,6 @@ public class Activator extends AbstractUIPlugin {
 			System.out.println("Server could not be started.");
 			e.printStackTrace();
 		}
-	}
-
-	void startServer() throws RemoteException {
-		if (System.getSecurityManager() == null) {
-			System.setSecurityManager(new DoodleSecurityManager());
-		}
-
-		String name = "DoodleDebug";
-		PluginServer engine = new RealPluginServer();
-		PluginServer stub = (PluginServer) UnicastRemoteObject.exportObject(
-				engine, 1098);
-		Registry registry = LocateRegistry.getRegistry();
-		try {
-			registry.rebind(name, stub); // XXX: Error occurs here!
-		} catch (ConnectException e) {
-			System.out.println("java.rmi.ConnectException occured!");
-		}
-//		try {
-//			registry.bind(name, stub);
-//		} catch (AlreadyBoundException e) {
-//			registry.rebind(name, stub);
-//		}
-
 	}
 
 	/*
