@@ -16,6 +16,7 @@ public class DoodleDebugView extends ViewPart {
 	public void createPartControl(Composite parent) {
 		try {
 			browser = new Browser(parent, SWT.H_SCROLL | SWT.V_SCROLL);
+			browser.setText("Nothing to display yet...");
 		} catch (SWTError e) {
 			MessageBox messageBox = new MessageBox(parent.getShell(),
 					SWT.ICON_ERROR | SWT.OK);
@@ -28,7 +29,6 @@ public class DoodleDebugView extends ViewPart {
 
 	@Override
 	public void setFocus() {
-		browser.setText("Nothing to display yet...");
 		browser.setFocus();
 	}
 
