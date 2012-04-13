@@ -1,1 +1,4 @@
 *.class
+*.aux
+*.synctex.gz
+*.out

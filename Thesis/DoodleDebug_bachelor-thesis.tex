@@ -1,0 +1,28 @@
+\documentclass{report}
+
+\usepackage{hyperref}
+
+\title{DoodleDebug}
+
+\begin{document}
+\maketitle
+
+\chapter*{Abstract}
+
+\chapter*{Introduction}
+
+\chapter*{Development}
+\section*{Planning}
+
+\section*{Programming}
+\subsection*{Communication between Java Virtual Machines}
+Because a user program is running in a different Virtual Machine (VM) than Eclipse itself, we had to find a way to somehow communicate between those two in order to display the DoodleDebug rendering in an Eclipse tab. As a first attempt, we tried to use Java's built-in Remote Method Invocation (RMI) what resulted in frustration as some Java Security Manager always put obstacles in our way. Looking for alternatives, we found SIMON (Simple Invocation of Methods Over Network), a more comfortable alternative, which allows to create a registry on a specified port of localhost and add a Server object to it. The Server class implements an Interface he client, knowing the server's Interface, can then search for this server name and send messages to it.
+
+\chapter*{References}
+\begin{enumerate}
+\item
+SIMON: \url{http://dev.root1.de/projects/simon}
+\end{enumerate}
+
+
+\end{document}
