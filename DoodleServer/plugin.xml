@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   
+   <!-- prevent lazy loading; server needs to be started immediately -->
    <extension
          point="org.eclipse.ui.startup">
    </extension>
+   
    <extension
          point="org.eclipse.ui.views">
       <category
@@ -43,6 +46,23 @@
       <contexts
             file="contexts.xml">
       </contexts>
+   </extension>
+   
+   <!-- contribution to "Add Library" wizard -->
+   <extension
+         point="org.eclipse.jdt.core.classpathContainerInitializer">
+      <classpathContainerInitializer
+            id="ch.unibe.scg.doodle.buildpath.DD_CONTAINER"
+            class="ch.unibe.scg.doodle.buildpath.DoodleDebugContainterInitializer">
+      </classpathContainerInitializer>
+   </extension>
+   <extension
+         point="org.eclipse.jdt.ui.classpathContainerPage">
+      <classpathContainerPage
+            id="ch.unibe.scg.doodle.buildpath.DD_CONTAINER"
+            name="DoodleDebug Library"
+            class="ch.unibe.scg.doodle.buildpath.DoodleDebugContainerPage">
+      </classpathContainerPage>
    </extension>
 
 </plugin>
