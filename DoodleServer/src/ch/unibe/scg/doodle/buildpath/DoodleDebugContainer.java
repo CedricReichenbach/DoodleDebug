@@ -10,10 +10,10 @@ public class DoodleDebugContainer implements IClasspathContainer {
 	private final IPath fPath;
 
 	public DoodleDebugContainer(IPath path, IClasspathEntry[] entries) {
-		fPath= path;
-		fEntries= entries;
+		fPath = path;
+		fEntries = entries;
 	}
-	
+
 	@Override
 	public IClasspathEntry[] getClasspathEntries() {
 		return fEntries;

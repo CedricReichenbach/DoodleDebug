@@ -86,7 +86,7 @@ public class DoodleDebugContainerPage extends WizardPage implements
 
 	@Override
 	public IClasspathEntry getSelection() {
-		IPath path = new Path(""); // XXX path to container
+		IPath path = new Path(DoodleDebugContainterInitializer.DD_CONTAINER_ID); // XXX path to container
 
 		final int index = this.mProjectsCombo.getSelectionIndex();
 		if (index != -1) {
