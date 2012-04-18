@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Wed Apr 18 21:53:49 CEST 2012
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=C\:\\Users\\Cedric Reichenbach\\students-cedric-DoodleDebug\\temporal libraries (DD)\\DoodleDebug-Client_2012-04-18.jar
+manifest.mergeall=true
+manifest.mainclass=
+manifest.file=<createnew>
+jarname.isextern=true
+onejar.expand=
+excludes=
+includes=

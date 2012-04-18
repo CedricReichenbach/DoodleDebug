@@ -1,16 +1,17 @@
 package doodle;
 
+import html_generator.Attribute;
+import html_generator.Tag;
+
 import java.awt.Desktop;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 
 import javax.inject.Inject;
-import html_generator.Attribute;
-import html_generator.Tag;
+
 import simon.SimonClient;
 import view.HtmlDocument;
 import view.HtmlRenderer;

@@ -1,6 +1,5 @@
 package doodle;
 
-import java.io.IOException;
 
 /**
  * Should be imlemented, if an Object wants to define its own "draw" and "drawSmall" methods, similar to "toString".

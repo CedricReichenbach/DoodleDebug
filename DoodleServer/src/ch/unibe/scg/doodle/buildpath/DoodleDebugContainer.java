@@ -21,7 +21,7 @@ public class DoodleDebugContainer implements IClasspathContainer {
 
 	@Override
 	public String getDescription() {
-		return "Container for DoodleDebug (client side)";
+		return "DoodleDebug";
 	}
 
 	@Override
