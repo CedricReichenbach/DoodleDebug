@@ -2,7 +2,8 @@ package app_example.huge_strings;
 
 import java.util.ArrayList;
 
-import doodle.D;
+import ch.unibe.scg.doodle.D;
+
 
 public class Main {
 

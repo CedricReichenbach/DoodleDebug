@@ -2,7 +2,8 @@ package app_example.twodim_array;
 
 import java.awt.Color;
 
-import doodle.D;
+import ch.unibe.scg.doodle.D;
+
 
 public class Main {
 

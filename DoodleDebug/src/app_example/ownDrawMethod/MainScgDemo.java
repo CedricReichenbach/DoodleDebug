@@ -13,7 +13,8 @@ import java.util.List;
 
 import org.junit.Test;
 
-import doodle.D;
+import ch.unibe.scg.doodle.D;
+
 
 public class MainScgDemo {
 

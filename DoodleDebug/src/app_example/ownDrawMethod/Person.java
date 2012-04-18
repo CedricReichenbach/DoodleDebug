@@ -3,8 +3,9 @@ package app_example.ownDrawMethod;
 import java.io.Serializable;
 import java.util.Arrays;
 
-import doodle.Doodleable;
-import doodle.Scratch;
+import ch.unibe.scg.doodle.Doodleable;
+import ch.unibe.scg.doodle.Scratch;
+
 
 public class Person implements Serializable, Cloneable, Doodleable {
 

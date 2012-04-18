@@ -1,12 +1,9 @@
 package app_example.car;
 
-import doodle.D;
+import ch.unibe.scg.doodle.D;
 
 public class Main {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		Car car = new Car(new Person("Enzo Ferrari"));
 		car.driver = new Person("Michael Schumacher");

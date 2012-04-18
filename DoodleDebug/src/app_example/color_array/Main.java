@@ -4,7 +4,8 @@ import java.awt.Color;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import doodle.D;
+import ch.unibe.scg.doodle.D;
+
 
 public class Main {
 
