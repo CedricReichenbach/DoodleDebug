@@ -1,2 +1,8 @@
 *.class
+<<<<<<< HEAD
 output.html
+=======
+*.aux
+*.synctex.gz
+*.out
+>>>>>>> 6b4e39aa079bd676f00612b214318b72960d9a99

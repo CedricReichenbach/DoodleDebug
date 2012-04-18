@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-
+   
+   <!-- prevent lazy loading; server needs to be started immediately -->
+   <extension
+         point="org.eclipse.ui.startup">
+   </extension>
+   
    <extension
          point="org.eclipse.ui.views">
       <category
-            name="Sample Category"
-            id="aPlugin">
+            name="DoodleDebug"
+            id="ch.unibe.scg.doodle.views">
       </category>
       <view
-            name="Sample View"
+            name="DoodleDebugView_Example"
             icon="icons/sample.gif"
-            category="aPlugin"
-            class="aplugin.views.SampleView"
-            id="aplugin.views.SampleView">
+            category="ch.unibe.scg.doodle.views"
+            class="ch.unibe.scg.doodle.views.DoodleDebugView_Example"
+            id="ch.unibe.scg.doodle.views.DoodleDebugView_Example">
+      </view>
+      <view
+            category="ch.unibe.scg.doodle.views"
+            class="ch.unibe.scg.doodle.views.DoodleDebugView"
+            icon="icons/sample.gif"
+            id="ch.unibe.scg.doodle.views.DoodleDebugView"
+            name="DoodleDebugView"
+            restorable="true">
       </view>
    </extension>
    <extension
@@ -24,7 +37,7 @@
                ratio="0.5"
                relative="org.eclipse.ui.views.TaskList"
                relationship="right"
-               id="aplugin.views.SampleView">
+               id="ch.unibe.scg.doodle.views.DoodleDebugView">
          </view>
       </perspectiveExtension>
    </extension>
@@ -33,6 +46,23 @@
       <contexts
             file="contexts.xml">
       </contexts>
+   </extension>
+   
+   <!-- contribution to "Add Library" wizard -->
+   <extension
+         point="org.eclipse.jdt.core.classpathContainerInitializer">
+      <classpathContainerInitializer
+            id="ch.unibe.scg.doodle.buildpath.DD_CONTAINER"
+            class="ch.unibe.scg.doodle.buildpath.DoodleDebugContainterInitializer">
+      </classpathContainerInitializer>
+   </extension>
+   <extension
+         point="org.eclipse.jdt.ui.classpathContainerPage">
+      <classpathContainerPage
+            id="ch.unibe.scg.doodle.buildpath.DD_CONTAINER"
+            name="DoodleDebug Library"
+            class="ch.unibe.scg.doodle.buildpath.DoodleDebugContainerPage">
+      </classpathContainerPage>
    </extension>
 
 </plugin>

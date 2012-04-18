@@ -11,6 +11,7 @@ import java.net.URISyntaxException;
 import javax.inject.Inject;
 import html_generator.Attribute;
 import html_generator.Tag;
+import simon.SimonClient;
 import view.HtmlDocument;
 import view.HtmlRenderer;
 
@@ -56,9 +57,23 @@ public class Doodler {
 //		System.out.println(htmlDocument.toString());
 		
 		// for testing
-		openInBrowser(htmlDocument.toString());
+//		openInBrowser(htmlDocument.toString());
+		
+		sentHtmlToEclipsePlugin(htmlDocument);
 		
 //		htmlRenderer.render(htmlDocument.toString());
+	}
+
+	private void sentHtmlToEclipsePlugin(HtmlDocument htmlDocument) {
+		int port = 58801;
+		try {
+			SimonClient client = new SimonClient(port);
+			client.sendHtml(htmlDocument.toString());
+			client.stop();
+		} catch (Exception e) {
+			System.out.println("Failed to send html to eclipse plugin.");
+			e.printStackTrace();
+		}
 	}
 
 	public void renderInlineInto(Object object, Tag tag) {

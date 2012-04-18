@@ -1,14 +1,10 @@
 package ch.unibe.scg.doodle.server;
 
-import java.rmi.AlreadyBoundException;
-import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import java.rmi.server.UnicastRemoteObject;
-
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+
+import ch.unibe.scg.doodle.simon.SimonServer;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -16,10 +12,12 @@ import org.osgi.framework.BundleContext;
 public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "aPlugin"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "DoodleDebug"; //$NON-NLS-1$
 
 	// The shared instance
 	private static Activator plugin;
+
+	private SimonServer simonServer;
 
 	/**
 	 * The constructor
@@ -37,28 +35,9 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		System.out.println("trying to start server");
-		this.startServer();
-		System.out.println("server started");
-	}
-
-	void startServer() throws RemoteException {
-		if (System.getSecurityManager() == null) {
-			System.setSecurityManager(new DoodleSecurityManager());
-		}
-
-		String name = "DoodleDebug";
-		PluginServer engine = new RealPluginServer();
-		PluginServer stub = (PluginServer) UnicastRemoteObject.exportObject(
-				engine, 1098);
-		Registry registry = LocateRegistry.getRegistry();
-//		registry.rebind(name, stub); // XXX: Error occurs here!
-		try {
-			registry.bind(name, stub);
-		} catch (AlreadyBoundException e) {
-			registry.rebind(name, stub);
-		}
-
+		
+		// use SIMON instead of RMI
+		startSimonServer();
 	}
 
 	/*
@@ -69,8 +48,25 @@ public class Activator extends AbstractUIPlugin {
 	 * )
 	 */
 	public void stop(BundleContext context) throws Exception {
+		stopSimonServer();
 		plugin = null;
 		super.stop(context);
+	}
+
+	private void startSimonServer() {
+		int port = 58801;
+		try {
+			System.out.println("Starting SIMON server at port "+port+"...");
+			simonServer = new SimonServer(port);
+			System.out.println("Server started successfully.");
+		} catch (Exception e) {
+			System.out.println("Server could not be started.");
+			e.printStackTrace();
+		}
+	}
+
+	private void stopSimonServer() {
+		simonServer.stop();
 	}
 
 	/**

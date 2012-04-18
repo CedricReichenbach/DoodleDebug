@@ -2,11 +2,14 @@ package view;
 
 import html_generator.Tag;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
@@ -50,28 +53,25 @@ public class HtmlDocument {
 	private String makeStyleSheet() {
 		// load from file "style.css"
 		String sep = File.separator;
-		return readFile(System.getProperty("user.dir") + sep + "src" + sep + "view"
-				+ sep + "style.css");
+		return readFile(this.getClass().getResource("style.css"));
 	}
 
-	private String readFile(String path) {
-		File file = new File(path);
-		FileInputStream stream = null;
+	private String readFile(URL url) {
+		String result = "";
+		
 		try {
-			stream = new FileInputStream(file);
-			FileChannel fc = stream.getChannel();
-			MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
-			
-			return Charset.defaultCharset().decode(bb).toString();
+			BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+			String inputLine = "";
+			while (inputLine != null) {
+				result += inputLine+"\n";
+				inputLine = in.readLine();
+			}
+			in.close();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
-		} finally {
-			try {
-				stream.close();
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
 		}
+		
+		return result;
 	}
 
 	public void setBody(Tag body) {
