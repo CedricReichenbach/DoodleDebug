@@ -64,5 +64,15 @@
             class="ch.unibe.scg.doodle.buildpath.DoodleDebugContainerPage">
       </classpathContainerPage>
    </extension>
+   
+   <!-- quickfix processors -->
+   <extension
+         point="org.eclipse.jdt.ui.quickFixProcessors">
+      <quickFixProcessor
+            class="ch.unibe.scg.doodle.quickfix.DoodleQuickfixProcessor"
+            id="ch.unibe.scg.doodle.quickfix.DoodleQuickfixProcessor"
+            name="DoodleDebug Quickfix">
+      </quickFixProcessor>
+   </extension>
 
 </plugin>

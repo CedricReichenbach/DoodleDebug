@@ -36,7 +36,6 @@ public class DoodleDebugContainterInitializer extends
 
 	private DoodleDebugContainer getNewContainer(IPath containerPath) {
 		Path path = new Path(getClientJarPath());
-		System.out.println(path);
 		Path srcPath = null;
 		IClasspathEntry entry = JavaCore.newLibraryEntry(path, srcPath, new Path("/"));
 		//IClasspathEntry entry = JavaCore.newContainerEntry(DD_PATH);
