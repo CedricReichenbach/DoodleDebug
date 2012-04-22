@@ -20,16 +20,15 @@ public class DoodleQuickfixProcessor implements IQuickFixProcessor {
 
 	@Override
 	public boolean hasCorrections(ICompilationUnit unit, int problemId) {
-		return /* problemId == IProblem.UndefinedMethod | */problemId == IProblem.UndefinedType;
+		return problemId == IProblem.UndefinedMethod
+				| problemId == IProblem.UndefinedType;
 	}
 
 	@Override
 	public IJavaCompletionProposal[] getCorrections(IInvocationContext context,
 			IProblemLocation[] locations) throws CoreException {
 		for (IProblemLocation problem : locations) {
-			if (problem.getProblemId() == IProblem.UndefinedType) {
-				return getAddDDToBuildPathProposals(context);
-			}
+			return getAddDDToBuildPathProposals(context);
 		}
 		return null;
 	}
@@ -41,14 +40,19 @@ public class DoodleQuickfixProcessor implements IQuickFixProcessor {
 		String name = "ch.unibe.scg.doodle.D";
 		ClasspathFixProposal[] fixProposals = ClasspathFixProcessor
 				.getContributedFixImportProposals(project, name, null);
-		
+
 		ArrayList<IJavaCompletionProposal> proposals = new ArrayList<IJavaCompletionProposal>();
 		for (ClasspathFixProposal fixProposal : fixProposals) {
-			proposals.add(new DoodleClasspathFixCorrelationProposal(
-					project, fixProposal, getImportRewrite(
-							context.getASTRoot(), name)));
+			proposals.add(new DoodleClasspathFixCorrelationProposal(project,
+					fixProposal, getImportRewrite(context.getASTRoot(), name)));
 		}
-		return (IJavaCompletionProposal[]) proposals.toArray();
+
+		IJavaCompletionProposal[] propArr = new IJavaCompletionProposal[proposals
+				.size()];
+		for (int i = 0; i < proposals.size(); i++) {
+			propArr[i] = proposals.get(i);
+		}
+		return propArr;
 	}
 
 	private ImportRewrite getImportRewrite(CompilationUnit astRoot,
