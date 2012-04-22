@@ -15,6 +15,8 @@ import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.NullChange;
 import org.eclipse.swt.graphics.Image;
 
+import ch.unibe.scg.doodle.util.DoodleImages;
+
 public class DoodleClasspathFixProposal extends ClasspathFixProposal {
 
 	private final IJavaProject fProject;
@@ -93,8 +95,7 @@ public class DoodleClasspathFixProposal extends ClasspathFixProposal {
 
 	@Override
 	public Image getImage() {
-		// TODO Auto-generated method stub
-		return null;
+		return DoodleImages.getDoodleDebugIcon();
 	}
 
 	@Override

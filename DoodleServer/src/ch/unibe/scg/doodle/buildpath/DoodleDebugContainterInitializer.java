@@ -43,7 +43,7 @@ public class DoodleDebugContainterInitializer extends
 				new IClasspathEntry[] { entry });
 	}
 
-	private String getClientJarPath() {
+	private String getClientJarPath() { // TODO: use DoodleFiles util
 		Bundle bundle = Platform.getBundle("DoodleServer");
 		Path path = new Path("DoodleDebug-Client.jar");
 		URL fileURL = FileLocator.find(bundle, path, null);
