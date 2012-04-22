@@ -74,5 +74,13 @@
             name="DoodleDebug Quickfix">
       </quickFixProcessor>
    </extension>
+   <extension
+         point="org.eclipse.jdt.ui.classpathFixProcessors">
+      <classpathFixProcessor
+            class="ch.unibe.scg.doodle.quickfix.DoodleClasspathFixProcessor"
+            id="ch.unibe.scg.doodle.quickfix.DoodleClasspathFixProcessor"
+            name="DoodleDebug ClasspathFix Processor">
+      </classpathFixProcessor>
+   </extension>
 
 </plugin>
