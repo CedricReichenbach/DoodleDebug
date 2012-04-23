@@ -3,7 +3,9 @@ Bundle-ManifestVersion: 2
 Bundle-Name: SimonPlugin
 Bundle-SymbolicName: SimonPlugin
 Bundle-Version: 1.0.0
-Bundle-ClassPath: .
+Bundle-ClassPath: simon-1.1.2-jar-with-dependencies.jar,
+ simon-1.1.2-javadoc.jar,
+ simon-1.1.2-sources.jar
 Export-Package: de.root1.simon,
  de.root1.simon.annotation,
  de.root1.simon.codec,
