@@ -15,6 +15,8 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.osgi.framework.Bundle;
 
+import ch.unibe.scg.doodle.util.DoodleFiles;
+
 public class DoodleDebugContainterInitializer extends
 		ClasspathContainerInitializer {
 	
@@ -35,28 +37,16 @@ public class DoodleDebugContainterInitializer extends
 	}
 
 	private DoodleDebugContainer getNewContainer(IPath containerPath) {
-		Path path = new Path(getClientJarPath());
-		Path srcPath = null;
+		final IPath path = getClientJarPath();
+		final IPath srcPath = null;
 		IClasspathEntry entry = JavaCore.newLibraryEntry(path, srcPath, new Path("/"));
 		//IClasspathEntry entry = JavaCore.newContainerEntry(DD_PATH);
 		return new DoodleDebugContainer(containerPath,
 				new IClasspathEntry[] { entry });
 	}
 
-	private String getClientJarPath() { // TODO: use DoodleFiles util
-		Bundle bundle = Platform.getBundle("DoodleServer");
-		Path path = new Path("DoodleDebug-Client.jar");
-		URL fileURL = FileLocator.find(bundle, path, null);
-		String result = "";
-		try {
-			result = FileLocator.resolve(fileURL).toString();
-			
-			// remove "file:/" XXX
-			result = result.substring("file:/".length());
-		} catch (IOException e) {
-//			throw new RuntimeException(e);
-		}
-		return result;
+	private IPath getClientJarPath() {
+		return DoodleFiles.getFilePath("DoodleDebug-Client.jar");
 	}
 
 }
