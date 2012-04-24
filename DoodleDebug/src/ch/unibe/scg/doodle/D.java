@@ -18,17 +18,28 @@ public class D {
 	 * Code sugar for D.raw-ing any Object similar to System.out.println
 	 * @param Object o
 	 */
-	public static void raw(Object o) {
+	public static void raw(Object o, Object... objects) {
 		Doodler doodler = injectorInstance().getInstance(Doodler.class);
-		doodler.visualize(o);
+		
+		if (objects.length == 0) {
+			doodler.visualize(o);
+			return;
+		}
+		
+		Object[] objArr = new Object[objects.length+1];
+		objArr[0] = o;
+		for (int i = 1; i < objArr.length; i++) {
+			objArr[i] = objects[i-1];
+		}
+		doodler.visualize(objArr);
 	}
 	
 	/**
-	 * Just redirects to D.raw
+	 * Equivalent to D.raw(Object o, Object... objects)
 	 * @param Object o
 	 */
-	public static void draw(Object o) {
-		raw(o);
+	public static void draw(Object o, Object... objects) {
+		raw(o, objects);
 	}
 	
 }

@@ -20,15 +20,20 @@ public class DoodleQuickfixProcessor implements IQuickFixProcessor {
 
 	@Override
 	public boolean hasCorrections(ICompilationUnit unit, int problemId) {
-		return problemId == IProblem.UndefinedMethod
-				| problemId == IProblem.UndefinedType;
+		// return problemId == IProblem.UndefinedMethod
+		// | problemId == IProblem.UndefinedType;
+		return problemId == IProblem.UnresolvedVariable;
 	}
 
 	@Override
 	public IJavaCompletionProposal[] getCorrections(IInvocationContext context,
 			IProblemLocation[] locations) throws CoreException {
 		for (IProblemLocation problem : locations) {
-			return getAddDDToBuildPathProposals(context);
+			if (problem.getProblemId() == 0x22000032
+					&& problem.getProblemArguments()[0].equals("D"))
+				// XXX filter relevant problems | I have no clue what this
+				// problemID is right now
+				return getAddDDToBuildPathProposals(context);
 		}
 		return null;
 	}
