@@ -59,7 +59,7 @@ public class Doodler {
 //		System.out.println(htmlDocument.toString());
 		
 		// for testing
-//		openInBrowser(htmlDocument.toString());
+		openInBrowser(htmlDocument.toString());
 		
 		sentHtmlToEclipsePlugin(htmlDocument);
 		

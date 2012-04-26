@@ -35,6 +35,7 @@
 
 body {
 	font-family: "Roboto", Verdana, Tahoma, sans-serif;
+	background-color: #ddd;
 }
 
 hr {
@@ -60,6 +61,7 @@ hr.betweenDrawCalls {
 .ClassName {
 	font-size: 8pt;
 	color: blue;
+	
 }
 
 .rendering {
@@ -68,11 +70,14 @@ hr.betweenDrawCalls {
 }
 
 .rendering > div {
+	background-color: #fff;
 	border-color: #0C5;
-	border-style: dotted;
-	padding: 2pt;
+	border-style: solid;
+	padding: 4pt;
 	overflow: hidden;
 	border-width: 1px;
+	box-shadow: 2px 2px 4px #ccc; /* XXX not working inside eclipse yet... */
+	margin-top: -11pt;
 }
 
 .column {
