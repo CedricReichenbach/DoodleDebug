@@ -77,7 +77,13 @@ hr.betweenDrawCalls {
 	overflow: hidden;
 	border-width: 1px;
 	box-shadow: 2px 2px 4px #ccc; /* XXX not working inside eclipse yet... */
-	margin-top: -11pt;
+	/* margin-top: -11pt; (not shown inside ecipse yet) */
+	margin-top: -4pt;
+}
+
+.rendering > div:hover {
+	background-color: #afb;
+    border-color: #0af;
 }
 
 .column {

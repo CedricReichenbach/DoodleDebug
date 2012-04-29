@@ -1,6 +1,5 @@
 package ch.unibe.scg.doodle;
 
-
 import java.awt.Desktop;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -16,7 +15,6 @@ import ch.unibe.scg.doodle.simon.SimonClient;
 import ch.unibe.scg.doodle.view.HtmlDocument;
 import ch.unibe.scg.doodle.view.HtmlRenderer;
 
-
 /**
  * Class used for visualizing any Object
  * 
@@ -24,13 +22,15 @@ import ch.unibe.scg.doodle.view.HtmlRenderer;
  * 
  */
 public class Doodler {
-	
+
 	@Inject
 	ScratchFactory scratchFactory;
-	
+
 	private Tag body;
 
 	private HtmlRenderer htmlRenderer;
+
+	private final boolean debugMode = false;
 
 	/**
 	 * Creates a new Doodler for visualizing objects 1 Doodler = 1 window
@@ -44,26 +44,28 @@ public class Doodler {
 	 * Visualizes any Object, either using draw Method of the object itself (if
 	 * existing) or does a default drawing.
 	 * 
-	 * @param Object not null
-	 *            
+	 * @param Object
+	 *            not null
+	 * 
 	 */
 	@SuppressWarnings("unchecked")
 	public void visualize(Object o) {
 		assert (o != null);
 		scratchFactory.create(o).drawWholeWithName(body);
-		
-		body.add(new Tag("hr","class=betweenDrawCalls"));
+
+		body.add(new Tag("hr", "class=betweenDrawCalls"));
 		HtmlDocument htmlDocument = new HtmlDocument();
 		htmlDocument.setBody(body);
-		
-//		System.out.println(htmlDocument.toString());
-		
+
+		// System.out.println(htmlDocument.toString());
+
 		// for testing
-		openInBrowser(htmlDocument.toString());
-		
+		if (debugMode)
+			openInBrowser(htmlDocument.toString());
+
 		sentHtmlToEclipsePlugin(htmlDocument);
-		
-//		htmlRenderer.render(htmlDocument.toString());
+
+		// htmlRenderer.render(htmlDocument.toString());
 	}
 
 	private void sentHtmlToEclipsePlugin(HtmlDocument htmlDocument) {
@@ -96,13 +98,14 @@ public class Doodler {
 
 	private void openInBrowser(String html) {
 		try {
-			File file = new File(System.getProperty("user.dir") + "/tempfiles/output.html");
+			File file = new File(System.getProperty("user.dir")
+					+ "/tempfiles/output.html");
 			new File(file.getParent()).mkdirs();
 			FileWriter fw = new FileWriter(file.getPath());
 			BufferedWriter buf = new BufferedWriter(fw);
 			buf.write(html);
 			buf.close();
-			
+
 			URI uri = file.toURI();
 			Desktop.getDesktop().browse(uri);
 		} catch (IOException e) {

@@ -1,6 +1,5 @@
 package ch.unibe.scg.doodle;
 
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,29 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.management.RuntimeErrorException;
-
 
 import ch.unibe.ch.scg.htmlgen.Attribute;
 import ch.unibe.ch.scg.htmlgen.Tag;
 import ch.unibe.scg.doodle.plugins.ArrayPlugin;
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
-import ch.unibe.scg.doodle.rendering.DefaultRendering;
 import ch.unibe.scg.doodle.rendering.Rendering;
 import ch.unibe.scg.doodle.rendering.RenderingRegistry;
 import ch.unibe.scg.doodle.rendering.ScratchRendering;
-import ch.unibe.scg.doodle.view.DoodleCanvas;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import com.google.inject.Provider;
 import com.google.inject.assistedinject.Assisted;
 
-
-
 /**
  * Placeholder for an object. Finds the correct plugin to display an object and
- *  prepares the tag the object can write itself into.
+ * prepares the tag the object can write itself into.
  * 
  * Organized in a tree structure, which the renderer traverses to create the
  * real pixels on a doodle canvas.
@@ -58,7 +49,7 @@ public class RealScratch implements Scratch {
 
 	@Inject
 	ScratchFactory scratchFactory;
-	
+
 	@Inject
 	Provider<ScratchRendering> scratchRenderingProvider;
 
@@ -84,25 +75,28 @@ public class RealScratch implements Scratch {
 	 */
 	@Override
 	public void drawWhole(Tag tag) {
-		tag.addAttribute(new Attribute("class","rendering"));
+		tag.addAttribute(new Attribute("class", "rendering"));
 		Tag subTag = new Tag("div");
 		tag.add(subTag);
-		
+
 		drawRendering(subTag);
 	}
 
 	@Override
 	public void drawWholeWithName(Tag tag) {
-		writeClassName(renderingRegistry.lookup(object.getClass()).getObjectTypeName(object), tag);
-		tag.addAttribute(new Attribute("class","rendering"));
+		writeClassName(renderingRegistry.lookup(object.getClass())
+				.getObjectTypeName(object), tag);
+		tag.addAttribute(new Attribute("class", "rendering"));
 		Tag subTag = new Tag("div");
 		tag.add(subTag);
 		this.drawRendering(subTag);
 	}
 
 	void drawRendering(Tag tag) {
+		addLink(tag);
+
 		if (object instanceof Doodleable) {
-			tag.addAttribute(new Attribute("class","Scratch"));
+			tag.addAttribute(new Attribute("class", "Scratch"));
 			try {
 				((Doodleable) object).drawOn(this);
 			} catch (Exception e) {
@@ -126,6 +120,11 @@ public class RealScratch implements Scratch {
 		tag.add(span);
 	}
 
+	private void addLink(Tag tag) {
+		tag.addAttribute(new Attribute("onclick", "window.open('"
+				+ object.hashCode() + "')"));
+	}
+
 	/**
 	 * Makes a default drawing for objects that don't implement their own draw
 	 * method.
@@ -137,16 +136,17 @@ public class RealScratch implements Scratch {
 		assert (renderingRegistry != null);
 		RenderingPlugin plugin = renderingRegistry.lookup(object.getClass());
 		prepareTag(tag, plugin);
-	
+
 		if (object.getClass().isArray()) {
 			plugin = arrayPluginProvider.get();
 		}
-	
+
 		plugin.render(object, tag);
 	}
 
 	void prepareTag(Tag tag, RenderingPlugin plugin) {
-		tag.addAttribute(new Attribute("class",plugin.getClass().getSimpleName()));
+		tag.addAttribute(new Attribute("class", plugin.getClass()
+				.getSimpleName()));
 	}
 
 	/*
@@ -156,8 +156,8 @@ public class RealScratch implements Scratch {
 	 */
 	@Override
 	public void draw(Object o) {
-		List<List<Scratch>> lastColumn = columns.get(columns.size()-1);
-		List<Scratch> lastLine = lastColumn.get(lastColumn.size()-1);
+		List<List<Scratch>> lastColumn = columns.get(columns.size() - 1);
+		List<Scratch> lastLine = lastColumn.get(lastColumn.size() - 1);
 		lastLine.add((RealScratch) scratchFactory.create(o));
 	}
 
@@ -229,7 +229,7 @@ public class RealScratch implements Scratch {
 		FileOutputStream out = new FileOutputStream(file);
 		out.write(image);
 		out.close();
-		
+
 		HtmlImage htmlImage = new HtmlImage(file, mimeType);
 		this.draw(htmlImage);
 	}
