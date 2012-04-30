@@ -4,6 +4,7 @@ package ch.unibe.scg.doodle;
 import java.io.IOException;
 import java.util.List;
 
+import ch.unibe.ch.scg.htmlgen.Attribute;
 import ch.unibe.ch.scg.htmlgen.Tag;
 
 public interface Scratch {
@@ -57,5 +58,7 @@ public interface Scratch {
 	public abstract void newColumn();
 	
 	public abstract void drawImage(byte[] image, String mimeType) throws IOException;
+
+	public abstract void addAttribute(Attribute attribute);
 
 }

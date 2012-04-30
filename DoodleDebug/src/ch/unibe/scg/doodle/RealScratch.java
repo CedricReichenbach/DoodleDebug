@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -34,6 +35,8 @@ public class RealScratch implements Scratch {
 	private Object object;
 
 	private String title;
+
+	private Collection<Attribute> attributes = new ArrayList<Attribute>();
 
 	/**
 	 * List of columns, a column is a list of lines, a line is a list of
@@ -73,21 +76,29 @@ public class RealScratch implements Scratch {
 	 * 
 	 * @see doodle.Scratch#drawWhole(html_generator.Tag)
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void drawWhole(Tag tag) {
 		tag.addAttribute(new Attribute("class", "rendering"));
 		Tag subTag = new Tag("div");
+		for (Attribute a : attributes) {
+			subTag.addAttribute(a);
+		}
 		tag.add(subTag);
 
 		drawRendering(subTag);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void drawWholeWithName(Tag tag) {
+		tag.addAttribute(new Attribute("class", "rendering"));
 		writeClassName(renderingRegistry.lookup(object.getClass())
 				.getObjectTypeName(object), tag);
-		tag.addAttribute(new Attribute("class", "rendering"));
 		Tag subTag = new Tag("div");
+		for (Attribute a : attributes) {
+			subTag.addAttribute(a);
+		}
 		tag.add(subTag);
 		this.drawRendering(subTag);
 	}
@@ -239,6 +250,11 @@ public class RealScratch implements Scratch {
 			return ".png";
 		}
 		throw new RuntimeException();
+	}
+
+	@Override
+	public void addAttribute(Attribute attribute) {
+		attributes.add(attribute);
 	}
 
 }

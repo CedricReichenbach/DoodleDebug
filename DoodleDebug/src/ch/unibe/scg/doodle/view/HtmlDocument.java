@@ -27,6 +27,7 @@ public class HtmlDocument {
 	@SuppressWarnings("unchecked")
 	private Tag makeHeader() {
 		Tag header = new Tag("head");
+		header.add("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=100\" >"); // for IE9 compatibility
 		Tag title = new Tag("title");
 		title.add("DoodleDebug");
 		header.add(title);

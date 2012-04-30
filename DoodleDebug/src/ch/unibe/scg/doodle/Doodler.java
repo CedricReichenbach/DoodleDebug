@@ -30,7 +30,7 @@ public class Doodler {
 
 	private HtmlRenderer htmlRenderer;
 
-	private final boolean debugMode = false;
+	private final boolean debugMode = true;
 
 	/**
 	 * Creates a new Doodler for visualizing objects 1 Doodler = 1 window
@@ -51,7 +51,9 @@ public class Doodler {
 	@SuppressWarnings("unchecked")
 	public void visualize(Object o) {
 		assert (o != null);
-		scratchFactory.create(o).drawWholeWithName(body);
+		Scratch scratch = scratchFactory.create(o);
+		scratch.addAttribute(new Attribute("class","printOut"));
+		scratch.drawWholeWithName(body);
 
 		body.add(new Tag("hr", "class=betweenDrawCalls"));
 		HtmlDocument htmlDocument = new HtmlDocument();

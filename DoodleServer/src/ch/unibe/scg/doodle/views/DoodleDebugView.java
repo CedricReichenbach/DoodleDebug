@@ -15,7 +15,7 @@ public class DoodleDebugView extends ViewPart {
 	@Override
 	public void createPartControl(Composite parent) {
 		try {
-			browser = new Browser(parent, SWT.H_SCROLL | SWT.V_SCROLL);
+			browser = new Browser(parent, SWT.V_SCROLL);
 			DoodleTypeListener openWindowListener = new DoodleTypeListener();
 			browser.addOpenWindowListener(openWindowListener);
 			browser.setText("Nothing to display yet...");
