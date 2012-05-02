@@ -111,7 +111,7 @@ public class Doodler {
 		level--;
 	}
 
-	private void addClass(Tag tag, String className) {
+	public static void addClass(Tag tag, String className) {
 		Attributes attributes = tag.getAttributes(); // XXX
 		for (Attribute a : attributes) {
 			String attName = a.getAttribute();

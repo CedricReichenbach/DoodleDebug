@@ -126,7 +126,7 @@ public class RealScratch implements Scratch {
 	}
 
 	private void writeClassName(String name, Tag tag) {
-		Tag span = new Tag("span", "class=ClassName");
+		Tag span = new Tag("div", "class=ClassName");
 		span.add(name);
 		tag.add(span);
 	}
@@ -158,8 +158,8 @@ public class RealScratch implements Scratch {
 	}
 
 	void prepareTag(Tag tag, RenderingPlugin plugin) {
-		tag.addAttribute(new Attribute("class", plugin.getClass()
-				.getSimpleName()));
+		Doodler.addClass(tag, plugin.getClass()
+				.getSimpleName());
 	}
 
 	/*

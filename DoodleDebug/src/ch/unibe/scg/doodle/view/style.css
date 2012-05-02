@@ -46,13 +46,11 @@ hr.betweenDrawCalls {
     display: block;
     padding: 10pt;
 }
-.ImagePlugin img {
-    max-height: 90pt;
-    max-width: 90pt;
-}
-.ClassName {
+.rendering .ClassName {
     color: blue;
     font-size: 8pt;
+	float: none;
+	margin-bottom: -4pt;
 }
 .rendering {
     float: left;
@@ -60,10 +58,8 @@ hr.betweenDrawCalls {
 }
 .printOut, .level1 {
     background-color: #FFFFFF;
-    border-color: transparent;
-    border-style: solid;
+	border-width: 0;
     box-shadow: 0 0 2px #AAAAAA;
-    margin-top: -4pt;
     overflow: hidden;
 }
 .level1:hover {
@@ -72,10 +68,13 @@ hr.betweenDrawCalls {
 }
 .column {
     float: left;
-    padding-left: 10pt;
 }
 .rendering > .StringPlugin {
 }
 .StringRendering {
     margin: 0;
+}
+.ImagePlugin img {
+    max-height: 90pt;
+    max-width: 90pt;
 }
