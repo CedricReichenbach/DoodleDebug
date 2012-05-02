@@ -38,5 +38,10 @@ public class ArrayPlugin extends AbstractPlugin {
 					+ " objects)";
 		return super.getObjectTypeName(o);
 	}
+	
+	@Override
+	public String getCSS() {
+		return ".ArrayPlugin > div {float:left;}";
+	}
 
 }
