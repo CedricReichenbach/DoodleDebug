@@ -1,6 +1,5 @@
 package ch.unibe.scg.doodle.plugins;
 
-
 import java.lang.reflect.Array;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,7 +9,6 @@ import javax.inject.Provider;
 
 import ch.unibe.ch.scg.htmlgen.Tag;
 import ch.unibe.scg.doodle.rendering.ArrayRendering;
-
 
 public class ArrayPlugin extends AbstractPlugin {
 
@@ -38,10 +36,10 @@ public class ArrayPlugin extends AbstractPlugin {
 					+ " objects)";
 		return super.getObjectTypeName(o);
 	}
-	
+
 	@Override
 	public String getCSS() {
-		return ".ArrayPlugin > div {float:left;}";
+		return ".ArrayPlugin .arrayElement {float:left;}"; // XXX
 	}
 
 }

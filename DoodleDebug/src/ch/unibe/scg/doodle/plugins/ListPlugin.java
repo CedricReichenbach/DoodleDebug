@@ -36,4 +36,10 @@ public class ListPlugin extends AbstractPlugin {
 		return super.getObjectTypeName(o);
 	}
 
+
+	@Override
+	public String getCSS() {
+		return ".ListPlugin .listElement {float:left;}"; // XXX
+	}
+
 }

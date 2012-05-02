@@ -1,13 +1,11 @@
 package ch.unibe.scg.doodle.rendering;
 
-
 import java.util.List;
 
 import javax.inject.Inject;
 
 import ch.unibe.ch.scg.htmlgen.Tag;
 import ch.unibe.scg.doodle.Doodler;
-
 
 public class ListRendering implements Rendering<List> {
 
@@ -16,18 +14,21 @@ public class ListRendering implements Rendering<List> {
 
 	@Override
 	public void render(List list, Tag tag) {
-		Tag div = new Tag("div");
-
 		if (checkIfElementsSameType(list)) {
 			for (Object o : list) {
-				doodler.renderInlineIntoWithoutClassName(o, div);
+				Tag element = new Tag("div");
+				doodler.addClass(element, "arrayElement");
+				doodler.renderInlineIntoWithoutClassName(o, tag);
+				tag.add(element);
 			}
 		} else {
 			for (Object o : list) {
-				doodler.renderInlineInto(o, div);
+				Tag element = new Tag("div");
+				doodler.addClass(element, "arrayElement");
+				doodler.renderInlineInto(o, tag);
+				tag.add(element);
 			}
 		}
-		tag.add(div);
 	}
 
 	public static boolean checkIfElementsSameType(List list) {

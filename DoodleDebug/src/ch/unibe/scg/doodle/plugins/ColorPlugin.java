@@ -29,7 +29,7 @@ public class ColorPlugin extends AbstractPlugin {
 
 	@Override
 	public String getCSS() {
-		return ".ColorPlugin > div {\n" + "padding:10pt;\n" + "}";
+		return ".ColorPlugin {\n" + "padding:10pt;\n" + "}";
 	}
 
 }

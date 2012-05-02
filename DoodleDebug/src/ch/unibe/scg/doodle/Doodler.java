@@ -6,6 +6,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -90,24 +93,20 @@ public class Doodler {
 	public void renderInlineInto(Object object, Tag tag) {
 		level++; // TODO: smarter, nicer solution for this
 		addClass(tag, "rendering");
-		Tag div = new Tag("div");
 		Scratch scratch = scratchFactory.create(object);
 		scratch.addCSSClass("level" + level);
-		scratch.drawWholeWithName(div);
-		addClass(div, scratch.getClassAttribute());
-		tag.add(div);
+		scratch.drawWholeWithName(tag);
+		// addClass(tag, scratch.getClassAttribute());
 		level--;
 	}
 
 	public void renderInlineIntoWithoutClassName(Object object, Tag tag) {
 		level++;
 		addClass(tag, "rendering");
-		Tag div = new Tag("div");
 		Scratch scratch = scratchFactory.create(object);
 		scratch.addCSSClass("level" + level);
-		scratch.drawWhole(div);
-		addClass(div, scratch.getClassAttribute());
-		tag.add(div);
+		scratch.drawWhole(tag);
+		// addClass(tag, scratch.getClassAttribute());
 		level--;
 	}
 
@@ -116,6 +115,9 @@ public class Doodler {
 		for (Attribute a : attributes) {
 			String attName = a.getAttribute();
 			if (attName.equals("class")) {
+				List<String> vals = Arrays.asList(a.getValue().split(" "));
+				if (vals.contains(className))
+					return;
 				a.setValue(a.getValue() + " " + className);
 				tag.setAttributes(attributes);
 				return;

@@ -1,11 +1,9 @@
 package ch.unibe.scg.doodle.rendering;
 
-
 import javax.inject.Inject;
 
 import ch.unibe.ch.scg.htmlgen.Tag;
 import ch.unibe.scg.doodle.Doodler;
-
 
 public class ArrayRendering implements Rendering<Object[]> {
 
@@ -14,19 +12,21 @@ public class ArrayRendering implements Rendering<Object[]> {
 
 	@Override
 	public void render(Object[] array, Tag tag) {
-		Tag div = new Tag("div");
-
 		if (checkIfElementsSameType(array)) {
 			for (int i = 0; i < array.length; i++) {
-				doodler.renderInlineIntoWithoutClassName(array[i], div);
+				Tag element = new Tag("div");
+				doodler.addClass(element, "arrayElement");
+				doodler.renderInlineIntoWithoutClassName(array[i], element);
+				tag.add(element);
 			}
 		} else {
 			for (int i = 0; i < array.length; i++) {
-				doodler.renderInlineInto(array[i], div);
+				Tag element = new Tag("div");
+				doodler.addClass(element, "arrayElement");
+				doodler.renderInlineInto(array[i], element);
+				tag.add(element);
 			}
 		}
-
-		tag.add(div);
 	}
 
 	public static boolean checkIfElementsSameType(Object[] array) {
