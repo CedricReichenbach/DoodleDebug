@@ -1,8 +1,4 @@
-- clickables marked with shadows (no border)
-
-- less borders
-
 - no visual differenciation between inner objects (> 2. level)
  (class "printedObject")
 
-- let plugins provide CSS
+ - ScratchRendering: not correct (untereinander)

@@ -1,3 +1,1 @@
 - Should RenderingPlugins be typified or not? Atm, objects are always casted there, because Renderings are typified.
-
-Quickfix always proposes adding DD library as solution... :D
