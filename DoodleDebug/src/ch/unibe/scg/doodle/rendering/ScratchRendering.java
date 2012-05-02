@@ -31,6 +31,7 @@ public class ScratchRendering implements Rendering<Scratch> {
 			Tag div = new Tag("div");
 			this.renderLine(line, div);
 			tag.add(div);
+			tag.add(Tag.br());
 		}
 	}
 
