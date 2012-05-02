@@ -67,4 +67,6 @@ public interface Scratch {
 	 */
 	public abstract void setLevel(int i);
 
+	public abstract void setObjectID(int store);
+
 }

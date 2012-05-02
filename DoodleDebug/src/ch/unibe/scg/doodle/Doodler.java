@@ -8,9 +8,13 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
+
+import org.apache.commons.collections.map.HashedMap;
 
 import ch.unibe.ch.scg.htmlgen.Attribute;
 import ch.unibe.ch.scg.htmlgen.Attributes;
@@ -38,11 +42,14 @@ public class Doodler {
 
 	private int level;
 
+	private IndexedObjectStorage clickables;
+
 	/**
 	 * Creates a new Doodler for visualizing objects 1 Doodler = 1 window
 	 */
 	protected Doodler() {
 		body = new Tag("body");
+		clickables = new IndexedObjectStorage();
 		htmlRenderer = new HtmlRenderer();
 	}
 
@@ -91,22 +98,26 @@ public class Doodler {
 	}
 
 	public void renderInlineInto(Object object, Tag tag) {
+		this.renderInline(object, tag, true);
+	}
+
+	public void renderInlineIntoWithoutClassName(Object object, Tag tag) {
+		this.renderInline(object, tag, false);
+	}
+
+	private void renderInline(Object object, Tag tag, boolean withClassName) {
 		level++; // TODO: smarter, nicer solution for this
 		addClass(tag, "rendering");
 		Scratch scratch = scratchFactory.create(object);
 		scratch.addCSSClass("level" + level);
-		scratch.drawWholeWithName(tag);
-		// addClass(tag, scratch.getClassAttribute());
-		level--;
-	}
-
-	public void renderInlineIntoWithoutClassName(Object object, Tag tag) {
-		level++;
-		addClass(tag, "rendering");
-		Scratch scratch = scratchFactory.create(object);
-		scratch.addCSSClass("level" + level);
-		scratch.drawWhole(tag);
-		// addClass(tag, scratch.getClassAttribute());
+		scratch.setLevel(level);
+		if (level == 1)
+			scratch.setObjectID(clickables.store(object));
+		if (withClassName) {
+			scratch.drawWholeWithName(tag);
+		} else {
+			scratch.drawWhole(tag);
+		}
 		level--;
 	}
 

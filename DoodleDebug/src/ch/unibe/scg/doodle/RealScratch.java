@@ -62,6 +62,8 @@ public class RealScratch implements Scratch {
 
 	private String classNames = "";
 
+	private int objectID;
+
 	/**
 	 * Creates a new Scratch for visualizing objects
 	 */
@@ -132,8 +134,9 @@ public class RealScratch implements Scratch {
 	}
 
 	private void addLink(Tag tag) {
-		tag.addAttribute(new Attribute("onclick", "window.open('"
-				+ object.hashCode() + "')"));
+		if (this.level == 1)
+			tag.addAttribute(new Attribute("onclick", "window.location = '"
+					+ objectID + "'"));
 	}
 
 	/**
@@ -158,8 +161,7 @@ public class RealScratch implements Scratch {
 	}
 
 	void prepareTag(Tag tag, RenderingPlugin plugin) {
-		Doodler.addClass(tag, plugin.getClass()
-				.getSimpleName());
+		Doodler.addClass(tag, plugin.getClass().getSimpleName());
 	}
 
 	/*
@@ -263,6 +265,11 @@ public class RealScratch implements Scratch {
 	@Override
 	public void setLevel(int level) {
 		this.level = level;
+	}
+
+	@Override
+	public void setObjectID(int id) {
+		this.objectID = id;
 	}
 
 }
