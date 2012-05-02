@@ -58,7 +58,7 @@ hr.betweenDrawCalls {
     float: left;
     padding: 5pt;
 }
-.rendering > div {
+.printOut, .level1 {
     background-color: #FFFFFF;
     border-color: transparent;
     border-style: solid;
@@ -66,16 +66,13 @@ hr.betweenDrawCalls {
     margin-top: -4pt;
     overflow: hidden;
 }
-.rendering > div:hover {
+.level1:hover {
     background-color: #AAFFBB;
     box-shadow: 0 0 2px blue;
 }
 .column {
     float: left;
     padding-left: 10pt;
-}
-.rendering > .ColorPlugin {
-    padding: 10pt;
 }
 .rendering > .StringPlugin {
 }

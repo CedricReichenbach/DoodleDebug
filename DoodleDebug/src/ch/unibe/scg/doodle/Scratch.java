@@ -47,7 +47,7 @@ public interface Scratch {
 	 */
 	public abstract void drawTitle(String title);
 
-	public abstract List<List<List<Scratch>>> getColumns();
+	public abstract List<List<List<Object>>> getColumns();
 
 	public abstract String getTitle();
 
@@ -59,6 +59,12 @@ public interface Scratch {
 	
 	public abstract void drawImage(byte[] image, String mimeType) throws IOException;
 
-	public abstract void addAttribute(Attribute attribute);
+	void addCSSClass(String className);
+
+	/**
+	 * Defines nesting level of a Scratch/visualization
+	 * @param i
+	 */
+	public abstract void setLevel(int i);
 
 }

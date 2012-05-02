@@ -1,6 +1,5 @@
 package ch.unibe.scg.doodle.plugins;
 
-
 import java.awt.Color;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,9 +10,8 @@ import javax.inject.Provider;
 import ch.unibe.ch.scg.htmlgen.Tag;
 import ch.unibe.scg.doodle.rendering.ColorRendering;
 
-
 public class ColorPlugin extends AbstractPlugin {
-	
+
 	@Inject
 	Provider<ColorRendering> colorRenderingProvider;
 
@@ -27,6 +25,11 @@ public class ColorPlugin extends AbstractPlugin {
 	@Override
 	public void render(Object color, Tag tag) {
 		colorRenderingProvider.get().render((Color) color, tag);
+	}
+
+	@Override
+	public String getCSS() {
+		return ".ColorPlugin > div {\n" + "padding:10pt;\n" + "}";
 	}
 
 }

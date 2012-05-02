@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<head><title>DoodleDebug</title>
+<head><meta http-equiv="X-UA-Compatible" content="IE=100" ><title>DoodleDebug</title>
 <style>
 @font-face {
     font-family: "Roboto";
@@ -7,216 +7,86 @@
     font-weight: 500;
     src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/OLffGBTaF0XFOW1gnuHF0YbN6UDyHWBl620a-IRfuBk.woff") format("woff");
 }
-
 @font-face {
     font-family: "Roboto";
     font-style: normal;
     font-weight: 500;
     src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/RxZJdnzeo3R5zSexge8UUT8E0i7KZn-EPnyo3HZu7kw.woff") format("woff");
 }
-
 @font-face {
     font-family: "Roboto";
     font-style: normal;
     font-weight: 100;
     src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/vzIUHo9z-oJ4WgkpPOtg1_esZW2xOQ-xsNqO47m55DA.woff") format("woff");
 }
-
 @font-face {
     font-family: "Roboto";
     font-style: italic;
     font-weight: 400;
     src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/1pO9eUAp8pSF8VnRTP3xnvesZW2xOQ-xsNqO47m55DA.woff") format("woff");
 }
-
 @font-face {
     font-family: "Roboto";
     font-style: normal;
     font-weight: 400;
     src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/2UX7WLTfW3W8TclTUvlFyQ.woff") format("woff");
 }
-
 body {
-	font-family: "Roboto", Verdana, Tahoma, sans-serif;
+    background-color: #DDDDDD;
+    font-family: "Roboto",Verdana,Tahoma,sans-serif;
+    font-size: 0.8em;
 }
-
 hr {
-	width: 100%;
-	height: 0;
-	margin: 0;
-	padding: 0;
-	visibility: hidden;
-	display: none;
-	clear: both;
+    clear: both;
+    display: none;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    visibility: hidden;
+    width: 100%;
 }
-
 hr.betweenDrawCalls {
-	display: block;
-	padding: 10pt;
+    display: block;
+    padding: 10pt;
 }
-
 .ImagePlugin img {
-	max-width: 90pt;
-	max-height: 90pt;
+    max-height: 90pt;
+    max-width: 90pt;
 }
-
 .ClassName {
-	font-size: 8pt;
-	color: blue;
+    color: blue;
+    font-size: 8pt;
 }
-
 .rendering {
-	float:left;
-	padding: 5pt;
+    float: left;
+    padding: 5pt;
 }
-
-.rendering > div {
-	border-color: #0C5;
-	border-style: dotted;
-	padding: 2pt;
-	overflow: hidden;
-	border-width: 1px;
+.printOut, .level1 {
+    background-color: #FFFFFF;
+    border-color: transparent;
+    border-style: solid;
+    box-shadow: 0 0 2px #AAAAAA;
+    margin-top: -4pt;
+    overflow: hidden;
 }
-
+.level1:hover {
+    background-color: #AAFFBB;
+    box-shadow: 0 0 2px blue;
+}
 .column {
-	float:left;
-	padding-left:10pt;
+    float: left;
+    padding-left: 10pt;
 }
-
-.rendering > .ColorPlugin {
- 	padding: 10pt;
-}
-
 .rendering > .StringPlugin {
-
 }
-
 .StringRendering {
-	margin: 0;
+    margin: 0;
 }
+
 </style>
 </head>
-<<<<<<< HEAD
-<body class="rendering" class="rendering"><span class="ClassName">ArrayList of Person</span>
-<div class="ListPlugin"><div><div class="rendering" class="ObjectPlugin"><div class="Scratch"><div class="column"><div><span class="rendering"><div class="ImagePlugin"><img src="file:/C:/Users/CEDRIC~1/AppData/Local/Temp/image4934660358233832565.png"></img>
-=======
-<body class="rendering"><span class="ClassName">Color[][] (only Color[] objects)</span>
-<div class="ArrayPlugin"><div><div class="rendering" class="ArrayPlugin"><div class="ArrayPlugin"><div><div class="rendering" class="ColorPlugin"><div class="ColorPlugin" style="background-color:#bd543f"></div>
->>>>>>> 6b4e39aa079bd676f00612b214318b72960d9a99
-</div>
-<div class="rendering" class="ColorPlugin"><div class="ColorPlugin" style="background-color:#5d8d27"></div>
-</div>
-<div class="rendering" class="ColorPlugin"><div class="ColorPlugin" style="background-color:#5dc45c"></div>
-</div>
-<div class="rendering" class="ColorPlugin"><div class="ColorPlugin" style="background-color:#d23157"></div>
-</div>
-<div class="rendering" class="ColorPlugin"><div class="ColorPlugin" style="background-color:#bb5adb"></div>
-</div>
-</div>
-</div>
-</div>
-<div class="rendering" class="ArrayPlugin"><div class="ArrayPlugin"><div><div class="rendering" class="ColorPlugin"><div class="ColorPlugin" style="background-color:#d31ed1"></div>
-</div>
-<<<<<<< HEAD
-</div>
-<div class="rendering" class="ObjectPlugin"><div class="Scratch"><div class="column"><div><span class="rendering"><div class="ImagePlugin"><img src="file:/C:/Users/CEDRIC~1/AppData/Local/Temp/image3855017736582938428.png"></img>
-</div>
-</span>
-</div>
-</div>
-<div class="column"><div><span class="rendering"><div class="StringPlugin"><p class="StringRendering">Steve Jobs</p>
-</div>
-</span>
-</div>
-<div><span class="rendering"><div class="ObjectPlugin"><p class="StringRendering">+1 800 692 7753</p>
-</div>
-</span>
-</div>
-</div>
-</div>
-</div>
-<div class="rendering" class="ObjectPlugin"><div class="Scratch"><div class="column"><div><span class="rendering"><div class="ImagePlugin"><img src="file:/C:/Users/CEDRIC~1/AppData/Local/Temp/image2473466664618417575.png"></img>
-</div>
-</span>
-</div>
-</div>
-<div class="column"><div><span class="rendering"><div class="StringPlugin"><p class="StringRendering">Che Guevara</p>
-</div>
-</span>
-</div>
-<div><span class="rendering"><div class="ObjectPlugin"><p class="StringRendering">+44 028 240 84</p>
-</div>
-</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<hr class="betweenDrawCalls"></hr>
-<span class="ClassName">ArrayList of Person</span>
-<div class="ListPlugin"><div><div class="rendering" class="ObjectPlugin"><div class="Scratch"><div class="column"><div><span class="rendering"><div class="ImagePlugin"><img src="file:/C:/Users/CEDRIC~1/AppData/Local/Temp/image3180240145096473090.png"></img>
-=======
-<div class="rendering" class="ColorPlugin"><div class="ColorPlugin" style="background-color:#fc15d8"></div>
-</div>
-<div class="rendering" class="ColorPlugin"><div class="ColorPlugin" style="background-color:#3ad5e0"></div>
->>>>>>> 6b4e39aa079bd676f00612b214318b72960d9a99
-</div>
-<div class="rendering" class="ColorPlugin"><div class="ColorPlugin" style="background-color:#8061e3"></div>
-</div>
-<div class="rendering" class="ColorPlugin"><div class="ColorPlugin" style="background-color:#256917"></div>
-</div>
-</div>
-</div>
-</div>
-<div class="rendering" class="ArrayPlugin"><div class="ArrayPlugin"><div><div class="rendering" class="ColorPlugin"><div class="ColorPlugin" style="background-color:#77b3a0"></div>
-</div>
-<div class="rendering" class="ColorPlugin"><div class="ColorPlugin" style="background-color:#c68429"></div>
-</div>
-<div class="rendering" class="ColorPlugin"><div class="ColorPlugin" style="background-color:#ed7a00"></div>
-</div>
-<div class="rendering" class="ColorPlugin"><div class="ColorPlugin" style="background-color:#056810"></div>
-</div>
-<<<<<<< HEAD
-<div class="rendering" class="ObjectPlugin"><div class="Scratch"><div class="column"><div><span class="rendering"><div class="ImagePlugin"><img src="file:/C:/Users/CEDRIC~1/AppData/Local/Temp/image7511944257933652914.png"></img>
-=======
-<div class="rendering" class="ColorPlugin"><div class="ColorPlugin" style="background-color:#549a0f"></div>
->>>>>>> 6b4e39aa079bd676f00612b214318b72960d9a99
-</div>
-</div>
-</div>
-</div>
-<div class="rendering" class="ArrayPlugin"><div class="ArrayPlugin"><div><div class="rendering" class="ColorPlugin"><div class="ColorPlugin" style="background-color:#771cf7"></div>
-</div>
-<div class="rendering" class="ColorPlugin"><div class="ColorPlugin" style="background-color:#549122"></div>
-</div>
-<div class="rendering" class="ColorPlugin"><div class="ColorPlugin" style="background-color:#991081"></div>
-</div>
-<div class="rendering" class="ColorPlugin"><div class="ColorPlugin" style="background-color:#d52d46"></div>
-</div>
-<div class="rendering" class="ColorPlugin"><div class="ColorPlugin" style="background-color:#05c389"></div>
-</div>
-</div>
-<<<<<<< HEAD
-<div class="rendering" class="ObjectPlugin"><div class="Scratch"><div class="column"><div><span class="rendering"><div class="ImagePlugin"><img src="file:/C:/Users/CEDRIC~1/AppData/Local/Temp/image8727047874569866608.png"></img>
-=======
->>>>>>> 6b4e39aa079bd676f00612b214318b72960d9a99
-</div>
-</div>
-<div class="rendering" class="ArrayPlugin"><div class="ArrayPlugin"><div><div class="rendering" class="ColorPlugin"><div class="ColorPlugin" style="background-color:#469f5d"></div>
-</div>
-<div class="rendering" class="ColorPlugin"><div class="ColorPlugin" style="background-color:#6d545e"></div>
-</div>
-<div class="rendering" class="ColorPlugin"><div class="ColorPlugin" style="background-color:#589182"></div>
-</div>
-<div class="rendering" class="ColorPlugin"><div class="ColorPlugin" style="background-color:#233016"></div>
-</div>
-<div class="rendering" class="ColorPlugin"><div class="ColorPlugin" style="background-color:#af7ed1"></div>
-</div>
-</div>
-</div>
-</div>
-</div>
+<body class="rendering"><span class="ClassName">Car</span>
+<div class="printOut" onclick="window.open('1221695831')" class="ObjectPlugin"><p class="StringRendering">app_example.car.Car@48d19957</p>
 </div>
 <hr class="betweenDrawCalls"></hr>
 </body>

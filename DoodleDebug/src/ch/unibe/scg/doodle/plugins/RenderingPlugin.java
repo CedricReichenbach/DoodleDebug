@@ -13,4 +13,7 @@ public interface RenderingPlugin extends Rendering {
 	public String getClassAttribute();
 	
 	public String getObjectTypeName(Object o);
+	
+	// XXX maybe wrong place
+	public String getCSS();
 }

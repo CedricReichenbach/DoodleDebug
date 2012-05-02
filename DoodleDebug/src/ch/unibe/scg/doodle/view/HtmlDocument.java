@@ -44,7 +44,9 @@ public class HtmlDocument {
 
 	private String makeStyleSheet() {
 		// load from file "style.css"
-		return readFile(this.getClass().getResource("style.css"));
+		String css = readFile(this.getClass().getResource("style.css"));
+		// + provided by plugins
+		return css + CSSCollection.getAllCSS();
 	}
 
 	private String readFile(URL url) {

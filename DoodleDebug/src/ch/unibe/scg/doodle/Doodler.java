@@ -10,6 +10,7 @@ import java.net.URI;
 import javax.inject.Inject;
 
 import ch.unibe.ch.scg.htmlgen.Attribute;
+import ch.unibe.ch.scg.htmlgen.Attributes;
 import ch.unibe.ch.scg.htmlgen.Tag;
 import ch.unibe.scg.doodle.simon.SimonClient;
 import ch.unibe.scg.doodle.view.HtmlDocument;
@@ -32,6 +33,8 @@ public class Doodler {
 
 	private final boolean debugMode = true;
 
+	private int level;
+
 	/**
 	 * Creates a new Doodler for visualizing objects 1 Doodler = 1 window
 	 */
@@ -52,7 +55,9 @@ public class Doodler {
 	public void visualize(Object o) {
 		assert (o != null);
 		Scratch scratch = scratchFactory.create(o);
-		scratch.addAttribute(new Attribute("class","printOut"));
+		scratch.addCSSClass("printOut");
+		this.level = 0;
+		body.addAttribute(new Attribute("class", "rendering"));
 		scratch.drawWholeWithName(body);
 
 		body.add(new Tag("hr", "class=betweenDrawCalls"));
@@ -65,12 +70,12 @@ public class Doodler {
 		if (debugMode)
 			openInBrowser(htmlDocument.toString());
 
-		sentHtmlToEclipsePlugin(htmlDocument);
+		sendHtmlToEclipsePlugin(htmlDocument);
 
 		// htmlRenderer.render(htmlDocument.toString());
 	}
 
-	private void sentHtmlToEclipsePlugin(HtmlDocument htmlDocument) {
+	private void sendHtmlToEclipsePlugin(HtmlDocument htmlDocument) {
 		int port = 58801;
 		try {
 			SimonClient client = new SimonClient(port);
@@ -83,19 +88,40 @@ public class Doodler {
 	}
 
 	public void renderInlineInto(Object object, Tag tag) {
+		level++; // TODO: smarter, nicer solution for this
+		addClass(tag, "rendering");
 		Tag div = new Tag("div");
 		Scratch scratch = scratchFactory.create(object);
+		scratch.addCSSClass("level" + level);
 		scratch.drawWholeWithName(div);
-		div.addAttribute(new Attribute("class", scratch.getClassAttribute()));
+		addClass(div, scratch.getClassAttribute());
 		tag.add(div);
+		level--;
 	}
 
 	public void renderInlineIntoWithoutClassName(Object object, Tag tag) {
+		level++;
+		addClass(tag, "rendering");
 		Tag div = new Tag("div");
 		Scratch scratch = scratchFactory.create(object);
+		scratch.addCSSClass("level" + level);
 		scratch.drawWhole(div);
-		div.addAttribute(new Attribute("class", scratch.getClassAttribute()));
+		addClass(div, scratch.getClassAttribute());
 		tag.add(div);
+		level--;
+	}
+
+	private void addClass(Tag tag, String className) {
+		Attributes attributes = tag.getAttributes(); // XXX
+		for (Attribute a : attributes) {
+			String attName = a.getAttribute();
+			if (attName.equals("class")) {
+				a.setValue(a.getValue() + " " + className);
+				tag.setAttributes(attributes);
+				return;
+			}
+		}
+		tag.addAttribute(new Attribute("class", className));
 	}
 
 	private void openInBrowser(String html) {

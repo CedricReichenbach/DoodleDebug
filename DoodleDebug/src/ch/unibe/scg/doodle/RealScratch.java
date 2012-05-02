@@ -16,6 +16,7 @@ import ch.unibe.scg.doodle.plugins.RenderingPlugin;
 import ch.unibe.scg.doodle.rendering.Rendering;
 import ch.unibe.scg.doodle.rendering.RenderingRegistry;
 import ch.unibe.scg.doodle.rendering.ScratchRendering;
+import ch.unibe.scg.doodle.view.CSSCollection;
 
 import com.google.inject.Provider;
 import com.google.inject.assistedinject.Assisted;
@@ -36,13 +37,11 @@ public class RealScratch implements Scratch {
 
 	private String title;
 
-	private Collection<Attribute> attributes = new ArrayList<Attribute>();
-
 	/**
 	 * List of columns, a column is a list of lines, a line is a list of
 	 * sketches.
 	 */
-	private List<List<List<Scratch>>> columns;
+	private List<List<List<Object>>> columns;
 
 	@Inject
 	RenderingRegistry renderingRegistry;
@@ -56,6 +55,13 @@ public class RealScratch implements Scratch {
 	@Inject
 	Provider<ScratchRendering> scratchRenderingProvider;
 
+	@Inject
+	Doodler doodler;
+
+	private int level;
+
+	private String classNames = "";
+
 	/**
 	 * Creates a new Scratch for visualizing objects
 	 */
@@ -64,10 +70,10 @@ public class RealScratch implements Scratch {
 		this.object = o;
 		this.title = "";
 
-		List<Scratch> line = new ArrayList<Scratch>();
-		List<List<Scratch>> column = new ArrayList<List<Scratch>>();
+		List<Object> line = new ArrayList<Object>();
+		List<List<Object>> column = new ArrayList<List<Object>>();
 		column.add(line);
-		this.columns = new ArrayList<List<List<Scratch>>>();
+		this.columns = new ArrayList<List<List<Object>>>();
 		columns.add(column);
 	}
 
@@ -79,11 +85,8 @@ public class RealScratch implements Scratch {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void drawWhole(Tag tag) {
-		tag.addAttribute(new Attribute("class", "rendering"));
 		Tag subTag = new Tag("div");
-		for (Attribute a : attributes) {
-			subTag.addAttribute(a);
-		}
+		subTag.addAttribute(new Attribute("class", classNames));
 		tag.add(subTag);
 
 		drawRendering(subTag);
@@ -92,13 +95,10 @@ public class RealScratch implements Scratch {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void drawWholeWithName(Tag tag) {
-		tag.addAttribute(new Attribute("class", "rendering"));
 		writeClassName(renderingRegistry.lookup(object.getClass())
 				.getObjectTypeName(object), tag);
 		Tag subTag = new Tag("div");
-		for (Attribute a : attributes) {
-			subTag.addAttribute(a);
-		}
+		subTag.addAttribute(new Attribute("class", classNames));
 		tag.add(subTag);
 		this.drawRendering(subTag);
 	}
@@ -148,6 +148,8 @@ public class RealScratch implements Scratch {
 		RenderingPlugin plugin = renderingRegistry.lookup(object.getClass());
 		prepareTag(tag, plugin);
 
+		CSSCollection.instance().add(plugin.getCSS());
+
 		if (object.getClass().isArray()) {
 			plugin = arrayPluginProvider.get();
 		}
@@ -167,9 +169,9 @@ public class RealScratch implements Scratch {
 	 */
 	@Override
 	public void draw(Object o) {
-		List<List<Scratch>> lastColumn = columns.get(columns.size() - 1);
-		List<Scratch> lastLine = lastColumn.get(lastColumn.size() - 1);
-		lastLine.add((RealScratch) scratchFactory.create(o));
+		List<List<Object>> lastColumn = columns.get(columns.size() - 1);
+		List<Object> lastLine = lastColumn.get(lastColumn.size() - 1);
+		lastLine.add(o);
 	}
 
 	/*
@@ -181,7 +183,6 @@ public class RealScratch implements Scratch {
 	public void drawSmall(Object o) {
 		// TODO: SmallScratch for this case
 		RealScratch subScratch = new SmallScratch(o);
-		// this.inner.add(subScratch);
 	}
 
 	/*
@@ -200,7 +201,7 @@ public class RealScratch implements Scratch {
 	 * @see doodle.Scratch#getInner()
 	 */
 	@Override
-	public List<List<List<Scratch>>> getColumns() {
+	public List<List<List<Object>>> getColumns() {
 		return this.columns;
 	}
 
@@ -216,20 +217,22 @@ public class RealScratch implements Scratch {
 
 	@Override
 	public String getClassAttribute() {
-		return renderingRegistry.lookup(object.getClass()).getClassAttribute();
+		String classAttribute = renderingRegistry.lookup(object.getClass())
+				.getClassAttribute();
+		return classAttribute;
 	}
 
 	@Override
 	public void newLine() {
-		List<List<Scratch>> lastColumn = columns.get(columns.size() - 1);
-		List<Scratch> line = new ArrayList<Scratch>();
+		List<List<Object>> lastColumn = columns.get(columns.size() - 1);
+		List<Object> line = new ArrayList<Object>();
 		lastColumn.add(line);
 	}
 
 	@Override
 	public void newColumn() {
-		List<Scratch> line = new ArrayList<Scratch>();
-		List<List<Scratch>> column = new ArrayList<List<Scratch>>();
+		List<Object> line = new ArrayList<Object>();
+		List<List<Object>> column = new ArrayList<List<Object>>();
 		column.add(line);
 		columns.add(column);
 	}
@@ -253,8 +256,13 @@ public class RealScratch implements Scratch {
 	}
 
 	@Override
-	public void addAttribute(Attribute attribute) {
-		attributes.add(attribute);
+	public void addCSSClass(String className) {
+		classNames += classNames.isEmpty() ? className : " " + className;
+	}
+
+	@Override
+	public void setLevel(int level) {
+		this.level = level;
 	}
 
 }
