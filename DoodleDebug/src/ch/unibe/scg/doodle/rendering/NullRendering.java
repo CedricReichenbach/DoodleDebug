@@ -7,7 +7,7 @@ public class NullRendering implements Rendering<NullObject> {
 
 	@Override
 	public void render(NullObject object, Tag tag) {
-		// intentionally left blank
+		tag.add("null");
 	}
 
 }

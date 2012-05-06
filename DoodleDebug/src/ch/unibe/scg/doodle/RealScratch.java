@@ -163,7 +163,7 @@ public class RealScratch implements Scratch {
 	}
 
 	void prepareTag(Tag tag, RenderingPlugin plugin) {
-		Doodler.addClass(tag, plugin.getClass().getSimpleName());
+		Doodler.addClass(tag, plugin.getClassAttribute());
 	}
 
 	/*
