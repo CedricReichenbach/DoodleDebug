@@ -54,7 +54,7 @@ hr.betweenDrawCalls {
 }
 .rendering {
     float: left;
-    padding: 5pt;
+    padding: 2pt;
 }
 .printOut, .level1 {
     background-color: #FFFFFF;
@@ -68,8 +68,6 @@ hr.betweenDrawCalls {
 }
 .column {
     float: left;
-}
-.rendering > .StringPlugin {
 }
 .StringRendering {
     margin: 0;

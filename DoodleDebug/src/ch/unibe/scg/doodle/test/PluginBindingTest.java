@@ -8,7 +8,7 @@ import java.util.Vector;
 import org.junit.Test;
 
 
-import ch.unibe.scg.doodle.DoodleModule;
+import ch.unibe.scg.doodle.inject.DoodleModule;
 import ch.unibe.scg.doodle.plugins.ListPlugin;
 import ch.unibe.scg.doodle.rendering.RenderingRegistry;
 

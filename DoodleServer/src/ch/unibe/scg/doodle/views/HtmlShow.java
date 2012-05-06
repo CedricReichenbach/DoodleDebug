@@ -6,24 +6,29 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
+import client.IndexedObjectStorage;
+
 public class HtmlShow implements Runnable {
-	
+
 	private String html;
-	
-	public HtmlShow(String html) {
+	private IndexedObjectStorage storage;
+
+	public HtmlShow(String html, IndexedObjectStorage storage) {
 		this.html = html;
+		this.storage = storage;
 	}
 
 	@Override
 	public void run() {
 		IViewPart view = findView();
-		assert(view != null);
-		((DoodleDebugView) view).showHtml(html);
+		assert (view != null);
+		((DoodleDebugView) view).showHtml(html, storage);
 	}
 
 	private IViewPart findView() {
 		IViewPart view = null;
-		IWorkbenchWindow[] windows = PlatformUI.getWorkbench().getWorkbenchWindows();
+		IWorkbenchWindow[] windows = PlatformUI.getWorkbench()
+				.getWorkbenchWindows();
 		for (IWorkbenchWindow window : windows) {
 			IWorkbenchPage[] pages = window.getPages();
 			for (IWorkbenchPage page : pages) {

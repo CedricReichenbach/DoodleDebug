@@ -17,15 +17,15 @@ public class ListRendering implements Rendering<List> {
 		if (checkIfElementsSameType(list)) {
 			for (Object o : list) {
 				Tag element = new Tag("div");
-				doodler.addClass(element, "arrayElement");
-				doodler.renderInlineIntoWithoutClassName(o, tag);
+				Doodler.addClass(element, "listElement");
+				doodler.renderInlineIntoWithoutClassName(o, element);
 				tag.add(element);
 			}
 		} else {
 			for (Object o : list) {
 				Tag element = new Tag("div");
-				doodler.addClass(element, "arrayElement");
-				doodler.renderInlineInto(o, tag);
+				Doodler.addClass(element, "listElement");
+				doodler.renderInlineInto(o, element);
 				tag.add(element);
 			}
 		}
@@ -38,7 +38,7 @@ public class ListRendering implements Rendering<List> {
 		Class first = list.get(0).getClass();
 
 		for (Object o : list) {
-			if (!(o.getClass().equals(first)))
+			if (o == null || !(o.getClass().equals(first)))
 				return false;
 		}
 		return true;

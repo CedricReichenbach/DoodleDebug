@@ -1,4 +1,4 @@
-package ch.unibe.scg.doodle;
+package client;
 
 import java.io.Serializable;
 import java.util.HashMap;

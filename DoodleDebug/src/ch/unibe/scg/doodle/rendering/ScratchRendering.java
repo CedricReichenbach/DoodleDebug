@@ -38,7 +38,7 @@ public class ScratchRendering implements Rendering<Scratch> {
 	private void renderLine(List<Object> line, Tag tag) {
 		for (Object o : line) {
 			Tag span = new Tag("span");
-			doodler.renderInlineIntoWithoutClassName(o, tag);
+			doodler.renderInlineIntoWithoutClassName(o, span);
 			tag.add(span);
 		}
 	}

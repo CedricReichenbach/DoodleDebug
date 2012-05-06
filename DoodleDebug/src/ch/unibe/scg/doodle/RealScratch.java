@@ -11,6 +11,8 @@ import javax.inject.Inject;
 
 import ch.unibe.ch.scg.htmlgen.Attribute;
 import ch.unibe.ch.scg.htmlgen.Tag;
+import ch.unibe.scg.doodle.helperClasses.ErrorDrawer;
+import ch.unibe.scg.doodle.helperClasses.HtmlImage;
 import ch.unibe.scg.doodle.plugins.ArrayPlugin;
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
 import ch.unibe.scg.doodle.rendering.Rendering;

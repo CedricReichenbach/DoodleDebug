@@ -7,6 +7,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.ui.part.ViewPart;
 
+import client.IndexedObjectStorage;
+
+import ch.unibe.scg.doodle.server.DoodleServer;
+
 public class DoodleDebugView extends ViewPart {
 
 	public static final String ID = "ch.unibe.scg.doodle.views.DoodleDebugView";
@@ -34,7 +38,8 @@ public class DoodleDebugView extends ViewPart {
 		browser.setFocus();
 	}
 
-	public void showHtml(String html) {
+	public void showHtml(String html, IndexedObjectStorage storage) {
+		DoodleServer.instance().setStorage(storage);
 		browser.setText(html);
 	}
 

@@ -3,6 +3,8 @@ package ch.unibe.scg.doodle.views;
 import org.eclipse.swt.browser.LocationEvent;
 import org.eclipse.swt.browser.LocationListener;
 
+import ch.unibe.scg.doodle.server.DoodleServer;
+
 public class DoodleLocationListener implements LocationListener {
 
 	@Override
@@ -13,6 +15,8 @@ public class DoodleLocationListener implements LocationListener {
 					.parseInt(event.location.replaceFirst("about:", ""));
 			System.out.println("Now attempting to draw object with ID: " + id);
 			event.doit = false; // prevent any actual changing of location
+			
+			DoodleServer.instance().drawObjectWithID(id);
 		} catch (NumberFormatException e) {
 			// nothing to do here (must have been a real link)
 		}
@@ -21,7 +25,7 @@ public class DoodleLocationListener implements LocationListener {
 	@Override
 	public void changed(LocationEvent event) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }

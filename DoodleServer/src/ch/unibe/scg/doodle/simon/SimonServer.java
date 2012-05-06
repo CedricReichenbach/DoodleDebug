@@ -5,6 +5,8 @@ import java.net.UnknownHostException;
 
 import org.eclipse.swt.widgets.Display;
 
+import client.IndexedObjectStorage;
+
 import ch.unibe.scg.doodle.views.HtmlShow;
 import de.root1.simon.Registry;
 import de.root1.simon.Simon;
@@ -23,16 +25,21 @@ public class SimonServer implements SimonServerInterface {
 	}
 
 	@Override
-	public void showHtml(String html) {
+	public void showHtml(String html, IndexedObjectStorage storage) {
 		System.out.println("Server: Received html code.");
-		
-		Runnable htmlShow = new HtmlShow(html);
+
+		Runnable htmlShow = new HtmlShow(html, storage);
 		Display.getDefault().syncExec(htmlShow);
 	}
 
 	public void stop() {
 		registry.unbind("DoodleServer");
 		registry.stop();
+	}
+
+	@Override
+	public void showHtml(String html) {
+		this.showHtml(html, null);
 	}
 
 }

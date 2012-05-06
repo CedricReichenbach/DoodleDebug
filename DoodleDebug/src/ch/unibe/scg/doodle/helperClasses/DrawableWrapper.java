@@ -1,4 +1,4 @@
-package ch.unibe.scg.doodle.rendering;
+package ch.unibe.scg.doodle.helperClasses;
 
 import java.lang.reflect.Field;
 

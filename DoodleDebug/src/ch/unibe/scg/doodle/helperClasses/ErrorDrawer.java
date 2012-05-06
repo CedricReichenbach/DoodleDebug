@@ -1,4 +1,7 @@
-package ch.unibe.scg.doodle;
+package ch.unibe.scg.doodle.helperClasses;
+
+import ch.unibe.scg.doodle.Doodleable;
+import ch.unibe.scg.doodle.Scratch;
 
 public class ErrorDrawer implements Doodleable {
 	

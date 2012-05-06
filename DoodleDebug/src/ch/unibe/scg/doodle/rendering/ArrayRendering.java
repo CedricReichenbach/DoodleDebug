@@ -15,14 +15,14 @@ public class ArrayRendering implements Rendering<Object[]> {
 		if (checkIfElementsSameType(array)) {
 			for (int i = 0; i < array.length; i++) {
 				Tag element = new Tag("div");
-				doodler.addClass(element, "arrayElement");
+				Doodler.addClass(element, "arrayElement");
 				doodler.renderInlineIntoWithoutClassName(array[i], element);
 				tag.add(element);
 			}
 		} else {
 			for (int i = 0; i < array.length; i++) {
 				Tag element = new Tag("div");
-				doodler.addClass(element, "arrayElement");
+				Doodler.addClass(element, "arrayElement");
 				doodler.renderInlineInto(array[i], element);
 				tag.add(element);
 			}

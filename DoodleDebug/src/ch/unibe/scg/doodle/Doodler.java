@@ -19,6 +19,7 @@ import org.apache.commons.collections.map.HashedMap;
 import ch.unibe.ch.scg.htmlgen.Attribute;
 import ch.unibe.ch.scg.htmlgen.Attributes;
 import ch.unibe.ch.scg.htmlgen.Tag;
+import ch.unibe.scg.doodle.helperClasses.NullObject;
 import ch.unibe.scg.doodle.simon.SimonClient;
 import ch.unibe.scg.doodle.view.HtmlDocument;
 import ch.unibe.scg.doodle.view.HtmlRenderer;
@@ -63,7 +64,10 @@ public class Doodler {
 	 */
 	@SuppressWarnings("unchecked")
 	public void visualize(Object o) {
-		assert (o != null);
+		if (o == null) {
+			o = new NullObject();
+		}
+
 		Scratch scratch = scratchFactory.create(o);
 		scratch.addCSSClass("printOut");
 		this.level = 0;
@@ -89,10 +93,11 @@ public class Doodler {
 		int port = 58801;
 		try {
 			SimonClient client = new SimonClient(port);
-			client.sendHtml(htmlDocument.toString());
+			client.sendHtml(htmlDocument.toString(), clickables);
 			client.stop();
 		} catch (Exception e) {
-			System.out.println("Failed to send html to eclipse plugin.");
+			System.out
+					.println("DoodleDebug: Failed to send html to eclipse plugin.");
 			e.printStackTrace();
 		}
 	}
@@ -106,6 +111,9 @@ public class Doodler {
 	}
 
 	private void renderInline(Object object, Tag tag, boolean withClassName) {
+		if (object == null) {
+			object = new NullObject();
+		}
 		level++; // TODO: smarter, nicer solution for this
 		addClass(tag, "rendering");
 		Scratch scratch = scratchFactory.create(object);
