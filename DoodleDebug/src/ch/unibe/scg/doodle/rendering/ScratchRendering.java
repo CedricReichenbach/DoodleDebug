@@ -26,10 +26,9 @@ public class ScratchRendering implements Rendering<Scratch> {
 
 	private void renderColumn(List<List<Object>> column, Tag tag) {
 		for (List<Object> line : column) {
-			Tag div = new Tag("div");
+			Tag div = new Tag("div", "class=line");
 			this.renderLine(line, div);
 			tag.add(div);
-			tag.add(Tag.br());
 		}
 	}
 
