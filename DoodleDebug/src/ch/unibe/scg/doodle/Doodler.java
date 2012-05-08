@@ -39,7 +39,7 @@ public class Doodler {
 
 	private HtmlRenderer htmlRenderer;
 
-	private final boolean debugMode = true;
+	private final boolean debugMode = false;
 
 	private int level;
 
