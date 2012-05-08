@@ -39,7 +39,7 @@ public class Doodler {
 
 	private HtmlRenderer htmlRenderer;
 
-	private final boolean debugMode = true;
+	private final boolean debugMode = false;
 
 	private int level;
 
@@ -90,9 +90,8 @@ public class Doodler {
 	}
 
 	private void sendHtmlToEclipsePlugin(HtmlDocument htmlDocument) {
-		int port = 58801;
 		try {
-			SimonClient client = new SimonClient(port);
+			SimonClient client = new SimonClient();
 			client.sendHtml(htmlDocument.toString(), clickables);
 			client.stop();
 		} catch (Exception e) {

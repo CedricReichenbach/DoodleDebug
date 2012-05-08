@@ -13,12 +13,16 @@ import de.root1.simon.exceptions.LookupFailedException;
 @SimonRemote(value = { SimonClientInterface.class })
 public class SimonClient implements SimonClientInterface {
 
+	/**
+	 * Official IANA port for SIMON
+	 */
+	private static final int PORT = 4753;
 	private Lookup lookup;
 	private SimonServerInterface server;
 
-	public SimonClient(int port) throws LookupFailedException,
+	public SimonClient() throws LookupFailedException,
 			EstablishConnectionFailed, UnknownHostException {
-		this.lookup = Simon.createNameLookup("localhost", port);
+		this.lookup = Simon.createNameLookup("localhost", PORT);
 		server = (SimonServerInterface) lookup.lookup("DoodleServer");
 	}
 

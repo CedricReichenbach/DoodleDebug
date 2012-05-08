@@ -36,9 +36,9 @@ public class Activator extends AbstractUIPlugin implements IStartup {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		
+
 		// use SIMON instead of RMI
-//		startSimonServer();
+		// startSimonServer();
 	}
 
 	/*
@@ -55,10 +55,9 @@ public class Activator extends AbstractUIPlugin implements IStartup {
 	}
 
 	private void startSimonServer() {
-		int port = 58801;
 		try {
-			System.out.println("Starting SIMON server at port "+port+"...");
-			simonServer = new SimonServer(port);
+			System.out.println("Starting SIMON server...");
+			simonServer = new SimonServer();
 			System.out.println("Server started successfully.");
 		} catch (Exception e) {
 			System.out.println("Server could not be started.");

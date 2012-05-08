@@ -16,11 +16,15 @@ import de.root1.simon.exceptions.NameBindingException;
 @SimonRemote(value = { SimonServerInterface.class })
 public class SimonServer implements SimonServerInterface {
 
+	/**
+	 * Official IANA port for SIMON
+	 */
+	private static final int PORT = 4753;
 	private Registry registry;
 
-	public SimonServer(int port) throws UnknownHostException, IOException,
+	public SimonServer() throws UnknownHostException, IOException,
 			NameBindingException {
-		this.registry = Simon.createRegistry(port);
+		this.registry = Simon.createRegistry(PORT);
 		registry.bind("DoodleServer", this);
 	}
 
