@@ -42,15 +42,9 @@ hr {
     visibility: hidden;
     width: 100%;
 }
-hr.betweenDrawCalls {
+.betweenDrawCalls {
     display: block;
-    padding: 10pt;
-}
-.rendering .ClassName {
-    color: blue;
-    font-size: 8pt;
-	float: none;
-	margin-bottom: -4pt;
+    padding: 2pt;
 }
 .rendering {
     float: left;
@@ -62,9 +56,18 @@ hr.betweenDrawCalls {
     box-shadow: 0 0 2px #AAAAAA;
     overflow: hidden;
 }
+.level1 {
+	cursor: pointer;
+}
 .level1:hover {
-    background-color: #AAFFBB;
+    background-color: lightskyblue;
     box-shadow: 0 0 2px blue;
+}
+.ClassName {
+    color: #0a8;
+    font-size: 8pt;
+	float: none;
+	margin-bottom: -4pt;
 }
 .column {
     float: left;
