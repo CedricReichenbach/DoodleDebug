@@ -136,9 +136,11 @@ public class RealScratch implements Scratch {
 	}
 
 	private void addLink(Tag tag) {
-		if (this.level == 1)
+		if (this.level == 1) {
 			tag.addAttribute(new Attribute("onclick", "window.location = '"
 					+ objectID + "'"));
+			tag.addAttribute(new Attribute("rel", "lightbox"));
+		}
 	}
 
 	/**
