@@ -37,13 +37,14 @@ public class Doodler {
 
 	private Tag body;
 
-	private HtmlRenderer htmlRenderer;
-
 	private final boolean debugMode = false;
 
 	private int level;
 
 	private IndexedObjectStorage clickables;
+
+	private final File FILE = new File(System.getProperty("user.dir")
+			+ "/tempfiles/output.html");
 
 	/**
 	 * Creates a new Doodler for visualizing objects 1 Doodler = 1 window
@@ -51,7 +52,6 @@ public class Doodler {
 	protected Doodler() {
 		body = new Tag("body");
 		clickables = new IndexedObjectStorage();
-		htmlRenderer = new HtmlRenderer();
 	}
 
 	/**
@@ -81,8 +81,9 @@ public class Doodler {
 		// System.out.println(htmlDocument.toString());
 
 		// for testing
+		storeToFile(FILE, htmlDocument.toString());
 		if (debugMode)
-			openInBrowser(htmlDocument.toString());
+			openInBrowser(FILE);
 
 		sendHtmlToEclipsePlugin(htmlDocument);
 
@@ -144,21 +145,24 @@ public class Doodler {
 		tag.addAttribute(new Attribute("class", className));
 	}
 
-	private void openInBrowser(String html) {
+	private void storeToFile(File file, String html) {
 		try {
-			File file = new File(System.getProperty("user.dir")
-					+ "/tempfiles/output.html");
 			new File(file.getParent()).mkdirs();
-			FileWriter fw = new FileWriter(file.getPath());
+			FileWriter fw = new FileWriter(FILE.getPath());
 			BufferedWriter buf = new BufferedWriter(fw);
 			buf.write(html);
 			buf.close();
-
-			URI uri = file.toURI();
-			Desktop.getDesktop().browse(uri);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
+	private void openInBrowser(File file) {
+		URI uri = file.toURI();
+		try {
+			Desktop.getDesktop().browse(uri);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

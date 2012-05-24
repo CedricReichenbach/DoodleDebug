@@ -67,8 +67,8 @@ hr {
 .ClassName {
     color: #0a8;
     font-size: 8pt;
-	float: none;
 	margin-bottom: -4pt;
+	position: relative; /* Important to bring text in front of respective content box */
 }
 .column {
     float: left;
