@@ -3,7 +3,6 @@ package ch.unibe.scg.doodle.rendering;
 import ch.unibe.ch.scg.htmlgen.Tag;
 import ch.unibe.scg.doodle.Doodler;
 import ch.unibe.scg.doodle.RealScratch;
-import ch.unibe.scg.doodle.view.DoodleCanvas;
 
 
 /**

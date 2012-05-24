@@ -7,15 +7,16 @@ import javax.inject.Inject;
 import ch.unibe.ch.scg.htmlgen.Tag;
 import ch.unibe.scg.doodle.Doodler;
 import ch.unibe.scg.doodle.Scratch;
+import ch.unibe.scg.doodle.api.DoodleCanvas;
 
-public class ScratchRendering implements Rendering<Scratch> {
+public class DoodleCanvasRendering implements Rendering<DoodleCanvas> {
 
 	@Inject
 	Doodler doodler;
 
 	@Override
-	public void render(Scratch scratch, Tag tag) {
-		List<List<List<Object>>> columns = scratch.getColumns();
+	public void render(DoodleCanvas canvas, Tag tag) {
+		List<List<List<Object>>> columns = canvas.getColumns();
 
 		for (List<List<Object>> column : columns) {
 			Tag div = new Tag("div", "class=column");

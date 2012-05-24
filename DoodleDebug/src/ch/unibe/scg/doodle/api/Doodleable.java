@@ -1,4 +1,5 @@
-package ch.unibe.scg.doodle;
+package ch.unibe.scg.doodle.api;
+
 
 
 /**
@@ -13,13 +14,13 @@ public interface Doodleable {
 	 * Defines how to draw self object using methods of received Doodler object (similar to System.out.println)
 	 * @param Doodler d
 	 */
-	public void drawOn(Scratch s) throws Exception;
+	public void drawOn(DoodleCanvas c) throws Exception;
 	
 	/**
 	 * Similar to "draw(d)", used for small drawings with less detail.
 	 * @param Doodler d
 	 * @throws Exception 
 	 */
-	public void drawSmallOn(Scratch s) throws Exception;
+	public void drawSmallOn(DoodleCanvas c) throws Exception;
 	
 }

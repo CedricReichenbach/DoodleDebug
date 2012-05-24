@@ -3,9 +3,8 @@ package app_example.ownDrawMethod;
 import java.io.Serializable;
 import java.util.Arrays;
 
-import ch.unibe.scg.doodle.Doodleable;
-import ch.unibe.scg.doodle.Scratch;
-
+import ch.unibe.scg.doodle.api.DoodleCanvas;
+import ch.unibe.scg.doodle.api.Doodleable;
 
 public class Person implements Serializable, Cloneable, Doodleable {
 
@@ -13,7 +12,7 @@ public class Person implements Serializable, Cloneable, Doodleable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private final String name;
 	private final PhoneNumber phoneNumber;
 	private byte[] image;
@@ -28,19 +27,20 @@ public class Person implements Serializable, Cloneable, Doodleable {
 		this.phoneNumber = number;
 		this.image = image;
 	}
-	
+
 	public String toString() {
-		return "Person("+name+", "+phoneNumber+", "+image.length+")";
+		return "Person(" + name + ", " + phoneNumber + ", " + image.length
+				+ ")";
 	}
 
 	public byte[] getImage() {
 		return this.image;
 	}
-	
+
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
-	
+
 	public Object clone() {
 		try {
 			return super.clone();
@@ -48,7 +48,6 @@ public class Person implements Serializable, Cloneable, Doodleable {
 			throw new RuntimeException(e);
 		}
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -60,7 +59,6 @@ public class Person implements Serializable, Cloneable, Doodleable {
 				+ ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -87,18 +85,18 @@ public class Person implements Serializable, Cloneable, Doodleable {
 	}
 
 	@Override
-	public void drawOn(Scratch s) throws Exception {
-		s.drawImage(image, "image/png");
-		s.newColumn();
-		s.draw(name);
-		s.newLine();
-		s.draw(phoneNumber);
+	public void drawOn(DoodleCanvas c) throws Exception {
+		c.drawImage(image, "image/png");
+		c.newColumn();
+		c.draw(name);
+		c.newLine();
+		c.draw(phoneNumber);
 	}
 
 	@Override
-	public void drawSmallOn(Scratch s) throws Exception {
+	public void drawSmallOn(DoodleCanvas c) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
