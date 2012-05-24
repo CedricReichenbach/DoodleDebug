@@ -32,7 +32,7 @@ public class SimonClient implements SimonClientInterface {
 		// create a registry for client too (for calls server -> client)
 		registry = Simon.createRegistry(PORT + 1);
 		registry.bind("DoodleClient", this);
-		server.clientOnline();
+		server.clientOnline(); // TODO: keep it alive (the client)
 	}
 
 	@Override
