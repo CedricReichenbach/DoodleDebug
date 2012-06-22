@@ -1,7 +1,7 @@
 package ch.unibe.scg.doodle.server;
 
-import client.IndexedObjectStorage;
 import ch.unibe.scg.doodle.D;
+import ch.unibe.scg.doodle.IndexedObjectStorage;
 
 public class DoodleServer {
 	private static DoodleServer instance;

@@ -7,8 +7,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.ui.part.ViewPart;
 
-import client.IndexedObjectStorage;
 
+import ch.unibe.scg.doodle.IndexedObjectStorage;
 import ch.unibe.scg.doodle.server.DoodleServer;
 
 public class DoodleDebugView extends ViewPart {

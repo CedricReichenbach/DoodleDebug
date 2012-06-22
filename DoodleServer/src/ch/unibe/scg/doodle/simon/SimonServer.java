@@ -5,8 +5,10 @@ import java.net.UnknownHostException;
 
 import org.eclipse.swt.widgets.Display;
 
+import com.thoughtworks.xstream.XStream;
+
+import ch.unibe.scg.doodle.IndexedObjectStorage;
 import ch.unibe.scg.doodle.views.HtmlShow;
-import client.IndexedObjectStorage;
 import de.root1.simon.Lookup;
 import de.root1.simon.Registry;
 import de.root1.simon.Simon;
@@ -35,11 +37,21 @@ public class SimonServer implements SimonServerInterface {
 	}
 
 	@Override
-	public void showHtml(String html, IndexedObjectStorage storage) {
+	public void showHtml(String html, String storageAsXML) {
 		System.out.println("Server: Received html code.");
+
+		IndexedObjectStorage storage = storageFromXML(storageAsXML);
 
 		Runnable htmlShow = new HtmlShow(html, storage);
 		Display.getDefault().syncExec(htmlShow);
+	}
+
+	private IndexedObjectStorage storageFromXML(String storageAsXML) {
+		XStream xstream = new XStream();
+		xstream.setClassLoader(IndexedObjectStorage.class.getClassLoader()); // XXX This is weird, but needed...
+		// xstream.alias("IndexedObjectStorage", IndexedObjectStorage.class);
+		System.out.println(storageAsXML);
+		return (IndexedObjectStorage) xstream.fromXML(storageAsXML);
 	}
 
 	public void stop() {
@@ -54,21 +66,7 @@ public class SimonServer implements SimonServerInterface {
 		this.showHtml(html, null);
 	}
 
-	@Override
-	public void clientOnline() {
-		System.out
-				.println("Client seems to be online now, let's check that...");
-		try {
-			this.lookup = Simon.createNameLookup("localhost", PORT + 1);
-			this.client = (SimonClientInterface) lookup.lookup("DoodleClient");
-		} catch (Exception e) {
-			System.out.println("Could not find client on desired port.");
-			e.printStackTrace();
-		}
-	}
-
 	public void subRenderObject(int id) {
-		client.subRender(id);
 	}
 
 }

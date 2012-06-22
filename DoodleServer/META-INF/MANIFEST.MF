@@ -7,7 +7,8 @@ Bundle-Activator: ch.unibe.scg.doodle.server.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  SimonPlugin;bundle-version="1.0.0",
- org.eclipse.core.resources
+ org.eclipse.core.resources,
+ XStreamPlugin;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.eclipse.jdt.core,

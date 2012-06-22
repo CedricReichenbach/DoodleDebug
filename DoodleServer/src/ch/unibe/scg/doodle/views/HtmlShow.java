@@ -6,7 +6,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
-import client.IndexedObjectStorage;
+import ch.unibe.scg.doodle.IndexedObjectStorage;
 
 public class HtmlShow implements Runnable {
 
