@@ -8,6 +8,7 @@ import org.eclipse.swt.widgets.Display;
 import com.thoughtworks.xstream.XStream;
 
 import ch.unibe.scg.doodle.IndexedObjectStorage;
+import ch.unibe.scg.doodle.server.DoodleServer;
 import ch.unibe.scg.doodle.views.HtmlShow;
 import de.root1.simon.Lookup;
 import de.root1.simon.Registry;
@@ -48,9 +49,8 @@ public class SimonServer implements SimonServerInterface {
 
 	private IndexedObjectStorage storageFromXML(String storageAsXML) {
 		XStream xstream = new XStream();
-		xstream.setClassLoader(IndexedObjectStorage.class.getClassLoader()); // XXX This is weird, but needed...
+		xstream.setClassLoader(DoodleServer.instance().getWorkspaceClassLoader());
 		// xstream.alias("IndexedObjectStorage", IndexedObjectStorage.class);
-		System.out.println(storageAsXML);
 		return (IndexedObjectStorage) xstream.fromXML(storageAsXML);
 	}
 
