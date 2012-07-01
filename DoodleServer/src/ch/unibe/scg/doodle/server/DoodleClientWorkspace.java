@@ -21,7 +21,7 @@ public class DoodleClientWorkspace {
 		List<URL> urls = new ArrayList<URL>();
 		for (IProject project : projects) {
 			// try {
-			getSubUrls(project.getLocation().toFile());
+			urls.addAll(getSubUrls(project.getLocation().toFile()));
 			// urls.add(project.getLocationURI().resolve("bin/").toURL());
 			// } catch (MalformedURLException e) {
 			// throw new RuntimeException(e);
@@ -37,7 +37,11 @@ public class DoodleClientWorkspace {
 
 	private static List<URL> getSubUrls(File path) {
 		List<URL> urls = new ArrayList<URL>();
+		if (path == null)
+			return urls;
 		File[] subdirs = path.listFiles();
+		if (subdirs == null)
+			return urls; // XXX: Why?
 		for (File dir : subdirs) {
 			try {
 				urls.add(dir.toURI().toURL());
