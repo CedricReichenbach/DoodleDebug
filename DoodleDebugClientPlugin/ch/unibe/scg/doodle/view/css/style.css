@@ -1,0 +1,85 @@
+@font-face {
+    font-family: "Roboto";
+    font-style: italic;
+    font-weight: 500;
+    src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/OLffGBTaF0XFOW1gnuHF0YbN6UDyHWBl620a-IRfuBk.woff") format("woff");
+}
+@font-face {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 500;
+    src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/RxZJdnzeo3R5zSexge8UUT8E0i7KZn-EPnyo3HZu7kw.woff") format("woff");
+}
+@font-face {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 100;
+    src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/vzIUHo9z-oJ4WgkpPOtg1_esZW2xOQ-xsNqO47m55DA.woff") format("woff");
+}
+@font-face {
+    font-family: "Roboto";
+    font-style: italic;
+    font-weight: 400;
+    src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/1pO9eUAp8pSF8VnRTP3xnvesZW2xOQ-xsNqO47m55DA.woff") format("woff");
+}
+@font-face {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/2UX7WLTfW3W8TclTUvlFyQ.woff") format("woff");
+}
+body {
+    background-color: #DDDDDD;
+    font-family: "Roboto",Verdana,Tahoma,sans-serif;
+    font-size: 0.8em;
+}
+hr {
+    clear: both;
+    display: none;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    visibility: hidden;
+    width: 100%;
+}
+.betweenDrawCalls {
+    display: block;
+    padding: 2pt;
+}
+.rendering {
+    float: left;
+    padding: 2pt;
+}
+.printOut, .level1 {
+    background-color: #FFFFFF;
+	border-width: 0;
+    box-shadow: 0 0 2px #AAAAAA;
+    overflow: hidden;
+	display: inline-block;
+}
+.level1 {
+	cursor: pointer;
+}
+.level1:hover {
+    background-color: lightskyblue;
+    box-shadow: 0 0 2px blue;
+}
+.ClassName {
+    color: #0a8;
+    font-size: 8pt;
+	margin-bottom: -4pt;
+	position: relative; /* Important to bring text in front of respective content box */
+}
+.column {
+    float: left;
+}
+.line {
+	overflow: hidden;
+}
+.StringRendering {
+    margin: 0;
+}
+.ImagePlugin img {
+    max-height: 90pt;
+    max-width: 90pt;
+}

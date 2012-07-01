@@ -1,9 +1,5 @@
 package ch.unibe.scg.doodle.server;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.ResourcesPlugin;
-
 import ch.unibe.scg.doodle.D;
 import ch.unibe.scg.doodle.IndexedObjectStorage;
 
