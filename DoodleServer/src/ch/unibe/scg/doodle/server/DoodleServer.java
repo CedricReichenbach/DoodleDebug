@@ -36,11 +36,4 @@ public class DoodleServer {
 		D.raw(o);
 	}
 
-	public ClassLoader getWorkspaceClassLoader() {
-		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		IProject[] projects = workspace.getRoot().getProjects();
-		// TODO: extract build folder of running project
-		return null;
-	}
-
 }

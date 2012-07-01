@@ -14,13 +14,6 @@
             id="ch.unibe.scg.doodle.views">
       </category>
       <view
-            name="DoodleDebugView_Example"
-            icon="icons/sample.gif"
-            category="ch.unibe.scg.doodle.views"
-            class="ch.unibe.scg.doodle.views.DoodleDebugView_Example"
-            id="ch.unibe.scg.doodle.views.DoodleDebugView_Example">
-      </view>
-      <view
             category="ch.unibe.scg.doodle.views"
             class="ch.unibe.scg.doodle.views.DoodleDebugView"
             icon="icons/sample.gif"
