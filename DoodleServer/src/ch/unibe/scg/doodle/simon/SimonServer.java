@@ -67,7 +67,4 @@ public class SimonServer implements SimonServerInterface {
 		this.showHtml(html, null);
 	}
 
-	public void subRenderObject(int id) {
-	}
-
 }
