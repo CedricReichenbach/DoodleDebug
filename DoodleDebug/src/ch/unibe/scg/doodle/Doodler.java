@@ -148,12 +148,12 @@ public class Doodler {
 	private void storeToFile(File file, String html) {
 		try {
 			new File(file.getParent()).mkdirs();
-			FileWriter fw = new FileWriter(FILE.getPath());
+			FileWriter fw = new FileWriter(file.getPath());
 			BufferedWriter buf = new BufferedWriter(fw);
 			buf.write(html);
 			buf.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.err.println("CLIENT: Could not write into file " + file);
 		}
 	}
 

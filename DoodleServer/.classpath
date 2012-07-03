@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="lib" path="DoodleDebug-Client.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="src" path="src"/>
@@ -8,7 +9,7 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/DoodleServer/libs/simon-1.1.2-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/DoodleDebug"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/DoodleDebug"/>
 	<classpathentry kind="lib" path="libs/xstream-1.4.2/lib/xstream/cglib-nodep-2.2.jar"/>
 	<classpathentry kind="lib" path="libs/xstream-1.4.2/lib/xstream/dom4j-1.6.1.jar"/>
 	<classpathentry kind="lib" path="libs/xstream-1.4.2/lib/xstream/jdom-1.1.jar"/>
