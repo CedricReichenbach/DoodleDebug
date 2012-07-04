@@ -1,4 +1,4 @@
-package ch.unibe.scg.doodle.quickfix;
+package ch.unibe.scg.doodle.server.quickfix;
 
 import java.lang.reflect.InvocationTargetException;
 

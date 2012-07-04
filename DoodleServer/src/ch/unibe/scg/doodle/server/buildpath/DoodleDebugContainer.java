@@ -1,4 +1,4 @@
-package ch.unibe.scg.doodle.buildpath;
+package ch.unibe.scg.doodle.server.buildpath;
 
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.jdt.core.IClasspathContainer;

@@ -1,4 +1,4 @@
-package ch.unibe.scg.doodle.quickfix;
+package ch.unibe.scg.doodle.server.quickfix;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.NullChange;
 import org.eclipse.swt.graphics.Image;
 
-import ch.unibe.scg.doodle.util.DoodleImages;
+import ch.unibe.scg.doodle.server.util.DoodleImages;
 
 public class DoodleClasspathFixProposal extends ClasspathFixProposal {
 

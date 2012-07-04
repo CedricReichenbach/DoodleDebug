@@ -5,7 +5,7 @@ import org.eclipse.ui.IStartup;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import ch.unibe.scg.doodle.simon.SimonServer;
+import ch.unibe.scg.doodle.server.simon.SimonServer;
 
 /**
  * The activator class controls the plug-in life cycle

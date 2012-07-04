@@ -1,4 +1,4 @@
-package ch.unibe.scg.doodle.views;
+package ch.unibe.scg.doodle.server.views;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTError;

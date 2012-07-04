@@ -8,8 +8,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  SimonPlugin;bundle-version="1.0.0",
  org.eclipse.core.resources,
- XStreamPlugin;bundle-version="1.0.0",
- DoodleDebugClientPlugin;bundle-version="1.0.0"
+ XStreamPlugin;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.eclipse.jdt.core,
@@ -22,5 +21,4 @@ Import-Package: org.eclipse.jdt.core,
  org.eclipse.jface.text,
  org.eclipse.jface.text.contentassist,
  org.eclipse.ltk.core.refactoring
-Bundle-ClassPath: DoodleDebug-Client.jar,
- .
+Bundle-ClassPath: .

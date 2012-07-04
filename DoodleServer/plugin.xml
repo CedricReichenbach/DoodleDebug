@@ -15,7 +15,7 @@
       </category>
       <view
             category="ch.unibe.scg.doodle.views"
-            class="ch.unibe.scg.doodle.views.DoodleDebugView"
+            class="ch.unibe.scg.doodle.server.views.DoodleDebugView"
             icon="icons/sample.gif"
             id="ch.unibe.scg.doodle.views.DoodleDebugView"
             name="DoodleDebugView"
@@ -46,7 +46,7 @@
          point="org.eclipse.jdt.core.classpathContainerInitializer">
       <classpathContainerInitializer
             id="ch.unibe.scg.doodle.buildpath.DD_CONTAINER"
-            class="ch.unibe.scg.doodle.buildpath.DoodleDebugContainterInitializer">
+            class="ch.unibe.scg.doodle.server.buildpath.DoodleDebugContainterInitializer">
       </classpathContainerInitializer>
    </extension>
    <extension
@@ -54,7 +54,7 @@
       <classpathContainerPage
             id="ch.unibe.scg.doodle.buildpath.DD_CONTAINER"
             name="DoodleDebug Library"
-            class="ch.unibe.scg.doodle.buildpath.DoodleDebugContainerPage">
+            class="ch.unibe.scg.doodle.server.buildpath.DoodleDebugContainerPage">
       </classpathContainerPage>
    </extension>
    
@@ -62,7 +62,7 @@
    <extension
          point="org.eclipse.jdt.ui.quickFixProcessors">
       <quickFixProcessor
-            class="ch.unibe.scg.doodle.quickfix.DoodleQuickfixProcessor"
+            class="ch.unibe.scg.doodle.server.quickfix.DoodleQuickfixProcessor"
             id="ch.unibe.scg.doodle.quickfix.DoodleQuickfixProcessor"
             name="DoodleDebug Quickfix">
       </quickFixProcessor>
@@ -70,7 +70,7 @@
    <extension
          point="org.eclipse.jdt.ui.classpathFixProcessors">
       <classpathFixProcessor
-            class="ch.unibe.scg.doodle.quickfix.DoodleClasspathFixProcessor"
+            class="ch.unibe.scg.doodle.server.quickfix.DoodleClasspathFixProcessor"
             id="ch.unibe.scg.doodle.quickfix.DoodleClasspathFixProcessor"
             name="DoodleDebug ClasspathFix Processor">
       </classpathFixProcessor>

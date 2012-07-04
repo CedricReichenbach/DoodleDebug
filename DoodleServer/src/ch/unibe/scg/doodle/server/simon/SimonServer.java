@@ -1,16 +1,11 @@
-package ch.unibe.scg.doodle.simon;
+package ch.unibe.scg.doodle.server.simon;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
 
-import org.eclipse.swt.widgets.Display;
-
+import ch.unibe.scg.doodle.D;
 import com.thoughtworks.xstream.XStream;
 
-import ch.unibe.scg.doodle.IndexedObjectStorage;
-import ch.unibe.scg.doodle.server.DoodleClientWorkspace;
-import ch.unibe.scg.doodle.server.DoodleServer;
-import ch.unibe.scg.doodle.views.HtmlShow;
 import de.root1.simon.Lookup;
 import de.root1.simon.Registry;
 import de.root1.simon.Simon;
@@ -27,6 +22,7 @@ public class SimonServer implements SimonServerInterface {
 	private Registry registry;
 	private SimonClientInterface client;
 	private Lookup lookup;
+	private XStream xstream;
 
 	public static SimonServer instance;
 
@@ -36,24 +32,20 @@ public class SimonServer implements SimonServerInterface {
 		registry.bind("DoodleServer", this);
 
 		instance = this;
-	}
 
-	@Override
-	public void showHtml(String html, String storageAsXML) {
-		System.out.println("Server: Received html code.");
-
-		IndexedObjectStorage storage = storageFromXML(storageAsXML);
-
-		Runnable htmlShow = new HtmlShow(html, storage);
-		Display.getDefault().syncExec(htmlShow);
-	}
-
-	private IndexedObjectStorage storageFromXML(String storageAsXML) {
-		XStream xstream = new XStream();
+		this.xstream = new XStream();
 		xstream.setClassLoader(DoodleClientWorkspace.getClientClassLoader());
-		// xstream.alias("IndexedObjectStorage", IndexedObjectStorage.class);
-		return (IndexedObjectStorage) xstream.fromXML(storageAsXML);
 	}
+
+	// @Override
+	// public void showHtml(String html, String storageAsXML) {
+	// System.out.println("Server: Received html code.");
+	//
+	// IndexedObjectStorage storage = storageFromXML(storageAsXML);
+	//
+	// Runnable htmlShow = new HtmlShow(html, storage);
+	// Display.getDefault().syncExec(htmlShow);
+	// }
 
 	public void stop() {
 		registry.unbind("DoodleServer");
@@ -62,9 +54,23 @@ public class SimonServer implements SimonServerInterface {
 			lookup.release(client);
 	}
 
+	// @Override
+	// public void showHtml(String html) {
+	// this.showHtml(html, null);
+	// }
+
 	@Override
-	public void showHtml(String html) {
-		this.showHtml(html, null);
+	public void renderObject(String objectAsXML) {
+		Object o = xstream.fromXML(objectAsXML);
+		D.raw(o);
+	}
+
+	@Override
+	public void renderObjects(String objectAsXML, String objectArrayAsXML) {
+		Object o = xstream.fromXML(objectAsXML);
+		Object[] os = (Object[]) xstream.fromXML(objectArrayAsXML); // XXX Check
+																	// this!
+		D.raw(o, os);
 	}
 
 }

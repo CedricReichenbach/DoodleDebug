@@ -1,7 +1,7 @@
 package ch.unibe.scg.doodle.simon;
 
-import ch.unibe.scg.doodle.IndexedObjectStorage;
-
 public interface SimonClientInterface {
-	public void sendHtml(String html, IndexedObjectStorage storage);
+	public void sendObject(Object object);
+
+	public void sendObjects(Object object, Object[] objects);
 }

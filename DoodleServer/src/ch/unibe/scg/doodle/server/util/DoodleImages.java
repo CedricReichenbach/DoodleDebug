@@ -1,4 +1,4 @@
-package ch.unibe.scg.doodle.util;
+package ch.unibe.scg.doodle.server.util;
 
 import java.io.IOException;
 

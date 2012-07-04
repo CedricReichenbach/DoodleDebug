@@ -1,4 +1,4 @@
-package ch.unibe.scg.doodle.buildpath;
+package ch.unibe.scg.doodle.server.buildpath;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
@@ -9,7 +9,7 @@ import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 
-import ch.unibe.scg.doodle.util.DoodleFiles;
+import ch.unibe.scg.doodle.server.util.DoodleFiles;
 
 public class DoodleDebugContainterInitializer extends
 		ClasspathContainerInitializer {

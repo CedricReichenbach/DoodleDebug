@@ -4,8 +4,6 @@ import java.io.IOException;
 
 import com.thoughtworks.xstream.XStream;
 
-import ch.unibe.scg.doodle.IndexedObjectStorage;
-
 import de.root1.simon.Lookup;
 import de.root1.simon.Registry;
 import de.root1.simon.Simon;
@@ -24,33 +22,44 @@ public class SimonClient implements SimonClientInterface {
 	private Lookup lookup;
 	private SimonServerInterface server;
 	private Registry registry;
+	private XStream xstream;
 
 	public SimonClient() throws LookupFailedException,
 			EstablishConnectionFailed, IOException, NameBindingException {
 		this.lookup = Simon.createNameLookup("localhost", PORT);
 		server = (SimonServerInterface) lookup.lookup("DoodleServer");
 
-		// create a registry for client too (for calls server -> client)
-		registry = Simon.createRegistry(PORT + 1);
-		registry.bind("DoodleClient", this);
+		this.xstream = new XStream();
 	}
 
-	@Override
-	public void sendHtml(String html, IndexedObjectStorage storage) {
-		String storageAsXML = storageToXML(storage);
-		server.showHtml(html, storageAsXML); // TODO: transfer storage to plugin
-	}
+//	@Override
+//	public void sendHtml(String html, IndexedObjectStorage storage) {
+//		String storageAsXML = storageToXML(storage);
+//		server.showHtml(html, storageAsXML); // TODO: transfer storage to plugin
+//	}
 
-	private String storageToXML(IndexedObjectStorage storage) {
-		XStream xstream = new XStream();
-//		xstream.alias("IndexedObjectStorage", IndexedObjectStorage.class);
-		return xstream.toXML(storage);
-	}
+//	private String storageToXML(IndexedObjectStorage storage) {
+//		XStream xstream = new XStream();
+////		xstream.alias("IndexedObjectStorage", IndexedObjectStorage.class);
+//		return xstream.toXML(storage);
+//	}
 
 	public void stop() {
 		lookup.release(server);
 		registry.unbind("DoodleClient");
 		registry.stop();
+	}
+
+	@Override
+	public void sendObject(Object object) {
+		String objectAsXML = xstream.toXML(object);
+		
+	}
+
+	@Override
+	public void sendObjects(Object object, Object[] objects) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
