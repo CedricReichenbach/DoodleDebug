@@ -3,7 +3,7 @@ package ch.unibe.scg.doodle.helperClasses;
 
 import java.io.File;
 
-import ch.unibe.ch.scg.htmlgen.Tag;
+import ch.unibe.scg.htmlgen.Tag;
 
 public class HtmlImage {
 	

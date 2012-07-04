@@ -6,23 +6,19 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
-import org.apache.commons.collections.map.HashedMap;
+import org.eclipse.swt.widgets.Display;
 
-import ch.unibe.ch.scg.htmlgen.Attribute;
-import ch.unibe.ch.scg.htmlgen.Attributes;
-import ch.unibe.ch.scg.htmlgen.Tag;
 import ch.unibe.scg.doodle.helperClasses.NullObject;
-import ch.unibe.scg.doodle.simon.SimonClient;
+import ch.unibe.scg.doodle.server.views.HtmlShow;
 import ch.unibe.scg.doodle.view.HtmlDocument;
-import ch.unibe.scg.doodle.view.HtmlRenderer;
+import ch.unibe.scg.htmlgen.Attribute;
+import ch.unibe.scg.htmlgen.Attributes;
+import ch.unibe.scg.htmlgen.Tag;
 
 /**
  * Class used for visualizing any Object
@@ -78,28 +74,13 @@ public class Doodler {
 		HtmlDocument htmlDocument = new HtmlDocument();
 		htmlDocument.setBody(body);
 
-		// System.out.println(htmlDocument.toString());
-
 		// for testing
 		storeToFile(FILE, htmlDocument.toString());
 		if (debugMode)
 			openInBrowser(FILE);
 
-		sendHtmlToEclipsePlugin(htmlDocument);
-
-		// htmlRenderer.render(htmlDocument.toString());
-	}
-
-	private void sendHtmlToEclipsePlugin(HtmlDocument htmlDocument) {
-		try {
-			SimonClient client = new SimonClient();
-			client.sendHtml(htmlDocument.toString(), clickables);
-			client.stop();
-		} catch (Exception e) {
-			System.out
-					.println("DoodleDebug: Failed to send html to eclipse plugin.");
-			e.printStackTrace();
-		}
+		Runnable htmlShow = new HtmlShow(htmlDocument.toString(), clickables);
+		Display.getDefault().syncExec(htmlShow);
 	}
 
 	public void renderInlineInto(Object object, Tag tag) {

@@ -7,8 +7,8 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import ch.unibe.ch.scg.htmlgen.Tag;
 import ch.unibe.scg.doodle.rendering.StringRendering;
+import ch.unibe.scg.htmlgen.Tag;
 
 
 public class StringPlugin extends AbstractPlugin {

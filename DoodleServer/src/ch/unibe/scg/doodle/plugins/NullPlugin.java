@@ -6,9 +6,9 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import ch.unibe.ch.scg.htmlgen.Tag;
 import ch.unibe.scg.doodle.helperClasses.NullObject;
 import ch.unibe.scg.doodle.rendering.NullRendering;
+import ch.unibe.scg.htmlgen.Tag;
 
 public class NullPlugin extends AbstractPlugin {
 

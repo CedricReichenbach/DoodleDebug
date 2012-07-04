@@ -4,8 +4,8 @@ package ch.unibe.scg.doodle.rendering;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import ch.unibe.ch.scg.htmlgen.Tag;
 import ch.unibe.scg.doodle.Doodler;
+import ch.unibe.scg.htmlgen.Tag;
 
 
 public class DefaultRendering implements Rendering<Object> {

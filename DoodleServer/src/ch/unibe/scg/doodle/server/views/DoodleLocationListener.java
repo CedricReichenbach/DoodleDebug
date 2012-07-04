@@ -4,7 +4,7 @@ import org.eclipse.swt.browser.LocationEvent;
 import org.eclipse.swt.browser.LocationListener;
 
 import ch.unibe.scg.doodle.server.DoodleServer;
-import ch.unibe.scg.doodle.server.simon.SimonServer;
+import ch.unibe.scg.doodle.simon.SimonServer;
 
 public class DoodleLocationListener implements LocationListener {
 

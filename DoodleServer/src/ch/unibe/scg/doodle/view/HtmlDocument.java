@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 
-import ch.unibe.ch.scg.htmlgen.Tag;
 import ch.unibe.scg.doodle.view.css.CSSUtil;
 import ch.unibe.scg.doodle.view.js.JSUtil;
+import ch.unibe.scg.htmlgen.Tag;
 
 public class HtmlDocument {
 

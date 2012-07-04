@@ -9,8 +9,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import ch.unibe.ch.scg.htmlgen.Attribute;
-import ch.unibe.ch.scg.htmlgen.Tag;
 import ch.unibe.scg.doodle.api.DoodleCanvas;
 import ch.unibe.scg.doodle.api.Doodleable;
 import ch.unibe.scg.doodle.api.RealDoodleCanvas;
@@ -22,6 +20,8 @@ import ch.unibe.scg.doodle.rendering.Rendering;
 import ch.unibe.scg.doodle.rendering.RenderingRegistry;
 import ch.unibe.scg.doodle.rendering.DoodleCanvasRendering;
 import ch.unibe.scg.doodle.view.CSSCollection;
+import ch.unibe.scg.htmlgen.Attribute;
+import ch.unibe.scg.htmlgen.Tag;
 
 import com.google.inject.Provider;
 import com.google.inject.assistedinject.Assisted;

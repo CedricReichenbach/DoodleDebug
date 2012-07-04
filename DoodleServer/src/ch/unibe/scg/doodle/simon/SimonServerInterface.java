@@ -1,4 +1,4 @@
-package ch.unibe.scg.doodle.server.simon;
+package ch.unibe.scg.doodle.simon;
 
 public interface SimonServerInterface {
 	public void renderObject(String objectAsXML);

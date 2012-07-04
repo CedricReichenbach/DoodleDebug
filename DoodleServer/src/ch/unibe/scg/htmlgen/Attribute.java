@@ -1,4 +1,4 @@
-package ch.unibe.ch.scg.htmlgen;
+package ch.unibe.scg.htmlgen;
 
 public class Attribute {
 

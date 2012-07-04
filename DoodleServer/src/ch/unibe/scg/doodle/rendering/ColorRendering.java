@@ -2,8 +2,8 @@ package ch.unibe.scg.doodle.rendering;
 
 import java.awt.Color;
 
-import ch.unibe.ch.scg.htmlgen.Attribute;
-import ch.unibe.ch.scg.htmlgen.Tag;
+import ch.unibe.scg.htmlgen.Attribute;
+import ch.unibe.scg.htmlgen.Tag;
 
 
 public class ColorRendering implements Rendering<Color> {

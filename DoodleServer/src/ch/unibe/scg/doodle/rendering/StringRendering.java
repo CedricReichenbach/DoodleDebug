@@ -1,6 +1,6 @@
 package ch.unibe.scg.doodle.rendering;
 
-import ch.unibe.ch.scg.htmlgen.Tag;
+import ch.unibe.scg.htmlgen.Tag;
 
 public class StringRendering implements Rendering<String> {
 

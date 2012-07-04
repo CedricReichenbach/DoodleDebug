@@ -1,4 +1,4 @@
-package ch.unibe.scg.doodle.server.simon;
+package ch.unibe.scg.doodle.simon;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -39,27 +39,12 @@ public class SimonServer implements SimonServerInterface {
 		xstream.setClassLoader(DoodleClientWorkspace.getClientClassLoader());
 	}
 
-	// @Override
-	// public void showHtml(String html, String storageAsXML) {
-	// System.out.println("Server: Received html code.");
-	//
-	// IndexedObjectStorage storage = storageFromXML(storageAsXML);
-	//
-	// Runnable htmlShow = new HtmlShow(html, storage);
-	// Display.getDefault().syncExec(htmlShow);
-	// }
-
 	public void stop() {
 		registry.unbind("DoodleServer");
 		registry.stop();
 		if (client != null)
 			lookup.release(client);
 	}
-
-	// @Override
-	// public void showHtml(String html) {
-	// this.showHtml(html, null);
-	// }
 
 	@Override
 	public void renderObject(String objectAsXML) {
