@@ -6,23 +6,19 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
-import ch.unibe.scg.doodle.IndexedObjectStorage;
-
 public class HtmlShow implements Runnable {
 
 	private String html;
-	private IndexedObjectStorage storage;
 
-	public HtmlShow(String html, IndexedObjectStorage storage) {
+	public HtmlShow(String html) {
 		this.html = html;
-		this.storage = storage;
 	}
 
 	@Override
 	public void run() {
 		IViewPart view = findView();
 		assert (view != null);
-		((DoodleDebugView) view).showHtml(html, storage);
+		((DoodleDebugView) view).showHtml(html);
 	}
 
 	private IViewPart findView() {

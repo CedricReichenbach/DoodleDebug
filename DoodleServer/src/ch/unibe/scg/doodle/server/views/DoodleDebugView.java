@@ -38,8 +38,7 @@ public class DoodleDebugView extends ViewPart {
 		browser.setFocus();
 	}
 
-	public void showHtml(String html, IndexedObjectStorage storage) {
-		DoodleServer.instance().setStorage(storage);
+	public void showHtml(String html) {
 		browser.setText(html);
 	}
 

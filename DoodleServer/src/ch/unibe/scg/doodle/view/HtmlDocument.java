@@ -1,10 +1,5 @@
 package ch.unibe.scg.doodle.view;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-
 import ch.unibe.scg.doodle.view.css.CSSUtil;
 import ch.unibe.scg.doodle.view.js.JSUtil;
 import ch.unibe.scg.htmlgen.Tag;

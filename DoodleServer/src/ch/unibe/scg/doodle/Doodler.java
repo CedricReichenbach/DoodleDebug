@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import org.eclipse.swt.widgets.Display;
 
 import ch.unibe.scg.doodle.helperClasses.NullObject;
+import ch.unibe.scg.doodle.server.DoodleServer;
 import ch.unibe.scg.doodle.server.views.HtmlShow;
 import ch.unibe.scg.doodle.view.HtmlDocument;
 import ch.unibe.scg.htmlgen.Attribute;
@@ -79,7 +80,8 @@ public class Doodler {
 		if (debugMode)
 			openInBrowser(FILE);
 
-		Runnable htmlShow = new HtmlShow(htmlDocument.toString(), clickables);
+		DoodleServer.instance().setStorage(clickables);
+		Runnable htmlShow = new HtmlShow(htmlDocument.toString());
 		Display.getDefault().syncExec(htmlShow);
 	}
 

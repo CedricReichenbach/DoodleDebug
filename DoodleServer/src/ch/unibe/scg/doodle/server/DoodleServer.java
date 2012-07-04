@@ -11,7 +11,7 @@ public class DoodleServer {
 
 	public static DoodleServer instance() {
 		if (instance == null) {
-			return new DoodleServer();
+			instance = new DoodleServer();
 		}
 		return instance;
 	}
@@ -24,6 +24,7 @@ public class DoodleServer {
 
 	public void setStorage(IndexedObjectStorage storage) {
 		this.storage = storage;
+		System.out.println(this.storage);
 	}
 
 	public void drawObjectWithID(int id) {
@@ -37,7 +38,7 @@ public class DoodleServer {
 
 	public void clearOutput() {
 		DMockup.resetInstance();
-		Runnable emptyShow = new HtmlShow("", null);
+		Runnable emptyShow = new HtmlShow("");
 		Display.getDefault().asyncExec(emptyShow);
 	}
 }
