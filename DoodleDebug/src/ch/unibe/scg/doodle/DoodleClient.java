@@ -35,4 +35,8 @@ public class DoodleClient {
 	public void sendToServer(Object o, Object[] os) {
 		simonClient.sendObjects(o, os);
 	}
+
+	public void clearOutput() {
+		simonClient.clearOutput();
+	}
 }

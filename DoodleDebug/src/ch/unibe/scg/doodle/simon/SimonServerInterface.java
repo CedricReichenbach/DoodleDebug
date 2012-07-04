@@ -4,4 +4,6 @@ public interface SimonServerInterface {
 	public void renderObject(String objectAsXML);
 
 	public void renderObjects(String objectAsXML, String objectArrayAsXML);
+
+	public void clearOutput();
 }

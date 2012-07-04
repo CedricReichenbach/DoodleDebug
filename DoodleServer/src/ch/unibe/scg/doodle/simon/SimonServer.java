@@ -3,8 +3,10 @@ package ch.unibe.scg.doodle.simon;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
-import ch.unibe.scg.doodle.D;
+import ch.unibe.scg.doodle.DMockup;
+import ch.unibe.scg.doodle.Doodler;
 import ch.unibe.scg.doodle.server.DoodleClientWorkspace;
+import ch.unibe.scg.doodle.server.DoodleServer;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -49,7 +51,7 @@ public class SimonServer implements SimonServerInterface {
 	@Override
 	public void renderObject(String objectAsXML) {
 		Object o = xstream.fromXML(objectAsXML);
-		D.raw(o);
+		DMockup.raw(o);
 	}
 
 	@Override
@@ -57,7 +59,12 @@ public class SimonServer implements SimonServerInterface {
 		Object o = xstream.fromXML(objectAsXML);
 		Object[] os = (Object[]) xstream.fromXML(objectArrayAsXML); // XXX Check
 																	// this!
-		D.raw(o, os);
+		DMockup.raw(o, os);
+	}
+
+	@Override
+	public void clearOutput() {
+		DoodleServer.instance().clearOutput();
 	}
 
 }

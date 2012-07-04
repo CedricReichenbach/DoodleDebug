@@ -1,7 +1,10 @@
 package ch.unibe.scg.doodle.server;
 
-import ch.unibe.scg.doodle.D;
+import org.eclipse.swt.widgets.Display;
+
+import ch.unibe.scg.doodle.DMockup;
 import ch.unibe.scg.doodle.IndexedObjectStorage;
+import ch.unibe.scg.doodle.server.views.HtmlShow;
 
 public class DoodleServer {
 	private static DoodleServer instance;
@@ -25,11 +28,16 @@ public class DoodleServer {
 
 	public void drawObjectWithID(int id) {
 		if (this.storage == null) {
-			D.raw("Sorry, don't know that object.");
+			DMockup.raw("Sorry, don't know that object.");
 			return;
 		}
 		Object o = this.storage.get(id);
-		D.raw(o);
+		DMockup.raw(o);
 	}
 
+	public void clearOutput() {
+		DMockup.resetInstance();
+		Runnable emptyShow = new HtmlShow("", null);
+		Display.getDefault().asyncExec(emptyShow);
+	}
 }

@@ -63,4 +63,8 @@ public class SimonClient implements SimonClientInterface {
 		server.renderObjects(objectAsXML, objectArrAsXML);
 	}
 
+	public void clearOutput() {
+		server.clearOutput();
+	}
+
 }

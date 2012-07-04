@@ -6,7 +6,7 @@ import ch.unibe.scg.doodle.inject.DoodleModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-public class D {
+public class DMockup {
 
 	static Injector injector;
 
@@ -15,6 +15,10 @@ public class D {
 			injector = Guice.createInjector(new DoodleModule());
 		}
 		return injector;
+	}
+
+	public static void resetInstance() {
+		injector = null;
 	}
 
 	/**

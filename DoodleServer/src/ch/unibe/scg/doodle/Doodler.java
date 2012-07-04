@@ -134,7 +134,7 @@ public class Doodler {
 			buf.write(html);
 			buf.close();
 		} catch (IOException e) {
-			System.err.println("CLIENT: Could not write into file " + file);
+			System.err.println("SERVER: Could not write into file " + file);
 		}
 	}
 
