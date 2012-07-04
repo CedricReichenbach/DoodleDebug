@@ -32,17 +32,17 @@ public class SimonClient implements SimonClientInterface {
 		this.xstream = new XStream();
 	}
 
-//	@Override
-//	public void sendHtml(String html, IndexedObjectStorage storage) {
-//		String storageAsXML = storageToXML(storage);
-//		server.showHtml(html, storageAsXML); // TODO: transfer storage to plugin
-//	}
+	// @Override
+	// public void sendHtml(String html, IndexedObjectStorage storage) {
+	// String storageAsXML = storageToXML(storage);
+	// server.showHtml(html, storageAsXML); // TODO: transfer storage to plugin
+	// }
 
-//	private String storageToXML(IndexedObjectStorage storage) {
-//		XStream xstream = new XStream();
-////		xstream.alias("IndexedObjectStorage", IndexedObjectStorage.class);
-//		return xstream.toXML(storage);
-//	}
+	// private String storageToXML(IndexedObjectStorage storage) {
+	// XStream xstream = new XStream();
+	// // xstream.alias("IndexedObjectStorage", IndexedObjectStorage.class);
+	// return xstream.toXML(storage);
+	// }
 
 	public void stop() {
 		lookup.release(server);
@@ -53,13 +53,14 @@ public class SimonClient implements SimonClientInterface {
 	@Override
 	public void sendObject(Object object) {
 		String objectAsXML = xstream.toXML(object);
-		
+		server.renderObject(objectAsXML);
 	}
 
 	@Override
 	public void sendObjects(Object object, Object[] objects) {
-		// TODO Auto-generated method stub
-		
+		String objectAsXML = xstream.toXML(object);
+		String objectArrAsXML = xstream.toXML(objects);
+		server.renderObjects(objectAsXML, objectArrAsXML);
 	}
 
 }

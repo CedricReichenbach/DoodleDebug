@@ -1,7 +1,7 @@
 package ch.unibe.scg.doodle.simon;
 
 public interface SimonServerInterface {
-	public void showHtml(String html); // XXX same problem as in server
+	public void renderObject(String objectAsXML);
 
-	public void showHtml(String html, String storageAsXML);
+	public void renderObjects(String objectAsXML, String objectArrayAsXML);
 }

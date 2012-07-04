@@ -9,7 +9,7 @@ public class D {
 	 *            o
 	 */
 	public static void raw(Object o) {
-
+		DoodleClient.instance().sendToServer(o);
 	}
 
 	/**
@@ -19,7 +19,7 @@ public class D {
 	 *            o
 	 */
 	public static void raw(Object o, Object... objects) {
-
+		DoodleClient.instance().sendToServer(o, objects);
 	}
 
 	/**

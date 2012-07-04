@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 
 import ch.unibe.scg.doodle.D;
+import ch.unibe.scg.doodle.server.DoodleClientWorkspace;
+
 import com.thoughtworks.xstream.XStream;
 
 import de.root1.simon.Lookup;
