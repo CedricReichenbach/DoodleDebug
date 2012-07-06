@@ -14,12 +14,12 @@ import javax.inject.Inject;
 import org.eclipse.swt.widgets.Display;
 
 import ch.unibe.scg.doodle.helperClasses.NullObject;
+import ch.unibe.scg.doodle.htmlgen.Attribute;
+import ch.unibe.scg.doodle.htmlgen.Attributes;
+import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.server.DoodleServer;
 import ch.unibe.scg.doodle.server.views.HtmlShow;
 import ch.unibe.scg.doodle.view.HtmlDocument;
-import ch.unibe.scg.htmlgen.Attribute;
-import ch.unibe.scg.htmlgen.Attributes;
-import ch.unibe.scg.htmlgen.Tag;
 
 /**
  * Class used for visualizing any Object
@@ -40,8 +40,8 @@ public class Doodler {
 
 	private IndexedObjectStorage clickables;
 
-	private final File FILE = new File(System.getProperty("user.dir")
-			+ "/tempfiles/output.html");
+	private final File FILE = new File(System.getProperty("java.io.tmpdir")
+			+ "/doodledebug/output.html");
 
 	/**
 	 * Creates a new Doodler for visualizing objects 1 Doodler = 1 window
@@ -136,7 +136,8 @@ public class Doodler {
 			buf.write(html);
 			buf.close();
 		} catch (IOException e) {
-			System.err.println("SERVER: Could not write into file " + file);
+			System.err.println("SERVER: Could not write into file " + file
+					+ "\n" + e.getMessage());
 		}
 	}
 

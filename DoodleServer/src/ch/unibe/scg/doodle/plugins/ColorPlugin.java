@@ -7,8 +7,8 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.rendering.ColorRendering;
-import ch.unibe.scg.htmlgen.Tag;
 
 public class ColorPlugin extends AbstractPlugin {
 

@@ -1,4 +1,4 @@
-package ch.unibe.scg.htmlgen;
+package ch.unibe.scg.doodle.htmlgen;
 
 import java.util.*;
 
@@ -114,6 +114,10 @@ public class Tag extends LinkedList {
 
 	public static Object hr() {
 		return "<hr>";
+	}
+
+	public void addAttribute(String name, String value) {
+		this.addAttribute(new Attribute(name, value));
 	}
 
 }

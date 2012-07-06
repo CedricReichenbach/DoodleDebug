@@ -1,7 +1,7 @@
 package ch.unibe.scg.doodle.rendering;
 
 import ch.unibe.scg.doodle.helperClasses.HtmlImage;
-import ch.unibe.scg.htmlgen.Tag;
+import ch.unibe.scg.doodle.htmlgen.Tag;
 
 public class ImageRendering implements Rendering<HtmlImage> {
 

@@ -8,8 +8,8 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 import ch.unibe.scg.doodle.helperClasses.HtmlImage;
+import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.rendering.ImageRendering;
-import ch.unibe.scg.htmlgen.Tag;
 
 public class ImagePlugin extends AbstractPlugin {
 

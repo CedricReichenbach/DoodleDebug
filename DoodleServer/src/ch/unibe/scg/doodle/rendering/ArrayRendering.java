@@ -3,7 +3,7 @@ package ch.unibe.scg.doodle.rendering;
 import javax.inject.Inject;
 
 import ch.unibe.scg.doodle.Doodler;
-import ch.unibe.scg.htmlgen.Tag;
+import ch.unibe.scg.doodle.htmlgen.Tag;
 
 public class ArrayRendering implements Rendering<Object[]> {
 

@@ -1,4 +1,4 @@
-package ch.unibe.scg.htmlgen;
+package ch.unibe.scg.doodle.htmlgen;
 
 import java.util.*;
 

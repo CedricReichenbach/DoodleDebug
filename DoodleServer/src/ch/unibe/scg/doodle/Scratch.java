@@ -3,7 +3,7 @@ package ch.unibe.scg.doodle;
 
 import java.util.List;
 
-import ch.unibe.scg.htmlgen.Tag;
+import ch.unibe.scg.doodle.htmlgen.Tag;
 
 public interface Scratch {
 

@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import ch.unibe.scg.doodle.Doodler;
 import ch.unibe.scg.doodle.Scratch;
 import ch.unibe.scg.doodle.api.DoodleCanvas;
-import ch.unibe.scg.htmlgen.Tag;
+import ch.unibe.scg.doodle.htmlgen.Tag;
 
 public class DoodleCanvasRendering implements Rendering<DoodleCanvas> {
 

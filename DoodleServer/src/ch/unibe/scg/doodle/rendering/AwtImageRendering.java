@@ -2,7 +2,7 @@ package ch.unibe.scg.doodle.rendering;
 
 import java.awt.Image;
 
-import ch.unibe.scg.htmlgen.Tag;
+import ch.unibe.scg.doodle.htmlgen.Tag;
 
 public class AwtImageRendering implements Rendering<Image> {
 

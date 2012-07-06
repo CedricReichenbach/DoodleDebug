@@ -5,6 +5,7 @@ import org.eclipse.swt.widgets.Display;
 import ch.unibe.scg.doodle.DMockup;
 import ch.unibe.scg.doodle.IndexedObjectStorage;
 import ch.unibe.scg.doodle.server.views.HtmlShow;
+import ch.unibe.scg.doodle.view.HtmlDocument;
 
 public class DoodleServer {
 	private static DoodleServer instance;
@@ -24,7 +25,6 @@ public class DoodleServer {
 
 	public void setStorage(IndexedObjectStorage storage) {
 		this.storage = storage;
-		System.out.println(this.storage);
 	}
 
 	public void drawObjectWithID(int id) {
@@ -38,7 +38,7 @@ public class DoodleServer {
 
 	public void clearOutput() {
 		DMockup.resetInstance();
-		Runnable emptyShow = new HtmlShow("");
+		Runnable emptyShow = new HtmlShow(new HtmlDocument().toString());
 		Display.getDefault().asyncExec(emptyShow);
 	}
 

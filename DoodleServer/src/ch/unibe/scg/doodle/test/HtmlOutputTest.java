@@ -9,8 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ch.unibe.scg.doodle.ScratchFactory;
+import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.inject.DoodleModule;
-import ch.unibe.scg.htmlgen.Tag;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;

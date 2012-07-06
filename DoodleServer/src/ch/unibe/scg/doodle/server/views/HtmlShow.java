@@ -31,7 +31,7 @@ public class HtmlShow implements Runnable {
 				try {
 					page.showView(DoodleDebugView.ID);
 				} catch (PartInitException e) {
-					System.out.println("HtmlShow: PartInitException");
+					throw new RuntimeException(e);
 				}
 				view = page.findView(DoodleDebugView.ID);
 				if (view != null) {
@@ -39,7 +39,7 @@ public class HtmlShow implements Runnable {
 				}
 			}
 		}
-		System.out.println("Warning: DoodleDebug view not opened");
+		System.err.println("Warning: DoodleDebug view not opened");
 		return null;
 	}
 }

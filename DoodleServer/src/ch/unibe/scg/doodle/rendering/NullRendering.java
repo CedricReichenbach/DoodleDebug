@@ -1,7 +1,7 @@
 package ch.unibe.scg.doodle.rendering;
 
 import ch.unibe.scg.doodle.helperClasses.NullObject;
-import ch.unibe.scg.htmlgen.Tag;
+import ch.unibe.scg.doodle.htmlgen.Tag;
 
 public class NullRendering implements Rendering<NullObject> {
 

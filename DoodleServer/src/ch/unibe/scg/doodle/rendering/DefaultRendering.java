@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 import ch.unibe.scg.doodle.Doodler;
-import ch.unibe.scg.htmlgen.Tag;
+import ch.unibe.scg.doodle.htmlgen.Tag;
 
 
 public class DefaultRendering implements Rendering<Object> {

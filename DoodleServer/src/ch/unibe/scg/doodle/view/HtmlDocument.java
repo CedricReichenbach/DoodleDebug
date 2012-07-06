@@ -1,17 +1,21 @@
 package ch.unibe.scg.doodle.view;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.view.css.CSSUtil;
 import ch.unibe.scg.doodle.view.js.JSUtil;
-import ch.unibe.scg.htmlgen.Tag;
 
 public class HtmlDocument {
 
-	private Tag header;
+	private Tag head;
 	private String doctype;
 	private Tag body;
 
 	public HtmlDocument() {
-		this.header = makeHeader();
+		this.head = makeHead();
 		this.doctype = makeDoctype();
 		this.body = new Tag("body");
 	}
@@ -21,7 +25,7 @@ public class HtmlDocument {
 	}
 
 	@SuppressWarnings("unchecked")
-	private Tag makeHeader() {
+	private Tag makeHead() {
 		Tag header = new Tag("head");
 		header.add("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=100\" >"); // for
 																					// IE9
@@ -41,9 +45,9 @@ public class HtmlDocument {
 		return style;
 	}
 
-	private Object makeJavascript() {
+	private Tag makeJavascript() {
 		Tag js = new Tag("script", "type=text/javascript");
-		js.add(getJSCode());
+		js.add(getJS());
 		return js;
 	}
 
@@ -57,12 +61,21 @@ public class HtmlDocument {
 		return css + CSSCollection.getAllCSS();
 	}
 
-	private String getJSCode() {
+	/**
+	 * Loads JS code from files. Be careful: Order matters (I guess).
+	 * @return
+	 */
+	private String getJS() {
 		String js = "";
-		js += JSUtil.getJSFromFile("jquery-1.7.2.min.js");
-		// js += JSUtil.getJSFromFile("jquery-ui-1.8.18.custom.min.js");
-		// js += JSUtil.getJSFromFile("jquery.smooth-scroll.min.js");
+		js += JSUtil.getJSFromFile("prototype.js");
+		js += JSUtil.getJSFromFile("scriptaculous.js");
 		js += JSUtil.getJSFromFile("lightbox.js");
+		js += JSUtil.getJSFromFile("builder.js");
+		js += JSUtil.getJSFromFile("effects.js");
+		js += JSUtil.getJSFromFile("controls.js");
+		js += JSUtil.getJSFromFile("dragdrop.js");
+		js += JSUtil.getJSFromFile("slider.js");
+		js += JSUtil.getJSFromFile("sound.js");
 		return js;
 	}
 
@@ -71,6 +84,6 @@ public class HtmlDocument {
 	}
 
 	public String toString() {
-		return "" + doctype + header + body;
+		return "" + doctype + head + body;
 	}
 }

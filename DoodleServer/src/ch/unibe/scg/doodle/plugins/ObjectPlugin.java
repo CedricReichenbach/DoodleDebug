@@ -7,8 +7,8 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.rendering.DefaultRendering;
-import ch.unibe.scg.htmlgen.Tag;
 
 
 /**
