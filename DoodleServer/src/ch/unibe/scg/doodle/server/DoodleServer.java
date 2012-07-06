@@ -37,7 +37,7 @@ public class DoodleServer {
 	}
 
 	private void drawIntoLightbox(Object o) {
-		
+		// TODO
 	}
 
 	public void clearOutput() {
