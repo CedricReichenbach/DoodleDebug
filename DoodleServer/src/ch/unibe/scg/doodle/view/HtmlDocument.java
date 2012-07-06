@@ -56,7 +56,6 @@ public class HtmlDocument {
 		String css = CSSUtil.getCSSFromFile("style.css");
 		// load from lightbox css
 		css += CSSUtil.getCSSFromFile("lightbox.css");
-		// css += CSSUtil.getCSSFromFile("screen.css");
 		// + provided by plugins
 		return css + CSSCollection.getAllCSS();
 	}

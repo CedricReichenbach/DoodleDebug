@@ -33,7 +33,11 @@ public class DoodleServer {
 			return;
 		}
 		Object o = this.storage.get(id);
-		DMockup.raw(o);
+		drawIntoLightbox(o);
+	}
+
+	private void drawIntoLightbox(Object o) {
+		
 	}
 
 	public void clearOutput() {
