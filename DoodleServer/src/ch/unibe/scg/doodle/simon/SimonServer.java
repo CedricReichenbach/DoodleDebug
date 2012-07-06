@@ -66,4 +66,9 @@ public class SimonServer implements SimonServerInterface {
 		DoodleServer.instance().clearOutput();
 	}
 
+	@Override
+	public void firstRun() {
+		DoodleServer.instance().firstRun();
+	}
+
 }

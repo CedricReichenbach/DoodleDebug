@@ -9,7 +9,8 @@ package ch.unibe.scg.doodle;
  */
 public class DoodleDebug {
 	/**
-	 * Clear the output tab and leave a blank page.
+	 * Clear the output tab and leave a blank page. Suggestion: Use this method very carefully since
+	 * the history is cleared anyway at the beginning of each run.
 	 */
 	public static void clearHistory() {
 		DoodleClient.instance().clearOutput();

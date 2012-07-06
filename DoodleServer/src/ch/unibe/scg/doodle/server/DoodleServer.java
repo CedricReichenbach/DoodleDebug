@@ -41,4 +41,8 @@ public class DoodleServer {
 		Runnable emptyShow = new HtmlShow("");
 		Display.getDefault().asyncExec(emptyShow);
 	}
+
+	public void firstRun() {
+		this.clearOutput();
+	}
 }

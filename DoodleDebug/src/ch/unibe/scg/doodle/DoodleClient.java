@@ -15,6 +15,7 @@ public class DoodleClient {
 	public static DoodleClient instance() {
 		if (instance == null) {
 			instance = new DoodleClient();
+			instance.firstRun();
 		}
 		return instance;
 	}
@@ -38,5 +39,9 @@ public class DoodleClient {
 
 	public void clearOutput() {
 		simonClient.clearOutput();
+	}
+
+	protected void firstRun() {
+		simonClient.firstRun();
 	}
 }

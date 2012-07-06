@@ -67,4 +67,8 @@ public class SimonClient implements SimonClientInterface {
 		server.clearOutput();
 	}
 
+	public void firstRun() {
+		server.firstRun();
+	}
+
 }
