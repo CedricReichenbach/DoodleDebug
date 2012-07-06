@@ -1,24 +1,16 @@
 package ch.unibe.scg.doodle;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import javax.inject.Inject;
 
 import ch.unibe.scg.doodle.api.DoodleCanvas;
 import ch.unibe.scg.doodle.api.Doodleable;
 import ch.unibe.scg.doodle.api.RealDoodleCanvas;
 import ch.unibe.scg.doodle.helperClasses.ErrorDrawer;
-import ch.unibe.scg.doodle.helperClasses.HtmlImage;
 import ch.unibe.scg.doodle.plugins.ArrayPlugin;
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
+import ch.unibe.scg.doodle.rendering.DoodleCanvasRendering;
 import ch.unibe.scg.doodle.rendering.Rendering;
 import ch.unibe.scg.doodle.rendering.RenderingRegistry;
-import ch.unibe.scg.doodle.rendering.DoodleCanvasRendering;
 import ch.unibe.scg.doodle.view.CSSCollection;
 import ch.unibe.scg.htmlgen.Attribute;
 import ch.unibe.scg.htmlgen.Tag;

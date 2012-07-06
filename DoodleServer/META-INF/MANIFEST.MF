@@ -12,7 +12,8 @@ Require-Bundle: org.eclipse.ui,
  org.junit,
  GuicePlugin;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ClassPath: .
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: org.eclipse.jdt.core,
  org.eclipse.jdt.core.compiler,
  org.eclipse.jdt.core.dom,
@@ -23,4 +24,3 @@ Import-Package: org.eclipse.jdt.core,
  org.eclipse.jface.text,
  org.eclipse.jface.text.contentassist,
  org.eclipse.ltk.core.refactoring
-Bundle-ClassPath: .

@@ -23,5 +23,19 @@
 	<classpathentry kind="lib" path="libs/xstream-1.4.2/lib/xstream/xom-1.1.jar"/>
 	<classpathentry kind="lib" path="libs/xstream-1.4.2/lib/xstream/xpp3_min-1.1.4c.jar"/>
 	<classpathentry kind="lib" path="libs/xstream-1.4.2/lib/xstream-1.4.2.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/DoodleDebug"/>
+	<classpathentry kind="lib" path="libs/guice-3.0/aopalliance.jar"/>
+	<classpathentry kind="lib" path="libs/guice-3.0/guice-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/guice-3.0/guice-assistedinject-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/guice-3.0/guice-grapher-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/guice-3.0/guice-jmx-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/guice-3.0/guice-jndi-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/guice-3.0/guice-multibindings-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/guice-3.0/guice-persist-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/guice-3.0/guice-servlet-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/guice-3.0/guice-spring-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/guice-3.0/guice-struts2-plugin-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/guice-3.0/guice-throwingproviders-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/guice-3.0/javax.inject.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
