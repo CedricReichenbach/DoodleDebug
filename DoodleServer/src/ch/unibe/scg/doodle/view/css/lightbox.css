@@ -1,8 +1,12 @@
 #lightbox {
 	color: violet;
 	background-color: lightyellow;
+	position: absolute;
+	z-index: 2;
 }
 
 #overlay {
 	background-color: rgba(0,0,0,0.5);
+	position: fixed;
+	z-index: 1;
 }

@@ -6,9 +6,9 @@ import ch.unibe.scg.doodle.DMockup;
 import ch.unibe.scg.doodle.Doodler;
 import ch.unibe.scg.doodle.IndexedObjectStorage;
 import ch.unibe.scg.doodle.htmlgen.Tag;
-import ch.unibe.scg.doodle.server.util.JavascriptCallsUtil;
 import ch.unibe.scg.doodle.server.views.HtmlShow;
 import ch.unibe.scg.doodle.server.views.JavascriptExecuter;
+import ch.unibe.scg.doodle.util.JavascriptCallsUtil;
 import ch.unibe.scg.doodle.view.HtmlDocument;
 
 public class DoodleServer {

@@ -63,8 +63,8 @@ public class Doodler {
 	private void prepareLightbox() {
 		Tag lighboxWrapper = new Tag("div", "id=lightboxWrapper");
 		lighboxWrapper.addAttribute("style", "visibility:hidden");
-		Tag overlay = new Tag("a", "id=overlay");
-		overlay.addAttribute("href", "javascript:hideLightbox()");
+		Tag overlay = new Tag("div", "id=overlay");
+		overlay.addAttribute("onclick", "javascript:hideLightbox()");
 		lighboxWrapper.add(overlay);
 		Tag lightbox = new Tag("div", "id=lightbox");
 		lighboxWrapper.add(lightbox);

@@ -7,7 +7,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.ui.part.ViewPart;
 
-
 import ch.unibe.scg.doodle.IndexedObjectStorage;
 import ch.unibe.scg.doodle.server.DoodleServer;
 
@@ -41,9 +40,11 @@ public class DoodleDebugView extends ViewPart {
 	public void showHtml(String html) {
 		browser.setText(html);
 	}
-	
+
 	public void runJavascript(String script) {
-		browser.execute(script);
+		boolean sucessful = browser.execute(script);
+		System.out.println("SERVER: Running Javascript was "
+				+ (sucessful ? "" : "NOT ") + "successful");
 	}
 
 }
