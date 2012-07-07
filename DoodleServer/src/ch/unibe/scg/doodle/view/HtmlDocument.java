@@ -66,6 +66,7 @@ public class HtmlDocument {
 	 */
 	private String getJS() {
 		String js = "";
+		js += JSUtil.getJSFromFile("addCode.js");
 		js += JSUtil.getJSFromFile("prototype.js");
 		js += JSUtil.getJSFromFile("scriptaculous.js");
 		js += JSUtil.getJSFromFile("lightbox.js");

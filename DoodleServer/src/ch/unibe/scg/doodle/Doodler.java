@@ -40,7 +40,7 @@ public class Doodler {
 
 	private IndexedObjectStorage clickables;
 
-	private final File FILE = new File(System.getProperty("java.io.tmpdir")
+	private final File FILE = new File(System.getProperty("java.io.tmpdir") // Win7: C:\Users\<user>\AppData\Local\Temp
 			+ "/doodledebug/output.html");
 
 	/**
@@ -56,7 +56,6 @@ public class Doodler {
 	 * existing) or does a default drawing.
 	 * 
 	 * @param Object
-	 *            not null
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
