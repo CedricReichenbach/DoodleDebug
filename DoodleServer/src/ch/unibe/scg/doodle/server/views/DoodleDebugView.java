@@ -41,5 +41,9 @@ public class DoodleDebugView extends ViewPart {
 	public void showHtml(String html) {
 		browser.setText(html);
 	}
+	
+	public void runJavascript(String script) {
+		browser.execute(script);
+	}
 
 }

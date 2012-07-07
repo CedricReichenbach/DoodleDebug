@@ -3,8 +3,12 @@ package ch.unibe.scg.doodle.server;
 import org.eclipse.swt.widgets.Display;
 
 import ch.unibe.scg.doodle.DMockup;
+import ch.unibe.scg.doodle.Doodler;
 import ch.unibe.scg.doodle.IndexedObjectStorage;
+import ch.unibe.scg.doodle.htmlgen.Tag;
+import ch.unibe.scg.doodle.server.util.JavascriptCallsUtil;
 import ch.unibe.scg.doodle.server.views.HtmlShow;
+import ch.unibe.scg.doodle.server.views.JavascriptExecuter;
 import ch.unibe.scg.doodle.view.HtmlDocument;
 
 public class DoodleServer {
@@ -37,7 +41,13 @@ public class DoodleServer {
 	}
 
 	private void drawIntoLightbox(Object o) {
-		// TODO
+		Tag lightboxContentWrapper = new Tag("div",
+				"class=lightboxContentWrapper");
+		Doodler.instance().renderInlineInto(o, lightboxContentWrapper);
+		String toRender = lightboxContentWrapper.toString();
+		Runnable javascriptExecuter = new JavascriptExecuter(
+				JavascriptCallsUtil.showInLightbox(toRender));
+		Display.getDefault().syncExec(javascriptExecuter);
 	}
 
 	public void clearOutput() {

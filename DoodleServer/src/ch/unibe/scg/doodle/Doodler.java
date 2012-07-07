@@ -34,7 +34,7 @@ public class Doodler {
 
 	private Tag body;
 
-	private final boolean debugMode = false;
+	private final boolean debugMode = true; // XXX
 
 	private int level;
 
@@ -44,6 +44,8 @@ public class Doodler {
 																			// C:\Users\<user>\AppData\Local\Temp
 			+ "/doodledebug/output.html");
 
+	private static Doodler instance; // XXX Sorry, Guice...
+
 	/**
 	 * Creates a new Doodler for visualizing objects 1 Doodler = 1 window
 	 */
@@ -51,12 +53,18 @@ public class Doodler {
 		body = new Tag("body");
 		prepareLightbox();
 		clickables = new IndexedObjectStorage();
+		instance = this;
+	}
+
+	public static Doodler instance() {
+		return instance;
 	}
 
 	private void prepareLightbox() {
 		Tag lighboxWrapper = new Tag("div", "id=lightboxWrapper");
 		lighboxWrapper.addAttribute("style", "visibility:hidden");
-		Tag overlay = new Tag("div", "id=overlay");
+		Tag overlay = new Tag("a", "id=overlay");
+		overlay.addAttribute("href", "javascript:hideLightbox()");
 		lighboxWrapper.add(overlay);
 		Tag lightbox = new Tag("div", "id=lightbox");
 		lighboxWrapper.add(lightbox);
@@ -87,9 +95,8 @@ public class Doodler {
 		htmlDocument.setBody(body);
 
 		// for testing
-		storeToFile(FILE, htmlDocument.toString());
 		if (debugMode)
-			openInBrowser(FILE);
+			storeToFile(FILE, htmlDocument.toString());
 
 		DoodleServer.instance().setStorage(clickables);
 		Runnable htmlShow = new HtmlShow(htmlDocument.toString());

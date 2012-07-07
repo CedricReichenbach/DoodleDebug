@@ -21,7 +21,7 @@ public class HtmlShow implements Runnable {
 		((DoodleDebugView) view).showHtml(html);
 	}
 
-	private IViewPart findView() {
+	protected IViewPart findView() {
 		IViewPart view = null;
 		IWorkbenchWindow[] windows = PlatformUI.getWorkbench()
 				.getWorkbenchWindows();
