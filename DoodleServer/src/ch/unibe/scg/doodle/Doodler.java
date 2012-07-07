@@ -40,7 +40,8 @@ public class Doodler {
 
 	private IndexedObjectStorage clickables;
 
-	private final File FILE = new File(System.getProperty("java.io.tmpdir") // Win7: C:\Users\<user>\AppData\Local\Temp
+	private final File FILE = new File(System.getProperty("java.io.tmpdir") // Win7:
+																			// C:\Users\<user>\AppData\Local\Temp
 			+ "/doodledebug/output.html");
 
 	/**
@@ -48,7 +49,18 @@ public class Doodler {
 	 */
 	protected Doodler() {
 		body = new Tag("body");
+		prepareLightbox();
 		clickables = new IndexedObjectStorage();
+	}
+
+	private void prepareLightbox() {
+		Tag lighboxWrapper = new Tag("div", "id=lightboxWrapper");
+		lighboxWrapper.addAttribute("style", "visibility:hidden");
+		Tag overlay = new Tag("div", "id=overlay");
+		lighboxWrapper.add(overlay);
+		Tag lightbox = new Tag("div", "id=lightbox");
+		lighboxWrapper.add(lightbox);
+		body.add(lighboxWrapper);
 	}
 
 	/**
