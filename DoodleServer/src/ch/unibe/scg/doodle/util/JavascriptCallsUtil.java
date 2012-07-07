@@ -7,11 +7,12 @@ public class JavascriptCallsUtil {
 
 	/**
 	 * Let single quotes (') escape in order to prevent confusion.
+	 * 
 	 * @param html
 	 * @return
 	 */
 	private static String escape(String html) {
-		html.replaceAll("'", "\\'");
-		return null;
+		String escaped = html.replace("'", "\\'").replace("\n", "\\n");
+		return escaped;
 	}
 }

@@ -43,8 +43,8 @@ public class DoodleDebugView extends ViewPart {
 
 	public void runJavascript(String script) {
 		boolean sucessful = browser.execute(script);
-		System.out.println("SERVER: Running Javascript was "
-				+ (sucessful ? "" : "NOT ") + "successful");
+		if (!sucessful)
+			System.err.println("WARNING: Could not execute a javascript");
 	}
 
 }
