@@ -1,10 +1,12 @@
 #lightbox {
 	position: absolute;
+	box-shadow: 0 4pt 30pt black;
 	z-index: 2;
 }
 
 #overlay {
-	background-color: rgba(0,0,0,0.5);
+	background-color: black;
+	opacity: 0.7;
 	position: fixed;
 	z-index: 1;
 }
