@@ -18,7 +18,9 @@ import ch.unibe.scg.doodle.htmlgen.Attribute;
 import ch.unibe.scg.doodle.htmlgen.Attributes;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.server.DoodleServer;
+import ch.unibe.scg.doodle.server.util.DoodleImages;
 import ch.unibe.scg.doodle.server.views.HtmlShow;
+import ch.unibe.scg.doodle.util.FileUtil;
 import ch.unibe.scg.doodle.view.HtmlDocument;
 
 /**
@@ -51,6 +53,7 @@ public class Doodler {
 	 */
 	protected Doodler() {
 		body = new Tag("body");
+		setBackgroundImage();
 		prepareLightbox();
 		clickables = new IndexedObjectStorage();
 		instance = this;
@@ -58,6 +61,11 @@ public class Doodler {
 
 	public static Doodler instance() {
 		return instance;
+	}
+
+	private void setBackgroundImage() {
+		String texPath = DoodleImages.getDoodleTextureImageFilePath();
+		body.addAttribute("style", "background-image:url(" + texPath + ")");
 	}
 
 	private void prepareLightbox() {
@@ -68,6 +76,11 @@ public class Doodler {
 		lighboxWrapper.add(overlay);
 		Tag lightbox = new Tag("div", "id=lightbox");
 		lighboxWrapper.add(lightbox);
+		String closeImgFilePath = DoodleImages.getCloseWindowImageFilePath();
+		Tag closeImg = new Tag("img", "id=closeButton");
+		closeImg.addAttribute("src", closeImgFilePath);
+		closeImg.addAttribute("onclick", "javascript:hideLightbox()");
+		lighboxWrapper.add(closeImg);
 		body.add(lighboxWrapper);
 	}
 

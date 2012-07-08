@@ -15,10 +15,10 @@ Object.extend(Element, {
 	fullscreen: function(element) {
 		element = $(element);
 		var bounds = Position.windowBounds();
-		element.style.position = "absolute";
+		//element.style.position = "fixed";
 		element.style.left = element.style.top = 0;
-		element.style.width = bounds[0] + "px";
-		element.style.height = bounds[1] + "px";
+		element.style.width = "100%";
+		element.style.height = "100%";
 	},
 	center: function(element) {
 		element = $(element);
@@ -27,7 +27,7 @@ Object.extend(Element, {
 		var x = (bounds[0] - extent.width) / 2;
 		var y = (bounds[1] - extent.height) / 2;
 		x = x < 0 ? 0 : x; y = y < 0 ? 0 : y;
-		element.style.position = "absolute";
+		//element.style.position = "absolute";
 		element.style.left = x + "px";
 		element.style.top = y + "px";
 	}

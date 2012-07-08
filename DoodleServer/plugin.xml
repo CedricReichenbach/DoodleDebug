@@ -16,7 +16,7 @@
       <view
             category="ch.unibe.scg.doodle.views"
             class="ch.unibe.scg.doodle.server.views.DoodleDebugView"
-            icon="icons/sample.gif"
+            icon="icons/doodledebug-icon.png"
             id="ch.unibe.scg.doodle.views.DoodleDebugView"
             name="DoodleDebugView"
             restorable="true">

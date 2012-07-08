@@ -62,6 +62,7 @@ public class HtmlDocument {
 
 	/**
 	 * Loads JS code from files. Be careful: Order matters (I guess).
+	 * 
 	 * @return
 	 */
 	private String getJS() {
@@ -76,6 +77,7 @@ public class HtmlDocument {
 		js += JSUtil.getJSFromFile("dragdrop.js");
 		js += JSUtil.getJSFromFile("slider.js");
 		js += JSUtil.getJSFromFile("sound.js");
+		js += JSUtil.getJSFromFile("testExamples.js"); // XXX Only when developing
 		return js;
 	}
 
