@@ -6,6 +6,8 @@ import ch.unibe.scg.doodle.Doodler;
 import ch.unibe.scg.doodle.RealScratch;
 import ch.unibe.scg.doodle.Scratch;
 import ch.unibe.scg.doodle.ScratchFactory;
+import ch.unibe.scg.doodle.SmallScratch;
+import ch.unibe.scg.doodle.SmallScratchFactory;
 import ch.unibe.scg.doodle.plugins.ColorPlugin;
 import ch.unibe.scg.doodle.plugins.ImagePlugin;
 import ch.unibe.scg.doodle.plugins.ListPlugin;
@@ -32,6 +34,8 @@ public class DoodleModule extends AbstractModule {
 				RenderingRegistryProvider.class);
 		install(new FactoryModuleBuilder().implement(Scratch.class,
 				RealScratch.class).build(ScratchFactory.class));
+		install(new FactoryModuleBuilder().implement(Scratch.class,
+				SmallScratch.class).build(SmallScratchFactory.class));
 
 	}
 

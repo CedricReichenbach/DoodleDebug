@@ -33,6 +33,8 @@ public class Doodler {
 
 	@Inject
 	ScratchFactory scratchFactory;
+	@Inject
+	SmallScratchFactory smallScratchFactory;
 
 	private Tag body;
 
@@ -130,7 +132,12 @@ public class Doodler {
 		}
 		level++; // TODO: smarter, nicer solution for this
 		addClass(tag, "rendering");
-		Scratch scratch = scratchFactory.create(object);
+		Scratch scratch = null;
+		if (level <= 1) {
+			scratch = scratchFactory.create(object);
+		} else {
+			scratch = smallScratchFactory.create(object);
+		}
 		scratch.addCSSClass("level" + level);
 		scratch.setLevel(level);
 		if (level == 1)
