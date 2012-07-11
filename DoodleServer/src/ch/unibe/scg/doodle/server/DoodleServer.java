@@ -43,7 +43,7 @@ public class DoodleServer {
 	private void drawIntoLightbox(Object o) {
 		Tag lightboxContentWrapper = new Tag("div",
 				"class=lightboxContentWrapper");
-		Doodler.instance().renderInlineInto(o, lightboxContentWrapper);
+		Doodler.instance().renderIntoLightbox(o, lightboxContentWrapper);
 		String toRender = lightboxContentWrapper.toString();
 		Runnable javascriptExecuter = new JavascriptExecuter(
 				JavascriptCallsUtil.showInLightbox(toRender));

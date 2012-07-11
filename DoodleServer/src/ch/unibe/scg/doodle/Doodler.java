@@ -118,6 +118,12 @@ public class Doodler {
 		this.renderInline(object, tag, false);
 	}
 
+	public void renderIntoLightbox(Object object, Tag tag) {
+		level--;
+		this.renderInline(object, tag, true);
+		level++;
+	}
+
 	private void renderInline(Object object, Tag tag, boolean withClassName) {
 		if (object == null) {
 			object = new NullObject();

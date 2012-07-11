@@ -50,17 +50,17 @@ hr {
     float: left;
     padding: 2pt;
 }
-.printOut, .level1 {
+.printOut, .lightboxContentWrapper, .level1 {
     background-color: #FFFFFF;
 	border-width: 0;
     box-shadow: 0 0 2px #AAAAAA;
     overflow: hidden;
 	display: inline-block;
 }
-.printOut .level1 {
+.level1 {
 	cursor: pointer;
 }
-.printOut .level1:hover {
+.level1:hover {
     background-color: lightskyblue;
     box-shadow: 0 0 2px blue;
 }
