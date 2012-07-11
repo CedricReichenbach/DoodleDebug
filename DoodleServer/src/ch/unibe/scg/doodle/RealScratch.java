@@ -82,12 +82,17 @@ public class RealScratch implements Scratch {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void drawWholeWithName(Tag tag) {
-		writeClassName(renderingRegistry.lookup(object.getClass())
-				.getObjectTypeName(object), tag);
+		writeClassName(getObjectTypeName(), tag);
 		Tag subTag = new Tag("div");
 		subTag.addAttribute(new Attribute("class", classNames));
 		tag.add(subTag);
 		this.drawRendering(subTag);
+	}
+
+	@Override
+	public String getObjectTypeName() {
+		return renderingRegistry.lookup(object.getClass())
+				.getObjectTypeName(object);
 	}
 
 	void drawRendering(Tag tag) {

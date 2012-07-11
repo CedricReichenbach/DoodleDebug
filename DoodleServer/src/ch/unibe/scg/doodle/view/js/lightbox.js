@@ -30,6 +30,11 @@ Object.extend(Element, {
 		//element.style.position = "absolute";
 		element.style.left = x + "px";
 		element.style.top = y + "px";
+	},
+	outOfCorner: function(element) {
+		element = $(element);
+		element.style.left = "30px";
+		element.style.top = "30px";
 	}
 });
 function updateLightbox() {//ie6 fix hide all select elements not inside the lightbox
@@ -37,6 +42,7 @@ function updateLightbox() {//ie6 fix hide all select elements not inside the lig
 								{$$("select").invoke("setStyle", {visibility: "hidden"})
 								$("lightbox").descendants().each(function(item) {item.setStyle({visibility: "visible"})})}};
 	Element.fullscreen("overlay");
-	Element.center("lightbox");
+	Element.outOfCorner("lightbox");
+	//Element.center("lightbox");
 	Element.show("lightbox");
 };

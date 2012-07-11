@@ -28,4 +28,6 @@ public interface Scratch {
 
 	public abstract void setObjectID(int store);
 
+	abstract String getObjectTypeName();
+
 }

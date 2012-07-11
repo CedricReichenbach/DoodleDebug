@@ -20,6 +20,7 @@ function showLightbox() {
 function hideLightbox() {
 	document.getElementById('lightboxWrapper').style.visibility = 'hidden';
 	document.getElementById('lightboxWrapper').style.height = '0';
+	window.location = '-1'; // code for lightbox closing
 }
 
 function placeCloseButton() {

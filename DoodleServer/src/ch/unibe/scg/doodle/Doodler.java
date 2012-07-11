@@ -18,6 +18,7 @@ import ch.unibe.scg.doodle.htmlgen.Attribute;
 import ch.unibe.scg.doodle.htmlgen.Attributes;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.server.DoodleServer;
+import ch.unibe.scg.doodle.server.LightboxStack;
 import ch.unibe.scg.doodle.server.util.DoodleImages;
 import ch.unibe.scg.doodle.server.views.HtmlShow;
 import ch.unibe.scg.doodle.util.FileUtil;
@@ -111,17 +112,29 @@ public class Doodler {
 	}
 
 	public void renderInlineInto(Object object, Tag tag) {
-		this.renderInline(object, tag, true);
+		renderInline(object, tag, true);
 	}
 
 	public void renderInlineIntoWithoutClassName(Object object, Tag tag) {
-		this.renderInline(object, tag, false);
+		renderInline(object, tag, false);
 	}
 
-	public void renderIntoLightbox(Object object, Tag tag) {
+	public void renderIntoLightbox(LightboxStack stack, Tag tag) {
 		level--;
-		this.renderInline(object, tag, true);
+		renderBreadcrumbs(stack, tag);
+		renderInline(stack.top(), tag, false);
 		level++;
+	}
+
+	private void renderBreadcrumbs(LightboxStack stack, Tag tag) {
+		Tag breadcrumbs = new Tag("div", "id=breadcrumbs");
+		List<Object> objects = stack.bottomUpList();
+		for (Object o : objects) {
+			breadcrumbs.add(">");
+			String name = scratchFactory.create(o).getObjectTypeName();
+			breadcrumbs.add(name);
+		}
+		tag.add(breadcrumbs);
 	}
 
 	private void renderInline(Object object, Tag tag, boolean withClassName) {

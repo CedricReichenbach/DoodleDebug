@@ -17,6 +17,11 @@ public class DoodleLocationListener implements LocationListener {
 			System.out.println("SERVER: Now attempting to draw object with ID: " + id);
 			event.doit = false; // prevent any actual changing of location
 
+			if (id == -1) { // code for lighbox closing
+				DoodleServer.instance().lightboxClosed();
+				return;
+			}
+			
 			DoodleServer.instance().drawObjectWithID(id);
 		} catch (NumberFormatException e) {
 			// nothing to do here (must have been a real link)

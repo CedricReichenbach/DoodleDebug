@@ -26,6 +26,7 @@ public class DoodleServer {
 	}
 
 	private IndexedObjectStorage storage;
+	private LightboxStack stack;
 
 	public void setStorage(IndexedObjectStorage storage) {
 		this.storage = storage;
@@ -41,9 +42,15 @@ public class DoodleServer {
 	}
 
 	private void drawIntoLightbox(Object o) {
+		if (stack == null) {
+			stack = new LightboxStack(o);
+		} else {
+			stack.push(o);
+		}
+
 		Tag lightboxContentWrapper = new Tag("div",
 				"class=lightboxContentWrapper");
-		Doodler.instance().renderIntoLightbox(o, lightboxContentWrapper);
+		Doodler.instance().renderIntoLightbox(stack, lightboxContentWrapper);
 		String toRender = lightboxContentWrapper.toString();
 		Runnable javascriptExecuter = new JavascriptExecuter(
 				JavascriptCallsUtil.showInLightbox(toRender));
@@ -58,5 +65,9 @@ public class DoodleServer {
 
 	public void firstRun() {
 		this.clearOutput();
+	}
+
+	public void lightboxClosed() {
+		this.stack = null;
 	}
 }
