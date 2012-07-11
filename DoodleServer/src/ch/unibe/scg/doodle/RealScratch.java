@@ -30,7 +30,7 @@ import com.google.inject.assistedinject.Assisted;
  */
 public class RealScratch implements Scratch {
 
-	private Object object;
+	protected Object object;
 
 	@Inject
 	RenderingRegistry renderingRegistry;
@@ -47,7 +47,7 @@ public class RealScratch implements Scratch {
 	@Inject
 	Doodler doodler;
 
-	private DoodleCanvas canvas;
+	protected DoodleCanvas canvas;
 
 	private int level;
 
@@ -95,20 +95,24 @@ public class RealScratch implements Scratch {
 
 		if (object instanceof Doodleable) {
 			tag.addAttribute(new Attribute("class", "Scratch"));
-			try {
-				((Doodleable) object).drawOn(this.canvas);
-			} catch (Exception e) {
-				ErrorDrawer errorDrawer = new ErrorDrawer(e);
-				try {
-					errorDrawer.drawOn(this.canvas);
-				} catch (Exception e1) {
-					throw new RuntimeException(e1);
-				}
-			}
+			drawDoodleable();
 			Rendering<DoodleCanvas> rendering = doodleCanvasRenderingProvider.get();
 			rendering.render(this.canvas, tag);
 		} else {
 			this.drawDefault(tag);
+		}
+	}
+
+	protected void drawDoodleable() {
+		try {
+			((Doodleable) object).drawOn(this.canvas);
+		} catch (Exception e) {
+			ErrorDrawer errorDrawer = new ErrorDrawer(e);
+			try {
+				errorDrawer.drawOn(this.canvas);
+			} catch (Exception e1) {
+				throw new RuntimeException(e1);
+			}
 		}
 	}
 

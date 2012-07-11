@@ -44,10 +44,6 @@ public class Doodler {
 
 	private IndexedObjectStorage clickables;
 
-	private final File FILE = new File(System.getProperty("java.io.tmpdir") // Win7:
-																			// C:\Users\<user>\AppData\Local\Temp
-			+ "/doodledebug/output.html");
-
 	private static Doodler instance; // XXX Sorry, Guice...
 
 	/**
@@ -109,10 +105,6 @@ public class Doodler {
 		HtmlDocument htmlDocument = new HtmlDocument();
 		htmlDocument.setBody(body);
 
-		// for testing
-		if (debugMode)
-			storeToFile(FILE, htmlDocument.toString());
-
 		DoodleServer.instance().setStorage(clickables);
 		Runnable htmlShow = new HtmlShow(htmlDocument.toString());
 		Display.getDefault().syncExec(htmlShow);
@@ -164,27 +156,5 @@ public class Doodler {
 			}
 		}
 		tag.addAttribute(new Attribute("class", className));
-	}
-
-	private void storeToFile(File file, String html) {
-		try {
-			new File(file.getParent()).mkdirs();
-			FileWriter fw = new FileWriter(file.getPath());
-			BufferedWriter buf = new BufferedWriter(fw);
-			buf.write(html);
-			buf.close();
-		} catch (IOException e) {
-			System.err.println("SERVER: Could not write into file " + file
-					+ "\n" + e.getMessage());
-		}
-	}
-
-	private void openInBrowser(File file) {
-		URI uri = file.toURI();
-		try {
-			Desktop.getDesktop().browse(uri);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
 	}
 }

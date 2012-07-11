@@ -57,10 +57,10 @@ hr {
     overflow: hidden;
 	display: inline-block;
 }
-.level1 {
+.printOut .level1 {
 	cursor: pointer;
 }
-.level1:hover {
+.printOut .level1:hover {
     background-color: lightskyblue;
     box-shadow: 0 0 2px blue;
 }
