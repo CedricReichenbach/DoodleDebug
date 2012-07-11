@@ -50,10 +50,10 @@ hr {
     float: left;
     padding: 2pt;
 }
-.printOut, .lightboxContentWrapper, .level1 {
+.printOut, #lightboxContentWrapper, .level1 {
     background-color: #FFFFFF;
 	border-width: 0;
-    box-shadow: 0 0 2px #AAAAAA;
+    box-shadow: 0 0 2pt #AAAAAA;
     overflow: hidden;
 	display: inline-block;
 }
@@ -67,7 +67,7 @@ hr {
 .ClassName {
     color: #0a8;
     font-size: 8pt;
-	margin-bottom: -4pt;
+	margin-bottom: -4px;
 	position: relative; /* Important to bring text in front of respective content box */
 }
 .column {
@@ -79,7 +79,7 @@ hr {
 .StringRendering {
     margin: 0;
 }
-.ImagePlugin img {
+.ImagePlugin img { /* not wanted here! */
     max-height: 90pt;
     max-width: 90pt;
 }

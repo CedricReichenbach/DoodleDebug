@@ -2,12 +2,15 @@
 	position: absolute;
 	box-shadow: 0 4pt 30pt black;
 	z-index: 2;
+	padding: 4pt;
+	background-color: rgba(150,150,150,0.5);
+	border: 1px outset #666;
 }
 
 #closeButton {
 	position: absolute;
-	margin-top: -16px;
-	margin-left: -16px;
+	margin-top: -6px;
+	margin-left: -10px;
 	z-index: 2;
 	cursor: pointer;
 }
@@ -25,4 +28,16 @@
 
 #lightboxWrapper {
 	height: 0;
+}
+
+/* lightbox content ************************************* */
+
+#lightboxContentWrapper {
+	border: 1px inset #666;
+	padding: 4px;
+}
+
+#breadcrumbs {
+	background-color: #eee;
+	border: 1px solid #ccc;
 }

@@ -49,7 +49,7 @@ public class DoodleServer {
 		}
 
 		Tag lightboxContentWrapper = new Tag("div",
-				"class=lightboxContentWrapper");
+				"id=lightboxContentWrapper");
 		Doodler.instance().renderIntoLightbox(stack, lightboxContentWrapper);
 		String toRender = lightboxContentWrapper.toString();
 		Runnable javascriptExecuter = new JavascriptExecuter(
@@ -65,6 +65,7 @@ public class DoodleServer {
 
 	public void firstRun() {
 		this.clearOutput();
+		this.lightboxClosed();
 	}
 
 	public void lightboxClosed() {

@@ -19,7 +19,7 @@ public class DoodleImages {
 	}
 
 	public static String getCloseWindowImageFilePath() {
-		return DoodleFiles.getFilePath("img/close-button.png").toFile().toURI()
+		return DoodleFiles.getFilePath("img/close-button_16.png").toFile().toURI()
 				.toString();
 	}
 
