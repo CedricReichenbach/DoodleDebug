@@ -129,11 +129,16 @@ public class Doodler {
 	private void renderBreadcrumbs(LightboxStack stack, Tag tag) {
 		Tag breadcrumbs = new Tag("div", "id=breadcrumbs");
 		List<Object> objects = stack.bottomUpList();
+		Tag breadcrumb = null;
 		for (Object o : objects) {
-			breadcrumbs.add(">");
+			breadcrumb = new Tag("div", "class=breadcrumb");
+			breadcrumb.add(">");
 			String name = scratchFactory.create(o).getObjectTypeName();
-			breadcrumbs.add(name);
+			breadcrumb.add(name);
+			breadcrumbs.add(breadcrumb);
 		}
+		if (!(breadcrumb == null))
+			breadcrumb.addAttribute("id", "activeBreadcrumb"); // last one
 		tag.add(breadcrumbs);
 	}
 

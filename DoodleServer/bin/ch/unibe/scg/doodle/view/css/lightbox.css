@@ -1,8 +1,8 @@
 #lightbox {
 	position: absolute;
-	box-shadow: 0 4pt 30pt black;
+	box-shadow: 0 4px 30px black;
 	z-index: 2;
-	padding: 4pt;
+	padding: 4px;
 	background-color: rgba(150,150,150,0.5);
 	border: 1px outset #666;
 }
@@ -40,4 +40,29 @@
 #breadcrumbs {
 	background-color: #eee;
 	border: 1px solid #ccc;
+	padding: 2px;
+}
+
+.breadcrumb {
+	display: inline-block;
+	background-color: #999;	
+	color: white;
+	border: 1px solid #666;
+	box-shadow: 0 0 2px #666 inset;
+	padding: 0 2px;
+	font-weight: 500;
+}
+
+#activeBreadcrumb {
+	background-color: #5a5;
+	box-shadow: 0 0 4px 3px #383 inset;
+	border-color: #383;
+	font-weight: bold;
+}
+
+#activeBreadcrumb:hover, .breadcrumb:hover {
+	background-color: #6bb;
+	box-shadow: 0 0 4px 3px #499 inset;
+	border-color: #499;
+	cursor: pointer;
 }
