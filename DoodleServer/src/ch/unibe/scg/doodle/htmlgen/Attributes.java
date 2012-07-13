@@ -169,4 +169,19 @@ public class Attributes extends LinkedList<Attribute> {
 		out.deleteCharAt(out.length() - 1);
 		return out.toString();
 	}
+
+	/**
+	 * Return Attribute with specified key (= attribute name) or null if there's
+	 * no such one.
+	 * 
+	 * @param key
+	 * @return
+	 */
+	public Attribute getAttributeWithKey(String key) {
+		for (Attribute a : this) {
+			if (a.getAttribute().equals(key))
+				return a;
+		}
+		return null;
+	}
 }

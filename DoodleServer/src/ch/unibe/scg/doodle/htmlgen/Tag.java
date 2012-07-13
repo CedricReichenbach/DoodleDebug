@@ -120,4 +120,14 @@ public class Tag extends LinkedList {
 		this.addAttribute(new Attribute(name, value));
 	}
 
+	public void addCSSClass(String className) {
+		Attribute classAttribute = attributes.getAttributeWithKey("class");
+		if (classAttribute == null) {
+			this.addAttribute("class", className);
+		} else {
+			classAttribute
+					.setValue(classAttribute.getValue() + " " + className);
+		}
+	}
+
 }

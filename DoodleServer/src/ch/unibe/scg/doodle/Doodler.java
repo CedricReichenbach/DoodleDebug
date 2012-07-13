@@ -130,20 +130,29 @@ public class Doodler {
 	private void renderBreadcrumbs(LightboxStack stack, Tag tag) {
 		Tag breadcrumbs = new Tag("div", "id=breadcrumbs");
 		List<Object> objects = stack.bottomUpList();
-		Tag breadcrumb = null;
 		int depth = objects.size() - 1;
-		for (Object o : objects) {
-			breadcrumb = new Tag("div", "class=breadcrumb");
+		for (int i = 0; i < objects.size() - 1; i++) {
+			Object o = objects.get(i);
+			Tag breadcrumb = new Tag("div", "class=breadcrumb");
+			breadcrumb.addCSSClass("inactiveBreadcrumb");
 			breadcrumb.addAttribute("onclick", "javascript:window.location="
 					+ (DoodleLocationCodes.LIGHTBOX_STACK_OFFSET - depth));
-			breadcrumb.add(">");
 			String name = scratchFactory.create(o).getObjectTypeName();
 			breadcrumb.add(name);
 			breadcrumbs.add(breadcrumb);
+			Tag between = new Tag("div", "class=betweenBreadcrumbs");
+			between.add(">");
+			breadcrumbs.add(between);
 			depth--;
 		}
-		if (!(breadcrumb == null))
+		if (!objects.isEmpty()) { // handle last one
+			Object o = objects.get(objects.size() - 1);
+			Tag breadcrumb = new Tag("div", "class=breadcrumb");
 			breadcrumb.addAttribute("id", "activeBreadcrumb"); // last one
+			String name = scratchFactory.create(o).getObjectTypeName();
+			breadcrumb.add(name);
+			breadcrumbs.add(breadcrumb);
+		}
 		tag.add(breadcrumbs);
 	}
 

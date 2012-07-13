@@ -53,6 +53,10 @@
 	font-weight: 500;
 }
 
+.betweenBreadcrumbs {
+	display: inline-block;
+}
+
 #activeBreadcrumb {
 	background-color: #5a5;
 	box-shadow: 0 0 4px 3px #383 inset;
@@ -60,7 +64,7 @@
 	font-weight: bold;
 }
 
-#activeBreadcrumb:hover, .breadcrumb:hover {
+.inactiveBreadcrumb:hover {
 	background-color: #6bb;
 	box-shadow: 0 0 4px 3px #499 inset;
 	border-color: #499;
