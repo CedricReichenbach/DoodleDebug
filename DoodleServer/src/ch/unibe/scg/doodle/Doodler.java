@@ -20,6 +20,7 @@ import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.server.DoodleServer;
 import ch.unibe.scg.doodle.server.LightboxStack;
 import ch.unibe.scg.doodle.server.util.DoodleImages;
+import ch.unibe.scg.doodle.server.views.DoodleLocationCodes;
 import ch.unibe.scg.doodle.server.views.HtmlShow;
 import ch.unibe.scg.doodle.util.FileUtil;
 import ch.unibe.scg.doodle.view.HtmlDocument;
@@ -130,12 +131,16 @@ public class Doodler {
 		Tag breadcrumbs = new Tag("div", "id=breadcrumbs");
 		List<Object> objects = stack.bottomUpList();
 		Tag breadcrumb = null;
+		int depth = objects.size() - 1;
 		for (Object o : objects) {
 			breadcrumb = new Tag("div", "class=breadcrumb");
+			breadcrumb.addAttribute("onclick", "javascript:window.location="
+					+ (DoodleLocationCodes.LIGHTBOX_STACK_OFFSET - depth));
 			breadcrumb.add(">");
 			String name = scratchFactory.create(o).getObjectTypeName();
 			breadcrumb.add(name);
 			breadcrumbs.add(breadcrumb);
+			depth--;
 		}
 		if (!(breadcrumb == null))
 			breadcrumb.addAttribute("id", "activeBreadcrumb"); // last one

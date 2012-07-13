@@ -34,4 +34,17 @@ public class LightboxStack implements Cloneable {
 		list.add(top);
 		return list;
 	}
+
+	/**
+	 * Removes a number of top elements from this stack. Does not handle
+	 * Nullpointer exceptions.
+	 * 
+	 * @param num
+	 */
+	public void cutOffTop(int num) {
+		for (int i = 0; i < num; i++) {
+			this.top = tail.top;
+			this.tail = this.tail.tail;
+		}
+	}
 }
