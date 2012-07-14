@@ -123,7 +123,9 @@ public class Doodler {
 	public void renderIntoLightbox(LightboxStack stack, Tag tag) {
 		level--;
 		renderBreadcrumbs(stack, tag);
-		renderInline(stack.top(), tag, false);
+		Tag lightboxRendering = new Tag("div", "id=lightboxRendering");
+		renderInline(stack.top(), lightboxRendering, false);
+		tag.add(lightboxRendering);
 		level++;
 	}
 
@@ -150,6 +152,8 @@ public class Doodler {
 			Tag breadcrumb = new Tag("div", "class=breadcrumb");
 			breadcrumb.addAttribute("id", "activeBreadcrumb"); // last one
 			String name = scratchFactory.create(o).getObjectTypeName();
+			if (o instanceof NullObject)
+				name = "?";
 			breadcrumb.add(name);
 			breadcrumbs.add(breadcrumb);
 		}

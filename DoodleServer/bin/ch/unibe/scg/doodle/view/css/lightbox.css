@@ -41,6 +41,8 @@
 	background-color: #eee;
 	border: 1px solid #ccc;
 	padding: 2px;
+	margin-bottom: 4px;
+	border-radius: 1px;
 }
 
 .breadcrumb {
@@ -51,6 +53,7 @@
 	box-shadow: 0 0 2px #666 inset;
 	padding: 0 2px;
 	font-weight: 500;
+	border-radius: 1px;
 }
 
 .betweenBreadcrumbs {
@@ -65,8 +68,20 @@
 }
 
 .inactiveBreadcrumb:hover {
-	background-color: #6bb;
-	box-shadow: 0 0 4px 3px #499 inset;
-	border-color: #499;
+	color: #444;
+	background-color: #8dd;
+	box-shadow: 0 0 1px 1px #444;
+	border-color: #8dd;
 	cursor: pointer;
+}
+
+.inactiveBreadcrumb:active {
+    box-shadow: none;
+    border-color: #444;
+}
+
+/* where objects are rendered into */
+#lightboxRendering {
+	background-color: #eee;
+	padding: 4px;
 }

@@ -64,6 +64,10 @@ hr {
     background-color: lightskyblue;
     box-shadow: 0 0 2px blue;
 }
+.level1:active {
+	background-color: #58f;
+	box-shadow: 0 0 2px black;
+}
 .ClassName {
     color: #0a8;
     font-size: 8pt;

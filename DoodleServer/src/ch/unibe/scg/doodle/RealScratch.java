@@ -91,8 +91,8 @@ public class RealScratch implements Scratch {
 
 	@Override
 	public String getObjectTypeName() {
-		return renderingRegistry.lookup(object.getClass())
-				.getObjectTypeName(object);
+		return renderingRegistry.lookup(object.getClass()).getObjectTypeName(
+				object);
 	}
 
 	void drawRendering(Tag tag) {
@@ -101,7 +101,8 @@ public class RealScratch implements Scratch {
 		if (object instanceof Doodleable) {
 			tag.addAttribute(new Attribute("class", "Scratch"));
 			drawDoodleable();
-			Rendering<DoodleCanvas> rendering = doodleCanvasRenderingProvider.get();
+			Rendering<DoodleCanvas> rendering = doodleCanvasRenderingProvider
+					.get();
 			rendering.render(this.canvas, tag);
 		} else {
 			this.drawDefault(tag);
