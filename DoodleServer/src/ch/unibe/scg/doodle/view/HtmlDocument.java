@@ -64,7 +64,7 @@ public class HtmlDocument {
 	 */
 	private String getJS() {
 		String js = "";
-		js += JSUtil.getJSFromFile("doodleDebugCodeExchange.js");
+		js += JSUtil.getJSFromFile("doodleDebug.js");
 		js += JSUtil.getJSFromFile("prototype.js");
 		js += JSUtil.getJSFromFile("scriptaculous.js");
 		js += JSUtil.getJSFromFile("lightbox.js");

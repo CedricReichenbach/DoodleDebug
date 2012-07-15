@@ -153,8 +153,8 @@ public class Doodler {
 			Object o = objects.get(i);
 			Tag breadcrumb = new Tag("div", "class=breadcrumb");
 			breadcrumb.addCSSClass("inactiveBreadcrumb");
-			breadcrumb.addAttribute("onclick", "javascript:window.location="
-					+ (DoodleLocationCodes.LIGHTBOX_STACK_OFFSET - depth));
+			breadcrumb.addAttribute("onclick", "javascript:breadcrumbsBack("
+					+ depth + ")");
 			String name = scratchFactory.create(o).getObjectTypeName();
 			breadcrumb.add(name);
 			breadcrumbs.add(breadcrumb);
