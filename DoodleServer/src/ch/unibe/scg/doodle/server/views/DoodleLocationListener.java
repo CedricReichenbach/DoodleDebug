@@ -3,6 +3,7 @@ package ch.unibe.scg.doodle.server.views;
 import org.eclipse.swt.browser.LocationEvent;
 import org.eclipse.swt.browser.LocationListener;
 
+import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 import ch.unibe.scg.doodle.server.DoodleServer;
 import ch.unibe.scg.doodle.simon.SimonServer;
 
@@ -15,9 +16,10 @@ public class DoodleLocationListener implements LocationListener {
 
 			int id = Integer.parseInt(event.location.replaceFirst(
 					"doodledebug:", ""));
-			System.out
-					.println("SERVER: Now attempting to draw object with ID: "
-							+ id);
+			if (DoodleDebugProperties.developMode())
+				System.out
+						.println("SERVER: Now attempting to draw object with ID: "
+								+ id);
 			event.doit = false; // prevent any actual changing of location
 
 			if (id == DoodleLocationCodes.LIGHTBOX_CLOSE) {
