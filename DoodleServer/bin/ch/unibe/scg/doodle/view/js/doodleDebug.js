@@ -34,13 +34,20 @@ function placeCloseButton() {
 }
 
 function renderObjectInLightbox(id) {
-	window.location = id;
+	messageToJavaPlugin(id);
 }
 
 function breadcrumbsBack(depth) {
-	window.location = LIGHTBOX_STACK_OFFSET - depth;
+	messageToJavaPlugin(LIGHTBOX_STACK_OFFSET - depth);
 }
 
 function lighboxCloseMessage() {
-	window.location = LIGHTBOX_CLOSE;
+	messageToJavaPlugin(LIGHTBOX_CLOSE);
+}
+
+/**
+ * Send a message to DoodleDebug plugin. Message should be a number.
+ */
+function messageToJavaPlugin(message) {
+	window.location = 'doodledebug:'+message;
 }

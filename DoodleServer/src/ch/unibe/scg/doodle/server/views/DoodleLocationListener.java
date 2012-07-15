@@ -13,8 +13,8 @@ public class DoodleLocationListener implements LocationListener {
 		try {
 			DoodleServer doodleServer = DoodleServer.instance();
 
-			int id = Integer
-					.parseInt(event.location.replaceFirst("about:", ""));
+			int id = Integer.parseInt(event.location.replaceFirst(
+					"doodledebug:", ""));
 			System.out
 					.println("SERVER: Now attempting to draw object with ID: "
 							+ id);
