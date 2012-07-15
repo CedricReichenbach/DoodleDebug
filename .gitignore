@@ -1,5 +1,4 @@
-/DoodleDebug/bin/
-/DoodleServer/bin/
+*.class
 output.html
 *.aux
 *.synctex.gz
