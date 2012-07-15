@@ -130,4 +130,13 @@ public class Tag extends LinkedList {
 		}
 	}
 
+	public void addStyle(String style) {
+		Attribute classAttribute = attributes.getAttributeWithKey("style");
+		if (classAttribute == null) {
+			this.addAttribute("style", style);
+		} else {
+			classAttribute.setValue(classAttribute.getValue() + ";" + style);
+		}
+	}
+
 }

@@ -7,29 +7,21 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
 
+import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
+
 public class HtmlObserver {
 
 	private final File FILE;
-	/**
-	 * Enables/disables storing of html code into file for introspection.
-	 */
-	private boolean developMode = true;
-	/**
-	 * Only effective if developMode is on.
-	 */
-	private boolean debugMode = false;
 
 	public HtmlObserver() {
-		// Win7: C:\Users\<user>\AppData\Local\Temp\doodledebug\output.html
-		FILE = new File(System.getProperty("java.io.tmpdir")
-				+ "/doodledebug/output.html");
+		FILE = DoodleDebugProperties.tempFileForOutput();
 	}
 
 	public void htmlChangedTo(String text) {
 		// for testing
-		if (developMode) {
+		if (DoodleDebugProperties.developMode()) {
 			storeToFile(FILE, text);
-			if (debugMode)
+			if (DoodleDebugProperties.openInBrowser())
 				openInBrowser(FILE);
 		}
 	}

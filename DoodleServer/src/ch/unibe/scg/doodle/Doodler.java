@@ -17,6 +17,7 @@ import ch.unibe.scg.doodle.helperClasses.NullObject;
 import ch.unibe.scg.doodle.htmlgen.Attribute;
 import ch.unibe.scg.doodle.htmlgen.Attributes;
 import ch.unibe.scg.doodle.htmlgen.Tag;
+import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 import ch.unibe.scg.doodle.server.DoodleServer;
 import ch.unibe.scg.doodle.server.LightboxStack;
 import ch.unibe.scg.doodle.server.util.DoodleImages;
@@ -40,8 +41,6 @@ public class Doodler {
 
 	private Tag body;
 
-	private final boolean debugMode = true; // XXX
-
 	private int level;
 
 	private IndexedObjectStorage clickables;
@@ -51,9 +50,14 @@ public class Doodler {
 	/**
 	 * Creates a new Doodler for visualizing objects 1 Doodler = 1 window
 	 */
+	@SuppressWarnings("unchecked")
 	protected Doodler() {
 		body = new Tag("body");
 		setBackgroundImage();
+
+		if (DoodleDebugProperties.betaMode())
+			this.createBetaInfo(body);
+
 		prepareLightbox();
 		clickables = new IndexedObjectStorage();
 		instance = this;
@@ -66,6 +70,18 @@ public class Doodler {
 	private void setBackgroundImage() {
 		String texPath = DoodleImages.getDoodleTextureImageFilePath();
 		body.addAttribute("style", "background-image:url(" + texPath + ")");
+	}
+
+	@SuppressWarnings("unchecked")
+	private void createBetaInfo(Tag tag) {
+		Tag info = new Tag("div", "id=betaInfo");
+		String email = DoodleDebugProperties.getFeedbackMailAddress();
+		Tag mailto = new Tag("a", "href=mailto:" + email);
+		mailto.add(email);
+		info.add("<b>DoodleDebug <i>beta</i></b> - bugs & feedback to ");
+		info.add(mailto);
+		tag.add(info);
+		body.addStyle("padding-top:23px");
 	}
 
 	private void prepareLightbox() {

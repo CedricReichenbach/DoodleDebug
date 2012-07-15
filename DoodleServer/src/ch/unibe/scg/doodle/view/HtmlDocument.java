@@ -1,9 +1,5 @@
 package ch.unibe.scg.doodle.view;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.view.css.CSSUtil;
 import ch.unibe.scg.doodle.view.js.JSUtil;
@@ -45,6 +41,7 @@ public class HtmlDocument {
 		return style;
 	}
 
+	@SuppressWarnings("unchecked")
 	private Tag makeJavascript() {
 		Tag js = new Tag("script", "type=text/javascript");
 		js.add(getJS());
@@ -77,7 +74,8 @@ public class HtmlDocument {
 		js += JSUtil.getJSFromFile("dragdrop.js");
 		js += JSUtil.getJSFromFile("slider.js");
 		js += JSUtil.getJSFromFile("sound.js");
-		js += JSUtil.getJSFromFile("testExamples.js"); // XXX Only when developing
+		js += JSUtil.getJSFromFile("testExamples.js"); // XXX Only when
+														// developing
 		return js;
 	}
 
