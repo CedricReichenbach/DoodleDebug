@@ -66,7 +66,9 @@ public class HtmlDocument {
 	private String getJS() {
 		String js = "";
 		js += JSUtil.getJSFromFile("doodleDebug.js");
-		js += JSUtil.getJSFromFile("prototype.js"); // XXX: Slow! ~ 1s
+		js += JSUtil.getJSFromFile("prototype_compressed.js"); // uncompressed
+																// was too slow!
+																// (> 1s)
 		js += JSUtil.getJSFromFile("scriptaculous.js");
 		js += JSUtil.getJSFromFile("lightbox.js");
 		js += JSUtil.getJSFromFile("builder.js");
