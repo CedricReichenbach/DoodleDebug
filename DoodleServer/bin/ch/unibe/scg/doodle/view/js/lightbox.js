@@ -33,8 +33,6 @@ Object.extend(Element, {
 	},
 	outOfCorner: function(element) {
 		element = $(element);
-		element.style.left = "30px";
-		element.style.top = "30px";
 	}
 });
 function updateLightbox() {//ie6 fix hide all select elements not inside the lightbox

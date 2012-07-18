@@ -3,8 +3,10 @@ package ch.unibe.scg.doodle.server.views;
 import java.awt.Desktop;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.net.URI;
 
 import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
@@ -29,8 +31,10 @@ public class HtmlObserver {
 	private void storeToFile(File file, String html) {
 		try {
 			new File(file.getParent()).mkdirs();
-			FileWriter fw = new FileWriter(file.getPath());
-			BufferedWriter buf = new BufferedWriter(fw);
+			FileOutputStream stream = new FileOutputStream(file);
+			OutputStreamWriter writer = new OutputStreamWriter(stream, "UTF-8");
+			// FileWriter fw = new FileWriter(file.getPath());
+			BufferedWriter buf = new BufferedWriter(writer);
 			buf.write(html);
 			buf.close();
 		} catch (IOException e) {

@@ -18,7 +18,7 @@
             class="ch.unibe.scg.doodle.server.views.DoodleDebugView"
             icon="icons/doodledebug-icon.png"
             id="ch.unibe.scg.doodle.views.DoodleDebugView"
-            name="DoodleDebugView"
+            name="DoodleDebug"
             restorable="true">
       </view>
    </extension>

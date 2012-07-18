@@ -159,7 +159,7 @@ public class Doodler {
 			breadcrumb.add(name);
 			breadcrumbs.add(breadcrumb);
 			Tag between = new Tag("div", "class=betweenBreadcrumbs");
-			between.add(">");
+			between.add("&#x25B6;"); // Unicode: BLACK RIGHT-POINTING TRIANGLE
 			breadcrumbs.add(between);
 			depth--;
 		}

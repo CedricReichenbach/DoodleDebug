@@ -23,6 +23,7 @@ public class HtmlDocument {
 	@SuppressWarnings("unchecked")
 	private Tag makeHead() {
 		Tag header = new Tag("head");
+		header.add("<meta charset=\"utf-8\">");
 		header.add("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=100\" >"); // for
 																					// IE9
 																					// compatibility
