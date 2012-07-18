@@ -6,12 +6,17 @@ function addCode(code) {
 	document.body.innerHTML += code;
 }
 
+/* Add CSS to current one */
+function addCSS(css) {
+	var style = '<style type="text/css">'+css+'</style>'
+	document.head.innerHTML += style;
+}
+
 /* Renders given code inside a lightbox (creates one if necessary). */
 function showInLightbox(code) {
 	var lightbox = document.getElementById('lightbox');
 	lightbox.innerHTML = code;
 	updateLightbox();
-	placeCloseButton();
 	showLightbox();
 }
 
@@ -26,13 +31,6 @@ function hideLightbox() {
 	lightboxCloseMessage();
 }
 
-function placeCloseButton() {
-	var closeButton = document.getElementById("closeButton");
-	var lightbox = document.getElementById("lightbox");
-	closeButton.style.top = lightbox.style.top;
-	closeButton.style.left = (parseFloat(lightbox.style.left,10) + lightbox.getWidth())+"px";
-}
-
 function renderObjectInLightbox(id) {
 	messageToJavaPlugin(id);
 }
@@ -41,7 +39,7 @@ function breadcrumbsBack(depth) {
 	messageToJavaPlugin(LIGHTBOX_STACK_OFFSET - depth);
 }
 
-function lighboxCloseMessage() {
+function lightboxCloseMessage() {
 	messageToJavaPlugin(LIGHTBOX_CLOSE);
 }
 

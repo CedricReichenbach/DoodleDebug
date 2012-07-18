@@ -19,4 +19,16 @@ public class CSSCollection extends ArrayList<String> {
 		}
 		return all;
 	}
+
+	/**
+	 * Return all CSS and remove everything.
+	 * 
+	 * @return
+	 */
+	public static String flushAllCSS() {
+		String css = getAllCSS();
+		CSSCollection.instance = null;
+		return css;
+	}
+
 }

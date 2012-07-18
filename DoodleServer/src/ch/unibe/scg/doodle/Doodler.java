@@ -23,7 +23,10 @@ import ch.unibe.scg.doodle.server.LightboxStack;
 import ch.unibe.scg.doodle.server.util.DoodleImages;
 import ch.unibe.scg.doodle.server.views.DoodleLocationCodes;
 import ch.unibe.scg.doodle.server.views.HtmlShow;
+import ch.unibe.scg.doodle.server.views.JavascriptExecuter;
 import ch.unibe.scg.doodle.util.FileUtil;
+import ch.unibe.scg.doodle.util.JavascriptCallsUtil;
+import ch.unibe.scg.doodle.view.CSSCollection;
 import ch.unibe.scg.doodle.view.HtmlDocument;
 
 /**
@@ -52,13 +55,20 @@ public class Doodler {
 	 */
 	@SuppressWarnings("unchecked")
 	protected Doodler() {
+		HtmlDocument htmlDocument = new HtmlDocument();
 		body = new Tag("body");
+		htmlDocument.setBody(body);
+
 		setBackgroundImage();
 
 		if (DoodleDebugProperties.betaMode())
 			this.createBetaInfo(body);
 
 		prepareLightbox();
+
+		Runnable htmlShow = new HtmlShow(htmlDocument.toString());
+		Display.getDefault().syncExec(htmlShow);
+
 		clickables = new IndexedObjectStorage();
 		instance = this;
 	}
@@ -116,16 +126,19 @@ public class Doodler {
 		Scratch scratch = scratchFactory.create(o);
 		scratch.addCSSClass("printOut");
 		this.level = 0;
-		body.addAttribute(new Attribute("class", "rendering"));
-		scratch.drawWholeWithName(body);
-
-		body.add(new Tag("hr", "class=betweenDrawCalls"));
-		HtmlDocument htmlDocument = new HtmlDocument();
-		htmlDocument.setBody(body);
+		Tag printOutWrapper = new Tag("div", "class=printOutWrapper");
+		printOutWrapper.addAttribute(new Attribute("class", "rendering"));
+		scratch.drawWholeWithName(printOutWrapper);
 
 		DoodleServer.instance().setStorage(clickables);
-		Runnable htmlShow = new HtmlShow(htmlDocument.toString());
-		Display.getDefault().syncExec(htmlShow);
+
+		String css = CSSCollection.flushAllCSS();
+		Runnable jsExecuterForCss = new JavascriptExecuter(
+				JavascriptCallsUtil.addCSS(css));
+
+		Runnable jsExecuterForHtml = new JavascriptExecuter(
+				JavascriptCallsUtil.addToBodyCall(printOutWrapper.toString()));
+		Display.getDefault().syncExec(jsExecuterForHtml);
 	}
 
 	public void renderInlineInto(Object object, Tag tag) {
@@ -173,7 +186,9 @@ public class Doodler {
 			breadcrumb.add(name);
 			breadcrumbs.add(breadcrumb);
 		}
-		tag.add(breadcrumbs);
+		Tag breadcrumbsWrapper = new Tag("div", "id=breadcrumbsWrapper");
+		breadcrumbsWrapper.add(breadcrumbs);
+		tag.add(breadcrumbsWrapper);
 	}
 
 	private void renderInline(Object object, Tag tag, boolean withClassName) {

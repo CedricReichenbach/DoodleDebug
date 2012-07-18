@@ -37,11 +37,4 @@ public class HtmlOutputTest {
 				is("<test style=\"width:100; background-color:#ff0000\">java.awt.Color[r=255,g=0,b=0]</test>\n"));
 
 	}
-	
-	public void testCar() {
-		Car car;
-		assertThat(DoodleDebug.rendering(car), is("<div class=\"Car\">Toyota</div>"));
-		assertThat(car, rendersAs("<div class=\"Car\">Toyota</div>"));
-		D.raw(car);
-	}
 }

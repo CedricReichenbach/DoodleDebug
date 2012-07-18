@@ -56,7 +56,7 @@ public class DoodleServer {
 		Doodler.instance().renderIntoLightbox(stack, lightboxContentWrapper);
 		String toRender = lightboxContentWrapper.toString();
 		Runnable javascriptExecuter = new JavascriptExecuter(
-				JavascriptCallsUtil.showInLightbox(toRender));
+				JavascriptCallsUtil.showInLightboxCall(toRender));
 		Display.getDefault().syncExec(javascriptExecuter);
 	}
 

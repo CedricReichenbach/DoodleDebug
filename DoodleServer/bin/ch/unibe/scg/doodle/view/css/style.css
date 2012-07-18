@@ -42,13 +42,13 @@ hr {
     visibility: hidden;
     width: 100%;
 }
-.betweenDrawCalls {
-    display: block;
-    padding: 2px;
-}
 .rendering {
     float: left;
     padding: 2px;
+}
+.printOutWrapper {
+    display: block;
+    margin-bottom: 4px;
 }
 .printOut, #lightboxContentWrapper, .level1 {
     background-color: #FFFFFF;

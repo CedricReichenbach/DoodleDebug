@@ -18,7 +18,7 @@ public class DoodleLocationListener implements LocationListener {
 					"doodledebug:", ""));
 			if (DoodleDebugProperties.developMode())
 				System.out
-						.println("SERVER: Now attempting to draw object with ID: "
+						.println("SERVER: Received message from javascript: "
 								+ id);
 			event.doit = false; // prevent any actual changing of location
 

@@ -11,9 +11,10 @@
 }
 
 #closeButton {
-	position: absolute;
+	top: 30px;
+	left: 95%;
+	position: fixed;
 	margin-top: -6px;
-	margin-left: -10px;
 	z-index: 2;
 	cursor: pointer;
 }
@@ -38,6 +39,11 @@
 #lightboxContentWrapper {
 	border: 1px inset #666;
 	padding: 4px;
+	display: block;
+}
+
+#breadcrumbsWrapper {
+	display: block;
 }
 
 #breadcrumbs {
@@ -46,6 +52,7 @@
 	padding: 2px;
 	margin-bottom: 4px;
 	border-radius: 1px;
+	display: inline-block;
 }
 
 .breadcrumb {

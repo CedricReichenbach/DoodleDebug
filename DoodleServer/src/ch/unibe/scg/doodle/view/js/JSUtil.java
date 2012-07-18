@@ -4,6 +4,7 @@ import ch.unibe.scg.doodle.util.FileUtil;
 
 public class JSUtil {
 	public static String getJSFromFile(String filename) {
-		return FileUtil.readFile(JSUtil.class.getResource(filename));
+		String js = FileUtil.readFile(JSUtil.class.getResource(filename));
+		return js;
 	}
 }
