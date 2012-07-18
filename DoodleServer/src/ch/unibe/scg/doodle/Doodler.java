@@ -133,8 +133,9 @@ public class Doodler {
 		DoodleServer.instance().setStorage(clickables);
 
 		String css = CSSCollection.flushAllCSS();
-		Runnable jsExecuterForCss = new JavascriptExecuter(
+		Runnable jsExecuterForCSS = new JavascriptExecuter(
 				JavascriptCallsUtil.addCSS(css));
+		Display.getDefault().syncExec(jsExecuterForCSS);
 
 		Runnable jsExecuterForHtml = new JavascriptExecuter(
 				JavascriptCallsUtil.addToBodyCall(printOutWrapper.toString()));
