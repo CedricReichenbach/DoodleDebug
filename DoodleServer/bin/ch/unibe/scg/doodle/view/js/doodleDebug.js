@@ -8,8 +8,10 @@ function addCode(code) {
 
 /* Add CSS to current one */
 function addCSS(css) {
-	var style = '<style type="text/css">'+css+'</style>'
-	document.head.innerHTML += style;
+	var style = document.createElement('style');
+	style.setAttribute('type','text/css');
+	style.innerHTML = css;
+	document.head.appendChild(style);
 }
 
 /* Renders given code inside a lightbox (creates one if necessary). */
