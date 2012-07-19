@@ -65,10 +65,11 @@ public class HtmlDocument {
 	 */
 	private String getJS() {
 		String js = "";
+		long before = System.currentTimeMillis();
 		js += JSUtil.getJSFromFile("doodleDebug.js");
 		js += JSUtil.getJSFromFile("prototype.js"); // uncompressed
-																// too slow! (>
-																// 1s)
+													// too slow! (>
+													// 1s)
 		js += JSUtil.getJSFromFile("scriptaculous.js");
 		js += JSUtil.getJSFromFile("lightbox.js");
 		js += JSUtil.getJSFromFile("builder.js");
@@ -79,6 +80,8 @@ public class HtmlDocument {
 		js += JSUtil.getJSFromFile("sound.js");
 		js += JSUtil.getJSFromFile("testExamples.js"); // XXX Only when
 														// developing
+		long after = System.currentTimeMillis();
+		System.out.println("Time to load JS: " + (after - before) + " ms");
 		return js;
 	}
 

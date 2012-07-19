@@ -9,6 +9,8 @@ import org.eclipse.ui.part.ViewPart;
 
 import ch.unibe.scg.doodle.IndexedObjectStorage;
 import ch.unibe.scg.doodle.server.DoodleServer;
+import ch.unibe.scg.doodle.view.DoodleDebugScreen;
+import ch.unibe.scg.doodle.view.DoodleDebugWelcomeScreen;
 
 public class DoodleDebugView extends ViewPart {
 
@@ -23,7 +25,7 @@ public class DoodleDebugView extends ViewPart {
 			browser = new Browser(parent, SWT.V_SCROLL);
 			DoodleLocationListener locationListener = new DoodleLocationListener();
 			browser.addLocationListener(locationListener);
-			browser.setText("Nothing to display yet...");
+			browser.setText(new DoodleDebugWelcomeScreen().toString());
 		} catch (SWTError e) {
 			MessageBox messageBox = new MessageBox(parent.getShell(),
 					SWT.ICON_ERROR | SWT.OK);

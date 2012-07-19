@@ -9,6 +9,7 @@ import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.server.views.HtmlShow;
 import ch.unibe.scg.doodle.server.views.JavascriptExecuter;
 import ch.unibe.scg.doodle.util.JavascriptCallsUtil;
+import ch.unibe.scg.doodle.view.DoodleDebugScreen;
 import ch.unibe.scg.doodle.view.HtmlDocument;
 
 public class DoodleServer {
@@ -62,7 +63,7 @@ public class DoodleServer {
 
 	public void clearOutput() {
 		DMockup.resetInstance();
-		Runnable emptyShow = new HtmlShow(new HtmlDocument().toString());
+		Runnable emptyShow = new HtmlShow(new DoodleDebugScreen().toString());
 		Display.getDefault().asyncExec(emptyShow);
 	}
 

@@ -6,3 +6,5 @@
 - Do html rendering on server side instead of having both, a client jar and the same as plugin for the server to refer to (depend on it)
 
 - Renderings for Maps
+
+- Don't always set focus to DD tab!
