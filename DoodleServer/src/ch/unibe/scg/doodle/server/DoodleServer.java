@@ -8,6 +8,7 @@ import ch.unibe.scg.doodle.IndexedObjectStorage;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.server.views.HtmlShow;
 import ch.unibe.scg.doodle.server.views.JavascriptExecuter;
+import ch.unibe.scg.doodle.simon.SimonServer;
 import ch.unibe.scg.doodle.util.JavascriptCallsUtil;
 import ch.unibe.scg.doodle.view.DoodleDebugScreen;
 import ch.unibe.scg.doodle.view.HtmlDocument;
@@ -70,6 +71,7 @@ public class DoodleServer {
 	public void firstRun() {
 		this.clearOutput();
 		this.lightboxClosed();
+		SimonServer.instance.refreshClientClassloading();
 	}
 
 	public void lightboxClosed() {

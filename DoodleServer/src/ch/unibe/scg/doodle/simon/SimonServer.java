@@ -36,6 +36,13 @@ public class SimonServer implements SimonServerInterface {
 
 		instance = this;
 
+		refreshClientClassloading();
+	}
+
+	/**
+	 * Refresh remote classes by creating a new XStream and a new Classloader.
+	 */
+	public void refreshClientClassloading() {
 		this.xstream = new XStream();
 		xstream.setClassLoader(DoodleClientWorkspace.getClientClassLoader());
 	}
