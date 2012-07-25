@@ -18,5 +18,5 @@ public interface Rendering<T> {
 	 * @param Object
 	 *            o
 	 */
-	public void render(T object, Tag tag);
+	public void render(T object, Tag tag) throws DoodleRenderException;
 }

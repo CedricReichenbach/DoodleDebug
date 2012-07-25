@@ -1,1 +1,0 @@
-public static void draw(Object o, Object... objects)

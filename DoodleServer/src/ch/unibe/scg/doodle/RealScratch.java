@@ -11,6 +11,7 @@ import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.plugins.ArrayPlugin;
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
 import ch.unibe.scg.doodle.rendering.DoodleCanvasRendering;
+import ch.unibe.scg.doodle.rendering.DoodleRenderException;
 import ch.unibe.scg.doodle.rendering.Rendering;
 import ch.unibe.scg.doodle.rendering.RenderingRegistry;
 import ch.unibe.scg.doodle.view.CSSCollection;
@@ -103,7 +104,12 @@ public class RealScratch implements Scratch {
 			drawDoodleable();
 			Rendering<DoodleCanvas> rendering = doodleCanvasRenderingProvider
 					.get();
-			rendering.render(this.canvas, tag);
+			try {
+				rendering.render(this.canvas, tag);
+			} catch (DoodleRenderException e) {
+				doodler.renderInlineIntoWithoutClassName(new ErrorDrawer(e),
+						tag);
+			}
 		} else {
 			this.drawDefault(tag);
 		}
@@ -153,7 +159,11 @@ public class RealScratch implements Scratch {
 			plugin = arrayPluginProvider.get();
 		}
 
-		plugin.render(object, tag);
+		try {
+			plugin.render(object, tag);
+		} catch (DoodleRenderException e) {
+			doodler.renderInlineIntoWithoutClassName(e, tag);
+		}
 	}
 
 	void prepareTag(Tag tag, RenderingPlugin plugin) {

@@ -42,11 +42,15 @@ public class DoodleDebugProperties {
 
 	public static File tempFileForOutput() {
 		// Win7: C:\Users\<user>\AppData\Local\Temp\doodledebug\output.html
-		return new File(tempDir() + "/output.html");
+		File file = new File(tempDir() + "/output.html");
+		file.mkdirs();
+		return file;
 	}
 
 	public static File tempDirForImages() {
-		return new File(tempDir() + "/img/");
+		File dir = new File(tempDir() + "/img/");
+		dir.mkdirs();
+		return dir;
 	}
 
 	private static String tempDir() {

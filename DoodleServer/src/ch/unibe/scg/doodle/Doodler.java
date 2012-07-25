@@ -12,7 +12,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.eclipse.swt.widgets.Display;
+import org.omg.CosNaming.NamingContextPackage.CannotProceed;
 
+import ch.unibe.scg.doodle.helperClasses.CannotRenderMessage;
 import ch.unibe.scg.doodle.helperClasses.NullObject;
 import ch.unibe.scg.doodle.htmlgen.Attribute;
 import ch.unibe.scg.doodle.htmlgen.Attributes;
@@ -126,6 +128,11 @@ public class Doodler {
 		Scratch scratch = scratchFactory.create(o);
 		scratch.addCSSClass("printOut");
 		this.level = 0;
+
+		visualizeScratch(scratch);
+	}
+
+	void visualizeScratch(Scratch scratch) {
 		Tag printOutWrapper = new Tag("div", "class=printOutWrapper");
 		printOutWrapper.addAttribute(new Attribute("class", "rendering"));
 		scratch.drawWholeWithName(printOutWrapper);
@@ -230,5 +237,14 @@ public class Doodler {
 			}
 		}
 		tag.addAttribute(new Attribute("class", className));
+	}
+
+	public void couldNotRenderMessage(String canonicalName) {
+		CannotRenderMessage messageObject = new CannotRenderMessage(
+				canonicalName);
+		Scratch scratch = scratchFactory.create(messageObject);
+		scratch.addCSSClass("couldNotRenderMessage");
+		scratch.addCSSClass("printOut");
+		this.visualizeScratch(scratch);
 	}
 }

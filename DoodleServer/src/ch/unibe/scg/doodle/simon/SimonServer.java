@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 
 import ch.unibe.scg.doodle.DMockup;
+import ch.unibe.scg.doodle.Doodler;
 import ch.unibe.scg.doodle.server.DoodleClientWorkspace;
 import ch.unibe.scg.doodle.server.DoodleServer;
 
@@ -66,6 +67,11 @@ public class SimonServer implements SimonServerInterface {
 		Object[] os = (Object[]) xstream.fromXML(objectArrayAsXML); // XXX Check
 																	// this!
 		DMockup.raw(o, os);
+	}
+
+	@Override
+	public void couldNotSend(String canonicalName) {
+		Doodler.instance().couldNotRenderMessage(canonicalName);
 	}
 
 	@Override

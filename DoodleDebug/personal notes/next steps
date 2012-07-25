@@ -8,3 +8,6 @@
 - Renderings for Maps
 
 - Don't always set focus to DD tab!
+
+- Doo.dle() replaces D.raw() (maybe)
+  -> Shortcut like "syso" & [Ctrl]-[Space], e.g. "dood"

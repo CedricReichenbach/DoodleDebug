@@ -3,6 +3,7 @@ package ch.unibe.scg.doodle.simon;
 import java.io.IOException;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.converters.ConversionException;
 
 import de.root1.simon.Lookup;
 import de.root1.simon.Registry;
@@ -32,18 +33,6 @@ public class SimonClient implements SimonClientInterface {
 		this.xstream = new XStream();
 	}
 
-	// @Override
-	// public void sendHtml(String html, IndexedObjectStorage storage) {
-	// String storageAsXML = storageToXML(storage);
-	// server.showHtml(html, storageAsXML); // TODO: transfer storage to plugin
-	// }
-
-	// private String storageToXML(IndexedObjectStorage storage) {
-	// XStream xstream = new XStream();
-	// // xstream.alias("IndexedObjectStorage", IndexedObjectStorage.class);
-	// return xstream.toXML(storage);
-	// }
-
 	public void stop() {
 		lookup.release(server);
 		registry.unbind("DoodleClient");
@@ -52,8 +41,12 @@ public class SimonClient implements SimonClientInterface {
 
 	@Override
 	public void sendObject(Object object) {
-		String objectAsXML = xstream.toXML(object);
-		server.renderObject(objectAsXML);
+		try {
+			String objectAsXML = xstream.toXML(object);
+			server.renderObject(objectAsXML);
+		} catch (ConversionException e) {
+			server.couldNotSend(object.getClass().getCanonicalName());
+		}
 	}
 
 	@Override

@@ -8,4 +8,6 @@ public interface SimonServerInterface {
 	public void clearOutput();
 
 	public void firstRun();
+
+	public void couldNotSend(String canonicalName);
 }

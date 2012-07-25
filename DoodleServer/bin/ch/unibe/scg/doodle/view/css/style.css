@@ -57,6 +57,9 @@ hr {
     overflow: hidden;
 	display: inline-block;
 }
+.printOut {
+	box-shadow: 0 1px 3px 1px #999;
+}
 .level1 {
 	cursor: pointer;
 }
@@ -90,6 +93,16 @@ hr {
 	max-height: 200px;
 	overflow: scroll;
 }
+.couldNotRenderMessage * {
+	background-color: red;
+	color: yellow;
+	box-shadow: none;
+}
+::selection {
+	background-color: #3d0;
+	color: white;
+}
+
 .ImagePlugin img { /* not wanted here! */
     max-height: 90px;
     max-width: 90px;
