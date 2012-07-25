@@ -42,8 +42,14 @@ public class DoodleDebugProperties {
 
 	public static File tempFileForOutput() {
 		// Win7: C:\Users\<user>\AppData\Local\Temp\doodledebug\output.html
-		return new File(System.getProperty("java.io.tmpdir")
-				+ "/doodledebug/output.html");
+		return new File(tempDir() + "/output.html");
 	}
 
+	public static File tempDirForImages() {
+		return new File(tempDir() + "/img/");
+	}
+
+	private static String tempDir() {
+		return System.getProperty("java.io.tmpdir") + "/doodleDebug";
+	}
 }

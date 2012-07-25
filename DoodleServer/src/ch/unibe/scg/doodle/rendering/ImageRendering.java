@@ -1,14 +1,35 @@
 package ch.unibe.scg.doodle.rendering;
 
-import ch.unibe.scg.doodle.helperClasses.HtmlImage;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import ch.unibe.scg.doodle.htmlgen.Tag;
+import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 
-public class ImageRendering implements Rendering<HtmlImage> {
+public class ImageRendering implements Rendering<Image> {
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public void render(HtmlImage image, Tag tag) {
-		tag.add(image.asHtml());
+	public void render(Image image, Tag tag) {
+		File imgDir = DoodleDebugProperties.tempDirForImages();
+		File imgFile = new File(imgDir, "/img" + image.hashCode());
+		BufferedImage bufferedImage = new BufferedImage(image.getWidth(null),
+				image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+		Graphics graphics = bufferedImage.getGraphics();
+		graphics.drawImage(image, 0, 0, null);
+		try {
+			ImageIO.write(bufferedImage, "png", imgFile);
+			Tag imgTag = new Tag("img", "src=" + imgFile);
+			tag.add(imgTag);
+		} catch (IOException e) {
+			Tag error = new Tag("div", "class=error");
+			error.add("Could not render image: " + e.getMessage());
+			tag.add(error);
+		}
 	}
 
 }
