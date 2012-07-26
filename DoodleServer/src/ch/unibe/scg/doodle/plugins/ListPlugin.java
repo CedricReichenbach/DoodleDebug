@@ -45,6 +45,6 @@ public class ListPlugin extends AbstractPlugin {
 		return ".ListPlugin .listElement "
 				+ "{float:left;}"
 				+ ".ListPlugin.smallRendering .listElement "
-				+ "{float:left; background-color:black; height: 4px; width:4px;}"; // XXX
+				+ "{float:left; background-color:black; height: 4px; width:4px;} margin: 0 1px;"; // XXX
 	}
 }

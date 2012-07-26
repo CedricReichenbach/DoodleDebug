@@ -48,7 +48,7 @@ public class ArrayPlugin extends AbstractPlugin {
 		return ".ArrayPlugin .arrayElement "
 				+ "{float:left;} "
 				+ ".ArrayPlugin.smallRendering .arrayElement "
-				+ "{float:left; background-color:black; height: 4px; width:4px;}"; // XXX
+				+ "{float:left; background-color:black; height: 4px; width:4px; margin: 0 1px;}"; // XXX
 	}
 
 }
