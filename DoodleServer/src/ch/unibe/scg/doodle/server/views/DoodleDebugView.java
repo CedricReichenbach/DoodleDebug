@@ -22,7 +22,7 @@ public class DoodleDebugView extends ViewPart {
 	@Override
 	public void createPartControl(Composite parent) {
 		try {
-			browser = new Browser(parent, SWT.V_SCROLL);
+			browser = new Browser(parent, SWT.NONE);
 			DoodleLocationListener locationListener = new DoodleLocationListener();
 			browser.addLocationListener(locationListener);
 			browser.setText(new DoodleDebugWelcomeScreen().toString());

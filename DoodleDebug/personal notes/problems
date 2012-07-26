@@ -2,8 +2,6 @@
 
 - Should the output be always cleared at the beginning of a run or not?
 
-- Strings should only be cut off in small rendering
-
 - Not thread-save..?
 	- Sometimes parts of css not loaded.
 	- Lightbox-clicks at wrong time could cause strange behaviour (Doodler.render...())

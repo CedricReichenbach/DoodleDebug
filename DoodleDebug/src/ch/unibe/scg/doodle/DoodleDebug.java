@@ -15,4 +15,11 @@ public class DoodleDebug {
 	public static void clearHistory() {
 		DoodleClient.instance().clearOutput();
 	}
+	
+	/**
+	 * Includes all Console inputs into DoodleDebug output
+	 */
+	public static void includeSystemOut() {
+		// TODO
+	}
 }

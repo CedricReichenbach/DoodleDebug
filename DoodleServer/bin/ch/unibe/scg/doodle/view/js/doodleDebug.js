@@ -4,6 +4,7 @@ var LIGHTBOX_CLOSE = -1;
 /* Add code at the end of the html body. */
 function addCode(code) {
 	document.body.innerHTML += code;
+	scrollToLast();
 }
 
 /* Add CSS to current one */
@@ -25,12 +26,19 @@ function showInLightbox(code) {
 function showLightbox() {
 	document.getElementById('lightboxWrapper').style.visibility = 'visible';
 	document.getElementById('lightboxWrapper').style.height = 'auto';
+	adjustLightboxHeight();
+	window.onresize = function(event) { adjustLightboxHeight() };
 }
 
 function hideLightbox() {
 	document.getElementById('lightboxWrapper').style.visibility = 'hidden';
 	document.getElementById('lightboxWrapper').style.height = '0';
 	lightboxCloseMessage();
+}
+
+function adjustLightboxHeight() {
+	var lightboxContentWrapper = document.getElementById('lightboxContentWrapper');
+	lightboxContentWrapper.style.height = (window.innerHeight - 68)+'px';
 }
 
 function renderObjectInLightbox(id) {
@@ -50,4 +58,10 @@ function lightboxCloseMessage() {
  */
 function messageToJavaPlugin(message) {
 	window.location = 'doodledebug:'+message;
+}
+
+function scrollToLast() {
+	var elements = document.getElementsByClassName('printOutWrapper');
+	var last = elements[elements.length-1];
+	last.scrollTo();
 }
