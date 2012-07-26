@@ -40,7 +40,7 @@ public class DoodleCanvasRendering implements Rendering<DoodleCanvas> {
 
 	private void renderLine(List<Object> line, Tag tag) {
 		for (Object o : line) {
-			Tag span = new Tag("span");
+			Tag span = new Tag("div");
 			doodler.renderInlineIntoWithoutClassName(o, span);
 			tag.add(span);
 		}
