@@ -76,6 +76,8 @@ hr {
     font-size: 8pt;
 	margin-bottom: -4pt;
 	position: relative; /* Important to bring text in front of respective content box */
+	text-shadow: 0 0 2px #DDD;
+	/*filter: glow(color=#dddddd,strength=1);*/ /* IE; ugly rendering, not useful at all */
 }
 .column {
     float: left;

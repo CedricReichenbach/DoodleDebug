@@ -7,3 +7,4 @@
 - Not thread-save..?
 	- Sometimes parts of css not loaded.
 	- Lightbox-clicks at wrong time could cause strange behaviour (Doodler.render...())
+	-> Race conditions! Problems only with first renderings

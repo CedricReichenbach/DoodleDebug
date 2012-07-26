@@ -40,7 +40,7 @@ public class ImagePlugin extends AbstractPlugin {
 		else if (image instanceof Image)
 			imageRenderingProvider.get().render((Image) image, tag);
 		else if (image instanceof ImageIcon)
-			imageRenderingProvider.get().render((Image) image, tag);
+			imageIconRenderingProvider.get().render((ImageIcon) image, tag);
 		else {
 			Tag error = new Tag("div", "class=error");
 			error.add("Could not render image");
