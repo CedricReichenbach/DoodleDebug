@@ -47,4 +47,28 @@ public class ImagePlugin extends AbstractPlugin {
 			tag.add(error);
 		}
 	}
+
+	@Override
+	public void renderSmall(Object image, Tag tag) throws DoodleRenderException {
+		if (image instanceof HtmlImage)
+			htmlImageRenderingProvider.get()
+					.renderSmall((HtmlImage) image, tag);
+		else if (image instanceof Image)
+			imageRenderingProvider.get().renderSmall((Image) image, tag);
+		else if (image instanceof ImageIcon)
+			imageIconRenderingProvider.get()
+					.renderSmall((ImageIcon) image, tag);
+		else {
+			Tag error = new Tag("div", "class=error");
+			error.add("Could not render image");
+			tag.add(error);
+		}
+	}
+
+	@Override
+	public String getCSS() {
+		return ".ImagePlugin img " + "{ max-height: 120px; max-width: 120px;} "
+				+ ".ImagePlugin.smallRendering img "
+				+ "{ max-height: 40px; max-width: 40px;}";
+	}
 }

@@ -1,9 +1,6 @@
 package ch.unibe.scg.doodle.rendering;
 
-import ch.unibe.scg.doodle.Doodler;
-import ch.unibe.scg.doodle.RealScratch;
 import ch.unibe.scg.doodle.htmlgen.Tag;
-
 
 /**
  * Contains information of how an object should be rendered
@@ -19,4 +16,13 @@ public interface Rendering<T> {
 	 *            o
 	 */
 	public void render(T object, Tag tag) throws DoodleRenderException;
+
+	/**
+	 * Produces a smaller, space-saving rendering of the give object.
+	 * 
+	 * @param object
+	 * @param tag
+	 * @throws DoodleRenderException
+	 */
+	public void renderSmall(T object, Tag tag) throws DoodleRenderException;
 }

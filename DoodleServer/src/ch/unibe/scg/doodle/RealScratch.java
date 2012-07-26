@@ -160,14 +160,20 @@ public class RealScratch implements Scratch {
 		}
 
 		try {
-			plugin.render(object, tag);
+			renderUsingPlugin(tag, plugin);
 		} catch (DoodleRenderException e) {
 			doodler.renderInlineIntoWithoutClassName(e, tag);
 		}
 	}
 
-	void prepareTag(Tag tag, RenderingPlugin plugin) {
-		Doodler.addClass(tag, plugin.getClassAttribute());
+	@SuppressWarnings("unchecked")
+	protected void renderUsingPlugin(Tag tag, RenderingPlugin plugin)
+			throws DoodleRenderException {
+		plugin.render(object, tag);
+	}
+
+	protected void prepareTag(Tag tag, RenderingPlugin plugin) {
+		tag.addCSSClass(plugin.getClassAttribute());
 	}
 
 	@Override

@@ -13,19 +13,27 @@ public class ArrayRendering implements Rendering<Object[]> {
 	@Override
 	public void render(Object[] array, Tag tag) {
 		if (checkIfElementsSameType(array)) {
-			for (int i = 0; i < array.length; i++) {
+			for (Object o : array) {
 				Tag element = new Tag("div");
-				Doodler.addClass(element, "arrayElement");
-				doodler.renderInlineIntoWithoutClassName(array[i], element);
+				element.addCSSClass("arrayElement");
+				doodler.renderInlineIntoWithoutClassName(o, element);
 				tag.add(element);
 			}
 		} else {
-			for (int i = 0; i < array.length; i++) {
+			for (Object o : array) {
 				Tag element = new Tag("div");
-				Doodler.addClass(element, "arrayElement");
-				doodler.renderInlineInto(array[i], element);
+				element.addCSSClass("arrayElement");
+				doodler.renderInlineInto(o, element);
 				tag.add(element);
 			}
+		}
+	}
+
+	@Override
+	public void renderSmall(Object[] array, Tag tag) {
+		for (Object o : array) {
+			Tag element = new Tag("div", "class=arrayElement");
+			tag.add(element);
 		}
 	}
 

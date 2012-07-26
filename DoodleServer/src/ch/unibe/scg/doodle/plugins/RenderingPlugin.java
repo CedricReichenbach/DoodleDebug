@@ -8,7 +8,19 @@ public interface RenderingPlugin extends Rendering {
 
 	public Set<Class<?>> getDrawableClasses();
 
+	/**
+	 * Returns the html class attribute for CSS.
+	 * @return
+	 */
 	public String getClassAttribute();
+
+	/**
+	 * Provide a keyword (html class attribute) for small renderings (when using
+	 * renderSmall()).
+	 * 
+	 * @return
+	 */
+	public String getSmallCSSKeyword();
 
 	public String getObjectTypeName(Object o);
 

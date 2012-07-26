@@ -31,6 +31,14 @@ public class ListRendering implements Rendering<List> {
 		}
 	}
 
+	@Override
+	public void renderSmall(List list, Tag tag) {
+		for (Object o : list) {
+			Tag element = new Tag("div", "class=arrayElement");
+			tag.add(element);
+		}
+	}
+
 	public static boolean checkIfElementsSameType(List list) {
 		if (list.isEmpty())
 			return true;

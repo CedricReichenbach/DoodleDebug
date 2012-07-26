@@ -9,6 +9,7 @@ import javax.inject.Provider;
 
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.rendering.ColorRendering;
+import ch.unibe.scg.doodle.rendering.DoodleRenderException;
 
 public class ColorPlugin extends AbstractPlugin {
 
@@ -28,8 +29,14 @@ public class ColorPlugin extends AbstractPlugin {
 	}
 
 	@Override
+	public void renderSmall(Object color, Tag tag) {
+		colorRenderingProvider.get().renderSmall((Color) color, tag);
+	}
+
+	@Override
 	public String getCSS() {
-		return ".ColorPlugin {\n" + "padding:10pt;\n" + "}";
+		return ".ColorPlugin {padding:10pt;} "
+				+ ".ColorPlugin.smallRendering {padding:4pt}";
 	}
 
 }

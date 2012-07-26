@@ -5,7 +5,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import ch.unibe.scg.doodle.Doodler;
-import ch.unibe.scg.doodle.Scratch;
 import ch.unibe.scg.doodle.api.DoodleCanvas;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 
@@ -23,6 +22,12 @@ public class DoodleCanvasRendering implements Rendering<DoodleCanvas> {
 			this.renderColumn(column, div);
 			tag.add(div);
 		}
+	}
+
+	@Override
+	public void renderSmall(DoodleCanvas canvas, Tag tag) {
+		this.render(canvas, tag); // Differentiation is done in Interface
+									// Doodleable
 	}
 
 	private void renderColumn(List<List<Object>> column, Tag tag) {

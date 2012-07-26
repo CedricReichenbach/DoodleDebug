@@ -104,8 +104,3 @@ hr {
 	background-color: #3d0;
 	color: white;
 }
-
-.ImagePlugin img { /* not wanted here! */
-    max-height: 90px;
-    max-width: 90px;
-}

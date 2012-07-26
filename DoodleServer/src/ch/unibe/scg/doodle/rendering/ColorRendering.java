@@ -5,15 +5,22 @@ import java.awt.Color;
 import ch.unibe.scg.doodle.htmlgen.Attribute;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 
-
 public class ColorRendering implements Rendering<Color> {
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void render(Color color, Tag tag) {
-		tag.getAttributes().add(new Attribute("style", "background-color:"+hexColorString(color)));
-//		tag.add(color.toString());
-//		tag.add("&nbsp;&nbsp;&nbsp;");
+		tag.getAttributes().add(
+				new Attribute("style", "background-color:"
+						+ hexColorString(color)));
+		tag.add(color.toString());
+	}
+
+	@Override
+	public void renderSmall(Color color, Tag tag) {
+		tag.getAttributes().add(
+				new Attribute("style", "background-color:"
+						+ hexColorString(color)));
 	}
 
 	private String hexColorString(Color color) {

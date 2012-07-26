@@ -33,13 +33,21 @@ public class NullPlugin extends AbstractPlugin {
 	}
 
 	@Override
+	public void renderSmall(Object object, Tag tag) {
+		nullRenderingProvider.get().renderSmall((NullObject) object, tag);
+	}
+
+	@Override
 	public String getClassAttribute() {
 		return "null";
 	}
 
 	@Override
 	public String getCSS() {
-		return ".null { border: 1pt dotted #AAAAAA; color: #888888; font-size: 0.6em; padding: 0 0.1em;}";
+		return ".null "
+				+ "{ border: 1pt dotted #AAAAAA; color: #888888; font-size: 0.6em; padding: 0 0.1em;}"
+				+ ".null.smallRendering "
+				+ "{ border: 1pt dotted #AAAAAA; padding: 0.1em 0.1em;}";
 	}
 
 }

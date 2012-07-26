@@ -9,5 +9,10 @@ public class NullRendering implements Rendering<NullObject> {
 	public void render(NullObject object, Tag tag) {
 		tag.add("null");
 	}
+	
+	@Override
+	public void renderSmall(NullObject object, Tag tag) {
+		// do nothing, only grey box
+	}
 
 }

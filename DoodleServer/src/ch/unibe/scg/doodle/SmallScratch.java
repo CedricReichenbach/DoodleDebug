@@ -4,6 +4,9 @@ import javax.inject.Inject;
 
 import ch.unibe.scg.doodle.api.Doodleable;
 import ch.unibe.scg.doodle.helperClasses.ErrorDrawer;
+import ch.unibe.scg.doodle.htmlgen.Tag;
+import ch.unibe.scg.doodle.plugins.RenderingPlugin;
+import ch.unibe.scg.doodle.rendering.DoodleRenderException;
 
 import com.google.inject.assistedinject.Assisted;
 
@@ -17,6 +20,7 @@ public class SmallScratch extends RealScratch {
 		super(o);
 	}
 
+	@Override
 	protected void drawDoodleable() {
 		try {
 			((Doodleable) object).drawSmallOn(this.canvas);
@@ -28,6 +32,19 @@ public class SmallScratch extends RealScratch {
 				throw new RuntimeException(e1);
 			}
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	protected void renderUsingPlugin(Tag tag, RenderingPlugin plugin)
+			throws DoodleRenderException {
+		plugin.renderSmall(object, tag);
+	}
+
+	@Override
+	protected void prepareTag(Tag tag, RenderingPlugin plugin) {
+		tag.addCSSClass(plugin.getClassAttribute());
+		tag.addCSSClass(plugin.getSmallCSSKeyword());
 	}
 
 }

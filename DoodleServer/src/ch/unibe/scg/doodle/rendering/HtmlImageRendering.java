@@ -11,4 +11,9 @@ public class HtmlImageRendering implements Rendering<HtmlImage> {
 		tag.add(image.asHtml());
 	}
 
+	@Override
+	public void renderSmall(HtmlImage image, Tag tag) {
+		this.render(image, tag); // different css only
+	}
+
 }

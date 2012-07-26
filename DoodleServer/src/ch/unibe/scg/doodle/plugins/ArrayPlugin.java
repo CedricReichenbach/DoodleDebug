@@ -9,6 +9,7 @@ import javax.inject.Provider;
 
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.rendering.ArrayRendering;
+import ch.unibe.scg.doodle.rendering.DoodleRenderException;
 
 public class ArrayPlugin extends AbstractPlugin {
 
@@ -28,6 +29,11 @@ public class ArrayPlugin extends AbstractPlugin {
 	}
 
 	@Override
+	public void renderSmall(Object array, Tag tag) {
+		arrayRenderingProvider.get().renderSmall((Object[]) array, tag);
+	}
+
+	@Override
 	public String getObjectTypeName(Object o) {
 		if (ArrayRendering.checkIfElementsSameType((Object[]) o))
 			// TODO: maybe smarter text
@@ -39,7 +45,10 @@ public class ArrayPlugin extends AbstractPlugin {
 
 	@Override
 	public String getCSS() {
-		return ".ArrayPlugin .arrayElement {float:left;}"; // XXX
+		return ".ArrayPlugin .arrayElement "
+				+ "{float:left;} "
+				+ ".ArrayPlugin.smallRendering .arrayElement "
+				+ "{float:left; background-color:black; height: 4px; width:4px;}"; // XXX
 	}
 
 }

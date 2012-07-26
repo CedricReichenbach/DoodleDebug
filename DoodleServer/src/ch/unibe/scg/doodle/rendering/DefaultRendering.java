@@ -25,5 +25,12 @@ public class DefaultRendering implements Rendering<Object> {
 		// TODO
 		//(new DrawableWrapper(object)).drawWhole(tag);
 	}
+	
+	@Override
+	public void renderSmall(Object object, Tag tag) {
+		// simple testing example
+		stringRenderingProvider.get().renderSmall(object.toString(), tag);
+	}
+
 
 }

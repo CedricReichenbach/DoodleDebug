@@ -35,4 +35,9 @@ public class ImageRendering implements Rendering<Image> {
 		}
 	}
 
+	@Override
+	public void renderSmall(Image image, Tag tag) throws DoodleRenderException {
+		this.render(image, tag); // different css only
+	}
+
 }

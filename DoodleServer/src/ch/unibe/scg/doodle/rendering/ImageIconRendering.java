@@ -15,5 +15,10 @@ public class ImageIconRendering implements Rendering<ImageIcon> {
 	public void render(ImageIcon icon, Tag tag) throws DoodleRenderException {
 		imageRenderingProvider.get().render(icon.getImage(), tag);
 	}
+	
+	@Override
+	public void renderSmall(ImageIcon icon, Tag tag) throws DoodleRenderException {
+		this.render(icon, tag); // different css only
+	}
 
 }
