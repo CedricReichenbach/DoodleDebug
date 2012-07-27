@@ -8,7 +8,7 @@ public class HtmlDocument {
 
 	private Tag head;
 	private String doctype;
-	private Tag body;
+	protected Tag body;
 
 	public HtmlDocument() {
 		this.head = makeHead();
@@ -49,7 +49,7 @@ public class HtmlDocument {
 		return js;
 	}
 
-	private String makeStyleSheet() {
+	protected String makeStyleSheet() {
 		// load from file "style.css"
 		String css = CSSUtil.getCSSFromFile("style.css");
 		// load from lightbox css
@@ -63,7 +63,7 @@ public class HtmlDocument {
 	 * 
 	 * @return
 	 */
-	private String getJS() {
+	protected String getJS() {
 		String js = "";
 		long before = System.currentTimeMillis();
 		js += JSUtil.getJSFromFile("doodleDebug.js");

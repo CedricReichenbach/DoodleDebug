@@ -25,7 +25,9 @@ public class DoodleDebugView extends ViewPart {
 			browser = new Browser(parent, SWT.NONE);
 			DoodleLocationListener locationListener = new DoodleLocationListener();
 			browser.addLocationListener(locationListener);
-			browser.setText(new DoodleDebugWelcomeScreen().toString());
+			String welcomeHtml = new DoodleDebugWelcomeScreen().toString();
+			browser.setText(welcomeHtml);
+			htmlObserver.htmlChangedTo(welcomeHtml);
 		} catch (SWTError e) {
 			MessageBox messageBox = new MessageBox(parent.getShell(),
 					SWT.ICON_ERROR | SWT.OK);
