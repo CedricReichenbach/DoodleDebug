@@ -29,7 +29,7 @@ public class ArrayPlugin extends AbstractPlugin {
 		arrayRenderingProvider.get().render(castToArray(array), tag);
 	}
 
-	private Object[] castToArray(Object array) {
+	protected Object[] castToArray(Object array) {
 		try {
 			return (Object[]) array;
 		} catch (ClassCastException e) { // was array of primitives

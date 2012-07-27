@@ -7,7 +7,7 @@ import java.util.List;
 
 import ch.unibe.scg.doodle.plugins.ArrayPlugin;
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
-
+import ch.unibe.scg.doodle.plugins.TablePlugin;
 
 /**
  * Manages different Renderings, can be organized by user (e.g. different
@@ -26,8 +26,10 @@ public class RenderingRegistry {
 	}
 
 	/**
-	 * Construct a list of lists of all supertypes (superclasses and superinterfaces). They're organized levelwise:
-	 * close supertypes come first, distant ones later. For example, the first level of Integer is: Number, Comparable. The second level is Serializable, Object.
+	 * Construct a list of lists of all supertypes (superclasses and
+	 * superinterfaces). They're organized levelwise: close supertypes come
+	 * first, distant ones later. For example, the first level of Integer is:
+	 * Number, Comparable. The second level is Serializable, Object.
 	 * 
 	 * Used for iterating all supertypes levelwise.
 	 * 
@@ -61,14 +63,17 @@ public class RenderingRegistry {
 	}
 
 	public RenderingPlugin lookup(Class<?> type) {
-		if(type.isArray()) {
+		if (type.isArray()) {
+			if (type.getComponentType().isArray()) {
+				return new TablePlugin(); // XXX: How to do with dependency
+											// injection?
+			}
 			return new ArrayPlugin();
 		}
-		
 
 		List<List<Class<?>>> levels = superTypesLevelwise(type);
-		
-		for (List<Class<?>> level : levels){
+
+		for (List<Class<?>> level : levels) {
 			for (Class<?> curType : level) {
 				RenderingPlugin plugin = map.get(curType);
 				if (plugin != null) {
@@ -79,5 +84,4 @@ public class RenderingRegistry {
 		throw new AssertionError();
 
 	}
-
 }

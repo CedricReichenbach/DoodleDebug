@@ -10,6 +10,7 @@ import ch.unibe.scg.doodle.htmlgen.Attribute;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.plugins.ArrayPlugin;
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
+import ch.unibe.scg.doodle.plugins.TablePlugin;
 import ch.unibe.scg.doodle.rendering.DoodleCanvasRendering;
 import ch.unibe.scg.doodle.rendering.DoodleRenderException;
 import ch.unibe.scg.doodle.rendering.Rendering;
@@ -38,6 +39,9 @@ public class RealScratch implements Scratch {
 
 	@Inject
 	Provider<ArrayPlugin> arrayPluginProvider;
+
+	@Inject
+	Provider<TablePlugin> tablePluginProvider;
 
 	@Inject
 	ScratchFactory scratchFactory;
@@ -155,8 +159,11 @@ public class RealScratch implements Scratch {
 
 		CSSCollection.instance().add(plugin.getCSS());
 
+		// TODO: Fix this stupid workaround! (See renderingRegistry.lookup())
 		if (object.getClass().isArray()) {
 			plugin = arrayPluginProvider.get();
+			if (object.getClass().getComponentType().isArray())
+				plugin = tablePluginProvider.get();
 		}
 
 		try {
