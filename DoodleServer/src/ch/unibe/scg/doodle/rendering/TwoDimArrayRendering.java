@@ -17,12 +17,17 @@ public class TwoDimArrayRendering implements Rendering<Object[][]> {
 			onlyNumbers = true;
 		}
 
-		Tag table = new Tag("table");
+		Tag table = new Tag("table", "cellpadding=0");
+		table.addAttribute("cellspacing", "0");
 		Tag tbody = new Tag("tbody");
+		int rowNumber = 0;
 		for (Object[] array : arrays) {
 			Tag row = new Tag("tr");
+			if (rowNumber % 2 == 1) // odd
+				row.addCSSClass("oddRow");
 			renderRow(array, row);
 			tbody.add(row);
+			rowNumber++;
 		}
 		table.add(tbody);
 		tag.add(table);
@@ -65,13 +70,13 @@ public class TwoDimArrayRendering implements Rendering<Object[][]> {
 
 	private void renderNumber(Object number, Tag row) {
 		Tag before = new Tag("td", "class=beforeDecimalPoint");
-		if (beforeDecPoint(number) != 0)
-			before.add(beforeDecPoint(number));
+		before.add(beforeDecPoint(number));
 		row.add(before);
 
 		Tag point = new Tag("td", "class=decimalPoint");
 		Tag after = new Tag("td", "class=afterDecimalPoint");
-		if (!afterDecPoint(number).equals("")) {
+		if (!afterDecPoint(number).equals("")
+				&& !afterDecPoint(number).equals("0")) {
 			point.add(".");
 			after.add(afterDecPoint(number));
 		}

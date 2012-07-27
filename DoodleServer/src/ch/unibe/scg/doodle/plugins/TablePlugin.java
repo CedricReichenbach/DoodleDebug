@@ -58,8 +58,11 @@ public class TablePlugin extends ArrayPlugin {
 	@Override
 	public String getCSS() {
 		return ".TablePlugin td {float:none;} "
-				+ ".TablePlugin .beforeDecimalPoint {text-align:right;} "
-				+ ".TablePlugin .afterDecimalPoint {text-align:left;}";
+				+ ".TablePlugin .oddRow {background-color:#eee}"
+				+ ".TablePlugin .beforeDecimalPoint {text-align:right; padding-left: 4px;} "
+				+ ".TablePlugin .decimalPoint {text-align:center;}"
+				+ ".TablePlugin .afterDecimalPoint {text-align:left; padding-right: 4px; border-right: 1px solid #eee;} " +
+				".TablePlugin .oddRow .afterDecimalPoint {border-right: 1px solid #fff;}";
 	}
 
 }
