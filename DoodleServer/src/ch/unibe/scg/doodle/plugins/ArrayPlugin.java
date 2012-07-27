@@ -1,6 +1,8 @@
 package ch.unibe.scg.doodle.plugins;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,7 +11,6 @@ import javax.inject.Provider;
 
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.rendering.ArrayRendering;
-import ch.unibe.scg.doodle.rendering.DoodleRenderException;
 
 public class ArrayPlugin extends AbstractPlugin {
 
@@ -25,20 +26,44 @@ public class ArrayPlugin extends AbstractPlugin {
 
 	@Override
 	public void render(Object array, Tag tag) {
-		arrayRenderingProvider.get().render((Object[]) array, tag);
+		arrayRenderingProvider.get().render(castToArray(array), tag);
+	}
+
+	private Object[] castToArray(Object array) {
+		try {
+			return (Object[]) array;
+		} catch (ClassCastException e) { // was array of primitives
+			return castPrimitivesArray(array);
+		}
+	}
+
+	/**
+	 * Prevent error for arrays of primitive data types. There seems to be no
+	 * easier way.
+	 * 
+	 * @param array
+	 * @return
+	 */
+	private Object[] castPrimitivesArray(Object array) {
+		int length = Array.getLength(array);
+		Object[] casted = new Object[length];
+		for (int i = 0; i < length; i++) {
+			casted[i] = Array.get(array, i);
+		}
+		return casted;
 	}
 
 	@Override
 	public void renderSmall(Object array, Tag tag) {
-		arrayRenderingProvider.get().renderSmall((Object[]) array, tag);
+		arrayRenderingProvider.get().renderSmall(castToArray(array), tag);
 	}
 
 	@Override
 	public String getObjectTypeName(Object o) {
-		if (ArrayRendering.checkIfElementsSameType((Object[]) o))
+		if (ArrayRendering.checkIfElementsSameType(castToArray(o)))
 			// TODO: maybe smarter text
 			return super.getObjectTypeName(o) + " (only "
-					+ ((Object[]) o)[0].getClass().getSimpleName()
+					+ (castToArray(o))[0].getClass().getSimpleName()
 					+ " objects)";
 		return super.getObjectTypeName(o);
 	}
