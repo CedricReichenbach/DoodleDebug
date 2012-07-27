@@ -54,5 +54,10 @@ public class TablePlugin extends ArrayPlugin {
 		// TODO Auto-generated method stub
 		tag.add("table here");
 	}
+	
+	@Override
+	public String getCSS() {
+		return ".TablePlugin td {float:none;}";
+	}
 
 }
