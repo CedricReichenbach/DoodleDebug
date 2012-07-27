@@ -16,14 +16,4 @@ public class DoodleDebug {
 	public static void clearHistory() {
 		DoodleClient.instance().clearOutput();
 	}
-
-	/**
-	 * Includes all Console inputs into DoodleDebug output
-	 * 
-	 * @deprecated WARNING: Not implemented yet!
-	 */
-	public static void includeSystemOut() {
-		// XXX Problem: To catch everything, you have to implement an
-		// OutputStream which gets each character one after another...
-	}
 }
