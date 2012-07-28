@@ -43,8 +43,7 @@ public class TablePlugin extends ArrayPlugin {
 	@Override
 	public void renderSmall(Object table, Tag tag) throws DoodleRenderException {
 		Object[][] arrays = convertTo2DArray(table);
-		int rows = arrays.length;
-		tag.add("table (" + rows + " rows)");
+		twoDimArrayRenderingProvider.get().render(arrays, tag);
 	}
 
 	private Object[][] convertTo2DArray(Object table)

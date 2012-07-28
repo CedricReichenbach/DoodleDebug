@@ -37,11 +37,12 @@ public class MapPlugin extends AbstractPlugin {
 
 	@Override
 	public String getCSS() {
-		String all = ".MapPlugin .mappingKey, .MapPlugin .mappingArrow, .MapPlugin .mappingValue {display: inline-block; float: none;}";
+		String all = ".MapPlugin .mappingKey, .MapPlugin .mappingArrow, .MapPlugin .mappingValue {float: none;}";
 		String key = ".MapPlugin .mappingKey {}";
-		String arrow = ".MapPlugin .mappingArrow {position: relative; top: -4pt}";
+		String arrow = ".MapPlugin .mappingArrow {padding: 0 4px;}";
 		String value = ".MapPlugin .mappingValue {}";
-		return all + key + arrow + value;
+		String hr = ".MapPlugin .betweenMappings {}";
+		return all + key + arrow + value + hr;
 	}
 
 	@Override

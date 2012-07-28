@@ -16,19 +16,24 @@ public class MapRendering implements Rendering<Map<?, ?>> {
 	@Override
 	public void render(Map<?, ?> map, Tag tag) {
 		Set<?> keySet = map.keySet();
+		Tag table = new Tag("table", "cellpadding=0");
+		table.addAttribute("cellspacing", "0");
+		Tag tbody = new Tag("tbody");
 		for (Object key : keySet) {
-			Tag mapping = new Tag("div", "class=mapping");
-			Tag mapKey = new Tag("div", "class=mappingKey");
+			Tag mapping = new Tag("tr", "class=mapping");
+			Tag mapKey = new Tag("td", "class=mappingKey");
 			doodler.renderInlineInto(key, mapKey);
 			mapping.add(mapKey);
-			Tag arrow = new Tag("div", "class=mappingArrow");
+			Tag arrow = new Tag("td", "class=mappingArrow");
 			arrow.add("&rarr;");
 			mapping.add(arrow);
-			Tag mapValue = new Tag("div", "class=mappingValue");
+			Tag mapValue = new Tag("td", "class=mappingValue");
 			doodler.renderInlineInto(map.get(key), mapValue);
 			mapping.add(mapValue);
-			tag.add(mapping);
+			tbody.add(mapping);
 		}
+		table.add(tbody);
+		tag.add(table);
 	}
 
 	@Override

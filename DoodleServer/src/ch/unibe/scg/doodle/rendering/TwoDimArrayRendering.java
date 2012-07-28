@@ -35,8 +35,8 @@ public class TwoDimArrayRendering implements Rendering<Object[][]> {
 
 	@Override
 	public void renderSmall(Object[][] arrays, Tag tag) {
-		// TODO Auto-generated method stub
-
+		int rows = arrays.length;
+		tag.add("table (" + rows + " rows)");
 	}
 
 	private boolean onlyNumbers(Object[][] arrays) {
