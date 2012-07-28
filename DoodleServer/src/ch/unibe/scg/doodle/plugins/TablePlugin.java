@@ -2,7 +2,9 @@ package ch.unibe.scg.doodle.plugins;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -33,11 +35,34 @@ public class TablePlugin extends ArrayPlugin {
 	}
 
 	@Override
-	public void render(Object table, Tag tag) {
-		if (table.getClass().isArray()) {
-			twoDimArrayRenderingProvider.get()
-					.render(castTo2DimArr(table), tag);
+	public void render(Object table, Tag tag) throws DoodleRenderException {
+		Object[][] arrays = convertTo2DArray(table);
+		twoDimArrayRenderingProvider.get().render(arrays, tag);
+	}
+
+	@Override
+	public void renderSmall(Object table, Tag tag) throws DoodleRenderException {
+		Object[][] arrays = convertTo2DArray(table);
+		int rows = arrays.length;
+		tag.add("table (" + rows + " rows)");
+	}
+
+	private Object[][] convertTo2DArray(Object table)
+			throws DoodleRenderException {
+		if (table.getClass().isArray())
+			return castTo2DimArr(table);
+		if (table instanceof Collection)
+			return collectionToArray((Collection<?>) table);
+		throw new DoodleRenderException("TablePlugin cannot render this type.");
+	}
+
+	private Object[][] collectionToArray(Collection<?> collection) {
+		Object[][] arrays = new Object[collection.size()][];
+		Iterator<?> iterator = collection.iterator();
+		for (int i = 0; i < arrays.length; i++) {
+			arrays[i] = ((Collection<?>) iterator.next()).toArray();
 		}
+		return arrays;
 	}
 
 	private Object[][] castTo2DimArr(Object twoDimArray) {
@@ -50,19 +75,16 @@ public class TablePlugin extends ArrayPlugin {
 	}
 
 	@Override
-	public void renderSmall(Object table, Tag tag) {
-		// TODO Auto-generated method stub
-		tag.add("table here");
-	}
-
-	@Override
 	public String getCSS() {
-		return ".TablePlugin td {float:none;} "
-				+ ".TablePlugin .oddRow {background-color:#eee}"
-				+ ".TablePlugin .beforeDecimalPoint {text-align:right; padding-left: 4px;} "
-				+ ".TablePlugin .decimalPoint {text-align:center;}"
-				+ ".TablePlugin .afterDecimalPoint {text-align:left; padding-right: 4px; border-right: 1px solid #eee;} " +
-				".TablePlugin .oddRow .afterDecimalPoint {border-right: 1px solid #fff;}";
+		String elements = ".TablePlugin td, .CollectionPlugin td {float:none;} ";
+		String nonOddRows = ".TablePlugin, .CollectionPlugin {background-color: white;}";
+		String oddRows = ".TablePlugin .oddRow, .CollectionPlugin .oddRow {background-color:#eee}";
+		String before = ".TablePlugin .beforeDecimalPoint, .CollectionPlugin .beforeDecimalPoint {text-align:right; padding-left: 4px;} ";
+		String point = ".TablePlugin .decimalPoint, .CollectionPlugin .decimalPoint {text-align:center;}";
+		String after = ".TablePlugin .afterDecimalPoint, .CollectionPlugin .afterDecimalPoint {text-align:left; padding-right: 4px; border-right: 1px solid #eee;} ";
+		String oddAfter = ".TablePlugin .oddRow .afterDecimalPoint, .CollectionPlugin .oddRow .afterDecimalPoint {border-right: 1px solid #fff;}";
+		return elements + nonOddRows + oddRows + before + point + after
+				+ oddAfter;
 	}
 
 }

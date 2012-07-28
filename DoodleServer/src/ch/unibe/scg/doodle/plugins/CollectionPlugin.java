@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 import ch.unibe.scg.doodle.htmlgen.Tag;
+import ch.unibe.scg.doodle.rendering.DoodleRenderException;
 
 /**
  * A proxy for ArrayPlugin, they use the same rendering.
@@ -20,6 +21,9 @@ public class CollectionPlugin extends AbstractPlugin {
 	@Inject
 	Provider<ArrayPlugin> arrayPluginProvider;
 
+	@Inject
+	Provider<TablePlugin> tablePluginProvider;
+
 	@Override
 	public Set<Class<?>> getDrawableClasses() {
 		HashSet<Class<?>> hs = new HashSet<Class<?>>();
@@ -28,13 +32,22 @@ public class CollectionPlugin extends AbstractPlugin {
 	}
 
 	@Override
-	public void render(Object collection, Tag tag) {
+	public void render(Object collection, Tag tag) throws DoodleRenderException {
+		if (twoDimCollection((Collection<?>) collection)) {
+			tablePluginProvider.get().render(collection, tag);
+			return;
+		}
 		Object[] array = ((Collection<?>) collection).toArray();
 		arrayPluginProvider.get().render(array, tag);
 	}
 
 	@Override
-	public void renderSmall(Object collection, Tag tag) {
+	public void renderSmall(Object collection, Tag tag)
+			throws DoodleRenderException {
+		if (twoDimCollection((Collection<?>) collection)) {
+			tablePluginProvider.get().renderSmall(collection, tag);
+			return;
+		}
 		Object[] array = ((Collection<?>) collection).toArray();
 		arrayPluginProvider.get().renderSmall(array, tag);
 	}
@@ -51,13 +64,22 @@ public class CollectionPlugin extends AbstractPlugin {
 
 	@Override
 	public String getCSS() {
-		return arrayPluginProvider.get().getCSS();
+		return arrayPluginProvider.get().getCSS()
+				+ tablePluginProvider.get().getCSS();
 		// return ".ListPlugin .listElement "
 		// + "{float:left;}"
 		// + ".ListPlugin.smallRendering .listElement "
 		// +
 		// "{float:left; background-color:black; height: 4px; width:4px;} margin: 0 1px;";
 		// // XXX
+	}
+
+	private boolean twoDimCollection(Collection<?> collection) {
+		if (collection.isEmpty())
+			return false;
+		if (collection.iterator().next() instanceof Collection)
+			return true;
+		return false;
 	}
 
 	public static boolean checkIfElementsSameType(Collection<?> collection) {

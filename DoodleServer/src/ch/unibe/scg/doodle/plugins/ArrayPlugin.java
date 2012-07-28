@@ -11,6 +11,7 @@ import javax.inject.Provider;
 
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.rendering.ArrayRendering;
+import ch.unibe.scg.doodle.rendering.DoodleRenderException;
 
 public class ArrayPlugin extends AbstractPlugin {
 
@@ -25,7 +26,7 @@ public class ArrayPlugin extends AbstractPlugin {
 	}
 
 	@Override
-	public void render(Object array, Tag tag) {
+	public void render(Object array, Tag tag) throws DoodleRenderException {
 		arrayRenderingProvider.get().render(castToArray(array), tag);
 	}
 
@@ -54,7 +55,7 @@ public class ArrayPlugin extends AbstractPlugin {
 	}
 
 	@Override
-	public void renderSmall(Object array, Tag tag) {
+	public void renderSmall(Object array, Tag tag) throws DoodleRenderException {
 		arrayRenderingProvider.get().renderSmall(castToArray(array), tag);
 	}
 
