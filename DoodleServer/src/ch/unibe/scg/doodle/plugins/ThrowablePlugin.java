@@ -35,10 +35,11 @@ public class ThrowablePlugin extends AbstractPlugin {
 
 	@Override
 	public String getCSS() {
-		String main = ".ThrowablePlugin {background-color: white; color: red;}";
-		String title = ".ThrowablePlugin .problemTitle {font-weight: 500;}";
+		String main = ".ThrowablePlugin {background-color: #ff6; color: red; padding: .5em}";
+		String mainSmall = ".ThrowablePlugin.smallRendering {padding: 0;}";
+		String title = ".ThrowablePlugin .problemTitle {font-weight: 500; margin: 0;}";
 		String trace = ".ThrowablePlugin .stackTrace {font-family: monospace, \"Roboto\";}";
-		return main + title + trace;
+		return main + mainSmall + title + trace;
 	}
 
 }

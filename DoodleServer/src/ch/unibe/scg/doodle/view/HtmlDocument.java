@@ -55,7 +55,7 @@ public class HtmlDocument {
 		// load from lightbox css
 		css += CSSUtil.getCSSFromFile("lightbox.css");
 		// + provided by plugins
-		return css + CSSCollection.getAllCSS();
+		return css + CSSCollection.flushAllCSS();
 	}
 
 	/**

@@ -10,6 +10,7 @@ import ch.unibe.scg.doodle.server.views.HtmlShow;
 import ch.unibe.scg.doodle.server.views.JavascriptExecuter;
 import ch.unibe.scg.doodle.simon.SimonServer;
 import ch.unibe.scg.doodle.util.JavascriptCallsUtil;
+import ch.unibe.scg.doodle.view.CSSCollection;
 import ch.unibe.scg.doodle.view.DoodleDebugScreen;
 import ch.unibe.scg.doodle.view.HtmlDocument;
 
@@ -72,6 +73,7 @@ public class DoodleServer {
 		this.clearOutput();
 		this.lightboxClosed();
 		SimonServer.instance.refreshClientClassloading();
+		CSSCollection.reset();
 	}
 
 	public void lightboxClosed() {
