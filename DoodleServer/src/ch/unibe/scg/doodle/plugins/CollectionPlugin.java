@@ -52,6 +52,7 @@ public class CollectionPlugin extends AbstractPlugin {
 		arrayPluginProvider.get().renderSmall(array, tag);
 	}
 
+	@Override
 	public String getObjectTypeName(Object collection) {
 		if (checkIfElementsSameType((Collection<?>) collection)
 				&& !((Collection<?>) collection).isEmpty())
@@ -86,12 +87,16 @@ public class CollectionPlugin extends AbstractPlugin {
 		if (collection.isEmpty())
 			return true;
 
-		Class<?> first = collection.iterator().next().getClass();
+		try {
+			Class<?> first = collection.iterator().next().getClass();
 
-		for (Object o : collection) {
-			if (o == null || !(o.getClass().equals(first)))
-				return false;
+			for (Object o : collection) {
+				if (o == null || !(o.getClass().equals(first)))
+					return false;
+			}
+			return true;
+		} catch (NullPointerException e) {
+			return false;
 		}
-		return true;
 	}
 }

@@ -11,6 +11,7 @@ import ch.unibe.scg.doodle.SmallScratchFactory;
 import ch.unibe.scg.doodle.plugins.ColorPlugin;
 import ch.unibe.scg.doodle.plugins.ImagePlugin;
 import ch.unibe.scg.doodle.plugins.CollectionPlugin;
+import ch.unibe.scg.doodle.plugins.MapPlugin;
 import ch.unibe.scg.doodle.plugins.NullPlugin;
 import ch.unibe.scg.doodle.plugins.ObjectPlugin;
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
@@ -50,6 +51,7 @@ public class DoodleModule extends AbstractModule {
 		uriBinder.addBinding().to(NullPlugin.class);
 		uriBinder.addBinding().to(TablePlugin.class);
 		uriBinder.addBinding().to(ThrowablePlugin.class);
+		uriBinder.addBinding().to(MapPlugin.class);
 	}
 
 }
