@@ -16,6 +16,7 @@ import ch.unibe.scg.doodle.plugins.ObjectPlugin;
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
 import ch.unibe.scg.doodle.plugins.StringPlugin;
 import ch.unibe.scg.doodle.plugins.TablePlugin;
+import ch.unibe.scg.doodle.plugins.ThrowablePlugin;
 import ch.unibe.scg.doodle.rendering.RenderingRegistry;
 import ch.unibe.scg.doodle.rendering.RenderingRegistryProvider;
 
@@ -48,6 +49,7 @@ public class DoodleModule extends AbstractModule {
 		uriBinder.addBinding().to(ImagePlugin.class);
 		uriBinder.addBinding().to(NullPlugin.class);
 		uriBinder.addBinding().to(TablePlugin.class);
+		uriBinder.addBinding().to(ThrowablePlugin.class);
 	}
 
 }

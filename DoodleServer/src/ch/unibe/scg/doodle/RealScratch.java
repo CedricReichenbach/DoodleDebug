@@ -111,8 +111,7 @@ public class RealScratch implements Scratch {
 			try {
 				rendering.render(this.canvas, tag);
 			} catch (DoodleRenderException e) {
-				doodler.renderInlineIntoWithoutClassName(new ErrorDrawer(e),
-						tag);
+				doodler.renderInlineIntoWithoutClassName(e, tag);
 			}
 		} else {
 			this.drawDefault(tag);

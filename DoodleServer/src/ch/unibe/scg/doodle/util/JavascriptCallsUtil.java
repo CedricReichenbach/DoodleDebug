@@ -20,7 +20,9 @@ public class JavascriptCallsUtil {
 	 * @return
 	 */
 	private static String escape(String html) {
-		String escaped = html.replace("'", "\\'").replace("\n", "\\n");
+		String escaped = html.replace("\\", "\\\\").replace("\t", "\\t")
+				.replace("\b", "\\b").replace("\n", "\\n").replace("\r", "\\r")
+				.replace("\f", "\\f").replace("\'", "\\'").replace("\"", "\\\"");
 		return escaped;
 	}
 }

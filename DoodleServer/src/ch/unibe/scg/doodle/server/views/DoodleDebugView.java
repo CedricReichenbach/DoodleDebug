@@ -3,6 +3,7 @@ package ch.unibe.scg.doodle.server.views;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTError;
 import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.browser.ProgressListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.ui.part.ViewPart;
@@ -23,6 +24,7 @@ public class DoodleDebugView extends ViewPart {
 	public void createPartControl(Composite parent) {
 		try {
 			browser = new Browser(parent, SWT.NONE);
+			browser.setJavascriptEnabled(true);
 			DoodleLocationListener locationListener = new DoodleLocationListener();
 			browser.addLocationListener(locationListener);
 			String welcomeHtml = new DoodleDebugWelcomeScreen().toString();
