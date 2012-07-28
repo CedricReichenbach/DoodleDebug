@@ -10,7 +10,7 @@ import ch.unibe.scg.doodle.SmallScratch;
 import ch.unibe.scg.doodle.SmallScratchFactory;
 import ch.unibe.scg.doodle.plugins.ColorPlugin;
 import ch.unibe.scg.doodle.plugins.ImagePlugin;
-import ch.unibe.scg.doodle.plugins.ListPlugin;
+import ch.unibe.scg.doodle.plugins.CollectionPlugin;
 import ch.unibe.scg.doodle.plugins.NullPlugin;
 import ch.unibe.scg.doodle.plugins.ObjectPlugin;
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
@@ -42,7 +42,7 @@ public class DoodleModule extends AbstractModule {
 	}
 
 	private void addPlugins(Multibinder<RenderingPlugin> uriBinder) {
-		uriBinder.addBinding().to(ListPlugin.class);
+		uriBinder.addBinding().to(CollectionPlugin.class);
 		uriBinder.addBinding().to(ObjectPlugin.class);
 		uriBinder.addBinding().to(ColorPlugin.class);
 		uriBinder.addBinding().to(StringPlugin.class);

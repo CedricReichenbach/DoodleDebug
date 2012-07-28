@@ -9,7 +9,7 @@ import org.junit.Test;
 
 
 import ch.unibe.scg.doodle.inject.DoodleModule;
-import ch.unibe.scg.doodle.plugins.ListPlugin;
+import ch.unibe.scg.doodle.plugins.CollectionPlugin;
 import ch.unibe.scg.doodle.rendering.RenderingRegistry;
 
 import com.google.inject.Guice;
@@ -23,7 +23,7 @@ public class PluginBindingTest {
 		Injector injector = Guice.createInjector(new DoodleModule());
 		RenderingRegistry registry = injector
 				.getInstance(RenderingRegistry.class);
-		assertThat(registry.lookup(Vector.class), is(ListPlugin.class));
+		assertThat(registry.lookup(Vector.class), is(CollectionPlugin.class));
 	}
 
 	@Test
