@@ -76,6 +76,7 @@ public class TablePlugin extends ArrayPlugin {
 
 	@Override
 	public String getCSS() {
+		String table = ".TablePlugin table, .CollectionPlugin table {empty-cells:show;}";
 		String elements = ".TablePlugin td, .CollectionPlugin td {float:none;} ";
 		String nonOddRows = ".TablePlugin, .CollectionPlugin {background-color: white;}";
 		String oddRows = ".TablePlugin .oddRow, .CollectionPlugin .oddRow {background-color:#eee}";
@@ -83,8 +84,7 @@ public class TablePlugin extends ArrayPlugin {
 		String point = ".TablePlugin .decimalPoint, .CollectionPlugin .decimalPoint {text-align:center;}";
 		String after = ".TablePlugin .afterDecimalPoint, .CollectionPlugin .afterDecimalPoint {text-align:left; padding-right: 4px; border-right: 1px solid #eee;} ";
 		String oddAfter = ".TablePlugin .oddRow .afterDecimalPoint, .CollectionPlugin .oddRow .afterDecimalPoint {border-right: 1px solid #fff;}";
-		return elements + nonOddRows + oddRows + before + point + after
+		return table + elements + nonOddRows + oddRows + before + point + after
 				+ oddAfter;
 	}
-
 }
