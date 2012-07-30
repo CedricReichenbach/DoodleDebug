@@ -2,7 +2,7 @@ package app_example.huge_strings;
 
 import java.util.ArrayList;
 
-import ch.unibe.scg.doodle.D;
+import ch.unibe.scg.doodle.Doo;
 
 
 public class Main {
@@ -17,7 +17,7 @@ public class Main {
 		
 		list.add("short one");
 		
-		D.raw(list);
+		Doo.dle(list);
 	}
 
 }

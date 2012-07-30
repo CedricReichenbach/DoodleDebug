@@ -22,7 +22,7 @@ public class DMockup {
 	}
 
 	/**
-	 * Code sugar for D.raw-ing any Object similar to System.out.println
+	 * Code sugar for Doo.raw-ing any Object similar to System.out.println
 	 * 
 	 * @param Object
 	 *            o
@@ -33,7 +33,7 @@ public class DMockup {
 	}
 
 	/**
-	 * Code sugar for D.raw-ing any Object similar to System.out.println
+	 * Code sugar for Doo.raw-ing any Object similar to System.out.println
 	 * 
 	 * @param Object
 	 *            o

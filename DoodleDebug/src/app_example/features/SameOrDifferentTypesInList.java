@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import ch.unibe.scg.doodle.D;
+import ch.unibe.scg.doodle.Doo;
 
 
 public class SameOrDifferentTypesInList {
@@ -21,8 +21,8 @@ public class SameOrDifferentTypesInList {
 		
 		List<String> same = Arrays.asList("Asdf", "jklö");
 		
-		D.raw(different);
-		D.raw(same);
+		Doo.dle(different);
+		Doo.dle(same);
 	}
 
 }

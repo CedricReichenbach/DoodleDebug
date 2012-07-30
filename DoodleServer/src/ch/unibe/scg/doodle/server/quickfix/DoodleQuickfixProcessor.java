@@ -30,7 +30,7 @@ public class DoodleQuickfixProcessor implements IQuickFixProcessor {
 			IProblemLocation[] locations) throws CoreException {
 		for (IProblemLocation problem : locations) {
 			if (problem.getProblemId() == 0x22000032
-					&& problem.getProblemArguments()[0].equals("D"))
+					&& problem.getProblemArguments()[0].equals("Doo"))
 				// XXX filter relevant problems | I have no clue what this
 				// problemID is right now
 				return getAddDDToBuildPathProposals(context);
@@ -42,7 +42,7 @@ public class DoodleQuickfixProcessor implements IQuickFixProcessor {
 			IInvocationContext context) {
 		ICompilationUnit unit = context.getCompilationUnit();
 		IJavaProject project = unit.getJavaProject();
-		String name = "ch.unibe.scg.doodle.D";
+		String name = "ch.unibe.scg.doodle.Doo";
 		ClasspathFixProposal[] fixProposals = ClasspathFixProcessor
 				.getContributedFixImportProposals(project, name, null);
 

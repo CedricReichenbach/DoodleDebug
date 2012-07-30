@@ -2,7 +2,7 @@ package app_example.twodim_array;
 
 import java.awt.Color;
 
-import ch.unibe.scg.doodle.D;
+import ch.unibe.scg.doodle.Doo;
 
 
 public class Main {
@@ -19,7 +19,7 @@ public class Main {
 
 		System.out.println(colors);
 		
-		D.raw(colors);
+		Doo.dle(colors);
 	}
 
 	private static Color[] randomColors() {

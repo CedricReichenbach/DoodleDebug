@@ -13,7 +13,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import ch.unibe.scg.doodle.D;
+import ch.unibe.scg.doodle.Doo;
 
 
 public class MainScgDemo {
@@ -59,8 +59,8 @@ public class MainScgDemo {
 		System.out.println(beforeSerializing);
 		System.out.println(afterSerializing);
 		
-		D.raw(beforeSerializing);
-		D.raw(afterSerializing);
+		Doo.dle(beforeSerializing);
+		Doo.dle(afterSerializing);
 		
 		assertEquals(beforeSerializing,afterSerializing);
 	}

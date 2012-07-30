@@ -1,6 +1,6 @@
 package app_example.car;
 
-import ch.unibe.scg.doodle.D;
+import ch.unibe.scg.doodle.Doo;
 
 public class Main {
 
@@ -9,7 +9,7 @@ public class Main {
 		car.driver = new Person("Michael Schumacher");
 		car.addPassenger(new Person("Carl Johnson"));
 		
-		D.raw(car);
+		Doo.dle(car);
 	}
 
 }

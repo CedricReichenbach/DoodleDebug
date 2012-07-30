@@ -4,13 +4,13 @@ import java.awt.Color;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import ch.unibe.scg.doodle.D;
+import ch.unibe.scg.doodle.Doo;
 
 
 public class Main {
 
 	/**
-	 * Creates an ArrayList of colors and draws them with D.raw(...) of
+	 * Creates an ArrayList of colors and draws them with Doo.raw(...) of
 	 * DoodleDebug
 	 * 
 	 * @param args
@@ -19,15 +19,15 @@ public class Main {
 		Color[] ar = new Color[5];
 		fillRandomColors(ar);
 		
-		D.raw(ar);
+		Doo.dle(ar);
 
 		ar[2] = new ExtendedColor(0);
 
-		D.raw(ar);
+		Doo.dle(ar);
 
 		for (int i = 1; i <= 10; i++) {
 			changeRandomColor(ar);
-			D.raw(ar);
+			Doo.dle(ar);
 		}
 	}
 
