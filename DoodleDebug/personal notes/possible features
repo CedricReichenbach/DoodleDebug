@@ -1,1 +1,3 @@
 - Keyboard navigation, e.g.: 'j' for next object rendering (".printOut")
+
+- use statically imported method (i.e. "doodle()") instead of Doo.dle()

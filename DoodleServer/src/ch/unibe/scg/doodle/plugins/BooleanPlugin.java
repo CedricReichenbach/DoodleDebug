@@ -33,10 +33,10 @@ public class BooleanPlugin extends AbstractPlugin {
 
 	@Override
 	public String getCSS() {
-		String bool = ".BooleanPlugin .boolean {}";
-		String small = ".BooleanPlugin.smallRendering .boolean * { padding: 0.5em; border-radius: 0.5em;}";
-		String trueCSS = ".BooleanPlugin .boolean .true {box-shadow: 0 0 1em #0e0 inset;}";
-		String falseCSS = ".BooleanPlugin .boolean .false {box-shadow: 0 0 1em #f22 inset;}";
+		String bool = ".BooleanPlugin {}";
+		String small = ".BooleanPlugin.smallRendering .boolean { padding: 0.5em; border-radius: 0.5em;}";
+		String trueCSS = ".BooleanPlugin .true {box-shadow: 0 0 1em #0e0 inset;}";
+		String falseCSS = ".BooleanPlugin .false {box-shadow: 0 0 1em #f22 inset;}";
 		return bool + small + trueCSS + falseCSS;
 	}
 

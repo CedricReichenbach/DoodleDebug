@@ -51,6 +51,7 @@ hr {
 .printOutWrapper {
     display: block;
     margin-bottom: 4px;
+	overflow: hidden;
 }
 .printOut, #lightboxContentWrapper, .level1 {
     background-color: #FFFFFF;

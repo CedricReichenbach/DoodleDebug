@@ -158,13 +158,6 @@ public class RealScratch implements Scratch {
 
 		CSSCollection.instance().add(plugin.getCSS());
 
-		// TODO: Fix this stupid workaround! (See renderingRegistry.lookup())
-		if (object.getClass().isArray()) {
-			plugin = arrayPluginProvider.get();
-			if (object.getClass().getComponentType().isArray())
-				plugin = tablePluginProvider.get();
-		}
-
 		try {
 			renderUsingPlugin(tag, plugin);
 		} catch (DoodleRenderException e) {

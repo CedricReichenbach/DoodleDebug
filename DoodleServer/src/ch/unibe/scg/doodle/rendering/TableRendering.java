@@ -1,31 +1,34 @@
 package ch.unibe.scg.doodle.rendering;
 
+import java.util.Collection;
+import java.util.Iterator;
+
 import javax.inject.Inject;
 
 import ch.unibe.scg.doodle.Doodler;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 
-public class TwoDimArrayRendering implements Rendering<Object[][]> {
+public class TableRendering implements Rendering<Collection<Collection<?>>> {
 
 	@Inject
 	Doodler doodler;
-	private boolean onlyNumbers = false;
+	private boolean numberTable = false;
 
 	@Override
-	public void render(Object[][] arrays, Tag tag) {
-		if (onlyNumbers(arrays)) {
-			onlyNumbers = true;
+	public void render(Collection<Collection<?>> collections, Tag tag) {
+		if (numberTable(collections)) {
+			numberTable = true;
 		}
 
 		Tag table = new Tag("table", "cellpadding=0");
 		table.addAttribute("cellspacing", "0");
 		Tag tbody = new Tag("tbody");
 		int rowNumber = 0;
-		for (Object[] array : arrays) {
+		for (Collection<?> collection : collections) {
 			Tag row = new Tag("tr");
 			if (rowNumber % 2 == 1) // odd
 				row.addCSSClass("oddRow");
-			renderRow(array, row);
+			renderRow(collection, row);
 			tbody.add(row);
 			rowNumber++;
 		}
@@ -34,17 +37,32 @@ public class TwoDimArrayRendering implements Rendering<Object[][]> {
 	}
 
 	@Override
-	public void renderSmall(Object[][] arrays, Tag tag) {
-		int rows = arrays.length;
+	public void renderSmall(Collection<Collection<?>> collections, Tag tag) {
+		int rows = collections.size();
 		tag.add("table (" + rows + " rows)");
 	}
 
-	private boolean onlyNumbers(Object[][] arrays) {
-		for (Object[] array : arrays) {
-			for (Object element : array) {
+	private boolean numberTable(Collection<Collection<?>> collections) {
+		if (!rectangular(collections))
+			return false;
+		for (Collection<?> collection : collections) {
+			for (Object element : collection) {
 				if (!isNumber(element)) {
 					return false;
 				}
+			}
+		}
+		return true;
+	}
+
+	private boolean rectangular(Collection<Collection<?>> collections) {
+		if (collections.isEmpty())
+			return true;
+		Iterator<Collection<?>> iterator = collections.iterator();
+		final int width = iterator.next().size();
+		while (iterator.hasNext()) {
+			if (iterator.next().size() != width) {
+				return false;
 			}
 		}
 		return true;
@@ -55,10 +73,17 @@ public class TwoDimArrayRendering implements Rendering<Object[][]> {
 				|| o instanceof Integer || o instanceof Short || o instanceof Byte);
 	}
 
-	private void renderRow(Object[] array, Tag row) {
-		for (Object element : array) {
-			if (onlyNumbers) {
-				renderNumber(element, row);
+	// private void renderRow(List<?> l, Tag row) {
+	// if(numberTable) {
+	// List<Number> numbers = (List<Number>) l;
+	//
+	// }
+	// }
+
+	private void renderRow(Collection<?> collection, Tag row) {
+		for (Object element : collection) {
+			if (numberTable) {
+				renderNumber((Number) element, row);
 			} else {
 				Tag data = new Tag("td");
 
@@ -68,7 +93,7 @@ public class TwoDimArrayRendering implements Rendering<Object[][]> {
 		}
 	}
 
-	private void renderNumber(Object number, Tag row) {
+	private void renderNumber(Number number, Tag row) {
 		Tag before = new Tag("td", "class=beforeDecimalPoint");
 		before.add(beforeDecPoint(number));
 		row.add(before);
@@ -84,11 +109,11 @@ public class TwoDimArrayRendering implements Rendering<Object[][]> {
 		row.add(after);
 	}
 
-	private int beforeDecPoint(Object number) {
-		return (int) (double) Double.valueOf(number.toString());
+	private int beforeDecPoint(Number number) {
+		return number.intValue();
 	}
 
-	private String afterDecPoint(Object number) {
+	private String afterDecPoint(Number number) {
 		String numString = number.toString();
 		int index = numString.indexOf('.');
 		if (index < 0)

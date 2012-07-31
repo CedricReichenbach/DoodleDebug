@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 import ch.unibe.scg.doodle.htmlgen.Tag;
+import ch.unibe.scg.doodle.rendering.CollectionRendering;
 import ch.unibe.scg.doodle.rendering.DoodleRenderException;
 
 /**
@@ -19,10 +20,10 @@ import ch.unibe.scg.doodle.rendering.DoodleRenderException;
 public class CollectionPlugin extends AbstractPlugin {
 
 	@Inject
-	Provider<ArrayPlugin> arrayPluginProvider;
+	Provider<TablePlugin> tablePluginProvider;
 
 	@Inject
-	Provider<TablePlugin> tablePluginProvider;
+	CollectionRendering collectionRendering;
 
 	@Override
 	public Set<Class<?>> getDrawableClasses() {
@@ -37,8 +38,7 @@ public class CollectionPlugin extends AbstractPlugin {
 			tablePluginProvider.get().render(collection, tag);
 			return;
 		}
-		Object[] array = ((Collection<?>) collection).toArray();
-		arrayPluginProvider.get().render(array, tag);
+		collectionRendering.render((Collection<?>) collection, tag);
 	}
 
 	@Override
@@ -48,8 +48,7 @@ public class CollectionPlugin extends AbstractPlugin {
 			tablePluginProvider.get().renderSmall(collection, tag);
 			return;
 		}
-		Object[] array = ((Collection<?>) collection).toArray();
-		arrayPluginProvider.get().renderSmall(array, tag);
+		collectionRendering.renderSmall((Collection<?>) collection, tag);
 	}
 
 	@Override
@@ -65,14 +64,10 @@ public class CollectionPlugin extends AbstractPlugin {
 
 	@Override
 	public String getCSS() {
-		return arrayPluginProvider.get().getCSS()
-				+ tablePluginProvider.get().getCSS();
-		// return ".ListPlugin .listElement "
-		// + "{float:left;}"
-		// + ".ListPlugin.smallRendering .listElement "
-		// +
-		// "{float:left; background-color:black; height: 4px; width:4px;} margin: 0 1px;";
-		// // XXX
+		String element = ".CollectionPlugin .collectionElement {float:left;}";
+		String smallElement = ".CollectionPlugin.smallRendering .collectionElement "
+				+ "{float:left; background-color:black; height: 4px; width:4px; margin: 0 1px;}";
+		return element + smallElement + tablePluginProvider.get().getCSS();
 	}
 
 	private boolean twoDimCollection(Collection<?> collection) {

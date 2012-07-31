@@ -157,7 +157,7 @@ public class Doodler {
 		renderInline(object, tag, false);
 	}
 
-	public void renderIntoLightbox(LightboxStack stack, Tag tag) {
+	public synchronized void renderIntoLightbox(LightboxStack stack, Tag tag) {
 		level--;
 		renderBreadcrumbs(stack, tag);
 		Tag lightboxRendering = new Tag("div", "id=lightboxRendering");
@@ -199,7 +199,8 @@ public class Doodler {
 		tag.add(breadcrumbsWrapper);
 	}
 
-	private void renderInline(Object object, Tag tag, boolean withClassName) {
+	private synchronized void renderInline(Object object, Tag tag,
+			boolean withClassName) {
 		if (object == null) {
 			object = new NullObject();
 		}

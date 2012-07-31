@@ -1,20 +1,19 @@
 package ch.unibe.scg.doodle.plugins;
 
-import java.lang.reflect.Array;
+import static ch.unibe.scg.doodle.util.ArrayUtil.castToArray;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
 
 import ch.unibe.scg.doodle.htmlgen.Tag;
-import ch.unibe.scg.doodle.rendering.ArrayRendering;
 import ch.unibe.scg.doodle.rendering.DoodleRenderException;
-import ch.unibe.scg.doodle.rendering.TwoDimArrayRendering;
+import ch.unibe.scg.doodle.rendering.TableRendering;
 
 /**
  * Plugin responsible for rendering of two-dimensional data structures like
@@ -26,7 +25,7 @@ import ch.unibe.scg.doodle.rendering.TwoDimArrayRendering;
 public class TablePlugin extends ArrayPlugin {
 
 	@Inject
-	Provider<TwoDimArrayRendering> twoDimArrayRenderingProvider;
+	Provider<TableRendering> tableRenderingProvider;
 
 	@Override
 	public Set<Class<?>> getDrawableClasses() {
@@ -36,41 +35,41 @@ public class TablePlugin extends ArrayPlugin {
 
 	@Override
 	public void render(Object table, Tag tag) throws DoodleRenderException {
-		Object[][] arrays = convertTo2DArray(table);
-		twoDimArrayRenderingProvider.get().render(arrays, tag);
+		Collection<Collection<?>> arrays = convertTo2DCollection(table);
+		tableRenderingProvider.get().render(arrays, tag);
 	}
 
 	@Override
 	public void renderSmall(Object table, Tag tag) throws DoodleRenderException {
-		Object[][] arrays = convertTo2DArray(table);
-		twoDimArrayRenderingProvider.get().render(arrays, tag);
+		Collection<Collection<?>> arrays = convertTo2DCollection(table);
+		tableRenderingProvider.get().render(arrays, tag);
 	}
 
-	private Object[][] convertTo2DArray(Object table)
+	private Collection<Collection<?>> convertTo2DCollection(Object table)
 			throws DoodleRenderException {
-		if (table.getClass().isArray())
-			return castTo2DimArr(table);
-		if (table instanceof Collection)
-			return collectionToArray((Collection<?>) table);
+		try {
+			if (table.getClass().isArray())
+				return twoDimArrayToCollection(table);
+			if (table instanceof Collection) {
+				return (Collection<Collection<?>>) table;
+			}
+		} catch (ClassCastException e) {
+			throw new DoodleRenderException(e);
+		}
 		throw new DoodleRenderException("TablePlugin cannot render this type.");
 	}
 
-	private Object[][] collectionToArray(Collection<?> collection) {
-		Object[][] arrays = new Object[collection.size()][];
-		Iterator<?> iterator = collection.iterator();
-		for (int i = 0; i < arrays.length; i++) {
-			arrays[i] = ((Collection<?>) iterator.next()).toArray();
-		}
-		return arrays;
-	}
-
-	private Object[][] castTo2DimArr(Object twoDimArray) {
-		Object[][] result = new Object[Array.getLength(twoDimArray)][];
-		Object[] arrays = castToArray(twoDimArray);
-		for (int i = 0; i < arrays.length; i++) {
-			result[i] = castToArray(arrays[i]);
+	private Collection<Collection<?>> twoDimArrayToCollection(Object table) {
+		Collection<Collection<?>> result = new ArrayList<Collection<?>>();
+		Collection<Object> arrays = asList(table);
+		for (Object array : arrays) {
+			result.add(asList(array));
 		}
 		return result;
+	}
+
+	private Collection<Object> asList(Object array) {
+		return Arrays.asList(castToArray(array));
 	}
 
 	@Override

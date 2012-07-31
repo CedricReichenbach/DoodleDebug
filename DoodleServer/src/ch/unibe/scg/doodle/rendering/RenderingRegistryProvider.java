@@ -6,13 +6,20 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import ch.unibe.scg.doodle.plugins.ArrayPlugin;
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
-
+import ch.unibe.scg.doodle.plugins.TablePlugin;
 
 public class RenderingRegistryProvider implements Provider<RenderingRegistry> {
 
 	@Inject
 	Set<RenderingPlugin> allPlugins;
+
+	@Inject
+	Provider<ArrayPlugin> arrayPluginProvider;
+
+	@Inject
+	Provider<TablePlugin> tablePluginProvider;
 
 	@Override
 	public RenderingRegistry get() {
@@ -23,7 +30,8 @@ public class RenderingRegistryProvider implements Provider<RenderingRegistry> {
 				m.put(type, p);
 			}
 		}
-		RenderingRegistry registry = new RenderingRegistry(m);
+		RenderingRegistry registry = new RenderingRegistry(m,
+				arrayPluginProvider.get(), tablePluginProvider.get());
 
 		return registry;
 	}

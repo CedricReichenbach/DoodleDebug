@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Provider;
+
 import ch.unibe.scg.doodle.plugins.ArrayPlugin;
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
 import ch.unibe.scg.doodle.plugins.TablePlugin;
@@ -18,11 +21,18 @@ import ch.unibe.scg.doodle.plugins.TablePlugin;
  */
 public class RenderingRegistry {
 
+	private final ArrayPlugin arrayPlugin;
+
+	private final TablePlugin tablePlugin;
+
 	private final HashMap<Class<?>, RenderingPlugin> map;
 
-	public RenderingRegistry(HashMap<Class<?>, RenderingPlugin> m) {
+	public RenderingRegistry(HashMap<Class<?>, RenderingPlugin> m,
+			ArrayPlugin arrayPlugin, TablePlugin tablePlugin) {
 		this.map = m;
 		assert map.containsKey(Object.class);
+		this.arrayPlugin = arrayPlugin;
+		this.tablePlugin = tablePlugin;
 	}
 
 	/**
@@ -65,10 +75,9 @@ public class RenderingRegistry {
 	public RenderingPlugin lookup(Class<?> type) {
 		if (type.isArray()) {
 			if (type.getComponentType().isArray()) {
-				return new TablePlugin(); // XXX: How to do with dependency
-											// injection?
+				return tablePlugin;
 			}
-			return new ArrayPlugin();
+			return arrayPlugin;
 		}
 
 		List<List<Class<?>>> levels = superTypesLevelwise(type);

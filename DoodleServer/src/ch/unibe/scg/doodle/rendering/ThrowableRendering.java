@@ -12,7 +12,10 @@ public class ThrowableRendering implements Rendering<Throwable> {
 	@Override
 	public void render(Throwable e, Tag tag) throws DoodleRenderException {
 		Tag title = new Tag("h3", "class=problemTitle");
-		title.add("A problem occurred. Stack trace:");
+		if (e instanceof DoodleRenderException)
+			title.add("A problem occurred during rendering. Stack trace:");
+		else
+			title.add("Stack trace:");
 		tag.add(title);
 		Tag stackTrace = new Tag("p", "class=stackTrace");
 		String traceString = getStackTrace(e);
