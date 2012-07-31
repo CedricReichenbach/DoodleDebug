@@ -10,27 +10,43 @@ public class ColorRendering implements Rendering<Color> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void render(Color color, Tag tag) {
-		tag.getAttributes().add(
-				new Attribute("style", "background-color:"
-						+ hexColorString(color)));
-		tag.add(color.toString());
+		tag.addAttribute("style", "background-color:" + rgbaColorString(color));
+		if (isDark(color))
+			tag.addCSSClass("darkColor");
+		Tag colorText = new Tag("div", "class=colorText");
+		colorText.add(colorString(color));
+		tag.add(colorText);
 	}
 
 	@Override
 	public void renderSmall(Color color, Tag tag) {
 		tag.getAttributes().add(
 				new Attribute("style", "background-color:"
-						+ hexColorString(color)));
+						+ rgbaColorString(color)));
 	}
 
-	private String hexColorString(Color color) {
+	private boolean isDark(Color color) {
+		int r = color.getRed();
+		int g = color.getGreen();
+		int b = color.getBlue();
+		int a = 255 - color.getAlpha();
+		return (r + g + b + a) < 255; // ~ < 25% brightness
+	}
+
+	private String colorString(Color color) {
+		int r = color.getRed();
+		int g = color.getGreen();
+		int b = color.getBlue();
+		int a = color.getAlpha();
+		return "Red: " + r + ", Green: " + g + ", Blue: " + b + ", Alpha: " + a;
+	}
+
+	private String rgbaColorString(Color color) {
 		int red = color.getRed();
 		int green = color.getGreen();
 		int blue = color.getBlue();
-		String hex_red = size2(Integer.toHexString(red));
-		String hex_green = size2(Integer.toHexString(green));
-		String hex_blue = size2(Integer.toHexString(blue));
-		return "#" + hex_red + hex_green + hex_blue;
+		int alpha = color.getAlpha();
+		return "rgba(" + red + "," + green + "," + blue + "," + alpha + ")";
 	}
 
 	private String size2(String hexString) {
