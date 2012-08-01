@@ -18,6 +18,7 @@ public class TableRendering implements Rendering<Collection<Collection<?>>> {
 	public void render(Collection<Collection<?>> collections, Tag tag) {
 		if (numberTable(collections)) {
 			numberTable = true;
+			tag.addCSSClass("numberTable");
 		}
 
 		Tag table = new Tag("table", "cellpadding=0");

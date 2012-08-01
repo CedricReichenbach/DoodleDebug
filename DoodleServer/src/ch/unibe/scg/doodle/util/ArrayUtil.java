@@ -1,7 +1,5 @@
 package ch.unibe.scg.doodle.util;
 
-import static ch.unibe.scg.doodle.util.ArrayUtil.castToArray;
-
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collection;

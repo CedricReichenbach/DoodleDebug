@@ -21,5 +21,4 @@ public class Doo {
 	public static void dle(Object o, Object... objects) {
 		DoodleClient.instance().sendToServer(o, objects);
 	}
-
 }

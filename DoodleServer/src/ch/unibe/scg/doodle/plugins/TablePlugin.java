@@ -70,14 +70,15 @@ public class TablePlugin extends ArrayPlugin {
 	@Override
 	public String getCSS() {
 		String table = ".TablePlugin table, .CollectionPlugin table {empty-cells:show;}";
-		String elements = ".TablePlugin td, .CollectionPlugin td {float:none;} ";
+		String elements = ".TablePlugin td, .CollectionPlugin td {float:none; padding: 2px;} ";
+		String numberElements = ".TablePlugin.numberTable td, .CollectionPlugin.numberTable td {float:none; padding: 1px 0;} ";
 		String nonOddRows = ".TablePlugin, .CollectionPlugin {background-color: white;}";
 		String oddRows = ".TablePlugin .oddRow, .CollectionPlugin .oddRow {background-color:#eee}";
-		String before = ".TablePlugin .beforeDecimalPoint, .CollectionPlugin .beforeDecimalPoint {text-align:right; padding-left: 4px;} ";
-		String point = ".TablePlugin .decimalPoint, .CollectionPlugin .decimalPoint {text-align:center;}";
-		String after = ".TablePlugin .afterDecimalPoint, .CollectionPlugin .afterDecimalPoint {text-align:left; padding-right: 4px; border-right: 1px solid #eee;} ";
-		String oddAfter = ".TablePlugin .oddRow .afterDecimalPoint, .CollectionPlugin .oddRow .afterDecimalPoint {border-right: 1px solid #fff;}";
-		return table + elements + nonOddRows + oddRows + before + point + after
-				+ oddAfter;
+		String before = ".TablePlugin.numberTable .beforeDecimalPoint, .CollectionPlugin.numberTable .beforeDecimalPoint {text-align:right; padding-left: 8px;} ";
+		String point = ".TablePlugin.numberTable .decimalPoint, .CollectionPlugin.numberTable .decimalPoint {text-align:center;}";
+		String after = ".TablePlugin.numberTable .afterDecimalPoint, .CollectionPlugin.numberTable .afterDecimalPoint {text-align:left; padding-right: 8px; border-right: 1px solid #eee;} ";
+		String oddAfter = ".TablePlugin.numberTable .oddRow .afterDecimalPoint, .CollectionPlugin.numberTable .oddRow .afterDecimalPoint {border-right: 1px solid #fff;}";
+		return table + elements + numberElements + nonOddRows + oddRows
+				+ before + point + after + oddAfter;
 	}
 }

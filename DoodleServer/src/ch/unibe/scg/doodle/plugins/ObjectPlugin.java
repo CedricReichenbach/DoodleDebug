@@ -4,10 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
 
 import ch.unibe.scg.doodle.htmlgen.Tag;
-import ch.unibe.scg.doodle.rendering.DefaultRendering;
 
 /**
  * Represents default drawing of any Object, if no other is defined.
@@ -16,13 +14,9 @@ import ch.unibe.scg.doodle.rendering.DefaultRendering;
  * 
  */
 public class ObjectPlugin extends AbstractPlugin {
-	final Provider<DefaultRendering> defaultRenderingProvider;
 
 	@Inject
-	public ObjectPlugin(Provider<DefaultRendering> defaultRenderingProvider) {
-		super();
-		this.defaultRenderingProvider = defaultRenderingProvider;
-	}
+	StringPlugin stringPlugin;
 
 	@Override
 	public Set<Class<?>> getDrawableClasses() {
@@ -33,12 +27,22 @@ public class ObjectPlugin extends AbstractPlugin {
 
 	@Override
 	public void render(Object object, Tag tag) {
-		defaultRenderingProvider.get().render(object, tag);
+		stringPlugin.render(object.toString(), tag);
 	}
 
 	@Override
 	public void renderSmall(Object object, Tag tag) {
-		defaultRenderingProvider.get().renderSmall(object, tag);
+		stringPlugin.renderSmall(object.toString(), tag);
+	}
+
+	@Override
+	public String getClassAttribute() {
+		return stringPlugin.getClassAttribute();
+	}
+
+	@Override
+	public String getCSS() {
+		return stringPlugin.getCSS();
 	}
 
 }
