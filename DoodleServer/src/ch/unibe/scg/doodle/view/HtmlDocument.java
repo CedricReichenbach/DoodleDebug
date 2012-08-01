@@ -1,5 +1,7 @@
 package ch.unibe.scg.doodle.view;
 
+import java.net.URL;
+
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.view.css.CSSUtil;
 import ch.unibe.scg.doodle.view.js.JSUtil;
@@ -22,24 +24,40 @@ public class HtmlDocument {
 
 	@SuppressWarnings("unchecked")
 	private Tag makeHead() {
-		Tag header = new Tag("head");
-		header.add("<meta charset=\"utf-8\">");
-		header.add("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=100\" >"); // for
-																					// IE9
-																					// compatibility
+		Tag head = new Tag("head");
+		head.add("<meta charset=\"utf-8\">");
+		head.add("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=100\" >"); // for
+																				// IE9
+																				// compatibility
 		Tag title = new Tag("title");
 		title.add("DoodleDebug");
-		header.add(title);
-		header.add(makeStyle());
-		header.add(makeJavascript());
-		return header;
+		head.add(title);
+		makeStyle(head);
+		head.add(makeJavascript());
+		return head;
 	}
 
 	@SuppressWarnings("unchecked")
-	private Tag makeStyle() {
-		Tag style = new Tag("style", "type=text/css");
-		style.add(makeStyleSheet());
-		return style;
+	private void makeStyle(Tag head) {
+		// from file "style.css"
+		URL mainStyle = CSSUtil.getCSSURLFromFile("style.css");
+		Tag main = new Tag("link", "rel=stylesheet", "type=text/css");
+		main.addAttribute("href", mainStyle.toExternalForm());
+		head.add(main);
+		// from lightbox.css
+		URL lightboxStyle = CSSUtil.getCSSURLFromFile("lightbox.css");
+		Tag lightbox = new Tag("link", "rel=stylesheet", "type=text/css");
+		lightbox.addAttribute("href", lightboxStyle.toExternalForm());
+		head.add(lightbox);
+
+		Tag pluginStyle = new Tag("style", "type=text/css");
+		pluginStyle.add(makePluginStyle());
+		head.add(pluginStyle);
+	}
+
+	protected String makePluginStyle() {
+		// provided by plugins
+		return CSSCollection.flushAllCSS();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -47,15 +65,6 @@ public class HtmlDocument {
 		Tag js = new Tag("script", "type=text/javascript");
 		js.add(getJS());
 		return js;
-	}
-
-	protected String makeStyleSheet() {
-		// load from file "style.css"
-		String css = CSSUtil.getCSSFromFile("style.css");
-		// load from lightbox css
-		css += CSSUtil.getCSSFromFile("lightbox.css");
-		// + provided by plugins
-		return css + CSSCollection.flushAllCSS();
 	}
 
 	/**

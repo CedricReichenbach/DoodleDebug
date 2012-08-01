@@ -18,8 +18,8 @@ public class DoodleDebugWelcomeScreen extends HtmlDocument {
 	}
 
 	@Override
-	protected String makeStyleSheet() {
-		return super.makeStyleSheet()
+	protected String makePluginStyle() {
+		return super.makePluginStyle()
 				+ "\n#welcomeTitle{text-shadow: 1px 1px 0 white; " +
 				"filter: progid:DXImageTransform.Microsoft.DropShadow(OffX=1, OffY=1, Color=white);}";
 	}

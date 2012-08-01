@@ -52,6 +52,20 @@ public class Tag extends LinkedList {
 	}
 
 	/**
+	 * Create a new Tag with a specified name and several attributes
+	 * 
+	 * @param name
+	 * @param attributes
+	 */
+	public Tag(String name, String... attributes) {
+		this(name);
+		this.attributes = new Attributes();
+		for (String attr : attributes) {
+			this.attributes.addAll(new Attributes(attr));
+		}
+	}
+
+	/**
 	 * Get the value of close.
 	 * 
 	 * @return Value of close.
