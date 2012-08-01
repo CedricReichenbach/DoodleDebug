@@ -14,6 +14,7 @@ import ch.unibe.scg.doodle.rendering.CollectionRendering;
 import ch.unibe.scg.doodle.rendering.DoodleRenderException;
 
 import static ch.unibe.scg.doodle.util.ArrayUtil.castToArray;
+import static ch.unibe.scg.doodle.util.ArrayUtil.asList;
 
 public class ArrayPlugin extends AbstractPlugin {
 
@@ -32,17 +33,17 @@ public class ArrayPlugin extends AbstractPlugin {
 
 	@Override
 	public void render(Object array, Tag tag) throws DoodleRenderException {
-		collectionPlugin.render(Arrays.asList(array), tag);
+		collectionPlugin.render(asList(array), tag);
 	}
 
 	@Override
 	public void renderSmall(Object array, Tag tag) throws DoodleRenderException {
-		collectionPlugin.renderSmall(Arrays.asList(array), tag);
+		collectionPlugin.renderSmall(asList(array), tag);
 	}
 
 	@Override
 	public String getObjectTypeName(Object o) {
-		if (CollectionRendering.checkIfElementsSameType(Arrays.asList(o))
+		if (CollectionRendering.checkIfElementsSameType(asList(o))
 				&& Array.getLength(o) != 0)
 			// TODO: maybe smarter text
 			return super.getObjectTypeName(o) + " (only "

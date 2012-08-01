@@ -1,8 +1,32 @@
 package ch.unibe.scg.doodle.util;
 
+import static ch.unibe.scg.doodle.util.ArrayUtil.castToArray;
+
 import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Collection;
 
 public class ArrayUtil {
+
+	/**
+	 * Convert an array to a java.util.List. In contrast to Arrays.asList(),
+	 * this one explicitly casts the given object to an array to prevent
+	 * surprises.
+	 * 
+	 * @param array
+	 * @return
+	 */
+	public static Collection<Object> asList(Object array) {
+		return Arrays.asList(castToArray(array));
+	}
+
+	/**
+	 * Cast an object to an array. This method includes correct casting of
+	 * primitives-arrays.
+	 * 
+	 * @param array
+	 * @return
+	 */
 	public static Object[] castToArray(Object array) {
 		try {
 			return (Object[]) array;

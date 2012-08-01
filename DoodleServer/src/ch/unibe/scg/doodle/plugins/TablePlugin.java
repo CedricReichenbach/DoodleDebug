@@ -1,9 +1,8 @@
 package ch.unibe.scg.doodle.plugins;
 
-import static ch.unibe.scg.doodle.util.ArrayUtil.castToArray;
+import static ch.unibe.scg.doodle.util.ArrayUtil.asList;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -66,10 +65,6 @@ public class TablePlugin extends ArrayPlugin {
 			result.add(asList(array));
 		}
 		return result;
-	}
-
-	private Collection<Object> asList(Object array) {
-		return Arrays.asList(castToArray(array));
 	}
 
 	@Override
