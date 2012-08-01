@@ -36,7 +36,7 @@ public class BooleanPlugin extends AbstractPlugin {
 	public String getCSS() {
 		String bool = ".BooleanPlugin .boolean {padding: 1px; text-align: center;}";
 		String font = "@font-face { font-family: \"openSymbol\"; src: url(\""
-				+ FontUtil.getFontFile("openSymbol.ttf") + "\")}";
+				+ FontUtil.getFontFileURL("openSymbol.ttf") + "\")}";
 		String small = ".BooleanPlugin.smallRendering .boolean "
 				+ "{ width: 1em; height: 1em; border-radius: 0.5em; font-family: \"openSymbol\", \"Roboto\";}";
 		String trueCSS = ".BooleanPlugin .true {box-shadow: 0 0 1em #0e0 inset;}";

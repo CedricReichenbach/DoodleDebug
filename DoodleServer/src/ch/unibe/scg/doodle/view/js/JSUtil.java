@@ -1,10 +1,16 @@
 package ch.unibe.scg.doodle.view.js;
 
-import ch.unibe.scg.doodle.util.FileUtil;
+import java.io.IOException;
+import java.net.URL;
+
+import org.eclipse.core.runtime.FileLocator;
 
 public class JSUtil {
-	public static String getJSFromFile(String filename) {
-		String js = FileUtil.readFile(JSUtil.class.getResource(filename));
-		return js;
+	public static URL getJSURLFromFile(String filename) {
+		try {
+			return FileLocator.resolve(JSUtil.class.getResource(filename));
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

@@ -1,6 +1,8 @@
 package ch.unibe.scg.doodle.view;
 
 import java.net.URL;
+import java.util.LinkedList;
+import java.util.List;
 
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.view.css.CSSUtil;
@@ -33,7 +35,7 @@ public class HtmlDocument {
 		title.add("DoodleDebug");
 		head.add(title);
 		makeStyle(head);
-		head.add(makeJavascript());
+		makeJavascript(head);
 		return head;
 	}
 
@@ -60,11 +62,14 @@ public class HtmlDocument {
 		return CSSCollection.flushAllCSS();
 	}
 
-	@SuppressWarnings("unchecked")
-	private Tag makeJavascript() {
-		Tag js = new Tag("script", "type=text/javascript");
-		js.add(getJS());
-		return js;
+	private void makeJavascript(Tag head) {
+		List<String> jsFiles = getJSFiles();
+		for (String file : jsFiles) {
+			Tag js = new Tag("script", "type=text/javascript");
+			js.addAttribute("src", JSUtil.getJSURLFromFile(file)
+					.toExternalForm());
+			head.add(js);
+		}
 	}
 
 	/**
@@ -72,25 +77,22 @@ public class HtmlDocument {
 	 * 
 	 * @return
 	 */
-	protected String getJS() {
-		String js = "";
-		long before = System.currentTimeMillis();
-		js += JSUtil.getJSFromFile("doodleDebug.js");
-		js += JSUtil.getJSFromFile("prototype.js"); // uncompressed
-													// too slow! (>
-													// 1s)
-		js += JSUtil.getJSFromFile("scriptaculous.js");
-		js += JSUtil.getJSFromFile("lightbox.js");
-		js += JSUtil.getJSFromFile("builder.js");
-		js += JSUtil.getJSFromFile("effects.js");
-		js += JSUtil.getJSFromFile("controls.js");
-		js += JSUtil.getJSFromFile("dragdrop.js");
-		js += JSUtil.getJSFromFile("slider.js");
-		js += JSUtil.getJSFromFile("sound.js");
-		js += JSUtil.getJSFromFile("testExamples.js"); // XXX Only when
-														// developing
-		long after = System.currentTimeMillis();
-		System.out.println("Time to load JS: " + (after - before) + " ms");
+	protected List<String> getJSFiles() {
+		List<String> js = new LinkedList<String>();
+		js.add("doodleDebug.js");
+		js.add("prototype.js"); // uncompressed
+								// too slow! (>
+								// 1s)
+		js.add("scriptaculous.js");
+		js.add("lightbox.js");
+		js.add("builder.js");
+		js.add("effects.js");
+		js.add("controls.js");
+		js.add("dragdrop.js");
+		js.add("slider.js");
+		js.add("sound.js");
+		js.add("testExamples.js"); // XXX Only when
+									// developing
 		return js;
 	}
 
