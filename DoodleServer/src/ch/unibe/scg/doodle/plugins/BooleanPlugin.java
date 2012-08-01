@@ -8,6 +8,7 @@ import javax.inject.Provider;
 
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.rendering.BooleanRendering;
+import ch.unibe.scg.doodle.view.fonts.FontUtil;
 
 public class BooleanPlugin extends AbstractPlugin {
 
@@ -33,11 +34,18 @@ public class BooleanPlugin extends AbstractPlugin {
 
 	@Override
 	public String getCSS() {
-		String bool = ".BooleanPlugin {}";
-		String small = ".BooleanPlugin.smallRendering .boolean { padding: 0.5em; border-radius: 0.5em;}";
+		String bool = ".BooleanPlugin .boolean {padding: 1px; text-align: center;}";
+		String font = "@font-face { font-family: \"openSymbol\"; src: url(\""
+				+ FontUtil.getFontFile("openSymbol.ttf") + "\")}";
+		String small = ".BooleanPlugin.smallRendering .boolean "
+				+ "{ width: 1em; height: 1em; border-radius: 0.5em; font-family: \"openSymbol\", \"Roboto\";}";
 		String trueCSS = ".BooleanPlugin .true {box-shadow: 0 0 1em #0e0 inset;}";
+		String trueSmall = ".BooleanPlugin.smallRendering .true {color: green; box-shadow: none;}";
 		String falseCSS = ".BooleanPlugin .false {box-shadow: 0 0 1em #f22 inset;}";
-		return bool + small + trueCSS + falseCSS;
+		String falseSmall = ".BooleanPlugin.smallRendering .false "
+				+ "{color: #d00; box-shadow: none; position: relative; top: -1pt;}";
+		return bool + font + small + trueCSS + trueSmall + falseCSS
+				+ falseSmall;
 	}
 
 }
