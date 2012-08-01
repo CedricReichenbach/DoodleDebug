@@ -8,3 +8,5 @@
 	-> Race conditions! Problems only with first renderings
 
 - ArrayPlugin and ListPlugin almost the same
+
+- User program seems not to terminate when using DoodleDebug

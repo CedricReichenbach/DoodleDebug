@@ -15,7 +15,7 @@ import ch.unibe.scg.doodle.rendering.MapRendering;
 public class MapPlugin extends AbstractPlugin {
 
 	@Inject
-	Provider<MapRendering> mapRenderingProvider;
+	MapRendering mapRendering;
 
 	@Override
 	public Set<Class<?>> getDrawableClasses() {
@@ -26,13 +26,13 @@ public class MapPlugin extends AbstractPlugin {
 
 	@Override
 	public void render(Object object, Tag tag) throws DoodleRenderException {
-		mapRenderingProvider.get().render((Map<?, ?>) object, tag);
+		mapRendering.render((Map<?, ?>) object, tag);
 	}
 
 	@Override
 	public void renderSmall(Object object, Tag tag)
 			throws DoodleRenderException {
-		mapRenderingProvider.get().renderSmall((Map<?, ?>) object, tag);
+		mapRendering.renderSmall((Map<?, ?>) object, tag);
 	}
 
 	@Override
@@ -48,10 +48,14 @@ public class MapPlugin extends AbstractPlugin {
 	@Override
 	public String getObjectTypeName(Object mapObject) {
 		Map<?, ?> map = (Map<?, ?>) mapObject;
-		if (CollectionPlugin.checkIfElementsSameType(map.keySet())
-				&& !map.isEmpty())
-			return super.getObjectTypeName(mapObject) + ": " + keyType(map)
-					+ " &rarr; " + valueType(map);
+		if (!map.isEmpty())
+			return super.getObjectTypeName(mapObject)
+					+ ": "
+					+ (mapRendering.sameTypes(map.keySet()) ? keyType(map)
+							: "*")
+					+ " &rarr; "
+					+ (mapRendering.sameTypes(map.values()) ? valueType(map)
+							: "*");
 		return super.getObjectTypeName(mapObject);
 	}
 
