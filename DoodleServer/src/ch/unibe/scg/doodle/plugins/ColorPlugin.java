@@ -34,8 +34,8 @@ public class ColorPlugin extends AbstractPlugin {
 
 	@Override
 	public String getCSS() {
-		String main = ".ColorPlugin {padding:10pt;} ";
-		String small = ".ColorPlugin.smallRendering {padding:4pt}";
+		String main = ".ColorPlugin {padding:2px;} ";
+		String small = ".ColorPlugin.smallRendering {padding:4px}";
 		String dark = ".ColorPlugin.darkColor {color: white;}";
 		return main + small + dark;
 	}

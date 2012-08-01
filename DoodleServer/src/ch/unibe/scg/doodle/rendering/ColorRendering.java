@@ -30,7 +30,7 @@ public class ColorRendering implements Rendering<Color> {
 		int g = color.getGreen();
 		int b = color.getBlue();
 		int a = 255 - color.getAlpha();
-		return (r + g + b + a) < 255; // ~ < 25% brightness
+		return (r + g + b) < 255 && a < 100; // ~ < 25% brightness
 	}
 
 	private String colorString(Color color) {
@@ -38,7 +38,7 @@ public class ColorRendering implements Rendering<Color> {
 		int g = color.getGreen();
 		int b = color.getBlue();
 		int a = color.getAlpha();
-		return "Red: " + r + ", Green: " + g + ", Blue: " + b + ", Alpha: " + a;
+		return "RGB&alpha;: (" + r + ", " + g + ", " + b + ", " + a + ")";
 	}
 
 	private String rgbaColorString(Color color) {
@@ -46,7 +46,8 @@ public class ColorRendering implements Rendering<Color> {
 		int green = color.getGreen();
 		int blue = color.getBlue();
 		int alpha = color.getAlpha();
-		return "rgba(" + red + "," + green + "," + blue + "," + alpha + ")";
+		return "rgba(" + red + "," + green + "," + blue + ","
+				+ (((double) alpha) / 255) + ")";
 	}
 
 	private String size2(String hexString) {

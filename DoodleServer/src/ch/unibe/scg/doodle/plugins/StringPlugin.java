@@ -31,4 +31,12 @@ public class StringPlugin extends AbstractPlugin {
 		stringRenderingProvider.get().renderSmall((String) string, tag);
 	}
 
+	@Override
+	public String getCSS() {
+		String big = ".StringPlugin {padding: 1px;}";
+		String small = ".StringPlugin.smallRendering {padding: 0;}";
+		String paragraph = ".StringPlugin .StringRendering {margin: 0;}";
+		return big + small + paragraph;
+	}
+
 }

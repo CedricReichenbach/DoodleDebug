@@ -88,9 +88,6 @@ hr {
 .line {
 	overflow: hidden;
 }
-.StringRendering {
-    margin: 0;
-}
 .error {
 	background-color: red;
 	color: yellow;
