@@ -1,5 +1,6 @@
 package ch.unibe.scg.doodle.rendering;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -70,8 +71,7 @@ public class TableRendering implements Rendering<Collection<Collection<?>>> {
 	}
 
 	private boolean isNumber(Object o) {
-		return (o instanceof Float || o instanceof Double
-				|| o instanceof Integer || o instanceof Short || o instanceof Byte);
+		return o instanceof Number;
 	}
 
 	// private void renderRow(List<?> l, Tag row) {
@@ -101,13 +101,23 @@ public class TableRendering implements Rendering<Collection<Collection<?>>> {
 
 		Tag point = new Tag("td", "class=decimalPoint");
 		Tag after = new Tag("td", "class=afterDecimalPoint");
-		if (!afterDecPoint(number).equals("")
-				&& !afterDecPoint(number).equals("0")) {
+		if (isFloatingPointNumber(number)) {
 			point.add(".");
-			after.add(afterDecPoint(number));
+			if (somethingAfterComma(number))
+				after.add(afterDecPoint(number));
 		}
 		row.add(point);
 		row.add(after);
+	}
+
+	private boolean isFloatingPointNumber(Number number) {
+		return number instanceof Double || number instanceof Float
+				|| number instanceof BigDecimal || somethingAfterComma(number);
+	}
+
+	private boolean somethingAfterComma(Number number) {
+		return !afterDecPoint(number).equals("")
+				&& !afterDecPoint(number).equals("0");
 	}
 
 	private int beforeDecPoint(Number number) {
