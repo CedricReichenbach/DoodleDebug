@@ -10,3 +10,5 @@
 - ArrayPlugin and ListPlugin almost the same
 
 - User program seems not to terminate when using DoodleDebug
+
+- DoodleProposalSorter seems not to be used. And cursor should stay at end of line after autocomplete (NOT selection).

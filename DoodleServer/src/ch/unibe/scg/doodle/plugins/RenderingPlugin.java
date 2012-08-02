@@ -4,12 +4,21 @@ import java.util.Set;
 
 import ch.unibe.scg.doodle.rendering.Rendering;
 
+/**
+ * Interface extending {@link Rendering} and adding methods for plugins for
+ * defining custom visualizations. Users are advised to use
+ * {@link AbstractPlugin}.
+ * 
+ * @author Cedric Reichenbach
+ * 
+ */
 public interface RenderingPlugin extends Rendering {
 
 	public Set<Class<?>> getDrawableClasses();
 
 	/**
 	 * Returns the html class attribute for CSS.
+	 * 
 	 * @return
 	 */
 	public String getClassAttribute();

@@ -75,5 +75,23 @@
             name="DoodleDebug ClasspathFix Processor">
       </classpathFixProcessor>
    </extension>
+   
+   <!-- autocompletion -->
+   <extension
+         id="doodleCompletion"
+         point="org.eclipse.jdt.ui.javaCompletionProposalComputer">
+      <javaCompletionProposalComputer
+            activate="true"
+            categoryId="org.eclipse.jdt.ui.defaultProposalCategory"
+            class="ch.unibe.scg.doodle.server.javaCompletion.CompletionProposalComputer">
+      </javaCompletionProposalComputer>
+   </extension>
+   <extension
+         point="org.eclipse.jdt.ui.javaCompletionProposalSorters">
+      <proposalSorter
+            class="ch.unibe.scg.doodle.server.javaCompletion.DoodleProposalSorter"
+            id="ch.unibe.scg.doodle.server.javaCompletion.DoodleProposalSorter">
+      </proposalSorter>
+   </extension>
 
 </plugin>
