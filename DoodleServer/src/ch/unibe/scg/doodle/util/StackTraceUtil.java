@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import ch.unibe.scg.doodle.server.DoodleServer;
 import ch.unibe.scg.doodle.server.views.DoodleLocationCodes;
 
 public class StackTraceUtil {
@@ -24,7 +25,10 @@ public class StackTraceUtil {
 						String fullMethodName = stuff[stuff.length - 1];
 						String classAndLine = fullClassWithLineNumber(part,
 								fullMethodName);
-						prepared.add(link(part, classAndLine));
+						if (isInWorkspace(classAndLine))
+							prepared.add(link(part, classAndLine));
+						else
+							prepared.add(part);
 					} catch (IndexOutOfBoundsException e) {
 						System.err
 								.println("WARNING: Exception when creating link to java file "
@@ -53,6 +57,11 @@ public class StackTraceUtil {
 
 	public static boolean isClass(String string) {
 		return string.matches(".+\\.java:.\\d+");
+	}
+
+	private static boolean isInWorkspace(String classAndLine) {
+		return DoodleServer.instance().getJavaFileURL(
+				classAndLine.split(":")[0]) != null;
 	}
 
 	/**

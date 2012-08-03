@@ -3,21 +3,20 @@ package ch.unibe.scg.doodle.server;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.Enumeration;
 import java.util.HashMap;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.ide.IDE;
 
 import ch.unibe.scg.doodle.DMockup;
 import ch.unibe.scg.doodle.Doodler;
@@ -29,12 +28,10 @@ import ch.unibe.scg.doodle.simon.SimonServer;
 import ch.unibe.scg.doodle.util.JavascriptCallsUtil;
 import ch.unibe.scg.doodle.view.CSSCollection;
 import ch.unibe.scg.doodle.view.DoodleDebugScreen;
-import ch.unibe.scg.doodle.view.HtmlDocument;
-
-import org.eclipse.ui.ide.IDE;
 
 public class DoodleServer {
 	private static DoodleServer instance;
+	private URLClassLoader clientClassLoader;
 
 	public static DoodleServer instance() {
 		if (instance == null) {
@@ -93,6 +90,7 @@ public class DoodleServer {
 		this.lightboxClosed();
 		SimonServer.instance.refreshClientClassloading();
 		CSSCollection.reset();
+		this.clientClassLoader = DoodleClientWorkspace.getClientClassLoader();
 	}
 
 	public void lightboxClosed() {
@@ -105,17 +103,23 @@ public class DoodleServer {
 	}
 
 	public void openJavaFile(String className, int lineNumber) {
+		URL url = getJavaFileURL(className);
+		if (url == null)
+			return;
 
+		openFileAtLine(url, lineNumber);
+	}
+
+	public URL getJavaFileURL(String className) {
 		// TODO: find right class instead of brute-force classloader method
 
 		String[] parts = className.split("\\.");
 		String onlyClass = parts[parts.length - 1];
 		Enumeration<URL> urls;
 		try {
-			urls = DoodleClientWorkspace.getClientClassLoader().findResources(
-					onlyClass + ".java");
+			urls = clientClassLoader.findResources(onlyClass + ".java");
 		} catch (IOException e) {
-			return; // XXX: fail message or similar
+			return null; // XXX: fail message or similar
 		}
 		while (urls.hasMoreElements()) {
 			URL url = urls.nextElement();
@@ -126,11 +130,11 @@ public class DoodleServer {
 					match = false;
 			}
 			if (match) {
-				openFileAtLine(url, lineNumber);
-				return;
+				return url;
 			}
 			;
 		}
+		return null;
 	}
 
 	private void openFileAtLine(URL url, int lineNumber) {
