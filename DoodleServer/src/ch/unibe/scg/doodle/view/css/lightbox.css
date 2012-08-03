@@ -1,7 +1,7 @@
 #lightbox {
 	position: fixed;
 	box-shadow: 0 4px 30px black;
-	z-index: 2;
+	z-index: 3;
 	padding: 4px;
 	background-color: rgba(150,150,150,0.5);
 	border: 1px outset #666;
@@ -27,7 +27,7 @@
 	background-color: black;
 	opacity: 0.7;
 	position: fixed;
-	z-index: 1;
+	z-index: 2;
 }
 
 #lightboxWrapper {

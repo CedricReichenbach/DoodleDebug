@@ -48,10 +48,12 @@ hr {
     float: left;
     padding: 2px;
 }
+table .rendering {
+	float: none;
+}
 .printOutWrapper {
     display: block;
     margin-bottom: 4px;
-	overflow: hidden;
 }
 .printOut, #lightboxContentWrapper, .level1 {
     background-color: #FFFFFF;
@@ -62,6 +64,7 @@ hr {
 }
 .printOut {
 	box-shadow: 0 1px 3px 1px #999;
+	padding: 2px;
 }
 .level1 {
 	cursor: pointer;
@@ -72,9 +75,11 @@ hr {
 }
 .level1:active {
 	background-color: #58f;
-	box-shadow: 0 0 2px black;
+	box-shadow: 0 0 2px black inset;
 }
 .ClassName {
+	z-index: 1;
+	height: 13px;
     color: #0a8;
     font-size: 8pt;
 	margin-bottom: -4pt;

@@ -3,8 +3,13 @@ package ch.unibe.scg.doodle.plugins;
 /**
  * Abstract Plugin class to manage and compute renderings of specified object
  * types. Subclasses need to implement methods of {@link RenderingPlugin} and
- * may override {@link #getClassAttribute()}, {@link #getSmallCSSKeyword()},
- * {@link #getObjectTypeName(Object)} and {@link #getCSS()} .
+ * may override:
+ * <ul>
+ * <li>{@link #getClassAttribute()}</li>
+ * <li>{@link #getSmallCSSKeyword()}</li>
+ * <li>{@link #getObjectTypeName(Object)}</li>
+ * <li>{@link #getCSS()}</li>
+ * </ul>
  * 
  * @author Cedric Reichenbach
  * 
@@ -21,13 +26,16 @@ public abstract class AbstractPlugin implements RenderingPlugin {
 	}
 
 	/**
-	 * {@inheritDoc} Standard: "smallRendering"
+	 * {@inheritDoc} Default: "smallRendering"
 	 */
 	@Override
 	public String getSmallCSSKeyword() {
 		return "smallRendering";
 	}
 
+	/**
+	 * {@inheritDoc} Default: SimpleName of class (e.g. "ImagePlugin").
+	 */
 	@Override
 	public String getObjectTypeName(Object o) {
 		return o.getClass().getSimpleName();

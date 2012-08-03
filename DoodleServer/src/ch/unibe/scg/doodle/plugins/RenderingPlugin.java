@@ -31,6 +31,11 @@ public interface RenderingPlugin extends Rendering {
 	 */
 	public String getSmallCSSKeyword();
 
+	/**
+	 * Provide a name to be displayed beside the rendering.
+	 * @param o
+	 * @return
+	 */
 	public String getObjectTypeName(Object o);
 
 	/**
