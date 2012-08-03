@@ -66,8 +66,11 @@ public class CollectionPlugin extends AbstractPlugin {
 	public String getCSS() {
 		String element = ".CollectionPlugin .collectionElement {float:left;}";
 		String smallElement = ".CollectionPlugin.smallRendering .collectionElement "
-				+ "{float:left; background-color:black; height: 4px; width:4px; margin: 0 1px;}";
-		return element + smallElement + tablePluginProvider.get().getCSS();
+				+ "{float:left; background-color:black; height: 6px; width:6px; margin: 0 1px;}";
+		String dot = ".CollectionPlugin.smallRendering .collectionDot "
+				+ "{height: 2px; width: 2px; margin-top: 4px; margin-right: 0;}";
+		return element + smallElement + dot
+				+ tablePluginProvider.get().getCSS();
 	}
 
 	private boolean twoDimCollection(Collection<?> collection) {

@@ -33,9 +33,20 @@ public class CollectionRendering implements Rendering<Collection<?>> {
 
 	@Override
 	public void renderSmall(Collection<?> collection, Tag tag) {
+		int threshold = 10;
+		int painted = 0;
 		for (Object o : collection) {
+			if (painted >= threshold) {
+				Tag dot = new Tag("div", "class=collectionDot");
+				dot.addCSSClass("collectionElement");
+				for (int i = 0; i < 3; i++) {
+					tag.add(dot);
+				}
+				break;
+			}
 			Tag element = new Tag("div", "class=collectionElement");
 			tag.add(element);
+			painted++;
 		}
 	}
 

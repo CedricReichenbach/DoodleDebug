@@ -27,7 +27,10 @@ public class CompletionProposalComputer implements
 		if (context instanceof JavaContentAssistInvocationContext) {
 			JavaContentAssistInvocationContext jcontext = (JavaContentAssistInvocationContext) context;
 			CompletionContext corecontext = jcontext.getCoreContext();
-			if (shortcut.startsWith(new String(corecontext.getToken()).toLowerCase())) {
+			if (corecontext.getToken() == null)
+				return result;
+			if (shortcut.startsWith(new String(corecontext.getToken())
+					.toLowerCase())) {
 				result.add(new DoodleCompletionProposal(shortcut, corecontext));
 			}
 		}
