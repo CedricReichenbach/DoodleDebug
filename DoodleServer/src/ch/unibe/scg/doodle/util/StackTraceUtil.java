@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import ch.unibe.scg.doodle.server.views.DoodleLocationCodes;
+
 public class StackTraceUtil {
 	public static String linkClasses(String string) {
 		List<String> parts1 = Arrays.asList(string.split("\\)"));
@@ -17,9 +19,18 @@ public class StackTraceUtil {
 			String lastpart = "";
 			for (String part : parts) {
 				if (isClass(part)) {
-					String[] stuff = lastpart.split("at ");
-					String fullClassName = stuff[stuff.length - 1];
-					prepared.add(link(part, fullClassName));
+					try {
+						String[] stuff = lastpart.split("at ");
+						String fullMethodName = stuff[stuff.length - 1];
+						String classAndLine = fullClassWithLineNumber(part,
+								fullMethodName);
+						prepared.add(link(part, classAndLine));
+					} catch (IndexOutOfBoundsException e) {
+						System.err
+								.println("WARNING: Exception when creating link to java file "
+										+ "(StackTraceUtil.linkClasses())");
+						prepared.add(part);
+					}
 				} else {
 					prepared.add(part);
 				}
@@ -44,8 +55,37 @@ public class StackTraceUtil {
 		return string.matches(".+\\.java:.\\d+");
 	}
 
+	/**
+	 * Convert from two strings of format
+	 * <ul>
+	 * <li><code><i>[class]</i>.java:<i>[line]</i></code></li>
+	 * <li><code><i>[package]</i>.<i>[class]</i>.<i>[method]</i></code></li>
+	 * </ul>
+	 * to format<br>
+	 * <code><i>[package]</i>.<i>[class]</i>:<i>[line]</i></code>.
+	 * 
+	 * @param fullMethodName
+	 * @return
+	 */
+	private static String fullClassWithLineNumber(String javaFileAndLineNumber,
+			String fullMethodName) {
+		String[] parts1 = javaFileAndLineNumber.split(":");
+		int lineNumber = Integer.parseInt(parts1[parts1.length - 1]);
+
+		String[] parts2 = fullMethodName.split("\\.");
+		String result = "";
+		for (int i = 0; i < parts2.length - 2; i++) {
+			result += parts2[i] + ".";
+		}
+		result += parts2[parts2.length - 2];
+
+		result += ":" + lineNumber;
+		return result;
+	}
+
 	private static String link(String part, String fullClassName) {
-		return "<a href=\"javafile:" + fullClassName + "\">" + part + "</a>";
+		return "<a href=\"" + DoodleLocationCodes.JAVA_FILE_LINK_PREFIX
+				+ fullClassName + "\">" + part + "</a>";
 	}
 
 	public static String getStackTrace(Throwable throwable) {
