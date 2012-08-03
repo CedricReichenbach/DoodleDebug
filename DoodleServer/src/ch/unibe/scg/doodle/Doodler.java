@@ -161,7 +161,7 @@ public class Doodler {
 		level--;
 		renderBreadcrumbs(stack, tag);
 		Tag lightboxRendering = new Tag("div", "id=lightboxRendering");
-		renderInline(stack.top(), lightboxRendering, false);
+		renderInline(stack.top(), lightboxRendering, true);
 		tag.add(lightboxRendering);
 		level++;
 	}

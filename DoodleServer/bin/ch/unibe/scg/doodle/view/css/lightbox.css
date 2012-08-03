@@ -15,7 +15,7 @@
 	left: 95%;
 	position: fixed;
 	margin-top: -6px;
-	z-index: 2;
+	z-index: 4;
 	cursor: pointer;
 }
 
@@ -96,6 +96,9 @@
 #lightboxRendering {
 	background-color: #eee;
 	padding: 4px;
+}
+#lightboxRendering > .ClassName {
+	margin: 0;
 }
 
 /* beta info part at top */
