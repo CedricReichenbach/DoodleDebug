@@ -65,6 +65,7 @@ table .rendering {
 .printOut {
 	box-shadow: 0 1px 3px 1px #999;
 	padding: 2px;
+	float: none;
 }
 .level1 {
 	cursor: pointer;

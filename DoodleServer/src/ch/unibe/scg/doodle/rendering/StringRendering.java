@@ -10,21 +10,25 @@ public class StringRendering implements Rendering<String> {
 	@Override
 	public void render(String string, Tag tag) {
 		Tag p = new Tag("p", "class=StringRendering");
-		
-		p.add(string);
+
+		p.add(replaceRegEx(string));
 		tag.add(p);
 	}
-	
+
 	@Override
 	public void renderSmall(String string, Tag tag) {
 		Tag p = new Tag("p", "class=StringRendering");
-		
+
 		if (string.length() > maxLength) {
 			string = string.substring(0, maxLength - 1) + "...";
 		}
-		
-		p.add(string);
+
+		p.add(replaceRegEx(string));
 		tag.add(p);
+	}
+
+	private String replaceRegEx(String string) {
+		return string.replace("\n", "<br>");
 	}
 
 }

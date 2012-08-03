@@ -61,7 +61,22 @@ function messageToJavaPlugin(message) {
 }
 
 function scrollToLast() {
+	if (!atBottom())
+		return;
 	var elements = document.getElementsByClassName('printOutWrapper');
 	var last = elements[elements.length-1];
 	last.scrollTo();
+}
+
+function atBottom() {
+	var elements = document.getElementsByClassName('printOutWrapper');
+	if (elements.length < 2)
+		return true;
+	var oldLast = elements[elements.length-2];
+	var last = elements[elements.length-1];
+	// for small elements
+	if (window.pageYOffset + window.innerHeight >= last.offsetTop)
+		return true;
+	// for big elements
+	return window.pageYOffset >= oldLast.offsetTop;
 }
