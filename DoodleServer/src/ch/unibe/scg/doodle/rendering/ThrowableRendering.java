@@ -1,12 +1,5 @@
 package ch.unibe.scg.doodle.rendering;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.util.StackTraceUtil;
 
