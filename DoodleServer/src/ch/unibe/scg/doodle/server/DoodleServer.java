@@ -11,6 +11,9 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IType;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
@@ -112,6 +115,7 @@ public class DoodleServer {
 
 	public URL getJavaFileURL(String className) {
 		// TODO: find right class instead of brute-force classloader method
+		// Idea: IJavaProject.findType()
 
 		String[] parts = className.split("\\.");
 		String onlyClass = parts[parts.length - 1];
