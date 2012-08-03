@@ -29,8 +29,9 @@ public class CompletionProposalComputer implements
 			CompletionContext corecontext = jcontext.getCoreContext();
 			if (corecontext.getToken() == null)
 				return result;
-			if (shortcut.startsWith(new String(corecontext.getToken())
-					.toLowerCase())) {
+			if (corecontext.getToken().length != 0
+					&& shortcut.startsWith(new String(corecontext.getToken())
+							.toLowerCase())) {
 				result.add(new DoodleCompletionProposal(shortcut, corecontext));
 			}
 		}

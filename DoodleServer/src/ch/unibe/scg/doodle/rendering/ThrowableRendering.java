@@ -3,8 +3,12 @@ package ch.unibe.scg.doodle.rendering;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 import ch.unibe.scg.doodle.htmlgen.Tag;
+import ch.unibe.scg.doodle.util.StackTraceUtil;
 
 public class ThrowableRendering implements Rendering<Throwable> {
 
@@ -18,7 +22,8 @@ public class ThrowableRendering implements Rendering<Throwable> {
 			title.add("Stack trace:");
 		tag.add(title);
 		Tag stackTrace = new Tag("p", "class=stackTrace");
-		String traceString = getStackTrace(e);
+		String traceString = StackTraceUtil.getStackTrace(e);
+		traceString = StackTraceUtil.linkClasses(traceString);
 		String replaced = traceString.replace("\n", "<br>");
 		stackTrace.add(replaced);
 		tag.add(stackTrace);
@@ -30,10 +35,4 @@ public class ThrowableRendering implements Rendering<Throwable> {
 		tag.add(e.getClass().getSimpleName());
 	}
 
-	public static String getStackTrace(Throwable throwable) {
-		Writer writer = new StringWriter();
-		PrintWriter printWriter = new PrintWriter(writer);
-		throwable.printStackTrace(printWriter);
-		return writer.toString();
-	}
 }

@@ -11,7 +11,7 @@ public class StringRendering implements Rendering<String> {
 	public void render(String string, Tag tag) {
 		Tag p = new Tag("p", "class=StringRendering");
 
-		p.add(replaceRegEx(string));
+		p.add(replaceEscapeSeq(string));
 		tag.add(p);
 	}
 
@@ -23,11 +23,11 @@ public class StringRendering implements Rendering<String> {
 			string = string.substring(0, maxLength - 1) + "...";
 		}
 
-		p.add(replaceRegEx(string));
+		p.add(replaceEscapeSeq(string));
 		tag.add(p);
 	}
 
-	private String replaceRegEx(String string) {
+	private String replaceEscapeSeq(String string) {
 		return string.replace("\n", "<br>");
 	}
 

@@ -83,7 +83,7 @@ public class DoodleCompletionProposal implements ICompletionProposal,
 			int start = context.getTokenStart();
 			int length = offset - start;
 			String prefix = document.get(start, length);
-			return (shortcut.startsWith(prefix));
+			return !prefix.isEmpty() && (shortcut.startsWith(prefix));
 		} catch (BadLocationException e) {
 			throw new RuntimeException(e); // XXX: too hard?
 		}
