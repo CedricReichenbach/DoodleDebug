@@ -35,10 +35,9 @@ public class BooleanPlugin extends AbstractPlugin {
 	@Override
 	public String getCSS() {
 		String bool = ".BooleanPlugin .boolean {padding: 1px; text-align: center;}";
-		String font = "@font-face { font-family: \"openSymbol\"; src: url(\""
-				+ FontUtil.getFontFileURL("openSymbol.ttf") + "\")}";
+		String font = getFontFace();
 		String small = ".BooleanPlugin.smallRendering .boolean "
-				+ "{ width: 1em; height: 1em; border-radius: 0.5em; font-family: \"openSymbol\", \"Roboto\";}";
+				+ "{ width: 1em; height: 1em; border-radius: 0.5em; font-family: \"openSymbolRegular\", \"Roboto\";}";
 		String trueCSS = ".BooleanPlugin .true {box-shadow: 0 0 1em #0e0 inset;}";
 		String trueSmall = ".BooleanPlugin.smallRendering .true {color: green; box-shadow: none;}";
 		String falseCSS = ".BooleanPlugin .false {box-shadow: 0 0 1em #f22 inset;}";
@@ -48,4 +47,35 @@ public class BooleanPlugin extends AbstractPlugin {
 				+ falseSmall;
 	}
 
+	String getFontFace() {
+		return "@font-face { " // font-squirrel
+				+ "font-family: 'OpenSymbolRegular'; "
+				+ "src: url('opensymbol-webfont.eot'); "
+				+ "src: url('"
+				+ FontUtil.getFontFileURL("opensymbol-webfont.eot")
+				+ "?#iefix') format('embedded-opentype'), "
+				+ "url('"
+				+ FontUtil.getFontFileURL("opensymbol-webfont.woff")
+				+ "') format('woff'), "
+				+ "url('"
+				+ FontUtil.getFontFileURL("opensymbol-webfont.ttf")
+				+ "') format('truetype'), "
+				+ "url('"
+				+ FontUtil.getFontFileURL("opensymbol-webfont.svg")
+				+ "#OpenSymbolRegular') format('svg'); "
+				+ "font-weight: normal; font-style: normal;}";
+		// String eot = "url(\""
+		// + FontUtil.getFontFileURL("openSymbol.ttf").toString()
+		// .replace("ttf", "eot?") + "\") format(\"eot\")";
+		// String woff = "url(\""
+		// + FontUtil.getFontFileURL("openSymbol.ttf").toString()
+		// .replace("ttf", "woff") + "\") format(\"woff\")";
+		// String ttf = "url(\"" + FontUtil.getFontFileURL("OpenSymbol.ttf")
+		// + "\") format(\"truetype\")";
+		// return "@font-face { font-family: \"OpenSymbol\"; src: " +
+		// /*
+		// * eot + " " + woff + " " +
+		// */
+		// ttf + "}";
+	}
 }

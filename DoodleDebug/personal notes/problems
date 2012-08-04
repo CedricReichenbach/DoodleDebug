@@ -14,3 +14,5 @@
 - DoodleProposalSorter seems not to be used. And cursor should stay at end of line after autocomplete (NOT selection).
 
 - IE: box-shadow inside border -> nasty space at bottom
+
+- @font-face does not really work -.-
