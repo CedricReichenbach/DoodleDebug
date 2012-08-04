@@ -40,7 +40,7 @@ public class HtmlDocument {
 	}
 
 	@SuppressWarnings("unchecked")
-	private void makeStyle(Tag head) {
+	protected void makeStyle(Tag head) {
 		// from file "style.css"
 		URL mainStyle = CSSUtil.getCSSURLFromFile("style.css");
 		Tag main = new Tag("link", "rel=stylesheet", "type=text/css");

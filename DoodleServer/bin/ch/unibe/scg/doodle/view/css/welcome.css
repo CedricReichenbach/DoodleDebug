@@ -1,0 +1,30 @@
+body {
+	text-align: center;
+	padding-top: 30px;
+}
+
+hr {
+	height: 30px;
+}
+
+#welcomeTitle {
+	text-shadow: 1px 2px 1px #222;
+	color: #ff4;
+	filter: progid:DXImageTransform.Microsoft.DropShadow(OffX=1, OffY=2, Color=#222);
+	background-color: #0af;
+	display: inline;
+	padding: 4px;
+	border-radius: 3px;
+	box-shadow: 1px 2px 2px gray;
+}
+
+#welcomeTitle, #info {
+	display: inline;
+	padding: 4px;
+	border-radius: 3px;
+	box-shadow: 1px 2px 2px gray;
+}
+
+#info {
+	background-color: #af0;
+}
