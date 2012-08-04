@@ -21,7 +21,7 @@ public class ThrowablePlugin extends AbstractPlugin {
 		hs.add(Throwable.class);
 		return hs;
 	}
-	
+
 	@Override
 	public void render(Object object, Tag tag) throws DoodleRenderException {
 		throwableRenderingProvider.get().render((Throwable) object, tag);
@@ -37,9 +37,10 @@ public class ThrowablePlugin extends AbstractPlugin {
 	public String getCSS() {
 		String main = ".ThrowablePlugin {background-color: #ff6; color: red; padding: .5em}";
 		String mainSmall = ".ThrowablePlugin.smallRendering {padding: 0;}";
-		String title = ".ThrowablePlugin .problemTitle {font-weight: 500; margin: 0;}";
-		String trace = ".ThrowablePlugin .stackTrace {font-family: monospace, \"Roboto\";}";
-		return main + mainSmall + title + trace;
+		String title = ".ThrowablePlugin .problemTitle, .ThrowablePlugin .causeTitle {font-weight: 500; margin: 0;}";
+		String causeTitle = ".ThrowablePlugin .causeTitle {color: darkViolet;}";
+		String trace = ".ThrowablePlugin .stackTrace {font-family: monospace, \"Roboto\"; margin: 0.5em 0;}";
+		return main + mainSmall + title + causeTitle + trace;
 	}
 
 }

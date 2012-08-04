@@ -97,6 +97,16 @@ public class StackTraceUtil {
 				+ fullClassName + "\">" + part + "</a>";
 	}
 
+	public static String getStackTraceWithoutCause(Throwable throwable) {
+		String result = "";
+		StackTraceElement[] trace = throwable.getStackTrace();
+		result += throwable.getLocalizedMessage();
+		for (StackTraceElement element : trace) {
+			result += "\n at " + element;
+		}
+		return result + "\n";
+	}
+
 	public static String getStackTrace(Throwable throwable) {
 		Writer writer = new StringWriter();
 		PrintWriter printWriter = new PrintWriter(writer);
