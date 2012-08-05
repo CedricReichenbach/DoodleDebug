@@ -37,7 +37,7 @@ public class BooleanPlugin extends AbstractPlugin {
 		String bool = ".BooleanPlugin .boolean {padding: 1px; text-align: center;}";
 		String font = getFontFace();
 		String small = ".BooleanPlugin.smallRendering .boolean "
-				+ "{ width: 1em; height: 1em; border-radius: 0.5em; font-family: \"openSymbolRegular\", \"Roboto\";}";
+				+ "{ width: 1em; height: 1em; border-radius: 0.5em; font-family: 'OpenSymbol', 'OpenSymbolEOT', 'OpenSymbolSVG', 'OpenSymbolWOFF', \"Roboto\";}";
 		String trueCSS = ".BooleanPlugin .true {box-shadow: 0 0 1em #0e0 inset;}";
 		String trueSmall = ".BooleanPlugin.smallRendering .true {color: green; box-shadow: none;}";
 		String falseCSS = ".BooleanPlugin .false {box-shadow: 0 0 1em #f22 inset;}";
@@ -48,34 +48,29 @@ public class BooleanPlugin extends AbstractPlugin {
 	}
 
 	String getFontFace() {
-		return "@font-face { " // font-squirrel
-				+ "font-family: 'OpenSymbolRegular'; "
-				+ "src: url('opensymbol-webfont.eot'); "
-				+ "src: url('"
-				+ FontUtil.getFontFileURL("opensymbol-webfont.eot")
-				+ "?#iefix') format('embedded-opentype'), "
+		return "@font-face { \n" // ff ************
+				+ "font-family: 'OpenSymbol'; " + "src: " + "url('"
+				+ FontUtil.getFontFileURL("openSymbol.ttf")
+				+ "') format('truetype'); "
+				+ "font-weight: normal; font-style: normal;} \n"
+				+ "@font-face { \n" // ff ************
+				+ "font-family: 'OpenSymbolEOT'; "
+				+ "src: "
 				+ "url('"
-				+ FontUtil.getFontFileURL("opensymbol-webfont.woff")
-				+ "') format('woff'), "
+				+ FontUtil.getFontFileURL("openSymbol.eot")
+				+ "?#iefix') format('embedded-opentype'); "
+				+ "font-weight: normal; font-style: normal;} \n"
+				+ "@font-face { \n" // ff ************
+				+ "font-family: 'OpenSymbolWOFF'; "
+				+ "src: "
 				+ "url('"
-				+ FontUtil.getFontFileURL("opensymbol-webfont.ttf")
-				+ "') format('truetype'), "
-				+ "url('"
-				+ FontUtil.getFontFileURL("opensymbol-webfont.svg")
+				+ FontUtil.getFontFileURL("openSymbol.woff")
+				+ "') format('woff'); "
+				+ "font-weight: normal; font-style: normal;} \n"
+				+ "@font-face { \n" // ff ************
+				+ "font-family: 'OpenSymbolSVG'; " + "src: " + "url('"
+				+ FontUtil.getFontFileURL("openSymbol.svg")
 				+ "#OpenSymbolRegular') format('svg'); "
-				+ "font-weight: normal; font-style: normal;}";
-		// String eot = "url(\""
-		// + FontUtil.getFontFileURL("openSymbol.ttf").toString()
-		// .replace("ttf", "eot?") + "\") format(\"eot\")";
-		// String woff = "url(\""
-		// + FontUtil.getFontFileURL("openSymbol.ttf").toString()
-		// .replace("ttf", "woff") + "\") format(\"woff\")";
-		// String ttf = "url(\"" + FontUtil.getFontFileURL("OpenSymbol.ttf")
-		// + "\") format(\"truetype\")";
-		// return "@font-face { font-family: \"OpenSymbol\"; src: " +
-		// /*
-		// * eot + " " + woff + " " +
-		// */
-		// ttf + "}";
+				+ "font-weight: normal; font-style: normal;} ";
 	}
 }
