@@ -17,18 +17,20 @@ public class DoodleDebugWelcomeScreen extends HtmlDocument {
 	private Tag makeBody() {
 		Tag body = new Tag("body");
 		body.addAttribute("onload", "appearWelcome()");
+		Tag background = new Tag("div", "id=background");
 		Tag welcome = new Tag("h1", "id=welcomeTitle");
 		welcome.add("Welcome to DoodleDebug!");
-		body.add(welcome);
+		background.add(welcome);
 
-		body.add(Tag.hr());
+		background.add(Tag.hr());
 
 		Tag info = new Tag("h3", "id=info", "style=visibility:hidden");
 		Tag tutLink = new Tag("a", "href=http://scg.unibe.ch/doodledebug",
 				"target=_blank");
 		tutLink.add("scg.unibe.ch/doodledebug");
 		info.add("Tutorials: " + tutLink);
-		body.add(info);
+		background.add(info);
+		body.add(background);
 		return body;
 	}
 
@@ -41,7 +43,7 @@ public class DoodleDebugWelcomeScreen extends HtmlDocument {
 		main.addAttribute("href", welcomeCSS.toExternalForm());
 		head.add(main);
 	}
-	
+
 	@Override
 	protected List<String> getJSFiles() {
 		List<String> list = super.getJSFiles();
