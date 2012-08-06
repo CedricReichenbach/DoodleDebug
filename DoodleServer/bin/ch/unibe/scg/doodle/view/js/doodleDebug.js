@@ -80,3 +80,39 @@ function atBottom() {
 	// for big elements
 	return window.pageYOffset >= oldLast.offsetTop;
 }
+
+/* key navigation */
+
+function keyPressEvent(event) {
+	if (!event)
+		event = window.event;
+	if (event.which) {
+		var code = event.which;
+	} else if (event.keyCode) {
+    	var code = event.keyCode;
+	}
+	keyPressed(code);
+}
+
+function keyPressed(code) {
+	var j = 106;
+	var k = 107;
+	
+	if (code == j) {
+		toNextElement();
+	} else if (code == k) {
+		toPrevElement();
+	}
+}
+
+function toNextElement() {
+	// TODO
+	alert('next');
+}
+
+function toPrevElement() {
+	// TODO
+	alert('prev');
+}
+
+document.onkeypress = keyPressEvent;
