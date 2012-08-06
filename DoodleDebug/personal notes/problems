@@ -16,3 +16,4 @@
 - IE: box-shadow inside border -> nasty space at bottom
 
 - @font-face does not really work -.-
+	-> try bundleresource: link inside eclipse
