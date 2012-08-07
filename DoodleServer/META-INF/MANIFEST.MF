@@ -10,7 +10,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.resources,
  XStreamPlugin;bundle-version="1.0.0",
  org.junit,
- GuicePlugin;bundle-version="1.0.0"
+ GuicePlugin;bundle-version="1.0.0",
+ org.eclipse.ui.editors
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

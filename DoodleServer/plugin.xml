@@ -78,20 +78,29 @@
    
    <!-- autocompletion -->
    <extension
-         id="doodleCompletion"
-         point="org.eclipse.jdt.ui.javaCompletionProposalComputer">
-      <javaCompletionProposalComputer
-            activate="true"
-            categoryId="org.eclipse.jdt.ui.defaultProposalCategory"
-            class="ch.unibe.scg.doodle.server.javaCompletion.CompletionProposalComputer">
-      </javaCompletionProposalComputer>
-   </extension>
-   <extension
-         point="org.eclipse.jdt.ui.javaCompletionProposalSorters">
-      <proposalSorter
-            class="ch.unibe.scg.doodle.server.javaCompletion.DoodleProposalSorter"
-            id="ch.unibe.scg.doodle.server.javaCompletion.DoodleProposalSorter">
-      </proposalSorter>
+         point="org.eclipse.ui.editors.templates">
+      <template
+            autoinsert="true"
+            contextTypeId="java-statements"
+            description="visualize Objects with Doo.dle()"
+            icon="icons/doodledebug-icon.png"
+            id="ch.unibe.scg.doodle.DoodleTemplate_doodle"
+            name="doodle">
+         <pattern>
+            Doo.dle(${word_selection}${object});${cursor}
+         </pattern>
+      </template>
+      <template
+            autoinsert="true"
+            contextTypeId="java-statements"
+            description="visualize Objects with Doo.dle()"
+            icon="icons/doodledebug-icon.png"
+            id="ch.unibe.scg.doodle.DoodleTemplate_dd"
+            name="dd">
+         <pattern>
+            Doo.dle(${word_selection}${object});${cursor}
+         </pattern>
+      </template>
    </extension>
 
 </plugin>
