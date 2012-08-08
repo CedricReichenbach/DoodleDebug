@@ -110,3 +110,26 @@ table .rendering {
 	background-color: #3d0;
 	color: white;
 }
+
+/* beta info part at top */
+
+#betaInfoWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    text-align: right;
+    width: 100%;
+	z-index: 10;
+}
+
+#betaInfo {
+	display: inline-block;
+	background-color: rgba(255, 215, 0, 0.6);
+    padding: 4px;
+	box-shadow: -1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+#betaInfo:hover {
+	background-color: rgba(255, 215, 0, 1);
+	box-shadow: -1px 1px 2px rgba(0, 0, 0, 0.5);
+}

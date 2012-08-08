@@ -3,14 +3,10 @@ package ch.unibe.scg.doodle.server.views;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTError;
 import org.eclipse.swt.browser.Browser;
-import org.eclipse.swt.browser.ProgressListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.ui.part.ViewPart;
 
-import ch.unibe.scg.doodle.IndexedObjectStorage;
-import ch.unibe.scg.doodle.server.DoodleServer;
-import ch.unibe.scg.doodle.view.DoodleDebugScreen;
 import ch.unibe.scg.doodle.view.DoodleDebugWelcomeScreen;
 
 public class DoodleDebugView extends ViewPart {

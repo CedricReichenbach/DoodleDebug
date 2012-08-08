@@ -100,17 +100,3 @@
 #lightboxRendering > .ClassName {
 	margin: 0;
 }
-
-/* beta info part at top */
-
-#betaInfo {
-	background-color: gold;
-    left: 0;
-    padding: 4px;
-    position: fixed;
-    text-align: center;
-    top: 0;
-    width: 100%;
-	z-index: 10;
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-}

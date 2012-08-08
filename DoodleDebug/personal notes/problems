@@ -7,13 +7,9 @@
 	- Lightbox-clicks at wrong time could cause strange behaviour (Doodler.render...())
 	-> Race conditions! Problems only with first renderings
 
-- ArrayPlugin and ListPlugin almost the same
-
 - User program seems not to terminate when using DoodleDebug
 
-- DoodleProposalSorter seems not to be used. And cursor should stay at end of line after autocomplete (NOT selection).
-
-- IE: box-shadow inside border -> nasty space at bottom
+- IE: box-shadow inside border -> nasty space at bottom (because box-shadow is inside border)
 
 - @font-face does not really work -.-
-	-> try bundleresource: link inside eclipse
+	-> try bundleresource: link inside eclipse (-> not working)

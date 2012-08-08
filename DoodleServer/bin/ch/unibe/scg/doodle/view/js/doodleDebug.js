@@ -105,14 +105,38 @@ function keyPressed(code) {
 	}
 }
 
+/**
+ * Scroll to next object element in rendering output.
+ * Returns true if any scrolling was done and false if not.
+ */
 function toNextElement() {
-	// TODO
-	alert('next');
+	var blocks = document.getElementsByClassName('printOutWrapper');
+	for (i = 0; i < blocks.length; i++) {
+		block = blocks[i];
+		var offset = block.offsetTop;
+		if (window.pageYOffset < offset) {
+			block.scrollTo();
+			return true;
+		}
+	}
+	return false;
 }
 
+/**
+ * Scroll to last object element in rendering output.
+ * Returns true if any scrolling was done and false if not.
+ */
 function toPrevElement() {
-	// TODO
-	alert('prev');
+	var blocks = document.getElementsByClassName('printOutWrapper');
+	for (i = blocks.length-1; i >= 0; i--) {
+		var block = blocks[i];
+		var offset = block.offsetTop;
+		if (window.pageYOffset > offset) {
+			block.scrollTo();
+			return true;
+		}
+	}
+	return false;
 }
 
 document.onkeypress = keyPressEvent;

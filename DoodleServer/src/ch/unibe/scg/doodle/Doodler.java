@@ -86,14 +86,15 @@ public class Doodler {
 
 	@SuppressWarnings("unchecked")
 	private void createBetaInfo(Tag tag) {
+		Tag wrapper = new Tag("div", "id=betaInfoWrapper");
 		Tag info = new Tag("div", "id=betaInfo");
 		String email = DoodleDebugProperties.getFeedbackMailAddress();
 		Tag mailto = new Tag("a", "href=mailto:" + email);
 		mailto.add(email);
 		info.add("<b>DoodleDebug <i>beta</i></b> - bugs & feedback to ");
 		info.add(mailto);
-		tag.add(info);
-		body.addStyle("padding-top:23px");
+		wrapper.add(info);
+		tag.add(wrapper);
 	}
 
 	private void prepareLightbox() {

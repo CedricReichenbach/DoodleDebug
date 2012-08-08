@@ -1,5 +1,6 @@
 package ch.unibe.scg.doodle.plugins;
 
+import java.awt.Font;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -37,7 +38,7 @@ public class BooleanPlugin extends AbstractPlugin {
 		String bool = ".BooleanPlugin .boolean {padding: 1px; text-align: center;}";
 		String font = getFontFace();
 		String small = ".BooleanPlugin.smallRendering .boolean "
-				+ "{ width: 1em; height: 1em; border-radius: 0.5em; font-family: 'OpenSymbol', 'OpenSymbolEOT', 'OpenSymbolSVG', 'OpenSymbolWOFF', \"Roboto\";}";
+				+ "{ width: 1em; height: 1em; border-radius: 0.5em; font-family: \"OpenSymbol\", \"OpenSymbolEOT\", \"OpenSymbolSVG\", \"OpenSymbolWOFF\", \"Roboto\";}";
 		String trueCSS = ".BooleanPlugin .true {box-shadow: 0 0 1em #0e0 inset;}";
 		String trueSmall = ".BooleanPlugin.smallRendering .true {color: green; box-shadow: none;}";
 		String falseCSS = ".BooleanPlugin .false {box-shadow: 0 0 1em #f22 inset;}";
@@ -48,29 +49,29 @@ public class BooleanPlugin extends AbstractPlugin {
 	}
 
 	String getFontFace() {
-		return "@font-face { \n" // ff ************
-				+ "font-family: 'OpenSymbol'; " + "src: " + "url('"
+		return "@font-face { " // ff ************
+				+ "font-family: \"OpenSymbol\"; " + "src: " + "url(\""
 				+ FontUtil.getFontFileURL("openSymbol.ttf")
-				+ "') format('truetype'); "
-				+ "font-weight: normal; font-style: normal;} \n"
-				+ "@font-face { \n" // ff ************
-				+ "font-family: 'OpenSymbolEOT'; "
+				+ "\") format(\"truetype\"); "
+				+ "font-weight: normal; font-style: normal;} "
+				+ "@font-face { " // ff ************
+				+ "font-family: \"OpenSymbolEOT\"; "
 				+ "src: "
-				+ "url('"
+				+ "url(\""
 				+ FontUtil.getFontFileURL("openSymbol.eot")
-				+ "?#iefix') format('embedded-opentype'); "
-				+ "font-weight: normal; font-style: normal;} \n"
-				+ "@font-face { \n" // ff ************
-				+ "font-family: 'OpenSymbolWOFF'; "
+				+ "?#iefix\") format(\"embedded-opentype\"); "
+				+ "font-weight: normal; font-style: normal;} "
+				+ "@font-face { " // ff ************
+				+ "font-family: \"OpenSymbolWOFF\"; "
 				+ "src: "
-				+ "url('"
+				+ "url(\""
 				+ FontUtil.getFontFileURL("openSymbol.woff")
-				+ "') format('woff'); "
-				+ "font-weight: normal; font-style: normal;} \n"
-				+ "@font-face { \n" // ff ************
-				+ "font-family: 'OpenSymbolSVG'; " + "src: " + "url('"
+				+ "\") format(\"woff\"); "
+				+ "font-weight: normal; font-style: normal;} "
+				+ "@font-face { " // ff ************
+				+ "font-family: \"OpenSymbolSVG\"; " + "src: " + "url(\""
 				+ FontUtil.getFontFileURL("openSymbol.svg")
-				+ "#OpenSymbolRegular') format('svg'); "
+				+ "#OpenSymbolRegular\") format(\"svg\"); "
 				+ "font-weight: normal; font-style: normal;} ";
 	}
 }
