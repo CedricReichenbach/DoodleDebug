@@ -7,7 +7,7 @@ hr {
 	height: 30px;
 }
 
-#welcomeTitle, #info, #background {
+#welcomeTitle, #info/*, #background*/ {
 	display: inline;
 	padding: 4px;
 	border-radius: 3px;
@@ -15,7 +15,7 @@ hr {
 }
 
 #background {
-	background-color: #def;
+	/*background-color: #def;*/
     display: inline-block;
     overflow: hidden;
     padding: 30px;

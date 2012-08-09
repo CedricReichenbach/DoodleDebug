@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.List;
 
 import ch.unibe.scg.doodle.htmlgen.Tag;
+import ch.unibe.scg.doodle.server.util.DoodleImages;
 import ch.unibe.scg.doodle.view.css.CSSUtil;
 
 public class DoodleDebugWelcomeScreen extends HtmlDocument {
@@ -11,6 +12,12 @@ public class DoodleDebugWelcomeScreen extends HtmlDocument {
 	public DoodleDebugWelcomeScreen() {
 		super();
 		this.body = makeBody();
+		this.setBackgroundImage();
+	}
+	
+	private void setBackgroundImage() {
+		String texPath = DoodleImages.getDoodleTextureImageFilePath();
+		body.addAttribute("style", "background-image:url(" + texPath + ")");
 	}
 
 	@SuppressWarnings("unchecked")
