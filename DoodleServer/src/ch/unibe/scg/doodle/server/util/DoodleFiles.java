@@ -15,16 +15,21 @@ import org.osgi.framework.Bundle;
 
 public class DoodleFiles {
 	public static IPath getFilePath(String file) {
+		URL fileURL = getResolvedFileURL(file);
+		String result = "";
+		result = fileURL.getPath();
+		return Path.fromOSString(result);
+	}
+
+	public static URL getResolvedFileURL(String file) {
 		Bundle bundle = Platform.getBundle("DoodleServer");
 		Path path = new Path(file);
 		URL fileURL = FileLocator.find(bundle, path, null);
-		String result = "";
 		try {
-			result = FileLocator.resolve(fileURL).getPath();
+			return FileLocator.resolve(fileURL);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-		return Path.fromOSString(result);
 	}
 
 }

@@ -25,7 +25,7 @@ public class HtmlDocument {
 	}
 
 	@SuppressWarnings("unchecked")
-	private Tag makeHead() {
+	protected Tag makeHead() {
 		Tag head = new Tag("head");
 		head.add("<meta charset=\"utf-8\">");
 		head.add("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=100\" >"); // for

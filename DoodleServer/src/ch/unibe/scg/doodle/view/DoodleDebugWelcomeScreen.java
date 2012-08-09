@@ -3,7 +3,10 @@ package ch.unibe.scg.doodle.view;
 import java.net.URL;
 import java.util.List;
 
+import org.eclipse.core.resources.ResourcesPlugin;
+
 import ch.unibe.scg.doodle.htmlgen.Tag;
+import ch.unibe.scg.doodle.server.util.DoodleFiles;
 import ch.unibe.scg.doodle.server.util.DoodleImages;
 import ch.unibe.scg.doodle.view.css.CSSUtil;
 
@@ -14,10 +17,18 @@ public class DoodleDebugWelcomeScreen extends HtmlDocument {
 		this.body = makeBody();
 		this.setBackgroundImage();
 	}
-	
+
 	private void setBackgroundImage() {
 		String texPath = DoodleImages.getDoodleTextureImageFilePath();
 		body.addAttribute("style", "background-image:url(" + texPath + ")");
+	}
+
+	@Override
+	protected Tag makeHead() {
+		Tag head = super.makeHead();
+		Tag js = new Tag("script", "src=js/tutorial.js");
+		head.add(js);
+		return head;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -32,10 +43,14 @@ public class DoodleDebugWelcomeScreen extends HtmlDocument {
 		background.add(Tag.hr());
 
 		Tag info = new Tag("h3", "id=info", "style=visibility:hidden");
-		Tag tutLink = new Tag("a", "href=http://scg.unibe.ch/doodledebug",
-				"target=_blank");
-		tutLink.add("scg.unibe.ch/doodledebug");
-		info.add("Tutorials: " + tutLink);
+
+		Tag tutLink = new Tag("a");
+		tutLink.addAttribute("href",
+				DoodleFiles.getResolvedFileURL("tutorials/dd-tutorial.html")
+						.toExternalForm());
+		tutLink.addAttribute("target", "_blank");
+		tutLink.add("Tutorial");
+		info.add(tutLink);
 		background.add(info);
 		body.add(background);
 		return body;
