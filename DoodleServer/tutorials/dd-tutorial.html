@@ -10,6 +10,7 @@
 <span class="code"></span>
  -->
 <body>
+	<div id="wrapper">
 	<h1 id="mainTitle">
 		DoodleDebug tutorial
 	</h1>
@@ -30,9 +31,13 @@
 		Define rendering of an object type
 	</h3>
 	Implement the interface <span class="code">Doodleable</span>, which contains the methods
-	<span class="code">drawOn(DoodleCanvas c)</span> and <span class="code">drawSmallOn(DoodleCanvas c)</span>.<br>
-	DoodleCanvas uses a cursor-like navigation and provides the following methods:<br>
-	<span class="code">c.draw(Object o)</span>: Render an object (e.g. a field of this object) at the current cursor position.
-	<span class="code">c.draw(Object o)</span>
+	<span class="code">drawOn(DoodleCanvas c)</span> and <span class="code">drawSmallOn(DoodleCanvas c)</span>,
+	so DoodleDebug will automatically use those methods for rendering.<br>
+	DoodleCanvas uses a (virtual) cursor-like navigation and provides the following methods:<br>
+	<span class="code">c.draw(Object o)</span>: Render an object (e.g. a field of this object) at the current cursor position.<br>
+	<span class="code">c.drawSmall(Object o)</span>: Render an object at the current cursor position with fewer details.<br>
+	<span class="code">c.newLine()</span>: Jump to a new line with the virtual cursor, staying in the same column.<br>
+	<span class="code">c.newColumn()</span>: Jump to a new column with the virtual cursor, i.e. create a new column on the right side of the last one.
+	</div>
 </body>
 </html>

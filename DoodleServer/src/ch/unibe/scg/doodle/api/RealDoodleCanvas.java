@@ -1,14 +1,7 @@
 package ch.unibe.scg.doodle.api;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import ch.unibe.scg.doodle.RealScratch;
-import ch.unibe.scg.doodle.SmallScratch;
-import ch.unibe.scg.doodle.helperClasses.HtmlImage;
 
 public class RealDoodleCanvas implements DoodleCanvas {
 
@@ -46,7 +39,7 @@ public class RealDoodleCanvas implements DoodleCanvas {
 	 */
 	@Override
 	public void drawSmall(Object o) {
-		// TODO: SmallDoodleCanvas for this case
+		// TODO: Create class SmallWrapper and respective Plugin
 	}
 
 	@Override
@@ -63,18 +56,6 @@ public class RealDoodleCanvas implements DoodleCanvas {
 		column.add(line);
 		columns.add(column);
 	}
-
-	@Override
-	public void drawImage(byte[] image, String mimeType) throws IOException {
-		File file = File.createTempFile("image", this.getSuffix(mimeType));
-		FileOutputStream out = new FileOutputStream(file);
-		out.write(image);
-		out.close();
-
-		HtmlImage htmlImage = new HtmlImage(file, mimeType);
-		this.draw(htmlImage);
-	}
-	
 
 	/*
 	 * (non-Javadoc)

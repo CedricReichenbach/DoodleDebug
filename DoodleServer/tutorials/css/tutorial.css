@@ -29,10 +29,22 @@
     src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/2UX7WLTfW3W8TclTUvlFyQ.woff") format("woff");
 }
 body {
-    background-color: #def;
     font-family: "Roboto",Verdana,Tahoma,sans-serif;
     font-size: 1em;
-	margin: 10px 40px;
+	line-height: 1.3em;
+	margin: 0;
+	background-color: #abc;
+}
+#wrapper {
+    background-color: #def;
+	top: 0;
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 15px;
+	border-width: 0 1px 1px 1px;
+	border-style: solid;
+	border-color: #7ad;
+	box-shadow: 0 2px 8px 2px rgba(0, 0, 0, 0.5);
 }
 #mainTitle {
 	color: #444;
@@ -51,6 +63,7 @@ body {
 }
 .code {
 	padding: 1px 2px;
+	display: inline-block;
 }
 .codeBlock, .tip {
 	padding: .5em;

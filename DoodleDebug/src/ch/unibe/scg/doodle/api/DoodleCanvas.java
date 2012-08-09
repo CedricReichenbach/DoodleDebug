@@ -1,8 +1,5 @@
 package ch.unibe.scg.doodle.api;
 
-import java.io.IOException;
-import java.util.List;
-
 public interface DoodleCanvas {
 
 	/**
@@ -24,11 +21,15 @@ public interface DoodleCanvas {
 	 */
 	public abstract void drawSmall(Object o);
 
-	public abstract void drawImage(byte[] image, String mimeType)
-			throws IOException;
-
+	/**
+	 * Jump to a new line with the virtual cursor, staying in the same column.
+	 */
 	public abstract void newLine();
 
+	/**
+	 * Jump to a new column with the virtual cursor, i.e. create a new column on
+	 * the right side of the last one.
+	 */
 	public abstract void newColumn();
 
 }

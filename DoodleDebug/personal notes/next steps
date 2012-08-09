@@ -1,13 +1,8 @@
-- no visual differenciation between inner objects (> 2. level)
+- no visual differentiation between inner objects (> 2. level)
  (class "printedObject")
  
 - CSS doubled up?
 
-- Do html rendering on server side instead of having both, a client jar and the same as plugin for the server to refer to (depend on it)
-
-- Renderings for Maps
-
 - Don't always set focus to DD tab!
 
-- Doo.dle() replaces D.raw() (maybe)
-  -> Shortcut like "syso" & [Ctrl]-[Space], e.g. "dood"
+- DoodleCanvas.drawSmall(); is not implemented yet!!!

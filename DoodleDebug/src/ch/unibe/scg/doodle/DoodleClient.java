@@ -29,15 +29,15 @@ public class DoodleClient {
 		}
 	}
 
-	public void sendToServer(Object o) {
+	void sendToServer(Object o) {
 		simonClient.sendObject(o);
 	}
 
-	public void sendToServer(Object o, Object[] os) {
+	void sendToServer(Object o, Object[] os) {
 		simonClient.sendObjects(o, os);
 	}
 
-	public void clearOutput() {
+	void clearOutput() {
 		simonClient.clearOutput();
 	}
 
