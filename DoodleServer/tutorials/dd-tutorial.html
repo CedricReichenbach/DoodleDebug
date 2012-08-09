@@ -6,6 +6,9 @@
 	<title>DoodleDebug Tutorial</title>
 	<link rel="stylesheet" type="text/css" href="css/tutorial.css">
 </head>
+<!-- Just for copy&paste:
+<span class="code"></span>
+ -->
 <body>
 	<h1 id="mainTitle">
 		DoodleDebug tutorial
@@ -23,5 +26,13 @@
 		and hit <span class="key">Ctrl</span>+<span class="key">Space</span>, so eclipse will complete it to
 		<span class="code">Doo.dle();</span> for you.
 	</div>
+	<h3 id="title">
+		Define rendering of an object type
+	</h3>
+	Implement the interface <span class="code">Doodleable</span>, which contains the methods
+	<span class="code">drawOn(DoodleCanvas c)</span> and <span class="code">drawSmallOn(DoodleCanvas c)</span>.<br>
+	DoodleCanvas uses a cursor-like navigation and provides the following methods:<br>
+	<span class="code">c.draw(Object o)</span>: Render an object (e.g. a field of this object) at the current cursor position.
+	<span class="code">c.draw(Object o)</span>
 </body>
 </html>

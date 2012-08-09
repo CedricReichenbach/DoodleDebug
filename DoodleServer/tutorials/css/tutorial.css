@@ -39,6 +39,7 @@ body {
 	text-shadow: 1px 1px 0 rgba(0, 200, 0, 0.5);
 }
 #title {
+	margin-top: 2em;
 	color: green;
 }
 .code,

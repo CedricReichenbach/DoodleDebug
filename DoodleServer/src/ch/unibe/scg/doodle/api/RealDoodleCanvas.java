@@ -81,7 +81,6 @@ public class RealDoodleCanvas implements DoodleCanvas {
 	 * 
 	 * @see doodle.Scratch#getInner()
 	 */
-	@Override
 	public List<List<List<Object>>> getColumns() {
 		return this.columns;
 	}

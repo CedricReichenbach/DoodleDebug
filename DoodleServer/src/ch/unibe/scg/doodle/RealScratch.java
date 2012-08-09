@@ -52,7 +52,7 @@ public class RealScratch implements Scratch {
 	@Inject
 	Doodler doodler;
 
-	protected DoodleCanvas canvas;
+	protected RealDoodleCanvas canvas;
 
 	private int level;
 
@@ -106,7 +106,7 @@ public class RealScratch implements Scratch {
 		if (object instanceof Doodleable) {
 			tag.addAttribute(new Attribute("class", "Scratch"));
 			drawDoodleable();
-			Rendering<DoodleCanvas> rendering = doodleCanvasRenderingProvider
+			Rendering<RealDoodleCanvas> rendering = doodleCanvasRenderingProvider
 					.get();
 			try {
 				rendering.render(this.canvas, tag);

@@ -30,8 +30,4 @@ public interface DoodleCanvas {
 	public abstract void newLine();
 
 	public abstract void newColumn();
-
-	// TODO: should not be exposed to user
-	public abstract List<List<List<Object>>> getColumns();
-
 }

@@ -5,16 +5,16 @@ import java.util.List;
 import javax.inject.Inject;
 
 import ch.unibe.scg.doodle.Doodler;
-import ch.unibe.scg.doodle.api.DoodleCanvas;
+import ch.unibe.scg.doodle.api.RealDoodleCanvas;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 
-public class DoodleCanvasRendering implements Rendering<DoodleCanvas> {
+public class DoodleCanvasRendering implements Rendering<RealDoodleCanvas> {
 
 	@Inject
 	Doodler doodler;
 
 	@Override
-	public void render(DoodleCanvas canvas, Tag tag) {
+	public void render(RealDoodleCanvas canvas, Tag tag) {
 		List<List<List<Object>>> columns = canvas.getColumns();
 
 		for (List<List<Object>> column : columns) {
@@ -25,7 +25,7 @@ public class DoodleCanvasRendering implements Rendering<DoodleCanvas> {
 	}
 
 	@Override
-	public void renderSmall(DoodleCanvas canvas, Tag tag) {
+	public void renderSmall(RealDoodleCanvas canvas, Tag tag) {
 		this.render(canvas, tag); // Differentiation is done in Interface
 									// Doodleable
 	}
