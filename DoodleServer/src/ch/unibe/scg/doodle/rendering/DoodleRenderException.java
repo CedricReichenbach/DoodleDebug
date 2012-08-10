@@ -1,5 +1,10 @@
 package ch.unibe.scg.doodle.rendering;
 
+/**
+ * Exception representing any problems when rendering an object.
+ * @author Cedric Reichenbach
+ *
+ */
 public class DoodleRenderException extends Exception {
 	/**
 	 * 

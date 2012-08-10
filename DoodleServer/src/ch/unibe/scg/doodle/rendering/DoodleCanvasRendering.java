@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import ch.unibe.scg.doodle.Doodler;
 import ch.unibe.scg.doodle.api.RealDoodleCanvas;
+import ch.unibe.scg.doodle.helperClasses.SmallWrapper;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 
 public class DoodleCanvasRendering implements Rendering<RealDoodleCanvas> {
@@ -40,9 +41,12 @@ public class DoodleCanvasRendering implements Rendering<RealDoodleCanvas> {
 
 	private void renderLine(List<Object> line, Tag tag) {
 		for (Object o : line) {
-			Tag span = new Tag("div");
-			doodler.renderInlineIntoWithoutClassName(o, span);
-			tag.add(span);
+			Tag div = new Tag("div");
+			if (o instanceof SmallWrapper)
+				doodler.renderSmallInlineInto(((SmallWrapper) o).object(), div);
+			else
+				doodler.renderInlineIntoWithoutClassName(o, div);
+			tag.add(div);
 		}
 	}
 }

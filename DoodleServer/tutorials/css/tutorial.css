@@ -34,6 +34,7 @@ body {
 	line-height: 1.3em;
 	margin: 0;
 	background-color: #abc;
+	background-image: url('../../img/dd-tex.png');
 }
 #wrapper {
     background-color: #def;
@@ -41,7 +42,7 @@ body {
 	max-width: 1000px;
 	margin: 0 auto;
 	padding: 15px;
-	border-width: 0 1px 1px 1px;
+	border-width: 0 1px;
 	border-style: solid;
 	border-color: #7ad;
 	box-shadow: 0 2px 8px 2px rgba(0, 0, 0, 0.5);
@@ -86,4 +87,16 @@ body {
 .tip:before {
 	content: "Tip: ";
 	font-weight: bold;
+}
+#footer {
+	padding-top: 2em;
+}
+#footer a {
+	color: gray;
+	text-decoration: none;
+	font-size: 0.8em;
+}
+#footer a:hover {
+	text-decoration: underline;
+	color: black;
 }

@@ -8,6 +8,7 @@ import ch.unibe.scg.doodle.Scratch;
 import ch.unibe.scg.doodle.ScratchFactory;
 import ch.unibe.scg.doodle.SmallScratch;
 import ch.unibe.scg.doodle.SmallScratchFactory;
+import ch.unibe.scg.doodle.helperClasses.SmallWrapper;
 import ch.unibe.scg.doodle.plugins.BooleanPlugin;
 import ch.unibe.scg.doodle.plugins.CollectionPlugin;
 import ch.unibe.scg.doodle.plugins.ColorPlugin;
@@ -17,6 +18,7 @@ import ch.unibe.scg.doodle.plugins.MapPlugin;
 import ch.unibe.scg.doodle.plugins.NullPlugin;
 import ch.unibe.scg.doodle.plugins.ObjectPlugin;
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
+import ch.unibe.scg.doodle.plugins.SmallWrapperPlugin;
 import ch.unibe.scg.doodle.plugins.StringPlugin;
 import ch.unibe.scg.doodle.plugins.TablePlugin;
 import ch.unibe.scg.doodle.plugins.ThrowablePlugin;
@@ -45,17 +47,18 @@ public class DoodleModule extends AbstractModule {
 	}
 
 	private void addPlugins(Multibinder<RenderingPlugin> uriBinder) {
-		uriBinder.addBinding().to(CollectionPlugin.class);
 		uriBinder.addBinding().to(ObjectPlugin.class);
-		uriBinder.addBinding().to(ColorPlugin.class);
-		uriBinder.addBinding().to(StringPlugin.class);
-		uriBinder.addBinding().to(ImagePlugin.class);
+		uriBinder.addBinding().to(SmallWrapperPlugin.class);
 		uriBinder.addBinding().to(NullPlugin.class);
-		uriBinder.addBinding().to(TablePlugin.class);
+		uriBinder.addBinding().to(StringPlugin.class);
+		uriBinder.addBinding().to(CollectionPlugin.class);
+		uriBinder.addBinding().to(DoodleListPlugin.class);
 		uriBinder.addBinding().to(ThrowablePlugin.class);
+		uriBinder.addBinding().to(ColorPlugin.class);
+		uriBinder.addBinding().to(ImagePlugin.class);
+		uriBinder.addBinding().to(TablePlugin.class);
 		uriBinder.addBinding().to(MapPlugin.class);
 		uriBinder.addBinding().to(BooleanPlugin.class);
-		uriBinder.addBinding().to(DoodleListPlugin.class);
 	}
 
 }

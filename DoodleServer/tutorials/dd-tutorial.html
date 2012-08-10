@@ -8,6 +8,8 @@
 </head>
 <!-- Just for copy&paste:
 <span class="code"></span>
+<span class="key"></span>
+<div class="tip"></div>
  -->
 <body>
 	<div id="wrapper">
@@ -28,6 +30,16 @@
 		<span class="code">Doo.dle();</span> for you.
 	</div>
 	<h3 id="title">
+		Navigation
+	</h3>
+	<div class="tip">Use keys <span class="key">j</span> and <span class="key">k</span> to navigate to the next
+	or the last doodled object, respectively.</div>
+	Some objects inside the doodled ones are clickable, this can be seen from their fine shadow and their color
+	change to blue when hovering them with the cursor. As they are clicked, a more detailed rendering is doodled into a lightbox,
+	which can contain clickables itself. This mechanism allows users to inspect their objects in a arbitrary deep manner.
+	To navigate back out, breadcrumbs are displayed at top of the lightbox, or, if desired, the lightbox can be fully closed
+	by clicking in the dark background beside it.
+	<h3 id="title">
 		Define rendering of an object type
 	</h3>
 	Implement the interface <span class="code">Doodleable</span>, which contains the methods
@@ -38,6 +50,7 @@
 	<span class="code">c.drawSmall(Object o)</span>: Render an object at the current cursor position with fewer details.<br>
 	<span class="code">c.newLine()</span>: Jump to a new line with the virtual cursor, staying in the same column.<br>
 	<span class="code">c.newColumn()</span>: Jump to a new column with the virtual cursor, i.e. create a new column on the right side of the last one.
+	<div id="footer"><a href="http://scg.unibe.ch/" target="_blank">Software Composition Group, University of Berne</a></div>
 	</div>
 </body>
 </html>

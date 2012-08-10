@@ -121,7 +121,7 @@ public class Doodler {
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
-	public void visualize(Object o) {
+	void visualize(Object o) {
 		if (o == null) {
 			o = new NullObject();
 		}
@@ -150,21 +150,73 @@ public class Doodler {
 		Display.getDefault().syncExec(jsExecuterForHtml);
 	}
 
+	/**
+	 * Sub-render any object into a given tag.<br>
+	 * This method may be called from draw()/drawSmall() methods inside client
+	 * RenderingPlugins.
+	 * 
+	 * @param object
+	 * @param tag
+	 */
 	public void renderInlineInto(Object object, Tag tag) {
-		renderInline(object, tag, true);
+		renderInline(object, tag, true, false);
 	}
 
+	/**
+	 * Sub-render any object into a given tag without rendering its class name.<br>
+	 * This method may be called from draw()/drawSmall() methods inside client
+	 * RenderingPlugins.
+	 * 
+	 * @param object
+	 * @param tag
+	 */
 	public void renderInlineIntoWithoutClassName(Object object, Tag tag) {
-		renderInline(object, tag, false);
+		renderInline(object, tag, false, false);
 	}
 
+	public void renderSmallInlineInto(Object object, Tag tag) {
+		renderInline(object, tag, false, true);
+	}
+
+	/**
+	 * Render an object into lightbox.<br>
+	 * This method should not be used by clients.
+	 * 
+	 * @param stack
+	 * @param tag
+	 */
 	public synchronized void renderIntoLightbox(LightboxStack stack, Tag tag) {
 		level--;
 		renderBreadcrumbs(stack, tag);
 		Tag lightboxRendering = new Tag("div", "id=lightboxRendering");
-		renderInline(stack.top(), lightboxRendering, true);
+		renderInline(stack.top(), lightboxRendering, true, false);
 		tag.add(lightboxRendering);
 		level++;
+	}
+
+	private synchronized void renderInline(Object object, Tag tag,
+			boolean withClassName, boolean small) {
+		if (object == null) {
+			object = new NullObject();
+		}
+		level++; // TODO: smarter, nicer solution for this
+		tag.addCSSClass("rendering");
+		Scratch scratch = null;
+		if (level <= 1 && !small) {
+			scratch = scratchFactory.create(object);
+		} else {
+			scratch = smallScratchFactory.create(object);
+		}
+		scratch.addCSSClass("level" + level);
+		scratch.setLevel(level);
+		if (level == 1)
+			scratch.setObjectID(clickables.store(object));
+		if (withClassName) {
+			scratch.drawWholeWithName(tag);
+		} else {
+			scratch.drawWhole(tag);
+		}
+		level--;
 	}
 
 	private void renderBreadcrumbs(LightboxStack stack, Tag tag) {
@@ -200,47 +252,14 @@ public class Doodler {
 		tag.add(breadcrumbsWrapper);
 	}
 
-	private synchronized void renderInline(Object object, Tag tag,
-			boolean withClassName) {
-		if (object == null) {
-			object = new NullObject();
-		}
-		level++; // TODO: smarter, nicer solution for this
-		addClass(tag, "rendering");
-		Scratch scratch = null;
-		if (level <= 1) {
-			scratch = scratchFactory.create(object);
-		} else {
-			scratch = smallScratchFactory.create(object);
-		}
-		scratch.addCSSClass("level" + level);
-		scratch.setLevel(level);
-		if (level == 1)
-			scratch.setObjectID(clickables.store(object));
-		if (withClassName) {
-			scratch.drawWholeWithName(tag);
-		} else {
-			scratch.drawWhole(tag);
-		}
-		level--;
-	}
-
-	public static void addClass(Tag tag, String className) {
-		Attributes attributes = tag.getAttributes(); // XXX
-		for (Attribute a : attributes) {
-			String attName = a.getAttribute();
-			if (attName.equals("class")) {
-				List<String> vals = Arrays.asList(a.getValue().split(" "));
-				if (vals.contains(className))
-					return;
-				a.setValue(a.getValue() + " " + className);
-				tag.setAttributes(attributes);
-				return;
-			}
-		}
-		tag.addAttribute(new Attribute("class", className));
-	}
-
+	/**
+	 * Display an error message when problems occur, e.g. when sending. <br>
+	 * Clients may not use this method, but throw a
+	 * {@link ch.unibe.scg.doodle.rendering.DoodleRenderException
+	 * DoodleRenderException}.
+	 * 
+	 * @param canonicalName
+	 */
 	public void couldNotRenderMessage(String canonicalName) {
 		CannotRenderMessage messageObject = new CannotRenderMessage(
 				canonicalName);

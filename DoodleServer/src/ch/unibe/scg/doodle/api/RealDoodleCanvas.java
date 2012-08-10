@@ -3,6 +3,8 @@ package ch.unibe.scg.doodle.api;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.unibe.scg.doodle.helperClasses.SmallWrapper;
+
 public class RealDoodleCanvas implements DoodleCanvas {
 
 	/**
@@ -39,7 +41,7 @@ public class RealDoodleCanvas implements DoodleCanvas {
 	 */
 	@Override
 	public void drawSmall(Object o) {
-		// TODO: Create class SmallWrapper and respective Plugin
+		draw(new SmallWrapper(o));
 	}
 
 	@Override
