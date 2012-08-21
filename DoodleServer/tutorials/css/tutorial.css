@@ -95,6 +95,10 @@ body {
 .example {
 	background-color: #afa;
 	border-color: #5d0;
+	float: left;
+}
+.example-wrapper {
+	overflow: hidden;
 }
 .example:before {
 	content: "Example: ";
