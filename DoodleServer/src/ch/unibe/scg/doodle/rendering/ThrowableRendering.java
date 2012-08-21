@@ -20,7 +20,7 @@ public class ThrowableRendering implements Rendering<Throwable> {
 		else
 			title.add("Stack trace:");
 		tag.add(title);
-		Tag stackTrace = new Tag("p", "class=stackTrace");
+		Tag stackTrace = new Tag("pre", "class=stackTrace");
 		String traceString = StackTraceUtil.getStackTraceWithoutCause(e);
 		traceString = StackTraceUtil.linkClasses(traceString);
 		String replaced = traceString.replace("\n", "<br>");
