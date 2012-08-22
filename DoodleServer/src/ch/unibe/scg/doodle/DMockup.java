@@ -5,6 +5,7 @@ import ch.unibe.scg.doodle.inject.DoodleModule;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Module;
 
 public class DMockup {
 
@@ -17,8 +18,12 @@ public class DMockup {
 		return injector;
 	}
 
-	public static void resetInstance() {
+	public static void resetInjector() {
 		injector = null;
+	}
+
+	public static void addModules(Module... modules) {
+		injector = injector.createChildInjector(modules);
 	}
 
 	/**

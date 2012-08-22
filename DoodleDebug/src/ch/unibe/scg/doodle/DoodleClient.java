@@ -2,6 +2,8 @@ package ch.unibe.scg.doodle;
 
 import java.io.IOException;
 
+import com.google.inject.Module;
+
 import ch.unibe.scg.doodle.simon.SimonClient;
 import de.root1.simon.exceptions.EstablishConnectionFailed;
 import de.root1.simon.exceptions.LookupFailedException;
@@ -43,5 +45,9 @@ class DoodleClient {
 
 	protected void firstRun() {
 		simonClient.firstRun();
+	}
+
+	public void addModules(Module... modules) {
+		simonClient.addModules(modules);
 	}
 }

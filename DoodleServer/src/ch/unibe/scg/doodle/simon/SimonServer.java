@@ -8,6 +8,7 @@ import ch.unibe.scg.doodle.Doodler;
 import ch.unibe.scg.doodle.server.DoodleClientWorkspace;
 import ch.unibe.scg.doodle.server.DoodleServer;
 
+import com.google.inject.Module;
 import com.thoughtworks.xstream.XStream;
 
 import de.root1.simon.Lookup;
@@ -82,6 +83,12 @@ public class SimonServer implements SimonServerInterface {
 	@Override
 	public void firstRun() {
 		DoodleServer.instance().firstRun();
+	}
+
+	@Override
+	public void addModules(String modulesAsXML) {
+		Module[] modules = (Module[]) xstream.fromXML(modulesAsXML);
+		DMockup.addModules(modules);
 	}
 
 }

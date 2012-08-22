@@ -2,6 +2,7 @@ package ch.unibe.scg.doodle.simon;
 
 import java.io.IOException;
 
+import com.google.inject.Module;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.ConversionException;
 
@@ -62,6 +63,11 @@ public class SimonClient implements SimonClientInterface {
 
 	public void firstRun() {
 		server.firstRun();
+	}
+
+	public void addModules(Module... modules) {
+		String modulesAsXML = xstream.toXML(modules);
+		server.addModules(modulesAsXML);
 	}
 
 }

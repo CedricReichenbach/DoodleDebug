@@ -10,4 +10,6 @@ public interface SimonServerInterface {
 	public void firstRun();
 
 	public void couldNotSend(String canonicalName);
+
+	public void addModules(String modulesAsXML);
 }

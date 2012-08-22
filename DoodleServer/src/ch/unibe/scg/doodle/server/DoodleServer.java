@@ -83,7 +83,7 @@ public class DoodleServer {
 	}
 
 	public void clearOutput() {
-		DMockup.resetInstance();
+		DMockup.resetInjector();
 		Runnable emptyShow = new HtmlShow(new DoodleDebugScreen().toString());
 		Display.getDefault().asyncExec(emptyShow);
 	}
