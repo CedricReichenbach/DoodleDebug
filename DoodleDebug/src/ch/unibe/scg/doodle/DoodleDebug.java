@@ -25,7 +25,7 @@ public class DoodleDebug {
 	 * 
 	 * @param plugins
 	 */
-	public static void addRenderingPlugin(RenderingPlugin... plugins) {
+	public static void addRenderingPlugins(RenderingPlugin... plugins) {
 		DoodleClient.instance().addModules(plugins);
 	}
 
