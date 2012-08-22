@@ -7,7 +7,7 @@ import de.root1.simon.exceptions.EstablishConnectionFailed;
 import de.root1.simon.exceptions.LookupFailedException;
 import de.root1.simon.exceptions.NameBindingException;
 
-public class DoodleClient {
+class DoodleClient {
 	private SimonClient simonClient;
 
 	private static DoodleClient instance = null;
