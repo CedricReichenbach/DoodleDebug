@@ -1,5 +1,6 @@
 package ch.unibe.scg.doodle.rendering;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -23,17 +24,23 @@ public class RenderingRegistryProvider implements Provider<RenderingRegistry> {
 
 	@Override
 	public RenderingRegistry get() {
+		HashMap<Class<?>, RenderingPlugin> m = mapFromPlugins(allPlugins);
+		RenderingRegistry registry = new RenderingRegistry(m,
+				arrayPluginProvider.get(), tablePluginProvider.get());
+
+		return registry;
+	}
+
+	public static HashMap<Class<?>, RenderingPlugin> mapFromPlugins(
+			Collection<RenderingPlugin> plugins) {
 		HashMap<Class<?>, RenderingPlugin> m = new HashMap<Class<?>, RenderingPlugin>();
-		for (RenderingPlugin p : allPlugins) {
+		for (RenderingPlugin p : plugins) {
 			assert p != null;
 			for (Class<?> type : p.getDrawableClasses()) {
 				m.put(type, p);
 			}
 		}
-		RenderingRegistry registry = new RenderingRegistry(m,
-				arrayPluginProvider.get(), tablePluginProvider.get());
-
-		return registry;
+		return m;
 	}
 
 }

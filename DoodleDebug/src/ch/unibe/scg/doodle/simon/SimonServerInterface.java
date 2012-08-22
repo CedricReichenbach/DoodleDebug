@@ -11,5 +11,5 @@ public interface SimonServerInterface {
 
 	public void couldNotSend(String canonicalName);
 
-	public void addModules(String modulesAsXML);
+	public void addModules(String pluginsAsXML);
 }

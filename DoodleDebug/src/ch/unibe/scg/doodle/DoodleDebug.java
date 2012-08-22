@@ -1,5 +1,8 @@
 package ch.unibe.scg.doodle;
 
+import ch.unibe.scg.doodle.plugins.AbstractPlugin;
+import ch.unibe.scg.doodle.plugins.RenderingPlugin;
+
 import com.google.inject.AbstractModule;
 import com.google.inject.Module;
 
@@ -13,16 +16,17 @@ import com.google.inject.Module;
 public class DoodleDebug {
 
 	/**
-	 * Add custom modules containing information for custom type renderings. For
-	 * creating such a module, inheritance of {@link AbstractModule} is
-	 * recommended.<br> <strike>This method should preferably be called at the
-	 * beginning of an application, i.e. before the first
-	 * {@link Doo#dle(Object) Doo.dle()} call.</strike>
+	 * Add custom plugins containing information for custom type renderings. For
+	 * creating such a plugin, inheritance of {@link AbstractPlugin} is
+	 * recommended.<br>
+	 * <strike>This method should preferably be called at the beginning of an
+	 * application, i.e. before the first {@link Doo#dle(Object) Doo.dle()}
+	 * call.</strike>
 	 * 
-	 * @param modules
+	 * @param plugins
 	 */
-	public static void addModule(Module... modules) {
-		DoodleClient.instance().addModules(modules);
+	public static void addRenderingPlugin(RenderingPlugin... plugins) {
+		DoodleClient.instance().addModules(plugins);
 	}
 
 	/**

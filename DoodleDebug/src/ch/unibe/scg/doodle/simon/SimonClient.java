@@ -2,6 +2,8 @@ package ch.unibe.scg.doodle.simon;
 
 import java.io.IOException;
 
+import ch.unibe.scg.doodle.plugins.RenderingPlugin;
+
 import com.google.inject.Module;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.ConversionException;
@@ -65,9 +67,9 @@ public class SimonClient implements SimonClientInterface {
 		server.firstRun();
 	}
 
-	public void addModules(Module... modules) {
-		String modulesAsXML = xstream.toXML(modules);
-		server.addModules(modulesAsXML);
+	public void addModules(RenderingPlugin... plugins) {
+		String pluginsAsXML = xstream.toXML(plugins);
+		server.addModules(pluginsAsXML);
 	}
 
 }

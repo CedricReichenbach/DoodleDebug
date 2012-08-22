@@ -2,9 +2,12 @@ package ch.unibe.scg.doodle.simon;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.util.Collection;
 
 import ch.unibe.scg.doodle.DMockup;
 import ch.unibe.scg.doodle.Doodler;
+import ch.unibe.scg.doodle.plugins.RenderingPlugin;
+import ch.unibe.scg.doodle.rendering.RenderingRegistry;
 import ch.unibe.scg.doodle.server.DoodleClientWorkspace;
 import ch.unibe.scg.doodle.server.DoodleServer;
 
@@ -86,9 +89,10 @@ public class SimonServer implements SimonServerInterface {
 	}
 
 	@Override
-	public void addModules(String modulesAsXML) {
-		Module[] modules = (Module[]) xstream.fromXML(modulesAsXML);
-		DMockup.addModules(modules);
+	public void addModules(String pluginsAsXML) {
+		Collection<RenderingPlugin> plugins = (Collection<RenderingPlugin>) xstream
+				.fromXML(pluginsAsXML);
+		RenderingRegistry.addPlugins(plugins);
 	}
 
 }

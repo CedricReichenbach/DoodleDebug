@@ -22,10 +22,6 @@ public class DMockup {
 		injector = null;
 	}
 
-	public static void addModules(Module... modules) {
-		injector = injector.createChildInjector(modules);
-	}
-
 	/**
 	 * Code sugar for Doo.raw-ing any Object similar to System.out.println
 	 * 

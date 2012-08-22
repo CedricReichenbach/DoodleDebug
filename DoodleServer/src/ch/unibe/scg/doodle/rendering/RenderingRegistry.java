@@ -2,6 +2,7 @@ package ch.unibe.scg.doodle.rendering;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,12 +28,23 @@ public class RenderingRegistry {
 
 	private final HashMap<Class<?>, RenderingPlugin> map;
 
+	private static RenderingRegistry instance;
+
+	private static Collection<RenderingPlugin> userPlugins;
+
 	public RenderingRegistry(HashMap<Class<?>, RenderingPlugin> m,
 			ArrayPlugin arrayPlugin, TablePlugin tablePlugin) {
 		this.map = m;
 		assert map.containsKey(Object.class);
 		this.arrayPlugin = arrayPlugin;
 		this.tablePlugin = tablePlugin;
+
+		if (userPlugins != null) {
+			this.map.putAll(RenderingRegistryProvider
+					.mapFromPlugins(userPlugins));
+		}
+
+		instance = this;
 	}
 
 	/**
@@ -92,5 +104,17 @@ public class RenderingRegistry {
 		}
 		throw new AssertionError();
 
+	}
+
+	public static void addPlugins(Collection<RenderingPlugin> plugins) {
+		if (instance == null) {
+			if (userPlugins == null)
+				userPlugins = plugins;
+			else
+				userPlugins.addAll(plugins);
+			return;
+		}
+
+		instance.map.putAll(RenderingRegistryProvider.mapFromPlugins(plugins));
 	}
 }
