@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="DDFeatureProject"
+      label="DDFeatureProject"
+      version="1.0.0.qualifier">
+
+   <description url="http://scg.unibe.ch/">
+      DoodleDebug allows to graphically visualize objects directly
+from calls inside Java code.
+   </description>
+
+   <copyright url="http://scg.unibe.ch/">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.junit"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="SimonPlugin" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="XStreamPlugin" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="GuicePlugin" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jdt.core"/>
+      <import plugin="org.eclipse.jdt.ui"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.eclipse.ltk.core.refactoring"/>
+      <import plugin="org.eclipse.ui.ide"/>
+   </requires>
+
+   <plugin
+         id="DoodleServer"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="SimonPlugin"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="GuicePlugin"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="XStreamPlugin"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+</feature>

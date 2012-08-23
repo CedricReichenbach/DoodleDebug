@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description name="DoodleDebug">
+      Visualize objects directly with calls from code.
+   </description>
+   <feature url="features/DDFeatureProject_1.0.0.201208231352.jar" id="DDFeatureProject" version="1.0.0.201208231352" os="" ws="" nl="" arch="">
+      <category name="DoodleDebug update site"/>
+   </feature>
+   <category-def name="DoodleDebug update site" label="DoodleDebug">
+      <description>
+         Graphical visualization of Java objects, directly called from code.
+Usage similar to System.out.println().
+      </description>
+   </category-def>
+</site>

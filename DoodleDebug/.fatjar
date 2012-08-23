@@ -1,10 +1,10 @@
 #Fat Jar Configuration File
-#Thu Aug 09 15:12:08 CEST 2012
+#Thu Aug 23 13:11:46 CEST 2012
 onejar.license.required=false
 manifest.classpath=
 manifest.removesigners=true
 onejar.checkbox=false
-jarname=C\:\\Users\\Cedric Reichenbach\\students-cedric-DoodleDebug\\temporal libraries (DD)\\DoodleDebug-Client_2012-08-09.jar
+jarname=C\:\\Users\\Cedric Reichenbach\\students-cedric-DoodleDebug\\temporal libraries (DD)\\DoodleDebug-Client_2012-08-23.jar
 manifest.mergeall=true
 manifest.mainclass=
 manifest.file=<createnew>
