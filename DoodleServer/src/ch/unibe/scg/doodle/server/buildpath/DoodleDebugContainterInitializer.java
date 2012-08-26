@@ -40,7 +40,7 @@ public class DoodleDebugContainterInitializer extends
 	}
 
 	private IPath getClientJarPath() {
-		return DoodleFiles.getFilePath("DoodleDebug-Client.jar");
+		return DoodleFiles.getFilePath("/DoodleDebug-Client.jar");
 	}
 
 }

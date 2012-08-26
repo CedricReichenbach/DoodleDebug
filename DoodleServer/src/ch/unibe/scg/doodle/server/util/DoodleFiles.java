@@ -14,6 +14,9 @@ import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Bundle;
 
 public class DoodleFiles {
+
+	public static final String PLUGIN_ID = "ch.unibe.scg.doodledebug";
+
 	public static IPath getFilePath(String file) {
 		URL fileURL = getResolvedFileURL(file);
 		String result = "";
@@ -22,7 +25,7 @@ public class DoodleFiles {
 	}
 
 	public static URL getResolvedFileURL(String file) {
-		Bundle bundle = Platform.getBundle("DoodleServer");
+		Bundle bundle = Platform.getBundle(PLUGIN_ID);
 		Path path = new Path(file);
 		URL fileURL = FileLocator.find(bundle, path, null);
 		try {

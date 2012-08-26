@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="DDFeatureProject"
-      label="DDFeatureProject"
+      id="DoodleDebug"
+      label="DoodleDebug"
       version="1.0.0.qualifier">
 
    <description url="http://scg.unibe.ch/">
@@ -34,13 +34,6 @@ from calls inside Java code.
    </requires>
 
    <plugin
-         id="DoodleServer"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="SimonPlugin"
          download-size="0"
          install-size="0"
@@ -57,5 +50,12 @@ from calls inside Java code.
          download-size="0"
          install-size="0"
          version="0.0.0"/>
+
+   <plugin
+         id="ch.unibe.scg.doodledebug"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
 </feature>

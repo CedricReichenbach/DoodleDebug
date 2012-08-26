@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: DoodleDebug
-Bundle-SymbolicName: DoodleServer;singleton:=true
+Bundle-SymbolicName: ch.unibe.scg.doodledebug;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: ch.unibe.scg.doodle.server.Activator
 Require-Bundle: org.eclipse.ui,

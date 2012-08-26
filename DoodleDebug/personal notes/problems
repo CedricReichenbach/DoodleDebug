@@ -13,5 +13,6 @@
 
 - @font-face does not really work -.-
 	-> try bundleresource: link inside eclipse (-> not working)
-	
+
 - image paths wrong when in jar: "C:\Program Files\eclipse EE indigo\file:\C:\Users\Cedric Reichenbach\.eclipse\org.eclipse.platform_3.7.0_1202875443\plugins\DoodleServer_1.0.0.201208231352.jar!\icons\doodledebug-icon.png"
+ + views cannot

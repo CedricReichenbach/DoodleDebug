@@ -23,7 +23,7 @@
 	<classpathentry kind="lib" path="libs/xstream-1.4.2/lib/xstream/xom-1.1.jar"/>
 	<classpathentry kind="lib" path="libs/xstream-1.4.2/lib/xstream/xpp3_min-1.1.4c.jar"/>
 	<classpathentry kind="lib" path="libs/xstream-1.4.2/lib/xstream-1.4.2.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/DoodleDebug"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/DoodleDebugClient"/>
 	<classpathentry kind="lib" path="libs/guice-3.0/aopalliance.jar"/>
 	<classpathentry kind="lib" path="libs/guice-3.0/guice-3.0.jar"/>
 	<classpathentry kind="lib" path="libs/guice-3.0/guice-assistedinject-3.0.jar"/>

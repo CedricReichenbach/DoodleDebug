@@ -3,10 +3,10 @@
    <description name="DoodleDebug">
       Visualize objects directly with calls from code.
    </description>
-   <feature url="features/DDFeatureProject_1.0.0.201208231352.jar" id="DDFeatureProject" version="1.0.0.201208231352" os="" ws="" nl="" arch="">
-      <category name="DoodleDebug update site"/>
+   <feature url="features/DoodleDebug_1.0.0.201208241858.jar" id="DoodleDebug" version="1.0.0.201208241858">
+      <category name="DoodleDebug category"/>
    </feature>
-   <category-def name="DoodleDebug update site" label="DoodleDebug">
+   <category-def name="DoodleDebug category" label="DoodleDebug">
       <description>
          Graphical visualization of Java objects, directly called from code.
 Usage similar to System.out.println().
