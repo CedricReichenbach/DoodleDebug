@@ -14,7 +14,7 @@
 <body>
 	<div id="wrapper">
 		<h1 id="mainTitle">DoodleDebug tutorial</h1>
-		<h3 id="title">Visualize an object</h3>
+		<h3 class="title">Visualize an object</h3>
 		DoodleDebug's usage works similar to
 		<code class="code">System.out.println()</code>
 		, just type
@@ -35,7 +35,12 @@
 			<code class="code">Doo.dle();</code>
 			for you.
 		</div>
-		<h3 id="title">Navigation</h3>
+		<div class="tip">
+			To visualize multiple objects beside each other on the same tile, use
+			multiple arguments (varargs):
+			<code class="code">Doo.dle(object1, object2, ...)</code>
+		</div>
+		<h3 class="title">Navigation</h3>
 		<div class="tip">
 			Use keys
 			<code class="key">j</code>
@@ -51,7 +56,7 @@
 		manner. To navigate back out, breadcrumbs are displayed at top of the
 		lightbox, or, if desired, the lightbox can be fully closed by clicking
 		in the dark background beside it.
-		<h3 id="title">Define rendering of an object type</h3>
+		<h3 class="title">Define rendering of an object type</h3>
 		Implement the interface
 		<code class="code">Doodleable</code>
 		, which contains the methods
@@ -75,6 +80,30 @@
 		<div class="example-wrapper">
 			<div class="example">
 				<a href="examples/contact-example.html">Contact</a>
+			</div>
+		</div>
+		<h3 class="title">Create custom RenderingPlugins</h3>
+		DoodleDebug comes with a plug-in structure for software developers to
+		define renderings for their frequently used data types without having
+		to modify the type's source code itself. A
+		<code class="code">RenderingPlugin</code>
+		basically contains following information:
+		<li>Types to render using this plugin</li>
+		<li>How to render those objects</li>
+		<li>CSS</li> The methods
+		<code class="code">render(Object, Tag)</code>
+		and
+		<code class="code">renderSmall(Object, Tag)</code>
+		from the interface
+		<code class="code">Rendering</code>
+		receive the object to be rendered and a HTML tag. The provided tag
+		object refers to <span style="color: red">[TODO: I FORGOT]</span>
+		<div class="tip">Inherit from AbstractPlugin to define your own
+			plugins.</div>
+		<div class="example-wrapper">
+			<div class="example">
+				<a href="examples/plugin-example.html">TelePlugin for Phone and
+					Fax types</a>
 			</div>
 		</div>
 		<div id="footer">

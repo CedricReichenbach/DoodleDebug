@@ -20,23 +20,23 @@
 			<br>
 			<div class="example-file">
 				<a href="javascript:switchExpand('example_main')">Main.java</a>
-				<pre id="example_main" style="display: none">
+				<pre id="example_main" style="display: none"><xmp>
 public class Main {
 	public static void main(String[] args) {
 		Address address = new Address("Dead End 23", 3012, "Bern");
 		Contact contact = new Contact("Endo Anaconda", address);
 		Doo.dle(contact);
 	}
-}</pre>
+}</xmp></pre>
 			</div>
 			<div class="example-file">
 				<a href="javascript:switchExpand('example_contact')">Contact.java</a>
-				<pre id="example_contact" style="display: none">
+				<pre id="example_contact" style="display: none"><xmp>
 public class Contact implements Doodleable {
 	private String name;
 	private Address address;
 	
-	public Contact(String name, Address address)
+	public Contact(String name, Address address) {
 		this.name = name;
 		this.address = address;
 	}
@@ -52,17 +52,17 @@ public class Contact implements Doodleable {
 	public void drawSmallOn(DoodleCanvas c) {
 		c.draw(name);
 	}
-}</pre>
+}</xmp></pre>
 			</div>
 			<div class="example-file">
 				<a href="javascript:switchExpand('example_address')">Address.java</a>
-				<pre id="example_address" style="display: none">
+				<pre id="example_address" style="display: none"><xmp>
 public class Address implements Doodleable {
 	private String street;
 	private int postalCode;
 	private String city;
 	
-	public Contact(String street, int postalCode, String city)
+	public Address(String street, int postalCode, String city) {
 		this.street = street;
 		this.postalCode = postalCode;
 		this.city = city;
@@ -80,7 +80,12 @@ public class Address implements Doodleable {
 	public void drawSmallOn(DoodleCanvas c) {
 		c.draw(city);
 	}
-}</pre>
+}</xmp></pre>
+			</div>
+		</div>
+		<div class="download-wrapper">
+			<div class="download">
+				<a href="archived/Contact-Doodleable-example.zip">Example as archive (.zip)</a>
 			</div>
 		</div>
 		<div id="footer">

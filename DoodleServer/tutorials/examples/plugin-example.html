@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=100">
+<title>DoodleDebug Tutorial</title>
+<link rel="stylesheet" type="text/css" href="../css/tutorial.css">
+<script type="text/javascript" src="../js/tutorial.js"></script>
+</head>
+<!-- Just for copy&paste:
+<code class="code"></code>
+<code class="key"></code>
+<div class="tip"></div>
+ -->
+<body>
+	<div id="wrapper">
+		<h1 id="mainTitle">Example: Contact</h1>
+		<div id="examples">
+			<i>(Click to expand)</i> <br>
+			<div class="example-file">
+				<a href="javascript:switchExpand('example_main')">Main.java</a>
+				<pre id="example_main" style="display: none">
+					<xmp>
+public class Main {
+	public static void main(String[] args) {
+		Phone phone = new Phone(41, "331234567");
+		Fax fax = new Fax("034 456 78 90");
+		Doo.dle(phone);
+		Doo.dle(fax);
+
+		Set<RenderingPlugin> set = new HashSet<RenderingPlugin>();
+		set.add(new TelePlugin());
+		DoodleDebug.addRenderingPlugins(set);
+
+		Doo.dle(phone);
+		Doo.dle(fax);
+	}
+
+}</xmp>
+				</pre>
+			</div>
+			<div class="example-file">
+				<a href="javascript:switchExpand('example_teleplugin')">TelePlugin.java</a>
+				<pre id="example_teleplugin" style="display: none">
+					<xmp>
+public class TelePlugin extends AbstractPlugin {
+
+	private PhoneRendering phoneRendering;
+	private FaxRendering faxRendering;
+
+	public TelePlugin() {
+		this.phoneRendering = new PhoneRendering();
+		this.faxRendering = new FaxRendering();
+	}
+
+	@Override
+	public Set<Class<?>> getDrawableClasses() {
+		Set<Class<?>> set = new HashSet<Class<?>>();
+		set.add(Phone.class);
+		set.add(Fax.class);
+		return set;
+	}
+
+	@Override
+	public void render(Object object, Tag tag) throws DoodleRenderException {
+		if (object instanceof Phone) {
+			phoneRendering.render((Phone) object, tag);
+		} else if (object instanceof Fax) {
+			faxRendering.render((Fax) object, tag);
+		}
+	}
+
+	@Override
+	public void renderSmall(Object object, Tag tag)
+			throws DoodleRenderException {
+		if (object instanceof Phone) {
+			new PhoneRendering().renderSmall((Phone) object, tag);
+		} else if (object instanceof Fax) {
+			new FaxRendering().renderSmall((Fax) object, tag);
+		}
+	}
+
+	// Optional. Standard implementation returns an empty string (= no css).
+	@Override
+	public String getCSS() {
+		return ".TelePlugin .fax-number {background-color: #fdb} "
+				+ ".TelePlugin .phone-number {background-color: #cfd}";
+	}
+
+}
+				</xmp>
+				</pre>
+			</div>
+			<div class="example-file">
+				<a href="javascript:switchExpand('example_phonerendering')">PhoneRendering.java</a>
+				<pre id="example_phonerendering" style="display: none">
+					<xmp>
+public class PhoneRendering implements Rendering<Phone> {
+
+	@Override
+	public void render(Phone phone, Tag tag) throws DoodleRenderException {
+		tag.add("A Phone: ");
+		Tag number = new Tag("span", "class=phone-number");
+		number.add("++" + phone.getPre());
+		number.add(phone.getNumber());
+		tag.add(number);
+	}
+
+	@Override
+	public void renderSmall(Phone phone, Tag tag) throws DoodleRenderException {
+		tag.add(phone.getPre() + phone.getNumber());
+	}
+
+}</xmp>
+				</pre>
+			</div>
+			<div class="example-file">
+				<a href="javascript:switchExpand('example_faxrendering')">FaxRendering.java</a>
+				<pre id="example_faxrendering" style="display: none">
+					<xmp>
+public class FaxRendering implements Rendering<Fax> {
+
+	@Override
+	public void render(Fax fax, Tag tag) throws DoodleRenderException {
+		tag.add("A Fax: ");
+		Tag number = new Tag("span", "class=fax-number");
+		number.add(fax.getNumber());
+		tag.add(number);
+	}
+
+	@Override
+	public void renderSmall(Fax fax, Tag tag) throws DoodleRenderException {
+		tag.add(fax.getNumber());
+	}
+
+}</xmp>
+				</pre>
+			</div>
+			<div class="example-file">
+				<a href="javascript:switchExpand('example_phone')">Phone.java</a>
+				<pre id="example_phone" style="display: none">
+					<xmp>
+public class Phone {
+
+	private int pre;
+	private String number;
+
+	public Phone(int pre, String number) {
+		this.pre = pre;
+		this.number = number;
+	}
+
+	public int getPre() {
+		return pre;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+}</xmp>
+				</pre>
+			</div>
+			<div class="example-file">
+				<a href="javascript:switchExpand('example_fax')">Fax.java</a>
+				<pre id="example_fax" style="display: none">
+					<xmp>
+public class Fax {
+
+	private String number;
+
+	public Fax(String number) {
+		this.number = number;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+}</xmp>
+				</pre>
+			</div>
+		</div>
+		<div class="download-wrapper">
+			<div class="download">
+				<a href="archived/TelePlugin-example.zip">Example as archive (.zip)</a>
+			</div>
+		</div>
+		<div id="footer">
+			Cedric Reichenbach, <a href="http://scg.unibe.ch/" target="_blank">Software
+				Composition Group, University of Berne</a>
+		</div>
+	</div>
+</body>
+</html>

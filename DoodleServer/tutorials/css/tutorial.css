@@ -52,7 +52,7 @@ body {
 	color: #444;
 	text-shadow: 1px 1px 0 rgba(0, 200, 0, 0.5);
 }
-#title {
+.title {
 	margin-top: 2em;
 	color: green;
 }
@@ -68,7 +68,7 @@ body {
 	padding: 1px 2px;
 	display: inline-block;
 }
-.codeBlock, .tip, .example {
+.codeBlock, .tip, .example, .download {
 	padding: .5em;
 	margin: .5em 0;
 	max-width: 600px;
@@ -81,7 +81,7 @@ body {
 	padding: 1px;
 	box-shadow: 0 1px;
 }
-.tip, .example {
+.tip, .example, .download {
 	border-radius: 4px;
 	border: 1px solid;
 }
@@ -104,6 +104,9 @@ body {
 .example:before {
 	content: "Example: ";
 	font-weight: bold;
+}
+li {
+	margin-left: 1em;
 }
 #footer {
 	padding-top: 2em;
@@ -128,11 +131,22 @@ body {
 #examples {
 	overflow: hidden;
 }
-
 .example-file {
 	background-color: #eef7ff;
 	padding: .5em;
 	float: left;
 	margin: 1em;
 	border: 1px dashed #8af;
+}
+.download-wrapper {
+	overflow: hidden;
+}
+.download:before {
+	content: "Download: ";
+	font-weight: bold;
+}
+.download {
+	background-color: #ecf;
+	border-color: #daf;
+	float: left;
 }
