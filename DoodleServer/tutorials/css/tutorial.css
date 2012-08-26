@@ -79,6 +79,7 @@ body {
 	border-radius: 3px;
 	border: 1px solid;
 	padding: 1px;
+	box-shadow: 0 1px;
 }
 .tip, .example {
 	border-radius: 4px;

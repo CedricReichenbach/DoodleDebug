@@ -1,4 +1,4 @@
-package ch.unibe.scg.doodle.plugins.html;
+package ch.unibe.scg.doodle.htmlgen;
 
 public class Attribute {
 

@@ -168,6 +168,7 @@ public class RealScratch implements Scratch {
 	@SuppressWarnings("unchecked")
 	protected void renderUsingPlugin(Tag tag, RenderingPlugin plugin)
 			throws DoodleRenderException {
+//		plugin.getClass().getMethod("render", Object.class, Tag.class).invoke(null, null);
 		plugin.render(object, tag);
 	}
 

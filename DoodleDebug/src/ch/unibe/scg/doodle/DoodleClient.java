@@ -1,6 +1,8 @@
 package ch.unibe.scg.doodle;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Set;
 
 import com.google.inject.Module;
 
@@ -48,7 +50,7 @@ class DoodleClient {
 		simonClient.firstRun();
 	}
 
-	public void addModules(RenderingPlugin... plugins) {
-		simonClient.addModules(plugins);
+	public void addPlugins(Collection<RenderingPlugin> plugins) {
+		simonClient.addPlugins(plugins);
 	}
 }

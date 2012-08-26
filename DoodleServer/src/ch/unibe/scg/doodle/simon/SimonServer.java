@@ -89,7 +89,7 @@ public class SimonServer implements SimonServerInterface {
 	}
 
 	@Override
-	public void addModules(String pluginsAsXML) {
+	public void addPlugins(String pluginsAsXML) {
 		Collection<RenderingPlugin> plugins = (Collection<RenderingPlugin>) xstream
 				.fromXML(pluginsAsXML);
 		RenderingRegistry.addPlugins(plugins);

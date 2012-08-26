@@ -1,10 +1,10 @@
 package ch.unibe.scg.doodle;
 
+import java.util.Collection;
+import java.util.Set;
+
 import ch.unibe.scg.doodle.plugins.AbstractPlugin;
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
-
-import com.google.inject.AbstractModule;
-import com.google.inject.Module;
 
 /**
  * This Class contains methods for controlling the output of DoodleDebug. It's
@@ -25,8 +25,8 @@ public class DoodleDebug {
 	 * 
 	 * @param plugins
 	 */
-	public static void addRenderingPlugins(RenderingPlugin... plugins) {
-		DoodleClient.instance().addModules(plugins);
+	public static void addRenderingPlugins(Collection<RenderingPlugin> plugins) {
+		DoodleClient.instance().addPlugins(plugins);
 	}
 
 	/**

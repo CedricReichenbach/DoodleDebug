@@ -107,14 +107,14 @@ public class RenderingRegistry {
 	}
 
 	public static void addPlugins(Collection<RenderingPlugin> plugins) {
-		if (instance == null) {
-			if (userPlugins == null)
-				userPlugins = plugins;
-			else
-				userPlugins.addAll(plugins);
-			return;
-		}
+		if (userPlugins == null)
+			userPlugins = plugins;
+		else
+			userPlugins.addAll(plugins);
 
-		instance.map.putAll(RenderingRegistryProvider.mapFromPlugins(plugins));
+		if (instance != null) { // when call in the middle of a run
+			instance.map.putAll(RenderingRegistryProvider
+					.mapFromPlugins(plugins));
+		}
 	}
 }

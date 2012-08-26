@@ -1,6 +1,6 @@
-package ch.unibe.scg.doodle.plugins;
+package ch.unibe.scg.doodle.rendering;
 
-import ch.unibe.scg.doodle.plugins.html.Tag;
+import ch.unibe.scg.doodle.htmlgen.Tag;
 
 
 /**
