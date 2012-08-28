@@ -45,8 +45,9 @@ hr {
     width: 100%;
 }
 .rendering {
-    float: left;
+    /*float: left;*/
     padding: 2px;
+	overflow: hidden;
 }
 table .rendering {
 	float: none;

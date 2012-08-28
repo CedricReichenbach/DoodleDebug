@@ -13,10 +13,10 @@ import ch.unibe.scg.doodle.server.util.DoodleFiles;
 
 public class DoodleDebugContainterInitializer extends
 		ClasspathContainerInitializer {
-	
+
 	public static final String DD_CONTAINER_ID = "ch.unibe.scg.doodle.buildpath.DD_CONTAINER";
 
-//	private static final IPath DD_PATH = new Path(DD_CONTAINER_ID);
+	// private static final IPath DD_PATH = new Path(DD_CONTAINER_ID);
 
 	public DoodleDebugContainterInitializer() {
 	}
@@ -33,8 +33,9 @@ public class DoodleDebugContainterInitializer extends
 	private DoodleDebugContainer getNewContainer(IPath containerPath) {
 		final IPath path = getClientJarPath();
 		final IPath srcPath = null;
-		IClasspathEntry entry = JavaCore.newLibraryEntry(path, srcPath, new Path("/"));
-		//IClasspathEntry entry = JavaCore.newContainerEntry(DD_PATH);
+		IClasspathEntry entry = JavaCore.newLibraryEntry(path, srcPath,
+				new Path("/"));
+		// IClasspathEntry entry = JavaCore.newContainerEntry(DD_PATH);
 		return new DoodleDebugContainer(containerPath,
 				new IClasspathEntry[] { entry });
 	}

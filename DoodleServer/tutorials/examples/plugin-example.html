@@ -123,8 +123,8 @@ public class FaxRendering implements Rendering<Fax> {
 	@Override
 	public void render(Fax fax, Tag tag) throws DoodleRenderException {
 		tag.add("A Fax: ");
-		Tag number = new Tag("span", "class=fax-number");
-		number.add(fax.getNumber());
+		Tag number = new Tag("div", "class=fax-number");
+		DoodleRenderer.renderInto(fax.getNumber(), number, false);
 		tag.add(number);
 	}
 

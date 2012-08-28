@@ -8,6 +8,7 @@
 </head>
 <!-- Just for copy&paste:
 <code class="code"></code>
+<pre class="codeBlock"></pre>
 <code class="key"></code>
 <div class="tip"></div>
  -->
@@ -90,16 +91,30 @@
 		basically contains following information:
 		<li>Types to render using this plugin</li>
 		<li>How to render those objects</li>
-		<li>CSS</li> The methods
+		<li>CSS</li>
+		<div class="tip">Inherit from AbstractPlugin to define your own
+			plugins.</div>
+		The methods
 		<code class="code">render(Object, Tag)</code>
 		and
 		<code class="code">renderSmall(Object, Tag)</code>
 		from the interface
 		<code class="code">Rendering</code>
 		receive the object to be rendered and a HTML tag. The provided tag
-		object refers to <span style="color: red">[TODO: I FORGOT]</span>
-		<div class="tip">Inherit from AbstractPlugin to define your own
-			plugins.</div>
+		object refers to <span style="color: red">[TODO: I FORGOT]</span>, a
+		simple hierarchical organized HTML framework, slightly modified for
+		some more convenience. Users can generate HTML code and put it into
+		this provided tag, the generated HTML code will directly be used by
+		DoodleDebug, without an more modification.<br>
+		<h4 class="subtitle">Dynamical sub-rendering and clickable
+			objects</h4>
+		In order to dynamically render other objects into user-made
+		renderings, the class
+		<code class="code">DoodleRenderer</code>
+		provides a static method
+		<pre class="codeBlock">DoodleRenderer.renderInto(Object o, Tag tag, boolean showClassName)</pre>
+		which automatically renders the desired object into the given tag and
+		makes it clickable/inspectable in the rendering output.
 		<div class="example-wrapper">
 			<div class="example">
 				<a href="examples/plugin-example.html">TelePlugin for Phone and

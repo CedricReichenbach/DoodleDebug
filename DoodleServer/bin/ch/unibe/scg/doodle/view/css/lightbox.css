@@ -96,6 +96,7 @@
 #lightboxRendering {
 	background-color: #eee;
 	padding: 4px;
+	float: left;
 }
 #lightboxRendering > .ClassName {
 	margin: 0;

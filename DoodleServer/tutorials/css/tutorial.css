@@ -56,6 +56,10 @@ body {
 	margin-top: 2em;
 	color: green;
 }
+.subtitle {
+	margin-bottom: 0.5em;
+	font-style: italic;
+}
 .code,
 .codeBlock,
 .key {
@@ -72,6 +76,7 @@ body {
 	padding: .5em;
 	margin: .5em 0;
 	max-width: 600px;
+	overflow: auto;
 }
 .key {
 	color: #f60;
