@@ -3,3 +3,5 @@ output.html
 *.aux
 *.synctex.gz
 *.out
+DDUpdateSite/features/*
+DDUpdateSite/plugins/*
