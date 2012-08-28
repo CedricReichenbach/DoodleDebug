@@ -19,9 +19,8 @@ public class DoodleFiles {
 
 	public static IPath getFilePath(String file) {
 		URL fileURL = getResolvedFileURL(file);
-		String result = "";
-		result = fileURL.getPath();
-		return Path.fromOSString(result);
+		String result = fileURL.getPath();
+		return Path.fromPortableString(result);
 	}
 
 	public static URL getResolvedFileURL(String file) {
