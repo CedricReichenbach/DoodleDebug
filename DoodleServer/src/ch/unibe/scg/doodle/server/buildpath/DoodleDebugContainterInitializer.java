@@ -42,11 +42,9 @@ public class DoodleDebugContainterInitializer extends
 
 	private IPath getClientJarPath() {
 		IPath path = DoodleFiles.getFilePath("/DoodleDebug-Client.jar");
-		if (path.getDevice().contains("file:")) {// happens with update site
-			return new Path(
-					"C:\\Users\\Cedric Reichenbach\\.eclipse\\org.eclipse.platform_3.7.0_740800064\\plugins\\ch.unibe.scg.doodledebug_1.0.0.201208290028.jar!\\DoodleDebug-Client.jar");
-			// path.setDevice(null);
-		}
+//		if (path.getDevice().contains("file:")) {// happens with update site
+//			 path.setDevice(null);
+//		}
 		return path;
 	}
 }

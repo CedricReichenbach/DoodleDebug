@@ -20,4 +20,9 @@ public class DoodleImages {
 		return DoodleFiles.getFilePath("/img/dd-tex.png").toFile().toURI()
 				.toString();
 	}
+
+	public static ImageDescriptor getTutorialIcon() {
+		return ImageDescriptor.createFromURL(DoodleFiles
+				.getResolvedFileURL("/icons/tutorial-icon.png"));
+	}
 }

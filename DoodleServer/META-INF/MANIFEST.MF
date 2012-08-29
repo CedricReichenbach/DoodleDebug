@@ -4,6 +4,7 @@ Bundle-Name: DoodleDebug
 Bundle-SymbolicName: ch.unibe.scg.doodledebug;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: ch.unibe.scg.doodle.server.Activator
+Eclipse-BundleShape: dir
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  SimonPlugin;bundle-version="1.0.0",

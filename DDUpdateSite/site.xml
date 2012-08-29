@@ -3,7 +3,7 @@
    <description name="DoodleDebug">
       Visualize objects directly with calls from code.
    </description>
-   <feature url="features/DoodleDebug_1.0.0.201208290030.jar" id="DoodleDebug" version="1.0.0.201208290030">
+   <feature url="features/DoodleDebug_1.0.0.201208291238.jar" id="DoodleDebug" version="1.0.0.201208291238">
       <category name="DoodleDebug category"/>
    </feature>
    <category-def name="DoodleDebug category" label="DoodleDebug">
