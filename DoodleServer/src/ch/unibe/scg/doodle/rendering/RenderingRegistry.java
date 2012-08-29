@@ -98,10 +98,16 @@ public class RenderingRegistry {
 			for (Class<?> curType : level) {
 				RenderingPlugin plugin = map.get(curType);
 				if (plugin != null) {
-					return plugin;
+					// there could still be super interfaces
+					if (!curType.equals(Object.class)) {
+						return plugin;
+					}
 				}
 			}
 		}
+		RenderingPlugin plugin = map.get(Object.class);
+		if (plugin != null)
+			return plugin;
 		throw new AssertionError();
 
 	}

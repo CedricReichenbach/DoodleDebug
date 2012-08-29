@@ -1,7 +1,11 @@
 package ch.unibe.scg.doodle.plugins;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Map;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -25,37 +29,57 @@ public class CollectionPlugin extends AbstractPlugin {
 	@Inject
 	CollectionRendering collectionRendering;
 
+	private static Map<Integer, Collection<?>> iteratorListMap = new HashMap<Integer, Collection<?>>();
+
 	@Override
 	public Set<Class<?>> getDrawableClasses() {
 		HashSet<Class<?>> hs = new HashSet<Class<?>>();
 		hs.add(Collection.class);
+		hs.add(Iterator.class);
 		return hs;
 	}
 
 	@Override
 	public void render(Object collection, Tag tag) throws DoodleRenderException {
+		if (collection instanceof Iterator) {
+			collection = toCollection((Iterator<?>) collection);
+		}
+
 		if (twoDimCollection((Collection<?>) collection)) {
 			tablePluginProvider.get().render(collection, tag);
 			return;
 		}
+
 		collectionRendering.render((Collection<?>) collection, tag);
 	}
 
 	@Override
 	public void renderSmall(Object collection, Tag tag)
 			throws DoodleRenderException {
+		if (collection instanceof Iterator) {
+			collection = toCollection((Iterator<?>) collection);
+		}
+
 		if (twoDimCollection((Collection<?>) collection)) {
 			tablePluginProvider.get().renderSmall(collection, tag);
 			return;
 		}
+
 		collectionRendering.renderSmall((Collection<?>) collection, tag);
 	}
 
 	@Override
 	public String getObjectTypeName(Object collection) {
+		Iterator<?> iterator = null;
+		if (collection instanceof Iterator) {
+			iterator = (Iterator<?>) collection;
+			collection = toCollection((Iterator<?>) collection);
+		}
+
 		if (checkIfElementsSameType((Collection<?>) collection)
 				&& !((Collection<?>) collection).isEmpty())
-			return super.getObjectTypeName(collection)
+			return super.getObjectTypeName(iterator != null ? iterator
+					: collection)
 					+ " of "
 					+ ((Collection<?>) collection).iterator().next().getClass()
 							.getSimpleName();
@@ -71,6 +95,24 @@ public class CollectionPlugin extends AbstractPlugin {
 				+ "{height: 2px; width: 2px; margin-top: 4px; margin-right: 0;}";
 		return element + smallElement + dot
 				+ tablePluginProvider.get().getCSS();
+	}
+
+	private Collection<?> toCollection(Iterator<?> iterator) {
+		// XXX: nasty, but no other solution available in my head
+		if (iteratorListMap.containsKey(System.identityHashCode(iterator))) {
+			return iteratorListMap.get(System.identityHashCode(iterator));
+		}
+
+		Collection<Object> list = new LinkedList<Object>();
+		while (iterator.hasNext()) {
+			System.out.println(System.identityHashCode(iterator));
+			list.add(iterator.next());
+		}
+
+		// store iterator list
+		iteratorListMap.put(System.identityHashCode(iterator), list);
+
+		return list;
 	}
 
 	private boolean twoDimCollection(Collection<?> collection) {
