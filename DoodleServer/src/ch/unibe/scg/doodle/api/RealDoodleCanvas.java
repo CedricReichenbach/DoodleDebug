@@ -13,7 +13,10 @@ public class RealDoodleCanvas implements DoodleCanvas {
 	 */
 	private List<List<List<Object>>> columns;
 
-	// TODO: make this constructor invisible for user
+	/**
+	 * Creates a new DoodleCanvas object.<br>
+	 * <b>Not intended to be used by clients.</b>
+	 */
 	public RealDoodleCanvas() {
 		List<Object> line = new ArrayList<Object>();
 		List<List<Object>> column = new ArrayList<List<Object>>();

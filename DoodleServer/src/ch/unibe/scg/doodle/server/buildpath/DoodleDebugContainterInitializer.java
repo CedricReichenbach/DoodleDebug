@@ -2,7 +2,6 @@ package ch.unibe.scg.doodle.server.buildpath;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.ClasspathContainerInitializer;
 import org.eclipse.jdt.core.IClasspathContainer;
 import org.eclipse.jdt.core.IClasspathEntry;
@@ -32,9 +31,10 @@ public class DoodleDebugContainterInitializer extends
 
 	private DoodleDebugContainer getNewContainer(IPath containerPath) {
 		final IPath path = getClientJarPath();
-		final IPath srcPath = null;
-		IClasspathEntry entry = JavaCore.newLibraryEntry(path, srcPath,
-				new Path("/"));
+		final IPath srcPath = path;
+		final IPath srcRoot = null;
+		IClasspathEntry entry = JavaCore
+				.newLibraryEntry(path, srcPath, srcRoot);
 		// IClasspathEntry entry = JavaCore.newContainerEntry(DD_PATH);
 		return new DoodleDebugContainer(containerPath,
 				new IClasspathEntry[] { entry });
@@ -42,9 +42,6 @@ public class DoodleDebugContainterInitializer extends
 
 	private IPath getClientJarPath() {
 		IPath path = DoodleFiles.getFilePath("/DoodleDebug-Client.jar");
-//		if (path.getDevice().contains("file:")) {// happens with update site
-//			 path.setDevice(null);
-//		}
 		return path;
 	}
 }

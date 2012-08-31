@@ -25,4 +25,9 @@ public class DoodleImages {
 		return ImageDescriptor.createFromURL(DoodleFiles
 				.getResolvedFileURL("/icons/tutorial-icon.png"));
 	}
+
+	public static ImageDescriptor getTutorialIconDisabled() {
+		return ImageDescriptor.createFromURL(DoodleFiles
+				.getResolvedFileURL("/icons/tutorial-icon_disabled.png"));
+	}
 }

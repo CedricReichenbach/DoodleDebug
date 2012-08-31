@@ -12,6 +12,7 @@ public class TutorialButtonAction extends Action {
 	public TutorialButtonAction() {
 		super("DoodleDebug Tutorial");
 		this.setImageDescriptor(DoodleImages.getTutorialIcon());
+		this.setDisabledImageDescriptor(DoodleImages.getTutorialIconDisabled());
 	}
 
 	@Override

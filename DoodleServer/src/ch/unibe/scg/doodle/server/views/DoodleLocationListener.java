@@ -11,6 +11,14 @@ import org.eclipse.swt.browser.LocationListener;
 import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 import ch.unibe.scg.doodle.server.DoodleServer;
 
+/**
+ * Listener for browser which DoodleDebug renders into. Listens to location
+ * changes (link calls for instance) and checks if it contains a message for the
+ * DoodleDebug server instance.
+ * 
+ * @author Cedric Reichenbach
+ * 
+ */
 public class DoodleLocationListener implements LocationListener {
 
 	@Override
@@ -49,20 +57,19 @@ public class DoodleLocationListener implements LocationListener {
 
 	private void handleJavaFileLocationEvent(LocationEvent event) {
 		DoodleServer doodleServer = DoodleServer.instance();
-		
+
 		String[] parts = event.location.split(":");
 		String className = parts[parts.length - 2];
 		int lineNumber = Integer.parseInt(parts[parts.length - 1]);
 
 		event.doit = false;
-		
+
 		doodleServer.openJavaFile(className, lineNumber);
 	}
 
 	@Override
 	public void changed(LocationEvent event) {
-		// TODO Auto-generated method stub
-
+		// nothing to do here
 	}
 
 }

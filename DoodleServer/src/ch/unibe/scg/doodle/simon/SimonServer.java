@@ -68,8 +68,7 @@ public class SimonServer implements SimonServerInterface {
 	@Override
 	public void renderObjects(String objectAsXML, String objectArrayAsXML) {
 		Object o = xstream.fromXML(objectAsXML);
-		Object[] os = (Object[]) xstream.fromXML(objectArrayAsXML); // XXX Check
-																	// this!
+		Object[] os = (Object[]) xstream.fromXML(objectArrayAsXML);
 		DMockup.raw(o, os);
 	}
 

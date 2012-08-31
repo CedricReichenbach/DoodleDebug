@@ -48,7 +48,6 @@ public class DoodleDebugView extends ViewPart {
 	private void addTutorialButton() {
 		IActionBars actionBars = getViewSite().getActionBars();
 		IToolBarManager toolBar = actionBars.getToolBarManager();
-		IMenuManager viewMenu = actionBars.getMenuManager();
 
 		Action action = new TutorialButtonAction();
 		toolBar.add(action);
