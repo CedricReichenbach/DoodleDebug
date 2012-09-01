@@ -5,6 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=100">
 <title>DoodleDebug Tutorial</title>
 <link rel="stylesheet" type="text/css" href="css/tutorial.css">
+<script type="text/javascript" src="js/tutorial.js"></script>
 </head>
 <!-- Just for copy&paste:
 <code class="code"></code>
@@ -57,7 +58,29 @@
 		manner. To navigate back out, breadcrumbs are displayed at top of the
 		lightbox, or, if desired, the lightbox can be fully closed by clicking
 		in the dark background beside it.
-		<h3 class="title">Define rendering of an object type</h3>
+		<h3 class="title">Custom renderings</h3>
+		DoodleDebug provides two ways to define custom renderings:
+		<ul>
+			<li>Implementing the <code class="code">Doodleable</code>
+				interface <a href="#doodleable">&#x2693;</a>
+			</li>
+			<li>Providing a <code class="code">RenderingPlugin</code> <a
+				href="#renderingplugin">&#x2693;</a>
+			</li>
+		</ul>
+		Doodleables are easy and fast to implement, but provide only a simple
+		API, whereas RenderingPlugins leave room for any rendering an
+		individual developer desires, still preserving the modularity of
+		DoodleDebug.<br>
+		<div class="image">
+			<a href="javascript:switchExpand('rendering-pipeline')">DoodleDebug
+				rendering pipeline</a> <span class="smallNote">(click to
+				show/hide)</span><br> <a href="img/rendering-pipeline.png"><img
+				id="rendering-pipeline" src="img/rendering-pipeline.png"
+				style="display: none" /></a>
+		</div>
+		<h3 id="doodleable" class="title">Define rendering of an object
+			type directly in its class (Doodleables)</h3>
 		Implement the interface
 		<code class="code">Doodleable</code>
 		, which contains the methods
@@ -83,15 +106,18 @@
 				<a href="examples/contact-example.html">Contact</a>
 			</div>
 		</div>
-		<h3 class="title">Create custom RenderingPlugins</h3>
+		<h3 id="renderingplugin" class="title">Create custom
+			RenderingPlugins</h3>
 		DoodleDebug comes with a plug-in structure for software developers to
 		define renderings for their frequently used data types without having
 		to modify the type's source code itself. A
 		<code class="code">RenderingPlugin</code>
 		basically contains following information:
-		<li>Types to render using this plugin</li>
-		<li>How to render those objects</li>
-		<li>CSS</li>
+		<ul>
+			<li>Types to render using this plugin</li>
+			<li>How to render those objects</li>
+			<li>CSS</li>
+		</ul>
 		<div class="tip">Inherit from AbstractPlugin to define your own
 			plugins.</div>
 		The methods
