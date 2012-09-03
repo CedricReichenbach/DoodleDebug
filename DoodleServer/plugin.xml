@@ -102,5 +102,31 @@
          </pattern>
       </template>
    </extension>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            description="DoodleDebug Actions"
+            id="ch.unibe.scg.doodle.actionSet"
+            label="DoodleDebug Action Set"
+            visible="true">
+         <action
+               class="ch.unibe.scg.doodle.server.views.actions.TutorialButtonAction"
+               disabledIcon="icons/tutorial-icon_disabled.png"
+               icon="icons/tutorial-icon.png"
+               id="ch.unibe.scg.doodle.views.actions.TutorialButtonAction"
+               label="DoodleDebug Tutorial"
+               toolbarPath="DoodleDebug"
+               tooltip="Open DoodleDebug Tutorial">
+         </action>
+         <action
+               class="ch.unibe.scg.doodle.server.views.actions.ViewButtonAction"
+               icon="icons/doodledebug-icon.png"
+               id="ch.unibe.scg.doodle.views.actions.ViewButtonAction"
+               label="DoodleDebug View"
+               toolbarPath="DoodleDebug"
+               tooltip="Show DoodleDebug output view">
+         </action>
+      </actionSet>
+   </extension>
 
 </plugin>

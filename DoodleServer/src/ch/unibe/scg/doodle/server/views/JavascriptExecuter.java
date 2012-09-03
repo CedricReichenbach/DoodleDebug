@@ -2,6 +2,8 @@ package ch.unibe.scg.doodle.server.views;
 
 import org.eclipse.ui.IViewPart;
 
+import ch.unibe.scg.doodle.util.PluginUtil;
+
 public class JavascriptExecuter extends HtmlShow {
 
 	private String script;
@@ -13,7 +15,7 @@ public class JavascriptExecuter extends HtmlShow {
 
 	@Override
 	public void run() {
-		IViewPart view = findView();
+		IViewPart view = PluginUtil.findDoodleDebugView();
 		assert (view != null);
 		((DoodleDebugView) view).runJavascript(script);
 	}
