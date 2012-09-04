@@ -17,3 +17,21 @@ Broken serialization
 	- Test fail: assertEquals(before, after)
 	Task:
 	- Find out what's wrongly (de-)serialized
+
+Image matrix
+	Given:
+	- Some image, represented as X*Y*3 array (of int)
+	- Algorithm for seam carving, which is under construction and only marks a possible seam
+	by putting its pixel's values to black (0 0 0)
+	Problem:
+	- Graphical output is not yet implemented, but developers need some "feedback" while developing the algorithm
+	Taks:
+	- What does the algorithm compute, does it make any sense?
+
+Matrix diagonalization
+	Given:
+	- Algorithm to diagonalize matrices in order to compute their eigenvalues
+	Problem:
+	- The algorithm does not halt
+	Task:
+	- Watch the process of diagonalization and see when it should halt
