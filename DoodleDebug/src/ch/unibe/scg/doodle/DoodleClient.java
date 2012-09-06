@@ -1,16 +1,9 @@
 package ch.unibe.scg.doodle;
 
-import java.io.IOException;
 import java.util.Collection;
-import java.util.Set;
-
-import com.google.inject.Module;
 
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
 import ch.unibe.scg.doodle.simon.SimonClient;
-import de.root1.simon.exceptions.EstablishConnectionFailed;
-import de.root1.simon.exceptions.LookupFailedException;
-import de.root1.simon.exceptions.NameBindingException;
 
 class DoodleClient {
 	private SimonClient simonClient;
@@ -28,8 +21,9 @@ class DoodleClient {
 	protected DoodleClient() {
 		try {
 			this.simonClient = new SimonClient();
-		} catch (LookupFailedException | EstablishConnectionFailed
-				| IOException | NameBindingException e) {
+			// } catch (LookupFailedException | EstablishConnectionFailed
+			// | IOException | NameBindingException e) { // TODO when going to JRE 1.7: Multicatch
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}

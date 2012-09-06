@@ -1,3 +1,9 @@
-- Keyboard navigation, e.g.: 'j' for next object rendering (".printOut")
 
-- use statically imported method (i.e. "doodle()") instead of Doo.dle()
+
+~~~ probably for master thesis ~~~
+
+- Search
+
+- Groovy-like command line for rendered object (see eclipse's "inspect" in debugger)
+
+- Inspector on rendered objects (like a debugger)
