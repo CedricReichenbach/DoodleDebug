@@ -35,3 +35,7 @@ Matrix diagonalization
 	- The algorithm does not halt
 	Task:
 	- Watch the process of diagonalization and see when it should halt
+
+Number table (point alignment)
+	Given:
+	
