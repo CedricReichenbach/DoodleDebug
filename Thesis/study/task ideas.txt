@@ -1,4 +1,4 @@
-Broken sorting algorithm
+A) Broken sorting algorithm
 	Given:
 	- Unsorted List/Array of Colors (maybe just grayscale), they should be sorted by brightness.
 	- Algorithm to sort by brightness, e.g. some kind of insertion sort.
@@ -9,7 +9,7 @@ Broken sorting algorithm
 	Task:
 	- Find the problem and eliminate it.
 
-Broken serialization
+B) Broken serialization
 	Given:
 	- Some realistic user-made data type, e.g. Contact.java
 	- Serializing/desiralizing util as black box
@@ -18,24 +18,29 @@ Broken serialization
 	Task:
 	- Find out what's wrongly (de-)serialized
 
-Image matrix
+C) Image matrix
 	Given:
 	- Some image, represented as X*Y*3 array (of int)
 	- Algorithm for seam carving, which is under construction and only marks a possible seam
 	by putting its pixel's values to black (0 0 0)
 	Problem:
 	- Graphical output is not yet implemented, but developers need some "feedback" while developing the algorithm
-	Taks:
+	Task:
 	- What does the algorithm compute, does it make any sense?
+	  -> Where is the computed seam?
 
-Matrix diagonalization
+D) Matrix triangulation
 	Given:
 	- Algorithm to diagonalize matrices in order to compute their eigenvalues
 	Problem:
 	- The algorithm does not halt
 	Task:
-	- Watch the process of diagonalization and see when it should halt
+	- Watch the process of triangulation and see when it should halt
 
-Number table (point alignment)
+E) Number table (point alignment)
 	Given:
-	
+	- 2D-array containing floating point values.
+	Problem:
+	- It's inconsistent.
+	Task:
+	- Find a duplicated line.
