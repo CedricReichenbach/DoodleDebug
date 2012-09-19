@@ -43,3 +43,11 @@ E) Number table (point alignment)
 	- It's inconsistent.
 	Task:
 	- Find a duplicated line.
+
+F) Transposed matrix
+	Given:
+	- Matrix to be transposed
+	Problem:
+	- Not shure if working correctly
+	Task:
+	- Check it "by hand"

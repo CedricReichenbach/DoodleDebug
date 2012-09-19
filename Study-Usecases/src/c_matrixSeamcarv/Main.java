@@ -1,6 +1,5 @@
 package c_matrixSeamcarv;
 
-
 public class Main {
 
 	/**

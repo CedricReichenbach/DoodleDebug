@@ -46,6 +46,7 @@ hr {
 }
 .rendering {
     /*float: left;*/
+	display: inline-block;
     padding: 2px;
 	overflow: hidden;
 }

@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.unibe.scg.doodle.Doo;
-
 public class Main {
 
 	/**
@@ -27,9 +25,6 @@ public class Main {
 		expectation.add(greyscale(200));
 		expectation.add(greyscale(250));
 
-		Doo.dle(colors);
-		Doo.dle(expectation);
-		
 		check(colors.equals(expectation));
 	}
 

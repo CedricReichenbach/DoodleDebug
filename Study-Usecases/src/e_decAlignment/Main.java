@@ -1,6 +1,5 @@
 package e_decAlignment;
 
-
 public class Main {
 
 	/**

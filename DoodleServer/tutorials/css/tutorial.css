@@ -39,6 +39,7 @@ body {
 }
 #wrapper {
     background-color: #def;
+	background-image: url("../img/tile_tutorial.png");
 	top: 0;
 	max-width: 970px;
 	margin: 0 auto;
