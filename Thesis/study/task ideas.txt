@@ -8,7 +8,6 @@ A) Broken sorting algorithm
 	(maybe as test failure)
 	Task:
 	- Find the problem and eliminate it.
-
 B) Broken serialization
 	Given:
 	- Some realistic user-made data type, e.g. Contact.java

@@ -53,8 +53,9 @@ body {
 	text-shadow: 1px 1px 0 rgba(0, 200, 0, 0.5);
 }
 .title {
+	font-size: 1.3em;
 	margin-top: 2em;
-	color: green;
+	color: darkgreen;
 }
 .subtitle {
 	margin-bottom: 0.5em;
@@ -72,10 +73,10 @@ body {
 	padding: 1px 2px;
 	display: inline-block;
 }
-.codeBlock, .tip, .example, .download {
+.codeBlock, .tip, .example, .download, .exercise {
 	padding: .5em;
 	margin: .5em 0;
-	max-width: 600px;
+	max-width: 610px;
 	overflow: auto;
 }
 .key {
@@ -86,21 +87,21 @@ body {
 	padding: 1px;
 	box-shadow: 0 1px;
 }
-.tip, .example, .download {
+.tip, .example, .download, .exercise {
 	border-radius: 4px;
 	border: 1px solid;
 }
 .tip {
-	background-color: #ff8;
-	border-color: gold;
+	background-color: #ffb;
+	border-color: #ed6;
 }
 .tip:before {
 	content: "Tip: ";
 	font-weight: bold;
 }
 .example {
-	background-color: #afa;
-	border-color: #5d0;
+	background-color: #cfc;
+	border-color: #7e2;
 	float: left;
 }
 .example-wrapper {
@@ -108,6 +109,14 @@ body {
 }
 .example:before {
 	content: "Example: ";
+	font-weight: bold;
+}
+.exercise {
+	background-color: #fed;
+	border-color: #eca;
+}
+.exercise:before {
+	content: "Exercise: ";
 	font-weight: bold;
 }
 ul {
@@ -165,7 +174,7 @@ ul {
 	font-weight: bold;
 }
 .download {
-	background-color: #ecf;
+	background-color: #edf;
 	border-color: #daf;
 	float: left;
 }
