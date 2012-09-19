@@ -16,22 +16,24 @@
 	<div id="wrapper">
 		<h1 id="mainTitle">Example: Contact</h1>
 		<div id="examples">
-			<i>(Click to expand)</i>
-			<br>
+			<i>(Click to expand)</i> <br>
 			<div class="example-file">
 				<a href="javascript:switchExpand('example_main')">Main.java</a>
-				<pre id="example_main" style="display: none"><xmp>
+				<pre id="example_main" style="display: none">
+					<xmp>
 public class Main {
 	public static void main(String[] args) {
 		Address address = new Address("Dead End 23", 3012, "Bern");
 		Contact contact = new Contact("Endo Anaconda", address);
 		Doo.dle(contact);
 	}
-}</xmp></pre>
+}</xmp>
+				</pre>
 			</div>
 			<div class="example-file">
 				<a href="javascript:switchExpand('example_contact')">Contact.java</a>
-				<pre id="example_contact" style="display: none"><xmp>
+				<pre id="example_contact" style="display: none">
+					<xmp>
 public class Contact implements Doodleable {
 	private String name;
 	private Address address;
@@ -52,11 +54,13 @@ public class Contact implements Doodleable {
 	public void drawSmallOn(DoodleCanvas c) {
 		c.draw(name);
 	}
-}</xmp></pre>
+}</xmp>
+				</pre>
 			</div>
 			<div class="example-file">
 				<a href="javascript:switchExpand('example_address')">Address.java</a>
-				<pre id="example_address" style="display: none"><xmp>
+				<pre id="example_address" style="display: none">
+					<xmp>
 public class Address implements Doodleable {
 	private String street;
 	private int postalCode;
@@ -80,12 +84,19 @@ public class Address implements Doodleable {
 	public void drawSmallOn(DoodleCanvas c) {
 		c.draw(city);
 	}
-}</xmp></pre>
+}</xmp>
+				</pre>
+			</div>
+		</div>
+		<div class="float-wrapper">
+			<div class="result">
+				<img src="screenshots/doodleable-contact_output.png" />
 			</div>
 		</div>
 		<div class="download-wrapper">
 			<div class="download">
-				<a href="archived/Contact-Doodleable-example.zip">Example as archive (.zip)</a>
+				<a href="archived/Contact-Doodleable-example.zip">Example as
+					archive (.zip)</a>
 			</div>
 		</div>
 		<div id="footer">

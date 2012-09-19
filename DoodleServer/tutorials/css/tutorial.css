@@ -74,7 +74,7 @@ body {
 	padding: 1px 2px;
 	display: inline-block;
 }
-.codeBlock, .tip, .example, .download, .exercise {
+.codeBlock, .tip, .example, .download, .exercise, .result {
 	padding: .5em;
 	margin: .5em 0;
 	max-width: 610px;
@@ -88,12 +88,12 @@ body {
 	padding: 1px;
 	box-shadow: 0 1px;
 }
-.tip, .example, .download, .exercise {
+.tip, .example, .download, .exercise, .result {
 	border-radius: 4px;
 	border: 1px solid;
 }
 .tip {
-	background-color: #ffb;
+	background-color: #FFFFC4;
 	border-color: #ed6;
 }
 .tip:before {
@@ -167,7 +167,7 @@ ul {
 	margin: 1em;
 	border: 1px dashed #8af;
 }
-.download-wrapper {
+.download-wrapper, .float-wrapper {
 	overflow: hidden;
 }
 .download:before {
@@ -178,4 +178,18 @@ ul {
 	background-color: #edf;
 	border-color: #daf;
 	float: left;
+}
+.result {
+	background-color: #c4e6ff;
+	border-color: #bcf;
+	float: left;
+}
+.result:before {
+	content: "Result: ";
+	font-weight: bold;
+	float: left;
+	margin-right: 1em;
+}
+.result img {
+	box-shadow: 0 5px 10px rgba(0,0,0,0.5);
 }
