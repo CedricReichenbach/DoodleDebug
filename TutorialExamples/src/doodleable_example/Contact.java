@@ -21,7 +21,7 @@ public class Contact implements Doodleable {
 	}
 	
 	@Override
-	public void drawSmallOn(DoodleCanvas c) {
+	public void summarizeOn(DoodleCanvas c) {
 		c.draw(name);
 	}
 

@@ -33,6 +33,7 @@ public class DoodleQuickfixProcessor implements IQuickFixProcessor {
 					&& problem.getProblemArguments()[0].equals("Doo"))
 				// XXX filter relevant problems | I have no clue what this
 				// problemID is right now
+				// TODO: Check if build path already contains DoodleDebug library
 				return getAddDDToBuildPathProposals(context);
 		}
 		return null;

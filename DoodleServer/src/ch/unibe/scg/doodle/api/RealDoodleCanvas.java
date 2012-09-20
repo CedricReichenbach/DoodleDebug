@@ -43,7 +43,7 @@ public class RealDoodleCanvas implements DoodleCanvas {
 	 * @see doodle.Scratch#drawSmall(java.lang.Object)
 	 */
 	@Override
-	public void drawSmall(Object o) {
+	public void drawSimplified(Object o) {
 		draw(new SmallWrapper(o));
 	}
 

@@ -23,11 +23,11 @@ public class SmallScratch extends RealScratch {
 	@Override
 	protected void drawDoodleable() {
 		try {
-			((Doodleable) object).drawSmallOn(this.canvas);
+			((Doodleable) object).summarizeOn(this.canvas);
 		} catch (Exception e) {
 			ErrorDrawer errorDrawer = new ErrorDrawer(e);
 			try {
-				errorDrawer.drawSmallOn(this.canvas);
+				errorDrawer.summarizeOn(this.canvas);
 			} catch (Exception e1) {
 				throw new RuntimeException(e1);
 			}

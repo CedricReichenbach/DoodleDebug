@@ -12,7 +12,7 @@ public class CannotRenderMessage implements Doodleable {
 	}
 
 	@Override
-	public void drawOn(DoodleCanvas c) throws Exception {
+	public void drawOn(DoodleCanvas c) {
 		c.draw("Could not render: " + className);
 		c.newLine();
 		c.draw("Possible reasons:");
@@ -23,7 +23,7 @@ public class CannotRenderMessage implements Doodleable {
 	}
 
 	@Override
-	public void drawSmallOn(DoodleCanvas c) throws Exception {
+	public void summarizeOn(DoodleCanvas c) {
 		c.draw("Could not render: " + className);
 	}
 

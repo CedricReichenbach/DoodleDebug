@@ -12,13 +12,13 @@ public class ErrorDrawer implements Doodleable {
 	}
 
 	@Override
-	public void drawOn(DoodleCanvas c) throws Exception {
+	public void drawOn(DoodleCanvas c) {
 		c.draw(this.exception.getStackTrace());
 		exception.printStackTrace();
 	}
 
 	@Override
-	public void drawSmallOn(DoodleCanvas c) throws Exception {
+	public void summarizeOn(DoodleCanvas c) {
 		c.draw(this.exception);
 	}
 

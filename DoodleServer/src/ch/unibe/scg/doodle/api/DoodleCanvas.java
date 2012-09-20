@@ -13,13 +13,13 @@ public interface DoodleCanvas {
 	public abstract void draw(Object o);
 
 	/**
-	 * Visualizes any Object with few details, either using drawSmall Method of
+	 * Visualizes any Object with few details, either using <code>summarizeOn()</code> Method of
 	 * the object itself (if existing) or does a default drawing.
 	 * 
 	 * @param Object
 	 *            o
 	 */
-	public abstract void drawSmall(Object o);
+	public abstract void drawSimplified(Object o);
 
 	/**
 	 * Jump to a new line with the virtual cursor, staying in the same column.

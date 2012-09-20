@@ -15,8 +15,6 @@ import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.NullChange;
 import org.eclipse.swt.graphics.Image;
 
-import ch.unibe.scg.doodle.server.buildpath.DoodleDebugContainer;
-import ch.unibe.scg.doodle.server.buildpath.DoodleDebugContainerPage;
 import ch.unibe.scg.doodle.server.buildpath.DoodleDebugContainterInitializer;
 import ch.unibe.scg.doodle.server.util.DoodleImages;
 
