@@ -36,7 +36,7 @@ public class ThrowableRendering implements Rendering<Throwable> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void renderSmall(Throwable e, Tag tag) throws DoodleRenderException {
+	public void renderSimplified(Throwable e, Tag tag) throws DoodleRenderException {
 		tag.add(e.getClass().getSimpleName());
 	}
 

@@ -33,8 +33,8 @@ public class NullPlugin extends AbstractPlugin {
 	}
 
 	@Override
-	public void renderSmall(Object object, Tag tag) {
-		nullRenderingProvider.get().renderSmall((NullObject) object, tag);
+	public void renderSimplified(Object object, Tag tag) {
+		nullRenderingProvider.get().renderSimplified((NullObject) object, tag);
 	}
 
 	@Override

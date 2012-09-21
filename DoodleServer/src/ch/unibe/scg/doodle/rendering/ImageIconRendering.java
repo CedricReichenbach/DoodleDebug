@@ -17,7 +17,7 @@ public class ImageIconRendering implements Rendering<ImageIcon> {
 	}
 	
 	@Override
-	public void renderSmall(ImageIcon icon, Tag tag) throws DoodleRenderException {
+	public void renderSimplified(ImageIcon icon, Tag tag) throws DoodleRenderException {
 		this.render(icon, tag); // different css only
 	}
 

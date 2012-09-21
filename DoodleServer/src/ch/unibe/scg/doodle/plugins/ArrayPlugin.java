@@ -37,8 +37,8 @@ public class ArrayPlugin extends AbstractPlugin {
 	}
 
 	@Override
-	public void renderSmall(Object array, Tag tag) throws DoodleRenderException {
-		collectionPlugin.renderSmall(asList(array), tag);
+	public void renderSimplified(Object array, Tag tag) throws DoodleRenderException {
+		collectionPlugin.renderSimplified(asList(array), tag);
 	}
 
 	@Override

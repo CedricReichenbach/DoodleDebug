@@ -18,7 +18,7 @@ public class BooleanRendering implements Rendering<Boolean> {
 	}
 
 	@Override
-	public void renderSmall(Boolean bool, Tag tag) {
+	public void renderSimplified(Boolean bool, Tag tag) {
 		Tag value = new Tag("div", "class=boolean");
 		if (bool == true) {
 			value.add("&#x2611;");

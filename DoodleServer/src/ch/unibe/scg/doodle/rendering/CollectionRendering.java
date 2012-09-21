@@ -32,7 +32,7 @@ public class CollectionRendering implements Rendering<Collection<?>> {
 	}
 
 	@Override
-	public void renderSmall(Collection<?> collection, Tag tag) {
+	public void renderSimplified(Collection<?> collection, Tag tag) {
 		int threshold = 10;
 		int painted = 0;
 		for (Object o : collection) {

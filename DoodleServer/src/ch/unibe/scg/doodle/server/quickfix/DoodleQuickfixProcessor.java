@@ -3,8 +3,11 @@ package ch.unibe.scg.doodle.server.quickfix;
 import java.util.ArrayList;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.ui.text.java.ClasspathFixProcessor;
 import org.eclipse.jdt.ui.text.java.ClasspathFixProcessor.ClasspathFixProposal;
 import org.eclipse.jdt.ui.text.java.IInvocationContext;
@@ -15,6 +18,8 @@ import org.eclipse.jdt.core.compiler.IProblem;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.rewrite.ImportRewrite;
 import org.eclipse.jdt.ui.CodeStyleConfiguration;
+
+import ch.unibe.scg.doodle.server.buildpath.DoodleDebugContainterInitializer;
 
 public class DoodleQuickfixProcessor implements IQuickFixProcessor {
 
@@ -30,13 +35,34 @@ public class DoodleQuickfixProcessor implements IQuickFixProcessor {
 			IProblemLocation[] locations) throws CoreException {
 		for (IProblemLocation problem : locations) {
 			if (problem.getProblemId() == 0x22000032
-					&& problem.getProblemArguments()[0].equals("Doo"))
-				// XXX filter relevant problems | I have no clue what this
-				// problemID is right now
-				// TODO: Check if build path already contains DoodleDebug library
-				return getAddDDToBuildPathProposals(context);
+					&& problem.getProblemArguments()[0].equals("Doo")) {
+				if (!doodleDebugInBuildPath(context.getCompilationUnit()
+						.getJavaProject()))
+					return getAddDDToBuildPathProposals(context);
+			}
 		}
 		return null;
+	}
+
+	private boolean doodleDebugInBuildPath(IJavaProject javaProject) {
+		if (javaProject == null)
+			return false;
+
+		IClasspathEntry[] entries = null;
+		try {
+			entries = javaProject.getRawClasspath();
+		} catch (JavaModelException e) {
+			return false;
+		}
+		for (IClasspathEntry entry : entries) {
+			int kind = entry.getEntryKind();
+			IPath path = entry.getPath();
+			if (kind == IClasspathEntry.CPE_CONTAINER
+					&& path.toString().equals(DoodleDebugContainterInitializer.DD_CONTAINER_ID))
+				return true;
+			
+		}
+		return false;
 	}
 
 	private IJavaCompletionProposal[] getAddDDToBuildPathProposals(

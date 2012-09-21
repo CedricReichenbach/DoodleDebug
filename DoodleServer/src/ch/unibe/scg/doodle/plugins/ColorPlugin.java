@@ -28,8 +28,8 @@ public class ColorPlugin extends AbstractPlugin {
 	}
 
 	@Override
-	public void renderSmall(Object color, Tag tag) {
-		colorRenderingProvider.get().renderSmall((Color) color, tag);
+	public void renderSimplified(Object color, Tag tag) {
+		colorRenderingProvider.get().renderSimplified((Color) color, tag);
 	}
 
 	@Override

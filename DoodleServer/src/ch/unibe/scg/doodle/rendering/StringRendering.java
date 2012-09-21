@@ -16,7 +16,7 @@ public class StringRendering implements Rendering<String> {
 	}
 
 	@Override
-	public void renderSmall(String string, Tag tag) {
+	public void renderSimplified(String string, Tag tag) {
 		Tag p = new Tag("p", "class=StringRendering");
 
 		if (string.length() > maxLength) {

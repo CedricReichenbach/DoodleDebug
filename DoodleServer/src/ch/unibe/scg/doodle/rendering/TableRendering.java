@@ -39,7 +39,7 @@ public class TableRendering implements Rendering<Collection<Collection<?>>> {
 	}
 
 	@Override
-	public void renderSmall(Collection<Collection<?>> collections, Tag tag) {
+	public void renderSimplified(Collection<Collection<?>> collections, Tag tag) {
 		int rows = collections.size();
 		tag.add("table (" + rows + " rows)");
 	}

@@ -26,7 +26,7 @@ public class DoodleCanvasRendering implements Rendering<RealDoodleCanvas> {
 	}
 
 	@Override
-	public void renderSmall(RealDoodleCanvas canvas, Tag tag) {
+	public void renderSimplified(RealDoodleCanvas canvas, Tag tag) {
 		this.render(canvas, tag); // Differentiation is done in Interface
 									// Doodleable
 	}

@@ -25,7 +25,7 @@ public interface RenderingPlugin extends Rendering {
 
 	/**
 	 * Provide a keyword (html class attribute) for small renderings (when using
-	 * renderSmall()).
+	 * renderSimplified()).
 	 * 
 	 * @return
 	 */

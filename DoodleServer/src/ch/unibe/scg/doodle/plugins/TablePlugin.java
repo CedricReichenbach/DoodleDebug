@@ -39,7 +39,7 @@ public class TablePlugin extends ArrayPlugin {
 	}
 
 	@Override
-	public void renderSmall(Object table, Tag tag) throws DoodleRenderException {
+	public void renderSimplified(Object table, Tag tag) throws DoodleRenderException {
 		Collection<Collection<?>> arrays = convertTo2DCollection(table);
 		tableRenderingProvider.get().render(arrays, tag);
 	}

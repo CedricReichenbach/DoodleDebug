@@ -12,7 +12,7 @@ public class HtmlImageRendering implements Rendering<HtmlImage> {
 	}
 
 	@Override
-	public void renderSmall(HtmlImage image, Tag tag) {
+	public void renderSimplified(HtmlImage image, Tag tag) {
 		this.render(image, tag); // different css only
 	}
 

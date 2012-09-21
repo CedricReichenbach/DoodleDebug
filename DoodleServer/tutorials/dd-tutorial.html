@@ -91,14 +91,14 @@
 		, which contains the methods
 		<code class="code">drawOn(DoodleCanvas c)</code>
 		and
-		<code class="code">drawSmallOn(DoodleCanvas c)</code>
+		<code class="code">summarizeOn(DoodleCanvas c)</code>
 		, so DoodleDebug will automatically use those methods for rendering.<br>
 		DoodleCanvas uses a (virtual) cursor-like navigation and provides the
 		following methods:<br>
 		<code class="code">c.draw(Object o)</code>
 		: Render an object (e.g. a field of this object) at the current cursor
 		position.<br>
-		<code class="code">c.drawSmall(Object o)</code>
+		<code class="code">c.drawSimplified(Object o)</code>
 		: Render an object at the current cursor position with fewer details.<br>
 		<code class="code">c.newLine()</code>
 		: Jump to a new line with the virtual cursor, staying in the same
@@ -110,6 +110,22 @@
 			<div class="example">
 				<a href="examples/contact-example.html">Contact</a>
 			</div>
+		</div>
+		<div class="exercise">
+			<ol>
+				<li>Create a class <code class="code">House</code> containing
+					several <code class="code">Room</code> objects as fields.
+				</li>
+				<li>Let <code class="code">House</code> implement the <code
+						class="code">Doodleable</code> interface and find useful
+					implementations for its <code class="code">drawOn</code> and <code
+						class="code">summarizeOn</code> methods.
+				</li>
+				<li>Check your work by creating an instance of <code
+						class="code">House</code> and calling <code class="code">Doo.dle(house)</code>.
+				</li>
+			</ol>
+
 		</div>
 		<h3 id="renderingplugin" class="title">Create custom
 			RenderingPlugins</h3>
@@ -128,7 +144,7 @@
 		The methods
 		<code class="code">render(Object, Tag)</code>
 		and
-		<code class="code">renderSmall(Object, Tag)</code>
+		<code class="code">renderSimplified(Object, Tag)</code>
 		from the interface
 		<code class="code">Rendering</code>
 		receive the object to be rendered and a HTML tag. The provided tag

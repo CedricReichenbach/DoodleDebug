@@ -29,8 +29,8 @@ public class BooleanPlugin extends AbstractPlugin {
 	}
 
 	@Override
-	public void renderSmall(Object bool, Tag tag) {
-		booleanRenderingProvider.get().renderSmall((Boolean) bool, tag);
+	public void renderSimplified(Object bool, Tag tag) {
+		booleanRenderingProvider.get().renderSimplified((Boolean) bool, tag);
 	}
 
 	@Override

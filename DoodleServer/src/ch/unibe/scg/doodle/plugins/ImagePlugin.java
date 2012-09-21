@@ -49,15 +49,15 @@ public class ImagePlugin extends AbstractPlugin {
 	}
 
 	@Override
-	public void renderSmall(Object image, Tag tag) throws DoodleRenderException {
+	public void renderSimplified(Object image, Tag tag) throws DoodleRenderException {
 		if (image instanceof HtmlImage)
 			htmlImageRenderingProvider.get()
-					.renderSmall((HtmlImage) image, tag);
+					.renderSimplified((HtmlImage) image, tag);
 		else if (image instanceof Image)
-			imageRenderingProvider.get().renderSmall((Image) image, tag);
+			imageRenderingProvider.get().renderSimplified((Image) image, tag);
 		else if (image instanceof ImageIcon)
 			imageIconRenderingProvider.get()
-					.renderSmall((ImageIcon) image, tag);
+					.renderSimplified((ImageIcon) image, tag);
 		else {
 			Tag error = new Tag("div", "class=error");
 			error.add("Could not render image");

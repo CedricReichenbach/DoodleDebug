@@ -38,7 +38,7 @@ public class SmallScratch extends RealScratch {
 	@Override
 	protected void renderUsingPlugin(Tag tag, RenderingPlugin plugin)
 			throws DoodleRenderException {
-		plugin.renderSmall(object, tag);
+		plugin.renderSimplified(object, tag);
 	}
 
 	@Override

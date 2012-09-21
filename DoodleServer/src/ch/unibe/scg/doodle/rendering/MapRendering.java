@@ -64,7 +64,7 @@ public class MapRendering implements Rendering<Map<?, ?>> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void renderSmall(Map<?, ?> map, Tag tag) {
+	public void renderSimplified(Map<?, ?> map, Tag tag) {
 		tag.add("Map (" + map.size() + " mappings)");
 	}
 }

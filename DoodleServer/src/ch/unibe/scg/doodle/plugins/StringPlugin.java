@@ -27,8 +27,8 @@ public class StringPlugin extends AbstractPlugin {
 	}
 
 	@Override
-	public void renderSmall(Object string, Tag tag) {
-		stringRenderingProvider.get().renderSmall((String) string, tag);
+	public void renderSimplified(Object string, Tag tag) {
+		stringRenderingProvider.get().renderSimplified((String) string, tag);
 	}
 
 	@Override

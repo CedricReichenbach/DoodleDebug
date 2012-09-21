@@ -31,8 +31,8 @@ public class ObjectPlugin extends AbstractPlugin {
 	}
 
 	@Override
-	public void renderSmall(Object object, Tag tag) {
-		stringPlugin.renderSmall(object.toString(), tag);
+	public void renderSimplified(Object object, Tag tag) {
+		stringPlugin.renderSimplified(object.toString(), tag);
 	}
 
 	@Override

@@ -30,9 +30,9 @@ public class MapPlugin extends AbstractPlugin {
 	}
 
 	@Override
-	public void renderSmall(Object object, Tag tag)
+	public void renderSimplified(Object object, Tag tag)
 			throws DoodleRenderException {
-		mapRendering.renderSmall((Map<?, ?>) object, tag);
+		mapRendering.renderSimplified((Map<?, ?>) object, tag);
 	}
 
 	@Override

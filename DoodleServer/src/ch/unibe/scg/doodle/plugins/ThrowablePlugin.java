@@ -28,9 +28,9 @@ public class ThrowablePlugin extends AbstractPlugin {
 	}
 
 	@Override
-	public void renderSmall(Object object, Tag tag)
+	public void renderSimplified(Object object, Tag tag)
 			throws DoodleRenderException {
-		throwableRenderingProvider.get().renderSmall((Throwable) object, tag);
+		throwableRenderingProvider.get().renderSimplified((Throwable) object, tag);
 	}
 
 	@Override

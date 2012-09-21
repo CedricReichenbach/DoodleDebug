@@ -54,18 +54,18 @@ public class CollectionPlugin extends AbstractPlugin {
 	}
 
 	@Override
-	public void renderSmall(Object collection, Tag tag)
+	public void renderSimplified(Object collection, Tag tag)
 			throws DoodleRenderException {
 		if (collection instanceof Iterator) {
 			collection = toCollection((Iterator<?>) collection);
 		}
 
 		if (twoDimCollection((Collection<?>) collection)) {
-			tablePluginProvider.get().renderSmall(collection, tag);
+			tablePluginProvider.get().renderSimplified(collection, tag);
 			return;
 		}
 
-		collectionRendering.renderSmall((Collection<?>) collection, tag);
+		collectionRendering.renderSimplified((Collection<?>) collection, tag);
 	}
 
 	@Override

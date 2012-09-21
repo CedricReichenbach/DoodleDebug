@@ -11,7 +11,7 @@ public class NullRendering implements Rendering<NullObject> {
 	}
 	
 	@Override
-	public void renderSmall(NullObject object, Tag tag) {
+	public void renderSimplified(NullObject object, Tag tag) {
 		// do nothing, only grey box
 	}
 

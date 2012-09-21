@@ -19,7 +19,7 @@ public class ColorRendering implements Rendering<Color> {
 	}
 
 	@Override
-	public void renderSmall(Color color, Tag tag) {
+	public void renderSimplified(Color color, Tag tag) {
 		tag.getAttributes().add(
 				new Attribute("style", "background-color:"
 						+ rgbaColorString(color)));
