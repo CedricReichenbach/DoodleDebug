@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 import ch.unibe.scg.doodle.plugins.ArrayPlugin;
+import ch.unibe.scg.doodle.plugins.FieldDoodlerPlugin;
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
 import ch.unibe.scg.doodle.plugins.TablePlugin;
 
@@ -21,12 +22,15 @@ public class RenderingRegistryProvider implements Provider<RenderingRegistry> {
 
 	@Inject
 	Provider<TablePlugin> tablePluginProvider;
+	
+	@Inject
+	FieldDoodlerPlugin fieldDoodlerPlugin;
 
 	@Override
 	public RenderingRegistry get() {
 		HashMap<Class<?>, RenderingPlugin> m = mapFromPlugins(allPlugins);
 		RenderingRegistry registry = new RenderingRegistry(m,
-				arrayPluginProvider.get(), tablePluginProvider.get());
+				arrayPluginProvider.get(), tablePluginProvider.get(), fieldDoodlerPlugin);
 
 		return registry;
 	}

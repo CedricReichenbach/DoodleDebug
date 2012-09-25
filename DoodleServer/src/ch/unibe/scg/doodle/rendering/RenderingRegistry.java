@@ -6,10 +6,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-
+import ch.unibe.scg.doodle.api.FieldDoodler;
 import ch.unibe.scg.doodle.plugins.ArrayPlugin;
+import ch.unibe.scg.doodle.plugins.FieldDoodlerPlugin;
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
 import ch.unibe.scg.doodle.plugins.TablePlugin;
 
@@ -28,16 +27,20 @@ public class RenderingRegistry {
 
 	private final HashMap<Class<?>, RenderingPlugin> map;
 
+	private FieldDoodlerPlugin fieldDoodlerPlugin;
+
 	private static RenderingRegistry instance;
 
 	private static Collection<RenderingPlugin> userPlugins;
 
 	public RenderingRegistry(HashMap<Class<?>, RenderingPlugin> m,
-			ArrayPlugin arrayPlugin, TablePlugin tablePlugin) {
+			ArrayPlugin arrayPlugin, TablePlugin tablePlugin,
+			FieldDoodlerPlugin fieldDoodlerPlugin) {
 		this.map = m;
 		assert map.containsKey(Object.class);
 		this.arrayPlugin = arrayPlugin;
 		this.tablePlugin = tablePlugin;
+		this.fieldDoodlerPlugin = fieldDoodlerPlugin;
 
 		if (userPlugins != null) {
 			this.map.putAll(RenderingRegistryProvider
@@ -85,6 +88,10 @@ public class RenderingRegistry {
 	}
 
 	public RenderingPlugin lookup(Class<?> type) {
+		if (isFieldDoodler(type)) {
+			return fieldDoodlerPlugin;
+		}
+
 		if (type.isArray()) {
 			if (type.getComponentType().isArray()) {
 				return tablePlugin;
@@ -110,6 +117,11 @@ public class RenderingRegistry {
 			return plugin;
 		throw new AssertionError();
 
+	}
+
+	private boolean isFieldDoodler(Class<?> type) {
+		List<Class<?>> interfaces = Arrays.asList(type.getInterfaces());
+		return interfaces.contains(FieldDoodler.class);
 	}
 
 	public static void addPlugins(Collection<RenderingPlugin> plugins) {
