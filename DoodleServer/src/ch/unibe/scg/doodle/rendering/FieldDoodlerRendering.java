@@ -19,9 +19,9 @@ public class FieldDoodlerRendering implements Rendering<FieldDoodler> {
 	@Override
 	public void render(FieldDoodler object, Tag tag)
 			throws DoodleRenderException {
-		Tag title = new Tag("h3", "class=title");
-		title.add("Fields: ");
-		tag.add(title);
+//		Tag title = new Tag("h3", "class=title");
+//		title.add("Fields: ");
+//		tag.add(title);
 
 		List<Field> fields = Arrays.asList(object.getClass()
 				.getDeclaredFields());
@@ -33,6 +33,11 @@ public class FieldDoodlerRendering implements Rendering<FieldDoodler> {
 
 	private void renderField(Object object, Field field, Tag tag)
 			throws DoodleRenderException {
+		// don't render static ones
+		if (Modifier.isStatic(field.getModifiers())) {
+			return;
+		}
+		
 		Tag wrapper = new Tag("div", "class=fieldWrapper");
 		Tag div = new Tag("div", "class=field");
 		renderScope(field, wrapper);
@@ -41,13 +46,7 @@ public class FieldDoodlerRendering implements Rendering<FieldDoodler> {
 		div.add(name);
 		Tag content = new Tag("div", "class=content");
 		try {
-			if (Modifier.isStatic(field.getModifiers())) {
-				// TODO: Static fields are not correct, not transported
-				// correctly
-				content.add("static");
-			} else {
-				doodler.renderInlineInto(field.get(object), content);
-			}
+			doodler.renderInlineInto(field.get(object), content);
 			div.add(content);
 		} catch (IllegalArgumentException e) {
 			throw new DoodleRenderException(e);

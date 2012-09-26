@@ -50,27 +50,24 @@ public class FieldDoodlerPlugin extends AbstractPlugin {
 	}
 
 	private String fieldCSS() {
-		return ".FieldDoodlerPlugin .fieldWrapper {margin: 4px 0;}"
-				+ ".FieldDoodlerPlugin .field {border: 1px dotted #ccc; display: inline-block; padding: 2px; min-height: 2em; background-color: whitesmoke;}"
+		return ".FieldDoodlerPlugin .fieldWrapper {margin: 3px 0;}"
+				+ ".FieldDoodlerPlugin .field {border: 1px dotted #ccc; display: inline-block; padding: 1px; min-height: 1.5em; background-color: whitesmoke;}"
 				+ ".FieldDoodlerPlugin .content {margin-left: 0.5em;}"
 				+ ".FieldDoodlerPlugin .content, .FieldDoodlerPlugin .scope, .FieldDoodlerPlugin .name"
 				+ "{display: inline-block;}"
-				+ ".FieldDoodlerPlugin .name {float: left; margin: 2px;}";
+				+ ".FieldDoodlerPlugin .name {float: left; margin: 1px 2px;}";
 	}
 
 	private String scopeCSS() {
 		return ".FieldDoodlerPlugin .scope "
-				+ "{float: left; margin-left: 2px; height: 2em; width: 2em; text-align: center;"
+				+ "{float: left; margin-left: 2px; height: 1.5em; width: 1.5em; text-align: center;"
 				+ "border-width: 1px 0 1px 1px; border-style: solid; border-color: #DDD;"
 				+ "box-shadow: -9px 0 12px -10px rgba(0,0,0,0.5) inset;}"
 				+ ".FieldDoodlerPlugin .scope.public {background-color: #8f8; border-color: #6d6;}"
 				+ ".FieldDoodlerPlugin .scope.protected {background-color: #ff4; border-color: #dd0;}"
 				+ ".FieldDoodlerPlugin .scope.private {background-color: #fcc; border-color: #d99;}"
-				+ ".FieldDoodlerPlugin .scope.default {background-color: #0df; border-color: #0bd;}" +
-				".FieldDoodlerPlugin .static .scope {border-style: double; border-color: #888;}" +
-				".FieldDoodlerPlugin .static .name {text-decoration: underline;}" +
-				".FieldDoodlerPlugin .static .content {color: #666; font-style: italic;}"
-				+ ".FieldDoodlerPlugin .scope p {position: relative; top: -0.5em;}";
+				+ ".FieldDoodlerPlugin .scope.default {background-color: #0df; border-color: #0bd;}"
+				+ ".FieldDoodlerPlugin .scope p {position: relative; bottom: 0.75em; margin-right: 1px;}";
 	}
 
 }
