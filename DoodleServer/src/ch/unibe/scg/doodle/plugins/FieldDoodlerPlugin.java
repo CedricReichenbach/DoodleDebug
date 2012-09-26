@@ -42,7 +42,7 @@ public class FieldDoodlerPlugin extends AbstractPlugin {
 
 	@Override
 	public String getCSS() {
-		return titleCSS() + fieldCSS() + scopeCSS();
+		return titleCSS() + fieldCSS() + scopeCSS() + smallCSS();
 	}
 
 	private String titleCSS() {
@@ -68,6 +68,11 @@ public class FieldDoodlerPlugin extends AbstractPlugin {
 				+ ".FieldDoodlerPlugin .scope.private {background-color: #fcc; border-color: #d99;}"
 				+ ".FieldDoodlerPlugin .scope.default {background-color: #0df; border-color: #0bd;}"
 				+ ".FieldDoodlerPlugin .scope p {position: relative; bottom: 0.75em; margin-right: 1px;}";
+	}
+
+	private String smallCSS() {
+		return ".FieldDoodlerPlugin.smallRendering .scope {height: 1em; width: 1em; border-width: 1px; box-shadow: none}" +
+				".FieldDoodlerPlugin.smallRendering .scope p {bottom: 1.1em;}";
 	}
 
 }

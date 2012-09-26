@@ -84,11 +84,11 @@ public class FieldDoodlerRendering implements Rendering<Object> {
 
 	@Override
 	public void renderSimplified(Object object, Tag tag) {
-		/*
-		 * XXX Idea: only colored dots for fields (e.g. 4*4 px, similar to
-		 * collections)
-		 */
-		tag.add("Object containing " + object.getClass().getFields().length
-				+ " fields");
+		List<Field> fields = Arrays.asList(object.getClass()
+				.getDeclaredFields());
+		for (Field field : fields) {
+			field.setAccessible(true);
+			renderScope(field, tag);
+		}
 	}
 }
