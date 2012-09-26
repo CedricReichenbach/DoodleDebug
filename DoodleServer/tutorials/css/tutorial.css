@@ -49,9 +49,42 @@ body {
 	border-color: #7ad;
 	box-shadow: 0 2px 8px 2px rgba(0, 0, 0, 0.5);
 }
+.title a,
+li a {
+	color: black;
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: underline;
+}
 #mainTitle {
 	color: #444;
 	text-shadow: 1px 1px 0 rgba(0, 200, 0, 0.5);
+}
+#contents-wrapper {
+	margin-top: 3em;
+	overflow: hidden;
+}
+#contents {
+	background-color: #2bf;
+	color: white;
+	padding: 1em;
+	max-width: 600px;
+	float: left;
+	box-shadow: 8px 8px 10px -4px rgba(0,0,0,0.5);
+	margin-bottom: 10px;
+}
+#contents b {
+	font-size: 12pt;
+	line-height: 1.5em;
+}
+#contents a {
+	color: #222;
+	text-decoration: none;
+	text-shadow: 0px -1px 0px #6cf;
+}
+#contents a:hover {
+	text-decoration: underline;
 }
 .title {
 	font-size: 1.3em;

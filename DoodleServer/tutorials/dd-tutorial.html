@@ -5,6 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=100">
 <title>DoodleDebug Tutorial</title>
 <link rel="stylesheet" type="text/css" href="css/tutorial.css">
+<script type="text/javascript" src="js/prototype.js"></script>
+<script type="text/javascript" src="js/scriptaculous/scriptaculous.js"></script>
 <script type="text/javascript" src="js/tutorial.js"></script>
 </head>
 <!-- Just for copy&paste:
@@ -16,6 +18,11 @@
 <body>
 	<div id="wrapper">
 		<h1 id="mainTitle">DoodleDebug tutorial</h1>
+		<div id="contents-wrapper">
+			<div id="contents">
+				<b>Contents:</b><br>
+			</div>
+		</div>
 		<h3 class="title">Visualize an object</h3>
 		DoodleDebug's usage works similar to
 		<code class="code">System.out.println()</code>
@@ -67,16 +74,23 @@
 		DoodleDebug provides two ways to define custom renderings:
 		<ul>
 			<li>Implementing the <code class="code">Doodleable</code>
-				interface <a href="#doodleable">&#x2693;</a>
+				interface <a href="#doodleable">&darr;</a>
 			</li>
 			<li>Providing a <code class="code">RenderingPlugin</code> <a
-				href="#renderingplugin">&#x2693;</a>
+				href="#renderingplugin">&darr;</a>
 			</li>
 		</ul>
 		Doodleables are easy and fast to implement, but provide only a simple
 		API, whereas RenderingPlugins leave room for any rendering an
 		individual developer desires, still preserving the modularity of
 		DoodleDebug.<br>
+		<h4 class="subtitle">The FieldDoodler interface</h4>
+		If you just want DoodleDebug to list all fields (an their content) of
+		an object, simply let it's class implement the
+		<code class="code">FieldDoodler</code>
+		interface. Please note that only content of non-static fields will be
+		visualized in terms of consistency issues. Static fields will be
+		listed though and just marked as static.<br>
 		<div class="image">
 			<a href="javascript:switchExpand('rendering-pipeline')">DoodleDebug
 				rendering pipeline</a> <span class="smallNote">(click to
@@ -170,7 +184,8 @@
 			</div>
 		</div>
 		<div id="footer">
-			Cedric Reichenbach, <a href="http://scg.unibe.ch/" target="_blank">Software
+			Cedric Reichenbach, <a
+				href="http://scg.unibe.ch/wiki/projects/DoodleDebug" target="_blank">Software
 				Composition Group, University of Berne</a>
 		</div>
 	</div>

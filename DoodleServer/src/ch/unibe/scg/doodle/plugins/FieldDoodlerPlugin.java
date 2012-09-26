@@ -66,7 +66,10 @@ public class FieldDoodlerPlugin extends AbstractPlugin {
 				+ ".FieldDoodlerPlugin .scope.public {background-color: #8f8; border-color: #6d6;}"
 				+ ".FieldDoodlerPlugin .scope.protected {background-color: #ff4; border-color: #dd0;}"
 				+ ".FieldDoodlerPlugin .scope.private {background-color: #fcc; border-color: #d99;}"
-				+ ".FieldDoodlerPlugin .scope.default {background-color: #0df; border-color: #0bd;}"
+				+ ".FieldDoodlerPlugin .scope.default {background-color: #0df; border-color: #0bd;}" +
+				".FieldDoodlerPlugin .static .scope {border-style: double; border-color: #888;}" +
+				".FieldDoodlerPlugin .static .name {text-decoration: underline;}" +
+				".FieldDoodlerPlugin .static .content {color: #666; font-style: italic;}"
 				+ ".FieldDoodlerPlugin .scope p {position: relative; top: -0.5em;}";
 	}
 

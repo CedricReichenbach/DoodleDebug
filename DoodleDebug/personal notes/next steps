@@ -2,3 +2,5 @@
 
 - Rendering pipeline: object instanceof FieldDoodler (for example)
 	and: It's plugin.render(), not plugin.draw()
+
+- Contents of Tutorial at top

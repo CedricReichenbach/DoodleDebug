@@ -33,7 +33,6 @@ public class FieldDoodlerRendering implements Rendering<FieldDoodler> {
 
 	private void renderField(Object object, Field field, Tag tag)
 			throws DoodleRenderException {
-		// TODO: differenciate static property
 		Tag wrapper = new Tag("div", "class=fieldWrapper");
 		Tag div = new Tag("div", "class=field");
 		renderScope(field, wrapper);
@@ -42,7 +41,13 @@ public class FieldDoodlerRendering implements Rendering<FieldDoodler> {
 		div.add(name);
 		Tag content = new Tag("div", "class=content");
 		try {
-			doodler.renderInlineInto(field.get(object), content);
+			if (Modifier.isStatic(field.getModifiers())) {
+				// TODO: Static fields are not correct, not transported
+				// correctly
+				content.add("static");
+			} else {
+				doodler.renderInlineInto(field.get(object), content);
+			}
 			div.add(content);
 		} catch (IllegalArgumentException e) {
 			throw new DoodleRenderException(e);
@@ -70,6 +75,10 @@ public class FieldDoodlerRendering implements Rendering<FieldDoodler> {
 		} else { // default/package scope
 			scope.addCSSClass("default");
 			p.add("~");
+		}
+
+		if (Modifier.isStatic(mod)) {
+			tag.addCSSClass("static");
 		}
 
 		scope.add(p);

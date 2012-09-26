@@ -5,7 +5,7 @@
       version="1.0.0.qualifier">
    <install-handler library=""/>
 
-   <description url="http://scg.unibe.ch/">
+   <description url="http://scg.unibe.ch/wiki/projects/DoodleDebug">
       DoodleDebug allows to graphically visualize objects directly
 from calls inside Java code.
    </description>
