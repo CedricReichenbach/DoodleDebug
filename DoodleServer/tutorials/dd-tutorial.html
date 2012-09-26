@@ -84,13 +84,20 @@
 		API, whereas RenderingPlugins leave room for any rendering an
 		individual developer desires, still preserving the modularity of
 		DoodleDebug.<br>
-		<h4 class="subtitle">The FieldDoodler interface</h4>
-		If you just want DoodleDebug to list all fields (an their content) of
-		an object, simply let it's class implement the
+		<h3 class="title">Built-in and standard renderings</h3>
+		DoodleDebug includes predefined renderings for commonly used data
+		types like collections, arrays, colors etc. If an object
+		should be rendered and neither the user provides custom renderings nor
+		a built-in rendering fits any of the object's types, the following
+		standard rendering procedure is used:<br> If the object has a
+		maximum of 7 non-static fields, it's visualization is a listing of all
+		it's non-static fields. If there are more than 7, the object's
+		<code class="code">toString()</code>
+		method is used in order to safe space in the output window.<br>
+		If you want DoodleDebug to use the field visualization anyway, you can
+		simply let your object implement the
 		<code class="code">FieldDoodler</code>
-		interface. Please note that only content of non-static fields will be
-		visualized in terms of consistency issues. Static fields will be
-		listed though and just marked as static.<br>
+		interface.
 		<div class="image">
 			<a href="javascript:switchExpand('rendering-pipeline')">DoodleDebug
 				rendering pipeline</a> <span class="smallNote">(click to

@@ -29,15 +29,15 @@ public class FieldDoodlerPlugin extends AbstractPlugin {
 	}
 
 	@Override
-	public void render(Object fieldDoodler, Tag tag)
+	public void render(Object object, Tag tag)
 			throws DoodleRenderException {
-		fieldDoodlerRendering.render((FieldDoodler) fieldDoodler, tag);
+		fieldDoodlerRendering.render(object, tag);
 	}
 
 	@Override
-	public void renderSimplified(Object fieldDoodler, Tag tag) {
+	public void renderSimplified(Object object, Tag tag) {
 		fieldDoodlerRendering
-				.renderSimplified((FieldDoodler) fieldDoodler, tag);
+				.renderSimplified(object, tag);
 	}
 
 	@Override

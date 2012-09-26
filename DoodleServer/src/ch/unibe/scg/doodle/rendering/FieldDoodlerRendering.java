@@ -8,20 +8,18 @@ import java.util.List;
 import javax.inject.Inject;
 
 import ch.unibe.scg.doodle.Doodler;
-import ch.unibe.scg.doodle.api.FieldDoodler;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 
-public class FieldDoodlerRendering implements Rendering<FieldDoodler> {
+public class FieldDoodlerRendering implements Rendering<Object> {
 
 	@Inject
 	Doodler doodler;
 
 	@Override
-	public void render(FieldDoodler object, Tag tag)
-			throws DoodleRenderException {
-//		Tag title = new Tag("h3", "class=title");
-//		title.add("Fields: ");
-//		tag.add(title);
+	public void render(Object object, Tag tag) throws DoodleRenderException {
+		// Tag title = new Tag("h3", "class=title");
+		// title.add("Fields: ");
+		// tag.add(title);
 
 		List<Field> fields = Arrays.asList(object.getClass()
 				.getDeclaredFields());
@@ -37,7 +35,7 @@ public class FieldDoodlerRendering implements Rendering<FieldDoodler> {
 		if (Modifier.isStatic(field.getModifiers())) {
 			return;
 		}
-		
+
 		Tag wrapper = new Tag("div", "class=fieldWrapper");
 		Tag div = new Tag("div", "class=field");
 		renderScope(field, wrapper);
@@ -85,7 +83,11 @@ public class FieldDoodlerRendering implements Rendering<FieldDoodler> {
 	}
 
 	@Override
-	public void renderSimplified(FieldDoodler object, Tag tag) {
+	public void renderSimplified(Object object, Tag tag) {
+		/*
+		 * XXX Idea: only colored dots for fields (e.g. 4*4 px, similar to
+		 * collections)
+		 */
 		tag.add("Object containing " + object.getClass().getFields().length
 				+ " fields");
 	}
