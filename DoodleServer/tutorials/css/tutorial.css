@@ -93,7 +93,7 @@ a:hover{
 	text-shadow: 0 0 3px white;
 }
 .subtitle {
-	margin-bottom: 0.5em;
+	margin: 0.5em 0;
 	font-style: italic;
 }
 .code,

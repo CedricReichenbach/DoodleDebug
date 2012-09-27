@@ -35,10 +35,14 @@ public class ObjectPlugin extends AbstractPlugin {
 
 	@Override
 	public void render(Object object, Tag tag) throws DoodleRenderException {
-		if (insideMax(object))
+		if (insideMax(object) && !isNumber(object))
 			fieldDoodlerPlugin.render(object, tag);
 		else
 			stringPlugin.render(object.toString(), tag);
+	}
+
+	private boolean isNumber(Object object) {
+		return object instanceof Number;
 	}
 
 	boolean insideMax(Object object) {
