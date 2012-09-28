@@ -9,6 +9,7 @@ import ch.unibe.scg.doodle.ScratchFactory;
 import ch.unibe.scg.doodle.SmallScratch;
 import ch.unibe.scg.doodle.SmallScratchFactory;
 import ch.unibe.scg.doodle.plugins.BooleanPlugin;
+import ch.unibe.scg.doodle.plugins.ClassPlugin;
 import ch.unibe.scg.doodle.plugins.CollectionPlugin;
 import ch.unibe.scg.doodle.plugins.ColorPlugin;
 import ch.unibe.scg.doodle.plugins.DoodleListPlugin;
@@ -56,6 +57,7 @@ public class DoodleModule extends AbstractModule {
 		uriBinder.addBinding().to(TablePlugin.class);
 		uriBinder.addBinding().to(MapPlugin.class);
 		uriBinder.addBinding().to(BooleanPlugin.class);
+		uriBinder.addBinding().to(ClassPlugin.class);
 	}
 
 }

@@ -29,20 +29,19 @@ public class FieldDoodlerPlugin extends AbstractPlugin {
 	}
 
 	@Override
-	public void render(Object object, Tag tag)
-			throws DoodleRenderException {
+	public void render(Object object, Tag tag) throws DoodleRenderException {
 		fieldDoodlerRendering.render(object, tag);
 	}
 
 	@Override
 	public void renderSimplified(Object object, Tag tag) {
-		fieldDoodlerRendering
-				.renderSimplified(object, tag);
+		fieldDoodlerRendering.renderSimplified(object, tag);
 	}
 
 	@Override
 	public String getCSS() {
-		return titleCSS() + fieldCSS() + scopeCSS() + smallCSS();
+		return titleCSS() + fieldCSS() + scopeCSS("FieldDoodlerPlugin")
+				+ smallCSS();
 	}
 
 	private String titleCSS() {
@@ -58,21 +57,33 @@ public class FieldDoodlerPlugin extends AbstractPlugin {
 				+ ".FieldDoodlerPlugin .name {float: left; margin: 1px 2px;}";
 	}
 
-	private String scopeCSS() {
-		return ".FieldDoodlerPlugin .scope "
+	static String scopeCSS(String pluginClass) {
+		return "."
+				+ pluginClass
+				+ " .scope "
 				+ "{float: left; margin-left: 2px; height: 1.5em; width: 1.5em; text-align: center;"
 				+ "border-width: 1px 0 1px 1px; border-style: solid; border-color: #DDD;"
 				+ "box-shadow: -9px 0 12px -10px rgba(0,0,0,0.5) inset;}"
-				+ ".FieldDoodlerPlugin .scope.public {background-color: #8f8; border-color: #6d6;}"
-				+ ".FieldDoodlerPlugin .scope.protected {background-color: #ff4; border-color: #dd0;}"
-				+ ".FieldDoodlerPlugin .scope.private {background-color: #fcc; border-color: #d99;}"
-				+ ".FieldDoodlerPlugin .scope.default {background-color: #0df; border-color: #0bd;}"
-				+ ".FieldDoodlerPlugin .scope p {position: relative; bottom: 0.75em; margin-right: 1px;}";
+				+ "."
+				+ pluginClass
+				+ " .scope.public {background-color: #8f8; border-color: #6d6;}"
+				+ "."
+				+ pluginClass
+				+ " .scope.protected {background-color: #ff4; border-color: #dd0;}"
+				+ "."
+				+ pluginClass
+				+ " .scope.private {background-color: #fcc; border-color: #d99;}"
+				+ "."
+				+ pluginClass
+				+ " .scope.default {background-color: #0df; border-color: #0bd;}"
+				+ "."
+				+ pluginClass
+				+ " .scope p {position: relative; bottom: 0.75em; margin-right: 1px;}";
 	}
 
 	private String smallCSS() {
-		return ".FieldDoodlerPlugin.smallRendering .scope {height: 1em; width: 1em; border-width: 1px; box-shadow: none}" +
-				".FieldDoodlerPlugin.smallRendering .scope p {bottom: 1.1em;}";
+		return ".FieldDoodlerPlugin.smallRendering .scope {height: 1em; width: 1em; border-width: 1px; box-shadow: none}"
+				+ ".FieldDoodlerPlugin.smallRendering .scope p {bottom: 1.1em;}";
 	}
 
 }

@@ -86,12 +86,13 @@
 		DoodleDebug.<br>
 		<h3 class="title">Built-in and standard renderings</h3>
 		DoodleDebug includes numerous predefined renderings for commonly used
-		data types like collections, arrays, colors etc. If an object should
-		be rendered and neither the user provides custom renderings nor a
-		built-in rendering fits any of the object's types, the following
-		standard rendering procedure is used:<br> If the object has a
-		maximum of 7 non-static fields, it's visualization is a listing of all
-		it's non-static fields. If there are more than 7, the object's
+		data types like collections, arrays, colors etc., but also for
+		reflection types like classes. If an object should be rendered and
+		neither the user provides custom renderings nor a built-in rendering
+		fits any of the object's types, the following standard rendering
+		procedure is used:<br> If the object has a maximum of 7
+		non-static fields, it's visualization is a listing of all it's
+		non-static fields. If there are more than 7, the object's
 		<code class="code">toString()</code>
 		method is used in order to safe space in the output window.<br>
 		If you want DoodleDebug to use the field visualization anyway, you can
@@ -101,13 +102,14 @@
 		<h4 class="subtitle">Meaning of field renderings</h4>
 		From a field's visualization, a programmer can see its scope, declared
 		variable name and, of course, its content. Scope modifiers are
-		visualize with a sign in UML style and color for faster perception.<br><img
-			src="img/screenshots/FooBar-fields.png" style="float:left; margin-right: 0.5em;"/>
-		<b>- (<span style="background-color:#FCC">red</span>):</b> private<br>
-		<b>+ (<span style="background-color:#8F8">green</span>):</b> public<br>
-		<b># (<span style="background-color:#FF4">yellow</span>):</b> protected<br>
-		<b>~ (<span style="background-color:#0DF">blue</span>):</b> default (package)<br>
-		<br style="clear:both;">
+		visualize with a sign in UML style and color for faster perception.<br>
+		<img src="img/screenshots/FooBar-fields.png"
+			style="float: left; margin-right: 0.5em;" /> <b>- (<span
+			style="background-color: #FCC">red</span>):
+		</b> private<br> <b>+ (<span style="background-color: #8F8">green</span>):
+		</b> public<br> <b># (<span style="background-color: #FF4">yellow</span>):
+		</b> protected<br> <b>~ (<span style="background-color: #0DF">blue</span>):
+		</b> default (package)<br> <br style="clear: both;">
 		<div class="image">
 			<a href="javascript:switchExpand('rendering-pipeline')">DoodleDebug
 				rendering pipeline</a> <span class="smallNote">(click to

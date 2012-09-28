@@ -1,6 +1,8 @@
 package ch.unibe.scg.doodle.rendering;
 
+import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.List;
@@ -39,6 +41,7 @@ public class FieldDoodlerRendering implements Rendering<Object> {
 		Tag wrapper = new Tag("div", "class=fieldWrapper");
 		Tag div = new Tag("div", "class=field");
 		renderScope(field, wrapper);
+
 		Tag name = new Tag("div", "class=name");
 		name.add(field.getName() + ":");
 		div.add(name);
@@ -55,11 +58,17 @@ public class FieldDoodlerRendering implements Rendering<Object> {
 		tag.add(wrapper);
 	}
 
-	private void renderScope(Field field, Tag tag) {
+	static void renderScope(AccessibleObject object, Tag tag) {
 		Tag scope = new Tag("div", "class=scope");
 		Tag p = new Tag("p");
 
-		int mod = field.getModifiers();
+		int mod = 0;
+		if (object instanceof Field)
+			mod = ((Field) object).getModifiers();
+		else if (object instanceof Method)
+			mod = ((Method) object).getModifiers();
+		else
+			return;
 		if (Modifier.isPublic(mod)) {
 			scope.addCSSClass("public");
 			p.add("+");
