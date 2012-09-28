@@ -10,17 +10,16 @@ package ch.unibe.scg.doodle.api;
 public interface Doodleable {
 
 	/**
-	 * Equivalent method to toString, but for drawing. Defines how to draw self
-	 * object using methods of received Doodler object (similar to
-	 * System.out.println)
+	 * Equivalent method to toString, but for doodling. Defines how to draw this
+	 * object using methods of received DoodleCanvas object.
 	 * 
 	 * @param DoodleCanvas
 	 *            c
 	 */
-	public void drawOn(DoodleCanvas c);
+	public void doodleOn(DoodleCanvas c);
 
 	/**
-	 * Similar to "drawOn(d)", used for small drawings with less detail.
+	 * Similar to "doodleOn(d)", used for small drawings with less detail.
 	 * 
 	 * @param DoodleCanvas
 	 *            c

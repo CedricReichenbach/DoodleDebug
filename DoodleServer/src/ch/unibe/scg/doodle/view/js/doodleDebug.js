@@ -97,11 +97,22 @@ function keyPressEvent(event) {
 function keyPressed(code) {
 	var j = 106;
 	var k = 107;
+	var esc = 27;
+	var backspace = 8;
 	
-	if (code == j) {
+	switch (code) {
+	case j:
 		toNextElement();
-	} else if (code == k) {
+		break;
+	case k:
 		toPrevElement();
+		break;
+	case esc:
+		hideLightbox();
+		break;
+	case backspace:
+		breadcrumbsBack(1);
+		break;
 	}
 }
 

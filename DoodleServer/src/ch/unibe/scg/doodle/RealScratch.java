@@ -120,11 +120,11 @@ public class RealScratch implements Scratch {
 
 	protected void drawDoodleable() {
 		try {
-			((Doodleable) object).drawOn(this.canvas);
+			((Doodleable) object).doodleOn(this.canvas);
 		} catch (Exception e) {
 			ErrorDrawer errorDrawer = new ErrorDrawer(e);
 			try {
-				errorDrawer.drawOn(this.canvas);
+				errorDrawer.doodleOn(this.canvas);
 			} catch (Exception e1) {
 				throw new RuntimeException(e1);
 			}

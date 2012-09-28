@@ -61,7 +61,8 @@ public class ObjectPlugin extends AbstractPlugin {
 
 	@Override
 	public void renderSimplified(Object object, Tag tag) {
-		fieldDoodlerPlugin.renderSimplified(object, tag);
+		stringPlugin.render(object.toString(), tag);
+//		fieldDoodlerPlugin.renderSimplified(object, tag);
 	}
 
 	@Override

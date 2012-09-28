@@ -14,7 +14,7 @@ public class Contact implements Doodleable {
 	}
 	
 	@Override
-	public void drawOn(DoodleCanvas c) {
+	public void doodleOn(DoodleCanvas c) {
 		c.draw(name);
 		c.newLine();
 		c.draw(address);

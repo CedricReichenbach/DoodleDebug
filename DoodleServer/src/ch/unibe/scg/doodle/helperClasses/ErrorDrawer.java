@@ -12,7 +12,7 @@ public class ErrorDrawer implements Doodleable {
 	}
 
 	@Override
-	public void drawOn(DoodleCanvas c) {
+	public void doodleOn(DoodleCanvas c) {
 		c.draw(this.exception.getStackTrace());
 		exception.printStackTrace();
 	}

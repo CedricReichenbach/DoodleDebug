@@ -1,5 +1,13 @@
 package ch.unibe.scg.doodle.api;
 
+/**
+ * A virtual canvas for the user to draw objects onto.<br>
+ * It provides a cursor-like API, where the (imaginary) cursor is on top left
+ * initially and always goes to the right of the lastly printed object.
+ * 
+ * @author Cedric Reichenbach
+ * 
+ */
 public interface DoodleCanvas {
 
 	/**
@@ -13,8 +21,9 @@ public interface DoodleCanvas {
 	public abstract void draw(Object o);
 
 	/**
-	 * Visualizes any Object with few details, either using <code>summarizeOn()</code> Method of
-	 * the object itself (if existing) or does a default drawing.
+	 * Visualizes any Object with few details, either using
+	 * <code>summarizeOn()</code> Method of the object itself (if existing) or
+	 * does a default drawing.
 	 * 
 	 * @param Object
 	 *            o

@@ -15,7 +15,7 @@ public class Address implements Doodleable {
 	}
 	
 	@Override
-	public void drawOn(DoodleCanvas c) {
+	public void doodleOn(DoodleCanvas c) {
 		c.draw(street);
 		c.newLine();
 		c.draw(postalCode);
