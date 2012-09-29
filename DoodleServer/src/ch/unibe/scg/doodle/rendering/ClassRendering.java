@@ -43,7 +43,15 @@ public class ClassRendering implements Rendering<Class<?>> {
 		FieldDoodlerRendering.renderScope(field, tag);
 		Tag element = new Tag("div", "class=element");
 		element.addCSSClass("field");
-		element.add(field.getName());
+		
+		Tag typeSpan = new Tag("span", "class=fieldType");
+		typeSpan.add(field.getType().getSimpleName()+" ");
+		element.add(typeSpan);
+
+		Tag nameSpan = new Tag("span", "class=name");		
+		nameSpan.add(field.getName());
+		element.add(nameSpan);
+		
 		tag.add(element);
 	}
 

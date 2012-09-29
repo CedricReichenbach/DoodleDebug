@@ -33,7 +33,7 @@ public class ClassPlugin extends AbstractPlugin {
 	@Override
 	public String getCSS() {
 		return wrapperCSS() + elementCSS()
-				+ FieldDoodlerPlugin.scopeCSS("ClassPlugin");
+				+ FieldDoodlerPlugin.scopeCSS("ClassPlugin") +".ClassPlugin .static .scope {border-bottom-style: double; border-bottom-width: 3px;}";
 	}
 
 	private String wrapperCSS() {
@@ -41,10 +41,13 @@ public class ClassPlugin extends AbstractPlugin {
 	}
 
 	private String elementCSS() {
-		return ".ClassPlugin .element {border: 1px dotted #ccc; display: inline-block; padding: 1px; min-height: 1.5em; background-color: whitesmoke;}"
-				+ ".ClassPlugin .name, .ClassPlugin .field {font-weight: bold;}"
-				+ ".ClassPlugin .arguments {font-style: italic;}"
-				+ ".ClassPlugin .element .returnType {font-style: italic;}";
+		return ".ClassPlugin .element {border: 1px dotted #ccc; display: inline-block; padding: 2px 1px 0 1px; min-height: 1.5em; background-color: whitesmoke;}"
+				+ ".ClassPlugin .method {border-style: dashed;}"
+				+ ".ClassPlugin .name {font-weight:500;}"
+				+ ".ClassPlugin .static .name {text-decoration: underline;}"
+				+ ".ClassPlugin .returnType, .ClassPlugin .fieldType {color: #444; margin-left: 1px;}"
+				+ ".ClassPlugin .returnType {font-style: italic;}"
+				+ ".ClassPlugin .arguments {font-style: italic;}";
 	}
 
 }
