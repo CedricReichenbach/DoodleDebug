@@ -42,11 +42,9 @@ public class ClassPlugin extends AbstractPlugin {
 
 	private String elementCSS() {
 		return ".ClassPlugin .element {border: 1px dotted #ccc; display: inline-block; padding: 1px; min-height: 1.5em; background-color: whitesmoke;}"
-				+ ".ClassPlugin .name {float: left; margin: 1px 2px;}";// XXX
-																		// name
-																		// not
-																		// there
-																		// yet
+				+ ".ClassPlugin .name, .ClassPlugin .field {font-weight: bold;}"
+				+ ".ClassPlugin .arguments {font-style: italic;}"
+				+ ".ClassPlugin .element .returnType {font-style: italic;}";
 	}
 
 }

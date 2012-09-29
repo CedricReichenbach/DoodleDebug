@@ -27,7 +27,7 @@ public class ClassRendering implements Rendering<Class<?>> {
 		List<Method> methods = Arrays.asList(classObject.getDeclaredMethods());
 		for (Method m : methods) {
 			Tag wrapper = new Tag("div", "class=wrapper");
-			renderMethod(m, tag);
+			renderMethod(m, wrapper);
 			tag.add(wrapper);
 		}
 		List<Class<?>> innerClasses = Arrays.asList(classObject
@@ -54,18 +54,27 @@ public class ClassRendering implements Rendering<Class<?>> {
 
 		// return type
 		Class<?> returnType = method.getReturnType();
-		element.add(returnType.getSimpleName()+" ");
+		Tag returnSpan = new Tag("span", "class=returnType");
+		returnSpan.add(returnType.getSimpleName() + " ");
+		element.add(returnSpan);
 
 		// name & arguments
-		element.add(method.getName() + "(");
+		Tag nameSpan = new Tag("span", "class=name");
+		nameSpan.add(method.getName());
+		element.add(nameSpan);
+		element.add("(");
+		
+		Tag argSpan = new Tag("span", "class=arguments");
 		List<Class<?>> arguments = Arrays.asList(method.getParameterTypes());
 		Iterator<Class<?>> it = arguments.iterator();
 		while (it.hasNext()) {
 			Class<?> argType = it.next();
-			element.add(argType.getSimpleName());
+			argSpan.add(argType.getSimpleName());
 			if (it.hasNext())
-				element.add(", ");
+				argSpan.add(", ");
 		}
+		element.add(argSpan);
+		
 		element.add(")");
 		tag.add(element);
 	}
