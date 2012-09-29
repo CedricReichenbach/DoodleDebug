@@ -13,6 +13,7 @@ import ch.unibe.scg.doodle.server.DoodleServer;
 
 import com.google.inject.Module;
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
 
 import de.root1.simon.Lookup;
 import de.root1.simon.Registry;
@@ -48,7 +49,8 @@ public class SimonServer implements SimonServerInterface {
 	 * Refresh remote classes by creating a new XStream and a new Classloader.
 	 */
 	public void refreshClientClassloading() {
-		this.xstream = new XStream();
+		this.xstream = new XStream(new JettisonMappedXmlDriver());
+		xstream.setMode(XStream.NO_REFERENCES);
 		xstream.setClassLoader(DoodleClientWorkspace.getClientClassLoader());
 	}
 

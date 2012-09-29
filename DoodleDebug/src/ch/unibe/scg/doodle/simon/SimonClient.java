@@ -7,6 +7,7 @@ import ch.unibe.scg.doodle.plugins.RenderingPlugin;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.ConversionException;
+import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
 
 import de.root1.simon.Lookup;
 import de.root1.simon.Registry;
@@ -33,7 +34,8 @@ public class SimonClient implements SimonClientInterface {
 		this.lookup = Simon.createNameLookup("localhost", PORT);
 		server = (SimonServerInterface) lookup.lookup("DoodleServer");
 
-		this.xstream = new XStream();
+		this.xstream = new XStream(new JettisonMappedXmlDriver());
+		xstream.setMode(XStream.NO_REFERENCES);
 	}
 
 	public void stop() {
