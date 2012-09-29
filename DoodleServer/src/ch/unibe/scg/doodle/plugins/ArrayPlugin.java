@@ -1,8 +1,9 @@
 package ch.unibe.scg.doodle.plugins;
 
-import java.lang.reflect.Array;
+import static ch.unibe.scg.doodle.util.ArrayUtil.asList;
+import static ch.unibe.scg.doodle.util.ArrayUtil.castToArray;
 
-import java.util.Arrays;
+import java.lang.reflect.Array;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,9 +13,6 @@ import javax.inject.Provider;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.rendering.CollectionRendering;
 import ch.unibe.scg.doodle.rendering.DoodleRenderException;
-
-import static ch.unibe.scg.doodle.util.ArrayUtil.castToArray;
-import static ch.unibe.scg.doodle.util.ArrayUtil.asList;
 
 public class ArrayPlugin extends AbstractPlugin {
 
@@ -37,7 +35,8 @@ public class ArrayPlugin extends AbstractPlugin {
 	}
 
 	@Override
-	public void renderSimplified(Object array, Tag tag) throws DoodleRenderException {
+	public void renderSimplified(Object array, Tag tag)
+			throws DoodleRenderException {
 		collectionPlugin.renderSimplified(asList(array), tag);
 	}
 

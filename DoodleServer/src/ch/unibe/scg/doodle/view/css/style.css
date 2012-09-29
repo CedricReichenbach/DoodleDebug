@@ -112,6 +112,10 @@ table .rendering {
 	background-color: #3d0;
 	color: white;
 }
+::-moz-selection {
+	background-color: #3d0;
+	color: white;
+}
 
 /* beta info part at top */
 

@@ -1,6 +1,5 @@
 package ch.unibe.scg.doodle.plugins;
 
-import java.awt.Font;
 import java.util.HashSet;
 import java.util.Set;
 

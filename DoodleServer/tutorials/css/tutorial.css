@@ -64,6 +64,7 @@ a:hover{
 #contents-wrapper {
 	margin-top: 3em;
 	overflow: hidden;
+	margin-bottom: -20px;
 }
 #contents {
 	background-color: #2bf;
@@ -72,7 +73,7 @@ a:hover{
 	max-width: 600px;
 	float: left;
 	box-shadow: 8px 8px 10px -4px rgba(0,0,0,0.5);
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 }
 #contents b {
 	font-size: 12pt;
@@ -185,6 +186,10 @@ ul, ol {
 	color: black;
 }
 ::selection {
+	background-color: #3d0;
+	color: white;
+}
+::-moz-selection {
 	background-color: #3d0;
 	color: white;
 }

@@ -1,5 +1,9 @@
 package ch.unibe.scg.doodle.rendering;
 
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+
 import ch.unibe.scg.doodle.htmlgen.Tag;
 
 public class StringRendering implements Rendering<String> {
@@ -20,7 +24,25 @@ public class StringRendering implements Rendering<String> {
 		Tag p = new Tag("p", "class=StringRendering");
 
 		if (string.length() > maxLength) {
-			string = string.substring(0, maxLength - 1) + "...";
+			// split between words
+			List<String> words = Arrays.asList(string.split(" "));
+			Iterator<String> it = words.iterator();
+			String result = "";
+			while (it.hasNext()) {
+				String next = it.next();
+				if ((result + next).length() > maxLength) {
+					int i = result.lastIndexOf(" ");
+					result = result.substring(0, i);
+					break;
+				} else
+					result += next + " ";
+			}
+			if (it.hasNext()) {
+				string = result + "...";
+			} else {
+				string = result;
+			}
+			// string = string.substring(0, maxLength - 1) + "...";
 		}
 
 		p.add(replaceEscapeSeq(string));

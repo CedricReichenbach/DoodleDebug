@@ -35,7 +35,7 @@ public class SimonClient implements SimonClientInterface {
 		server = (SimonServerInterface) lookup.lookup("DoodleServer");
 
 		this.xstream = new XStream(new JettisonMappedXmlDriver());
-		xstream.setMode(XStream.NO_REFERENCES);
+		 xstream.setMode(XStream.NO_REFERENCES);
 	}
 
 	public void stop() {

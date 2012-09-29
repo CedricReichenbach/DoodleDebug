@@ -28,6 +28,7 @@ public class TablePlugin extends ArrayPlugin {
 
 	@Override
 	public Set<Class<?>> getDrawableClasses() {
+		// detected by renderingRegistry directly
 		HashSet<Class<?>> hs = new HashSet<Class<?>>();
 		return hs;
 	}
@@ -39,7 +40,8 @@ public class TablePlugin extends ArrayPlugin {
 	}
 
 	@Override
-	public void renderSimplified(Object table, Tag tag) throws DoodleRenderException {
+	public void renderSimplified(Object table, Tag tag)
+			throws DoodleRenderException {
 		Collection<Collection<?>> arrays = convertTo2DCollection(table);
 		tableRenderingProvider.get().render(arrays, tag);
 	}

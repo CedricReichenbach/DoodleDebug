@@ -85,14 +85,14 @@
 		individual developer desires, still preserving the modularity of
 		DoodleDebug.<br>
 		<h3 class="title">Built-in and standard renderings</h3>
-		DoodleDebug includes numerous predefined renderings for commonly used
-		data types like collections, arrays, colors etc., but also for
-		reflection types like classes. If an object should be rendered and
-		neither the user provides custom renderings nor a built-in rendering
-		fits any of the object's types, the following standard rendering
-		procedure is used:<br> If the object has a maximum of 7
-		non-static fields, it's visualization is a listing of all it's
-		non-static fields. If there are more than 7, the object's
+		DoodleDebug includes numerous <a href="#built-in">predefined
+			renderings</a> for commonly used data types like collections, arrays,
+		colors etc., but also for reflection types like classes. If an object
+		should be rendered and neither the user provides custom renderings nor
+		a built-in rendering fits any of the object's types, the following
+		standard rendering procedure is used:<br> If the object has a
+		maximum of 7 non-static fields, it's visualization is a listing of all
+		it's non-static fields. If there are more than 7, the object's
 		<code class="code">toString()</code>
 		method is used in order to safe space in the output window.<br>
 		If you want DoodleDebug to use the field visualization anyway, you can
@@ -202,6 +202,23 @@
 					Fax types</a>
 			</div>
 		</div>
+		<h3 id="built-in" class="title">List of built-in type renderings</h3>
+		The following data types already have predefined (non-default)
+		renderings in DoodleDebug:
+		<ul>
+			<li>Arrays</li>
+			<li>java.lang.Boolean</li>
+			<li>java.lang.Class</li>
+			<li>java.util.Collection</li>
+			<li>java.awt.Color</li>
+			<li>java.awt.Image</li>
+			<li>javax.swing.ImageIcon</li>
+			<li>java.util.Iterator</li>
+			<li>java.util.Map</li>
+			<li>java.lang.String</li>
+			<li>Tables and Matrices: 2-dimensional Collections and Arrays</li>
+			<li>java.lang.Throwable (Errors & Exceptions)</li>
+		</ul>
 		<div id="footer">
 			Cedric Reichenbach, <a
 				href="http://scg.unibe.ch/wiki/projects/DoodleDebug" target="_blank">Software
