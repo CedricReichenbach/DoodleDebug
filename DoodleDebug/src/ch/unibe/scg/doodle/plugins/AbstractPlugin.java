@@ -34,7 +34,9 @@ public abstract class AbstractPlugin implements RenderingPlugin {
 	}
 
 	/**
-	 * {@inheritDoc} Default: SimpleName of class (e.g. "ImagePlugin").
+	 * {@inheritDoc} Default: SimpleName of class (e.g. "Color"). This will be
+	 * directly put into HTML code, so special characters may be written using
+	 * their corresponind decimal/hex code, e.g. <code>&amp;#64;</code> for &#64;.<br>
 	 */
 	@Override
 	public String getObjectTypeName(Object o) {

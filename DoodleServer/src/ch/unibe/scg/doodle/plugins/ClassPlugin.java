@@ -32,8 +32,10 @@ public class ClassPlugin extends AbstractPlugin {
 
 	@Override
 	public String getCSS() {
-		return wrapperCSS() + elementCSS()
-				+ FieldDoodlerPlugin.scopeCSS("ClassPlugin") +".ClassPlugin .static .scope {border-bottom-style: double; border-bottom-width: 3px;}";
+		return wrapperCSS()
+				+ elementCSS()
+				+ FieldDoodlerPlugin.scopeCSS("ClassPlugin")
+				+ ".ClassPlugin .static .scope {border-bottom-style: double; border-bottom-width: 3px;}";
 	}
 
 	private String wrapperCSS() {
@@ -48,6 +50,11 @@ public class ClassPlugin extends AbstractPlugin {
 				+ ".ClassPlugin .returnType, .ClassPlugin .fieldType {color: #444; margin-left: 1px;}"
 				+ ".ClassPlugin .returnType {font-style: italic;}"
 				+ ".ClassPlugin .arguments {font-style: italic;}";
+	}
+
+	@Override
+	public String getObjectTypeName(Object o) {
+		return "Class&#60;" + ((Class<?>) o).getSimpleName() + "&#62;";
 	}
 
 }
