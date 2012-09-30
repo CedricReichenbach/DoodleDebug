@@ -50,6 +50,9 @@ public class StringRendering implements Rendering<String> {
 	}
 
 	private String replaceEscapeSeq(String string) {
+		string = string.replace("<", "&lt;").replace(">", "&gt;");
+		string = string.replace("\"", "&quot").replace("'", "&#39;");
+		string = string.replace("/", "&x2F;");
 		return string.replace("\n", "<br>");
 	}
 

@@ -87,7 +87,7 @@ table .rendering {
     font-size: 8pt;
 	margin-bottom: -4pt;
 	position: relative; /* Important to bring text in front of respective content box */
-	text-shadow: 0 0 2px #DDD;
+	text-shadow: -1px 1px 1px #FFF;
 	/*filter: glow(color=#dddddd,strength=1);*/ /* IE; ugly rendering, not useful at all */
 }
 .column {
