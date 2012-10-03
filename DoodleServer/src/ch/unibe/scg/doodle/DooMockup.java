@@ -6,7 +6,12 @@ import ch.unibe.scg.doodle.inject.DoodleModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-public class DMockup {
+/**
+ * Mockup on server side for <code>Doo</code> on client side.
+ * @author Cedric Reichenbach
+ *
+ */
+public class DooMockup {
 
 	static Injector injector;
 
@@ -22,23 +27,23 @@ public class DMockup {
 	}
 
 	/**
-	 * Code sugar for Doo.raw-ing any Object similar to System.out.println
+	 * Code sugar for Doo.dle-ing any Object similar to System.out.println
 	 * 
 	 * @param Object
 	 *            o
 	 */
-	public static void raw(Object o) {
+	public static void dle(Object o) {
 		Object[] emptyArr = {};
-		raw(o, emptyArr);
+		dle(o, emptyArr);
 	}
 
 	/**
-	 * Code sugar for Doo.raw-ing any Object similar to System.out.println
+	 * Code sugar for Doo.dle-ing any Object similar to System.out.println
 	 * 
 	 * @param Object
 	 *            o
 	 */
-	public static void raw(Object o, Object... objects) {
+	public static void dle(Object o, Object... objects) {
 		Doodler doodler = injectorInstance().getInstance(Doodler.class);
 
 		if (objects.length == 0) {

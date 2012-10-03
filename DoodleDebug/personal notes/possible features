@@ -9,3 +9,6 @@
 - Inspector on rendered objects (like a debugger)
 
 - Dynamic update of objects / Diffs
+
+- Nice way to show canonical name instead of only simple name of class
+	(e.g. by right-click, tool tip or hover)

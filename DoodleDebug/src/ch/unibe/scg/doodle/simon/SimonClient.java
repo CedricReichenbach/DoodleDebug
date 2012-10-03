@@ -35,7 +35,7 @@ public class SimonClient implements SimonClientInterface {
 		server = (SimonServerInterface) lookup.lookup("DoodleServer");
 
 		this.xstream = new XStream(new JettisonMappedXmlDriver());
-		 xstream.setMode(XStream.NO_REFERENCES);
+		xstream.setMode(XStream.NO_REFERENCES);
 	}
 
 	public void stop() {
@@ -50,6 +50,9 @@ public class SimonClient implements SimonClientInterface {
 			String objectAsXML = xstream.toXML(object);
 			server.renderObject(objectAsXML);
 		} catch (ConversionException e) {
+			System.err.println("DoodleDebug: Could not serialize object ("
+					+ object.getClass().getCanonicalName() + ") for sending");
+			System.err.println("cause: " + e.getMessage());
 			server.couldNotSend(object.getClass().getCanonicalName());
 		}
 	}

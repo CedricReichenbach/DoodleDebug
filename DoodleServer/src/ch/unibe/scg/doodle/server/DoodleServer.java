@@ -21,7 +21,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 
-import ch.unibe.scg.doodle.DMockup;
+import ch.unibe.scg.doodle.DooMockup;
 import ch.unibe.scg.doodle.Doodler;
 import ch.unibe.scg.doodle.IndexedObjectStorage;
 import ch.unibe.scg.doodle.htmlgen.Tag;
@@ -56,7 +56,7 @@ public class DoodleServer {
 
 	public void drawObjectWithID(int id) {
 		if (this.storage == null) {
-			DMockup.raw("Sorry, don't know that object.");
+			DooMockup.dle("Sorry, don't know that object.");
 			return;
 		}
 		Object o = this.storage.get(id);
@@ -83,7 +83,7 @@ public class DoodleServer {
 	}
 
 	public void clearOutput() {
-		DMockup.resetInjector();
+		DooMockup.resetInjector();
 		Runnable emptyShow = new HtmlShow(new DoodleDebugScreen().toString());
 		Display.getDefault().asyncExec(emptyShow);
 	}

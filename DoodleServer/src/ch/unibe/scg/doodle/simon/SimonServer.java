@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.Collection;
 
-import ch.unibe.scg.doodle.DMockup;
+import ch.unibe.scg.doodle.DooMockup;
 import ch.unibe.scg.doodle.Doodler;
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
 import ch.unibe.scg.doodle.rendering.RenderingRegistry;
@@ -63,14 +63,14 @@ public class SimonServer implements SimonServerInterface {
 	@Override
 	public void renderObject(String objectAsXML) {
 		Object o = xstream.fromXML(objectAsXML);
-		DMockup.raw(o);
+		DooMockup.dle(o);
 	}
 
 	@Override
 	public void renderObjects(String objectAsXML, String objectArrayAsXML) {
 		Object o = xstream.fromXML(objectAsXML);
 		Object[] os = (Object[]) xstream.fromXML(objectArrayAsXML);
-		DMockup.raw(o, os);
+		DooMockup.dle(o, os);
 	}
 
 	@Override
