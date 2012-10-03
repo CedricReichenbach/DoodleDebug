@@ -98,6 +98,22 @@
 	padding: 4px;
 	float: left;
 }
+/* nice css3 gradient */
+#lightboxRendering {
+	background-image: linear-gradient(bottom, rgb(238,238,238) 100%, rgb(221,221,221) 0%);
+	background-image: -o-linear-gradient(bottom, rgb(238,238,238) 100%, rgb(221,221,221) 0%);
+	background-image: -moz-linear-gradient(bottom, rgb(238,238,238) 100%, rgb(221,221,221) 0%);
+	background-image: -webkit-linear-gradient(bottom, rgb(238,238,238) 100%, rgb(221,221,221) 0%);
+	background-image: -ms-linear-gradient(bottom, rgb(238,238,238) 100%, rgb(221,221,221) 0%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(1, rgb(238,238,238)),
+		color-stop(0, rgb(221,221,221))
+	);
+}
 #lightboxRendering > .ClassName {
 	margin: 0;
 }

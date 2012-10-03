@@ -69,6 +69,22 @@ table .rendering {
 	padding: 2px;
 	float: none;
 }
+/* nice css3 gradient */
+.printOut, #lightboxContentWrapper {
+	background-image: linear-gradient(bottom, rgb(238,238,238) 0%, rgb(255,255,255) 100%);
+	background-image: -o-linear-gradient(bottom, rgb(238,238,238) 0%, rgb(255,255,255) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(238,238,238) 0%, rgb(255,255,255) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(238,238,238) 0%, rgb(255,255,255) 100%);
+	background-image: -ms-linear-gradient(bottom, rgb(238,238,238) 0%, rgb(255,255,255) 100%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0, rgb(238,238,238)),
+		color-stop(1, rgb(255,255,255))
+	);
+}
 .level1 {
 	cursor: pointer;
 }

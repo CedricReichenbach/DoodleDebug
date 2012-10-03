@@ -160,6 +160,3 @@ function toPrevElement() {
 }
 
 document.onkeypress = keyPressEvent;
-
-/* osterei */
-
