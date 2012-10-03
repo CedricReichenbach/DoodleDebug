@@ -64,4 +64,4 @@ Export-Package: de.root1.simon,
  org.slf4j.helpers,
  org.slf4j.impl,
  org.slf4j.spi
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
