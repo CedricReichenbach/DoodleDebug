@@ -44,4 +44,4 @@ Export-Package: com.google.inject,
  javax.inject,
  org.aopalliance.aop,
  org.aopalliance.intercept
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
