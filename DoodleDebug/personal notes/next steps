@@ -11,3 +11,5 @@
 - Maybe break down tutorial into tutorial & documentation
 
 - Broken key navigation (.preventDefault()!)
+
+- remove unused stuff from client fat jar (e.g. guice)

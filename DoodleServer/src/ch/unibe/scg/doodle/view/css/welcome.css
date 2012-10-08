@@ -7,7 +7,7 @@ hr {
 	height: 30px;
 }
 
-#welcomeTitle, #info/*, #background*/ {
+#welcomeTitle, #tutorial, #shortTut, #info/*, #background*/ {
 	display: inline;
 	padding: 4px;
 	border-radius: 3px;
@@ -28,6 +28,27 @@ hr {
 	background-color: #0af;
 }
 
+#shortTut {
+	display: inline-block;
+	background-color: #0fa;
+}
+#shortTut h3 {
+	margin: 2pt;
+}
+#shortTut code {
+	font-size: 12pt;
+	background-color: #aff;
+	padding: 1pt;
+	margin: 2pt;
+}
+
+#tutorial {
+	background-color: #df0;
+}
+
 #info {
-	background-color: #af0;
+	background-color: #fc4;
+}
+#info a {
+	color: #333;
 }

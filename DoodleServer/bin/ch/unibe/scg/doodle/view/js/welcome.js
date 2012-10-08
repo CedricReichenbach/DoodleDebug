@@ -1,15 +1,12 @@
 function appearWelcome() {
 	var title = document.getElementById('welcomeTitle');
 	var e = new Effect.Grow(title);
-	setTimeout("appearInfo()", 500);
+	setTimeout("appear('shortTut')", 500);
+	setTimeout("appear('tutorial')", 1000);
+	setTimeout("appear('info')", 1500);
 }
 
-function appearInfo() {
-	var info = document.getElementById('info');
-	new Effect.Grow(info);
-	setTimeout("infoVisible()", 50);
-}
-
-function infoVisible() {
-	info.style.visibility = "visible";
+function appear(name) {
+	var element = document.getElementById(name);
+	new Effect.Grow(element);
 }
