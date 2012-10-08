@@ -132,9 +132,11 @@ public class RealScratch implements Scratch {
 	}
 
 	private void writeClassName(String name, Tag tag) {
-		Tag span = new Tag("div", "class=ClassName");
-		span.add(name);
-		tag.add(span);
+		Tag div = new Tag("div", "class=ClassName");
+		Tag classNameWrapper = new Tag("div", "class=classNameText");
+		classNameWrapper.add(name);
+		div.add(classNameWrapper);
+		tag.add(div);
 	}
 
 	private void addLink(Tag tag) {
@@ -168,7 +170,8 @@ public class RealScratch implements Scratch {
 	@SuppressWarnings("unchecked")
 	protected void renderUsingPlugin(Tag tag, RenderingPlugin plugin)
 			throws DoodleRenderException {
-//		plugin.getClass().getMethod("render", Object.class, Tag.class).invoke(null, null);
+		// plugin.getClass().getMethod("render", Object.class,
+		// Tag.class).invoke(null, null);
 		plugin.render(object, tag);
 	}
 

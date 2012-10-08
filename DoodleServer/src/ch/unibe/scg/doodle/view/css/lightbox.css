@@ -115,5 +115,9 @@
 	);
 }
 #lightboxRendering > .ClassName {
-	margin: 0;
+	margin-bottom: 3px;
+}
+#lightboxRendering > .ClassName .classNameText {
+	border-radius: 3px;
+	box-shadow: 0 0 2px rgba(0, 72, 54, 0.3);
 }
