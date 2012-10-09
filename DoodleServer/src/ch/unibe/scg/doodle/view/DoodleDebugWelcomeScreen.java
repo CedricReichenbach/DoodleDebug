@@ -6,6 +6,7 @@ import java.util.List;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.server.util.DoodleFiles;
 import ch.unibe.scg.doodle.server.util.DoodleImages;
+import ch.unibe.scg.doodle.server.views.DoodleLocationCodes;
 import ch.unibe.scg.doodle.view.css.CSSUtil;
 
 public class DoodleDebugWelcomeScreen extends HtmlDocument {
@@ -55,26 +56,24 @@ public class DoodleDebugWelcomeScreen extends HtmlDocument {
 
 		background.add(Tag.hr());
 
-		Tag fullTutorial = new Tag("h3", "id=tutorial",
-				"style=display:none");
+		Tag fullTutorial = new Tag("h3", "id=tutorial", "style=display:none");
 		Tag tutLink = new Tag("a");
-		tutLink.addAttribute("href",
-				DoodleFiles.getResolvedFileURL("tutorials/dd-tutorial.html")
+		tutLink.addAttribute("href", DoodleLocationCodes.EXTERNAL_LINK_PREFIX
+				+ DoodleFiles.getResolvedFileURL("tutorials/dd-tutorial.html")
 						.toExternalForm());
-		tutLink.addAttribute("target", "_blank");
 		tutLink.add("Complete Tutorial");
 		fullTutorial.addAttribute("style", "display:none");
 		fullTutorial.add(tutLink);
 		background.add(fullTutorial);
-		
+
 		background.add(Tag.hr());
 
 		Tag info = new Tag("div", "id=info");
-		Tag infoLink = new Tag("a", "href=" + DD_WIKI);
-		infoLink.addAttribute("target", "_blank");
+		Tag infoLink = new Tag("a", "href="
+				+ DoodleLocationCodes.EXTERNAL_LINK_PREFIX + DD_WIKI);
 		infoLink.add(DD_WIKI);
 		info.add(infoLink);
-		info.addAttribute("style","display:none");
+		info.addAttribute("style", "display:none");
 		background.add(info);
 
 		body.add(background);
