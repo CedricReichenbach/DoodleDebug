@@ -11,3 +11,5 @@
 - DD has veery long to render a int[200][120][3] (see study usecase "c_matrix")
 
 - Stop server always before starting it (for when last shutdown was not correct)
+
+- Eclipse suggests to import DD library, when actually JUnit is needed...
