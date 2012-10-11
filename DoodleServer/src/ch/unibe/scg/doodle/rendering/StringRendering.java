@@ -14,7 +14,7 @@ public class StringRendering implements Rendering<String> {
 	@Override
 	public void render(String string, Tag tag) {
 		Tag p = new Tag("p", "class=StringRendering");
-
+		
 		p.add(replaceEscapeSeq(string));
 		tag.add(p);
 	}
