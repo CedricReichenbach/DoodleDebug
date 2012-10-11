@@ -139,4 +139,4 @@ Export-Package: com.bea.xml.stream,
  org.w3c.dom,
  org.xmlpull.mxp1,
  org.xmlpull.v1
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

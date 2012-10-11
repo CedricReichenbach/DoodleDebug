@@ -2,14 +2,19 @@ package ch.unibe.scg.doodle.server.views;
 
 import static ch.unibe.scg.doodle.server.views.DoodleLocationCodes.DOODLE_DEBUG_PREFIX;
 import static ch.unibe.scg.doodle.server.views.DoodleLocationCodes.JAVA_FILE_LINK_PREFIX;
+import static ch.unibe.scg.doodle.server.views.DoodleLocationCodes.EXTERNAL_LINK_PREFIX;
 import static ch.unibe.scg.doodle.server.views.DoodleLocationCodes.LIGHTBOX_CLOSE;
 import static ch.unibe.scg.doodle.server.views.DoodleLocationCodes.LIGHTBOX_STACK_OFFSET;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.eclipse.swt.browser.LocationEvent;
 import org.eclipse.swt.browser.LocationListener;
 
 import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 import ch.unibe.scg.doodle.server.DoodleServer;
+import ch.unibe.scg.doodle.util.SystemUtil;
 
 /**
  * Listener for browser which DoodleDebug renders into. Listens to location
@@ -23,10 +28,24 @@ public class DoodleLocationListener implements LocationListener {
 
 	@Override
 	public void changing(LocationEvent event) {
-		if (event.location.startsWith(DOODLE_DEBUG_PREFIX))
+		if (event.location.startsWith(EXTERNAL_LINK_PREFIX)) {
+			handleExternalLink(event);
+		} else if (event.location.startsWith(DOODLE_DEBUG_PREFIX))
 			handleDoodledebugLocationEvent(event);
 		else if (event.location.startsWith(JAVA_FILE_LINK_PREFIX))
 			handleJavaFileLocationEvent(event);
+	}
+
+	void handleExternalLink(LocationEvent event) {
+		URL url;
+		try {
+			url = new URL(event.location.replaceFirst(EXTERNAL_LINK_PREFIX,
+					""));
+		} catch (MalformedURLException e) {
+			throw new RuntimeException();
+		}
+		SystemUtil.openInBrowser(url);
+		event.doit = false;
 	}
 
 	private void handleDoodledebugLocationEvent(LocationEvent event) {

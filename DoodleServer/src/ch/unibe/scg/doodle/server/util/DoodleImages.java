@@ -21,6 +21,15 @@ public class DoodleImages {
 				.toString();
 	}
 
+	/**
+	 * Osterei
+	 * @return
+	 */
+	public static String getOeImageFilePath() {
+		return DoodleFiles.getFilePath("/img/oe-tile.gif").toFile().toURI()
+				.toString();
+	}
+
 	public static ImageDescriptor getTutorialIcon() {
 		return ImageDescriptor.createFromURL(DoodleFiles
 				.getResolvedFileURL("/icons/tutorial-icon.png"));

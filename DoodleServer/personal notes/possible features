@@ -1,0 +1,14 @@
+
+
+~~~ probably for master thesis ~~~
+
+- Search
+
+- Groovy-like command line for rendered object (see eclipse's "inspect" in debugger)
+
+- Inspector on rendered objects (like a debugger)
+
+- Dynamic update of objects / Diffs
+
+- Nice way to show canonical name instead of only simple name of class
+	(e.g. by right-click, tool tip or hover)

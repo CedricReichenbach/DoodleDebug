@@ -1,32 +1,21 @@
 package ch.unibe.scg.doodle;
 
-import java.awt.Desktop;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.net.URI;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import org.eclipse.swt.widgets.Display;
-import org.omg.CosNaming.NamingContextPackage.CannotProceed;
 
 import ch.unibe.scg.doodle.helperClasses.CannotRenderMessage;
 import ch.unibe.scg.doodle.helperClasses.NullObject;
 import ch.unibe.scg.doodle.htmlgen.Attribute;
-import ch.unibe.scg.doodle.htmlgen.Attributes;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 import ch.unibe.scg.doodle.server.DoodleServer;
 import ch.unibe.scg.doodle.server.LightboxStack;
 import ch.unibe.scg.doodle.server.util.DoodleImages;
-import ch.unibe.scg.doodle.server.views.DoodleLocationCodes;
 import ch.unibe.scg.doodle.server.views.HtmlShow;
 import ch.unibe.scg.doodle.server.views.JavascriptExecuter;
-import ch.unibe.scg.doodle.util.FileUtil;
 import ch.unibe.scg.doodle.util.JavascriptCallsUtil;
 import ch.unibe.scg.doodle.view.CSSCollection;
 import ch.unibe.scg.doodle.view.HtmlDocument;

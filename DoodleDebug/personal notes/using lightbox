@@ -1,5 +1,0 @@
-1. Create elements with following ids:
-<div id="overlay"></div>
-<div id="lightbox">Hi, I'm lightbox content.</div>
-
-2. Call JS function "updateLightbox()"

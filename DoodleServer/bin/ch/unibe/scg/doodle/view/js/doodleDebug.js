@@ -91,9 +91,15 @@ function keyPressEvent(event) {
 	} else if (event.keyCode) {
     	var code = event.keyCode;
 	}
-	keyPressed(code);
+	if (keyPressed(code)) {
+		event.preventDefault();
+	}
 }
 
+/**
+ * Checks code and initiates actions if necessary.
+ * Returns true if custom action was triggered and false if default should be executed.
+ */
 function keyPressed(code) {
 	var j = 106;
 	var k = 107;
@@ -113,7 +119,10 @@ function keyPressed(code) {
 	case backspace:
 		breadcrumbsBack(1);
 		break;
+	default:
+		return false;
 	}
+	return true;
 }
 
 /**

@@ -43,6 +43,11 @@ public class LightboxStack implements Cloneable {
 	 */
 	public void cutOffTop(int num) {
 		for (int i = 0; i < num; i++) {
+			if (this.tail == null) {
+				System.err
+						.println("LightboxStack: Cannot go back one more (only one on stack)");
+				return;
+			}
 			this.top = tail.top;
 			this.tail = this.tail.tail;
 		}

@@ -7,6 +7,7 @@ import ch.unibe.scg.doodle.plugins.RenderingPlugin;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.ConversionException;
+import com.thoughtworks.xstream.core.TreeMarshaller.CircularReferenceException;
 import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
 
 import de.root1.simon.Lookup;
@@ -27,6 +28,13 @@ public class SimonClient implements SimonClientInterface {
 	private Lookup lookup;
 	private SimonServerInterface server;
 	private Registry registry;
+	/**
+	 * In JSON format
+	 */
+	private XStream jstream;
+	/**
+	 * IN XML format
+	 */
 	private XStream xstream;
 
 	public SimonClient() throws LookupFailedException,
@@ -34,8 +42,10 @@ public class SimonClient implements SimonClientInterface {
 		this.lookup = Simon.createNameLookup("localhost", PORT);
 		server = (SimonServerInterface) lookup.lookup("DoodleServer");
 
-		this.xstream = new XStream(new JettisonMappedXmlDriver());
-		 xstream.setMode(XStream.NO_REFERENCES);
+		this.jstream = new XStream(new JettisonMappedXmlDriver());
+		jstream.setMode(XStream.NO_REFERENCES);
+
+		this.xstream = new XStream();
 	}
 
 	public void stop() {
@@ -47,18 +57,38 @@ public class SimonClient implements SimonClientInterface {
 	@Override
 	public void sendObject(Object object) {
 		try {
+			String objectAsXML = jstream.toXML(object);
+			server.renderObject(objectAsXML, false);
+		} catch (CircularReferenceException e) {
+			// JSON problems -> try in XML
 			String objectAsXML = xstream.toXML(object);
-			server.renderObject(objectAsXML);
+			server.renderObject(objectAsXML, true);
 		} catch (ConversionException e) {
-			server.couldNotSend(object.getClass().getCanonicalName());
+			showConversionError(object, e);
 		}
 	}
 
 	@Override
 	public void sendObjects(Object object, Object[] objects) {
-		String objectAsXML = xstream.toXML(object);
-		String objectArrAsXML = xstream.toXML(objects);
-		server.renderObjects(objectAsXML, objectArrAsXML);
+		try {
+			String objectAsXML = jstream.toXML(object);
+			String objectArrAsXML = jstream.toXML(objects);
+			server.renderObjects(objectAsXML, objectArrAsXML, false);
+		} catch (CircularReferenceException e) {
+			// JSON problems -> try in XML
+			String objectAsXML = xstream.toXML(object);
+			String objectArrAsXML = xstream.toXML(objects);
+			server.renderObjects(objectAsXML, objectArrAsXML, true);
+		} catch (ConversionException e) {
+			showConversionError(object, e);
+		}
+	}
+
+	void showConversionError(Object object, ConversionException e) {
+		System.err.println("DoodleDebug: Could not serialize object ("
+				+ object.getClass().getCanonicalName() + ") for sending");
+		System.err.println("cause: " + e.getMessage());
+		server.couldNotSend(object.getClass().getCanonicalName());
 	}
 
 	public void clearOutput() {
@@ -70,7 +100,7 @@ public class SimonClient implements SimonClientInterface {
 	}
 
 	public void addPlugins(Collection<RenderingPlugin> plugins) {
-		String pluginsAsXML = xstream.toXML(plugins);
+		String pluginsAsXML = jstream.toXML(plugins);
 		server.addPlugins(pluginsAsXML);
 	}
 

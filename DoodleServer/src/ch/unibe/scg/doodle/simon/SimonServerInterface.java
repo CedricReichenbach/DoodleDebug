@@ -1,9 +1,9 @@
 package ch.unibe.scg.doodle.simon;
 
 public interface SimonServerInterface {
-	public void renderObject(String objectAsXML);
+	public void renderObject(String objectAsXML, boolean xml);
 
-	public void renderObjects(String objectAsXML, String objectArrayAsXML);
+	public void renderObjects(String objectAsXML, String objectArrayAsXML, boolean xml);
 
 	public void clearOutput();
 

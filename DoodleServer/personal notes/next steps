@@ -1,0 +1,8 @@
+- Don't always set focus to DD tab!
+
+- Generics using reflection
+	-> http://www.coderanch.com/t/383648/java/java/java-reflection-element-type-List
+
+- Maybe break down tutorial into tutorial & documentation
+
+- probably use local Roboto font file as fallback

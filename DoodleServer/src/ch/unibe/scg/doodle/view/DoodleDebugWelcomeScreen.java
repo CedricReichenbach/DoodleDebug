@@ -3,14 +3,15 @@ package ch.unibe.scg.doodle.view;
 import java.net.URL;
 import java.util.List;
 
-import org.eclipse.core.resources.ResourcesPlugin;
-
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.server.util.DoodleFiles;
 import ch.unibe.scg.doodle.server.util.DoodleImages;
+import ch.unibe.scg.doodle.server.views.DoodleLocationCodes;
 import ch.unibe.scg.doodle.view.css.CSSUtil;
 
 public class DoodleDebugWelcomeScreen extends HtmlDocument {
+
+	private static final String DD_WIKI = "http://scg.unibe.ch/wiki/projects/doodledebug";
 
 	public DoodleDebugWelcomeScreen() {
 		super();
@@ -38,20 +39,43 @@ public class DoodleDebugWelcomeScreen extends HtmlDocument {
 		Tag background = new Tag("div", "id=background");
 		Tag welcome = new Tag("h1", "id=welcomeTitle");
 		welcome.add("Welcome to DoodleDebug!");
+		welcome.addAttribute("style", "display:none");
 		background.add(welcome);
 
 		background.add(Tag.hr());
 
-		Tag info = new Tag("h3", "id=info", "style=visibility:hidden");
+		Tag shortTut = new Tag("div", "id=shortTut");
+		Tag shortTutTitle = new Tag("h3");
+		shortTutTitle.add("Ultra-short Tutorial:");
+		shortTut.add(shortTutTitle);
+		Tag code = new Tag("code");
+		code.add("Doo.dle(object);");
+		shortTut.add(code);
+		shortTut.addAttribute("style", "display:none");
+		background.add(shortTut);
 
+		background.add(Tag.hr());
+
+		Tag fullTutorial = new Tag("h3", "id=tutorial", "style=display:none");
 		Tag tutLink = new Tag("a");
-		tutLink.addAttribute("href",
-				DoodleFiles.getResolvedFileURL("tutorials/dd-tutorial.html")
+		tutLink.addAttribute("href", DoodleLocationCodes.EXTERNAL_LINK_PREFIX
+				+ DoodleFiles.getResolvedFileURL("tutorials/dd-tutorial.html")
 						.toExternalForm());
-		tutLink.addAttribute("target", "_blank");
-		tutLink.add("Tutorial");
-		info.add(tutLink);
+		tutLink.add("Complete Tutorial");
+		fullTutorial.addAttribute("style", "display:none");
+		fullTutorial.add(tutLink);
+		background.add(fullTutorial);
+
+		background.add(Tag.hr());
+
+		Tag info = new Tag("div", "id=info");
+		Tag infoLink = new Tag("a", "href="
+				+ DoodleLocationCodes.EXTERNAL_LINK_PREFIX + DD_WIKI);
+		infoLink.add(DD_WIKI);
+		info.add(infoLink);
+		info.addAttribute("style", "display:none");
 		background.add(info);
+
 		body.add(background);
 		return body;
 	}

@@ -78,11 +78,11 @@ public class CollectionPlugin extends AbstractPlugin {
 
 		if (checkIfElementsSameType((Collection<?>) collection)
 				&& !((Collection<?>) collection).isEmpty())
-			return super.getObjectTypeName(iterator != null ? iterator
-					: collection)
-					+ " of "
+			return (iterator != null ? iterator : collection).getClass()
+					.getSimpleName()
+					+ " ("
 					+ ((Collection<?>) collection).iterator().next().getClass()
-							.getSimpleName();
+							.getSimpleName() + " elements)";
 		return super.getObjectTypeName(collection);
 	}
 
