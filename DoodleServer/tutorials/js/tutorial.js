@@ -1,4 +1,4 @@
-document.observe("dom:loaded", initMenu);
+document.observe('dom:loaded', initMenu);
 
 function initMenu() {
 	var titles = $$('.title');
@@ -31,14 +31,14 @@ function insertTopLink(title) {
 	title.insert(a);
 }
 
-var visible = false;
+var visible = new Array();
 function switchExpand(id) {
-	if (visible) {
-		Effect.BlindUp(id);
-		visible = false;
+	if (visible[id]) {
+		Effect.BlindUp(id, {duration: 0.5});
+		visible[id] = false;
 	} else {
-		Effect.BlindDown(id);
-		visible = true;
+		Effect.BlindDown(id, {duration: 0.5});
+		visible[id] = true;
 	}
 	
 	//var tag = document.getElementById(id);
