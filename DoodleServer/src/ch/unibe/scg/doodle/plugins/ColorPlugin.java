@@ -37,7 +37,11 @@ public class ColorPlugin extends AbstractPlugin {
 		String main = ".ColorPlugin {padding:2px;} ";
 		String small = ".ColorPlugin.smallRendering {padding:4px}";
 		String dark = ".ColorPlugin.darkColor {color: white;}";
-		return main + small + dark;
+//		String parts = ".ColorPlugin .redPart {background-color: red;}" +
+//				".ColorPlugin .greenPart {background-color: lime;}" +
+//				".ColorPlugin .bluePart {background-color: blue;}" +
+//				".ColorPlugin .alphaPart {background-color: gray;}";
+		return main + small + dark /*+ parts*/;
 	}
 
 }

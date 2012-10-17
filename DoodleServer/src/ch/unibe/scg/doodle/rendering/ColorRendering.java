@@ -35,10 +35,19 @@ public class ColorRendering implements Rendering<Color> {
 
 	private String colorString(Color color) {
 		int r = color.getRed();
+		String red = makeSpan("redPart", r);
 		int g = color.getGreen();
+		String green = makeSpan("greenPart", g);
 		int b = color.getBlue();
+		String blue = makeSpan("bluePart", b);
 		int a = color.getAlpha();
-		return "RGB&alpha;: (" + r + ", " + g + ", " + b + ", " + a + ")";
+		String alpha = makeSpan("alphaPart", a);
+		return "RGB&alpha;: (" + red + ", " + green + ", " + blue + ", "
+				+ alpha + ")";
+	}
+
+	private String makeSpan(String className, int number) {
+		return "<span class=\"" + className + "\">" + number + "</span>";
 	}
 
 	private String rgbaColorString(Color color) {
