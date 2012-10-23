@@ -60,34 +60,30 @@ public class FieldDoodlerRendering implements Rendering<Object> {
 
 	static void renderScope(AccessibleObject object, Tag tag) {
 		Tag scope = new Tag("div", "class=scope");
-		Tag p = new Tag("p");
 
 		int mod = 0;
-		if (object instanceof Field)
+		if (object instanceof Field) {
+			scope.addCSSClass("field");
 			mod = ((Field) object).getModifiers();
-		else if (object instanceof Method)
+		} else if (object instanceof Method) {
+			scope.addCSSClass("method");
 			mod = ((Method) object).getModifiers();
-		else
+		} else
 			return;
 		if (Modifier.isPublic(mod)) {
 			scope.addCSSClass("public");
-			p.add("+");
 		} else if (Modifier.isProtected(mod)) {
 			scope.addCSSClass("protected");
-			p.add("#");
 		} else if (Modifier.isPrivate(mod)) {
 			scope.addCSSClass("private");
-			p.add("-");
 		} else { // default/package scope
 			scope.addCSSClass("default");
-			p.add("~");
 		}
 
 		if (Modifier.isStatic(mod)) {
 			tag.addCSSClass("static");
 		}
 
-		scope.add(p);
 		tag.add(scope);
 	}
 

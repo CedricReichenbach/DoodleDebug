@@ -9,6 +9,7 @@ import ch.unibe.scg.doodle.api.FieldDoodler;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.rendering.DoodleRenderException;
 import ch.unibe.scg.doodle.rendering.FieldDoodlerRendering;
+import ch.unibe.scg.doodle.server.util.EclipseIconUtil;
 
 /**
  * Plugin to print all fields of a class.
@@ -61,21 +62,37 @@ public class FieldDoodlerPlugin extends AbstractPlugin {
 		return "."
 				+ pluginClass
 				+ " .scope "
-				+ "{float: left; margin-left: 2px; height: 1.5em; width: 1.5em; text-align: center;"
-				+ "border-width: 1px 0 1px 1px; border-style: solid; border-color: #DDD;"
-				+ "box-shadow: -9px 0 12px -10px rgba(0,0,0,0.5) inset;}"
+				+ "{float: left; margin-left: 1px; height: 1em; width: 1em; position: relative; right: -1px;"
+				+ "border-width: 1px 0 1px 1px; border-style: solid; border-color: #DDD; padding: 2px;"
+				+ "background-color: whitesmoke; background-position: center; background-repeat: no-repeat;}"
+				+"."
+				+ pluginClass
+				+" .scope.field"
+				+"{border-style: dotted;}"
+				+"."
+				+ pluginClass
+				+" .scope.method"
+				+"{border-style: dashed;}"
 				+ "."
 				+ pluginClass
-				+ " .scope.public {background-color: #8f8; border-color: #6d6;}"
+				+ " .scope.field.public {background-image: url('"
+				+ EclipseIconUtil.getIcon(EclipseIconUtil.PUBLIC_FIELD).toURI()
+				+ "')}"
 				+ "."
 				+ pluginClass
-				+ " .scope.protected {background-color: #ff4; border-color: #dd0;}"
+				+ " .scope.method.public {background-image: url('"
+				+ EclipseIconUtil.getIcon(EclipseIconUtil.PUBLIC_METHOD)
+						.toURI()
+				+ "')}"
 				+ "."
 				+ pluginClass
-				+ " .scope.private {background-color: #fcc; border-color: #d99;}"
+				+ " .scope.protected {}"
 				+ "."
 				+ pluginClass
-				+ " .scope.default {background-color: #0df; border-color: #0bd;}"
+				+ " .scope.private {}"
+				+ "."
+				+ pluginClass
+				+ " .scope.default {}"
 				+ "."
 				+ pluginClass
 				+ " .scope p {position: relative; bottom: 0.75em; margin-right: 1px;}";

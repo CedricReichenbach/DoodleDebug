@@ -35,11 +35,11 @@ public class ClassPlugin extends AbstractPlugin {
 		return wrapperCSS()
 				+ elementCSS()
 				+ FieldDoodlerPlugin.scopeCSS("ClassPlugin")
-				+ ".ClassPlugin .static .scope {border-bottom-style: double; border-bottom-width: 3px;}";
+				+ ".ClassPlugin .static .scope {}";
 	}
 
 	private String wrapperCSS() {
-		return ".ClassPlugin .wrapper {margin: 3px 0;}";
+		return ".ClassPlugin .wrapper {margin: 3px 0; white-space: nowrap;}";
 	}
 
 	private String elementCSS() {

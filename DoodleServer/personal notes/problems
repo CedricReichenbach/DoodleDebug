@@ -13,3 +13,5 @@
 - Stop server always before starting it (for when last shutdown was not correct)
 
 - Eclipse suggests to import DD library, when actually JUnit is needed...
+
+- Problems when running first time -> JDT icon loading problems? (maybe not saved yet in temp dir)
