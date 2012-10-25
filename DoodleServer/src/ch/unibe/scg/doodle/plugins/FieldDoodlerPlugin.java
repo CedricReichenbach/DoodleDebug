@@ -50,7 +50,7 @@ public class FieldDoodlerPlugin extends AbstractPlugin {
 	}
 
 	private String fieldCSS() {
-		return ".FieldDoodlerPlugin .fieldWrapper {margin: 3px 0;}"
+		return ".FieldDoodlerPlugin .fieldWrapper {margin: 3px 0; white-space: nowrap;}"
 				+ ".FieldDoodlerPlugin .field {border: 1px dotted #ccc; display: inline-block; padding: 1px; min-height: 1.5em; background-color: whitesmoke;}"
 				+ ".FieldDoodlerPlugin .content {margin-left: 0.5em;}"
 				+ ".FieldDoodlerPlugin .content, .FieldDoodlerPlugin .scope, .FieldDoodlerPlugin .name"
@@ -65,15 +65,25 @@ public class FieldDoodlerPlugin extends AbstractPlugin {
 				+ "{float: left; margin-left: 1px; height: 1em; width: 1em; position: relative; right: -1px;"
 				+ "border-width: 1px 0 1px 1px; border-style: solid; border-color: #DDD; padding: 2px;"
 				+ "background-color: whitesmoke; background-position: center; background-repeat: no-repeat;}"
-				+"."
-				+ pluginClass
-				+" .scope.field"
-				+"{border-style: dotted;}"
-				+"."
-				+ pluginClass
-				+" .scope.method"
-				+"{border-style: dashed;}"
 				+ "."
+				+ pluginClass
+				+ " .scope.field"
+				+ "{border-style: dotted;}"
+				+ "."
+				+ pluginClass
+				+ " .scope.method"
+				+ "{border-style: dashed;}"
+				+ publicScopeCSS(pluginClass)
+				+ protectedScopeCSS(pluginClass)
+				+ privateScopeCSS(pluginClass)
+				+ defaultScopeCSS(pluginClass)
+				+ "."
+				+ pluginClass
+				+ " .scope p {position: relative; bottom: 0.75em; margin-right: 1px;}";
+	}
+
+	private static String publicScopeCSS(String pluginClass) {
+		return "."
 				+ pluginClass
 				+ " .scope.field.public {background-image: url('"
 				+ EclipseIconUtil.getIcon(EclipseIconUtil.PUBLIC_FIELD).toURI()
@@ -82,20 +92,49 @@ public class FieldDoodlerPlugin extends AbstractPlugin {
 				+ pluginClass
 				+ " .scope.method.public {background-image: url('"
 				+ EclipseIconUtil.getIcon(EclipseIconUtil.PUBLIC_METHOD)
+						.toURI() + "')}";
+	}
+
+	private static String protectedScopeCSS(String pluginClass) {
+		return "."
+				+ pluginClass
+				+ " .scope.field.protected {background-image:url('"
+				+ EclipseIconUtil.getIcon(EclipseIconUtil.PROTECTED_FIELD)
 						.toURI()
 				+ "')}"
 				+ "."
 				+ pluginClass
-				+ " .scope.protected {}"
+				+ " .scope.method.protected {background-image:url('"
+				+ EclipseIconUtil.getIcon(EclipseIconUtil.PROTECTED_METHOD)
+						.toURI() + "')}";
+	}
+
+	private static String privateScopeCSS(String pluginClass) {
+		return "."
+				+ pluginClass
+				+ " .scope.field.private {background-image:url('"
+				+ EclipseIconUtil.getIcon(EclipseIconUtil.PRIVATE_FIELD)
+						.toURI()
+				+ "')}"
 				+ "."
 				+ pluginClass
-				+ " .scope.private {}"
+				+ " .scope.method.private {background-image:url('"
+				+ EclipseIconUtil.getIcon(EclipseIconUtil.PRIVATE_METHOD)
+						.toURI() + "')}";
+	}
+
+	private static String defaultScopeCSS(String pluginClass) {
+		return "."
+				+ pluginClass
+				+ " .scope.field.default {background-image:url('"
+				+ EclipseIconUtil.getIcon(EclipseIconUtil.DEFAULT_FIELD)
+						.toURI()
+				+ "')}"
 				+ "."
 				+ pluginClass
-				+ " .scope.default {}"
-				+ "."
-				+ pluginClass
-				+ " .scope p {position: relative; bottom: 0.75em; margin-right: 1px;}";
+				+ " .scope.method.default {background-image:url('"
+				+ EclipseIconUtil.getIcon(EclipseIconUtil.DEFAULT_METHOD)
+						.toURI() + "')}";
 	}
 
 	private String smallCSS() {
