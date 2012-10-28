@@ -1,5 +1,8 @@
 package ch.unibe.scg.doodle.server.util;
 
+import java.io.File;
+import java.net.URISyntaxException;
+
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 
@@ -21,8 +24,13 @@ public class DoodleImages {
 				.toString();
 	}
 
+	public static File getLoadingErrorIcon() {
+		return DoodleFiles.getFilePath("/img/loading-error.png").toFile();
+	}
+
 	/**
 	 * Osterei
+	 * 
 	 * @return
 	 */
 	public static String getOeImageFilePath() {

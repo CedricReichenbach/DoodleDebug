@@ -28,7 +28,25 @@ public class EclipseIconUtil {
 
 	public static File getIcon(String iconName) {
 		ISharedImages images = JavaUI.getSharedImages();
-		Image image = images.getImage(iconName);
+
+		// XXX: Some strange racing condition occurs here...
+		Image image = null;
+		int count = 0;
+		while (image == null) {
+			try {
+				image = images.getImage(iconName);
+			} catch (NullPointerException e) {
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e1) {
+					throw new RuntimeException(e1);
+				}
+			}
+			count++;
+			if (count >= 20)
+				return DoodleImages.getLoadingErrorIcon();
+		}
+
 		File imgFile = new File(imgDir, "/img" + image.hashCode() + ".png");
 		createFile(image, imgFile);
 		return imgFile;

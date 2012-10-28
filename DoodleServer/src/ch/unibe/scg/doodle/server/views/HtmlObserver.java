@@ -29,6 +29,7 @@ public class HtmlObserver {
 	}
 
 	private void storeToFile(File file, String html) {
+		file.getParentFile().mkdirs();
 		try {
 			new File(file.getParent()).mkdirs();
 			FileOutputStream stream = new FileOutputStream(file);
