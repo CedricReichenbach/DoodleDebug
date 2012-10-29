@@ -127,7 +127,7 @@ public class FieldDoodlerPlugin extends AbstractPlugin {
 		return "."
 				+ pluginClass
 				+ " .scope.field.default {background-image:url('"
-				+ EclipseIconUtil.getIcon("huhu"/*EclipseIconUtil.DEFAULT_FIELD*/)
+				+ EclipseIconUtil.getIcon(EclipseIconUtil.DEFAULT_FIELD)
 						.toURI()
 				+ "')}"
 				+ "."

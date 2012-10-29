@@ -15,3 +15,5 @@
 - Eclipse suggests to import DD library, when actually JUnit is needed...
 
 - Problems when running first time -> JDT icon loading problems? (maybe not saved yet in temp dir)
+
+- Problems with multiple eclipse instances running DoodleDebug (bc. using same address/port)
