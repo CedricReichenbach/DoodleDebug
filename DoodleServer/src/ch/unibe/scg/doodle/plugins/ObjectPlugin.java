@@ -35,7 +35,7 @@ public class ObjectPlugin extends AbstractPlugin {
 
 	@Override
 	public void render(Object object, Tag tag) throws DoodleRenderException {
-		if (insideMax(object) && !isNumber(object))
+		if (insideRange(object) && !isNumber(object))
 			fieldDoodlerPlugin.render(object, tag);
 		else
 			stringPlugin.render(object.toString(), tag);
@@ -45,8 +45,9 @@ public class ObjectPlugin extends AbstractPlugin {
 		return object instanceof Number;
 	}
 
-	boolean insideMax(Object object) {
-		return numberOfNonstaticFields(object) <= MAX_FIELDS;
+	boolean insideRange(Object object) {
+		int numberOfFields = numberOfNonstaticFields(object);
+		return numberOfFields <= MAX_FIELDS;
 	}
 
 	private int numberOfNonstaticFields(Object object) {
@@ -62,7 +63,7 @@ public class ObjectPlugin extends AbstractPlugin {
 	@Override
 	public void renderSimplified(Object object, Tag tag) {
 		stringPlugin.render(object.toString(), tag);
-//		fieldDoodlerPlugin.renderSimplified(object, tag);
+		// fieldDoodlerPlugin.renderSimplified(object, tag);
 	}
 
 	@Override

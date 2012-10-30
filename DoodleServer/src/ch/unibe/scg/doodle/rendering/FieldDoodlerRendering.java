@@ -29,6 +29,11 @@ public class FieldDoodlerRendering implements Rendering<Object> {
 			field.setAccessible(true);
 			renderField(object, field, tag);
 		}
+		if (fields.isEmpty()) {
+			Tag i = new Tag("i", "class=noFieldsMessage");
+			i.add("(no fields declared)");
+			tag.add(i);
+		}
 	}
 
 	private void renderField(Object object, Field field, Tag tag)

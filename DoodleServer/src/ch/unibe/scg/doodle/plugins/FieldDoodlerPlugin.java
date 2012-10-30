@@ -55,7 +55,8 @@ public class FieldDoodlerPlugin extends AbstractPlugin {
 				+ ".FieldDoodlerPlugin .content {margin-left: 0.5em;}"
 				+ ".FieldDoodlerPlugin .content, .FieldDoodlerPlugin .scope, .FieldDoodlerPlugin .name"
 				+ "{display: inline-block;}"
-				+ ".FieldDoodlerPlugin .name {float: left; margin: 1px 2px; font-weight: 500;}";
+				+ ".FieldDoodlerPlugin .name {float: left; margin: 1px 2px; font-weight: 500;}"
+				+ ".FieldDoodlerPlugin .noFieldsMessage {color: rgba(0,0,0,0.5);}";
 	}
 
 	static String scopeCSS(String pluginClass) {

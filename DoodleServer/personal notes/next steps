@@ -10,3 +10,5 @@
 - Enable beta info on beta version online
 
 - ClassRendering: Show scope of inner classes too, e.g. similar rendering to fields/methods
+
+- Class rendering: Interfaces? Icon of static members?
