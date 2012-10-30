@@ -24,7 +24,7 @@ public class NullPlugin extends AbstractPlugin {
 
 	@Override
 	public String getObjectTypeName(Object o) {
-		return "&nbsp;"; // null has no type
+		return "-"; // null has no type
 	}
 
 	@Override
