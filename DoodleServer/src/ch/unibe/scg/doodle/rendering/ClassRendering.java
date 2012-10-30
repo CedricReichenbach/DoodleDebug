@@ -33,32 +33,33 @@ public class ClassRendering implements Rendering<Class<?>> {
 		List<Class<?>> innerClasses = Arrays.asList(classObject
 				.getDeclaredClasses());
 		for (Class c : innerClasses) {
-			Tag inner = new Tag("div", "class=innerClass");
-			doodler.renderInlineInto(c, inner);
-			tag.add(inner);
+			Tag wrapper = new Tag("div", "class=wrapper");
+			renderInnerClass(c, wrapper);
+			tag.add(wrapper);
+			// Tag inner = new Tag("div", "class=innerClass");
+			// doodler.renderInlineInto(c, inner);
+			// tag.add(inner);
 		}
 	}
 
 	private void renderField(Field field, Tag tag) {
 		FieldDoodlerRendering.renderScope(field, tag);
 		Tag element = new Tag("div", "class=element");
-		element.addCSSClass("field");
-		
+
 		Tag typeSpan = new Tag("span", "class=fieldType");
-		typeSpan.add(field.getType().getSimpleName()+" ");
+		typeSpan.add(field.getType().getSimpleName() + " ");
 		element.add(typeSpan);
 
-		Tag nameSpan = new Tag("span", "class=name");		
+		Tag nameSpan = new Tag("span", "class=name");
 		nameSpan.add(field.getName());
 		element.add(nameSpan);
-		
+
 		tag.add(element);
 	}
 
 	private void renderMethod(Method method, Tag tag) {
 		FieldDoodlerRendering.renderScope(method, tag);
 		Tag element = new Tag("div", "class=element");
-		element.addCSSClass("method");
 
 		// return type
 		Class<?> returnType = method.getReturnType();
@@ -71,7 +72,7 @@ public class ClassRendering implements Rendering<Class<?>> {
 		nameSpan.add(method.getName());
 		element.add(nameSpan);
 		element.add("(");
-		
+
 		Tag argSpan = new Tag("span", "class=arguments");
 		List<Class<?>> arguments = Arrays.asList(method.getParameterTypes());
 		Iterator<Class<?>> it = arguments.iterator();
@@ -82,8 +83,15 @@ public class ClassRendering implements Rendering<Class<?>> {
 				argSpan.add(", ");
 		}
 		element.add(argSpan);
-		
+
 		element.add(")");
+		tag.add(element);
+	}
+
+	private void renderInnerClass(Class<?> c, Tag tag) {
+		FieldDoodlerRendering.renderScope(c, tag);
+		Tag element = new Tag("div", "class=element");
+		doodler.renderInlineInto(c, element);
 		tag.add(element);
 	}
 

@@ -92,7 +92,10 @@ public class FieldDoodlerPlugin extends AbstractPlugin {
 				+ pluginClass
 				+ " .scope.method.public {background-image: url('"
 				+ EclipseIconUtil.getIcon(EclipseIconUtil.PUBLIC_METHOD)
-						.toURI() + "')}";
+						.toURI() + "')}" + "." + pluginClass
+				+ " .scope.class.public {background-image: url('"
+				+ EclipseIconUtil.getIcon(EclipseIconUtil.PUBLIC_CLASS).toURI()
+				+ "')}";
 	}
 
 	private static String protectedScopeCSS(String pluginClass) {
@@ -106,6 +109,12 @@ public class FieldDoodlerPlugin extends AbstractPlugin {
 				+ pluginClass
 				+ " .scope.method.protected {background-image:url('"
 				+ EclipseIconUtil.getIcon(EclipseIconUtil.PROTECTED_METHOD)
+						.toURI()
+				+ "')}"
+				+ "."
+				+ pluginClass
+				+ " .scope.class.protected {background-image:url('"
+				+ EclipseIconUtil.getIcon(EclipseIconUtil.PROTECTED_CLASS)
 						.toURI() + "')}";
 	}
 
@@ -120,6 +129,12 @@ public class FieldDoodlerPlugin extends AbstractPlugin {
 				+ pluginClass
 				+ " .scope.method.private {background-image:url('"
 				+ EclipseIconUtil.getIcon(EclipseIconUtil.PRIVATE_METHOD)
+						.toURI()
+				+ "')}"
+				+ "."
+				+ pluginClass
+				+ " .scope.class.private {background-image:url('"
+				+ EclipseIconUtil.getIcon(EclipseIconUtil.PRIVATE_CLASS)
 						.toURI() + "')}";
 	}
 
@@ -134,6 +149,12 @@ public class FieldDoodlerPlugin extends AbstractPlugin {
 				+ pluginClass
 				+ " .scope.method.default {background-image:url('"
 				+ EclipseIconUtil.getIcon(EclipseIconUtil.DEFAULT_METHOD)
+						.toURI()
+				+ "')}"
+				+ "."
+				+ pluginClass
+				+ " .scope.class.default {background-image:url('"
+				+ EclipseIconUtil.getIcon(EclipseIconUtil.DEFAULT_CLASS)
 						.toURI() + "')}";
 	}
 

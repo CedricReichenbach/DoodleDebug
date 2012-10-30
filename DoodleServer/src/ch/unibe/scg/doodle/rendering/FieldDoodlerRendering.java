@@ -59,6 +59,14 @@ public class FieldDoodlerRendering implements Rendering<Object> {
 	}
 
 	static void renderScope(AccessibleObject object, Tag tag) {
+		renderScopeOnObject(object, tag);
+	}
+
+	static void renderScope(Class<?> c, Tag tag) {
+		renderScopeOnObject(c, tag);
+	}
+
+	private static void renderScopeOnObject(Object object, Tag tag) {
 		Tag scope = new Tag("div", "class=scope");
 
 		int mod = 0;
@@ -68,6 +76,9 @@ public class FieldDoodlerRendering implements Rendering<Object> {
 		} else if (object instanceof Method) {
 			scope.addCSSClass("method");
 			mod = ((Method) object).getModifiers();
+		} else if (object instanceof Class<?>) {
+			scope.addCSSClass("class");
+			mod = ((Class<?>) object).getModifiers();
 		} else
 			return;
 		if (Modifier.isPublic(mod)) {
