@@ -19,8 +19,20 @@
 \section*{Planning}
 
 \section*{Programming}
+
+\subsection*{Providing Code from Eclipse Plugin to Workspace}
+\subsubsection*{Lack of Documentation}
+In order to provide API functionality such as \verb-Doo.dle()- or the \verb-Doodleable- interface to users, we had to find some way of providing Java code automatically from our plugin to the current eclipse workspace. Even though it should intuitively be a quite simple operation, it took weeks in the dark to figure it out. One may say that everything is well-documented in the Eclipse documentation, but the challenge was to find the right part in the documentation. Eclipse developer forums neither could help, but finally a hint was given by some Stackoverflow user: In order to provide code to workspace Java projects, a plugin needs to use the extension point \verb-org.eclipse.jdt.ui.classpathContainerPage-. From then on, another big help was the source code of JUnit, which uses the same technique, otherwise, it would probably have taken several more weeks until everything was working finely.
+\subsubsection*{What Is Provided to the User Workspace?}
+On one hand, all API methods must be visible from user projects. On the other hand, users should only see the very minimal amount of DoodleDebug's code in order to prevent them from using it in an unintended way, which could cause unexpected behaviour and is much less future-proof, i.e. when DoodleDebug is internally changing. The compromise made between those two requirements was to mainly provide simple, well-documented interfaces (such as \verb-Doodleable- and only show a proxy of fully implemented classes (e.g. \verb-Doo-).
+
 \subsection*{Communication between Java Virtual Machines}
-Because a user program is running in a different Virtual Machine (VM) than Eclipse itself, we had to find a way to somehow communicate between those two in order to display the DoodleDebug rendering in an Eclipse tab. As a first attempt, we tried to use Java's built-in Remote Method Invocation (RMI) what resulted in frustration as some Java Security Manager always put obstacles in our way. Looking for alternatives, we found SIMON (Simple Invocation of Methods Over Network), a more comfortable alternative, which allows to create a registry on a specified port of localhost and add a Server object to it. The Server class implements an Interface he client, knowing the server's Interface, can then search for this server name and send messages to it.
+Because a user program is running in a different Virtual Machine (VM) than Eclipse itself, we had to find a way to somehow communicate between those two in order to display the DoodleDebug rendering in an Eclipse tab. As a first attempt, we tried to use Java's built-in Remote Method Invocation (RMI) what resulted in frustration as some Java Security Manager always put obstacles in our way. Looking for alternatives, we found SIMON (Simple Invocation of Methods Over Network)$^1$, a more comfortable alternative, which allows to create a registry on a specified port of localhost and add a Server object to it. The Server class implements an Interface and the client, knowing the server's Interface, can then search for this server name and send messages to it, including simple data types such as Strings. In Order to transport any kind of Java objects, a serialization util is used.
+
+\subsection*{Serialization for the Transport between VMs}
+SIMON only allows transporting simple data types, such as Strings, so every objects is serialized before its transportation. For this purpose, we make use of XStream, a fast and simple serializing library, originally created to serialize Java objects to XML and back again. Because of it's modularity, it also allows to serialize to JSON and comes with a built-in mapping for this. Because of XML's more verbose syntax and therefore bigger space/time consumption in many cases, we decided to use JSON as first choice, with a fallback to XML if errors occur. This is necessary because standard JSON cannot handle circular references, it lacks the ability to append attributes to entities and therefore cannot index them in order to reference to a parent id in case of a circular reference. Obviously, there are workarounds for this issue, but the fallback to XML does not take as much time that users could even recognize it is happening.
+
+TODO: Maybe simple benchmark of XML vs. JSON here
 
 \chapter*{User Interface}
 \section*{Output}
@@ -31,6 +43,8 @@ In order to save space and keep information available to users, DoodleDebug uses
 \begin{enumerate}
 \item
 SIMON: \url{http://dev.root1.de/projects/simon}
+\item
+XStream: \url{http://xstream.codehaus.org}
 \end{enumerate}
 
 
