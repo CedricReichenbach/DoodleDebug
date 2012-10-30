@@ -11,4 +11,4 @@
 
 - ClassRendering: Show scope of inner classes too, e.g. similar rendering to fields/methods
 
-- Class rendering: Interfaces? Icon of static members?
+- Class rendering: Interfaces? Icon of static members? Constructors?

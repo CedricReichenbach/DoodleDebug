@@ -9,6 +9,7 @@ import java.util.List;
 import ch.unibe.scg.doodle.api.FieldDoodler;
 import ch.unibe.scg.doodle.plugins.ArrayPlugin;
 import ch.unibe.scg.doodle.plugins.FieldDoodlerPlugin;
+import ch.unibe.scg.doodle.plugins.PrimitivesPlugin;
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
 import ch.unibe.scg.doodle.plugins.TablePlugin;
 
@@ -25,9 +26,11 @@ public class RenderingRegistry {
 
 	private final TablePlugin tablePlugin;
 
-	private final HashMap<Class<?>, RenderingPlugin> map;
-
 	private FieldDoodlerPlugin fieldDoodlerPlugin;
+
+	private PrimitivesPlugin primitivesPlugin;
+
+	private final HashMap<Class<?>, RenderingPlugin> map;
 
 	private static RenderingRegistry instance;
 
@@ -35,12 +38,14 @@ public class RenderingRegistry {
 
 	public RenderingRegistry(HashMap<Class<?>, RenderingPlugin> m,
 			ArrayPlugin arrayPlugin, TablePlugin tablePlugin,
-			FieldDoodlerPlugin fieldDoodlerPlugin) {
+			FieldDoodlerPlugin fieldDoodlerPlugin,
+			PrimitivesPlugin primitivesPlugin) {
 		this.map = m;
 		assert map.containsKey(Object.class);
 		this.arrayPlugin = arrayPlugin;
 		this.tablePlugin = tablePlugin;
 		this.fieldDoodlerPlugin = fieldDoodlerPlugin;
+		this.primitivesPlugin = primitivesPlugin;
 
 		if (userPlugins != null) {
 			this.map.putAll(RenderingRegistryProvider
@@ -99,6 +104,10 @@ public class RenderingRegistry {
 			return arrayPlugin;
 		}
 
+		if (isPrimitive(type)) {
+			return primitivesPlugin;
+		}
+
 		List<List<Class<?>>> levels = superTypesLevelwise(type);
 
 		for (List<Class<?>> level : levels) {
@@ -117,6 +126,14 @@ public class RenderingRegistry {
 			return plugin;
 		throw new AssertionError();
 
+	}
+
+	private boolean isPrimitive(Class<?> type) {
+		for (Class<?> c : primitivesPlugin.getDrawableClasses()) {
+			if (c.isAssignableFrom(type))
+				return true;
+		}
+		return false;
 	}
 
 	private boolean isFieldDoodler(Class<?> type) {

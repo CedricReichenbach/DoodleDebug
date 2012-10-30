@@ -1,6 +1,5 @@
 package ch.unibe.scg.doodle.plugins;
 
-
 /**
  * Abstract Plugin class to manage and compute renderings of specified object
  * types. Subclasses need to implement methods of {@link RenderingPlugin} and
@@ -19,7 +18,9 @@ public abstract class AbstractPlugin implements RenderingPlugin {
 
 	/**
 	 * {@inheritDoc} Default is java class name of the implementing plugin class
-	 * (e.g. "ImagePlugin").
+	 * (e.g. "ImagePlugin").<br>
+	 * If more than one class attribute is desired, multiple class names can be
+	 * separated by whitespace.
 	 */
 	@Override
 	public String getClassAttribute() {
@@ -43,22 +44,22 @@ public abstract class AbstractPlugin implements RenderingPlugin {
 	@Override
 	public String getObjectTypeName(Object o) {
 		// TODO: inspect generics using reflection
-//		Collection<String> genericTypes = null;
-//		String genericsString = "";
-//		TypeVariable<?>[] typeParams = o.getClass().getTypeParameters();
-//		if (typeParams.length > 0) {
-//			genericTypes = new LinkedList<String>();
-//			for (TypeVariable typeParam : typeParams) {
-//				// search for fields using this typeParam
-//				List<Field> fields = Arrays.asList(o.getClass().getFields());
-//				for (Field field : fields) {
-//					Type type = field.getGenericType();
-//					if (type instanceof ParameterizedType) {
-//						// TODO Now check if typeParam fits type
-//					}
-//				}
-//			}
-//		}
+		// Collection<String> genericTypes = null;
+		// String genericsString = "";
+		// TypeVariable<?>[] typeParams = o.getClass().getTypeParameters();
+		// if (typeParams.length > 0) {
+		// genericTypes = new LinkedList<String>();
+		// for (TypeVariable typeParam : typeParams) {
+		// // search for fields using this typeParam
+		// List<Field> fields = Arrays.asList(o.getClass().getFields());
+		// for (Field field : fields) {
+		// Type type = field.getGenericType();
+		// if (type instanceof ParameterizedType) {
+		// // TODO Now check if typeParam fits type
+		// }
+		// }
+		// }
+		// }
 		return o.getClass().getSimpleName()/* + genericsString */;
 	}
 
