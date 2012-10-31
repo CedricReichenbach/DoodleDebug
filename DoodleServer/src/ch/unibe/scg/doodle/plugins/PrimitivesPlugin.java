@@ -51,6 +51,14 @@ public class PrimitivesPlugin extends AbstractPlugin {
 	}
 
 	@Override
+	public String getObjectTypeName(Object o) {
+		if (o instanceof Enum) {
+			return super.getObjectTypeName(o) + " (Enum)";
+		}
+		return super.getObjectTypeName(o);
+	}
+
+	@Override
 	public String getClassAttribute() {
 		return stringPlugin.getClassAttribute() + " "
 				+ super.getClassAttribute();
