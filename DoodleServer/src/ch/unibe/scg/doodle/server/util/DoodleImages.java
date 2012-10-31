@@ -1,7 +1,7 @@
 package ch.unibe.scg.doodle.server.util;
 
 import java.io.File;
-import java.net.URISyntaxException;
+import java.net.URL;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
@@ -9,9 +9,17 @@ import org.eclipse.swt.graphics.Image;
 public class DoodleImages {
 	public static Image getDoodleDebugIcon() {
 		ImageDescriptor imageDescriptor = ImageDescriptor
-				.createFromURL(DoodleFiles
-						.getResolvedFileURL("/icons/doodledebug-icon.png"));
+				.createFromURL(getDoodleDebugIconURL());
 		return imageDescriptor.createImage();
+	}
+
+	private static URL getDoodleDebugIconURL() {
+		return DoodleFiles.getResolvedFileURL("/icons/doodledebug-icon.png");
+	}
+
+	public static String getDDIconPath() {
+		return DoodleFiles.getFilePath("/icons/doodledebug-icon.png").toFile().toURI()
+				.toString();
 	}
 
 	public static String getCloseWindowImageFilePath() {

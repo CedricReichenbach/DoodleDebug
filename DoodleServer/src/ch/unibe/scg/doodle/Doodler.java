@@ -1,5 +1,6 @@
 package ch.unibe.scg.doodle;
 
+import java.net.URL;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -212,6 +213,17 @@ public class Doodler {
 		Tag breadcrumbs = new Tag("div", "id=breadcrumbs");
 		List<Object> objects = stack.bottomUpList();
 		int depth = objects.size() - 1;
+
+		// in front of breadcrumbs
+		Tag home = new Tag("div", "id=dd-home");
+		String homeImgPath = DoodleImages.getDDIconPath();
+		Tag homeImg = new Tag("img", "src=" + homeImgPath);
+		home.add(homeImg);
+		breadcrumbs.add(home);
+		Tag before = new Tag("div", "class=betweenBreadcrumbs");
+		before.add("&#x25B6;"); // Unicode: BLACK RIGHT-POINTING TRIANGLE
+		breadcrumbs.add(before);
+
 		for (int i = 0; i < objects.size() - 1; i++) {
 			Object o = objects.get(i);
 			Tag breadcrumb = new Tag("div", "class=breadcrumb");
