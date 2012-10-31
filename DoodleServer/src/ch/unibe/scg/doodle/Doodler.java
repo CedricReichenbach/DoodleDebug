@@ -218,6 +218,7 @@ public class Doodler {
 		Tag home = new Tag("div", "id=dd-home");
 		String homeImgPath = DoodleImages.getDDIconPath();
 		Tag homeImg = new Tag("img", "src=" + homeImgPath);
+		homeImg.addAttribute("onclick","javascript:hideLightbox()");
 		home.add(homeImg);
 		breadcrumbs.add(home);
 		Tag before = new Tag("div", "class=betweenBreadcrumbs");

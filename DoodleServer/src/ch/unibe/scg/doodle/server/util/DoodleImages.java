@@ -18,8 +18,8 @@ public class DoodleImages {
 	}
 
 	public static String getDDIconPath() {
-		return DoodleFiles.getFilePath("/icons/doodledebug-icon.png").toFile().toURI()
-				.toString();
+		return DoodleFiles.getFilePath("/icons/doodledebug-icon.png").toFile()
+				.toURI().toString();
 	}
 
 	public static String getCloseWindowImageFilePath() {

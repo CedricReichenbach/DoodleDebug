@@ -68,6 +68,15 @@
 	vertical-align: top;
 }
 
+#dd-home img {
+	cursor: pointer;
+	opacity: 0.7;
+}
+
+#dd-home img:hover {
+	opacity: 1;
+}
+
 .breadcrumb {
 	display: inline-block;
 	background-color: #999;
