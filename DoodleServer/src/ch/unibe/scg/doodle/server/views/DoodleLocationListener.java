@@ -39,8 +39,7 @@ public class DoodleLocationListener implements LocationListener {
 	void handleExternalLink(LocationEvent event) {
 		URL url;
 		try {
-			url = new URL(event.location.replaceFirst(EXTERNAL_LINK_PREFIX,
-					""));
+			url = new URL(event.location.replaceFirst(EXTERNAL_LINK_PREFIX, ""));
 		} catch (MalformedURLException e) {
 			throw new RuntimeException();
 		}
@@ -62,9 +61,10 @@ public class DoodleLocationListener implements LocationListener {
 			if (id == LIGHTBOX_CLOSE) {
 				doodleServer.lightboxClosed();
 				return;
-			}
-			if (id < 0) {
-				doodleServer.cutoffFromStack(-id + LIGHTBOX_STACK_OFFSET);
+			} else if (id < 0) {
+				int fromZero = (-id + LIGHTBOX_STACK_OFFSET);
+				int toCutOff = fromZero * -(fromZero % 2 * 2 - 1) / 2;
+				doodleServer.cutoffFromStack(toCutOff);
 				return;
 			}
 

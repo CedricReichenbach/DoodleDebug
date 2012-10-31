@@ -17,6 +17,7 @@ import ch.unibe.scg.doodle.server.LightboxStack;
 import ch.unibe.scg.doodle.server.util.DoodleImages;
 import ch.unibe.scg.doodle.server.views.HtmlShow;
 import ch.unibe.scg.doodle.server.views.JavascriptExecuter;
+import ch.unibe.scg.doodle.util.BreadcrumbsBuilder;
 import ch.unibe.scg.doodle.util.JavascriptCallsUtil;
 import ch.unibe.scg.doodle.view.CSSCollection;
 import ch.unibe.scg.doodle.view.HtmlDocument;
@@ -33,6 +34,9 @@ public class Doodler {
 	ScratchFactory scratchFactory;
 	@Inject
 	SmallScratchFactory smallScratchFactory;
+
+	@Inject
+	BreadcrumbsBuilder breadcrumbsBuilder;
 
 	private Tag body;
 
@@ -177,7 +181,7 @@ public class Doodler {
 	 */
 	public synchronized void renderIntoLightbox(LightboxStack stack, Tag tag) {
 		level--;
-		renderBreadcrumbs(stack, tag);
+		breadcrumbsBuilder.renderBreadcrumbs(stack, tag);
 		Tag lightboxRendering = new Tag("div", "id=lightboxRendering");
 		renderInline(stack.top(), lightboxRendering, true, false);
 		tag.add(lightboxRendering);
@@ -207,51 +211,6 @@ public class Doodler {
 			scratch.drawWhole(tag);
 		}
 		level--;
-	}
-
-	private void renderBreadcrumbs(LightboxStack stack, Tag tag) {
-		Tag breadcrumbs = new Tag("div", "id=breadcrumbs");
-		List<Object> objects = stack.bottomUpList();
-		int depth = objects.size() - 1;
-
-		// in front of breadcrumbs
-		Tag home = new Tag("div", "id=dd-home");
-		String homeImgPath = DoodleImages.getDDIconPath();
-		Tag homeImg = new Tag("img", "src=" + homeImgPath);
-		homeImg.addAttribute("onclick","javascript:hideLightbox()");
-		home.add(homeImg);
-		breadcrumbs.add(home);
-		Tag before = new Tag("div", "class=betweenBreadcrumbs");
-		before.add("&#x25B6;"); // Unicode: BLACK RIGHT-POINTING TRIANGLE
-		breadcrumbs.add(before);
-
-		for (int i = 0; i < objects.size() - 1; i++) {
-			Object o = objects.get(i);
-			Tag breadcrumb = new Tag("div", "class=breadcrumb");
-			breadcrumb.addCSSClass("inactiveBreadcrumb");
-			breadcrumb.addAttribute("onclick", "javascript:breadcrumbsBack("
-					+ depth + ")");
-			String name = scratchFactory.create(o).getObjectTypeName();
-			breadcrumb.add(name);
-			breadcrumbs.add(breadcrumb);
-			Tag between = new Tag("div", "class=betweenBreadcrumbs");
-			between.add("&#x25B6;"); // Unicode: BLACK RIGHT-POINTING TRIANGLE
-			breadcrumbs.add(between);
-			depth--;
-		}
-		if (!objects.isEmpty()) { // handle last one
-			Object o = objects.get(objects.size() - 1);
-			Tag breadcrumb = new Tag("div", "class=breadcrumb");
-			breadcrumb.addAttribute("id", "activeBreadcrumb"); // last one
-			String name = scratchFactory.create(o).getObjectTypeName();
-			if (o instanceof NullObject)
-				name = "?";
-			breadcrumb.add(name);
-			breadcrumbs.add(breadcrumb);
-		}
-		Tag breadcrumbsWrapper = new Tag("div", "id=breadcrumbsWrapper");
-		breadcrumbsWrapper.add(breadcrumbs);
-		tag.add(breadcrumbsWrapper);
 	}
 
 	/**

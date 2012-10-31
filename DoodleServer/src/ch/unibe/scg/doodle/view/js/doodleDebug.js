@@ -46,7 +46,13 @@ function renderObjectInLightbox(id) {
 }
 
 function breadcrumbsBack(depth) {
-	messageToJavaPlugin(LIGHTBOX_STACK_OFFSET - depth);
+	if (depth > 0){
+		// navigate backwards (up in nesting tree)
+		messageToJavaPlugin(LIGHTBOX_STACK_OFFSET - depth * 2);
+	} else {
+		// navigate forward (back into a last opened object)
+		messageToJavaPlugin(LIGHTBOX_STACK_OFFSET + depth * 2 - 1);
+	}
 }
 
 function lightboxCloseMessage() {
