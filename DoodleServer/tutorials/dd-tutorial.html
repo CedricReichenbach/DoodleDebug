@@ -70,20 +70,6 @@
 		manner. To navigate back out, breadcrumbs are displayed at top of the
 		lightbox, or, if desired, the lightbox can be fully closed by clicking
 		in the dark background beside it.
-		<h3 class="title">Custom renderings</h3>
-		DoodleDebug provides two ways to define custom renderings:
-		<ul>
-			<li>Implementing the <code class="code">Doodleable</code>
-				interface <a href="#doodleable">&darr;</a>
-			</li>
-			<li>Providing a <code class="code">RenderingPlugin</code> <a
-				href="#renderingplugin">&darr;</a>
-			</li>
-		</ul>
-		Doodleables are easy and fast to implement, but provide only a simple
-		API, whereas RenderingPlugins leave room for any rendering an
-		individual developer desires, still preserving the modularity of
-		DoodleDebug.<br>
 		<h3 class="title">Built-in and standard renderings</h3>
 		DoodleDebug includes numerous <a href="#built-in">predefined
 			renderings</a> for commonly used data types like collections, arrays,
@@ -117,6 +103,20 @@
 				id="rendering-pipeline" src="img/rendering-pipeline.png"
 				style="display: none" /></a>
 		</div>
+		<h3 class="title">Custom renderings</h3>
+		DoodleDebug provides two ways to define custom renderings:
+		<ul>
+			<li>Implementing the <code class="code">Doodleable</code>
+				interface <a href="#doodleable">&darr;</a>
+			</li>
+			<li>Providing a <code class="code">RenderingPlugin</code> <a
+				href="#renderingplugin">&darr;</a>
+			</li>
+		</ul>
+		Doodleables are easy and fast to implement, but provide only a simple
+		API, whereas RenderingPlugins leave room for any rendering an
+		individual developer desires, still preserving the modularity of
+		DoodleDebug.
 		<h3 id="doodleable" class="title">Define rendering of an object
 			type directly in its class (Doodleables)</h3>
 		Implement the interface
