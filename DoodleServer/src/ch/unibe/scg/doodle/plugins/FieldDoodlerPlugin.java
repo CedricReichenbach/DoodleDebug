@@ -51,7 +51,7 @@ public class FieldDoodlerPlugin extends AbstractPlugin {
 
 	private String fieldCSS() {
 		return ".FieldDoodlerPlugin .fieldWrapper {margin: 3px 0; white-space: nowrap;}"
-				+ ".FieldDoodlerPlugin .field {border: 1px dotted #ccc; display: inline-block; padding: 1px; min-height: 1.5em; background-color: whitesmoke;}"
+				+ ".FieldDoodlerPlugin .field {border: 1px dotted #ccc; display: inline-block; padding: 1px; background-color: whitesmoke;}"
 				+ ".FieldDoodlerPlugin .content {margin-left: 0.5em;}"
 				+ ".FieldDoodlerPlugin .content, .FieldDoodlerPlugin .scope, .FieldDoodlerPlugin .name"
 				+ "{display: inline-block;}"
@@ -64,7 +64,7 @@ public class FieldDoodlerPlugin extends AbstractPlugin {
 				+ pluginClass
 				+ " .scope "
 				+ "{float: left; margin-left: 1px; height: 1em; width: 1em; position: relative; right: -1px;"
-				+ "border-width: 1px 0 1px 1px; border-style: solid; border-color: #DDD; padding: 2px;"
+				+ "border-width: 1px 0 1px 1px; border-style: solid; border-color: #DDD; padding: 3px;"
 				+ "background-color: whitesmoke; background-position: center; background-repeat: no-repeat;}"
 				+ "."
 				+ pluginClass

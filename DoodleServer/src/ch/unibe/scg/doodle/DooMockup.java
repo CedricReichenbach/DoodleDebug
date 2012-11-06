@@ -1,5 +1,7 @@
 package ch.unibe.scg.doodle;
 
+import java.util.Arrays;
+
 import ch.unibe.scg.doodle.helperClasses.DoodleList;
 import ch.unibe.scg.doodle.inject.DoodleModule;
 
@@ -8,8 +10,9 @@ import com.google.inject.Injector;
 
 /**
  * Mockup on server side for <code>Doo</code> on client side.
+ * 
  * @author Cedric Reichenbach
- *
+ * 
  */
 public class DooMockup {
 
@@ -53,9 +56,10 @@ public class DooMockup {
 
 		DoodleList list = new DoodleList();
 		list.add(o);
-		for (Object object : objects) {
-			list.add(object);
+		for (int i = 0; i < objects.length; i++) {
+			list.add(objects[i]);
 		}
+		System.out.println(objects[2] + ", " + list.get(3));
 		doodler.visualize(list);
 	}
 

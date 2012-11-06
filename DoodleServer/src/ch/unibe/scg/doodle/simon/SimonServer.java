@@ -13,7 +13,6 @@ import ch.unibe.scg.doodle.server.DoodleClientWorkspace;
 import ch.unibe.scg.doodle.server.DoodleServer;
 
 import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
 
 import de.root1.simon.Lookup;
 import de.root1.simon.Registry;
@@ -31,10 +30,10 @@ public class SimonServer implements SimonServerInterface {
 	private Registry registry;
 	private SimonClientInterface client;
 	private Lookup lookup;
-	/**
-	 * In JSON format
-	 */
-	private XStream jstream;
+	// /**
+	// * In JSON format
+	// */
+	// private XStream jstream;
 	/**
 	 * In XML format
 	 */
@@ -59,9 +58,9 @@ public class SimonServer implements SimonServerInterface {
 		URLClassLoader classLoader = DoodleClientWorkspace
 				.getClientClassLoader();
 
-		this.jstream = new XStream(new JettisonMappedXmlDriver());
-		jstream.setMode(XStream.NO_REFERENCES);
-		jstream.setClassLoader(classLoader);
+		// this.jstream = new XStream(new JettisonMappedXmlDriver());
+		// jstream.setMode(XStream.NO_REFERENCES);
+		// jstream.setClassLoader(classLoader);
 
 		this.xstream = new XStream();
 		xstream.setClassLoader(classLoader);
@@ -83,11 +82,11 @@ public class SimonServer implements SimonServerInterface {
 	@Override
 	public void renderObject(String objectAsXML, boolean xml) {
 		Object o;
-		if (xml) {
-			o = xstream.fromXML(objectAsXML);
-		} else {
-			o = jstream.fromXML(objectAsXML);
-		}
+		// if (xml) {
+		o = xstream.fromXML(objectAsXML);
+		// } else {
+		// o = jstream.fromXML(objectAsXML);
+		// }
 		DooMockup.dle(o);
 	}
 
@@ -96,13 +95,13 @@ public class SimonServer implements SimonServerInterface {
 			boolean xml) {
 		Object o;
 		Object[] os;
-		if (xml) {
-			o = xstream.fromXML(objectAsXML);
-			os = (Object[]) xstream.fromXML(objectArrayAsXML);
-		} else {
-			o = jstream.fromXML(objectAsXML);
-			os = (Object[]) jstream.fromXML(objectArrayAsXML);
-		}
+		// if (xml) {
+		o = xstream.fromXML(objectAsXML);
+		os = (Object[]) xstream.fromXML(objectArrayAsXML);
+		// } else {
+		// o = jstream.fromXML(objectAsXML);
+		// os = (Object[]) jstream.fromXML(objectArrayAsXML);
+		// }
 		DooMockup.dle(o, os);
 	}
 
@@ -123,7 +122,8 @@ public class SimonServer implements SimonServerInterface {
 
 	@Override
 	public void addPlugins(String pluginsAsXML) {
-		Collection<RenderingPlugin> plugins = (Collection<RenderingPlugin>) jstream
+		@SuppressWarnings("unchecked")
+		Collection<RenderingPlugin> plugins = (Collection<RenderingPlugin>) xstream
 				.fromXML(pluginsAsXML);
 		RenderingRegistry.addPlugins(plugins);
 	}

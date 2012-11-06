@@ -87,8 +87,7 @@
             id="ch.unibe.scg.doodle.DoodleTemplate_doodle"
             name="doodle">
          <pattern>
-            ${:import(ch.unibe.scg.doodle.Doo)}
-Doo.dle(${word_selection}${object});${cursor}
+            ${:import(ch.unibe.scg.doodle.Doo)}Doo.dle(${word_selection}${object});${cursor}
          </pattern>
       </template>
       <template
@@ -99,8 +98,7 @@ Doo.dle(${word_selection}${object});${cursor}
             id="ch.unibe.scg.doodle.DoodleTemplate_dd"
             name="dd">
          <pattern>
-            ${:import(ch.unibe.scg.doodle.Doo)}
-Doo.dle(${word_selection}${object});${cursor}
+            ${:import(ch.unibe.scg.doodle.Doo)}Doo.dle(${word_selection}${object});${cursor}
          </pattern>
       </template>
    </extension>

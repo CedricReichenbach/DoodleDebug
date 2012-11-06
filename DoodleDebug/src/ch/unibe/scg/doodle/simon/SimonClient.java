@@ -28,10 +28,10 @@ public class SimonClient implements SimonClientInterface {
 	private Lookup lookup;
 	private SimonServerInterface server;
 	private Registry registry;
-	/**
-	 * In JSON format
-	 */
-	private XStream jstream;
+//	/**
+//	 * In JSON format
+//	 */
+//	private XStream jstream;
 	/**
 	 * IN XML format
 	 */
@@ -42,8 +42,8 @@ public class SimonClient implements SimonClientInterface {
 		this.lookup = Simon.createNameLookup("localhost", PORT);
 		server = (SimonServerInterface) lookup.lookup("DoodleServer");
 
-		this.jstream = new XStream(new JettisonMappedXmlDriver());
-		jstream.setMode(XStream.NO_REFERENCES);
+//		this.jstream = new XStream(new JettisonMappedXmlDriver());
+//		jstream.setMode(XStream.NO_REFERENCES);
 
 		this.xstream = new XStream();
 	}
@@ -56,11 +56,13 @@ public class SimonClient implements SimonClientInterface {
 
 	@Override
 	public void sendObject(Object object) {
+		// Explanation: see method below
+		// try {
+		// String objectAsXML = jstream.toXML(object);
+		// server.renderObject(objectAsXML, false);
+		// } catch (CircularReferenceException e) {
+		// JSON problems -> try in XML
 		try {
-			String objectAsXML = jstream.toXML(object);
-			server.renderObject(objectAsXML, false);
-		} catch (CircularReferenceException e) {
-			// JSON problems -> try in XML
 			String objectAsXML = xstream.toXML(object);
 			server.renderObject(objectAsXML, true);
 		} catch (ConversionException e) {
@@ -70,12 +72,15 @@ public class SimonClient implements SimonClientInterface {
 
 	@Override
 	public void sendObjects(Object object, Object[] objects) {
+		// XXX: JSON Problems: Arrays lose their order, references are
+		// impossible
+		// try {
+		// String objectAsXML = jstream.toXML(object);
+		// String objectArrAsXML = jstream.toXML(objects);
+		// server.renderObjects(objectAsXML, objectArrAsXML, false);
+		// } catch (CircularReferenceException e) {
+		// JSON problems -> try in XML
 		try {
-			String objectAsXML = jstream.toXML(object);
-			String objectArrAsXML = jstream.toXML(objects);
-			server.renderObjects(objectAsXML, objectArrAsXML, false);
-		} catch (CircularReferenceException e) {
-			// JSON problems -> try in XML
 			String objectAsXML = xstream.toXML(object);
 			String objectArrAsXML = xstream.toXML(objects);
 			server.renderObjects(objectAsXML, objectArrAsXML, true);
@@ -100,7 +105,7 @@ public class SimonClient implements SimonClientInterface {
 	}
 
 	public void addPlugins(Collection<RenderingPlugin> plugins) {
-		String pluginsAsXML = jstream.toXML(plugins);
+		String pluginsAsXML = xstream.toXML(plugins);
 		server.addPlugins(pluginsAsXML);
 	}
 
