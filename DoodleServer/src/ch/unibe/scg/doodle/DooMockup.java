@@ -59,7 +59,6 @@ public class DooMockup {
 		for (int i = 0; i < objects.length; i++) {
 			list.add(objects[i]);
 		}
-		System.out.println(objects[2] + ", " + list.get(3));
 		doodler.visualize(list);
 	}
 

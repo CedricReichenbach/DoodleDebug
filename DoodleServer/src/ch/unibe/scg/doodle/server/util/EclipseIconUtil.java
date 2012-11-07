@@ -27,7 +27,9 @@ public class EclipseIconUtil {
 	public static final String DEFAULT_FIELD = org.eclipse.jdt.ui.ISharedImages.IMG_FIELD_DEFAULT;
 	public static final String DEFAULT_METHOD = org.eclipse.jdt.ui.ISharedImages.IMG_OBJS_DEFAULT;
 	public static final String DEFAULT_CLASS = org.eclipse.jdt.ui.ISharedImages.IMG_OBJS_INNER_CLASS_DEFAULT;
-
+	
+//	public static final String STATIC_MEMBER = org.eclipse.jdt.ui.ISharedImages
+	
 	private static final File imgDir = DoodleDebugProperties.tempDirForImages();
 
 	public static File getIcon(String iconName) {

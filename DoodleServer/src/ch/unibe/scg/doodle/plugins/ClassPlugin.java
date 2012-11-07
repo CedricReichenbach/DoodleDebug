@@ -1,5 +1,6 @@
 package ch.unibe.scg.doodle.plugins;
 
+import java.lang.reflect.Modifier;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,8 +33,7 @@ public class ClassPlugin extends AbstractPlugin {
 
 	@Override
 	public String getCSS() {
-		return wrapperCSS()
-				+ elementCSS()
+		return wrapperCSS() + elementCSS()
 				+ FieldDoodlerPlugin.scopeCSS("ClassPlugin")
 				+ ".ClassPlugin .static .scope {}";
 	}
@@ -54,7 +54,13 @@ public class ClassPlugin extends AbstractPlugin {
 
 	@Override
 	public String getObjectTypeName(Object o) {
-		return "Class&#60;" + ((Class<?>) o).getSimpleName() + "&#62;";
+		Class<?> c = (Class<?>) o;
+		String result = "";
+		int mod = c.getModifiers();
+		if (Modifier.isAbstract(mod) && !Modifier.isInterface(mod))
+			result += "abstract ";
+		result += (c.isInterface() ? "Interface" : "Class") + "&#60;"
+				+ c.getSimpleName() + "&#62;";
+		return result;
 	}
-
 }
