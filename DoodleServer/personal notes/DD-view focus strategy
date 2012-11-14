@@ -1,0 +1,1 @@
+on change: set focus if time since last update > 4 seconds

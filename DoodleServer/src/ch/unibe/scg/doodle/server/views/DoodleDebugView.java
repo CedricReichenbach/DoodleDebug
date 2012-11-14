@@ -1,5 +1,7 @@
 package ch.unibe.scg.doodle.server.views;
 
+import java.util.Date;
+
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.swt.SWT;
@@ -8,9 +10,12 @@ import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
 import ch.unibe.scg.doodle.server.views.actions.TutorialButtonAction;
+import ch.unibe.scg.doodle.util.PluginUtil;
 import ch.unibe.scg.doodle.view.DoodleDebugWelcomeScreen;
 
 public class DoodleDebugView extends ViewPart {
@@ -19,6 +24,8 @@ public class DoodleDebugView extends ViewPart {
 	private Browser browser;
 
 	private HtmlObserver htmlObserver = new HtmlObserver();
+
+	private Date lastFocusSet;
 
 	@Override
 	public void createPartControl(Composite parent) {
@@ -59,6 +66,8 @@ public class DoodleDebugView extends ViewPart {
 	public void showHtml(String html) {
 		browser.setText(html);
 		htmlObserver.htmlChangedTo(html);
+
+		this.activate();
 	}
 
 	public void runJavascript(String script) {
@@ -66,6 +75,22 @@ public class DoodleDebugView extends ViewPart {
 		if (!sucessful)
 			System.err.println("WARNING: Could not execute a javascript");
 		htmlObserver.htmlChangedTo(browser.getText());
+
+		this.activate();
+	}
+
+	private void activate() {
+		Date now = new Date();
+
+		if (lastFocusSet == null
+				|| (now.getTime() - lastFocusSet.getTime()) >= 4000) {
+			PluginUtil.showDoodleDebugView();
+		}
+		lastFocusSet = now;
+	}
+
+	public void resetFocusTimer() {
+		this.lastFocusSet = null;
 	}
 
 }

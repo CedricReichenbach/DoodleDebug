@@ -25,10 +25,12 @@ import ch.unibe.scg.doodle.DooMockup;
 import ch.unibe.scg.doodle.Doodler;
 import ch.unibe.scg.doodle.IndexedObjectStorage;
 import ch.unibe.scg.doodle.htmlgen.Tag;
+import ch.unibe.scg.doodle.server.views.DoodleDebugView;
 import ch.unibe.scg.doodle.server.views.HtmlShow;
 import ch.unibe.scg.doodle.server.views.JavascriptExecuter;
 import ch.unibe.scg.doodle.simon.SimonServer;
 import ch.unibe.scg.doodle.util.JavascriptCallsUtil;
+import ch.unibe.scg.doodle.util.PluginUtil;
 import ch.unibe.scg.doodle.view.CSSCollection;
 import ch.unibe.scg.doodle.view.DoodleDebugScreen;
 
@@ -90,10 +92,16 @@ public class DoodleServer {
 
 	public void firstRun() {
 		this.clearOutput();
+		this.resetFocusTimer();
 		this.lightboxClosed();
 		SimonServer.instance.refreshClientClassloading();
 		CSSCollection.reset();
 		this.clientClassLoader = DoodleClientWorkspace.getClientClassLoader();
+	}
+
+	private void resetFocusTimer() {
+		DoodleDebugView view = (DoodleDebugView) PluginUtil.findDoodleDebugView();
+		view.resetFocusTimer();
 	}
 
 	public void lightboxClosed() {

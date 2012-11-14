@@ -1,10 +1,6 @@
 package ch.unibe.scg.doodle.server.views;
 
 import org.eclipse.ui.IViewPart;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
 
 import ch.unibe.scg.doodle.util.PluginUtil;
 

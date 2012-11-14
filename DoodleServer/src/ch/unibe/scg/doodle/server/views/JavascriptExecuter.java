@@ -15,7 +15,7 @@ public class JavascriptExecuter extends HtmlShow {
 
 	@Override
 	public void run() {
-		IViewPart view = PluginUtil.findDoodleDebugView();
+		IViewPart view = PluginUtil.findDoodleDebugView(); // XXX: sets focus
 		assert (view != null);
 		((DoodleDebugView) view).runJavascript(script);
 	}
