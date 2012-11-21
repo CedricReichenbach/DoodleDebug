@@ -96,9 +96,11 @@ public class FieldDoodlerRendering implements Rendering<Object> {
 			scope.addCSSClass("default");
 		}
 
+		Tag overlay = new Tag("div", "class=overlay");
 		if (Modifier.isStatic(mod)) {
-			tag.addCSSClass("static");
+			overlay.addCSSClass("static");
 		}
+		scope.add(overlay);
 
 		tag.add(scope);
 	}

@@ -78,6 +78,7 @@ public class FieldDoodlerPlugin extends AbstractPlugin {
 				+ protectedScopeCSS(pluginClass)
 				+ privateScopeCSS(pluginClass)
 				+ defaultScopeCSS(pluginClass)
+				+ staticPropertyCSS(pluginClass)
 				+ "."
 				+ pluginClass
 				+ " .scope p {position: relative; bottom: 0.75em; margin-right: 1px;}";
@@ -157,6 +158,17 @@ public class FieldDoodlerPlugin extends AbstractPlugin {
 				+ " .scope.class.default {background-image:url('"
 				+ EclipseIconUtil.getIcon(EclipseIconUtil.DEFAULT_CLASS)
 						.toURI() + "')}";
+	}
+
+	private static String staticPropertyCSS(String pluginClass) {
+		return "."
+				+ pluginClass
+				+ " .scope .static {background-image:url('"
+				+ EclipseIconUtil
+						.getIcon(EclipseIconUtil.STATIC_MEMBER_OVERLAY).toURI()
+				+ "'); background-repeat: no-repeat; background-position: top right;"
+				+ "height: 100%; width: 6px; position: relative; left: 70%;}";
+		// XXX: width is a hack for black line in static icon
 	}
 
 	private String smallCSS() {

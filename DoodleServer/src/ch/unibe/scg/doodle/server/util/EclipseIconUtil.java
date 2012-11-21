@@ -4,9 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
+import org.eclipse.jdt.internal.ui.JavaPluginImages;
 import org.eclipse.jdt.ui.ISharedImages;
 import org.eclipse.jdt.ui.JavaUI;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
@@ -27,9 +30,9 @@ public class EclipseIconUtil {
 	public static final String DEFAULT_FIELD = org.eclipse.jdt.ui.ISharedImages.IMG_FIELD_DEFAULT;
 	public static final String DEFAULT_METHOD = org.eclipse.jdt.ui.ISharedImages.IMG_OBJS_DEFAULT;
 	public static final String DEFAULT_CLASS = org.eclipse.jdt.ui.ISharedImages.IMG_OBJS_INNER_CLASS_DEFAULT;
-	
-//	public static final String STATIC_MEMBER = org.eclipse.ui.ISharedImages.im
-	
+
+	public static final ImageDescriptor STATIC_MEMBER_OVERLAY = JavaPluginImages.DESC_OVR_STATIC;
+
 	private static final File imgDir = DoodleDebugProperties.tempDirForImages();
 
 	public static File getIcon(String iconName) {
@@ -53,6 +56,16 @@ public class EclipseIconUtil {
 				return DoodleImages.getLoadingErrorIcon();
 		}
 
+		return fileFromImage(image);
+	}
+
+	public static File getIcon(ImageDescriptor descriptor) {
+		return fileFromImage(descriptor.createImage());
+	}
+
+	private static File fileFromImage(Image image) {
+		// TODO: Cache them instead of creating every time
+		image.setBackground(new Color(null, 255, 0, 255));
 		File imgFile = new File(imgDir, "/img" + image.hashCode() + ".png");
 		createFile(image, imgFile);
 		return imgFile;
