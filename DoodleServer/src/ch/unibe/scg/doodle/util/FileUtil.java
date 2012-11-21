@@ -1,6 +1,9 @@
 package ch.unibe.scg.doodle.util;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -24,5 +27,16 @@ public class FileUtil {
 		}
 
 		return result;
+	}
+
+	public static void writeToFile(File file, String content) {
+		try {
+			FileWriter fstream = new FileWriter(file);
+			BufferedWriter out = new BufferedWriter(fstream);
+			out.write(content);
+			out.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

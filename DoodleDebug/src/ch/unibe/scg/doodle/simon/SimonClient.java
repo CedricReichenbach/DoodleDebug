@@ -1,7 +1,12 @@
 package ch.unibe.scg.doodle.simon;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
 
@@ -21,6 +26,8 @@ import de.root1.simon.exceptions.NameBindingException;
 @SimonRemote(value = { SimonClientInterface.class })
 public class SimonClient implements SimonClientInterface {
 
+	private static final String INFO_FILE_NAME = "connection-info";
+
 	/**
 	 * Official IANA port for SIMON
 	 */
@@ -28,10 +35,10 @@ public class SimonClient implements SimonClientInterface {
 	private Lookup lookup;
 	private SimonServerInterface server;
 	private Registry registry;
-//	/**
-//	 * In JSON format
-//	 */
-//	private XStream jstream;
+	// /**
+	// * In JSON format
+	// */
+	// private XStream jstream;
 	/**
 	 * IN XML format
 	 */
@@ -40,12 +47,39 @@ public class SimonClient implements SimonClientInterface {
 	public SimonClient() throws LookupFailedException,
 			EstablishConnectionFailed, IOException, NameBindingException {
 		this.lookup = Simon.createNameLookup("localhost", PORT);
-		server = (SimonServerInterface) lookup.lookup("DoodleServer");
+		String connectionId = findConnectionId();
+		server = (SimonServerInterface) lookup.lookup(connectionId);
 
-//		this.jstream = new XStream(new JettisonMappedXmlDriver());
-//		jstream.setMode(XStream.NO_REFERENCES);
+		// this.jstream = new XStream(new JettisonMappedXmlDriver());
+		// jstream.setMode(XStream.NO_REFERENCES);
 
 		this.xstream = new XStream();
+	}
+
+	private String findConnectionId() {
+		File tempDir = FileUtil.mainTempDir();
+		String content = FileUtil
+				.readFromFile(new File(tempDir, INFO_FILE_NAME));
+
+		String current;
+		try {
+			current = new File(this.getClass().getResource(".").toURI())
+					.getAbsolutePath();
+		} catch (URISyntaxException e) {
+			throw new RuntimeException(e);
+		}
+
+		String[] parts = content.split("\n");
+		Iterator<String> iterator = Arrays.asList(parts).iterator();
+		while (iterator.hasNext()) {
+			String path = iterator.next();
+			if (current.contains(path))
+				return iterator.next();
+			else
+				iterator.next(); // wrong id
+		}
+
+		throw new RuntimeException("No fitting connection info found");
 	}
 
 	public void stop() {

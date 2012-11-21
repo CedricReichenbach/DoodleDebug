@@ -52,6 +52,12 @@ public class DoodleDebugProperties {
 		dir.mkdirs();
 		return dir;
 	}
+	
+	public static File mainTempDir() {
+		File dir = new File(tempDir());
+		dir.mkdirs();
+		return dir;
+	}
 
 	private static String tempDir() {
 		return System.getProperty("java.io.tmpdir") + "/doodleDebug";
