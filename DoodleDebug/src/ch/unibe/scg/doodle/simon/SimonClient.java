@@ -63,6 +63,7 @@ public class SimonClient implements SimonClientInterface {
 
 		String current;
 		try {
+			// FIXME: not necessarily correct, probably need to use stack trace
 			current = new File(this.getClass().getResource(".").toURI())
 					.getAbsolutePath();
 		} catch (URISyntaxException e) {
