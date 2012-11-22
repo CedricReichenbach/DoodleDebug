@@ -1,5 +1,3 @@
-- Don't always set focus to DD tab!
-
 - Generics using reflection
 	-> http://www.coderanch.com/t/383648/java/java/java-reflection-element-type-List
 
@@ -12,3 +10,5 @@
 - ClassRendering: Show scope of inner classes too, e.g. similar rendering to fields/methods
 
 - Class rendering: Interfaces? Icon of static members? Constructors?
+
+- Test in multiple simultaneous instances (not while developing but with jar)

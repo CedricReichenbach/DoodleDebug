@@ -72,12 +72,19 @@ public class SimonClient implements SimonClientInterface {
 
 		String[] parts = content.split("\n");
 		Iterator<String> iterator = Arrays.asList(parts).iterator();
+		String lastwrong = null;
 		while (iterator.hasNext()) {
 			String path = iterator.next();
+			// TODO: Find longest match, not only match
 			if (current.contains(path))
 				return iterator.next();
 			else
-				iterator.next(); // wrong id
+				lastwrong = iterator.next(); // wrong id
+		}
+
+		// (weak) fallback: take first value
+		if (lastwrong != null) {
+			return lastwrong;
 		}
 
 		throw new RuntimeException("No fitting connection info found");

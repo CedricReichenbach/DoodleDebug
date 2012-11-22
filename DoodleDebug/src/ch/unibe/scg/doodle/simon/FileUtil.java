@@ -22,7 +22,7 @@ public class FileUtil {
 		try {
 			BufferedReader in = new BufferedReader(new InputStreamReader(file
 					.toURI().toURL().openStream()));
-			String inputLine = "";
+			String inputLine = in.readLine();
 			while (inputLine != null) {
 				result += inputLine + "\n";
 				inputLine = in.readLine();

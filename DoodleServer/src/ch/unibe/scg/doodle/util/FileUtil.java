@@ -31,7 +31,7 @@ public class FileUtil {
 
 	public static void writeToFile(File file, String content) {
 		try {
-			FileWriter fstream = new FileWriter(file);
+			FileWriter fstream = new FileWriter(file, true);
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write(content);
 			out.close();
