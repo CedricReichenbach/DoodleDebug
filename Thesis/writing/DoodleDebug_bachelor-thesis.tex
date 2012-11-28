@@ -68,6 +68,51 @@ A fully functional version of DoodleDebug was used, most probably the equivalent
 Before the actual testing, the user had 15 - 30 minutes to work through a tutorial and play around with DoodleDebug inside a sandbox. At this time, the instructor was allowed to answer questions and support the subject.\\
 For the actual session, there were 3 different small programs containing some manually inserted bug, which they had to find and eliminate. For one or two of them, they were allowed to use DoodleDebug and for the other one or two respectively, they had to fall back to classical tools. The permission to use DoodleDebug on a particular problem changed with every study session, i.e. if subject 1 was allowed to use DoodleDebug on problem A, then subject 2 would not be allowed, but subject 3 would.
 
+\section*{Posed Problems}
+\subsubsection*{Sorting}
+A couple of grey scale \verb.Color. objects are put into a \verb.List. and then sorted using a custom \verb.ColorComparator., which should sort by brightness. The result then is compared to a hand-built \verb.List. which initially has the expected order. This test fails and it's the subject's task to find out what is ordered wrong, i.e. if there is a clear pattern, and to fix this bug. Subjects have access to all of the source code and are allowed to manipulate it.\\
+Solution: In the comparator, completely black colors are wrongly treated as complete white.
+
+\subsubsection*{Serialization}
+Phone book contacts are modelled using \verb.Contact. and \verb.Address. objects. They should be serialized using a \verb.SerializingUtil. (simulated serialization only) and de-serialized afterwards.
+Those mechanisms are executed with example data, but comparison of a contact object before and after serialization fails. The subject's task here is to find out what parts of the contact object were broken and why, i.e. fix the bug. Subjects have access to all of the source code and are allowed to manipulate it.\\
+Solution: In the \verb.SerializingUtil., every field of type \verb.long. is casted into an \verb.integer. before serialization and back into a \verb.long. afterwards. This causes a field called \verb.phoneNumber. of \verb.Address. to be changed into some negative value.
+
+\subsubsection*{Decimal Alignment}
+A class \verb.DatabaseUtil. is a black box simulating access to an imaginary database by returning a two-dimensional array of \verb.float. when calling it's only method \verb.getData().. Subject know that in the returned table, there are duplicated tuples and have to name them. Because they have no access to source code, they need to rely on received data only and also cannot fix the bug.\\
+Solution: There are two pairs of fitting rows (3 \& 8, 6 \& 9).
+
+\section*{Candidates}
+To respect privacy, the real names of our test subjects have been replaced by character names of the usual Radio Spelling Alphabet, enumerated in order of their participation.
+
+\subsection*{Education and Experience of Each Candidate}
+\subsubsection*{Alpha} % Oskar Truffer
+B.Sc. in Mathematics, Minor Computer Science 60 ECTS\\
+Master Student in Computer Science
+\subsubsection*{Bravo} % Remo Diethelm
+B.Sc. in Computer Science\\
+Master Student  in Computer Science
+\subsubsection*{Charlie} % Andrei Chis
+M.Sc. in Computer Science\\ % TODO is this true?
+Ph.D. Student in Computer Science
+\subsubsection*{Delta} % Julian Schelker
+B.Sc. in Computer Science\\
+Master Student  in Computer Science
+\subsubsection*{Echo} % Raffael Krebs
+M.Sc. in Computer Science\\
+Working as Software Engineer, 1 year of experience
+\subsubsection*{Foxtrot} % Roger Kohler
+B.Sc. in Computer Science\\
+Master Student  in Computer Science
+\subsubsection*{Golf} % Ueli Scheidegger
+Lic.rer.pol. in Economics, Minor Computer Science 60 ECTS\\
+Working as Software Engineer, 15 years of experience
+
+\subsection*{Different Problem Approaches}
+Depending on study session with our candidates, we could observe different patterns of approaching a problem with classical tools.
+\subsubsection*{System.out.println()}
+Most of the subjects made use of this mechanism to visualize runtime data.
+
 \chapter*{References}
 \begin{enumerate}
 \item
