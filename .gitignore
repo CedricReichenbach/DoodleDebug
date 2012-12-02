@@ -5,4 +5,4 @@ output.html
 *.out
 DDUpdateSite/features/
 DDUpdateSite/plugins/
-study_*.fbr
+*study_*.fbr
