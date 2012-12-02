@@ -111,7 +111,11 @@ Working as Software Engineer, 15 years of experience
 \subsection*{Different Problem Approaches}
 Depending on study session with our candidates, we could observe different patterns of approaching a problem with classical tools.
 \subsubsection*{System.out.println()}
-Most of the subjects made use of this mechanism to visualize runtime data.
+Most of the subjects made use of this mechanism to visualize runtime data. It's quick and most of them argued with laziness to open a debugger or to stare at foreign code. Also, they can compare things, either two different objects as posed in the sorting problem or the same object at different points in time, as in the Serialization problem. Both is not directly possible with a classical debugger like the one coming built-in with Eclipse classic.
+\subsubsection*{Debugger}
+Few subjects used the eclipse debugger to inspect objects, only one (Echo) used it exclusively. The argumentation for this usage was that debuggers are more powerful in comparison to System.out.println(), because they allow to inspect objects dynamically and additionally provide simple improvements of standard textual representations (e.g. arrays are represented in the form of \verb-[objectA, objectB, ...]- instead of \verb-[Ljava.lang.Object;@4cb162d5-. But Echo also missed the feature to compare two objects, even at the same point in time they could not manage to do so.
+\subsubsection*{Source Code Staring}
+As mentioned before, debugging tools were mainly developed to avoid the need of staring at code, and most people found this the most annoying part, especially because it was code they had not written on their own. Nevertheless, subject Golf solved the Serialization problem only by using this method. They tried to comprehend the logic of the problem's \verb.SerializingUtil. and thus, in contrast to others, found the problem source at the same time as the semantic problem itself.
 
 \chapter*{References}
 \begin{enumerate}
