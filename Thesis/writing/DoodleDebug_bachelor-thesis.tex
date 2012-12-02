@@ -21,6 +21,19 @@ Conscious of all those problems, we tried to model a new way of debugging, joini
 \chapter*{Development}
 \section*{Planning}
 
+\subsection*{Verifying Our Idea}
+TODO: Refer to DoodleDebug paper here
+
+\subsection*{Sketching the Features}
+TODO: Refer to DoodleDebug paper here (probably)
+Before we could start with building a system, we needed to find out what information programmers mostly need for effective debugging. We built a script for data mining on SqueakSource, which mainly searches for all classes overriding Smalltalk's \verb.printOn(). method and shows their source code. Based on review of this data, we expanded the script to numerically check our observations. One widely used pattern was that the object's textual representation contained the its own class name, so we decided to always include the class name of an object in it's rendering.
+
+\subsection*{Confronting People With Hand Drawings}
+Instead of blindly implementing some GUI based on our assumptions, we decided to first sketch candidate renderings of commonly used data structure with pen and paper with their respective producing code and then present them to other programmers in order to see if they intuitively understand the meaning of those visual representations.
+\begin{figure}
+	\includegraphics[scale=1]{img/design-sketches_thinker.jpg}
+\end{figure}
+
 \section*{Programming}
 
 \subsection*{Providing Code from Eclipse Plugin to Workspace}
