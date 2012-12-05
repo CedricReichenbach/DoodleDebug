@@ -31,7 +31,8 @@ Before we could start with building a system, we needed to find out what informa
 \subsection*{Confronting People With Hand Drawings}
 Instead of blindly implementing some GUI based on our assumptions, we decided to first sketch candidate renderings of commonly used data structure with pen and paper with their respective producing code and then present them to other programmers in order to see if they intuitively understand the meaning of those visual representations.
 \begin{figure}
-	\includegraphics[scale=1]{img/design-sketches_thinker.jpg}
+	\includegraphics[width=\textwidth]{img/design-sketches_thinker.jpg}
+	Programmers should look at our code snippets and corresponding design sketches for us to evaluate their intuitiveness
 \end{figure}
 
 \section*{Programming}
@@ -129,6 +130,17 @@ Most of the subjects made use of this mechanism to visualize runtime data. It's 
 Few subjects used the eclipse debugger to inspect objects, only one (Echo) used it exclusively. The argumentation for this usage was that debuggers are more powerful in comparison to System.out.println(), because they allow to inspect objects dynamically and additionally provide simple improvements of standard textual representations (e.g. arrays are represented in the form of \verb-[objectA, objectB, ...]- instead of \verb-[Ljava.lang.Object;@4cb162d5-. But Echo also missed the feature to compare two objects, even at the same point in time they could not manage to do so.
 \subsubsection*{Source Code Staring}
 As mentioned before, debugging tools were mainly developed to avoid the need of staring at code, and most people found this the most annoying part, especially because it was code they had not written on their own. Nevertheless, subject Golf solved the Serialization problem only by using this method. They tried to comprehend the logic of the problem's \verb.SerializingUtil. and thus, in contrast to others, found the problem source at the same time as the semantic problem itself.
+
+\section*{Sessions}
+
+\subsection*{Alpha}
+The main purpose of our very first session was to test our study setup and its synthetic programming problems. At this point, we only had the first two mentioned problems, namely "Sorting" and "Serialization", the third one, "Decimal Alignment", was added afterwards. Aware of those unequal conditions, we include those results nevertheless, because this study only has a qualitative background and intended to deliver statistically relevant results.
+\subsubsection*{Successes}
+After creating a dummy project while learning from the Tutorial, they immediately were able to understand how to use the \verb-Doo.dle(object)- method, even used the auto-completion template \verb.dd. and never typed the whole method name again.
+\subsubsection*{Errors}
+When working through the tutorial, Alpha had to face the situation where they had to use DoodleDebug's \verb.Doodleable. interface. This interface contains two methods for generating a visual representation supporting semantic zoom, one for its normal representation and one for reduced size. In that version of DoodleDebug, they were called \verb.drawOn(Canvas c). and \verb.drawSmallOn(Canvas c)., and the Canvas object received as parameter had two methods to draw objects onto it, also supporting semantic zoom, even though \verb-Canvas.drawSmall(Object o)- is intended to be used only in special cases. Instead of adapting the idea of semantic zoom and reducing an objects representation in \verb.drawSmallOn(c). method to as few as possible parts, Alpha basically drew the same fields as in \verb.drawOn(c)., but used \verb-c.drawSmall(o)-. Conceptually, this is a bad idea, because repeating this behaviour in nested objects can withdraw any size reduction when it's always delegated to inner objects. At best, this would cause all objects of the normal representation still to be rendered, but maybe smaller (depending of the innermost objects) and thus be reduced to something similar to geometrical zoom.
+\\
+TODO: Watch video first, then write
 
 \chapter*{References}
 \begin{enumerate}
