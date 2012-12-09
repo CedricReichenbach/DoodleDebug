@@ -2,6 +2,10 @@
 
 \usepackage{hyperref}
 \usepackage{graphicx}
+\usepackage{pifont}
+
+\newcommand{\tick}{\ding{51}}
+\newcommand{\fattick}{\ding{51}}
 
 \title{DoodleDebug}
 
@@ -80,7 +84,8 @@ One of DoodleDebug's big purposes is to compete with classical debugging mechani
 \section*{Study Session Setup}
 A fully functional version of DoodleDebug was used, most probably the equivalent to a "release candidate". It was run inside Eclipse 4.2 (Classic edition), using a ThinkPad T410 with Windows 7 (x64) and an additional mouse (2 buttons + wheel, standard size). The screen was captured during the whole session and one instructor sitting beside the test subject for problem explanation and protocol.\\
 Before the actual testing, the user had 15 - 30 minutes to work through a tutorial and play around with DoodleDebug inside a sandbox. At this time, the instructor was allowed to answer questions and support the subject.\\
-For the actual session, there were 3 different small programs containing some manually inserted bug, which they had to find and eliminate. For one or two of them, they were allowed to use DoodleDebug and for the other one or two respectively, they had to fall back to classical tools. The permission to use DoodleDebug on a particular problem changed with every study session, i.e. if subject 1 was allowed to use DoodleDebug on problem A, then subject 2 would not be allowed, but subject 3 would.
+For the actual session, there were 3 different small programs containing some manually inserted bug, which they had to find and eliminate. For one or two of them, they were allowed to use DoodleDebug and for the other one or two respectively, they had to fall back to classical tools. The permission to use DoodleDebug on a particular problem changed with every study session, i.e. if subject 1 was allowed to use DoodleDebug on problem A, then subject 2 would not be allowed, but subject 3 would.\\
+A subject was always working on a problem until it was completely solved, none of them needed more than 30 minutes for all problems together, so there was no reason for premature interruption.
 
 \section*{Posed Problems}
 \subsubsection*{Sorting}
@@ -132,15 +137,69 @@ Few subjects used the eclipse debugger to inspect objects, only one (Echo) used 
 As mentioned before, debugging tools were mainly developed to avoid the need of staring at code, and most people found this the most annoying part, especially because it was code they had not written on their own. Nevertheless, subject Golf solved the Serialization problem only by using this method. They tried to comprehend the logic of the problem's \verb.SerializingUtil. and thus, in contrast to others, found the problem source at the same time as the semantic problem itself.
 
 \section*{Sessions}
+TODO: Watch videos to check text and eventually add some numbers
 
 \subsection*{Alpha}
 The main purpose of our very first session was to test our study setup and its synthetic programming problems. At this point, we only had the first two mentioned problems, namely "Sorting" and "Serialization", the third one, "Decimal Alignment", was added afterwards. Aware of those unequal conditions, we include those results nevertheless, because this study only has a qualitative background and intended to deliver statistically relevant results.
+\subsubsection*{Allowed Tools}
+\begin{table}[h]
+\centering
+\begin{tabular}{l c c}
+{\bf Problem} & {\bf DoodleDebug} & {\bf Classical} \\ \hline
+Sorting & \tick &  \\
+Serialization &  & \tick \\
+\end{tabular}
+\caption{Problems for Alpha to be solved using DoodleDebug}
+\end{table}
+\subsubsection*{General Behaviour}
+Alpha is a typical System.out.println() user: Too lazy to open a debugger and start thinking, better just print out whatever could be affected.
 \subsubsection*{Successes}
 After creating a dummy project while learning from the Tutorial, they immediately were able to understand how to use the \verb-Doo.dle(object)- method, even used the auto-completion template \verb.dd. and never typed the whole method name again.
 \subsubsection*{Errors}
 When working through the tutorial, Alpha had to face the situation where they had to use DoodleDebug's \verb.Doodleable. interface. This interface contains two methods for generating a visual representation supporting semantic zoom, one for its normal representation and one for reduced size. In that version of DoodleDebug, they were called \verb.drawOn(Canvas c). and \verb.drawSmallOn(Canvas c)., and the Canvas object received as parameter had two methods to draw objects onto it, also supporting semantic zoom, even though \verb-Canvas.drawSmall(Object o)- is intended to be used only in special cases. Instead of adapting the idea of semantic zoom and reducing an objects representation in \verb.drawSmallOn(c). method to as few as possible parts, Alpha basically drew the same fields as in \verb.drawOn(c)., but used \verb-c.drawSmall(o)-. Conceptually, this is a bad idea, because repeating this behaviour in nested objects can withdraw any size reduction when it's always delegated to inner objects. At best, this would cause all objects of the normal representation still to be rendered, but maybe smaller (depending of the innermost objects) and thus be reduced to something similar to geometrical zoom.
+\subsubsection*{Discussion}
+They argued that it's probably too much work to implement an Interface like \verb.Doodleable., even if there are two methods to implement. They argued that one would suffice in most cases. From our point of view, one method is enough when a problem context only contains few information, just like in our study problems. As software grows bigger, structure will become nested deeper and deeper, which forces either very careful selection of what one want to see on their screen (which must be done before writing print statements into their code) or some technique like semantic zoom.
+\subsubsection*{Consequences}
+After this session, a couple of API methods were renamed in order to enhance intuitiveness and semantic distinctiveness of them.
 \\
-TODO: Watch video first, then write
+
+\subsection*{Bravo}
+\subsubsection*{Allowed Tools}
+\begin{table}[h]
+\centering
+\begin{tabular}{l c c}
+{\bf Problem} & {\bf DoodleDebug} & {\bf Classical} \\ \hline
+Sorting &  & \tick \\
+Serialization & \tick &  \\
+Decimal Alignment &  & \tick \\
+\end{tabular}
+\caption{Problems for Bravo to be solved using DoodleDebug}
+\end{table}
+\subsubsection*{General Behaviour}
+In contrast to any other subject, Bravo used Enums during their tutorial walk-through. We had not considered any rendering for Enums, because only very few programmers actually use them with Java, so there was no meaningful output for them and we had to find and supply some visual representation for them afterwards.\\
+For the sorting problem, Bravo started using Eclipse' debugger, but gave it up again quickly due to problems handling it technically, so they switched to System.out.println() usage.
+\subsubsection*{Successes}
+\subsubsection*{Errors}
+\subsubsection*{Discussion}
+\subsubsection*{Consequences}
+
+\subsection*{Subject}
+\subsubsection*{Allowed Tools}
+\begin{table}[h]
+\centering
+\begin{tabular}{l c c}
+{\bf Problem} & {\bf DoodleDebug} & {\bf Classical} \\ \hline
+Sorting &  &  \\
+Serialization &  &  \\
+Decimal Alignment &  &  \\
+\end{tabular}
+\caption{Problems for ??? to be solved using DoodleDebug}
+\end{table}
+\subsubsection*{General Behaviour}
+\subsubsection*{Successes}
+\subsubsection*{Errors}
+\subsubsection*{Discussion}
+\subsubsection*{Consequences}
 
 \chapter*{References}
 \begin{enumerate}

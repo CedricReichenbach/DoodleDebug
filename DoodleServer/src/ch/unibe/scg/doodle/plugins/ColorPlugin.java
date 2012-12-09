@@ -34,14 +34,16 @@ public class ColorPlugin extends AbstractPlugin {
 
 	@Override
 	public String getCSS() {
-		String main = ".ColorPlugin {padding:2px;} ";
+		String main = ".ColorPlugin {padding:2px; background: none;} ";
 		String small = ".ColorPlugin.smallRendering {padding:4px}";
 		String dark = ".ColorPlugin.darkColor {color: white;}";
-//		String parts = ".ColorPlugin .redPart {background-color: red;}" +
-//				".ColorPlugin .greenPart {background-color: lime;}" +
-//				".ColorPlugin .bluePart {background-color: blue;}" +
-//				".ColorPlugin .alphaPart {background-color: gray;}";
-		return main + small + dark /*+ parts*/;
+		String text = ".ColorPlugin .colorText {margin-bottom: 2px;}";
+		String parts = ".ColorPlugin .redPart {border-bottom: 2px solid red;}"
+				+ ".ColorPlugin .greenPart {border-bottom: 2px solid green;}"
+				+ ".ColorPlugin .bluePart {border-bottom: 2px solid blue;}"
+				+ ".ColorPlugin .alphaPart {border-bottom: 2px solid black;}"
+				+ ".ColorPlugin.darkColor .alphaPart {border-bottom: 2px solid white;}";
+		return main + small + dark + text + parts;
 	}
 
 }
