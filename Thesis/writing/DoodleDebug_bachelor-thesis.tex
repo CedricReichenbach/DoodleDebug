@@ -47,7 +47,7 @@
  {\colorbox{#3}{\bfseries\sffamily\scriptsize\textcolor{white}{#1}}}
  {\textcolor{#3}{\sf\small$\blacktriangleright$\textit{#2}$\blacktriangleleft$}}}
  \newcommand{\version}{\emph{\scriptsize\id}}}
-{\newcommand{\nbc}[3]{}
+{\newcommand{\nbc}[3]{\textcolor{#3}{#2}}
  \renewcommand{\ugh}[1]{#1} % please rephrase
  \renewcommand{\ins}[1]{#1} % please insert
  \renewcommand{\del}[1]{} % please delete
@@ -89,10 +89,10 @@ Conscious of all those problems, we tried to model a new way of debugging, joini
 \section*{Planning}
 
 \subsection*{Verifying Our Idea}
-TODO: Refer to DoodleDebug paper here
+\todo{Refer to DoodleDebug paper here}
 
 \subsection*{Sketching the Features}
-TODO: Refer to DoodleDebug paper here (probably)
+\todo{Refer to DoodleDebug paper here (probably)}
 Before we could start with building a system, \nes{Again: the goal is not to trace back how we invented it. A thesis is like a long paper. See the DD workshop paper. Does it talk about how we started building the system?} we needed to find out what information programmers mostly need for effective debugging. We built a script for data mining on SqueakSource, which mainly searches for all classes overriding Smalltalk's \verb.printOn(). method and shows their source code. Based on review of this data, we expanded the script to numerically check our observations. One widely used pattern was that the object's textual representation contained the its own class name, so we decided to always include the class name of an object in it's rendering.
 \nes{Is this really better than the workshop paper? You can stay pretty close to it, here.}
 
@@ -119,7 +119,7 @@ Because a user program is running in a different Virtual Machine (VM) than Eclip
 \subsection*{Serialization for the Transport between VMs}
 SIMON only allows transporting simple data types, such as Strings, so every objects \nes{grammar} is serialized before its transportation. For this purpose, we make use of XStream, a fast and simple \nes{No advertisement talk} serializing library, originally created to serialize Java objects to XML and back again. Because of it's modularity, it \del{also} allows to serialize to JSON and comes with a built-in mapping for this. Because of XML's more verbose syntax and therefore bigger space/time consumption in many cases, we decided to use JSON as first choice, with a fallback to XML if errors occur. This is necessary because standard JSON cannot handle circular references, it lacks the ability to append attributes to entities and therefore cannot index them in order to reference to a parent id in case of a circular reference. Obviously, there are workarounds for this issue, but the fallback to XML does not take as much time that users could even recognize it is happening.
 
-TODO: Maybe simple benchmark of XML vs. JSON here 
+\todo{Maybe simple benchmark of XML vs. JSON here}
 
 \subsection*{Communication between Java and JavaScript}
 \subsubsection*{From Java to JavaScript}
@@ -137,14 +137,14 @@ In order to make output interoperable, communication from JavaScript to Java is 
 In order to save space and keep information available to users, DoodleDebug uses the concept of "Semantic Zoom"[link/reference]. \nes{Yup, a reference would be nice. Make sure to read the referenced paper, too. In part, because you need to get a feeling for scientific style.} Object visualizations are divided in levels of nesting, where level 0 represents outermost objects, referenced in \verb-Doo.dle(object)-, level 1 objects are (semantically) nested ones inside level 0 etcetera. Saving space is achieved by only completely rendering level 0 and 1 objects, and use a smaller representation for a objects of level 2. Level 1 objects are clickable, which will cause them to be repainted as new virtual level 0 objects, so previous level 2 objects will move to level 1. This pattern allows to arbitrarily explore an objects nesting tree, similar to a debugger.
 
 \subsection*{Smart Behaviour versus Configuration Hell}
-When designing user interfaces, most people tend to be unsure about best behaviour their UI could provide \nes{Do you have data to back that up? No? Then you can't say it.}, or at least think that users will know better what they want. As a result \del{of this}, especially open source products come bundled with a lot of configuration possibilities, which is a good thing if some power users really know what they are doing and have lots of experience with this particular software. But most user will barely ever touch them, mostly because it's too expensive to find that specific check box they are searching for. \nes{General rambling. Stay focused on DoodleDebug. If you must talk about design and simplicity, do so by staying close to the literature. Then, quote the aforementioned "sketching user experiences", and "http://www.amazon.de/Design-Everyday-Things-Donald-Norman/dp/0465067107/ref=sr_1_1?ie=UTF8&qid=1355486165&sr=8-1" Make sure to have read both. Don't voice your own opinion, unless you can back it up.} Instead, it's mostly \nes{Why mostly?} more convenient to have a smart default behaviour fitting the vast majority of people. We made using this mindset as one of the goals for DoodleDebug's user interface, which is why there is no properties dialogue or file. \nes{No talk of goals. Talk about what was achieved.}
+When designing user interfaces, most people tend to be unsure about best behaviour their UI could provide \nes{Do you have data to back that up? No? Then you can't say it.}, or at least think that users will know better what they want. As a result \del{of this}, especially open source products come bundled with a lot of configuration possibilities, which is a good thing if some power users really know what they are doing and have lots of experience with this particular software. But most user will barely ever touch them, mostly because it's too expensive to find that specific check box they are searching for. \nes{General rambling. Stay focused on DoodleDebug. If you must talk about design and simplicity, do so by staying close to the literature. Then, quote the aforementioned "sketching user experiences", and "\url{http://www.amazon.de/Design-Everyday-Things-Donald-Norman/dp/0465067107/ref=sr_1_1?ie=UTF8&qid=1355486165&sr=8-1}" Make sure to have read both. Don't voice your own opinion, unless you can back it up.} Instead, it's mostly \nes{Why mostly?} more convenient to have a smart default behaviour fitting the vast majority of people. We made using this mindset as one of the goals for DoodleDebug's user interface, which is why there is no properties dialogue or file. \nes{No talk of goals. Talk about what was achieved.}
 \subsubsection*{Smart Scrolling}
 \nes{I'd like to bet that Apple has a patent on this. Find and quote.}
 One Example is the behaviour of the scroll position in the console when new objects are rendered into it. As default (with no user interaction), the window keeps scrolling along with rendered objects, always jumping to the newest one. As soon as the user scrolls away from the bottom, this mechanism is stopped and the scroll position remains equal while new objects are appended on the bottom of the output silently. However, if the user decides to go to the bottom of the output again, the auto-scrolling mechanism is obtained again.
 \subsubsection*{Focus When Likely Desired}
 \nes{You ran user studies, right? Talking about these things without mentioning the user studies is just sad. This section should stay as close as possible to the user studies. All that can't be backed up using data from them should go away.}
 Similar thoughts were made on focus handling of DoodleDebug's view in the space of Eclipse's whole UI. Eclipse's built-in console receives focus on any output event per default, but provides a button to deactivate this. For a programmer, it's likely desirable to generally be notified if something happened, but it can be annoying for many outputs over a long time, e.g. if they're working inside another view of Eclipse. In this case, they would probably want to be notified of sporadically occurring outputs. Based on these thoughts, we defined an algorithm to check time since the last output event and only gain focus if the previous event is longer than 4 seconds ago. For example some loop of a game which prints out it's calculation time for the last frame every time will only gain focus on the DoodleDebug view once, but a quiet application like a web server that only generates update when a user visits a site will usually regain focus on such an event.
-TODO: refer to design book here \nes{And read …}
+\todo{refer to design book here \nes{And read …}}
 
 \chapter*{Qualitative Study on Beta Version}
 \nes{Write the introduction from the point of view of qualitative psychological experiments. Read and reference "Introduction to Research Methods and Data Analysis in Psychology"}
@@ -181,7 +181,7 @@ Master Student in Computer Science
 B.Sc. in Computer Science\\
 Master Student  in Computer Science
 \subsubsection*{Charlie} % Andrei Chis
-M.Sc. in Computer Science\\ % TODO is this true?
+M.Sc. in Computer Science\\ \todo{is this true?}
 Ph.D. Student in Computer Science \nes{I don't think he's got his PhD already.}
 \subsubsection*{Delta} % Julian Schelker
 B.Sc. in Computer Science\\
@@ -206,7 +206,7 @@ Few subjects used the eclipse debugger to inspect objects, only one (Echo) used 
 As mentioned before, debugging tools were mainly developed to avoid the need of staring at code, and most people found this the most annoying part, especially because it was code they had not written on their own. Nevertheless, subject Golf solved the Serialization problem only by using this method. They tried to comprehend the logic of the problem's \verb.SerializingUtil. and thus, in contrast to others, found the problem source at the same time as the semantic problem itself.
 
 \section*{Sessions}
-TODO: Watch videos to check text and eventually add some numbers
+\todo{Watch videos to check text and eventually add some numbers}
 
 \subsection*{Alpha}
 \nes{Nope. Don't group by candidate, group by problem, and then list the candidates that support that problem. If you need to list the work log per candidate, do so in the appendix. On how to write up a user study like this, see "http://research.microsoft.com/en-us/um/redmond/groups/hip/papers/ko2007bugfixing.pdf"}
