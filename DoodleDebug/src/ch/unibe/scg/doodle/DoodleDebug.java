@@ -18,10 +18,7 @@ public class DoodleDebug {
 	/**
 	 * Add custom plugins containing information for custom type renderings. For
 	 * creating such a plugin, inheritance of {@link AbstractPlugin} is
-	 * recommended.<br>
-	 * <strike>This method should preferably be called at the beginning of an
-	 * application, i.e. before the first {@link Doo#dle(Object) Doo.dle()}
-	 * call.</strike>
+	 * recommended.
 	 * 
 	 * @param plugins
 	 */

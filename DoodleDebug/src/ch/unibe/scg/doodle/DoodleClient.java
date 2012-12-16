@@ -22,7 +22,10 @@ class DoodleClient {
 		try {
 			this.simonClient = new SimonClient();
 			// } catch (LookupFailedException | EstablishConnectionFailed
-			// | IOException | NameBindingException e) { // TODO when going to JRE 1.7: Multicatch
+			// | IOException | NameBindingException e) { // TODO when going to
+			// JRE 1.7: Multicatch
+		} catch (RuntimeException e) {
+			throw e;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

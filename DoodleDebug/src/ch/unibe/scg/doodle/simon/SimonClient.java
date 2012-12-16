@@ -6,14 +6,11 @@ import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.ConversionException;
-import com.thoughtworks.xstream.core.TreeMarshaller.CircularReferenceException;
-import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
 
 import de.root1.simon.Lookup;
 import de.root1.simon.Registry;
@@ -27,11 +24,16 @@ import de.root1.simon.exceptions.NameBindingException;
 public class SimonClient implements SimonClientInterface {
 
 	private static final String INFO_FILE_NAME = "connection-info";
+	/**
+	 * Just working for one single instance
+	 */
+	private static final String CONNECTION_ID = "doodledebug";
 
 	/**
 	 * Official IANA port for SIMON
 	 */
 	private static final int PORT = 4753;
+
 	private Lookup lookup;
 	private SimonServerInterface server;
 	private Registry registry;
@@ -47,7 +49,8 @@ public class SimonClient implements SimonClientInterface {
 	public SimonClient() throws LookupFailedException,
 			EstablishConnectionFailed, IOException, NameBindingException {
 		this.lookup = Simon.createNameLookup("localhost", PORT);
-		String connectionId = findConnectionId();
+		// String connectionId = findConnectionId();
+		String connectionId = CONNECTION_ID;
 		server = (SimonServerInterface) lookup.lookup(connectionId);
 
 		// this.jstream = new XStream(new JettisonMappedXmlDriver());
@@ -56,6 +59,7 @@ public class SimonClient implements SimonClientInterface {
 		this.xstream = new XStream();
 	}
 
+	@SuppressWarnings("unused")
 	private String findConnectionId() {
 		File tempDir = FileUtil.mainTempDir();
 		String content = FileUtil
@@ -64,7 +68,7 @@ public class SimonClient implements SimonClientInterface {
 		String current;
 		try {
 			// FIXME: not necessarily correct, probably need to use stack trace
-			current = new File(this.getClass().getResource(".").toURI())
+			current = new File(this.getClass().getResource("").toURI())
 					.getAbsolutePath();
 		} catch (URISyntaxException e) {
 			throw new RuntimeException(e);
@@ -82,7 +86,7 @@ public class SimonClient implements SimonClientInterface {
 				lastwrong = iterator.next(); // wrong id
 		}
 
-		// (weak) fallback: take first value
+		// (weak) fallback: take last value
 		if (lastwrong != null) {
 			return lastwrong;
 		}

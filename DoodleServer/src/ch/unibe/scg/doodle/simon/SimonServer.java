@@ -30,6 +30,10 @@ public class SimonServer implements SimonServerInterface {
 
 	private static final String INFO_FILE_NAME = "connection-info";
 	/**
+	 * Just working for one single instance
+	 */
+	private static final String CONNECTION_ID = "doodledebug";
+	/**
 	 * Official IANA port for SIMON
 	 */
 	private static final int PORT = 4753;
@@ -50,7 +54,8 @@ public class SimonServer implements SimonServerInterface {
 	public SimonServer() throws UnknownHostException, IOException,
 			NameBindingException {
 		this.registry = Simon.createRegistry(PORT);
-		String connectionId = generateId();
+		// String connectionId = generateId();
+		String connectionId = CONNECTION_ID;
 		registry.bind(connectionId, this);
 
 		instance = this;
@@ -58,6 +63,7 @@ public class SimonServer implements SimonServerInterface {
 		refreshClientClassloading();
 	}
 
+	@SuppressWarnings("unused")
 	private String generateId() {
 		File root = ResourcesPlugin.getWorkspace().getRoot().getLocation()
 				.toFile();
