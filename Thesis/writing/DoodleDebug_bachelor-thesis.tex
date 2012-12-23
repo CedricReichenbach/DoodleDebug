@@ -205,6 +205,22 @@ Few subjects used the eclipse debugger to inspect objects, only one (Echo) used 
 \subsubsection*{Source Code Staring}
 As mentioned before, debugging tools were mainly developed to avoid the need of staring at code, and most people found this the most annoying part, especially because it was code they had not written on their own. Nevertheless, subject Golf solved the Serialization problem only by using this method. They tried to comprehend the logic of the problem's \verb.SerializingUtil. and thus, in contrast to others, found the problem source at the same time as the semantic problem itself.
 
+\section*{Problems With Classical Tools}
+
+\subsection*{Using System.out.println()}
+\subsubsection*{Homogenous Output}
+We previously stated that purely textual output is poor in terms of formatting and therefore makes it harder for users to classify different parts as they always look similar in terms of size, color, alignment etc.
+\todo{Strive for examples of DoodleDebug > Sysout}
+
+\subsubsection*{Useless Output}
+The standard implementation of \verb-System.out.println()- prints class name and object hash for non-primitive objects. There was no case in our study where a subject printed an object in this way and could use this information for further debugging steps.
+\todo{Strive for examples of where:\\ - Subjects manually print primitive fields\\ - Subjects override toString()\\ - DoodleDebug is initially enough informative}
+
+\subsection*{Using A Debugger}
+\subsubsection*{Comparison Between Objects}
+The built-in eclipse debugger only allows to inspect one object at one point in time. As the serialization problem consists of two objects unexpectedly  being unequal, part of the debugging process was somehow comparing them in order to find their difference. Every subject except Golf did this, Golf only tried to understand the serialization and de-serialization process to find out, where the implementation has mistakes. Echo never used \verb-System.out.println()- so they also attempted to compare objects before and after serialization using the debugger. Even though the debugger supported simple and fast inspection to any point inside the object, Echo explicitly pointed out that they miss the feature to inspect two objects simultaneously instead of memorizing small pieces and going to the other one for comparison.
+\todo{Are there more examples? (Good ones)}
+
 \section*{Sessions}
 \todo{Watch videos to check text and eventually add some numbers}
 
@@ -222,7 +238,7 @@ Serialization &  & \tick \\
 \caption{Problems for Alpha to be solved using DoodleDebug}
 \end{table}
 \subsubsection*{General Behaviour}
-Alpha is a typical System.out.println() user: Too lazy to open a debugger and start thinking, better just print out whatever could be affected. \nes{Do you have data to back up that he's LAZY?! Just stick to what you know.}
+Alpha is a typical System.out.println() user: Too "lazy" (according to themselves) to open a debugger and start thinking, better just print out whatever could be affected.
 \subsubsection*{Successes}
 After creating a dummy project while learning from the Tutorial, they immediately were able to understand how to use the \verb-Doo.dle(object)- method, even used the auto-completion template \verb.dd. and never typed the whole method name again.
 \subsubsection*{Errors}
