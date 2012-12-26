@@ -13,7 +13,6 @@
 \frenchspacing
 
 
-
 % ============================================================
 % Markup macros for proof-reading
 \usepackage{ifthen}
@@ -48,16 +47,13 @@
  {\textcolor{#3}{\sf\small$\blacktriangleright$\textit{#2}$\blacktriangleleft$}}}
  \newcommand{\version}{\emph{\scriptsize\id}}}
 {\newcommand{\nbc}[3]{\textcolor{#3}{#2}}
- \renewcommand{\ugh}[1]{#1} % please rephrase
- \renewcommand{\ins}[1]{#1} % please insert
- \renewcommand{\del}[1]{} % please delete
- \renewcommand{\chg}[2]{#2} % please change
  \newcommand{\version}{}}
 \newcommand{\nb}[2]{\nbc{#1}{#2}{orange}}
 \newcommand{\here}{\yellowbox{$\Rightarrow$ CONTINUE HERE $\Leftarrow$}}
 \newcommand\rev[2]{\nb{TODO (rev #1)}{#2}} % reviewer comments
 \newcommand\fix[1]{\nb{FIX}{#1}}
 \newcommand\todo[1]{\nb{TO DO}{#1}}
+\newcommand\meta[1]{\nbc{META}{#1}{purple}}
 \newcommand\jr[1]{\nbc{JR}{#1}{orange}}
 \newcommand\nes[1]{\nbc{nes}{#1}{blue}}
 \newcommand\on[1]{\nbc{ON}{#1}{teal}} % add more author macros here
@@ -78,9 +74,16 @@
 \nes{Please don't check the pdf or aux files (except bbl) into the git repo}
 \nes{Read and quote all publications assiciated with whyline: http://faculty.washington.edu/ajko/whyline-java.shtml}
 \section*{Idea}
+\meta{Option 1 for beginning\\}
+Debugging is annoying. We want to change this by creating a tool that is as simple as one can think and delivers all desired runtime information at the same time. System.out.println() users will easily switch to it because of its dead easy usage and debugger-friends will love it for its powerful output.\\
+\meta{Option 2\\}
+"Yay, let's use a debugger!", said no one ever.\todo{...}\\
+\meta{Option 3\\}
+What would happen if we cross-breed a debugger with Java's System.out.println() mechanism? This clearly depends on which genes their child would inherit from each one, but if we made use of genetic engineering to pick all good genes from the pool, a completely new generation of debugging could be born.\\
+\meta{Main text\\}
 For programmers, it's an everyday problem: Some feature of a program is not working correctly, but it's not clear where the problem originating \ins{from}. In many cases, it's not even clear what is wrong in the runtime data.
 \nes{Start is too slow. You have a list of interesting things to say. Think of the most interesting one, and say it. Don't prefix it. Read: "http://www.amazon.com/Write-Point-Bill-Stott/dp/0231075499"}
- Those problems, commonly called bugs, \nes{Too prosaic.} are approached by many various \nes{Many and various don't go together} techniques who \nes{a technique isn't a who} always have pros and cons, mostly it's a trade off between (manpower) time cost and quality of output. \nes{Why would any of that matter? That's just a long useless prefix that has nothing to do with doodledebug.} The simplest approach, just staring at code and build some mental model to play the program in one's head, not only demands a lot of concentration and imagination, \nes{You're spending many lines trying to convince me that I need help fixing my bugs. I don't think that's a point worth making: everybody agrees. Focus instead on how doodledebug is better than toString. See the DD workshop paper for how to run an introduction} but also consumes a huge amount of time if the affected code sample is rather big. \nes{More trivialities.} In most cases, it's much more comfortable to automatically built \nes{build} a visual representation of runtime data, which \ugh{can is} provided by debuggers for instance. They allow users to stop at a particular moment in time, specified by a previously defined line of code that is run over. The whole program state is inspectable \nes{Finally we're getting to doodledebug! This isn't nearly concrete enough, though.} this way and commonly used data types have some improved textual representation. One big problem here is, \nes{No comma. English comma placement is a bit funny. Look it up.} that a program is only inspectable at one snapshot in time, but two states cannot directly be compared. \nes{Now we're getting somewhere. Make this the beginning of the introduction.} Another widely used solution, printing on a console, eliminates this issue and has other advantages: Because such printing instructions are directly timed into code to debug, it's much quicker to use instead of setting a break point, opening a debugger and navigating to whatever one is searching for. \nes{Nonsense. Have you used smalltalk? Opening up a debugger needn't be difficult at all. Again, look at the doodledebug workshop paper for how to introduce our problem. Don't open silly side battles.} Also, printing to a console allows to save space by just printing exactly what is needed and therefore display a bigger amount of useful information using the same space on screen. \nes{That makes no sense to me.} But still it lack nes{lacks} some features, on one hand \nes{on the one hand}, because the only supported output format is text, on the other hand, a line that has been printed cannot be edited any more, therefore advanced formatting becomes very complicated.\\ \nes{Don't use double backslash. } \nes{Unconvincing. "only supports text" is a property, not a downside. Why would that be bad?}
+ Those problems, commonly called bugs, \nes{Too prosaic.} are approached by various techniques which always have pros and cons, mostly it's a trade off between (manpower) time cost and quality of output. \nes{Why would any of that matter? That's just a long useless prefix that has nothing to do with doodledebug.} The simplest approach, just staring at code and build some mental model to play the program in one's head, not only demands a lot of concentration and imagination, \nes{You're spending many lines trying to convince me that I need help fixing my bugs. I don't think that's a point worth making: everybody agrees. Focus instead on how doodledebug is better than toString. See the DD workshop paper for how to run an introduction} but also consumes a huge amount of time if the affected code sample is rather big. \nes{More trivialities.} In most cases, it's much more comfortable to automatically build a visual representation of runtime data, which \ugh{can is} provided by debuggers for instance. They allow users to stop at a particular moment in time, specified by a previously defined line of code that is run over. The whole program state is inspectable \nes{Finally we're getting to doodledebug! This isn't nearly concrete enough, though.} this way and commonly used data types have some improved textual representation. One big problem here is that a program is only inspectable at one snapshot in time, but two states cannot directly be compared. \nes{Now we're getting somewhere. Make this the beginning of the introduction.} Another widely used solution, printing on a console, eliminates this issue and has other advantages: Because such printing instructions are directly timed into code to debug, it's much quicker to use instead of setting a break point, opening a debugger and navigating to whatever one is searching for. \nes{Nonsense. Have you used smalltalk? Opening up a debugger needn't be difficult at all. Again, look at the doodledebug workshop paper for how to introduce our problem. Don't open silly side battles.} Also, printing to a console allows to save space by just printing exactly what is needed and therefore display a bigger amount of useful information using the same space on screen. \nes{That makes no sense to me.} But still it lack nes{lacks} some features, on one hand \nes{on the one hand}, because the only supported output format is text, on the other hand, a line that has been printed cannot be edited any more, therefore advanced formatting becomes very complicated.\\ \nes{Don't use double backslash. } \nes{Unconvincing. "only supports text" is a property, not a downside. Why would that be bad?}
 Conscious of all those problems, we tried to model a new way of debugging, joining all advantages of classical tools and eliminate all discomfort \nes{Are we overselling a little bit?}. We considered console printing as a good starting point because it already brings a lot of desirable properties, \nes{It doesn't matter what you consider. The goal is to convince the reader that DoodleDebug solves a problem.} so our tool should be able to be called directly from code and render its output into some console-like device. To get away from \nes{article.} text-only format and also to support standards as well as portability, we decided to use html as output format. \nes{A Bachelor's thesis isn't the story of how you implemented your project. It's a scientific text, that leads from a problem to a solution. It's convincing, more than documenting.}
 
 \nes{Please do read "write to the point", linked above. Among many other things, it explains quite nicely how to break text into paragraphs.}
@@ -88,36 +91,33 @@ Conscious of all those problems, we tried to model a new way of debugging, joini
 \chapter*{Development}
 \section*{Planning}
 
-\subsection*{Verifying Our Idea}
-\todo{Refer to DoodleDebug paper here}
-
 \subsection*{Sketching the Features}
-\todo{Refer to DoodleDebug paper here (probably)}
-Before we could start with building a system, \nes{Again: the goal is not to trace back how we invented it. A thesis is like a long paper. See the DD workshop paper. Does it talk about how we started building the system?} we needed to find out what information programmers mostly need for effective debugging. We built a script for data mining on SqueakSource, which mainly searches for all classes overriding Smalltalk's \verb.printOn(). method and shows their source code. Based on review of this data, we expanded the script to numerically check our observations. One widely used pattern was that the object's textual representation contained the its own class name, so we decided to always include the class name of an object in it's rendering.
-\nes{Is this really better than the workshop paper? You can stay pretty close to it, here.}
+The concept of a new system for code understanding, especially for multi-dimensional objects like matrices was already introduced and justified in a previous paper\cite{dd-paper}. One main result was that textual output is not powerful enough to produce useful output in some cases. Anther one was that customized representations of objects tend to have some common denominators, like including their class name. Base on this information, we started to sketch some candidate renderings and corresponding code snippets of commonly used data structures in pen and paper style, planning to throw away failures during the design process and focus only on good prototypes when going towards implementation. We tried to follow the principle of not mixing up the design and engineering  processes\cite{sketching-user-experiences}.
 
 \subsection*{Confronting People With Hand Drawings}
-\nes{Please read and reference "sketching user experiences". It contains all the motivation needed to run a design phase up front. Don't try and think up the argument by yourself. It's a long book, so maybe only read the first 50 pages or so. That'll do.}
-Instead of blindly implementing some GUI based on our assumptions, we decided to first sketch candidate renderings of commonly used data structure with pen and paper with their respective producing code and then present them to other programmers in order to see if they intuitively understand the meaning of those visual representations.
-\begin{figure}
+After we had created a fair amount of sketches, we asked programmers to just have a look at our drawings and explain what they see (figure~\ref{sketch-discussion}). If they immediately anticipated the virtual situation, it was a good example and we kept it. If most candidates failed to understand what a particular drawing meant, or even took some wrong conclusions out of it, we either threw it away or tried to redesign, based on their statements and then re-evaluate with other people.
+
+\begin{figure}[h]
 	\includegraphics[width=\textwidth]{img/design-sketches_thinker.jpg}
-	Programmers should look at our code snippets and corresponding design sketches for us to evaluate their intuitiveness
+	\caption[Confronting people with design sketches]{Programmers should look at our code snippets and corresponding design sketches for us to evaluate their intuitiveness}
+	\label{sketch-discussion}
 \end{figure}
 
 \section*{Programming}
 \nes{There should be text under every heading.}
-\subsection*{Providing Code from Eclipse Plugin to Workspace}
-\subsubsection*{Lack of Documentation}
-In order to provide API functionality such as \verb-Doo.dle()- or the \verb-Doodleable- interface to users, we had to find some way of providing Java code automatically from our plugin to the current eclipse workspace. \nes{Don't talk about "had to find some way." In its way, this section has the least priority. It should probably be called "Implementation." Because it isn't very important, try and be brief: what were the implemtation challenges, what were the solutions? You're kind of saying that, just say it briefer.} \del{Even though it should intuitively be a quite simple operation, it took weeks in the dark to figure it out.} \nes{Doesn't matter} One may say that everything is well-documented in the Eclipse documentation \nes{Too prosaic. Also: doesn't really matter. This is science.}, but the challenge was to find the right part in the documentation. Eclipse developer forums neither could help, but finally a hint was given by some Stackoverflow user: In order to provide code to workspace Java projects, a plugin needs to use the extension point \verb-org.eclipse.jdt.ui.classpathContainerPage-. From then on, another big help was the source code of JUnit, which uses the same technique, otherwise, it would probably have taken several more weeks until everything was working finely. \nes{Rewrite, away from what you did, towards a problem-solution focus.} \nes{Blank line before sections, please.}
-\subsubsection*{What Is Provided to the User Workspace?} \nes{No question marks in headings.}
-On \ins{the} one hand, all API methods must be visible from user projects. On the other hand, users should only see the very minimal amount of DoodleDebug's code in order to prevent them from using it in an unintended way, which could cause unexpected behaviour \nes{I'd prefer American spelling: behavior} and is much less future-proof, i.e. when DoodleDebug is internally changing. \nes{Try and be briefer.} The compromise made between those two requirements was to mainly provide simple, well-documented interfaces (such as \verb-Doodleable- and only show a proxy of fully implemented classes (e.g. \verb-Doo-).
+\meta{What kind of text?}
 
 \subsection*{Communication between Java Virtual Machines}
-\nes{Why would this come second? This is the actual trick, the part that makes stuff work. The Eclipse plugin nonsense is accidental complexity: stuff that doesn't matter. Here's the trick, the part that makes DD work. This needs to come first. And it needs to be well-motivated.}
-Because a user program is running in a different Virtual Machine (VM) than Eclipse itself, we had to find a way to somehow communicate between those two in order to display the DoodleDebug rendering in an Eclipse tab. \nes{As always: don't talk about how you solved it. Talk about problem and solution. Also: motivate.} As a first attempt, we tried to use Java's built-in Remote Method Invocation (RMI) \nes{run-on sentence} what resulted in frustration as some Java Security Manager always put obstacles in our way. \nes{Doesn't matter. What matters is: you try and keep objects kind of alive in an old state. To do that, you serialize them and ship them off to a background service. Which framework you used isn't really important. You can mention it, but not at this length.} Looking for alternatives, we found SIMON (Simple Invocation of Methods Over Network)$^1$, a more comfortable \nes{That's a bit vague} alternative, which allows to create a registry on a specified port of localhost and add a Server object to it. The Server class implements an Interface and the client, knowing the server's Interface, can then search for this server name and send messages to it, including simple data types such as Strings. In \nes{small o} Order to transport any kind of Java objects, a serialization util is used.
+The calls for object visualizations are initiated directly from a user's program code, i.e. in the virtual machine (VM) where the user's program is running inside. DoodleDebug renders it's output into a view tab inside eclipse and must therefore be running in the same VM as eclipse. Since runtime information about objects and rendering calls must be provided from the user's VM to the eclipse VM, a solid communication mechanism is needed. After failing attempts with RMI, we switched SIMON (Simple Invocation of Methods Over Network)\cite{simon}, a simple alternative which allows to create a registry on a specified port of localhost and add a Server object to it. Clients can find the server through this registry and send messages to it by calling it's methods with simple objects like Strings as arguments.
+
+\subsection*{Providing Code from Eclipse Plugin to Workspace}
+\subsubsection*{Lack of Documentation} \meta{Probably throw this into appendix.}
+In order to provide API functionality such as \verb-Doo.dle()- or the \verb-Doodleable- interface to users, we had to find some way of providing Java code automatically from our plugin to the current eclipse workspace. \nes{Don't talk about "had to find some way." In its way, this section has the least priority. It should probably be called "Implementation." Because it isn't very important, try and be brief: what were the implemtation challenges, what were the solutions? You're kind of saying that, just say it briefer.} One may say that everything is well-documented in the Eclipse documentation \nes{Too prosaic. Also: doesn't really matter. This is science.}, but the challenge was to find the right part in the documentation. Eclipse developer forums neither could help, but finally a hint was given by some Stackoverflow user: In order to provide code to workspace Java projects, a plugin needs to use the extension point \verb-org.eclipse.jdt.ui.classpathContainerPage-. From then on, another big help was the source code of JUnit, which uses the same technique, otherwise, it would probably have taken several more weeks until everything was working finely. \nes{Rewrite, away from what you did, towards a problem-solution focus.} \nes{Blank line before sections, please.}
+\subsubsection*{What Is Provided to the User Workspace.}
+On the one hand, all API methods must be visible from user projects. On the other hand, users should only see a minimal amount of DoodleDebug's code in order to prevent them from using it in an unintended way and cause bad behaviour. The compromise made between those two requirements was to mainly provide simple, well-documented interfaces (such as \verb-Doodleable- and only show a proxy of fully implemented classes (e.g. \verb-Doo-).
 
 \subsection*{Serialization for the Transport between VMs}
-SIMON only allows transporting simple data types, such as Strings, so every objects \nes{grammar} is serialized before its transportation. For this purpose, we make use of XStream, a fast and simple \nes{No advertisement talk} serializing library, originally created to serialize Java objects to XML and back again. Because of it's modularity, it \del{also} allows to serialize to JSON and comes with a built-in mapping for this. Because of XML's more verbose syntax and therefore bigger space/time consumption in many cases, we decided to use JSON as first choice, with a fallback to XML if errors occur. This is necessary because standard JSON cannot handle circular references, it lacks the ability to append attributes to entities and therefore cannot index them in order to reference to a parent id in case of a circular reference. Obviously, there are workarounds for this issue, but the fallback to XML does not take as much time that users could even recognize it is happening.
+SIMON only allows transporting simple data types such as Strings, so every object is serialized before its transportation. For this purpose, we make use of XStream\cite{xstream}, a simple serializing library, originally created to serialize Java objects to XML and back again. Because of it's modularity, it also allows to serialize to JSON and comes with a built-in mapping for this. Because of XML's more verbose syntax and therefore bigger space/time consumption in many cases, we decided to use JSON as first choice, with a fallback to XML if errors occur. This is necessary because standard JSON cannot handle circular references, it lacks the ability to append attributes to entities and therefore cannot index them in order to reference to a parent id in case of a circular reference. Obviously, there are workarounds for this issue, but the fallback to XML does not take as much time that users could even recognize it is happening.
 
 \todo{Maybe simple benchmark of XML vs. JSON here}
 
@@ -287,13 +287,17 @@ Decimal Alignment &  &  \\
 \subsubsection*{Discussion}
 \subsubsection*{Consequences}
 
-\chapter*{References}
-\begin{enumerate}
-\item
+\renewcommand\bibname{References} % instead of "Bibliography"
+\begin{thebibliography}{99}
+\bibitem{dd-paper}
+Niko Schwarz. \emph{DoodleDebug, Objects Should Sketch Themselves For Code Understanding}. \url{http://scg.unibe.ch/archive/papers/Schw11bDoodleDebug.pdf}
+\bibitem{sketching-user-experiences}
+Bill Buxton. \emph{Sketching User Experiences}. Elsevier, 2007.
+\bibitem{simon}
 SIMON: \url{http://dev.root1.de/projects/simon}
-\item
+\bibitem{xstream}
 XStream: \url{http://xstream.codehaus.org}
-\end{enumerate}
+\end{thebibliography}
 
 
 \end{document}
