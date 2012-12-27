@@ -146,19 +146,17 @@ As a result, there is no settings dialogue or file for DoodleDebug.
 \nes{I'd like to bet that Apple has a patent on this. Find and quote.} \meta{Can't find it. Try googling something with apple and patent, and you will get a million results...}
 One Example is the behaviour of the scroll position in the console when new objects are rendered into it. As default (with no user interaction), the window keeps scrolling along with rendered objects, always jumping to the newest one. As soon as the user scrolls away from the bottom, this mechanism is stopped and the scroll position remains equal while new objects are appended on the bottom of the output silently. However, if the user decides to go to the bottom of the output again, the auto-scrolling mechanism is obtained again.
 \subsubsection*{Focus When Likely Desired}
-\nes{You ran user studies, right? Talking about these things without mentioning the user studies is just sad. This section should stay as close as possible to the user studies. All that can't be backed up using data from them should go away.}
 Similar thoughts were made on focus handling of DoodleDebug's view in the space of Eclipse's whole UI. Eclipse's built-in console receives focus on any output event per default, but provides a button to deactivate this. For a programmer, it's likely desirable to generally be notified if something happened, but it can be annoying for many outputs over a long time, e.g. if they're working inside another view of Eclipse. In this case, they would probably want to be notified of sporadically occurring outputs. In our study, we observed this problem as well, one subject even turned off console notifications\ref{console-focus-problem}\todo{Can I label this reference?}. Based on these thoughts, we defined an algorithm to check time since the last output event and only gain focus if the previous event is longer than 4 seconds ago. For example some loop of a game which prints out it's calculation time for the last frame every time will only gain focus on the DoodleDebug view once, but a quiet application like a web server that only generates update when a user visits a site will usually regain focus on such an event.
-\todo{refer to design book here \nes{And read …}}
+\todo{refer to design book here \nes{And read …} \meta{I've never seen such a technique described before, do you know something?}}
 
 \chapter*{Qualitative Study on Beta Version}
-\nes{Write the introduction from the point of view of qualitative psychological experiments. Read and reference "Introduction to Research Methods and Data Analysis in Psychology"}
+\nes{Write the introduction from the point of view of qualitative psychological experiments. Read and reference "Introduction to Research Methods and Data Analysis in Psychology" \meta{Ok, do you have it in the SCG?}}
 One of DoodleDebug's big purposes \nes{No talk of purposes.} is to compete with classical debugging mechanisms, so we decided to do a study with a handful of Java developers in order to proof this statement and to find bugs as well as usability problems. \nes{Nope. Reference }
 
 \section*{Study Session Setup}
-A fully functional version of DoodleDebug was used, most probably the equivalent to a "release candidate". It was run inside Eclipse 4.2 (Classic edition), using a ThinkPad T410 with Windows 7 (x64) and an additional mouse (2 buttons + wheel, standard size). The screen was captured during the whole session and one instructor sitting beside the test subject for problem explanation and protocol.\\ \nes{No double backslash.}
-Before the actual testing, the user had 15 - 30 minutes to work through a tutorial and play around with DoodleDebug inside a sandbox. At this time, the instructor was allowed to answer questions and support the subject.\\
-For the actual session, there were 3 different small programs containing some manually inserted bug, which they had to find and eliminate. For one or two of them, they were allowed to use DoodleDebug and for the other one or two respectively, they had to fall back to classical tools. The permission to use DoodleDebug on a particular problem changed with every study session, i.e. if subject 1 was allowed to use DoodleDebug on problem A, then subject 2 would not be allowed, but subject 3 would.\\ \nes{What's the point of not letting them use doodle debug? Do you see the difference between a qualitative and a quantitative study? There's plenty studies on how developers use the currently available toolset.}
-A subject was always working on a problem until it was completely solved, none of them needed more than 30 minutes for all problems together\del{, so there was no reason for premature interruption.}
+A fully functional version of DoodleDebug was used, most probably the equivalent to a "release candidate". It was run inside Eclipse 4.2 (Classic edition), using a ThinkPad T410 with Windows 7 (x64) and an additional mouse (2 buttons + wheel, standard size). The screen was captured during the whole session and one instructor sitting beside the test subject for problem explanation and protocol. Before the actual testing, the user had 15 - 30 minutes to work through a tutorial and play around with DoodleDebug inside a sandbox. At this time, the instructor was allowed to answer questions and support the subject.\\
+For the actual session, there were 3 different small programs containing some manually inserted bug, which they had to find and eliminate. For one or two of them, they were allowed to use DoodleDebug and for the other one or two respectively, they had to fall back to classical tools. The permission to use DoodleDebug on a particular problem changed with every study session, i.e. if subject 1 was allowed to use DoodleDebug on problem A, then subject 2 would not be allowed, but subject 3 would. The reason for letting some candidates only use classical debugging tools was to have a reference of behaviour in order to show that they are not trivial and detect what particular sub-problems they pose in detail, so we would see if DoodleDebug enables better approaches to solve them. Obviously we could not let people solve the same problem in both modes, or they would have been prejudiced by the solution they found before.\\
+A subject was always working on a problem until it was completely solved, none of them needed more than 30 minutes for all problems together.
 
 \section*{Posed Problems}
 \subsubsection*{Sorting}
@@ -166,7 +164,7 @@ A couple of grey scale \verb.Color. objects are put into a \verb.List. and then 
 Solution: In the comparator, completely black colors are wrongly treated as complete white.
 
 \subsubsection*{Serialization}
-Phone book contacts are modelled \nes{I'd prefer american spelling: modeled.} using \verb.Contact. and \verb.Address. objects. They should be serialized using a \verb.SerializingUtil. (simulated serialization only) and de-serialized afterwards.
+Phone book contacts are modeled using \verb.Contact. and \verb.Address. objects. They should be serialized using a \verb.SerializingUtil. (simulated serialization only) and de-serialized afterwards.
 Those mechanisms are executed with example data, but comparison of a contact object before and after serialization fails. The subject's task here is to find out what parts of the contact object were broken and why, i.e. fix the bug. Subjects have access to all of the source code and are allowed to manipulate it.\\
 Solution: In the \verb.SerializingUtil., every field of type \verb.long. is casted into an \verb.integer. before serialization and back into a \verb.long. afterwards. This causes a field called \verb.phoneNumber. of \verb.Address. to be changed into some negative value.
 
@@ -185,8 +183,8 @@ Master Student in Computer Science
 B.Sc. in Computer Science\\
 Master Student  in Computer Science
 \subsubsection*{Charlie} % Andrei Chis
-M.Sc. in Computer Science\\ \todo{is this true?}
-Ph.D. Student in Computer Science \nes{I don't think he's got his PhD already.}
+M.Sc. in Computer Science \todo{is this true?} \\
+Ph.D. Student in Computer Science \nes{I don't think he's got his PhD already. \meta{Yes, that's what it says...}}
 \subsubsection*{Delta} % Julian Schelker
 B.Sc. in Computer Science\\
 Master Student  in Computer Science
@@ -204,11 +202,11 @@ Working as Software Engineer, 15 years of experience
 \subsection*{Different Problem Approaches}
 Depending on study session with our candidates, we could observe different patterns of approaching a problem with classical tools.
 \subsubsection*{System.out.println()}
-Most \nes{Quantify.} of the subjects made use of this mechanism to visualize runtime data. It's quick and most of them argued with laziness to open a debugger or to stare at foreign code. Also, they can compare things, either two different objects as posed in the sorting problem or the same object at different points in time, as in the Serialization problem. Both is not directly possible with a classical debugger like the one coming built-in with Eclipse classic.
+5 out of 7 subjects (all except Delta and Echo) made use of this mechanism to visualize runtime data. It's quick and Alpha for example argued with laziness to open a debugger or to stare at foreign code. Also, they can compare things, either two different objects as posed in the sorting problem or the same object at different points in time, as in the Serialization problem. Both is not directly possible with a classical debugger like the one coming built-in with Eclipse classic.
 \subsubsection*{Debugger}
-Few subjects used the eclipse debugger to inspect objects, only one (Echo) used it exclusively. The argumentation for this usage was that debuggers are more powerful in comparison to System.out.println(), because they allow to inspect objects dynamically and additionally provide simple improvements of standard textual representations (e.g. arrays are represented in the form of \verb-[objectA, objectB, ...]- instead of \verb-[Ljava.lang.Object;@4cb162d5-. But Echo also missed the feature to compare two objects, even at the same point in time they could not manage to do so.
+Four subjects (Bravo, Delta, Echo and Foxtrott) used the eclipse debugger to inspect objects, only Delta and Echo used it exclusively. The argumentation for this usage was that debuggers are more powerful in comparison to System.out.println(), because they allow to inspect objects dynamically and additionally provide simple improvements of standard textual representations (e.g. arrays are represented in the form of \verb-[objectA, objectB, ...]- instead of \verb-[Ljava.lang.Object;@4cb162d5-. But Echo also missed the feature to compare two objects, even at the same point in time they could not manage to do so.
 \subsubsection*{Source Code Staring}
-As mentioned before, debugging tools were mainly developed to avoid the need of staring at code, and most people found this the most annoying part, especially because it was code they had not written on their own. Nevertheless, subject Golf solved the Serialization problem only by using this method. They tried to comprehend the logic of the problem's \verb.SerializingUtil. and thus, in contrast to others, found the problem source at the same time as the semantic problem itself.
+As mentioned before, debugging tools were mainly developed to avoid the need of staring at code, and most people found this the most annoying part, especially because it was code they had not written on their own. Nevertheless, subject Golf solved the Serialization almost only by using this method. They tried to comprehend the logic of the problem's \verb.SerializingUtil. and thus, in contrast to others, found the problem source at the same time as the semantic problem itself. To be exact, they located where the problem was (long casted to int) and used System.out.println() only to check what it resulted in.
 
 \section*{Problems With Classical Tools}
 
