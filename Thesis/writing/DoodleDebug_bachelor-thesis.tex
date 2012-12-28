@@ -140,7 +140,7 @@ Object visualizations are divided in levels of nesting, where level 0 represents
 
 \subsection*{Smart Behaviour versus Configuration Hell}
 When designing user interfaces, one basic decision must be taken: How much configuration options should it contain? Either a lot of settings are left to the user let them take part on the design process. Or the default design is made to fit everyone as good as possible. We decided not to treat everyone as designer\cite{sketching-user-experiences}\meta{p. 95+} but take away design decisions from them by creating sophisticated defaults.
-\todo{read "\url{http://www.amazon.de/Design-Everyday-Things-Donald-Norman/dp/0465067107/ref=sr_1_1?ie=UTF8&qid=1355486165&sr=8-1}"}
+\todo{read "\url{http://www.amazon.de/Design-Everyday-Things-Donald-Norman/dp/0465067107/ref=sr_1_1?ie=UTF8&qid=1355486165&sr=8-1}" \meta{Does SCG have it?}}
 As a result, there is no settings dialogue or file for DoodleDebug.
 \subsubsection*{Smart Scrolling}
 \nes{I'd like to bet that Apple has a patent on this. Find and quote.} \meta{Can't find it. Try googling something with apple and patent, and you will get a million results...}
@@ -213,11 +213,16 @@ As mentioned before, debugging tools were mainly developed to avoid the need of 
 \subsection*{Using System.out.println()}
 \subsubsection*{Homogenous Output}
 We previously stated that purely textual output is poor in terms of formatting and therefore makes it harder for users to classify different parts as they always look similar in terms of size, color, alignment etc.
-\todo{Strive for examples of DoodleDebug > Sysout}
+When solving the sorting problem, subjects were slowed down due to this fact. Beta for instance firstly iterated over the wrongly sorted color list to print each element and then stared at the (unaligned) numerical values of red, green and blue color components. After they had found out that a black element was at the end instead of the beginning, they could go on searching what had caused the problem. Subjects using DoodleDebug already had built-in renderings for \verb.Collection. and \verb.Color., which enabled them to visualize it by only using one call. Charlie Doodled the wrongly sorted color list and the correct one that was used as ground truth for comparison. They instantly noticed their similarity and pointed out that black is on the wrong side of the list.
 
-\subsubsection*{Useless Output}
-The standard implementation of \verb-System.out.println()- prints class name and object hash for non-primitive objects. There was no case in our study where a subject printed an object in this way and could use this information for further debugging steps.
-\todo{Strive for examples of where:\\ - Subjects manually print primitive fields\\ - Subjects override toString()\\ - DoodleDebug is initially enough informative}
+\subsubsection*{Uninspectable and Useless Output}
+The standard implementation of \verb-System.out.println()- prints class name and object hash for non-primitive objects. Output printed to a console is static and can not be inspected. If an object's representation lacks a particular piece of information, the programmer will need to go back into the code and either change the \verb.toString(). method of its class or manually gather information from outside and print it. In our study, Charlie was the only subject to override \verb.toString(). methods after firstly using their standard representation. They implemented it by printing out all fields of an object: \verb.Contact. was represented by\\
+\verb-"name: " + name + ", address: " + address-,\\
+whereat \verb.Address. was represented by\\
+\verb-"street: " + street + ", phoneNumber: " + phoneNumber + ", city: " + city-.
+This representation recursively breaks down a \verb.Contact. object into primitive types, which can be easily represented by text. Alpha produced a very similar output, but instead of overriding \verb.toString()., they extracted all fields from outside using getter methods directly inside the System.out.println() method. Golf only used System.out.println() as help for code inspection, they printed one particular primitive field at a time without considering its containing object.\\
+Another approach to solve insufficient output was to switch from System.out.println() to the debugger, observed on Bravo and Foxtrot.\\
+DoodleDebug includes an objects fields in it's standard rendering (if there are not too many) while still labelling its class name. All 3 subjects (Bravo, Delta, Foxtrot) using DoodleDebug for the serialization problem managed to find the changed field instantly after calling \verb-Doo.dle()- once before and once after the de-/serialization step.
 
 \subsection*{Using A Debugger}
 \subsubsection*{Comparison Between Objects}
@@ -230,7 +235,7 @@ The built-in eclipse debugger only allows to inspect one object at one point in 
 When some output is printed onto the console, it gains the UI's focus by default. Due to the problem setup, every program initially used to throw an exception at the end of it's execution, signalling the problem has not been solved yet. Every user experienced the following problem at least once: They were using DoodleDebug and therefore had this view tab opened when the exception was thrown and eclipse switched to the console. Only Echo managed to disable its focus-on-change setting, the other subjects just switched back to the DoodleDebug view tab after a few seconds.
 
 \section*{Sessions}
-\todo{Watch videos to check text and eventually add some numbers}
+\todo{Swap to appendix}
 
 \subsection*{Alpha}
 \nes{Nope. Don't group by candidate, group by problem, and then list the candidates that support that problem. If you need to list the work log per candidate, do so in the appendix. On how to write up a user study like this, see "http://research.microsoft.com/en-us/um/redmond/groups/hip/papers/ko2007bugfixing.pdf"}
