@@ -3,6 +3,7 @@ output.html
 *.aux
 *.synctex.gz
 *.out
+*.log
 DDUpdateSite/features/
 DDUpdateSite/plugins/
 *study_*.fbr
