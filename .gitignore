@@ -4,9 +4,11 @@ output.html
 *.synctex.gz
 *.out
 *.log
+*.dvi
+*.ps
+Thesis/writing/DoodleDebug_bachelor-thesis.pdf
 DDUpdateSite/features/
 DDUpdateSite/plugins/
 *study_*.fbr
-Thesis/writing/DoodleDebug_bachelor-thesis.pdf
 DoodleDebug/bin
 DoodleServer/bin
