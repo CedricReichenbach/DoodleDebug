@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import javax.inject.Inject;
+import javax.swing.text.NumberFormatter;
 
 import ch.unibe.scg.doodle.Doodler;
 import ch.unibe.scg.doodle.htmlgen.Tag;
@@ -96,6 +97,9 @@ public class TableRendering implements Rendering<Collection<Collection<?>>> {
 
 	private void renderNumber(Number number, Tag row) {
 		Tag before = new Tag("td", "class=beforeDecimalPoint");
+		if (number.doubleValue() < 0) {
+			before.add("-");
+		}
 		before.add(beforeDecPoint(number));
 		row.add(before);
 
