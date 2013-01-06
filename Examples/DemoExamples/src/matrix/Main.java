@@ -3,6 +3,8 @@ package matrix;
 import java.util.ArrayList;
 import java.util.List;
 
+import util.SysoutUtil;
+
 import ch.unibe.scg.doodle.Doo;
 
 public class Main {
@@ -17,34 +19,35 @@ public class Main {
 	}
 
 	private static void playWithMatrices() {
-		float[][] scaleMatrix = { { 2, 0 }, { 0, 2 } };
-		float[][] rotationMatrix = {
+		Float[][] scaleMatrix = { { 3.5f, 0f, 0f}, { 0f, 3.5f, 0f }, { 0f, 0f, 3.5f} };
+		Float[][] rotationMatrix = {
 				{ (float) Math.cos(Math.PI / 3), (float) -Math.sin(Math.PI / 3) },
 				{ (float) Math.sin(Math.PI / 3), (float) Math.cos(Math.PI / 3) } };
-		float[][] vector = { { 12, 33, 0.1f, 0, 0 } };
+		Float[][] vector = { { 12f, 33f, 0.1f, 0f, 0f } };
 
-		List<float[][]> matrices = new ArrayList<float[][]>();
+		List<Float[][]> matrices = new ArrayList<Float[][]>();
 		matrices.add(scaleMatrix);
 		matrices.add(rotationMatrix);
 		matrices.add(vector);
 
 		Doo.dle(matrices);
+		SysoutUtil.printMatrixList(matrices);
 
-		for (float[][] matrix : matrices) {
+		for (Float[][] matrix : matrices) {
 			MatrixUtil.transpose(matrix);
 			Doo.dle(matrices);
 		}
 		// Oh, they didn't change!
 
 		for (int i = 0; i < matrices.size(); i++) {
-			float[][] transposed = MatrixUtil.transpose(matrices.get(i));
+			Float[][] transposed = MatrixUtil.transpose(matrices.get(i));
 			matrices.set(i, transposed);
 			Doo.dle(matrices);
 		}
 		// Now they're transposed.
 
 		for (int i = 0; i < matrices.size(); i++) {
-			float[][] scaled = MatrixUtil.scale(matrices.get(i), 0.1f);
+			Float[][] scaled = MatrixUtil.scale(matrices.get(i), 0.1f);
 			matrices.set(i, scaled);
 			Doo.dle(matrices);
 		}
