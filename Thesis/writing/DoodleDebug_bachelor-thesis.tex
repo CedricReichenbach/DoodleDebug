@@ -224,6 +224,15 @@ DoodleDebug includes an objects fields in it's standard rendering (if there are 
 \subsection*{Using A Debugger}
 \subsubsection*{Comparison Between Objects}
 The built-in eclipse debugger only allows to inspect one object at one point in time. As the serialization problem consists of two objects unexpectedly  being unequal, part of the debugging process was somehow comparing them in order to find their difference. Every subject except Golf did this, Golf only tried to understand the serialization and de-serialization process to find out, where the implementation has mistakes. Echo never used \verb-System.out.println()- so they also attempted to compare objects before and after serialization using the debugger. Even though the debugger supported simple and fast inspection to any point inside the object, Echo explicitly pointed out that they miss the feature to inspect two objects simultaneously instead of memorizing small pieces and going to the other one for comparison.
+
+\subsubsection*{Non-Selective Output}
+Eclipse's Java debugger simply lists all contents of an object, since there is no information about relevance of its respective parts. In particular, interfaces may specify a imaginary concept and be used in in the declaration context for better overview, but for creation of an instance, a full class implementing this interface is needed. The debugger is working at runtime and therefore only knows the instantiated type of an object, so it will visualize all properties and contents of this, potentially resulting in a overly verbose output. We observed this on the color list problem, where \verb.ArrayList. was used as implementation for the interface \verb.List.. Subject Bravo initially tried to perceive the structure of a list right after sorting by pausing the program  using the debugger and inspecting the mentioned list (figure ~\ref{debugger_color-list}), but instantly gave up and switched to writing a \verb.for. loop which sequentially prints out all elements using \verb-System.out.println()-. If the standard output of DoodlDebug does not fit a users needs, it can be adjusted through of the two described methods, the simpler Doodleable interface was used in this context by Alpha. \todo{Screenshot of Doodleable usage}
+\begin{figure}[h]
+	\includegraphics[width=\textwidth]{img/debugger_color-list_remo.png}
+	\caption[Bravo using the debugger for a color list]{Eclipse's debugger visualizes all fields of an object's runtime type (ArrayList)}
+	\label{debugger_color-list}
+\end{figure}
+
 \todo{Are there more examples? (Good ones)}
 
 \subsection*{General Problems}
