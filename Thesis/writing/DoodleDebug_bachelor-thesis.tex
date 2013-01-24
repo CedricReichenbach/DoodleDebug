@@ -69,22 +69,17 @@
 \end{figure}
 
 \chapter*{Abstract}
+Software developers actively make use of debugging tools in order to find problem sources in code. In relation to a previous paper\cite{dd-paper}, we designed and implemented a tool representing a new style of debugging: Objects are responsible of their own visual representation, as already seen in classical tools, but with a powerful and yet simple mechanism for graphical visualization rather than text only. Most of its power is gained when taking on conceptually multidimensional objects like lists of matrices.
 
 \chapter*{Introduction}
-\nes{Please don't check the pdf or aux files (except bbl) into the git repo}
 \nes{Read and quote all publications assiciated with whyline: http://faculty.washington.edu/ajko/whyline-java.shtml}
+\nes{Read: "http://www.amazon.com/Write-Point-Bill-Stott/dp/0231075499"}
 \section*{Idea}
-\meta{Option 1 for beginning\\}
-Debugging is annoying. We want to change this by creating a tool that is as simple as one can think and delivers all desired runtime information at the same time. System.out.println() users will easily switch to it because of its dead easy usage and debugger-friends will love it for its powerful output.\\
-\meta{Option 2\\}
-"Yay, let's use a debugger!", said no one ever.\todo{...}\\
-\meta{Option 3\\}
-What would happen if we cross-breed a debugger with Java's System.out.println() mechanism? This clearly depends on which genes their child would inherit from each one, but if we made use of genetic engineering to pick all good genes from the pool, a completely new generation of debugging could be born.\\
-\meta{Main text\\}
-For programmers, it's an everyday problem: Some feature of a program is not working correctly, but it's not clear where the problem originating \ins{from}. In many cases, it's not even clear what is wrong in the runtime data.
-\nes{Start is too slow. You have a list of interesting things to say. Think of the most interesting one, and say it. Don't prefix it. Read: "http://www.amazon.com/Write-Point-Bill-Stott/dp/0231075499"}
- Those problems, commonly called bugs, \nes{Too prosaic.} are approached by various techniques which always have pros and cons, mostly it's a trade off between (manpower) time cost and quality of output. \nes{Why would any of that matter? That's just a long useless prefix that has nothing to do with doodledebug.} The simplest approach, just staring at code and build some mental model to play the program in one's head, not only demands a lot of concentration and imagination, \nes{You're spending many lines trying to convince me that I need help fixing my bugs. I don't think that's a point worth making: everybody agrees. Focus instead on how doodledebug is better than toString. See the DD workshop paper for how to run an introduction} but also consumes a huge amount of time if the affected code sample is rather big. \nes{More trivialities.} In most cases, it's much more comfortable to automatically build a visual representation of runtime data, which \ugh{can is} provided by debuggers for instance. They allow users to stop at a particular moment in time, specified by a previously defined line of code that is run over. The whole program state is inspectable \nes{Finally we're getting to doodledebug! This isn't nearly concrete enough, though.} this way and commonly used data types have some improved textual representation. One big problem here is that a program is only inspectable at one snapshot in time, but two states cannot directly be compared. \nes{Now we're getting somewhere. Make this the beginning of the introduction.} Another widely used solution, printing on a console, eliminates this issue and has other advantages: Because such printing instructions are directly timed into code to debug, it's much quicker to use instead of setting a break point, opening a debugger and navigating to whatever one is searching for. \nes{Nonsense. Have you used smalltalk? Opening up a debugger needn't be difficult at all. Again, look at the doodledebug workshop paper for how to introduce our problem. Don't open silly side battles.} Also, printing to a console allows to save space by just printing exactly what is needed and therefore display a bigger amount of useful information using the same space on screen. \nes{That makes no sense to me.} But still it lack nes{lacks} some features, on one hand \nes{on the one hand}, because the only supported output format is text, on the other hand, a line that has been printed cannot be edited any more, therefore advanced formatting becomes very complicated.\\ \nes{Don't use double backslash. } \nes{Unconvincing. "only supports text" is a property, not a downside. Why would that be bad?}
-Conscious of all those problems, we tried to model a new way of debugging, joining all advantages of classical tools and eliminate all discomfort \nes{Are we overselling a little bit?}. We considered console printing as a good starting point because it already brings a lot of desirable properties, \nes{It doesn't matter what you consider. The goal is to convince the reader that DoodleDebug solves a problem.} so our tool should be able to be called directly from code and render its output into some console-like device. To get away from \nes{article.} text-only format and also to support standards as well as portability, we decided to use html as output format. \nes{A Bachelor's thesis isn't the story of how you implemented your project. It's a scientific text, that leads from a problem to a solution. It's convincing, more than documenting.}
+\meta{\\Fast start --> Ok like that?\\}
+Debugging tools should save time. But when it comes to complex problems, like a list of matrices, classical tools like Java's \verb-System.out.println()- break down and become either expensive to use or completely useless\cite{dd-paper}. A Debugger may handle such problems better, it does not allow to compare two time slices. DoodleDebug combines graphical object representation with a simple API, still approving the simple and widely accepted usage pattern of \verb-System.out.println()-.
+\meta{\\Main text\\}
+For programmers, it's an everyday problem: Some feature of a program is not working correctly, but it's not clear where the problem originating from. The simplest approach, just staring at code and build some mental model to play the program in one's head, which is usually time and concentration intensive. In most cases, it's much more comfortable to automatically build a visual representation of runtime data, which is provided by debuggers for instance. They allow users to stop at a particular moment in time, the whole program state is inspectable and commonly used data types have some useful textual representation. One big problem here is that a program is only inspectable at one snapshot in time, but two states cannot directly be compared. Another widely used solution, printing on a console, eliminates this issue and has other advantages: Because such printing instructions are directly written into code to debug, which might be quicker or more convenient in some cases \todo{refer to study, where some subjects didn't use any debugger}. Also, printing to a console allows to precisely represent an object with needed data only using its \verb-toString()- method (in Java). \meta{Does this make sense now?} But still it lacks some features: On the one hand, the only supported output format is one-dimensional text, no colors, images or free spacial positioning. On the other hand, a line that has been printed cannot be edited any more, therefore advanced formatting becomes very complicated. \meta{Convinced about downsides?}
+This paper introduces a solution which aims on eliminating the above mentioned disadvantages and includes a small qualitative study for its verification.
 
 \nes{Please do read "write to the point", linked above. Among many other things, it explains quite nicely how to break text into paragraphs.}
 
@@ -150,6 +145,8 @@ Similar thoughts were made on focus handling of DoodleDebug's view in the space 
 \todo{refer to design book here \nes{And read …} \meta{I've never seen such a technique described before, do you know something?}}
 
 \chapter*{Qualitative Study on Beta Version}
+\nes{On how to write up a user study like this, see "http://research.microsoft.com/en-us/um/redmond/groups/hip/papers/ko2007bugfixing.pdf"}
+
 \nes{Write the introduction from the point of view of qualitative psychological experiments. Read and reference "Introduction to Research Methods and Data Analysis in Psychology" \meta{Ok, do you have it in the SCG?}}
 One of DoodleDebug's big purposes \nes{No talk of purposes.} is to compete with classical debugging mechanisms, so we decided to do a study with a handful of Java developers in order to proof this statement and to find bugs as well as usability problems. \nes{Nope. Reference }
 
@@ -234,11 +231,29 @@ The built-in eclipse debugger only allows to inspect one object at one point in 
 \label{console-focus-problem}
 When some output is printed onto the console, it gains the UI's focus by default. Due to the problem setup, every program initially used to throw an exception at the end of it's execution, signalling the problem has not been solved yet. Every user experienced the following problem at least once: They were using DoodleDebug and therefore had this view tab opened when the exception was thrown and eclipse switched to the console. Only Echo managed to disable its focus-on-change setting, the other subjects just switched back to the DoodleDebug view tab after a few seconds.
 
-\section*{Sessions}
-\todo{Swap to appendix}
+
+\renewcommand\bibname{References} % instead of "Bibliography"
+\begin{thebibliography}{99}
+\bibitem{dd-paper}
+Niko Schwarz. \emph{DoodleDebug, Objects Should Sketch Themselves For Code Understanding}. \url{http://scg.unibe.ch/archive/papers/Schw11bDoodleDebug.pdf}
+\bibitem{sketching-user-experiences}
+Bill Buxton. \emph{Sketching User Experiences}. Elsevier, 2007.
+\bibitem{semantic-zoom}
+Allison Woodruff, James Landay, and Michael Stonebraker. \emph{Goal-directed zoom.} In CHI 98 conference summary on Human factors in computing systems, CHI '98, pages 305-306, New York, NY, USA, 1998. ACM.
+\bibitem{simon}
+SIMON: \url{http://dev.root1.de/projects/simon}
+\bibitem{xstream}
+XStream: \url{http://xstream.codehaus.org}
+\end{thebibliography}
+
+\chapter*{Appendix}
+
+\section*{Study Sessions}
+
+For every candidate, a screen capture video was taken as well as hand notes. The main setup and action plots of each subject is documented here.
+\todo{Add rest of documentation}
 
 \subsection*{Alpha}
-\nes{Nope. Don't group by candidate, group by problem, and then list the candidates that support that problem. If you need to list the work log per candidate, do so in the appendix. On how to write up a user study like this, see "http://research.microsoft.com/en-us/um/redmond/groups/hip/papers/ko2007bugfixing.pdf"}
 The main purpose of our very first session was to test our study setup and its synthetic programming problems. At this point, we only had the first two mentioned problems, namely "Sorting" and "Serialization", the third one, "Decimal Alignment", was added afterwards. Aware of those unequal conditions, we include those results nevertheless, because this study only has a qualitative background and intended to deliver statistically relevant results.
 \subsubsection*{Allowed Tools}
 \begin{table}[h]
@@ -299,20 +314,5 @@ Decimal Alignment &  &  \\
 \subsubsection*{Errors}
 \subsubsection*{Discussion}
 \subsubsection*{Consequences}
-
-\renewcommand\bibname{References} % instead of "Bibliography"
-\begin{thebibliography}{99}
-\bibitem{dd-paper}
-Niko Schwarz. \emph{DoodleDebug, Objects Should Sketch Themselves For Code Understanding}. \url{http://scg.unibe.ch/archive/papers/Schw11bDoodleDebug.pdf}
-\bibitem{sketching-user-experiences}
-Bill Buxton. \emph{Sketching User Experiences}. Elsevier, 2007.
-\bibitem{semantic-zoom}
-Allison Woodruff, James Landay, and Michael Stonebraker. \emph{Goal-directed zoom.} In CHI 98 conference summary on Human factors in computing systems, CHI '98, pages 305-306, New York, NY, USA, 1998. ACM.
-\bibitem{simon}
-SIMON: \url{http://dev.root1.de/projects/simon}
-\bibitem{xstream}
-XStream: \url{http://xstream.codehaus.org}
-\end{thebibliography}
-
 
 \end{document}
