@@ -255,6 +255,19 @@ SIMON: \url{http://dev.root1.de/projects/simon}
 XStream: \url{http://xstream.codehaus.org}
 \end{thebibliography}
 
+\chapter*{Future Work}
+
+Besides proving things right, our study revealed some problems as well. As they only show that a problem exists but don't provide exact information about its cause, further research might invest in analysing them and propose accurate solutions.
+
+\section*{API}
+
+\subsection*{Split The Doodleable Interface}
+\subsubsection*{Problem}
+As already described, the \verb.Doodleable. interface contains two methods for object representation, one for a detailed and another one for a summarized variant. This structure greatly allows integration of semantic zoom because it forces user-provided information about content importance. However, study subjects eventually were unsure about the semantic meaning of those methods. Echo, for instance, verbally communicated his confusion about their difference; after going back to the documentation, everything was clear. Alpha did not show any special reaction when implementing the Doodleable interface for the first time, but simply "delegated" the zoom mechanism by replacing \verb-c.draw(object)- from their \verb.doodleOn(Canvas c). by \verb-c.drawSmall(object)- in their \verb.doodleSimplifiedOn(Canvas c)..
+
+\subsubsection*{Possible Solution}
+An approach for resolving this issue would be to split \verb.Doodleable. into two interfaces containing one single method each, let's say \verb.Doodleable. and \verb.SmallDoodleable.. For support of semantic zoom, users could simply implement both interfaces; if not, they would likely only use the standard version method. People implementing both interfaces would possibly make sure to first inform themselves of the respective semantic meanings and not run into previously mentioned slips. Anyhow, this solution would introduce new conceptual problems: What should happen if a user only implements \verb.SmallDoodleable.? Should DoodleDebug try to guess a way for semantic zoom of objects only implementing one interface or just ignore it and always use the same method for rendering?
+
 \chapter*{Appendix}
 
 \section*{Study Sessions}
