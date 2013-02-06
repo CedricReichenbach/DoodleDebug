@@ -76,26 +76,29 @@ Software developers actively make use of debugging tools in order to find proble
 \nes{Read: "http://www.amazon.com/Write-Point-Bill-Stott/dp/0231075499"}
 \section*{Idea}
 \meta{\\Fast start --> Ok like that?\\}
-Debugging tools should save time. But when it comes to complex problems, like a list of matrices, classical tools like Java's \verb-System.out.println()- break down and become either expensive to use or completely useless\cite{dd-paper}.
-\nes{On one of the first pages of "programming pearls", the author notes that often it's easier to write "just writing println is often easier". That would fit here.
+Debugging tools should save time, they help visualizing objects for inspection and thus bug detection. Java's \verb-System.out.println()- allows to easily compare many temporal states of an object or many different instances beside each other, which may be a reason for its popularity;\nes{On one of the first pages of "programming pearls", the author notes that often it's easier to write "just writing println is often easier". That would fit here.} but when it comes to complex problems, like a list of matrices, \verb-System.out.println()- breaks down and becomes either expensive to use or completely useless\cite{dd-paper}.
+ A Debugger may handle such a problem better, but it does not allow to compare two time slices. DoodleDebug combines graphical object representation with a simple API, still approving the simple and widely accepted usage pattern of \verb-System.out.println()-.
 
-Your argument is what exactly? The first sentence isn't connected to the second.
-}
- A Debugger may handle such problems \nes{you gave only one} better, it does not allow to compare two time slices.\nes{Yup.} DoodleDebug combines graphical object representation with a simple API, still approving the simple and widely accepted usage pattern of \verb-System.out.println()-.
- 
-\nes{I would argue that println is popular because it can do temporal comparisons, and because you don't have to be certain that the interesting run of a line of code is the first. Given this, we improve it, by giving it the power of a debugger.}
 \meta{\\Main text\\}
-\nes{Gee, that's a long paragraph. Is this because I was against double backslash? The alternative is to hit enter twice, make a newline, and that makes a real paragraph.}
-For programmers, it's an everyday problem: Some feature of a program is not working correctly, but it's not clear where the problem originating from. The simplest approach, just staring at code and build some mental model to play the program in one's head, which \nes{Sentence has no main verb. Otherwise good.} is usually time and concentration intensive. In most cases, it's much more comfortable \nes{unsubstantiated claim} to automatically build a visual representation of runtime data, which is provided by debuggers for instance. They allow users to stop at a particular moment in time, the whole program state is inspectable and commonly used data types have some useful textual representation. One big problem here is that a program is only inspectable at one snapshot in time, but two states cannot directly be compared. \nes{Excellent. Really good sentence. Maybe move this sentence further up. It's kind of key to the whole thing.} Another widely used solution, printing on a console, eliminates this issue and has other advantages: Because such printing instructions are directly written into code to debug, which might be quicker or more convenient in some cases \nes{Restructure. If you're showing these things later, you can say that. You can say: as our study results show, …} \todo{refer to study, where some subjects didn't use any debugger}. Also, printing to a console allows to precisely represent an object with needed data only using its \verb-toString()- method (in Java). \meta{Does this make sense now?} But still it lacks some features: On the one hand, the only supported output format is one-dimensional text, no colors, images or free spacial positioning. On the other hand, a line that has been printed cannot be edited any more, therefore advanced formatting becomes very complicated. \meta{Convinced about downsides?} \nes{Fighting alternatives should go into the "related work" section. Not the introduction. But yea, it's a lot better. But do move it to related work.}
-  This paper \nes{thesis:)} introduces a solution which aims on \nes{to eliminate} eliminating the above mentioned disadvantages and includes a small qualitative study for its verification.
+For programmers, it's an everyday problem: Some feature of a program is not working correctly, but it's not clear where the problem originating from. The simplest approach, just staring at code and build some mental model to play the program in one's head, is usually time and concentration intensive. For more comfort, tools help to automatically build a visual representation of runtime data, which is provided by debuggers for instance. They allow users to stop at a particular moment in time, the whole program state is inspectable and commonly used data types have some useful textual representation. One big problem here is that a program is only inspectable at one snapshot in time, but two states cannot directly be compared. \nes{Excellent. Really good sentence. Maybe move this sentence further up. It's kind of key to the whole thing.} \meta{But we need it here...}
+
+Another widely used solution, printing on a console, eliminates this issue and has other advantages: Because such printing instructions are directly written into code to debug, which might be quicker or more convenient in some cases \nes{Restructure. If you're showing these things later, you can say that. You can say: as our study results show, …} \todo{refer to study, where some subjects didn't use any debugger}. Also, printing to a console allows to precisely represent an object with needed data only using its \verb-toString()- method (in Java). \meta{Does this make sense now?} But still it lacks some features: On the one hand, the only supported output format is one-dimensional text, no colors, images or free spacial positioning. On the other hand, a line that has been printed cannot be edited any more, therefore advanced formatting becomes very complicated. \meta{Convinced about downsides?} \nes{Fighting alternatives should go into the "related work" section. Not the introduction. But yea, it's a lot better. But do move it to related work.}
+  This paper \nes{thesis:)} \meta{I'm confused now: I was told to write a paper and derive the bachelor's thesis out of it later...} introduces a solution which aims to eliminate the above mentioned disadvantages and includes a small qualitative study for its verification.
 
 \nes{Please do read "write to the point", linked above. Among many other things, it explains quite nicely how to break text into paragraphs.}
+
 \nes{The above comment is still good. Are there any paragraphs left in the paper?}
 
 \chapter*{Development}
 \nes{Every chapter needs an introduction paragraph.}
+
+The efforts made in analysing classical debugging tools and how programmers behave when interacting with them all aimed on implementing which would actually fill the mentioned problematic gaps. This chapter describes the process of realizing it in the form of an eclipse plugin, including general conceptual patterns as well as technically relevant parts.
+
 \section*{Planning}
 \nes{Every section needs an introduction paragraph.}
+
+Instead of immediately starting to implement, we followed several well-proven planning steps from literature to avoid costly redesigning or refactoring later on.
+
 \subsection*{Sketching the Features}
 The concept of a new system for code understanding, especially for multi-dimensional objects like matrices was already introduced and justified in a previous paper\cite{dd-paper}. \nes{Outline the argument there. That's what the related work section is for. Make one, make it chapter 2, just after the introduction.} One main result was that textual output is not powerful enough to produce useful output in some cases. \nes{That's much too vague. In this vagueness, it wasn't a result.} Anther one was that customized representations of objects tend to have some common denominators, like including their class name. \nes{Well, list them.} Base\ins{d} on this information, we started to sketch some candidate renderings and corresponding code snippets of commonly used data structures in pen and paper style, planning to throw away failures during the design process and focus only on good prototypes when going towards implementation. We tried to follow the principle of not mixing up the design and engineering  processes\cite{sketching-user-experiences}.\nes{Good, but a bit more detail!}
 
@@ -155,7 +158,6 @@ In order to save space and keep information available to users, DoodleDebug uses
 \nes{Yup, a reference would be nice. Make sure to read the referenced paper, too. In part, because you need to get a feeling for scientific style.} \meta{Semantic Zoom is from a book, right?}
 \nes{See the DoodleDebug workshop paper. It, too, quotes Semantic Zoom.}
 \nes{This is a design thing, and should go into the design chapter. Implementation things should go into the implementation chapter. Split differently. Currently, there's a chapter "programming" Make the new structure:
-
 1. Introduction
 2. Related work
 3. Design (this one should include *plenty* of our actual sketches. Both accepted and denied sketches.)
@@ -164,7 +166,6 @@ In order to save space and keep information available to users, DoodleDebug uses
 6. Discussion
 7. Future work (this one is optional. The others aren't.)
 8. Conclusions
-
 and then never mix them.}
 Object visualizations are divided in levels of nesting, where level 0 represents outermost objects, referenced in \verb-Doo.dle(object)-, level 1 objects are (semantically) nested ones inside level 0 etcetera. Saving space is achieved by only completely rendering level 0 and 1 objects, and use a smaller representation for a objects of level 2. Level 1 objects are clickable, which will cause them to be repainted as new virtual level 0 objects, so previous level 2 objects will move to level 1. This pattern allows to arbitrarily explore an objects nesting tree, similar to a debugger.
 
@@ -172,7 +173,8 @@ Object visualizations are divided in levels of nesting, where level 0 represents
 
 \subsection*{Smart Behaviour versus Configuration Hell}
 When designing user interfaces, one basic decision must be taken: How much configuration options should it contain? Either a lot of settings are left to the user let them take part on the design process. Or the default design is made to fit everyone as good as possible. We decided not to treat everyone as designer\cite{sketching-user-experiences}\meta{p. 95+} but take away design decisions from them by creating sophisticated defaults. \nes{Nice :)}
-\todo{read "\url{http://www.amazon.de/Design-Everyday-Things-Donald-Norman/dp/0465067107/ref=sr_1_1?ie=UTF8&qid=1355486165&sr=8-1}" \meta{Does SCG have it?}\nes{Of course. It's in room #206. Ask Erwann Wernli to find it before you come and pick it up.}}
+\todo{read \url{"http://www.amazon.de/Design-Everyday-Things-Donald-Norman/dp/0465067107/ref=sr_1_1?ie=UTF8&qid=1355486165&sr=8-1"}} \meta{Does SCG have it?}
+\nes{Of course. It's in room  no. 206. Ask Erwann Wernli to find it before you come and pick it up.}
 As a result, there is no settings dialogue or file for DoodleDebug.
 \subsubsection*{Smart Scrolling}
 \nes{I'd like to bet that Apple has a patent on this. Find and quote.} \meta{Can't find it. Try googling something with apple and patent, and you will get a million results... Google patent search did not reveal it as well. Going to stackoverflow...}
