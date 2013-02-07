@@ -89,6 +89,18 @@ Another widely used solution, printing on a console, eliminates this issue and h
 
 \nes{The above comment is still good. Are there any paragraphs left in the paper?}
 
+\chapter*{Related Work}
+Previous studies about human behaviour when developing and especially debugging code were good hints to point where DoodleDebug should be going. We filtered relevant data out of them and aligned them with our research efforts, resulting in a separate paper\cite{dd-paper}.
+
+\section*{Mining SqueakSource}
+We had programmed a simple Smalltalk data miner, which fetched all projects from SqueakSource, searched all classes overriding Smalltalk's \verb.printOn:. method, which is roughly equivalent to Java's \verb.toString(). in its meaning to programmers; namely it provides a textual representation of an object in order to print it to a console. In a next step, we manually went through the received \verb.printOn:. code snippets (590) and searched for repeating patterns.
+\begin{itemize}
+	\item 44 used ASCII graphics to build two-dimensional structures.
+	\item 137 wrapped their printed instance variables using parentheses.
+	\item 219 called \verb.printOn:. of their super class.
+	\item 452 included their class name.
+\end{itemize}
+
 \chapter*{Development}
 \nes{Every chapter needs an introduction paragraph.}
 
