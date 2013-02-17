@@ -100,6 +100,59 @@ We had programmed a simple Smalltalk data miner, which fetched all projects from
 	\item 219 called \verb.printOn:. of their super class.
 	\item 452 included their class name.
 \end{itemize}
+For DoodleDebug, we tried to consider those patterns and include them as well as possible and eventually include them in every output without the need of user manipulation. If not, they should be easily produced through an API.
+
+\section*{Text is not always powerful enough}
+In the same paper, we argued that there are data structures, where using classical console printing contains clear disadvantages, demonstrated using Arrays of two-dimensional matrices as an example of multi-dimensional structures. Objects with independent textual representation methods can only be listed vertically, which does not allow to do nesting with a consistent and thus clear layout (figure~\ref{nested-matrix-problem}). This nesting problem could be solved, if representation methods would not be restricted to one-dimensional text only (figure~\ref{nested-matrix-idea}).
+\begin{figure}[h]
+	\begin{verbatim}
+    an Array()
+
+    an Array(
+    MatrixTransform2x3(
+        2.0 0.0 0.0
+        0.0 2.0 0.0
+    ))
+
+    an Array(
+    MatrixTransform2x3(
+        2.0 0.0 0.0
+        0.0 2.0 0.0
+    ) MatrixTransform2x3(
+        0.707107 -0.707107 0.0
+        0.707107 0.707107 0.0
+    ))
+	\end{verbatim}
+	\caption[Bad nesting of 2D-matrix array]{Textual visualization of an array of 2D-matrices in Smalltalk}
+	\label{nested-matrix-problem}
+\end{figure}
+\begin{figure}[h]
+\raggedright
+	$\{\}$
+	\begin{verbatim}
+	
+	\end{verbatim}
+	$\{\begin{pmatrix}
+	2. & 0. & 0. \\
+	0. & 2. & 0. \\
+	0. & 0. & 2.
+	\end{pmatrix}\}$
+	\begin{verbatim}
+	
+	\end{verbatim}
+	$\{\begin{pmatrix}
+	2. & 0. & 0. \\
+	0. & 2. & 0. \\
+	0. & 0. & 2.
+	\end{pmatrix},
+	\begin{pmatrix}
+	0.707107 & -0.707107 & 0. \\
+	0.707107 & 0.707107 & 0. \\
+	0. & 0. & 1.
+	\end{pmatrix}\}$
+	\caption[Ideal nesting of 2D-matrix array]{Possible visualization of an array of 2D-matrices without the restriction to 1D-text}
+	\label{nested-matrix-idea}
+\end{figure}
 
 \chapter*{Development}
 \nes{Every chapter needs an introduction paragraph.}
