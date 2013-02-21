@@ -1,4 +1,5 @@
-\documentclass[a4paper,ngerman,english]{amsbook} % Use book format.
+\documentclass[english]{sig-alternate}
+%\documentclass[a4paper,ngerman,english]{amsbook} % Use book format.
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{babel}
@@ -62,18 +63,36 @@
 \newcommand\ewe[1]{\nbc{EWE}{#1}{olive}} % add more author macros here
 
 
-\title{DoodleDebug}
 
 \begin{document}
+\conferenceinfo{WOODSTOCK}{'97 El Paso, Texas USA}
+%\CopyrightYear{2007} % Allows default copyright year (20XX) to be over-ridden - IF NEED BE.
+%\crdata{0-12345-67-8/90/01}  % Allows default copyright data (0-89791-88-6/97/05) to be over-ridden - IF NEED BE.
+% --- End of Author Metadata ---
+
+\title{DoodleDebug}
+
+\numberofauthors{3}
+
+\author{
+\alignauthor Niko Schwarz \\
+\affaddr{University of Bern}
+\alignauthor Cedric Reichenbach \\
+\affaddr{University of Bern}
+\alignauthor Oscar Nierstrasz \\
+\affaddr{University of Bern}
+}
+
+\date{1 March 2012}
+
 \maketitle
-\begin{figure}
-	\includegraphics[scale=0.25]{img/DoodleDebug-logo.png}
-\end{figure}
 
-\chapter{Abstract}
+\begin{abstract}
 Software developers actively make use of debugging tools in order to find problem sources in code. In relation to a previous paper\cite{dd-paper}, we designed and implemented a tool representing a new style of debugging: Objects are responsible of their own visual representation, as already seen in classical tools, but with a powerful and yet simple mechanism for graphical visualization rather than text only. Most of its power is gained when taking on conceptually multidimensional objects like lists of matrices.
+\end{abstract}
 
-\chapter{Introduction}
+
+\section{Introduction}
 \nes{Read and quote all publications assiciated with whyline: http://faculty.washington.edu/ajko/whyline-java.shtml}
 \nes{Read: "http://www.amazon.com/Write-Point-Bill-Stott/dp/0231075499"}
 \section{Idea}
@@ -91,7 +110,7 @@ Another widely used solution, printing on a console, eliminates this issue and h
 
 \nes{The above comment is still good. Are there any paragraphs left in the paper?}
 
-\chapter{Related Work}
+\section{Related Work}
 \todo{What further related work is worth mentioning?}
 
 Previous studies about human behaviour when developing and especially debugging code were good hints to point where DoodleDebug should be going. We filtered relevant data out of them and aligned them with our research efforts, resulting in a separate paper\cite{dd-paper}.
@@ -158,7 +177,7 @@ In the same paper, we argued that there are data structures, where using classic
 	\label{nested-matrix-idea}
 \end{figure}
 
-\chapter{Development}
+\section{Development}
 The efforts made in analysing classical debugging tools and how programmers behave when interacting with them all aimed on implementing which would actually fill the mentioned problematic gaps. This chapter describes the process of realizing it in the form of an eclipse plugin, including general conceptual patterns as well as technically relevant parts.
 
 \section{Planning}
@@ -230,7 +249,7 @@ DoodleDebug renders its output into a dedicated tab inside the Eclipse UI, using
 Every rendering of Java objects to html is done in Java, so the output entity can only operate as a thin client.
 In order to make output interoperable, communication from JavaScript to Java is necessary, e.g. if an object is inspected and it's nested objects are not yet rendered. Because the output is rendered as html into a Browser, it is of course encapsulated from it's environment, which is a good thing for general portability of web site, but in this special case, it was a drawback. There is no such thing like a JavaScript-Method like "\verb.sendToBrowser(message).", so we had to find some workaround to notify the Java instance about occurring events (e.g. lightbox closing) on one hand and be able to provide some arguments (e.g. which object to render) on the other hand. Using AJAX calls on localhost would probably cause some tedious delays, break encapsulation and just be bad style. The solution we finally came up with causes no remarkable delays and stays inside its dedicated context: Eclipse's \verb.Browser. class allows to append event listeners for the case that its \verb-window.location- is about to change. We defined a pseudo-protocol \verb-doodledebug- and append some message to it, maintaining syntax limitation such as no white space. On Java side, a listener handles all location change events; if an event's target location fits the pseudo-protocol's pattern, its "message" is parsed and desired steps executed. The location change itself is cancelled, so the user stays on the same page. For instance, if an object is clicked and should be inspected inside a lightbox, this item's id is determined and the window location set to \verb-doodledebug:<id>-. On Java side, the object to render is determined from this id, rendered and a message with html code sent back to JavaScript again.
 
-\chapter{User Interface}
+\section{User Interface}
 \section{Output}
 \subsection{Output format and rendering engine}
 For displaying and handling HTML code and related web technologies, Eclipse provides the package \verb-org.eclipse.swt.browser-, which among others includes a \verb.Browser. class to render and integrate into the Eclipse UI. However, this \verb.Browser. class is not completely platform independent, it uses the default browser rendering engine of its current host operating system (and not the standard browser). When running on Windows for instance, Internet Explorer's rendering engine is used, even though Firefox is set as the System's standard browser. This fact forced us to be even more careful with the usage of HTML5 features, because their support varies between Browsers.
@@ -268,7 +287,7 @@ One Example is the behaviour of the scroll position in the console when new obje
 Similar thoughts were made on focus handling of DoodleDebug's view in the space of Eclipse's whole UI. Eclipse's built-in console receives focus on any output event per default, but provides a button to deactivate this. For a programmer, it's likely desirable to generally be notified if something happened, but it can be annoying for many outputs over a long time, e.g. if they're working inside another view of Eclipse. In this case, they would probably want to be notified of sporadically occurring outputs. In our study, we observed this problem as well, one subject even turned off console notifications\ref{console-focus-problem}\todo{Can I label this reference?}. Based on these thoughts, we defined an algorithm to check time since the last output event and only gain focus if the previous event is longer than 4 seconds ago. For example some loop of a game which prints out it's calculation time for the last frame every time will only gain focus on the DoodleDebug view once, but a quiet application like a web server that only generates update when a user visits a site will usually regain focus on such an event.
 \todo{refer to design book here \nes{And read …} \meta{I've never seen such a technique described before, do you know something?}}
 
-\chapter{Qualitative Study on Beta Version}
+\section{Qualitative Study on Beta Version}
 \nes{On how to write up a user study like this, see "http://research.microsoft.com/en-us/um/redmond/groups/hip/papers/ko2007bugfixing.pdf"}
 
 \nes{Write the introduction from the point of view of qualitative psychological experiments. Read and reference "Introduction to Research Methods and Data Analysis in Psychology"}
@@ -380,7 +399,7 @@ SIMON: \url{http://dev.root1.de/projects/simon}
 XStream: \url{http://xstream.codehaus.org}
 \end{thebibliography}
 
-\chapter{Future Work}
+\section{Future Work}
 
 Besides proving things right, our study revealed some problems as well. As they only show that a problem exists but don't provide exact information about its cause, further research might invest in analysing them and propose accurate solutions.
 
@@ -421,7 +440,7 @@ The communication between DoodleDebug's client (API) and server (plugin) side ha
 If the client side has no ability to autonomously get information about the Eclipse instance, it has to be provided from outside. One way would be to put a file containing a unique identifier of the running eclipse instance into the client's classpath from server side. One disadvantage of this solution is that it won't work when multiple instances try to run the same program.
 
 
-\chapter{Appendix}
+\section{Appendix}
 
 \section{Study Sessions}
 
