@@ -88,7 +88,7 @@
 \maketitle
 
 \begin{abstract}
-Software developers actively make use of debugging tools in order to find problem sources in code. In relation to a previous paper\cite{dd-paper}, we designed and implemented a tool representing a new style of debugging: Objects are responsible of their own visual representation, as already seen in classical tools, but with a powerful and yet simple mechanism for graphical visualization rather than text only. Most of its power is gained when taking on conceptually multidimensional objects like lists of matrices.
+Software developers actively make use of debugging tools in order to find problem sources in code. In relation to a previous paper\@cite{dd-paper}, we designed and implemented a tool representing a new style of debugging: Objects are responsible of their own visual representation, as already seen in classical tools, but with a powerful and yet simple mechanism for graphical visualization rather than text only. Most of its power is gained when taking on conceptually multidimensional objects like lists of matrices.
 \end{abstract}
 
 
@@ -97,7 +97,7 @@ Software developers actively make use of debugging tools in order to find proble
 \nes{Read: "http://www.amazon.com/Write-Point-Bill-Stott/dp/0231075499"}
 \section{Idea}
 \meta{\\Fast start --> Ok like that?\\}
-Debugging tools should save time, they help visualizing objects for inspection and thus bug detection. Java's \verb-System.out.println()- allows to easily compare many temporal states of an object or many different instances beside each other, which may be a reason for its popularity;\nes{On one of the first pages of "programming pearls", the author notes that often it's easier to write "just writing println is often easier". That would fit here.} but when it comes to complex problems, like a list of matrices, \verb-System.out.println()- breaks down and becomes either expensive to use or completely useless\cite{dd-paper}.
+Debugging tools should save time, they help visualizing objects for inspection and thus bug detection. Java's \verb-System.out.println()- allows to easily compare many temporal states of an object or many different instances beside each other, which may be a reason for its popularity;\nes{On one of the first pages of "programming pearls", the author notes that often it's easier to write "just writing println is often easier". That would fit here.} but when it comes to complex problems, like a list of matrices, \verb-System.out.println()- breaks down and becomes either expensive to use or completely useless\@cite{dd-paper}.
  A Debugger may handle such a problem better, but it does not allow to compare two time slices. DoodleDebug combines graphical object representation with a simple API, still approving the simple and widely accepted usage pattern of \verb-System.out.println()-.
 
 \meta{\\Main text\\}
@@ -113,7 +113,7 @@ Another widely used solution, printing on a console, eliminates this issue and h
 \section{Related Work}
 \todo{What further related work is worth mentioning?}
 
-Previous studies about human behaviour when developing and especially debugging code were good hints to point where DoodleDebug should be going. We filtered relevant data out of them and aligned them with our research efforts, resulting in a separate paper\cite{dd-paper}.
+Previous studies about human behaviour when developing and especially debugging code were good hints to point where DoodleDebug should be going. We filtered relevant data out of them and aligned them with our research efforts, resulting in a separate paper\@cite{dd-paper}.
 
 \section{Mining SqueakSource}
 We had programmed a simple Smalltalk data miner, which fetched all projects from SqueakSource, searched all classes overriding Smalltalk's \verb.printOn:. method, which is roughly equivalent to Java's \verb.toString(). in its meaning to programmers; namely it provides a textual representation of an object in order to print it to a console. In a next step, we manually went through the received \verb.printOn:. code snippets (590) and searched for repeating patterns.
@@ -181,7 +181,7 @@ In the same paper, we argued that there are data structures, where using classic
 The efforts made in analysing classical debugging tools and how programmers behave when interacting with them all aimed on implementing which would actually fill the mentioned problematic gaps. This chapter describes the process of realizing it in the form of an eclipse plugin, including general conceptual patterns as well as technically relevant parts.
 
 \section{Planning}
-Instead of immediately starting to implement, we followed several well-proven planning steps from literature to avoid costly redesigning or refactoring later on. Following the principle of "not mixing up the design and engineering processes" seemed to be a good way to avoid losing the initial path\cite{sketching-user-experiences}.
+Instead of immediately starting to implement, we followed several well-proven planning steps from literature to avoid costly redesigning or refactoring later on. Following the principle of "not mixing up the design and engineering processes" seemed to be a good way to avoid losing the initial path\@cite{sketching-user-experiences}.
 
 \subsection{Sketching the Features}
 As summarized in the Related Work chapter, we had shown that textual output is lacking features in certain mentioned cases on the one hand, and that custom textual object representations tend to exhibit a couple of frequently observable traits. \meta{Too biological?} Based on this information, we started to gather commonly used data types and sketch them to paper with a simple, meaningful appearance. Beside every sketched candidate rendering, we tried to think of a simple-as-possible but yet modular code snippet, that would imaginary render this image. Over time, while painting more and more candidates, we tried to converge our imaginary API, so we threw away outliers and repainted their object type in a more consistent way. When we had a consistent (still imaginary) API, we would take a step forward and consult third-party programmers for some feedback.
@@ -191,7 +191,7 @@ As soon as we had a consistent imaginary API and enough sample sketches, we stuc
 \todo{Loop back to the book.}
 
 \begin{figure}[h]
-	\includegraphics[width=\textwidth]{img/design-sketches_thinker.jpg}
+	\includegraphics[width=0.5\textwidth]{img/design-sketches_thinker.jpg}
 	\caption[Confronting people with design sketches]{Programmers should look at our code snippets and corresponding design sketches for us to evaluate their intuitiveness}
 	\label{sketch-discussion}
 \end{figure}
@@ -223,7 +223,7 @@ As an output format, we needed technology that meets some requirements:
 Based on these properties, we decided on HTML. It can be integrated in Eclipse, which uses the OS' built-in browser. CSS technology allows to tune design and arrangement of output separately from the rendering process and adds an additional layer of abstraction. Dynamic manipulation is done by Javascript, which is pretty straight forward thanks to additional libraries. In addition to above mentioned advantages, HTML is wide-spread and allowed us to add an additional layer of API where users can provide plugins to DoodleDebug, which define HTML representation of selected object types.
 
 \subsection{Communication between Java Virtual Machines}
-DoodleDebug renders its output into a view tab inside eclipse, so we implemented it to have the main part running in the same VM as eclipse for convenience. Since runtime information about objects and rendering calls must be provided from the user's VM to the eclipse VM, a solid communication mechanism is needed. We use SIMON (Simple Invocation of Methods Over Network)\cite{simon}, a library for object-oriented remote communication in Java. It allows to create a registry on a specified port of localhost and add a Server object to it. Clients can find the server through this registry and send messages to it by calling it's methods with simple objects like Strings as arguments.
+DoodleDebug renders its output into a view tab inside eclipse, so we implemented it to have the main part running in the same VM as eclipse for convenience. Since runtime information about objects and rendering calls must be provided from the user's VM to the eclipse VM, a solid communication mechanism is needed. We use SIMON (Simple Invocation of Methods Over Network)\@cite{simon}, a library for object-oriented remote communication in Java. It allows to create a registry on a specified port of localhost and add a Server object to it. Clients can find the server through this registry and send messages to it by calling it's methods with simple objects like Strings as arguments.
 
 
 \subsection{Providing Code from Eclipse Plugin to Workspace}
@@ -238,7 +238,7 @@ but the challenge was to find the right part in the documentation. Eclipse devel
 On the one hand, all API methods must be visible from user projects. On the other hand, users should only see a minimal amount of DoodleDebug's code in order to prevent them from using it in an unintended way and cause bad behaviour. The compromise made between those two requirements was to mainly provide simple, well-documented interfaces (such as \verb-Doodleable- and only show a proxy of fully implemented classes (e.g. \verb-Doo-).
 
 \subsection{Serialization for the Transport between VMs}
-SIMON only allows transporting simple data types such as Strings, so every object is serialized before its transportation. For this purpose, we make use of XStream\cite{xstream}, a simple serializing library, originally created to serialize Java objects to XML and back again. Because of it's modularity, it also allows to serialize to JSON and comes with a built-in mapping for this. Because of XML's more verbose syntax and therefore bigger space/time consumption in many cases, we decided to use JSON as first choice, with a fallback to XML if errors occur. This is necessary because standard JSON cannot handle circular references, it lacks the ability to append attributes to entities and therefore cannot index them in order to reference to a parent id in case of a circular reference. Obviously, there are workarounds for this issue, but the fallback to XML does not take as much time that users could even recognize it is happening.
+SIMON only allows transporting simple data types such as Strings, so every object is serialized before its transportation. For this purpose, we make use of XStream\@cite{xstream}, a simple serializing library, originally created to serialize Java objects to XML and back again. Because of it's modularity, it also allows to serialize to JSON and comes with a built-in mapping for this. Because of XML's more verbose syntax and therefore bigger space/time consumption in many cases, we decided to use JSON as first choice, with a fallback to XML if errors occur. This is necessary because standard JSON cannot handle circular references, it lacks the ability to append attributes to entities and therefore cannot index them in order to reference to a parent id in case of a circular reference. Obviously, there are workarounds for this issue, but the fallback to XML does not take as much time that users could even recognize it is happening.
 
 \todo{Maybe simple benchmark of XML vs. JSON here}
 
@@ -255,7 +255,7 @@ In order to make output interoperable, communication from JavaScript to Java is 
 For displaying and handling HTML code and related web technologies, Eclipse provides the package \verb-org.eclipse.swt.browser-, which among others includes a \verb.Browser. class to render and integrate into the Eclipse UI. However, this \verb.Browser. class is not completely platform independent, it uses the default browser rendering engine of its current host operating system (and not the standard browser). When running on Windows for instance, Internet Explorer's rendering engine is used, even though Firefox is set as the System's standard browser. This fact forced us to be even more careful with the usage of HTML5 features, because their support varies between Browsers.
 
 \subsection{Semantic Zoom}
-In order to save space and keep information available to users, DoodleDebug uses the concept of "Semantic Zoom"\cite{semantic-zoom}.
+In order to save space and keep information available to users, DoodleDebug uses the concept of "Semantic Zoom"\@cite{semantic-zoom}.
 \nes{Yup, a reference would be nice. Make sure to read the referenced paper, too. In part, because you need to get a feeling for scientific style.} \meta{Semantic Zoom is from a book, right?}
 \nes{See the DoodleDebug workshop paper. It, too, quotes Semantic Zoom.}
 \nes{This is a design thing, and should go into the design chapter. Implementation things should go into the implementation chapter. Split differently. Currently, there's a chapter "programming" Make the new structure:
@@ -276,15 +276,13 @@ Object visualizations are divided in levels of nesting, where level 0 represents
 \nes{Illustrate. This will probably take several sketches.}
 
 \subsection{Smart Behaviour versus Configuration Hell}
-When designing user interfaces, one basic decision must be taken: How much configuration options should it contain? Either a lot of settings are left to the user let them take part on the design process. Or the default design is made to fit everyone as good as possible. We decided not to treat everyone as designer\cite{sketching-user-experiences}\meta{p. 95+} but take away design decisions from them by creating sophisticated defaults. \nes{Nice :)}
-\todo{read \url{"http://www.amazon.de/Design-Everyday-Things-Donald-Norman/dp/0465067107/ref=sr_1_1?ie=UTF8&qid=1355486165&sr=8-1"}} \meta{Does SCG have it?}
-\nes{Of course. It's in room  no. 206. Ask Erwann Wernli to find it before you come and pick it up.}
+When designing user interfaces, one basic decision must be taken: How much configuration options should it contain? Either a lot of settings are left to the user let them take part on the design process. Or the default design is made to fit everyone as good as possible. We decided not to treat everyone as designer\@cite{sketching-user-experiences}\meta{p. 95+}\@cite{the-design-of-everyday-things}\meta{p. 155} but take away design decisions from them by creating sophisticated defaults.
 As a result, there is no settings dialogue or file for DoodleDebug.
 \subsubsection{Smart Scrolling}
 \nes{I'd like to bet that Apple has a patent on this. Find and quote.} \meta{Can't find it. Try googling something with apple and patent, and you will get a million results... Google patent search did not reveal it as well. Going to stackoverflow...}
 One Example is the behaviour of the scroll position in the console when new objects are rendered into it. As default (with no user interaction), the window keeps scrolling along with rendered objects, always jumping to the newest one. As soon as the user scrolls away from the bottom, this mechanism is stopped and the scroll position remains equal while new objects are appended on the bottom of the output silently. However, if the user decides to go to the bottom of the output again, the auto-scrolling mechanism is obtained again.
 \subsubsection{Focus When Likely Desired}
-Similar thoughts were made on focus handling of DoodleDebug's view in the space of Eclipse's whole UI. Eclipse's built-in console receives focus on any output event per default, but provides a button to deactivate this. For a programmer, it's likely desirable to generally be notified if something happened, but it can be annoying for many outputs over a long time, e.g. if they're working inside another view of Eclipse. In this case, they would probably want to be notified of sporadically occurring outputs. In our study, we observed this problem as well, one subject even turned off console notifications\ref{console-focus-problem}\todo{Can I label this reference?}. Based on these thoughts, we defined an algorithm to check time since the last output event and only gain focus if the previous event is longer than 4 seconds ago. For example some loop of a game which prints out it's calculation time for the last frame every time will only gain focus on the DoodleDebug view once, but a quiet application like a web server that only generates update when a user visits a site will usually regain focus on such an event.
+Similar thoughts were made on focus handling of DoodleDebug's view in the space of Eclipse's whole UI. Eclipse's built-in console receives focus on any output event per default, but provides a button to deactivate this. For a programmer, it's likely desirable to generally be notified if something happened, but it can be annoying for many outputs over a long time, e.g. if they're working inside another view of Eclipse. In this case, they would probably want to be notified of sporadically occurring outputs. In our study, we observed this problem as well, one subject even turned off console notifications (see \ref{console-focus-problem}). Based on these thoughts, we defined an algorithm to check time since the last output event and only gain focus if the previous event is longer than 4 seconds ago. For example some loop of a game which prints out it's calculation time for the last frame every time will only gain focus on the DoodleDebug view once, but a quiet application like a web server that only generates update when a user visits a site will usually regain focus on such an event.
 \todo{refer to design book here \nes{And read …} \meta{I've never seen such a technique described before, do you know something?}}
 
 \section{Qualitative Study on Beta Version}
@@ -318,27 +316,47 @@ To respect privacy, the real names of our test subjects have been replaced by ch
 
 \subsection{Education and Experience of Each Candidate}
 \subsubsection{Alpha} % Oskar Truffer
-B.Sc. in Mathematics, Minor Computer Science 60 ECTS\\
-Master Student in Computer Science
+\begin{enumerate}[$-$]
+\item B.Sc. in Mathematics, Minor Computer Science 60 ECTS
+\item Master Student in Computer Science
+\end{enumerate}
+
 \subsubsection{Bravo} % Remo Diethelm
-B.Sc. in Computer Science\\
-Master Student  in Computer Science
+\begin{enumerate}[$-$]
+\item B.Sc. in Computer Science
+\item Master Student  in Computer Science
+\end{enumerate}
+
 \subsubsection{Charlie} % Andrei Chis
-M.Sc. in Computer Science \todo{is this true?} \\
-Ph.D. Student in Computer Science \nes{I don't think he's got his PhD already. \meta{Yes, that's what it says...}}
+\begin{enumerate}[$-$]
+\item M.Sc. in Computer Science
+\item Ph.D. Student in Computer Science
+\end{enumerate}
+
 \subsubsection{Delta} % Julian Schelker
-B.Sc. in Computer Science\\
-Master Student  in Computer Science
+\begin{enumerate}[$-$]
+\item B.Sc. in Computer Science
+\item Master Student  in Computer Science
+\end{enumerate}
+
 \subsubsection{Echo} % Raffael Krebs
-M.Sc. in Computer Science\\
-Working as Software Engineer, 1 year of experience\\
-Minor experience in Eclipse plugin development (master thesis)
+\begin{enumerate}[$-$]
+\item M.Sc. in Computer Science
+\item Working as Software Engineer, 1 year of experience
+\item Minor experience in Eclipse plugin development (master thesis)
+\end{enumerate}
+
 \subsubsection{Foxtrot} % Roger Kohler
-B.Sc. in Computer Science\\
-Master Student  in Computer Science
+\begin{enumerate}[$-$]
+\item B.Sc. in Computer Science
+\item Master Student  in Computer Science
+\end{enumerate}
+
 \subsubsection{Golf} % Ueli Scheidegger
-Lic.rer.pol. in Economics, Minor Computer Science 60 ECTS\\
-Working as Software Engineer, 15 years of experience
+\begin{enumerate}[$-$]
+\item Lic.rer.pol. in Economics, Minor Computer Science 60 ECTS
+\item Working as Software Engineer, 15 years of experience
+\end{enumerate}
 
 \subsection{Different Problem Approaches}
 Depending on study session with our candidates, we could observe different patterns of approaching a problem with classical tools.
@@ -421,7 +439,7 @@ An approach for resolving this issue would be to split \verb.Doodleable. into tw
 
 \subsection{Include Variable Name in Visualization}
 
-\subsubsection{Problem} When people are debugging parts of their code and use object visualizations, it is obviously essential for them to map a visualized element to its corresponding object in code for simple use cases, the object's class name is already good hint and widely used for custom textual representations as well\cite{dd-study}, but it may become unclear if one is working with many different instances of the same class. Echo, who was only using the debugger beside DoodleDebug, stated it would be practical to see which object has which name in order to directly associate them with code snippets.
+\subsubsection{Problem} When people are debugging parts of their code and use object visualizations, it is obviously essential for them to map a visualized element to its corresponding object in code for simple use cases, the object's class name is already good hint and widely used for custom textual representations as well\@cite{dd-study}, but it may become unclear if one is working with many different instances of the same class. Echo, who was only using the debugger beside DoodleDebug, stated it would be practical to see which object has which name in order to directly associate them with code snippets.
 
 \subsubsection{Possible Solution}
 The very first step in this issue should be to clarify if it's technically possible to gather information about variable names during runtime. If so, the next question would be which context is relevant, since objects can be referenced to through different names from different contexts; probably the context where \verb-Doo.dle(object)- was called would be the only reasonable choice. For objects with no names in this context, e.g. inline objects, a meaningful replacement would need to be found to avoid user confusion. A good solution for UI integration might be achieved by pen and paper work; draw some sketches, show it to programmers and ask about their intuition.
