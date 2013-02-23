@@ -12,3 +12,5 @@
 - Class rendering: Interfaces? Icon of static members? Constructors?
 
 - Test in multiple simultaneous instances (not while developing but with jar)
+
+- Print Types when output generated through Doodleable interface as well?
