@@ -181,7 +181,7 @@ In the same paper, we argued that there are data structures, where using classic
 \end{figure}
 
 \subsection{Whyline for Java}
-Whyline is a Java library that should "answer why and why not questions" about a program's behaviour. In particular, it allows its users to click on a piece of either graphical or textual output and ask questions about the cause of its properties, like fields. Whyline then tracks back the program execution to the line of code where this particular field has been changed for the last time and visually reports it to the user, including the causal chain leading to it.
+Whyline\cite{whyline-website} is a Java library that should "answer why and why not questions"\cite{whyline-paper} about a program's behaviour. In particular, it allows its users to click on a piece of either graphical or textual output and ask questions about the cause of its properties, like fields. Whyline then tracks back the program execution to the line of code where this particular field has been changed for the last time and visually reports it to the user, including the causal chain leading to it.
 
 \subsubsection{Difference to DoodleDebug}
 Whyline aims on connecting properties of output to code snippets. In other words, it answers the "why" question. DoodleDebug visualizes objects and helps to understand what properties objects have and how they evolve over time. It answers the "what" question. By now, Whyline only supports output on \verb-java.awt.Graphics- and \verb-java.io.PrintStream- objects and is developed with closed source only, but from a conceptual point of view, those two technologies could be combined and eventually enhance each other.
@@ -437,6 +437,10 @@ Bill Buxton. \emph{Sketching User Experiences}. Elsevier, 2007.
 Donald A. Norman. \emph{The Design of Everyday Things}. The MIT Press, 1998.
 \bibitem{semantic-zoom}
 Allison Woodruff, James Landay, and Michael Stonebraker. \emph{Goal-directed zoom.} In CHI 98 conference summary on Human factors in computing systems, CHI '98, pages 305-306, New York, NY, USA, 1998. ACM.
+\bibitem{whyline-paper}
+Ko, A.J. and Myers, B.A. \emph{Debugging Reinvented: Asking and Answering Why and Why Not Questions about Program Behavior}. \url{http://faculty.washington.edu/ajko/papers/Ko2008JavaWhyline.pdf}
+\bibitem{whyline-website}
+Whyline: \url{http://faculty.washington.edu/ajko/whyline-java.shtml}
 \bibitem{simon}
 SIMON: \url{http://dev.root1.de/projects/simon}
 \bibitem{xstream}
