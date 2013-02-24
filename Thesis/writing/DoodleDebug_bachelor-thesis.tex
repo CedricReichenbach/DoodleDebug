@@ -113,9 +113,12 @@ Another widely used solution, printing on a console, eliminates this issue and h
 \section{Related Work}
 \todo{What further related work is worth mentioning?}
 
-Previous studies about human behaviour when developing and especially debugging code were good hints to point where DoodleDebug should be going. We filtered relevant data out of them and aligned them with our research efforts, resulting in a separate paper\cite{dd-paper}.
+Finding the source of problems in program code is an omnipresent issue in computer science and therefore a recurrent research theme. Previous studies about human behaviour when developing and especially debugging code were good hints to point where DoodleDebug should be going. We filtered relevant data out of them and aligned them with our research efforts, resulting in a separate paper.
 
-\subsection{Mining SqueakSource}
+\subsection{Previous Paper}
+In a previous paper\cite{dd-paper}, we analysed generally used patterns for textual representation of open source projects and showed basic conceptual issues preventing useful representations of certain data types. Following that, we outlined a concept automatically including information mostly used in custom textual representations and supporting "difficult" data types that prevent powerful renderings in textual form.
+
+\subsubsection{Mining SqueakSource}
 We had programmed a simple Smalltalk data miner, which fetched all projects from SqueakSource, searched all classes overriding Smalltalk's \verb.printOn:. method, which is roughly equivalent to Java's \verb.toString(). in its meaning to programmers; namely it provides a textual representation of an object in order to print it to a console. In a next step, we manually went through the received \verb.printOn:. code snippets (590) and searched for repeating patterns.
 \begin{itemize}
 	\item 44 used ASCII graphics to build two-dimensional structures.
@@ -125,7 +128,7 @@ We had programmed a simple Smalltalk data miner, which fetched all projects from
 \end{itemize}
 For DoodleDebug, we tried to consider those patterns and include them as well as possible and eventually include them in every output without the need of user manipulation. If not, they should be easily produced through an API.
 
-\subsection{Text is not always powerful enough}
+\subsubsection{Text is not always powerful enough}
 In the same paper, we argued that there are data structures, where using classical console printing contains clear disadvantages, demonstrated using Arrays of two-dimensional matrices as an example of multi-dimensional structures. Objects with independent textual representation methods can only be listed vertically, which does not allow to do nesting with a consistent and thus clear layout (figure~\ref{nested-matrix-problem}). This nesting problem could be solved, if representation methods would not be restricted to one-dimensional text only (figure~\ref{nested-matrix-idea}).
 \begin{figure}[h]
 	\begin{verbatim}
@@ -176,6 +179,12 @@ In the same paper, we argued that there are data structures, where using classic
 	\caption[Ideal nesting of 2D-matrix array]{Possible visualization of an array of 2D-matrices without the restriction to 1D-text}
 	\label{nested-matrix-idea}
 \end{figure}
+
+\subsection{Whyline for Java}
+Whyline is a Java library that should "answer why and why not questions" about a program's behaviour. In particular, it allows its users to click on a piece of either graphical or textual output and ask questions about the cause of its properties, like fields. Whyline then tracks back the program execution to the line of code where this particular field has been changed for the last time and visually reports it to the user, including the causal chain leading to it.
+
+\subsubsection{Difference to DoodleDebug}
+Whyline aims on connecting properties of output to code snippets. In other words, it answers the "why" question. DoodleDebug visualizes objects and helps to understand what properties objects have and how they evolve over time. It answers the "what" question. By now, Whyline only supports output on \verb-java.awt.Graphics- and \verb-java.io.PrintStream- objects and is developed with closed source only, but from a conceptual point of view, those two technologies could be combined and eventually enhance each other.
 
 \section{Development}
 The efforts made in analysing classical debugging tools and how programmers behave when interacting with them all aimed on implementing which would actually fill the mentioned problematic gaps. This chapter describes the process of realizing it in the form of an eclipse plugin, including general conceptual patterns as well as technically relevant parts.
