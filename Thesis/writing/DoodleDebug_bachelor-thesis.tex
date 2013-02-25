@@ -93,15 +93,13 @@ Software developers actively make use of debugging tools in order to find proble
 
 
 \section{Introduction}
-\nes{Read and quote all publications assiciated with whyline: http://faculty.washington.edu/ajko/whyline-java.shtml}
 \nes{Read: "http://www.amazon.com/Write-Point-Bill-Stott/dp/0231075499"}
 \subsection{Idea}
-Debugging tools should save time, they help visualizing objects for inspection and thus bug detection. Java's \verb-System.out.println()- allows developers to easily compare many temporal states of an object or many different instances beside each other, which may be a reason for its popularity;\nes{On one of the first pages of "programming pearls", the author notes that often it's easier to write "just writing println is often easier". That would fit here.} but when it comes to complex problems, like a list of matrices, \verb-System.out.println()- breaks down and becomes either expensive to use or completely useless\cite{dd-paper}. A Debugger may handle such a problem better, but it does not allow users to compare two time slices. DoodleDebug combines graphical object representation with a simple API, still approving the simple and widely accepted usage pattern of \verb-System.out.println()-.
+Debugging tools should save time, they help visualizing objects for inspection and thus bug detection. Java's \verb-System.out.println()- allows developers to easily compare many temporal states of an object or many different instances beside each other, which may be a reason for its popularity;\nes{On one of the first pages of "programming pearls", the author notes that often it's easier to write "just writing println is often easier". That would fit here.} \meta{Do you mean p. 24, the customized letter?} but when it comes to complex problems, like a list of matrices, \verb-System.out.println()- breaks down and becomes either expensive to use or completely useless\cite{dd-paper}. A Debugger may handle such a problem better, but it does not allow users to compare two time slices. DoodleDebug combines graphical object representation with a simple API, still approving the simple and widely accepted usage pattern of \verb-System.out.println()-.
 
 For programmers, it's an everyday problem: Some feature of a program is not working correctly, but it's not clear where the problem originating from. The simplest approach, just staring at code and build some mental model to play the program in one's head, is usually time and concentration intensive. For more comfort, tools help to automatically build a visual representation of runtime data, which is provided by debuggers for instance. They allow users to stop at a particular moment in time, the whole program state is inspectable and commonly used data types have some useful textual representation. One big problem here is that a program is only inspectable at one snapshot in time, but two states cannot directly be compared. \nes{Excellent. Really good sentence. Maybe move this sentence further up. It's kind of key to the whole thing.} \meta{But we need it here...}
 
-Another widely used solution, printing on a console, eliminates this issue and has other advantages: Because such printing instructions are directly written into code to debug, which might be quicker or more convenient in some cases \nes{Restructure. If you're showing these things later, you can say that. You can say: as our study results show, …} \todo{refer to study, where some subjects didn't use any debugger}. Also, printing to a console allows developers to precisely represent an object with needed data only using its \verb-toString()- method (in Java). \meta{Does this make sense now?} But still it lacks some features: On the one hand, the only supported output format is one-dimensional text, no colors, images or free spacial positioning. On the other hand, a line that has been printed cannot be edited any more, therefore advanced formatting becomes very complicated. \meta{Convinced about downsides?} \nes{Fighting alternatives should go into the "related work" section. Not the introduction. But yea, it's a lot better. But do move it to related work.}
-  This paper \nes{thesis:)} \meta{I'm confused now: I was told to write a paper and derive the bachelor's thesis out of it later...} introduces a solution which aims to eliminate the above mentioned disadvantages and includes a small qualitative study for its verification.
+Another widely used solution, printing on a console, eliminates this issue and has other advantages: As our study results show, programmers like it for its simplicity and assumed quickness, because such printing instructions are directly written into code snippets to be debugged. However, we could not observe any proof for this technique to be actually quicker than using a debugger. Also, printing to a console allows developers to precisely represent an object with needed data only using its \verb-toString()- method (in Java). This paper introduces a solution which aims to eliminate problems of the above mentioned tools \meta{Should I refer to the related work section here?} and includes a small qualitative study for its verification.
 
 \nes{Please do read "write to the point", linked above. Among many other things, it explains quite nicely how to break text into paragraphs.}
 
@@ -127,6 +125,9 @@ For DoodleDebug, we tried to consider those patterns and include them as well as
 
 \subsubsection{Text is not always powerful enough}
 In the same paper, we argued that there are data structures, where using classical console printing contains clear disadvantages, demonstrated using Arrays of two-dimensional matrices as an example of multi-dimensional structures. Objects with independent textual representation methods can only be listed vertically, which does not allow nesting with a consistent and thus clear layout (figure~\ref{nested-matrix-problem}). This nesting problem could be solved, if representation methods would not be restricted to one-dimensional text only (figure~\ref{nested-matrix-idea}).
+
+But simple textual output has even more restrictions than just the one caused by its single dimension: Colors are not supported in general, printing images is impossible and already printed line cannot be deleted, which limits formatting as well as the lack of free spacial positioning.
+
 \begin{figure}[h]
 	\begin{verbatim}
     an Array()
@@ -183,8 +184,8 @@ Whyline\cite{whyline-website} is a Java library that should "answer why and why 
 \subsubsection{Difference to DoodleDebug}
 Whyline aims on connecting properties of output to code snippets. In other words, it answers the "why" question. DoodleDebug visualizes objects and helps to understand what properties objects have and how they evolve over time. It answers the "what" question. By now, Whyline only supports output on \verb-java.awt.Graphics- and \verb-java.io.PrintStream- objects and is developed with closed source only, but from a conceptual point of view, those two technologies could be combined and eventually enhance each other.
 
-\section{Development}
-The efforts made in analysing classical debugging tools and how programmers behave when interacting with them all aimed on implementing which would actually fill the mentioned problematic gaps. This chapter describes the process of realizing it in the form of an eclipse plugin, including general conceptual patterns as well as technically relevant parts.
+\section{Design}
+\todo{text}
 
 \subsection{Planning}
 Instead of immediately starting to implement, we followed several well-proven planning steps from literature to avoid costly redesigning or refactoring later on. Following the principle of "not mixing up the design and engineering processes" seemed to be a good way to avoid losing the initial path\cite{sketching-user-experiences}.
@@ -202,57 +203,8 @@ As soon as we had a consistent imaginary API and enough sample sketches, we stuc
 	\label{sketch-discussion}
 \end{figure}
 
-\subsection{Implementation Details}
-\nes{There should be text under every heading.}
-\meta{What kind of text?}
-\nes{Well, an introduction paragraph. As a random example, see Katja Schwarz's thesis from 3 weeks ago. Note how below every heading, there's never immediately another heading, but always text.}
-
-After we thought to have gathered enough information for a simple API mapping to useful renderings, we were ready to head on selecting appropriate technologies for putting DoodleDebug into practice.
-\todo{Write more}
-
-\subsubsection{Selecting Technology}
-The decision of technology is not a question of right and wrong, but it's about weighting factors between different technologies and maximizing the benefit. We thought about implementing DoodleDebug in Smalltalk. This would have had the advantage of simplicity because of the strong consistency of Smalltalk's overall structure. Also, building dynamic output would have been easy, as in Smalltalk, the environment runs the same technology as programs running inside.
-
-\paragraph{Java and Eclipse}
-Java is one of the most popular programming languages and therefore contains many active software developers which could benefit from our work. After the decision to implement DoodleDebug for Java, we discussed if we should implement it as an independent library, which would make it independent in terms of environment, but the advantages of building it as an Eclipse plugin seemed to be bigger. Within Java developers, Eclipse users build a big community, which again provides a lot of possible users, but also causes a broader community of plugin developers and more information resources about plugin development. Furthermore, interaction can be smoothly integrated in to a user's working environment: Installation is done by Eclipse's plugin installation wizard, library dependencies are automatically added to projects if needed, imports are done on the fly and the output screen integrates consistently with the rest of Eclipse's user interface. Because Eclipse itself is written in Java, there are no barriers for data exchange between client (user) and server (plugin/IDE) side.
-
-\paragraph{Web Technologies}
-As an output format, we needed technology that meets some requirements:
-\begin{enumerate}[1.]
-	\item Two-dimensional arrangement
-	Objects must have at least 2 degrees of freedom
-	\item Consistent nesting
-	Nesting two or more objects doesn't break the structure of the outer one (for reasonable scales)
-	\item Dynamic change
-	Content can be dynamically manipulated in order to allow user interaction
-\end{enumerate}
-Based on these properties, we decided on HTML. It can be integrated in Eclipse, which uses the OS' built-in browser. CSS technology allows to tune design and arrangement of output separately from the rendering process and adds an additional layer of abstraction. Dynamic manipulation is done by Javascript, which is pretty straight forward thanks to additional libraries. In addition to above mentioned advantages, HTML is wide-spread and allowed us to add an additional layer of API where users can provide plugins to DoodleDebug, which define HTML representation of selected object types.
-
-\subsubsection{Communication between Java Virtual Machines}
-DoodleDebug renders its output into a view tab inside eclipse, so we implemented it to have the main part running in the same VM as eclipse for convenience. Since runtime information about objects and rendering calls must be provided from the user's VM to the eclipse VM, a solid communication mechanism is needed. We use SIMON (Simple Invocation of Methods Over Network)\cite{simon}, a library for object-oriented remote communication in Java. It allows to create a registry on a specified port of localhost and add a Server object to it. Clients can find the server through this registry and send messages to it by calling it's methods with simple objects like Strings as arguments.
-
-
-\subsubsection{Providing Code from Eclipse Plugin to Workspace}
-\paragraph{What Is Provided to the User Workspace}
-On the one hand, all API methods must be visible from user projects. On the other hand, users should only see a minimal amount of DoodleDebug's code in order to prevent them from using it in an unintended way and cause bad behaviour. The compromise made between those two requirements was to mainly provide simple, well-documented interfaces (such as \verb-Doodleable- and only show a proxy of fully implemented classes (e.g. \verb-Doo-).
-
-\subsubsection{Serialization for the Transport between VMs}
-SIMON only allows transporting simple data types such as Strings, so every object is serialized before its transportation. For this purpose, we make use of XStream\cite{xstream}, a simple serializing library, originally created to serialize Java objects to XML and back again. Because of it's modularity, it also allows to serialize to JSON and comes with a built-in mapping for this. Because of XML's more verbose syntax and therefore bigger space/time consumption in many cases, we decided to use JSON as first choice, with a fallback to XML if errors occur. This is necessary because standard JSON cannot handle circular references, it lacks the ability to append attributes to entities and therefore cannot index them in order to reference to a parent id in case of a circular reference. Obviously, there are workarounds for this issue, but the fallback to XML does not take as much time that users could even recognize it is happening.
-
-\todo{Maybe simple benchmark of XML vs. JSON here}
-
-\subsubsection{Communication between Java and JavaScript}
-\paragraph{From Java to JavaScript}
-DoodleDebug renders its output into a dedicated tab inside the Eclipse UI, using Eclipse's \verb.Browser. class. To append newly rendered objects to the output screen, a naive approach would be to just cache the current code on Java side and in the case of freshly added object renderings, just repaint the whole html page. This has some disadvantages: A refreshed page may always jump back to the top, and even if it does not or it is avoided by jumping back down with JavaScript, it would flicker anyway for the split of a second. Thanks to \verb.Browser.'s method \verb.execute(String script)., there is a smarter way to update: On Java side, the object's html code is escaped in a way to not collide with some JavaScript properties. Then, it's wrapped into a JavaScript method \verb.addCode(code)., which simply appends the html code in its argument to the document body.
-\paragraph{From JavaScript to Java}
-Every rendering of Java objects to html is done in Java, so the output entity can only operate as a thin client.
-In order to make output interoperable, communication from JavaScript to Java is necessary, e.g. if an object is inspected and it's nested objects are not yet rendered. Because the output is rendered as html into a Browser, it is of course encapsulated from it's environment, which is a good thing for general portability of web site, but in this special case, it was a drawback. There is no such thing like a JavaScript-Method like "\verb.sendToBrowser(message).", so we had to find some workaround to notify the Java instance about occurring events (e.g. lightbox closing) on one hand and be able to provide some arguments (e.g. which object to render) on the other hand. Using AJAX calls on localhost would probably cause some tedious delays, break encapsulation and just be bad style. The solution we finally came up with causes no remarkable delays and stays inside its dedicated context: Eclipse's \verb.Browser. class allows to append event listeners for the case that its \verb-window.location- is about to change. We defined a pseudo-protocol \verb-doodledebug- and append some message to it, maintaining syntax limitation such as no white space. On Java side, a listener handles all location change events; if an event's target location fits the pseudo-protocol's pattern, its "message" is parsed and desired steps executed. The location change itself is cancelled, so the user stays on the same page. For instance, if an object is clicked and should be inspected inside a lightbox, this item's id is determined and the window location set to \verb-doodledebug:<id>-. On Java side, the object to render is determined from this id, rendered and a message with html code sent back to JavaScript again.
-
-\section{User Interface}
-\todo{text}
-
-\subsection{API}
-\meta{Where should this part go?}
+\subsection{Final API}
+\meta{Where should this part go? Design or Implementation?}
 
 DoodleDebug's API can be divided into three parts:
 \begin{enumerate}
@@ -281,28 +233,13 @@ In our previous paper, we had proposed a patter where objects should contain inf
 \subsubsection{Providing Plugins to DoodleDebug}
 \todo{write this}
 
-\subsection{Output}
+\subsection{User Interface}
 \todo{text}
-\subsubsection{Output format and rendering engine}
-For displaying and handling HTML code and related web technologies, Eclipse provides the package \verb-org.eclipse.swt.browser-, which among others includes a \verb.Browser. class to render and integrate into the Eclipse UI. However, this \verb.Browser. class is not completely platform independent, it uses the default browser rendering engine of its current host operating system (and not the standard browser). When running on Windows for instance, Internet Explorer's rendering engine is used, even though Firefox is set as the System's standard browser. This fact forced us to be even more careful with the usage of HTML5 features, because their support varies between Browsers.
 
 \subsubsection{Semantic Zoom}
 In order to save space and keep information available to users, DoodleDebug uses the concept of "Semantic Zoom"\cite{semantic-zoom}.
 \nes{Yup, a reference would be nice. Make sure to read the referenced paper, too. In part, because you need to get a feeling for scientific style.} \meta{Semantic Zoom is from a book, right?}
 \nes{See the DoodleDebug workshop paper. It, too, quotes Semantic Zoom.}
-\nes{This is a design thing, and should go into the design chapter. Implementation things should go into the implementation chapter. Split differently. Currently, there's a chapter "programming" Make the new structure:
-1. Introduction
-2. Related work
-3. Design (this one should include *plenty* of our actual sketches. Both accepted and denied sketches.)
-4. Implementation
-5. Study
-6. Discussion
-7. Future work (this one is optional. The others aren't.)
-8. Conclusions
-and then never mix them.}
-\meta{I think I see...
-- The sections "Planning" and "Output" would both mainly go into "Design", right?
-- Section "Implementation Details" will become a chapter plus some parts from "User Interface"}
 Object visualizations are divided in levels of nesting, where level 0 represents outermost objects, referenced in \verb-Doo.dle(object)-, level 1 objects are (semantically) nested ones inside level 0 etcetera. Saving space is achieved by only completely rendering level 0 and 1 objects, and use a smaller representation for a objects of level 2. Level 1 objects are clickable, which will cause them to be repainted as new virtual level 0 objects, so previous level 2 objects will move to level 1. This pattern allows to arbitrarily explore an objects nesting tree, similar to a debugger.
 
 \nes{Illustrate. This will probably take several sketches.}
@@ -337,7 +274,52 @@ One Example is the behaviour of the scroll position in the console when new obje
 Similar thoughts were made on focus handling of DoodleDebug's view in the space of Eclipse's whole UI. Eclipse's built-in console receives focus on any output event per default, but provides a button to deactivate this. For a programmer, it's likely desirable to generally be notified if something happened, but it can be annoying for many outputs over a long time, e.g. if they're working inside another view of Eclipse. In this case, they would probably want to be notified of sporadically occurring outputs. In our study, we observed this problem as well, one subject even turned off console notifications (see \ref{console-focus-problem}). Based on these thoughts, we defined an algorithm to check time since the last output event and only gain focus if the previous event is longer than 4 seconds ago. For example some loop of a game which prints out it's calculation time for the last frame every time will only gain focus on the DoodleDebug view once, but a quiet application like a web server that only generates update when a user visits a site will usually regain focus on such an event.
 \todo{refer to design book here \nes{And read …} \meta{I've never seen such a technique described before, do you know something?}}
 
-\section{Qualitative Study on Beta Version}
+\section{Implementation}
+The efforts made in analysing classical debugging tools and how programmers behave when interacting with them all aimed on implementing a tool which would actually fill the mentioned problematic gaps. Though the implementation part is not the main theme of this paper, we will point out a couple of general conceptual patterns as well as relevant technical aspects in this section; further descriptions can be found in the appendix.
+
+\subsection{Selecting Technology}
+The decision of technology is not a question of right and wrong, but it's about weighting factors between different technologies and maximizing the benefit. We thought about implementing DoodleDebug in Smalltalk. This would have had the advantage of simplicity because of the strong consistency of Smalltalk's overall structure. Also, building dynamic output would have been easy, as in Smalltalk, the environment runs the same technology as programs running inside.
+
+\subsubsection{Java and Eclipse}
+Java is one of the most popular programming languages and therefore contains many active software developers which could benefit from our work. After the decision to implement DoodleDebug for Java, we discussed if we should implement it as an independent library, which would make it independent in terms of environment, but the advantages of building it as an Eclipse plugin seemed to be bigger. Within Java developers, Eclipse users build a big community, which again provides a lot of possible users, but also causes a broader community of plugin developers and more information resources about plugin development. Furthermore, interaction can be smoothly integrated in to a user's working environment: Installation is done by Eclipse's plugin installation wizard, library dependencies are automatically added to projects if needed, imports are done on the fly and the output screen integrates consistently with the rest of Eclipse's user interface. Because Eclipse itself is written in Java, there are no barriers for data exchange between client (user) and server (plugin/IDE) side.
+
+\subsubsection{Web Technologies}
+As an output format, we needed technology that meets some requirements:
+\begin{enumerate}[1.]
+	\item Two-dimensional arrangement
+	Objects must have at least 2 degrees of freedom
+	\item Consistent nesting
+	Nesting two or more objects doesn't break the structure of the outer one (for reasonable scales)
+	\item Dynamic change
+	Content can be dynamically manipulated in order to allow user interaction
+\end{enumerate}
+Based on these properties, we decided on HTML. It can be integrated in Eclipse, which uses the OS' built-in browser. CSS technology allows to tune design and arrangement of output separately from the rendering process and adds an additional layer of abstraction. Dynamic manipulation is done by Javascript, which is pretty straight forward thanks to additional libraries. In addition to above mentioned advantages, HTML is wide-spread and allowed us to add an additional layer of API where users can provide plugins to DoodleDebug, which define HTML representation of selected object types.
+
+\paragraph{Rendering the Output}
+For displaying and handling HTML code and related web technologies, Eclipse provides the package \verb-org.eclipse.swt.browser-, which among others includes a \verb.Browser. class to render and integrate into the Eclipse UI. However, this \verb.Browser. class is not completely platform independent, it uses the default browser rendering engine of its current host operating system (and not the standard browser). When running on Windows for instance, Internet Explorer's rendering engine is used, even though Firefox is set as the System's standard browser. This fact forced us to be even more careful with the usage of HTML5 features, because their support varies between Browsers.
+
+
+\subsection{Communication between Java Virtual Machines}
+DoodleDebug renders its output into a view tab inside eclipse, so we implemented it to have the main part running in the same VM as eclipse for convenience. Since runtime information about objects and rendering calls must be provided from the user's VM to the eclipse VM, a solid communication mechanism is needed. We use SIMON (Simple Invocation of Methods Over Network)\cite{simon}, a library for object-oriented remote communication in Java. It allows to create a registry on a specified port of localhost and add a Server object to it. Clients can find the server through this registry and send messages to it by calling it's methods with simple objects like Strings as arguments.
+
+\subsection{Providing Code from Eclipse Plugin to Workspace}
+\meta{Appendix?}
+As DoodleDebug works by calling its methods directly from user programs, some code needs to be exposed to the scope of a user's program. On the one hand, all API methods must be visible from user projects. On the other hand, users should only see a minimal amount of DoodleDebug's code in order to prevent them from using it in an unintended way and cause bad behaviour. The compromise made between those two requirements was to mainly provide simple, well-documented interfaces (such as \verb-Doodleable- and only show a proxy of fully implemented classes (e.g. \verb-Doo-).
+
+\subsection{Serialization for the Transport between VMs}
+SIMON only allows transporting simple data types such as Strings, so every object is serialized before its transportation. For this purpose, we make use of XStream\cite{xstream}, a simple serializing library, originally created to serialize Java objects to XML and back again. Because of it's modularity, it also allows to serialize to JSON and comes with a built-in mapping for this. Because of XML's more verbose syntax and therefore bigger space/time consumption in many cases, we decided to use JSON as first choice, with a fallback to XML if errors occur. This is necessary because standard JSON cannot handle circular references, it lacks the ability to append attributes to entities and therefore cannot index them in order to reference to a parent id in case of a circular reference. Obviously, there are workarounds for this issue, but the fallback to XML does not take as much time that users could even recognize it is happening.
+
+\subsection{Communication between Java and JavaScript}
+\subsubsection{From Java to JavaScript}
+DoodleDebug renders its output into a dedicated tab inside the Eclipse UI, using Eclipse's \verb.Browser. class. To append newly rendered objects to the output screen, a naive approach would be to just cache the current code on Java side and in the case of freshly added object renderings, just repaint the whole html page. This has some disadvantages: A refreshed page may always jump back to the top, and even if it does not or it is avoided by jumping back down with JavaScript, it would flicker anyway for the split of a second. Thanks to \verb.Browser.'s method \verb.execute(String script)., there is a smarter way to update: On Java side, the object's html code is escaped in a way to not collide with some JavaScript properties. Then, it's wrapped into a JavaScript method \verb.addCode(code)., which simply appends the html code in its argument to the document body.
+
+\subsubsection{From JavaScript to Java}
+\todo{break into paragraphs}
+Every rendering of Java objects to html is done in Java, so the output entity can only operate as a thin client.
+In order to make output interoperable, communication from JavaScript to Java is necessary, e.g. if an object is inspected and it's nested objects are not yet rendered. Because the output is rendered as html into a Browser, it is of course encapsulated from it's environment, which is a good thing for general portability of web site, but in this special case, it was a drawback. There is no such thing like a JavaScript-Method like "\verb.sendToBrowser(message).", so we had to find some workaround to notify the Java instance about occurring events (e.g. lightbox closing) on one hand and be able to provide some arguments (e.g. which object to render) on the other hand. Using AJAX calls on localhost would probably cause some tedious delays, break encapsulation and just be bad style. The solution we finally came up with causes no remarkable delays and stays inside its dedicated context: Eclipse's \verb.Browser. class allows to append event listeners for the case that its \verb-window.location- is about to change. We defined a pseudo-protocol \verb-doodledebug- and append some message to it, maintaining syntax limitation such as no white space. On Java side, a listener handles all location change events; if an event's target location fits the pseudo-protocol's pattern, its "message" is parsed and desired steps executed. The location change itself is cancelled, so the user stays on the same page. For instance, if an object is clicked and should be inspected inside a lightbox, this item's id is determined and the window location set to \verb-doodledebug:<id>-. On Java side, the object to render is determined from this id, rendered and a message with html code sent back to JavaScript again.
+
+
+\section{Study}
 \nes{On how to write up a user study like this, see "http://research.microsoft.com/en-us/um/redmond/groups/hip/papers/ko2007bugfixing.pdf"}
 
 \nes{Write the introduction from the point of view of qualitative psychological experiments. Read and reference "Introduction to Research Methods and Data Analysis in Psychology"}
@@ -515,82 +497,14 @@ The communication between DoodleDebug's client (API) and server (plugin) side ha
 \paragraph{Possible Solution}
 If the client side has no ability to autonomously get information about the Eclipse instance, it has to be provided from outside. One way would be to put a file containing a unique identifier of the running eclipse instance into the client's classpath from server side. One disadvantage of this solution is that it won't work when multiple instances try to run the same program.
 
+\section{Conclusion}
+
+\meta{What is the focus of this section? How big should it be? Just a paragraph of summarizing the results or (much) more detail? Personal opinions strictly prohibited?}
 
 \section{Appendix}
+\meta{Do we write an introduction to appendix as well?}
 
-\subsubsection{Lack of Documentation} \meta{Probably throw this into appendix.}
-In order to provide API functionality such as \verb-Doo.dle()- or the \verb-Doodleable- interface to users, we had to find some way of providing Java code automatically from our plugin to the current eclipse workspace. \nes{Don't talk about "had to find some way." In its way, this section has the least priority. It should probably be called "Implementation." Because it isn't very important, try and be brief: what were the implemtation challenges, what were the solutions? You're kind of saying that, just say it briefer.} \nes{You haven't come around to this, have you? Please do.} 
-One may say that everything is well-documented in the Eclipse documentation 
-\nes{Too prosaic. Also: doesn't really matter. This is science.},
-\nes{Still true. Please address all comments. Potentially by answering them, rather than following them.}
-\nes{I'm skipping this chapter, since it seems to have been addressed already.}
-but the challenge was to find the right part in the documentation. Eclipse developer forums neither could help, but finally a hint was given by some Stackoverflow user: In order to provide code to workspace Java projects, a plugin needs to use the extension point \verb-org.eclipse.jdt.ui.classpathContainerPage-. From then on, another big help was the source code of JUnit, which uses the same technique, otherwise, it would probably have taken several more weeks until everything was working finely. \nes{Rewrite, away from what you did, towards a problem-solution focus.}
-
-\subsection{Study Sessions}
-
-For every candidate, a screen capture video was taken as well as hand notes. The main setup and action plots of each subject is documented here.
-\todo{Add rest of documentation}
-
-\subsubsection{Alpha}
-The main purpose of our very first session was to test our study setup and its synthetic programming problems. At this point, we only had the first two mentioned problems, namely "Sorting" and "Serialization", the third one, "Decimal Alignment", was added afterwards. Aware of those unequal conditions, we include those results nevertheless, because this study only has a qualitative background and intended to deliver statistically relevant results.
-\paragraph{Allowed Tools}
-\begin{table}[h]
-\centering
-\begin{tabular}{l c c}
-{\bf Problem} & {\bf DoodleDebug} & {\bf Classical} \\ \hline
-Sorting & \tick &  \\
-Serialization &  & \tick \\
-\end{tabular}
-\caption{Problems for Alpha to be solved using DoodleDebug}
-\end{table}
-\paragraph{General Behaviour}
-Alpha is a typical System.out.println() user: Too "lazy" (according to themselves) to open a debugger and start thinking, better just print out whatever could be affected.
-\paragraph{Successes}
-After creating a dummy project while learning from the Tutorial, they immediately were able to understand how to use the \verb-Doo.dle(object)- method, even used the auto-completion template \verb.dd. and never typed the whole method name again.
-\paragraph{Errors}
-When working through the tutorial, Alpha had to face the situation where they had to use DoodleDebug's \verb.Doodleable. interface. This interface contains two methods for generating a visual representation supporting semantic zoom, one for its normal representation and one for reduced size. In that version of DoodleDebug, they were called \verb.drawOn(Canvas c). and \verb.drawSmallOn(Canvas c)., and the Canvas object received as parameter had two methods to draw objects onto it, also supporting semantic zoom, even though \verb-Canvas.drawSmall(Object o)- is intended to be used only in special cases. Instead of adapting the idea of semantic zoom and reducing an objects representation in \verb.drawSmallOn(c). method to as few as possible parts, Alpha basically drew the same fields as in \verb.drawOn(c)., but used \verb-c.drawSmall(o)-. Conceptually, this is a bad idea, because repeating this behaviour in nested objects can withdraw any size reduction when it's always delegated to inner objects. At best, this would cause all objects of the normal representation still to be rendered, but maybe smaller (depending of the innermost objects) and thus be reduced to something similar to geometrical zoom.
-\paragraph{Discussion}
-They argued that it's probably too much work to implement an Interface like \verb.Doodleable., even if there are two methods to implement. They argued that one would suffice in most cases. From our point of view, one method is enough when a problem context only contains few information, just like in our study problems. As software grows bigger, structure will become nested deeper and deeper, which forces either very careful selection of what one want to see on their screen (which must be done before writing print statements into their code) or some technique like semantic zoom.
-\paragraph{Consequences}
-After this session, a couple of API methods were renamed in order to enhance intuitiveness and semantic distinctiveness of them.
-\\
-
-\subsubsection{Bravo}
-\paragraph{Allowed Tools}
-\begin{table}[h]
-\centering
-\begin{tabular}{l c c}
-{\bf Problem} & {\bf DoodleDebug} & {\bf Classical} \\ \hline
-Sorting &  & \tick \\
-Serialization & \tick &  \\
-Decimal Alignment &  & \tick \\
-\end{tabular}
-\caption{Problems for Bravo to be solved using DoodleDebug}
-\end{table}
-\paragraph{General Behaviour}
-In contrast to any other subject, Bravo used Enums during their tutorial walk-through. We had not considered any rendering for Enums, because only very few programmers actually use them with Java, so there was no meaningful output for them and we had to find and supply some visual representation for them afterwards.\\
-For the sorting problem, Bravo started using Eclipse' debugger, but gave it up again quickly due to problems handling it technically, so they switched to System.out.println() usage.
-\paragraph{Successes}
-\paragraph{Errors}
-\paragraph{Discussion}
-\paragraph{Consequences}
-
-\subsubsection{Subject}
-\paragraph{Allowed Tools}
-\begin{table}[h]
-\centering
-\begin{tabular}{l c c}
-{\bf Problem} & {\bf DoodleDebug} & {\bf Classical} \\ \hline
-Sorting &  &  \\
-Serialization &  &  \\
-Decimal Alignment &  &  \\
-\end{tabular}
-\caption{Problems for ??? to be solved using DoodleDebug}
-\end{table}
-\paragraph{General Behaviour}
-\paragraph{Successes}
-\paragraph{Errors}
-\paragraph{Discussion}
-\paragraph{Consequences}
+\subsection{Download}
+The DoodleDebug Eclipse plugin and additional documents can be downloaded from \url{http://scg.unibe.ch/wiki/projects/DoodleDebug}.
 
 \end{document}

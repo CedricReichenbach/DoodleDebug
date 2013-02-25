@@ -1,0 +1,148 @@
+\documentclass[english]{../acm_proc_article-sp}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{pifont}
+
+\usepackage{enumerate}
+
+\newcommand{\tick}{\ding{51}}
+\newcommand{\fattick}{\ding{51}}
+
+% ============================================================
+% Markup macros for proof-reading
+\usepackage{ifthen}
+\usepackage[normalem]{ulem} % for \sout
+\usepackage{xcolor}
+\newcommand{\ra}{$\rightarrow$}
+\newboolean{showedits}
+\setboolean{showedits}{true} % toggle to show or hide edits
+\ifthenelse{\boolean{showedits}}
+{
+	\newcommand{\ugh}[1]{\textcolor{red}{\uwave{#1}}} % please rephrase
+	\newcommand{\ins}[1]{\textcolor{blue}{\uline{#1}}} % please insert
+	\newcommand{\del}[1]{\textcolor{red}{\sout{#1}}} % please delete
+	\newcommand{\chg}[2]{\textcolor{red}{\sout{#1}}{\ra}\textcolor{blue}{\uline{#2}}} % please change
+}{
+	\newcommand{\ugh}[1]{#1} % please rephrase
+	\newcommand{\ins}[1]{#1} % please insert
+	\newcommand{\del}[1]{} % please delete
+	\newcommand{\chg}[2]{#2}
+}
+% ============================================================
+% Put edit comments in a really ugly standout display
+%\usepackage{ifthen}
+\newboolean{showcomments}
+\setboolean{showcomments}{false}
+\newcommand{\id}[1]{$-$Id: scg-llncs.tex 30911 2010-02-05 10:21:47Z oscar $-$}
+\newcommand{\yellowbox}[1]{\fcolorbox{gray}{yellow}{\bfseries\sffamily\scriptsize#1}}
+\newcommand{\triangles}[1]{{\sf\small$\blacktriangleright$\textit{#1}$\blacktriangleleft$}}
+\ifthenelse{\boolean{showcomments}}
+{\newcommand{\nbc}[3]{
+ {\colorbox{#3}{\bfseries\sffamily\scriptsize\textcolor{white}{#1}}}
+ {\textcolor{#3}{\sf\small$\blacktriangleright$\textit{#2}$\blacktriangleleft$}}}
+ \newcommand{\version}{\emph{\scriptsize\id}}}
+{\newcommand{\nbc}[3]{\textcolor{#3}{#2}}
+ \newcommand{\version}{}}
+\newcommand{\nb}[2]{\nbc{#1}{#2}{orange}}
+\newcommand{\here}{\yellowbox{$\Rightarrow$ CONTINUE HERE $\Leftarrow$}}
+\newcommand\rev[2]{\nb{TODO (rev #1)}{#2}} % reviewer comments
+\newcommand\fix[1]{\nb{FIX}{#1}}
+\newcommand\todo[1]{\nb{TO DO}{#1}}
+\newcommand\meta[1]{\nbc{META}{#1}{purple}}
+\newcommand\jr[1]{\nbc{JR}{#1}{orange}}
+\newcommand\nes[1]{\nbc{nes}{#1}{blue}}
+\newcommand\on[1]{\nbc{ON}{#1}{teal}} % add more author macros here
+\newcommand\ewe[1]{\nbc{EWE}{#1}{olive}} % add more author macros here
+
+
+
+\begin{document}
+
+\subsection{Study Sessions}
+
+For every candidate, a screen capture video was taken as well as hand notes. The main setup and action plots of each subject is documented here.
+\todo{Add rest of documentation}
+
+\subsubsection{Alpha}
+The main purpose of our very first session was to test our study setup and its synthetic programming problems. At this point, we only had the first two mentioned problems, namely "Sorting" and "Serialization", the third one, "Decimal Alignment", was added afterwards. Aware of those unequal conditions, we include those results nevertheless, because this study only has a qualitative background and intended to deliver statistically relevant results.
+\paragraph{Allowed Tools}
+\begin{table}[h]
+\centering
+\begin{tabular}{l c c}
+{\bf Problem} & {\bf DoodleDebug} & {\bf Classical} \\ \hline
+Sorting & \tick &  \\
+Serialization &  & \tick \\
+\end{tabular}
+\caption{Problems for Alpha to be solved using DoodleDebug}
+\end{table}
+\paragraph{General Behaviour}
+Alpha is a typical System.out.println() user: Too "lazy" (according to themselves) to open a debugger and start thinking, better just print out whatever could be affected.
+\paragraph{Successes}
+After creating a dummy project while learning from the Tutorial, they immediately were able to understand how to use the \verb-Doo.dle(object)- method, even used the auto-completion template \verb.dd. and never typed the whole method name again.
+\paragraph{Errors}
+When working through the tutorial, Alpha had to face the situation where they had to use DoodleDebug's \verb.Doodleable. interface. This interface contains two methods for generating a visual representation supporting semantic zoom, one for its normal representation and one for reduced size. In that version of DoodleDebug, they were called \verb.drawOn(Canvas c). and \verb.drawSmallOn(Canvas c)., and the Canvas object received as parameter had two methods to draw objects onto it, also supporting semantic zoom, even though \verb-Canvas.drawSmall(Object o)- is intended to be used only in special cases. Instead of adapting the idea of semantic zoom and reducing an objects representation in \verb.drawSmallOn(c). method to as few as possible parts, Alpha basically drew the same fields as in \verb.drawOn(c)., but used \verb-c.drawSmall(o)-. Conceptually, this is a bad idea, because repeating this behaviour in nested objects can withdraw any size reduction when it's always delegated to inner objects. At best, this would cause all objects of the normal representation still to be rendered, but maybe smaller (depending of the innermost objects) and thus be reduced to something similar to geometrical zoom.
+\paragraph{Discussion}
+They argued that it's probably too much work to implement an Interface like \verb.Doodleable., even if there are two methods to implement. They argued that one would suffice in most cases. From our point of view, one method is enough when a problem context only contains few information, just like in our study problems. As software grows bigger, structure will become nested deeper and deeper, which forces either very careful selection of what one want to see on their screen (which must be done before writing print statements into their code) or some technique like semantic zoom.
+\paragraph{Consequences}
+After this session, a couple of API methods were renamed in order to enhance intuitiveness and semantic distinctiveness of them.
+\\
+
+\subsubsection{Bravo}
+\paragraph{Allowed Tools}
+\begin{table}[h]
+\centering
+\begin{tabular}{l c c}
+{\bf Problem} & {\bf DoodleDebug} & {\bf Classical} \\ \hline
+Sorting &  & \tick \\
+Serialization & \tick &  \\
+Decimal Alignment &  & \tick \\
+\end{tabular}
+\caption{Problems for Bravo to be solved using DoodleDebug}
+\end{table}
+\paragraph{General Behaviour}
+In contrast to any other subject, Bravo used Enums during their tutorial walk-through. We had not considered any rendering for Enums, because only very few programmers actually use them with Java, so there was no meaningful output for them and we had to find and supply some visual representation for them afterwards.\\
+For the sorting problem, Bravo started using Eclipse' debugger, but gave it up again quickly due to problems handling it technically, so they switched to System.out.println() usage.
+\paragraph{Successes}
+\paragraph{Errors}
+\paragraph{Discussion}
+\paragraph{Consequences}
+
+\subsubsection{Subject}
+\paragraph{Allowed Tools}
+\begin{table}[h]
+\centering
+\begin{tabular}{l c c}
+{\bf Problem} & {\bf DoodleDebug} & {\bf Classical} \\ \hline
+Sorting &  &  \\
+Serialization &  &  \\
+Decimal Alignment &  &  \\
+\end{tabular}
+\caption{Problems for ??? to be solved using DoodleDebug}
+\end{table}
+\paragraph{General Behaviour}
+\paragraph{Successes}
+\paragraph{Errors}
+\paragraph{Discussion}
+\paragraph{Consequences}
+
+
+
+
+
+
+
+
+\subsection{Lack of Documentation}
+In order to provide API functionality such as \verb-Doo.dle()- or the \verb-Doodleable- interface to users, we had to find some way of providing Java code automatically from our plugin to the current eclipse workspace. \nes{Don't talk about "had to find some way." In its way, this section has the least priority. It should probably be called "Implementation." Because it isn't very important, try and be brief: what were the implemtation challenges, what were the solutions? You're kind of saying that, just say it briefer.} \nes{You haven't come around to this, have you? Please do.} 
+One may say that everything is well-documented in the Eclipse documentation 
+\nes{Too prosaic. Also: doesn't really matter. This is science.},
+\nes{Still true. Please address all comments. Potentially by answering them, rather than following them.}
+\nes{I'm skipping this chapter, since it seems to have been addressed already.}
+but the challenge was to find the right part in the documentation. Eclipse developer forums neither could help, but finally a hint was given by some Stackoverflow user: In order to provide code to workspace Java projects, a plugin needs to use the extension point \verb-org.eclipse.jdt.ui.classpathContainerPage-. From then on, another big help was the source code of JUnit, which uses the same technique, otherwise, it would probably have taken several more weeks until everything was working finely. \nes{Rewrite, away from what you did, towards a problem-solution focus.}
+
+\end{document}
