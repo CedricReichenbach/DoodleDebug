@@ -100,17 +100,9 @@ Debuggers and object inspectors fare much better at showing the inners of object
 We believe that the popularity of \verb-System.out.println()- is in no small parts due to its simplicity in API and concept. DoodleDebug therefore aims to offer an API which is no more difficult than that of \verb-System.out.println()-. At the same time, we try to add it the advantages of two-dimensional layout, and a semantic zoom on objects that allows inspecting all instance variables recursively.
 
 \section{DoodleDebug in a nutshell}
-DoodleDebug's API can be divided into three parts:
-\begin{enumerate}
-\item The \verb-Doo.dle(object)- method, which uses the same pattern of uses as \verb-System.out.prinln(object)-
-\item The \verb.Doodleable. interface, which can be implemented by users to define two methods for simple and quick custom object representations
-\item \verb.RenderingPlugin.s as plugins for DoodleDebug, which enable custom renderings of any type without changing its source code
-\end{enumerate}
-\nes{Move to implementation.}
-
 Two different customization APIs represent different implementing costs as well as different patterns. They are not meant to compete, but to be specialized for different use cases.
 
-A user basically has three possibilities of interaction with the canvas:
+The central API mentioned in this paper is the Doodleable interface, utilizing a virtual canvas (figure~\ref{canvas-illustration}). A user basically has three possibilities of interaction with the canvas:
 \begin{enumerate}
 \item Draw an object to the place where the (virtual) cursor is right now
 \item Switch to a new line
@@ -121,12 +113,14 @@ A user basically has three possibilities of interaction with the canvas:
 	\includegraphics[width=\linewidth]{img/doodleable-example.png}
 	\caption[Usage of the Doodleable interface]{Example of a \texttt{Contact} class' \texttt{doodleOn()} method. Dotted lines visualize the effect of the corresponding structuring methods and the green i-beam indicates the final position of an imaginary cursor}
 	\meta{Can I make this wider?}
-	\label{asdf}
+	\label{canvas-illustration}
 \end{figure}
 
 \subsubsection{Semantic Zoom}
 In order to save space and keep information available to users, DoodleDebug uses the concept of "Semantic Zoom"\cite{semantic-zoom}.
-Object visualizations are divided in levels of nesting, where level 0 represents outermost objects, referenced in \verb-Doo.dle(object)-, level 1 objects are (semantically) nested ones inside level 0 \emph{etc.} Saving space is achieved by only completely rendering level 0 and 1 objects, and use a smaller representation for a objects of level 2. Level 1 objects are clickable, which will cause them to be repainted as new virtual level 0 objects, so previous level 2 objects will move to level 1. This pattern allows to arbitrarily explore an objects nesting tree, similar to a debugger. \nes{Reference the images. All of them.}
+Object visualizations are divided in levels of nesting, where level 0 represents outermost objects, referenced in \verb-Doo.dle(object)-, level 1 objects are (semantically) nested ones inside level 0 \emph{etc.} Saving space is achieved by only completely rendering level 0 and 1 objects, and use a smaller representation for objects of level 2. Level 1 objects are clickable, which will cause them to be repainted as new virtual level 0 objects, so previous level 2 objects will move to level 1. This pattern allows to arbitrarily explore an objects nesting tree, similar to a debugger.
+
+Addresses, for instance, are rendered in their simplified version in figure~\ref{addressbook_whole}, since they are level 2 objects below contacts (level 1) and addressBooks (level 0). When clicking on a contact, this one becomes the new level 0 object (figure~\ref{addressbook_contact}) and some address object (now level 1) reveals its detailed rendering. In figure~\ref{addressbook_address}, our address object is on level 0 and its inner fields would render with more detail, but since they're only strings and numbers, no differentiation is made.
 
 \begin{figure}[h]
 	\includegraphics{img/AddressBook_whole.png}
@@ -147,13 +141,13 @@ Object visualizations are divided in levels of nesting, where level 0 represents
 \end{figure}
 
 \section{Design}
-Instead of immediately starting to implement, we followed several well-proven planning steps from literature to avoid costly redesigning or refactoring later on. The implementation followed Baxton's ``not mixing up the design and engineering processes''\cite{sketching-user-experiences} \nes{Cedric: Is this a quote from the book? Page?} and involved a true design face, involving drawings.
+Instead of immediately starting to implement, we followed several well-proven planning steps from literature to avoid costly redesigning or refactoring later on. The implementation followed Buxton's not ``mixing up the design and engineering processes''\cite{sketching-user-experiences} \nes{Cedric: Is this a quote from the book? Page? \meta{Argh, can't find it anymore in that literal way, but it must be related to pages 73-75 (he argues why it's important to separate them).}} and involved a true design face, involving drawings.
 
-\subsubsection{Sketching the Features}
+\subsection{Sketching the Features}
 \nes{Needs a lot of work.}
-As summarized in the Related Work chapter, we had shown that textual output is lacking features in certain mentioned cases on the one hand \nes{"certain mentioned cases" … that sounds very complicated :)}, and that custom textual object representations tend to exhibit a couple of frequently observable traits. \meta{Too biological?} \nes{Not at all. Computer scientists love biological vocabulary :)} Based on this information, we started to gather commonly used data types and sketch them to paper with a simple, meaningful appearance. Beside every sketched candidate rendering, we tried to think of a simple-as-possible but yet modular code snippet, that would imaginary render this image. Over time, while painting more and more candidates, we tried to converge our imaginary API, so we threw away outliers and repainted their object type in a more consistent way. When we had a consistent (still imaginary) API, we would take a step forward and consult third-party programmers for some feedback.
+As summarized in the Related Work chapter, we had shown that textual output is lacking features in certain cases on the one hand \nes{"certain mentioned cases" … that sounds very complicated :) \meta{Ok, "certain cases"... :D}}, and that custom textual object representations tend to exhibit a couple of frequently observable traits. Based on this information, we started to gather commonly used data types and sketch them to paper with a simple, meaningful appearance. Beside every sketched candidate rendering, we tried to think of a simple-as-possible but yet modular code snippet, that would imaginary render this image. Over time, while painting more and more candidates, we tried to converge our imaginary API, so we threw away outliers and repainted their object type in a more consistent way. When we had a consistent (still imaginary) API, we would take a step forward and consult third-party programmers for some feedback.
 
-\subsubsection{Feedback For Hand-Made Sketches}
+\subsection{Feedback For Hand-Made Sketches}
 As soon as we had a consistent imaginary API and enough sample sketches, we stuck them to a wall and eventually asked other programmers to quickly look at those drawings and explain what they believe to see (figure~\ref{sketch-discussion}). If they immediately anticipated the virtual situation, it was a good example and we kept it. If most people failed to understand what a particular drawing meant, or even wrong conclusions were made out of it, we either threw it away or tried to redesign, based on people's statements and then loop and ask them others about it.
 \todo{Loop back to the book.}
 
@@ -163,48 +157,54 @@ As soon as we had a consistent imaginary API and enough sample sketches, we stuc
 	\label{sketch-discussion}
 \end{figure}
 
+\meta{I don't think we mean the same thing when talking about Plugins: Plugins account for the lower, more basic API part. They implement \texttt{RenderingPlugin} or extend \texttt{AbstractPlugin} and have the ability to generate HTML code and CSS. The Doodleable API (with a cursor-oriented model) is described under "The Doodleable Interface", but I see you moved it to the implementation part. Should I part it into two paragraphs, covering design and implementation aspects?\\\\
+Update: I moved the whole API part to Implementation and wrote a new one about the cursor-like principle of our canvas}
 
-\subsubsection{Providing Plugins to DoodleDebug}
-\todo{write this}
-\nes{Yea, please do.}
+\subsection{Cursor Model for Canvas Painting}
+For spacial navigation on a virtual canvas, a mechanism working similar to a cursor of a simple text editor turned out to be most intuitive for humans. Initially, the virtual cursor is placed on top left of a virtual canvas. Printed objects are aligned side by side like words in a text until the user creates a new line and the virtual cursor jumps back to the left, vertically shifted of course. After a couple of lines, a user may want to continue their painting beside of the already printed parts instead of constantly appending content to the bottom. For this, they can create a new column, which is attaches to the right side of previous one (figure~\ref{canvas-illustration}).
 
-\subsubsection{Smart Behaviour versus Configuration Hell}
+We attribute the supremacy of this method to the principle of standardization\cite{the-design-of-everyday-things}\meta{p. 200-203}. Virtually traversing an area from top-left to bottom-right, separated in lines and eventually in columns, is the way how text is written in western languages. Especially programmers, who use text editors on a daily basis, can therefore quickly adapt and apply this principle.
+
+\subsection{Smart Behaviour versus Configuration Hell}
 When designing user interfaces, one basic decision must be taken: How much configuration options should it contain? Either a lot of settings are left to the user let them take part on the design process. Or the default design is made to fit everyone as good as possible. We decided not to treat everyone as designer\cite{sketching-user-experiences}\meta{p. 95+}\cite{the-design-of-everyday-things}\meta{p. 155} but take away design decisions from them by creating sophisticated defaults.
 As a result, there is no settings dialogue or file for DoodleDebug. \nes{Nice!}
-\paragraph{Smart Scrolling}
+\subsubsection{Smart Scrolling}
 DoodleDebug implements the scrolling behavior of MUSHClient and mIRC. That is, when the most recent doodles are currently in view and a new doodle appears, the view port will scroll to keep the newest doodles in view. If, however, the view port is not showing the most recent doodles and a new doodle appears, no scrolling occurs. 
 This is probably in line with the user's intent. If they're looking at the most recent doodles, they probably are tracking the most recent doodles. If, however, the most recent doodles are not in view, they're studying a specific old doodle that should remain in view. 
-This took some engineering effort, since Eclipse provides no built-in support for this scrolling behavior.
-\paragraph{Focus When Likely Desired}
+This took some engineering effort, since Eclipse provides no built-in support for this scrolling behavior. \meta{Careful here: Actually, it's just HTML we're rendering and the mechanism is implemented in JS, so it'd be the same in every browser (though not tested).}
+
+\subsubsection{Focus When Likely Desired}
 \nes{Rewrite similar to Smart Scrolling above.}
-Similar thoughts were made on focus handling of DoodleDebug's view in the space of Eclipse's whole UI. Eclipse's built-in console receives focus on any output event per default, but provides a button to deactivate this. For a programmer, it's likely desirable to generally be notified if something happened, but it can be annoying for many outputs over a long time, e.g. if they're working inside another view of Eclipse. In this case, they would probably want to be notified of sporadically occurring outputs. In our study, we observed this problem as well, one subject even turned off console notifications (see \ref{console-focus-problem}). Based on these thoughts, we defined an algorithm to check time since the last output event and only gain focus if the previous event is longer than 4 seconds ago. For example some loop of a game which prints out it's calculation time for the last frame every time will only gain focus on the DoodleDebug view once, but a quiet application like a web server that only generates update when a user visits a site will usually regain focus on such an event.
-\todo{refer to design book here \nes{And read …} \meta{I've never seen such a technique described before, do you know something?}}
+
+\meta{Rewritten version:}
+
+The behaviour of Eclipse's focus state on DoodleDebug output actions is determined by a specially implemented\meta{Can't find the right word choice for "specially/newly implemented / custom / ...". Custom sounds like the user would define it.} decision function. It estimates if the user benefits from setting focus to the DoodleDebug output or not, dependent on the elapsed time since the previous output event. If this value falls below a threshold, any change of focus is avoided. The user's focus either is still on DoodleDebug's output and no change is needed or they had moved away during a phase of high output frequency, not wanting to be pulled back immediately. The problem of unwanted focus change has been observed in our study\ref{console-focus-problem}. If enough time has elapsed between two events, the output window gathers focus, since the occurring event may be irregular and thus the user like to be informed about it. \meta{Should I mention an example? Sth. like a game loop or similar}
 
 \section{Implementation}
 The efforts made in analysing classical debugging tools and how programmers behave when interacting with them all aimed on implementing a tool which would actually fill the mentioned problematic gaps. Though the implementation part is not the main theme of this paper, we will point out a couple of general conceptual patterns as well as relevant technical aspects in this section; further descriptions can be found in the appendix.
 
+\subsection{User API}
+DoodleDebug's API can be divided into three parts:
+\begin{enumerate}
+\item The \verb-Doo.dle(object)- method, which uses the same pattern of uses as \verb-System.out.prinln(object)-
+\item The \verb.Doodleable. interface, which can be implemented by users to define two methods for simple and quick custom object representations
+\item \verb.RenderingPlugin.s as plugins for DoodleDebug, which enable custom renderings of any type without changing its source code
+\end{enumerate}
+
 \subsubsection{The Doodleable Interface}
-In our previous paper, we had proposed a patter where objects should contain information about how to represent them. During the planning phase, we continuously improved a initially rough prototype of such an API until it converged to a form that met our requirements of intuitiveness and simplicity. For adding rendering information to an object, its class must implement the \verb.Doodleable. interface. \verb.Doodleable. contains two methods, \verb.doodleOn(DoodleCanvas c). and \verb.SummarizeOn(DoodleCanvas c). in order to support semantic zoom by having two representations with different levels of detail. The pattern behind the \verb.DoodleCanvas. is a virtual canvas with a virtual cursor behaving similarly as those in common text editors.
+In our previous paper, we had proposed a pattern where objects should contain information about how to represent them. During the planning phase, we continuously improved a initially rough prototype of such an API until it converged to a form that met our requirements of intuitiveness and simplicity. For adding rendering information to an object, its class must implement the \verb.Doodleable. interface. \verb.Doodleable. contains two methods, \verb.doodleOn(DoodleCanvas c). and \verb.SummarizeOn(DoodleCanvas c). in order to support semantic zoom by having two representations with different levels of detail. The pattern behind the \verb.DoodleCanvas. is a virtual canvas with a virtual cursor behaving similarly as those in common text editors.
+
+\subsubsection{Providing Plugins to DoodleDebug}
+Since the Doodleable API is simple but not too powerful, we implemented a more low-level API, which supports generation of HTML code and selection of all targeted object types. Users can inherit from an \verb.AbstractPlugin., customize it and provide it to DoodleDebug. Internally, we used this technique for the definition of all built-in type renderings, including the construction of a canvas painted through a Doodleable interface. Besides its higher flexibility, those plugins allow to affect an object type's visualization from outside without having to change its source code, which is beneficial in cases of missing source code access.
 
 \subsection{Selecting Technology}
 The decision of technology is not a question of right and wrong, but it's about weighting factors between different technologies and maximizing the benefit. We thought about implementing DoodleDebug in Smalltalk. This would have had the advantage of simplicity because of the strong consistency of Smalltalk's overall structure. Also, building dynamic output would have been easy, as in Smalltalk, the environment runs the same technology as programs running inside.
 
 \subsubsection{Java and Eclipse}
-\nes{Java and Eclipse are both huge. The reader knows that. We don't have to defend these choices.}
-Java is one of the most popular programming languages and therefore contains many active software developers which could benefit from our work. After the decision to implement DoodleDebug for Java, we discussed if we should implement it as an independent library, which would make it independent in terms of environment, but the advantages of building it as an Eclipse plugin seemed to be bigger. Within Java developers, Eclipse users build a big community, which again provides a lot of possible users, but also causes a broader community of plugin developers and more information resources about plugin development. Furthermore, interaction can be smoothly integrated in to a user's working environment: Installation is done by Eclipse's plugin installation wizard, library dependencies are automatically added to projects if needed, imports are done on the fly and the output screen integrates consistently with the rest of Eclipse's user interface. Because Eclipse itself is written in Java, there are no barriers for data exchange between client (user) and server (plugin/IDE) side.
+To reach as many users as possible, we decided to implement DoodleDebug for Java in the form of an Eclipse plugin. Interaction can be smoothly integrated in to a user's working environment and because Eclipse itself is written in Java, there are no barriers for data exchange between client (user) and server (plugin/IDE) side.
 
 \subsubsection{Web Technologies}
-As an output format, we needed technology that meets some requirements:
-\nes{Again, I don't think you need to defend these choices. Just describe the implementation, don't defend it.}
-\begin{enumerate}[1.]
-	\item Two-dimensional arrangement
-	Objects must have at least 2 degrees of freedom
-	\item Consistent nesting
-	Nesting two or more objects doesn't break the structure of the outer one (for reasonable scales)
-	\item Dynamic change
-	Content can be dynamically manipulated in order to allow user interaction
-\end{enumerate}
-Based on these properties, we decided on HTML. It can be integrated in Eclipse, which uses the OS' built-in browser. CSS technology allows to tune design and arrangement of output separately from the rendering process and adds an additional layer of abstraction. Dynamic manipulation is done by Javascript, which is pretty straight forward thanks to additional libraries. In addition to above mentioned advantages, HTML is wide-spread and allowed us to add an additional layer of API where users can provide plugins to DoodleDebug, which define HTML representation of selected object types.
+As output format we decided on HTML. It can be integrated in Eclipse, which uses the OS' built-in browser. CSS technology allows to tune design and arrangement of output separately from the rendering process and adds an additional layer of abstraction. Dynamic manipulation is done by Javascript, which is pretty straight forward thanks to additional libraries. In addition to above mentioned advantages, HTML is wide-spread and allowed us to add an additional layer of API where users can provide plugins to DoodleDebug, which define HTML representation of selected object types.
 
 \paragraph{Rendering the Output}
 For displaying and handling HTML code and related web technologies, Eclipse provides the package \verb-org.eclipse.swt.browser-, which among others includes a \verb.Browser. class to render and integrate into the Eclipse UI. However, this \verb.Browser. class is not completely platform independent, it uses the default browser rendering engine of its current host operating system (and not the standard browser). When running on Windows for instance, Internet Explorer's rendering engine is used, even though Firefox is set as the System's standard browser. This fact forced us to be even more careful with the usage of HTML5 features, because their support varies between Browsers.
@@ -225,9 +225,11 @@ SIMON only allows transporting simple data types such as Strings, so every objec
 DoodleDebug renders its output into a dedicated tab inside the Eclipse UI, using Eclipse's \verb.Browser. class. To append newly rendered objects to the output screen, a naive approach would be to just cache the current code on Java side and in the case of freshly added object renderings, just repaint the whole html page. This has some disadvantages: A refreshed page may always jump back to the top, and even if it does not or it is avoided by jumping back down with JavaScript, it would flicker anyway for the split of a second. Thanks to \verb.Browser.'s method \verb.execute(String script)., there is a smarter way to update: On Java side, the object's html code is escaped in a way to not collide with some JavaScript properties. Then, it's wrapped into a JavaScript method \verb.addCode(code)., which simply appends the html code in its argument to the document body.
 
 \subsubsection{From JavaScript to Java}
-\todo{break into paragraphs}
+\meta{Might be partially irrelephant $^\circ$j$^\circ$m}
 Every rendering of Java objects to html is done in Java, so the output entity can only operate as a thin client.
-In order to make output interoperable, communication from JavaScript to Java is necessary, e.g. if an object is inspected and it's nested objects are not yet rendered. Because the output is rendered as html into a Browser, it is of course encapsulated from it's environment, which is a good thing for general portability of web site, but in this special case, it was a drawback. There is no such thing like a JavaScript-Method like "\verb.sendToBrowser(message).", so we had to find some workaround to notify the Java instance about occurring events (e.g. lightbox closing) on one hand and be able to provide some arguments (e.g. which object to render) on the other hand. Using AJAX calls on localhost would probably cause some tedious delays, break encapsulation and just be bad style. The solution we finally came up with causes no remarkable delays and stays inside its dedicated context: Eclipse's \verb.Browser. class allows to append event listeners for the case that its \verb-window.location- is about to change. We defined a pseudo-protocol \verb-doodledebug- and append some message to it, maintaining syntax limitation such as no white space. On Java side, a listener handles all location change events; if an event's target location fits the pseudo-protocol's pattern, its "message" is parsed and desired steps executed. The location change itself is cancelled, so the user stays on the same page. For instance, if an object is clicked and should be inspected inside a lightbox, this item's id is determined and the window location set to \verb-doodledebug:<id>-. On Java side, the object to render is determined from this id, rendered and a message with html code sent back to JavaScript again.
+In order to make output interoperable, communication from JavaScript to Java is necessary, e.g. if an object is inspected and it's nested objects are not yet rendered. Because the output is rendered as html into a Browser, it is of course encapsulated from it's environment, which is a good thing for general portability of web site, but in this special case, it was a drawback. There is no such thing like a JavaScript-Method like "\verb.sendToBrowser(message).", so we had to find some workaround to notify the Java instance about occurring events (e.g. lightbox closing) on one hand and be able to provide some arguments (e.g. which object to render) on the other hand. Using AJAX calls on localhost would probably cause some tedious delays, break encapsulation and just be bad style.
+
+The solution we finally came up with causes no remarkable delays and stays inside its dedicated context: Eclipse's \verb.Browser. class allows to append event listeners for the case that its \verb-window.location- is about to change. We defined a pseudo-protocol \verb-doodledebug- and append some message to it, maintaining syntax limitation such as no white space. On Java side, a listener handles all location change events; if an event's target location fits the pseudo-protocol's pattern, its "message" is parsed and desired steps executed. The location change itself is cancelled, so the user stays on the same page. For instance, if an object is clicked and should be inspected inside a lightbox, this item's id is determined and the window location set to \verb-doodledebug:<id>-. On Java side, the object to render is determined from this id, rendered and a message with html code sent back to JavaScript again.
 
 
 \section{Study}
@@ -375,10 +377,10 @@ XStream: \url{http://xstream.codehaus.org}
 \todo{What further related work is worth mentioning?}
 \nes{CodeBubbles and This gaming guy that would overlay time frames in his output.}
 
-Finding the source of problems in program code is an omnipresent issue in computer science and therefore a recurrent research theme. Previous studies about human behavio\del{u}r when developing and especially debugging code were good hints to point where DoodleDebug should be going. We filtered relevant data out of them and aligned them with our research efforts, resulting in a separate paper.
+Finding the source of problems in program code is an omnipresent issue in computer science and therefore a recurrent research theme. Previous studies about human behavior when developing and especially debugging code were good hints to point where DoodleDebug should be going. We filtered relevant data out of them and aligned them with our research efforts, resulting in a separate paper.
 
 \subsection{Previous Paper}
-In a previous paper\cite{dd-paper}, we analyzed generally used patterns for textual representation of open source projects and showed basic conceptual issues preventing useful representations of certain data types. Following that, we outlined a concept automatically including information mostly used in custom textual representations and supporting "difficult" \nes{Use typographic quotes. ``Like this''} data types that prevent powerful renderings in textual form.
+In a previous paper\cite{dd-paper}, we analyzed generally used patterns for textual representation of open source projects and showed basic conceptual issues preventing useful representations of certain data types. Following that, we outlined a concept automatically including information mostly used in custom textual representations and supporting ``difficult'' data types that prevent powerful renderings in textual form.
 
 \subsubsection{Mining SqueakSource}
 We had programmed a simple Smalltalk data miner, which fetched all projects from SqueakSource, searched all classes overriding Smalltalk's \verb.printOn:. method, which is roughly equivalent to Java's \verb.toString(). in its meaning to programmers; namely it provides a textual representation of an object in order to print it to a console. In a next step, we manually went through the received \verb.printOn:. code snippets (590) and searched for repeating patterns.

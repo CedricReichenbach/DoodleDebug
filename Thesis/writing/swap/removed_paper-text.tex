@@ -145,4 +145,17 @@ One may say that everything is well-documented in the Eclipse documentation
 \nes{I'm skipping this chapter, since it seems to have been addressed already.}
 but the challenge was to find the right part in the documentation. Eclipse developer forums neither could help, but finally a hint was given by some Stackoverflow user: In order to provide code to workspace Java projects, a plugin needs to use the extension point \verb-org.eclipse.jdt.ui.classpathContainerPage-. From then on, another big help was the source code of JUnit, which uses the same technique, otherwise, it would probably have taken several more weeks until everything was working finely. \nes{Rewrite, away from what you did, towards a problem-solution focus.}
 
+
+
+
+
+For programmers, it's an everyday problem: Some feature of a program is not working correctly, but it's not clear where the problem originating from. The simplest approach, just staring at code and build some mental model to play the program in one's head, is usually time and concentration intensive. For more comfort, tools help to automatically build a visual representation of runtime data, which is provided by debuggers for instance. They allow users to stop at a particular moment in time, the whole program state is inspectable and commonly used data types have some useful textual representation. One big problem here is that a program is only inspectable at one snapshot in time, but two states cannot directly be compared. \nes{Excellent. Really good sentence. Maybe move this sentence further up. It's kind of key to the whole thing.} \meta{But we need it here...}
+Another widely used solution, printing on a console, eliminates this issue and has other advantages: As our study results show, programmers like it for its simplicity and assumed quickness, because such printing instructions are directly written into code snippets to be debugged. However, we could not observe any proof for this technique to be actually quicker than using a debugger. Also, printing to a console allows developers to precisely represent an object with needed data only using its \verb-toString()- method (in Java). This paper introduces a solution which aims to eliminate problems of the above mentioned tools \meta{Should I refer to the related work section here?} and includes a small qualitative study for its verification.
+
+
+
+\subsection{Planning}
+Instead of immediately starting to implement, we followed several well-proven planning steps from literature to avoid costly redesigning or refactoring later on. Following the principle of "not mixing up the design and engineering processes" seemed to be a good way to avoid losing the initial path\cite{sketching-user-experiences}.
+
+
 \end{document}
