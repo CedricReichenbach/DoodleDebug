@@ -93,130 +93,24 @@ Software developers actively make use of debugging tools in order to find proble
 
 
 \section{Introduction}
-\nes{Read: "http://www.amazon.com/Write-Point-Bill-Stott/dp/0231075499"}
-\subsection{Idea}
-Debugging tools should save time, they help visualizing objects for inspection and thus bug detection. Java's \verb-System.out.println()- allows developers to easily compare many temporal states of an object or many different instances beside each other, which may be a reason for its popularity;\nes{On one of the first pages of "programming pearls", the author notes that often it's easier to write "just writing println is often easier". That would fit here.} \meta{Do you mean p. 24, the customized letter?} but when it comes to complex problems, like a list of matrices, \verb-System.out.println()- breaks down and becomes either expensive to use or completely useless\cite{dd-paper}. A Debugger may handle such a problem better, but it does not allow users to compare two time slices. DoodleDebug combines graphical object representation with a simple API, still approving the simple and widely accepted usage pattern of \verb-System.out.println()-.
+Java's \verb-System.out.println()- 
+allows developers to easily compare many temporal states of an object or many different instances beside each other, which may be a reason for its popularity;\nes{On one of the first pages of "programming pearls", the author notes that often it's easier to write "just writing println is often easier". That would fit here.} \meta{Do you mean p. 24, the customized letter?} \nes{I left my copy in Switzerland :(.} but when it comes to complex problems, like a list of matrices, \verb-System.out.println()- breaks down and becomes either expensive to use or completely useless\cite{dd-paper}. 
+Debuggers and object inspectors fare much better at showing the inners of objects, but unlike the console output of \verb-System.out.println()-, debugger and object inspectors only show one moment in time. There are a few notable exceptions to the previous sentence, to which we will come back. 
 
-For programmers, it's an everyday problem: Some feature of a program is not working correctly, but it's not clear where the problem originating from. The simplest approach, just staring at code and build some mental model to play the program in one's head, is usually time and concentration intensive. For more comfort, tools help to automatically build a visual representation of runtime data, which is provided by debuggers for instance. They allow users to stop at a particular moment in time, the whole program state is inspectable and commonly used data types have some useful textual representation. One big problem here is that a program is only inspectable at one snapshot in time, but two states cannot directly be compared. \nes{Excellent. Really good sentence. Maybe move this sentence further up. It's kind of key to the whole thing.} \meta{But we need it here...}
+We believe that the popularity of \verb-System.out.println()- is in no small parts due to its simplicity in API and concept. DoodleDebug therefore aims to offer an API which is no more difficult than that of \verb-System.out.println()-. At the same time, we try to add it the advantages of two-dimensional layout, and a semantic zoom on objects that allows inspecting all instance variables recursively.
 
-Another widely used solution, printing on a console, eliminates this issue and has other advantages: As our study results show, programmers like it for its simplicity and assumed quickness, because such printing instructions are directly written into code snippets to be debugged. However, we could not observe any proof for this technique to be actually quicker than using a debugger. Also, printing to a console allows developers to precisely represent an object with needed data only using its \verb-toString()- method (in Java). This paper introduces a solution which aims to eliminate problems of the above mentioned tools \meta{Should I refer to the related work section here?} and includes a small qualitative study for its verification.
-
-\nes{Please do read "write to the point", linked above. Among many other things, it explains quite nicely how to break text into paragraphs.}
-
-\nes{The above comment is still good. Are there any paragraphs left in the paper?}
-
-\section{Related Work}
-\todo{What further related work is worth mentioning?}
-
-Finding the source of problems in program code is an omnipresent issue in computer science and therefore a recurrent research theme. Previous studies about human behaviour when developing and especially debugging code were good hints to point where DoodleDebug should be going. We filtered relevant data out of them and aligned them with our research efforts, resulting in a separate paper.
-
-\subsection{Previous Paper}
-In a previous paper\cite{dd-paper}, we analysed generally used patterns for textual representation of open source projects and showed basic conceptual issues preventing useful representations of certain data types. Following that, we outlined a concept automatically including information mostly used in custom textual representations and supporting "difficult" data types that prevent powerful renderings in textual form.
-
-\subsubsection{Mining SqueakSource}
-We had programmed a simple Smalltalk data miner, which fetched all projects from SqueakSource, searched all classes overriding Smalltalk's \verb.printOn:. method, which is roughly equivalent to Java's \verb.toString(). in its meaning to programmers; namely it provides a textual representation of an object in order to print it to a console. In a next step, we manually went through the received \verb.printOn:. code snippets (590) and searched for repeating patterns.
-\begin{itemize}
-	\item 44 used ASCII graphics to build two-dimensional structures.
-	\item 137 wrapped their printed instance variables using parentheses.
-	\item 219 called \verb.printOn:. of their super class.
-	\item 452 included their class name.
-\end{itemize}
-For DoodleDebug, we tried to consider those patterns and include them as well as possible and eventually include them in every output without the need of user manipulation. If not, they should be easily produced through an API.
-
-\subsubsection{Text is not always powerful enough}
-In the same paper, we argued that there are data structures, where using classical console printing contains clear disadvantages, demonstrated using Arrays of two-dimensional matrices as an example of multi-dimensional structures. Objects with independent textual representation methods can only be listed vertically, which does not allow nesting with a consistent and thus clear layout (figure~\ref{nested-matrix-problem}). This nesting problem could be solved, if representation methods would not be restricted to one-dimensional text only (figure~\ref{nested-matrix-idea}).
-
-But simple textual output has even more restrictions than just the one caused by its single dimension: Colors are not supported in general, printing images is impossible and already printed line cannot be deleted, which limits formatting as well as the lack of free spacial positioning.
-
-\begin{figure}[h]
-	\begin{verbatim}
-    an Array()
-
-    an Array(
-    MatrixTransform2x3(
-        2.0 0.0 0.0
-        0.0 2.0 0.0
-    ))
-
-    an Array(
-    MatrixTransform2x3(
-        2.0 0.0 0.0
-        0.0 2.0 0.0
-    ) MatrixTransform2x3(
-        0.707107 -0.707107 0.0
-        0.707107 0.707107 0.0
-    ))
-	\end{verbatim}
-	\caption[Bad nesting of 2D-matrix array]{Textual visualization of an array of 2D-matrices in Smalltalk}
-	\label{nested-matrix-problem}
-\end{figure}
-\begin{figure}[h]
-\raggedright
-	$\{\}$
-	\begin{verbatim}
-	
-	\end{verbatim}
-	$\{\begin{pmatrix}
-	2. & 0. & 0. \\
-	0. & 2. & 0. \\
-	0. & 0. & 2.
-	\end{pmatrix}\}$
-	\begin{verbatim}
-	
-	\end{verbatim}
-	$\{\begin{pmatrix}
-	2. & 0. & 0. \\
-	0. & 2. & 0. \\
-	0. & 0. & 2.
-	\end{pmatrix},
-	\begin{pmatrix}
-	0.707107 & -0.707107 & 0. \\
-	0.707107 & 0.707107 & 0. \\
-	0. & 0. & 1.
-	\end{pmatrix}\}$
-	\caption[Ideal nesting of 2D-matrix array]{Possible visualization of an array of 2D-matrices without the restriction to 1D-text}
-	\label{nested-matrix-idea}
-\end{figure}
-
-\subsection{Whyline for Java}
-Whyline\cite{whyline-website} is a Java library that should "answer why and why not questions"\cite{whyline-paper} about a program's behaviour. In particular, it allows its users to click on a piece of either graphical or textual output and ask questions about the cause of its properties, like fields. Whyline then tracks back the program execution to the line of code where this particular field has been changed for the last time and visually reports it to the user, including the causal chain leading to it.
-
-\subsubsection{Difference to DoodleDebug}
-Whyline aims on connecting properties of output to code snippets. In other words, it answers the "why" question. DoodleDebug visualizes objects and helps to understand what properties objects have and how they evolve over time. It answers the "what" question. By now, Whyline only supports output on \verb-java.awt.Graphics- and \verb-java.io.PrintStream- objects and is developed with closed source only, but from a conceptual point of view, those two technologies could be combined and eventually enhance each other.
-
-\section{Design}
-\todo{text}
-
-\subsection{Planning}
-Instead of immediately starting to implement, we followed several well-proven planning steps from literature to avoid costly redesigning or refactoring later on. Following the principle of "not mixing up the design and engineering processes" seemed to be a good way to avoid losing the initial path\cite{sketching-user-experiences}.
-
-\subsubsection{Sketching the Features}
-As summarized in the Related Work chapter, we had shown that textual output is lacking features in certain mentioned cases on the one hand, and that custom textual object representations tend to exhibit a couple of frequently observable traits. \meta{Too biological?} Based on this information, we started to gather commonly used data types and sketch them to paper with a simple, meaningful appearance. Beside every sketched candidate rendering, we tried to think of a simple-as-possible but yet modular code snippet, that would imaginary render this image. Over time, while painting more and more candidates, we tried to converge our imaginary API, so we threw away outliers and repainted their object type in a more consistent way. When we had a consistent (still imaginary) API, we would take a step forward and consult third-party programmers for some feedback.
-
-\subsubsection{Feedback For Hand-Made Sketches}
-As soon as we had a consistent imaginary API and enough sample sketches, we stuck them to a wall and eventually asked other programmers to quickly look at those drawings and explain what they believe to see (figure~\ref{sketch-discussion}). If they immediately anticipated the virtual situation, it was a good example and we kept it. If most people failed to understand what a particular drawing meant, or even wrong conclusions were made out of it, we either threw it away or tried to redesign, based on people's statements and then loop and ask them others about it.
-\todo{Loop back to the book.}
-
-\begin{figure}[h]
-	\includegraphics[width=\linewidth]{img/design-sketches_thinker.jpg}
-	\caption[Confronting people with design sketches]{Programmers should look at our code snippets and corresponding design sketches for us to evaluate their intuitiveness}
-	\label{sketch-discussion}
-\end{figure}
-
-\subsection{Final API}
-\meta{Where should this part go? Design or Implementation?}
-
+\section{DoodleDebug in a nutshell}
 DoodleDebug's API can be divided into three parts:
 \begin{enumerate}
 \item The \verb-Doo.dle(object)- method, which uses the same pattern of uses as \verb-System.out.prinln(object)-
 \item The \verb.Doodleable. interface, which can be implemented by users to define two methods for simple and quick custom object representations
 \item \verb.RenderingPlugin.s as plugins for DoodleDebug, which enable custom renderings of any type without changing its source code
 \end{enumerate}
+\nes{Move to implementation.}
 
 Two different customization APIs represent different implementing costs as well as different patterns. They are not meant to compete, but to be specialized for different use cases.
 
-\subsubsection{The Doodleable Interface}
-In our previous paper, we had proposed a patter where objects should contain information about how to represent them. During the planning phase, we continuously improved a initially rough prototype of such an API until it converged to a form that met our requirements of intuitiveness and simplicity. For adding rendering information to an object, its class must implement the \verb.Doodleable. interface. \verb.Doodleable. contains two methods, \verb.doodleOn(DoodleCanvas c). and \verb.SummarizeOn(DoodleCanvas c). in order to support semantic zoom by having two representations with different levels of detail. The pattern behind the \verb.DoodleCanvas. is a virtual canvas with a virtual cursor behaving similarly as those in common text editors. A user basically has three possibilities of interaction with the canvas:
+A user basically has three possibilities of interaction with the canvas:
 \begin{enumerate}
 \item Draw an object to the place where the (virtual) cursor is right now
 \item Switch to a new line
@@ -230,21 +124,9 @@ In our previous paper, we had proposed a patter where objects should contain inf
 	\label{asdf}
 \end{figure}
 
-\subsubsection{Providing Plugins to DoodleDebug}
-\todo{write this}
-
-\subsection{User Interface}
-\todo{text}
-
 \subsubsection{Semantic Zoom}
 In order to save space and keep information available to users, DoodleDebug uses the concept of "Semantic Zoom"\cite{semantic-zoom}.
-\nes{Yup, a reference would be nice. Make sure to read the referenced paper, too. In part, because you need to get a feeling for scientific style.} \meta{Semantic Zoom is from a book, right?}
-\nes{See the DoodleDebug workshop paper. It, too, quotes Semantic Zoom.}
-Object visualizations are divided in levels of nesting, where level 0 represents outermost objects, referenced in \verb-Doo.dle(object)-, level 1 objects are (semantically) nested ones inside level 0 etcetera. Saving space is achieved by only completely rendering level 0 and 1 objects, and use a smaller representation for a objects of level 2. Level 1 objects are clickable, which will cause them to be repainted as new virtual level 0 objects, so previous level 2 objects will move to level 1. This pattern allows to arbitrarily explore an objects nesting tree, similar to a debugger.
-
-\nes{Illustrate. This will probably take several sketches.}
-
-\meta{Something like that?}
+Object visualizations are divided in levels of nesting, where level 0 represents outermost objects, referenced in \verb-Doo.dle(object)-, level 1 objects are (semantically) nested ones inside level 0 \emph{etc.} Saving space is achieved by only completely rendering level 0 and 1 objects, and use a smaller representation for a objects of level 2. Level 1 objects are clickable, which will cause them to be repainted as new virtual level 0 objects, so previous level 2 objects will move to level 1. This pattern allows to arbitrarily explore an objects nesting tree, similar to a debugger. \nes{Reference the images. All of them.}
 
 \begin{figure}[h]
 	\includegraphics{img/AddressBook_whole.png}
@@ -264,27 +146,56 @@ Object visualizations are divided in levels of nesting, where level 0 represents
 	\label{addressbook_address}
 \end{figure}
 
+\section{Design}
+Instead of immediately starting to implement, we followed several well-proven planning steps from literature to avoid costly redesigning or refactoring later on. The implementation followed Baxton's ``not mixing up the design and engineering processes''\cite{sketching-user-experiences} \nes{Cedric: Is this a quote from the book? Page?} and involved a true design face, involving drawings.
+
+\subsubsection{Sketching the Features}
+\nes{Needs a lot of work.}
+As summarized in the Related Work chapter, we had shown that textual output is lacking features in certain mentioned cases on the one hand \nes{"certain mentioned cases" … that sounds very complicated :)}, and that custom textual object representations tend to exhibit a couple of frequently observable traits. \meta{Too biological?} \nes{Not at all. Computer scientists love biological vocabulary :)} Based on this information, we started to gather commonly used data types and sketch them to paper with a simple, meaningful appearance. Beside every sketched candidate rendering, we tried to think of a simple-as-possible but yet modular code snippet, that would imaginary render this image. Over time, while painting more and more candidates, we tried to converge our imaginary API, so we threw away outliers and repainted their object type in a more consistent way. When we had a consistent (still imaginary) API, we would take a step forward and consult third-party programmers for some feedback.
+
+\subsubsection{Feedback For Hand-Made Sketches}
+As soon as we had a consistent imaginary API and enough sample sketches, we stuck them to a wall and eventually asked other programmers to quickly look at those drawings and explain what they believe to see (figure~\ref{sketch-discussion}). If they immediately anticipated the virtual situation, it was a good example and we kept it. If most people failed to understand what a particular drawing meant, or even wrong conclusions were made out of it, we either threw it away or tried to redesign, based on people's statements and then loop and ask them others about it.
+\todo{Loop back to the book.}
+
+\begin{figure}[h]
+	\includegraphics[width=\linewidth]{img/design-sketches_thinker.jpg}
+	\caption[Confronting people with design sketches]{Programmers should look at our code snippets and corresponding design sketches for us to evaluate their intuitiveness}
+	\label{sketch-discussion}
+\end{figure}
+
+
+\subsubsection{Providing Plugins to DoodleDebug}
+\todo{write this}
+\nes{Yea, please do.}
+
 \subsubsection{Smart Behaviour versus Configuration Hell}
 When designing user interfaces, one basic decision must be taken: How much configuration options should it contain? Either a lot of settings are left to the user let them take part on the design process. Or the default design is made to fit everyone as good as possible. We decided not to treat everyone as designer\cite{sketching-user-experiences}\meta{p. 95+}\cite{the-design-of-everyday-things}\meta{p. 155} but take away design decisions from them by creating sophisticated defaults.
-As a result, there is no settings dialogue or file for DoodleDebug.
+As a result, there is no settings dialogue or file for DoodleDebug. \nes{Nice!}
 \paragraph{Smart Scrolling}
-\nes{I'd like to bet that Apple has a patent on this. Find and quote.} \meta{Can't find it. Try googling something with apple and patent, and you will get a million results... Google patent search did not reveal it as well. Going to stackoverflow...}
-One Example is the behaviour of the scroll position in the console when new objects are rendered into it. As default (with no user interaction), the window keeps scrolling along with rendered objects, always jumping to the newest one. As soon as the user scrolls away from the bottom, this mechanism is stopped and the scroll position remains equal while new objects are appended on the bottom of the output silently. However, if the user decides to go to the bottom of the output again, the auto-scrolling mechanism is obtained again.
+DoodleDebug implements the scrolling behavior of MUSHClient and mIRC. That is, when the most recent doodles are currently in view and a new doodle appears, the view port will scroll to keep the newest doodles in view. If, however, the view port is not showing the most recent doodles and a new doodle appears, no scrolling occurs. 
+This is probably in line with the user's intent. If they're looking at the most recent doodles, they probably are tracking the most recent doodles. If, however, the most recent doodles are not in view, they're studying a specific old doodle that should remain in view. 
+This took some engineering effort, since Eclipse provides no built-in support for this scrolling behavior.
 \paragraph{Focus When Likely Desired}
+\nes{Rewrite similar to Smart Scrolling above.}
 Similar thoughts were made on focus handling of DoodleDebug's view in the space of Eclipse's whole UI. Eclipse's built-in console receives focus on any output event per default, but provides a button to deactivate this. For a programmer, it's likely desirable to generally be notified if something happened, but it can be annoying for many outputs over a long time, e.g. if they're working inside another view of Eclipse. In this case, they would probably want to be notified of sporadically occurring outputs. In our study, we observed this problem as well, one subject even turned off console notifications (see \ref{console-focus-problem}). Based on these thoughts, we defined an algorithm to check time since the last output event and only gain focus if the previous event is longer than 4 seconds ago. For example some loop of a game which prints out it's calculation time for the last frame every time will only gain focus on the DoodleDebug view once, but a quiet application like a web server that only generates update when a user visits a site will usually regain focus on such an event.
 \todo{refer to design book here \nes{And read …} \meta{I've never seen such a technique described before, do you know something?}}
 
 \section{Implementation}
 The efforts made in analysing classical debugging tools and how programmers behave when interacting with them all aimed on implementing a tool which would actually fill the mentioned problematic gaps. Though the implementation part is not the main theme of this paper, we will point out a couple of general conceptual patterns as well as relevant technical aspects in this section; further descriptions can be found in the appendix.
 
+\subsubsection{The Doodleable Interface}
+In our previous paper, we had proposed a patter where objects should contain information about how to represent them. During the planning phase, we continuously improved a initially rough prototype of such an API until it converged to a form that met our requirements of intuitiveness and simplicity. For adding rendering information to an object, its class must implement the \verb.Doodleable. interface. \verb.Doodleable. contains two methods, \verb.doodleOn(DoodleCanvas c). and \verb.SummarizeOn(DoodleCanvas c). in order to support semantic zoom by having two representations with different levels of detail. The pattern behind the \verb.DoodleCanvas. is a virtual canvas with a virtual cursor behaving similarly as those in common text editors.
+
 \subsection{Selecting Technology}
 The decision of technology is not a question of right and wrong, but it's about weighting factors between different technologies and maximizing the benefit. We thought about implementing DoodleDebug in Smalltalk. This would have had the advantage of simplicity because of the strong consistency of Smalltalk's overall structure. Also, building dynamic output would have been easy, as in Smalltalk, the environment runs the same technology as programs running inside.
 
 \subsubsection{Java and Eclipse}
+\nes{Java and Eclipse are both huge. The reader knows that. We don't have to defend these choices.}
 Java is one of the most popular programming languages and therefore contains many active software developers which could benefit from our work. After the decision to implement DoodleDebug for Java, we discussed if we should implement it as an independent library, which would make it independent in terms of environment, but the advantages of building it as an Eclipse plugin seemed to be bigger. Within Java developers, Eclipse users build a big community, which again provides a lot of possible users, but also causes a broader community of plugin developers and more information resources about plugin development. Furthermore, interaction can be smoothly integrated in to a user's working environment: Installation is done by Eclipse's plugin installation wizard, library dependencies are automatically added to projects if needed, imports are done on the fly and the output screen integrates consistently with the rest of Eclipse's user interface. Because Eclipse itself is written in Java, there are no barriers for data exchange between client (user) and server (plugin/IDE) side.
 
 \subsubsection{Web Technologies}
 As an output format, we needed technology that meets some requirements:
+\nes{Again, I don't think you need to defend these choices. Just describe the implementation, don't defend it.}
 \begin{enumerate}[1.]
 	\item Two-dimensional arrangement
 	Objects must have at least 2 degrees of freedom
@@ -459,6 +370,87 @@ SIMON: \url{http://dev.root1.de/projects/simon}
 XStream: \url{http://xstream.codehaus.org}
 \end{thebibliography}
 
+
+\section{Related Work}
+\todo{What further related work is worth mentioning?}
+\nes{CodeBubbles and This gaming guy that would overlay time frames in his output.}
+
+Finding the source of problems in program code is an omnipresent issue in computer science and therefore a recurrent research theme. Previous studies about human behavio\del{u}r when developing and especially debugging code were good hints to point where DoodleDebug should be going. We filtered relevant data out of them and aligned them with our research efforts, resulting in a separate paper.
+
+\subsection{Previous Paper}
+In a previous paper\cite{dd-paper}, we analyzed generally used patterns for textual representation of open source projects and showed basic conceptual issues preventing useful representations of certain data types. Following that, we outlined a concept automatically including information mostly used in custom textual representations and supporting "difficult" \nes{Use typographic quotes. ``Like this''} data types that prevent powerful renderings in textual form.
+
+\subsubsection{Mining SqueakSource}
+We had programmed a simple Smalltalk data miner, which fetched all projects from SqueakSource, searched all classes overriding Smalltalk's \verb.printOn:. method, which is roughly equivalent to Java's \verb.toString(). in its meaning to programmers; namely it provides a textual representation of an object in order to print it to a console. In a next step, we manually went through the received \verb.printOn:. code snippets (590) and searched for repeating patterns.
+\begin{itemize}
+	\item 44 used ASCII graphics to build two-dimensional structures.
+	\item 137 wrapped their printed instance variables using parentheses.
+	\item 219 called \verb.printOn:. of their super class.
+	\item 452 included their class name.
+\end{itemize}
+For DoodleDebug, we tried to consider those patterns and include them as well as possible and eventually include them in every output without the need of user manipulation. If not, they should be easily produced through an API.
+
+\subsubsection{Text is not always powerful enough}
+In the same paper, we argued that there are data structures\del{,} where using classical console printing contains clear disadvantages, demonstrated using Arrays of two-dimensional matrices as an example of multi-dimensional structures. Objects with independent textual representation methods can only be listed vertically, which does not allow nesting with a consistent and thus clear layout (figure~\ref{nested-matrix-problem}). This nesting problem could be solved, if representation methods would not be restricted to one-dimensional text only (figure~\ref{nested-matrix-idea}).
+
+But simple textual output has even more restrictions than just the one caused by its single dimension: Colors are not supported in general, printing images is impossible and already printed line cannot be deleted, which limits formatting as well as the lack of free spacial positioning.
+
+\begin{figure}[h]
+	\begin{verbatim}
+    an Array()
+
+    an Array(
+    MatrixTransform2x3(
+        2.0 0.0 0.0
+        0.0 2.0 0.0
+    ))
+
+    an Array(
+    MatrixTransform2x3(
+        2.0 0.0 0.0
+        0.0 2.0 0.0
+    ) MatrixTransform2x3(
+        0.707107 -0.707107 0.0
+        0.707107 0.707107 0.0
+    ))
+	\end{verbatim}
+	\caption[Bad nesting of 2D-matrix array]{Textual visualization of an array of 2D-matrices in Smalltalk}
+	\label{nested-matrix-problem}
+\end{figure}
+\begin{figure}[h]
+\raggedright
+	$\{\}$
+	\begin{verbatim}
+	
+	\end{verbatim}
+	$\{\begin{pmatrix}
+	2. & 0. & 0. \\
+	0. & 2. & 0. \\
+	0. & 0. & 2.
+	\end{pmatrix}\}$
+	\begin{verbatim}
+	
+	\end{verbatim}
+	$\{\begin{pmatrix}
+	2. & 0. & 0. \\
+	0. & 2. & 0. \\
+	0. & 0. & 2.
+	\end{pmatrix},
+	\begin{pmatrix}
+	0.707107 & -0.707107 & 0. \\
+	0.707107 & 0.707107 & 0. \\
+	0. & 0. & 1.
+	\end{pmatrix}\}$
+	\caption[Ideal nesting of 2D-matrix array]{Possible visualization of an array of 2D-matrices without the restriction to 1D-text}
+	\label{nested-matrix-idea}
+\end{figure}
+
+\subsection{Whyline for Java}
+Whyline\cite{whyline-website} is a Java library that should "answer why and why not questions"\cite{whyline-paper} about a program's behaviour. In particular, it allows its users to click on a piece of either graphical or textual output and ask questions about the cause of its properties, like fields. Whyline then tracks back the program execution to the line of code where this particular field has been changed for the last time and visually reports it to the user, including the causal chain leading to it.
+
+\subsubsection{Difference to DoodleDebug}
+Whyline aims on connecting properties of output to code snippets. In other words, it answers the "why" question. DoodleDebug visualizes objects and helps to understand what properties objects have and how they evolve over time. It answers the "what" question. By now, Whyline only supports output on \verb-java.awt.Graphics- and \verb-java.io.PrintStream- objects and is developed with closed source only, but from a conceptual point of view, those two technologies could be combined and eventually enhance each other.
+
 \section{Future Work}
 
 Besides proving things right, our study revealed some problems as well. As they only show that a problem exists but don't provide exact information about its cause, further research might invest in analysing them and propose accurate solutions.
@@ -472,6 +464,7 @@ As already described, the \verb.Doodleable. interface contains two methods for o
 
 \nes{Why is this future work?! Just solve it, no?}
 \meta{It's not proven. Would this REALLY be better?}
+\nes{Sure it's proven. Just read your study. Not a person in your study implemented the interface that the study was trying to examine.}
 
 \paragraph{Possible Solution}
 An approach for resolving this issue would be to split \verb.Doodleable. into two interfaces containing one single method each, let's say \verb.Doodleable. and \verb.SmallDoodleable.. For support of semantic zoom, users could simply implement both interfaces; if not, they would likely only use the standard version method. People implementing both interfaces would possibly make sure to first inform themselves of the respective semantic meanings and not run into previously mentioned slips. A user study comparing two groups, one using a single interface like before and another one using  the proposed setup, could help to determine if it's an actual improvement. Anyhow, this solution would introduce new conceptual problems: What should happen if a user only implements \verb.SmallDoodleable.? Should DoodleDebug try to guess a way for semantic zoom of objects only implementing one interface or just ignore it and always use the same method for rendering?
