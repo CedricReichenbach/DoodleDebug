@@ -1,5 +1,15 @@
 \begin{thebibliography}{1}
 
+\bibitem{Brag10a}
+Andrew Bragdon, Robert Zeleznik, Steven~P. Reiss, Suman Karumuri, William
+  Cheung, Joshua Kaplan, Christopher Coleman, Ferdi Adeputra, and Joseph~J.
+  LaViola, Jr.
+\newblock Code bubbles: a working set-based interface for code understanding
+  and maintenance.
+\newblock In {\em CHI '10: Proceedings of the 28th international conference on
+  Human factors in computing systems}, pages 2503--2512, New York, NY, USA,
+  2010. ACM.
+
 \bibitem{Buxt07a}
 Bill Buxton.
 \newblock {\em Sketching User Experiences: Getting the Design Right and the
@@ -18,6 +28,13 @@ Darren Langdridge and Gareth Hagger-johnson.
 \newblock {\em Introduction to Research Methods and Data Analysis in
   Psychology}.
 \newblock Prentice Hall, 2 ill edition, June 2009.
+
+\bibitem{Lien09a}
+Adrian Lienhard, Julien Fierz, and Oscar Nierstrasz.
+\newblock Flow-centric, back-in-time debugging.
+\newblock In {\em Objects, Components, Models and Patterns, Proceedings of
+  TOOLS Europe 2009}, volume~33 of {\em LNBIP}, pages 272--288.
+  Springer-Verlag, 2009.
 
 \bibitem{Norm88a}
 Donald~A. Norman.
