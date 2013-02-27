@@ -93,12 +93,12 @@ Software developers actively make use of debugging tools in order to find proble
 
 \section{Introduction}
 Java's \verb-System.out.println()- 
-allows developers to easily compare many temporal states of an object or many different instances beside each other, which may be a reason for its popularity;\nes{On one of the first pages of "programming pearls", the author notes that often it's easier to write "just writing println is often easier". That would fit here.} \meta{Do you mean p. 24, the customized letter?} \nes{I left my copy in Switzerland :(.} but when it comes to complex problems, like a list of matrices, \verb-System.out.println()- breaks down and becomes either expensive to use or completely useless\cite{Schw11b}. 
+allows developers to easily compare many temporal states of an object or many different instances beside each other, which may be a reason for its popularity;\nes{On one of the first pages of "programming pearls", the author notes that often it's easier to write "just writing println is often easier". That would fit here.} \meta{Do you mean p. 24, the customized letter?} \nes{I left my copy in Switzerland :(.} but when it comes to complex problems, like a list of matrices, \verb-System.out.println()- breaks down and becomes either expensive to use or completely useless\cite{Schw11b}.
 Debuggers and object inspectors fare much better at showing the inners of objects, but unlike the console output of \verb-System.out.println()-, debugger and object inspectors only show one moment in time. There are a few notable exceptions to the previous sentence, to which we will come back. 
 
 We believe that the popularity of \verb-System.out.println()- is in no small parts due to its simplicity in API and concept. DoodleDebug therefore aims to offer an API which is no more difficult than that of \verb-System.out.println()-. At the same time, we try to add it the advantages of two-dimensional layout, and a semantic zoom on objects that allows inspecting all instance variables recursively.
 
-\nes{Outline the study.}
+In a small qualitative study with 7 Java developers, we examine DoodleDebug's debugging performance compared to classical tools under the same conditions. We pose three different problems to each candidate to be alternately solved with or without DoodleDebug, recording with screen capture videos and think aloud protocol. Then we search for problematic situations experienced with one tool and see if they've been solved easier using other tools.
 
 \section{DoodleDebug in a nutshell}
 Developers can choose how objects of a class are to be doodled on a virtual canvas. When first doodling an object on the canvas, the doodle  will appear in the upper left corner, because the cursor is initially placed in the upper left corner. Doodling on the canvas advances the cursor to the right of the previous doodle. As seen in Figure~\ref{canvas-illustration}, the cursor can also be moved to the next line, or the next column. \nes{Compare this with println in related work.}
@@ -110,7 +110,18 @@ Developers can choose how objects of a class are to be doodled on a virtual canv
 	\label{canvas-illustration}
 \end{figure}
 
-As a more complex example, an entire address book is doodled by the developer as follows. \nes{Insert code.} The resulting rendering is seen in Figure~\ref{addressbook_whole}. \nes{Code that produced the rendering is missing. Please add. Probably not as a figure, but as a listing in text.}
+As a more complex example, an entire address book is doodled by the developer as follows.
+\begin{verbatim}
+public void doodleOn(DoodleCanvas c) {
+	c.draw(firstName);
+	c.draw(lastName);
+	c.newLine();
+	c.draw(address);
+	c.newColumn();
+	c.draw(phoneNumber);
+}
+\end{verbatim}
+\nes{Insert code.} The resulting rendering is seen in Figure~\ref{addressbook_whole}. \nes{Code that produced the rendering is missing. Please add. Probably not as a figure, but as a listing in text.}
 Note that not all the state of the address book is visible in its doodle. However, all of it is available. Once the user clicks on any entry of the address book, an object inspector is opened, as seen in Figure~\ref{addressbook_contact}, that reveals a more detailed rendering of the clicked address. 
 
 \nes{Add an example session of printing a non-trivial object across time.}
@@ -128,7 +139,7 @@ Note that not all the state of the address book is visible in its doodle. Howeve
 
 \nes{Describe breadcrumbs here. Including a reference to the word "bread crumbs". This should serve as a reference: http://www.amazon.com/Dont-Make-Me-Think-Usability/dp/0321344758}
 
-In figure~\ref{addressbook_address}, our address object is on level 0 and its inner fields would render with more detail, but since they're only strings and numbers, no differentiation is made. \nes{Pick a better example, then. One where it does make a difference.}
+In figure~\ref{addressbook_address}, our address object is on level 0 and its inner fields would render with more detail, but since they're only strings and numbers, no differentiation is made. \nes{Pick a better example, then. One where it does make a difference.} \meta{It does in figures \ref{addressbook_whole} and \ref{addressbook_contact}. There is always a point where you cannot get more detail, of course.}
 
 \begin{figure}[h]
 	\includegraphics[width=\linewidth]{img/AddressBook_address.png}
@@ -151,7 +162,7 @@ As soon as we had a consistent imaginary API and enough sample sketches, we stuc
 
 \begin{figure}[h]
 	\includegraphics[width=\linewidth]{img/design-sketches_thinker.jpg}
-	\caption[Confronting people with design sketches]{Programmers should \nes{Don't say should. What's seen in the picture? Answering that is what a caption is for.} look at our code snippets and corresponding design sketches for us to evaluate their intuitiveness}
+	\caption[Confronting people with design sketches]{Programmers were confronted with our code snippets and corresponding design sketches, verbosely explaining their personal interpretation.}
 	\label{sketch-discussion}
 \end{figure}
 
@@ -179,7 +190,7 @@ This took some engineering effort, since Eclipse provides no built-in support fo
 
 \meta{Rewritten version:}
 
-The behaviour of Eclipse's focus state on DoodleDebug output actions is determined by a specially implemented\meta{Can't find the right word choice for "specially/newly implemented / custom / ...". \nes{Wrong quotes.} Custom sounds like the user would define it.} decision function. It estimates if the user benefits from setting focus to the DoodleDebug output or not, dependent on the elapsed time since the previous output event. If this value falls below a threshold, any change of focus is avoided. The user's focus either is still on DoodleDebug's output and no change is needed or they had moved away during a phase of high output frequency, not wanting to be pulled back immediately. The problem of unwanted focus change has been observed in our study\ref{console-focus-problem}. If enough time has elapsed between two events, the output window gathers focus, since the occurring event may be irregular and thus the user like to be informed about it. \meta{Should I mention an example? Sth. like a game loop or similar}
+The behaviour of Eclipse's focus state on DoodleDebug output actions is determined by a specially implemented\meta{Can't find the right word choice for ``specially/newly implemented / custom / ...''. Custom sounds like the user would define it.} decision function. It estimates if the user benefits from setting focus to the DoodleDebug output or not, dependent on the elapsed time since the previous output event. If this value falls below a threshold, any change of focus is avoided. The user's focus either is still on DoodleDebug's output and no change is needed or they had moved away during a phase of high output frequency, not wanting to be pulled back immediately. The problem of unwanted focus change has been observed in our study\ref{console-focus-problem}. If enough time has elapsed between two events, the output window gathers focus, since the occurring event may be irregular and thus the user like to be informed about it. \meta{Should I mention an example? Sth. like a game loop or similar}
 
 \section{Implementation}
 The efforts made in analysing classical debugging tools and how programmers behave when interacting with them all aimed on implementing a tool which would actually fill the mentioned problematic gaps. Though the implementation part is not the main theme of this paper, we will point out a couple of general conceptual patterns as well as relevant technical aspects in this section; further descriptions can be found in the appendix.
@@ -321,8 +332,10 @@ Four subjects (Bravo, Delta, Echo and Foxtrott) used the eclipse debugger to ins
 As mentioned before, debugging tools were mainly developed to avoid the need of staring at code, and most people found this the most annoying part, especially because it was code they had not written on their own. Nevertheless, subject Golf solved the Serialization almost only by using this method. They tried to comprehend the logic of the problem's \verb.SerializingUtil. and thus, in contrast to others, found the problem source at the same time as the semantic problem itself. To be exact, they located where the problem was (long casted to int) and used System.out.println() only to check what it resulted in.
 
 \subsection{Problems With Classical Tools}
+\todo{text}
 
 \subsubsection{Using System.out.println()}
+\todo{text}
 \paragraph{Homogenous Output}
 We previously stated that purely textual output is poor in terms of formatting and therefore makes it harder for users to classify different parts as they always look similar in terms of size, color, alignment etc.
 When solving the sorting problem, subjects were slowed down due to this fact. Beta for instance firstly iterated over the wrongly sorted color list to print each element and then stared at the (unaligned) numerical values of red, green and blue color components. After they had found out that a black element was at the end instead of the beginning, they could go on searching what had caused the problem. Subjects using DoodleDebug already had built-in renderings for \verb.Collection. and \verb.Color., which enabled them to visualize it by only using one call. Charlie Doodled the wrongly sorted color list and the correct one that was used as ground truth for comparison. They instantly noticed their similarity and pointed out that black is on the wrong side of the list.
@@ -337,6 +350,7 @@ Another approach to solve insufficient output was to switch from System.out.prin
 DoodleDebug includes an objects fields in it's standard rendering (if there are not too many) while still labelling its class name. All 3 subjects (Bravo, Delta, Foxtrot) using DoodleDebug for the serialization problem managed to find the changed field instantly after calling \verb-Doo.dle()- once before and once after the de-/serialization step.
 
 \subsubsection{Using A Debugger}
+\todo{text}
 \paragraph{Comparison Between Objects}
 The built-in eclipse debugger only allows to inspect one object at one point in time. As the serialization problem consists of two objects unexpectedly  being unequal, part of the debugging process was somehow comparing them in order to find their difference. Every subject except Golf did this, Golf only tried to understand the serialization and de-serialization process to find out, where the implementation has mistakes. Echo never used \verb-System.out.println()- so they also attempted to compare objects before and after serialization using the debugger. Even though the debugger supported simple and fast inspection to any point inside the object, Echo explicitly pointed out that they miss the feature to inspect two objects simultaneously instead of memorizing small pieces and going to the other one for comparison.
 
@@ -351,6 +365,7 @@ Eclipse's Java debugger simply lists all contents of an object, since there is n
 \todo{Are there more examples? (Good ones)}
 
 \subsubsection{General Problems}
+\todo{text}
 \paragraph{Console Keeps Stealing Focus}
 \label{console-focus-problem}
 When some output is printed onto the console, it gains the UI's focus by default. Due to the problem setup, every program initially used to throw an exception at the end of it's execution, signalling the problem has not been solved yet. Every user experienced the following problem at least once: They were using DoodleDebug and therefore had this view tab opened when the exception was thrown and eclipse switched to the console. Only Echo managed to disable its focus-on-change setting, the other subjects just switched back to the DoodleDebug view tab after a few seconds.
@@ -487,6 +502,6 @@ If the client side has no ability to autonomously get information about the Ecli
 The DoodleDebug Eclipse plugin and additional documents can be downloaded from \url{http://scg.unibe.ch/wiki/projects/DoodleDebug}.
 
 \bibliographystyle{plain}
-\bibliography{/usr/local/scgbib/scg}
+\bibliography{bib/scg}
 
 \end{document}

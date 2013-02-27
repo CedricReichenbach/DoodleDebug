@@ -7,6 +7,7 @@ output.html
 *.dvi
 *.ps
 Thesis/writing/DoodleDebug_bachelor-thesis.pdf
+Thesis/writing/bib
 DDUpdateSite/features/
 DDUpdateSite/plugins/
 *study_*.fbr
