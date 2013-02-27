@@ -106,24 +106,38 @@ Developers can choose how objects of a class are to be doodled on a virtual canv
 \begin{figure}[h]
 	\includegraphics[width=\linewidth]{img/doodleable-example.png}
 	\caption[Usage of the Doodleable interface]{Example of a \texttt{Contact} class' \texttt{doodleOn()} method. Dotted lines visualize the effect of the structuring methods \texttt{newLine()} (orange) and \texttt{newColumn()} (purple). The green i-beam indicates the final position of the canvas' imaginary cursor.}
+	\meta{Can I make this wider? It's hard to read...}
 	\label{canvas-illustration}
 \end{figure}
 
 As a more complex example, an entire address book is doodled by the developer as follows.
 \begin{verbatim}
-public void doodleOn(DoodleCanvas c) {
-    c.draw(firstName);
-    c.draw(lastName);
-    c.newLine();
-    c.draw(address);
-    c.newColumn();
-    c.draw(phoneNumber);
+public class AddressBook implements Doodleable {
+    ...
+
+    public void doodleOn(DoodleCanvas c) {
+        for (Contact contact : contacts) {
+            c.draw(contact);
+            c.newLine();
+        }
+    }
+
+    public void summarizeOn(DoodleCanvas c) {
+        c.draw("AddressBook with "
+            + numberOfContacts() + " entries");
+    }
 }
 \end{verbatim}
-\nes{Insert code.} The resulting rendering is seen in Figure~\ref{addressbook_whole}. \nes{Code that produced the rendering is missing. Please add. Probably not as a figure, but as a listing in text.}
+\meta{Should I add the code of \texttt{Contact} and \texttt{Address} as well? I'm afraid it'll grow too big with that...}
+The resulting rendering is seen in Figure~\ref{addressbook_whole}.
 Note that not all the state of the address book is visible in its doodle. However, all of it is available. Once the user clicks on any entry of the address book, an object inspector is opened, as seen in Figure~\ref{addressbook_contact}, that reveals a more detailed rendering of the clicked address. 
 
 \nes{Add an example session of printing a non-trivial object across time.}
+
+DoodleDebug allows to track the state of an object over a period of time by doodling it periodically. As an example, six players participate in a game with the goal to reduce other player's life point. Players with 0 points die, the last one standing wins.
+
+\todo{include sceenshots and explain using them}
+
 \begin{figure}[h]
 	\includegraphics{img/AddressBook_whole.png}
 	\caption[AddressBook visualization]{The representation of an AddressBook instance lists its contacts with few information.}
@@ -146,19 +160,17 @@ In figure~\ref{addressbook_address}, our address object is on level 0 and its in
 	\label{addressbook_address}
 \end{figure}
 
-
 \nes{Really, honestly, there is no story if we can't make the point of being useful across time. That's how we claim to be better than debuggers. Without it, we have very little. Add an example of the same object being printed at different points in time.}
 
 \section{Design}
 Instead of immediately starting to implement, we followed several well-proven planning steps from literature to avoid costly redesigning or refactoring later on. The implementation followed Buxton's imperative to separate the design from the engineering processes\cite[pp.73--75]{Buxt07a}. Before writing a line of code, we designed the entire API and the resulting renderings on paper, involving numerous iterations of drawings.
 
 \subsection{Sketching the Features}
-As summarized in the Related Work chapter, we had shown that textual output is lacking features in certain cases on the one hand \nes{Specific here. No reference to related work. Which were the deficiencies that drove the design process?} 
-and that custom textual object representations tend to exhibit a couple of frequently observable traits. Based on this information, we started to gather commonly used data types and sketch them to paper with a simple, meaningful appearance. Beside every sketched candidate rendering, we tried to think of a simple-as-possible but yet modular code snippet, that would imaginary render this image. Over time, while painting more and more candidates, we tried to converge our imaginary API, so we threw away outliers and repainted their object type in a more consistent way. When we had a consistent (still imaginary) API, we would take a step forward and consult third-party programmers for some feedback.
+In a previous paper, we had shown that textual output lacks features in cases of complex data structures, like matrices, that require accurate multidimensional arrangement for a good human perception, especially if they are nested. We also showed that custom textual object representations tend to exhibit a couple of frequently observable traits. Based on this information, we started to gather commonly used data types and sketch them to paper with a simple, meaningful appearance. Beside every sketched candidate rendering, we tried to think of a simple-as-possible but yet modular code snippet, that would imaginary render this image. Over time, while painting more and more candidates, we tried to converge our imaginary API, so we threw away outliers and repainted their object type in a more consistent way. When we had a consistent (still imaginary) API, we would take a step forward and consult third-party programmers for some feedback.
 \nes{This entire subsection is useless. Show the sketches, show the code, be specific. This is just a poor summary of Buxt07a. Just reference Buxt07a, and explain what we did.} 
 
 \subsection{Feedback For Hand-Made Sketches}
-As soon as we had a consistent imaginary API and enough sample sketches, we stuck them to a wall and eventually asked other programmers to quickly look at those drawings and explain what they believe to see (figure~\ref{sketch-discussion}). If they immediately anticipated the virtual situation, it was a good example and we kept it. If most people failed to understand what a particular drawing meant, or even wrong conclusions were made out of it\ref{bad-sketch_left-right}, we either threw it away or tried to redesign, based on people's statements and then loop and ask them others about it. \nes{Too general to be useful. Examples, specifics. Which API was refined? What was the old version, what's the new?}
+As soon as we had a consistent imaginary API and enough sample sketches, we stuck them to a wall and eventually asked other programmers to quickly look at those drawings and explain what they believe to see (figure~\ref{sketch-discussion}). If they immediately anticipated the virtual situation, it was a good example and we kept it. If most people failed to understand what a particular drawing meant, or even wrong conclusions were made out of it (figure~\ref{bad-sketch_left-right}), we either threw it away or tried to redesign, based on people's statements and then loop and ask them others about it. \nes{Too general to be useful. Examples, specifics. Which API was refined? What was the old version, what's the new?}
 \todo{Loop back to the book.}
 
 \begin{figure}[h]
@@ -174,19 +186,28 @@ As soon as we had a consistent imaginary API and enough sample sketches, we stuc
 \end{figure}
 
 \begin{figure}[h]
+	\includegraphics[width=\linewidth]{img/sketches/006.jpg}
+	\caption[Bad sketch example: UML]{We considered using or at least supporting UML as an output format through the Doodleable interface. No one of the asked programmers supported this idea. The reasoning behind their refusal was that they had never actually used UML for any real project, since it would be too complicated for quick anticipation.}
+	\label{bad-sketch_uml}
+\end{figure}
+
+\begin{figure}[h]
 	\includegraphics[width=\linewidth]{img/design-sketches_thinker.jpg}
 	\caption[Confronting people with design sketches]{Programmers were confronted with our code snippets and corresponding design sketches, verbosely explaining their personal interpretation.}
 	\label{sketch-discussion}
 \end{figure}
 
-\meta{I don't think we mean the same thing when talking about Plugins: Plugins account for the lower, more basic API part. They implement \texttt{RenderingPlugin} or extend \texttt{AbstractPlugin} and have the ability to generate HTML code and CSS. The Doodleable API (with a cursor-oriented model) is described under "The Doodleable Interface", but I see you moved it to the implementation part. Should I part it into two paragraphs, covering design and implementation aspects?\\\\
-Update: I moved the whole API part to Implementation and wrote a new one about the cursor-like principle of our canvas}
+\begin{figure}
+	\includegraphics[width=\linewidth]{img/sketches/003.jpg}
+	\caption[Good sketch: Cursor paradigm]{An API using the paradigm of a text cursor was adapted quickly by programmers. One asked question about this was why the second column would somehow float into the first one, since in common text blocks they're always separated. As a consequence, we adapted the traditional textbook pattern and strictly separate columns, which made the separator method obsolete as well.}
+	\label{good-sketch_cursor}
+\end{figure}
 
 \subsection{Cursor Model for Canvas Painting}
-For spacial navigation on a virtual canvas, a mechanism working similar to a cursor of a simple text editor turned out to be most intuitive for humans. \nes{"turned out" is not good enough. Show the sketches that didn't work, and the gradual evolution to the thing that did work.}
+For spacial navigation on a virtual canvas, a mechanism adapting the cursor paradigm of a simple text editor proved to be most intuitive for humans (figure~\ref{good-sketch_cursor}).
 \nes{In conflict with the "nutshell" section. Move contents up, or delete.} Initially, the virtual cursor is placed on top left of a virtual canvas. Printed objects are aligned side by side like words in a text until the user creates a new line and the virtual cursor jumps back to the left, vertically shifted of course. After a couple of lines, a user may want to continue their painting beside of the already printed parts instead of constantly appending content to the bottom. For this, they can create a new column, which is attaches to the right side of previous one (figure~\ref{canvas-illustration}).
 
-We attribute the supremacy of this method to the principle of standardization\cite[pp. 200--203]{Norm88a}. \nes{What is standardization? Explain.} Virtually traversing an area from top-left to bottom-right, separated in lines and eventually in columns, is the way how text is written in western languages. Especially programmers, who use text editors on a daily basis, can therefore quickly adapt and apply this principle. \nes{Well ... another argument is that this is system.out.println uses a cursor position, and developers understand system.out.println. Please discuss this in the related work section.}
+We attribute the supremacy of this method to the principle of standardization\cite[pp. 200--203]{Norm88a}. This means that similar usage patterns make life easier for users, since they only need to learn it once and then apply everywhere. Virtually traversing an area from top-left to bottom-right, separated in lines and eventually in columns, is the way how text is written in western languages. Especially programmers, who use text editors on a daily basis, can therefore quickly adapt and apply this principle. Other technologies have adopted this paradigm as well: \verb-System.out.println()- uses a cursor position and text flow, divided into lines. Java's AWT package uses canvas coordinates that originate on the top-left corner.
 
 \subsection{Smart Behaviour versus Configuration Hell}
 When designing user interfaces, one basic decision must be taken: How much configuration options should it contain? Either a lot of settings are left to the user let them take part on the design process. Or the default design is made to fit everyone as good as possible. We decided not to treat everyone as designer
@@ -197,11 +218,12 @@ As a result, there is no settings dialogue or file for DoodleDebug. \nes{Nice!}
 \subsubsection{Smart Scrolling}
 DoodleDebug implements the scrolling behavior of MUSHClient\footnote{\url{http://www.gammon.com.au/mushclient/}} and mIRC\footnote{\url{http://www.mirc.com}}. That is, when the most recent doodles are currently in view and a new doodle appears, the view port will scroll to keep the newest doodles in view. If, however, the view port is not showing the most recent doodles and a new doodle appears, no scrolling occurs. 
 This is probably in line with the user's intent. If they're looking at the most recent doodles, they probably are tracking the most recent doodles. If, however, the most recent doodles are not in view, they're studying a specific old doodle that should remain in view. 
-This took some engineering effort, since Eclipse provides no built-in support for this scrolling behavior. \meta{Careful here: Actually, it's just HTML we're rendering and the mechanism is implemented in JS, so it'd be the same in every browser (though not tested).} \nes{Meh. Don't tell me. Fix it :)}
+This took some engineering effort, since HTML provides no built-in support for scrolling on content growth.
 
 \subsubsection{Focus When Likely Desired}
 When a new Doodle occurs, DoodleDebug chooses whether or not to notify the user. 
-DoodleDebug operationalizes the time since the last doodling to estimate if the developer benefits from being notified by a recent doodle. Thus, frequent doodling does not trigger notifications, and the developer is not continually interrupted. \nes{What is the threshold? How established?} The problem of unwanted focus change has been observed in our study\ref{console-focus-problem}. \nes{Specifically refer to the part of the user study that confirmed this.}
+DoodleDebug operationalizes the time since the last doodling to estimate if the developer benefits from being notified by a recent doodle. Thus, frequent doodling does not trigger notifications, and the developer is not continually interrupted. \nes{What is the threshold? \meta{4 seconds.} How established? \meta{Empirically. Since we didn't have too much data from the study, it's still pretty arbitrary.}}
+The problem of unwanted focus change has been observed in our study. A candidate manually disabled the console's focus gathering because they were working in another view and it constantly jumped back (see \ref{console-focus-problem}).
 
 \section{Implementation}
 \nes{Niko: The intro paragraph needs a complete re-write. I will probably do it once I've read the rest of the section.}
@@ -232,7 +254,7 @@ The default visualizations that DoodleDebug ships are all implemented as Plugins
 For displaying and handling HTML code and related web technologies, Eclipse provides the package \verb-org.eclipse.swt.browser-, which among others includes the \verb.Browser. class to render and integrate into the Eclipse UI. This \verb.Browser. class is not completely platform independent. It uses the default \nes{What does "default" mean here?} browser rendering engine of its current host operating system. When running on Windows for instance, Internet Explorer's rendering engine is used, even though Firefox is set as the System's standard browser. This fact forced us to be even more careful with the usage of HTML5 features, because their support varies between Browsers.
 
 \subsection{Communication between Java Virtual Machines}
-DoodleDebug renders its output into a view tab \nes{What's a view tab?} inside eclipse, so we implemented it to have the main part running in the same VM as eclipse for convenience. Since runtime information about objects and rendering calls must be provided from the user's VM to the eclipse VM, a solid communication mechanism is needed. We use SIMON (Simple Invocation of Methods Over Network)\footnote{\url{http://dev.root1.de/projects/simon}}, a library for object-oriented remote communication in Java. It allows to create a registry on a specified port of localhost and add a Server object to it. Clients can find the server through this registry and send messages to it by calling it's methods with simple objects like Strings as arguments.
+DoodleDebug renders its output into a view \nes{What's a view tab?} (``window'') \meta{Those are just the view parts in eclipse, called ``views''. E.g. an editor is a view. The project explorer is a view. The console is a view.} inside eclipse, so we implemented it to have the main part running in the same VM as eclipse for convenience. Since runtime information about objects and rendering calls must be provided from the user's VM to the eclipse VM, a solid communication mechanism is needed. We use SIMON (Simple Invocation of Methods Over Network)\footnote{\url{http://dev.root1.de/projects/simon}}, a library for object-oriented remote communication in Java. It allows to create a registry on a specified port of localhost and add a Server object to it. Clients can find the server through this registry and send messages to it by calling it's methods with simple objects like Strings as arguments.
 \nes{This is hard for me to fix before we have a good section on across time debugging to motivate why we keep old versions around. Please urgently write that.}
 
 \subsection{Providing Code from Eclipse Plugin to Workspace}
@@ -348,13 +370,9 @@ As mentioned before, debugging tools were mainly developed to avoid the need of 
 \label{console-focus-problem}
 When some output is printed onto the console, it gains the UI's focus by default. Due to the problem setup, every program initially used to throw an exception at the end of it's execution, signaling the problem has not been solved yet. Every user experienced the following problem at least once: They were using DoodleDebug and therefore had this view tab opened when the exception was thrown and eclipse switched to the console. Only Echo managed to disable its focus-on-change setting, the other subjects just switched back to the DoodleDebug view tab after a few seconds.
 
-
-\section{Related Work}
 \subsubsection{System.out.println()}
 \paragraph{Homogenous Output}
-We previously stated that purely textual output is poor in terms of formatting and therefore makes it harder for users to classify different parts as they always look similar in terms of size, color, alignment etc.
-\nes{No "previously stated". No "etc".}
-When solving the sorting problem, subjects were slowed down due to this fact. Beta for instance firstly iterated over the wrongly sorted color list to print each element and then stared at the (unaligned) numerical values of red, green and blue color components. After they had found out that a black element was at the end instead of the beginning, they could go on searching what had caused the problem. Subjects using DoodleDebug already had built-in renderings for \verb.Collection. and \verb.Color., which enabled them to visualize it by only using one call. Charlie Doodled the wrongly sorted color list and the correct one that was used as ground truth for comparison. They instantly noticed their similarity and pointed out that black is on the wrong side of the list.
+Purely textual output is poor in terms of formatting and therefore makes it harder for users to classify different parts as they always look similar in terms of size, color and alignment. When solving the sorting problem, subjects were slowed down due to this fact. Beta for instance firstly iterated over the wrongly sorted color list to print each element and then stared at the (unaligned) numerical values of red, green and blue color components. After they had found out that a black element was at the end instead of the beginning, they could go on searching what had caused the problem. Subjects using DoodleDebug already had built-in renderings for \verb.Collection. and \verb.Color., which enabled them to visualize it by only using one call. Charlie Doodled the wrongly sorted color list and the correct one that was used as ground truth for comparison. They instantly noticed their similarity and pointed out that black is on the wrong side of the list.
 
 \paragraph{Uninspectable and Useless Output}
 The standard implementation of \verb-System.out.println()- prints class name and object hash for non-primitive objects. Output printed to a console is static and can not be inspected. If an object's representation lacks a particular piece of information, the programmer will need to go back into the code and either change the \verb.toString(). method of its class or manually gather information from outside and print it. In our study, Charlie was the only subject to override \verb.toString(). methods after firstly using their standard representation. They implemented it by printing out all fields of an object: \verb.Contact. was represented by\\
@@ -379,12 +397,16 @@ Eclipse's Java debugger simply lists all contents of an object, since there is n
 \end{figure}
 
 \todo{Are there more examples? (Good ones)}
-CodeBubbles's\cite{Brag10a} debugger allows to open bubbles by hand that represent states in the debugger. Thus, many old states can be on-screen. However, all old state is triggered thru direct user interaction. Unlike System.out.println, or DoodleDebug, where all printing happens from the program.
+CodeBubbles's\cite{Brag10a} debugger allows users to open bubbles by hand that represent states in the debugger. Thus, many old states can be on-screen. However, all old state is triggered thru direct user interaction. Unlike System.out.println, or DoodleDebug, where all printing happens from the program.
 
 \todo{What further related work is worth mentioning?}
-\nes{This gaming guy that would overlay time frames in his output.}
+\nes{This gaming guy that would overlay time frames in his output.} \meta{What? Who?}
 
 Finding the source of problems in program code is an omnipresent issue in computer science and therefore a recurrent research theme. Previous studies about human behavior when developing and especially debugging code were good hints to point where DoodleDebug should be going. We filtered relevant data out of them and aligned them with our research efforts, resulting in a separate paper.
+
+
+\section{Related Work}
+\todo{text}
 
 \subsection{Previous Paper}
 In a previous paper\cite{Schw11b}, we analyzed generally used patterns for textual representation of open source projects and showed basic conceptual issues preventing useful representations of certain data types. Following that, we outlined a concept automatically including information mostly used in custom textual representations and supporting ``difficult'' data types that prevent powerful renderings in textual form.
@@ -430,6 +452,7 @@ But simple textual output has even more restrictions than just the one caused by
 \end{figure}
 
 \nes{I don't think we can keep nested-matrix-idea. This is a paper about the really-existing DoodleDebug. If we don't have a rendering, we don't have it. Don't mention it.}
+\meta{But we have a special rendering for matrices/tables: Rectangular 2D-Arrays and 2D-Collections are rendered specially. If they contain numbers only, those get aligned by decimal point.}
 
 \begin{figure}[h]
 \raggedright
@@ -465,7 +488,7 @@ Whyline\cite{Ko04a} is a Java library that should answer why and why not questio
 Compass\cite{Lien09a} offers the user to trace objects back in time. Whereas DoodleDebug keeps the old states of objects that were doodled, Compass keeps a database of expired stack frames. While Compass must pre-emptively store stack frames that may or may not be relevant, DoodleDebug only keeps snapshots that the developer specifically marked as interesting.
 
 \section{Future Work}
-\nes{This is out of hand. We may or may not keep the "split doodleable interface" thing. Though I still think that should just be fixed and listed as an accomplishment, not as future work. The rest of this section should go.}
+\nes{This is out of hand. We may or may not keep the "split doodleable interface" thing. Though I still think that should just be fixed and listed as an accomplishment, not as future work. The rest of this section should go.} \meta{We cannot easily split it, because it would generally break the paradigm of complete semantic zoom, i.e. we would need case distinction and fallback. Also: Change the API, test everything, re-write tutorials and examples etc. This cannot be safely done in 2 days, just estimating from the last time we changed the API...}
 Besides proving things right, our study revealed some problems as well. As they only show that a problem exists but don't provide exact information about its cause, further research might invest in analysing them and propose accurate solutions.
 
 \subsection{API}
@@ -477,7 +500,7 @@ As already described, the \verb.Doodleable. interface contains two methods for o
 
 \nes{Why is this future work?! Just solve it, no?}
 \meta{It's not proven. Would this REALLY be better?}
-\nes{Sure it's proven. Just read your study. Not a person in your study implemented the interface that the study was trying to examine.}
+\nes{Sure it's proven. Just read your study. Not a person in your study implemented the interface that the study was trying to examine.} \meta{Just because this is isn't good doesn't mean the other is better. If we split it, we can throw away semantic zoom, as no one will ever implement SmallDoodleable if they don't have to (I'd even make a bet...).}
 
 \paragraph{Possible Solution}
 An approach for resolving this issue would be to split \verb.Doodleable. into two interfaces containing one single method each, let's say \verb.Doodleable. and \verb.SmallDoodleable.. For support of semantic zoom, users could simply implement both interfaces; if not, they would likely only use the standard version method. People implementing both interfaces would possibly make sure to first inform themselves of the respective semantic meanings and not run into previously mentioned slips. A user study comparing two groups, one using a single interface like before and another one using  the proposed setup, could help to determine if it's an actual improvement. Anyhow, this solution would introduce new conceptual problems: What should happen if a user only implements \verb.SmallDoodleable.? Should DoodleDebug try to guess a way for semantic zoom of objects only implementing one interface or just ignore it and always use the same method for rendering?
