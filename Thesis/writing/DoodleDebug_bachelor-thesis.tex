@@ -105,20 +105,19 @@ Developers can choose how objects of a class are to be doodled on a virtual canv
 
 \begin{figure}[h]
 	\includegraphics[width=\linewidth]{img/doodleable-example.png}
-	\caption[Usage of the Doodleable interface]{Example of a \texttt{Contact} class' \texttt{doodleOn()} method. Dotted lines visualize the effect of the corresponding structuring methods and the green i-beam indicates the final position of an imaginary cursor}
-	\meta{Can I make this wider?}
+	\caption[Usage of the Doodleable interface]{Example of a \texttt{Contact} class' \texttt{doodleOn()} method. Dotted lines visualize the effect of the structuring methods \texttt{newLine()} (orange) and \texttt{newColumn()} (purple). The green i-beam indicates the final position of the canvas' imaginary cursor.}
 	\label{canvas-illustration}
 \end{figure}
 
 As a more complex example, an entire address book is doodled by the developer as follows.
 \begin{verbatim}
 public void doodleOn(DoodleCanvas c) {
-	c.draw(firstName);
-	c.draw(lastName);
-	c.newLine();
-	c.draw(address);
-	c.newColumn();
-	c.draw(phoneNumber);
+    c.draw(firstName);
+    c.draw(lastName);
+    c.newLine();
+    c.draw(address);
+    c.newColumn();
+    c.draw(phoneNumber);
 }
 \end{verbatim}
 \nes{Insert code.} The resulting rendering is seen in Figure~\ref{addressbook_whole}. \nes{Code that produced the rendering is missing. Please add. Probably not as a figure, but as a listing in text.}
@@ -157,8 +156,20 @@ Instead of immediately starting to implement, we followed several well-proven pl
 As summarized in the Related Work chapter, we had shown that textual output is lacking features in certain cases on the one hand \nes{Specific here. No reference to related work. Which were the deficiencies that drove the design process?} and that custom textual object representations tend to exhibit a couple of frequently observable traits. Based on this information, we started to gather commonly used data types and sketch them to paper with a simple, meaningful appearance. Beside every sketched candidate rendering, we tried to think of a simple-as-possible but yet modular code snippet, that would imaginary render this image. Over time, while painting more and more candidates, we tried to converge our imaginary API, so we threw away outliers and repainted their object type in a more consistent way. When we had a consistent (still imaginary) API, we would take a step forward and consult third-party programmers for some feedback.
 
 \subsection{Feedback For Hand-Made Sketches}
-As soon as we had a consistent imaginary API and enough sample sketches, we stuck them to a wall and eventually asked other programmers to quickly look at those drawings and explain what they believe to see (figure~\ref{sketch-discussion}). If they immediately anticipated the virtual situation, it was a good example and we kept it. If most people failed to understand what a particular drawing meant, or even wrong conclusions were made out of it, we either threw it away or tried to redesign, based on people's statements and then loop and ask them others about it.
+As soon as we had a consistent imaginary API and enough sample sketches, we stuck them to a wall and eventually asked other programmers to quickly look at those drawings and explain what they believe to see (figure~\ref{sketch-discussion}). If they immediately anticipated the virtual situation, it was a good example and we kept it. If most people failed to understand what a particular drawing meant, or even wrong conclusions were made out of it\ref{bad-sketch_left-right}, we either threw it away or tried to redesign, based on people's statements and then loop and ask them others about it.
 \todo{Loop back to the book.}
+
+\begin{figure}[h]
+	\includegraphics[width=\linewidth]{img/sketches/026.jpg}
+	\caption[Bad sketch example: Left-right pattern]{One of the proposed types of API was traversing the canvas from top to bottom, divided into virtual lines. Users would be allowed to draw objects either on the left or the right part of its line, or just to take the line's full width. People mainly didn't understand the automatic creation of new lines. \texttt{drawLeft(object)} was mainly understood to take the left side of a bigger instance, e.g. the whole canvas.}
+	\label{bad-sketch_left-right}
+\end{figure}
+
+\begin{figure}
+	\includegraphics[width=\linewidth]{img/sketches/032.jpg}
+	\caption[Bad sketch example: Horizontal and vertical alignment]{Another proposed API type was aligning all printed objects either horizontally or vertically, dependent on the user's choice. Though most asked programmers managed to quickly understand what the pattern on this sketch is, they immediately asked about further 2D structuring. One pointed out, that horizontal alignment would almost be equivalent to text printing, because it only supports one dimension.}
+	\label{bad-sketch_align-h-v}
+\end{figure}
 
 \begin{figure}[h]
 	\includegraphics[width=\linewidth]{img/design-sketches_thinker.jpg}
