@@ -1,0 +1,40 @@
+\begin{thebibliography}{1}
+
+\bibitem{Buxt07a}
+Bill Buxton.
+\newblock {\em Sketching User Experiences: Getting the Design Right and the
+  Right Design (Interactive Technologies)}.
+\newblock Morgan Kaufmann, 1 edition, April 2007.
+
+\bibitem{Ko04a}
+Andrew~J. Ko and Brad~A. Myers.
+\newblock Designing the whyline: a debugging interface for asking questions
+  about program behavior.
+\newblock In {\em Proceedings of the 2004 conference on Human factors in
+  computing systems}, pages 151--158. ACM Press, 2004.
+
+\bibitem{Lang09b}
+Darren Langdridge and Gareth Hagger-johnson.
+\newblock {\em Introduction to Research Methods and Data Analysis in
+  Psychology}.
+\newblock Prentice Hall, 2 ill edition, June 2009.
+
+\bibitem{Norm88a}
+Donald~A. Norman.
+\newblock {\em The Design of Everyday Things}.
+\newblock The MIT Press, 1988.
+
+\bibitem{Schw11b}
+Niko Schwarz.
+\newblock {DoodleDebug}, objects should sketch themselves for code
+  understanding.
+\newblock In {\em Proceedings of the TOOLS 2011, 5th Workshop on Dynamic
+  Languages and Applications (DYLA'11).}, 2011.
+
+\bibitem{Wood98a}
+Allison Woodruff, James Landay, and Michael Stonebraker.
+\newblock Goal-directed zoom.
+\newblock In {\em CHI 98 conference summary on Human factors in computing
+  systems}, CHI '98, pages 305--306, New York, NY, USA, 1998. ACM.
+
+\end{thebibliography}
