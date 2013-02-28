@@ -7,7 +7,7 @@
 \usepackage{graphicx}
 \usepackage{pifont}
 \usepackage{refstyle}
-
+\usepackage{xspace}
 \usepackage{enumerate}
 
 \newcommand{\tick}{\ding{51}}
@@ -61,6 +61,12 @@
 \newcommand\on[1]{\nbc{ON}{#1}{teal}} % add more author macros here
 \newcommand\ewe[1]{\nbc{EWE}{#1}{olive}} % add more author macros here
 
+
+\newcommand{\bs}{\symbol{'134}} % backslash
+\newcommand{\us}{\symbol{'137}} % underscore
+\newcommand{\ie}{\emph{i.e.}\xspace}
+\newcommand{\eg}{\emph{e.g.}\xspace}
+\newcommand{\etal}{\emph{et al.}\xspace}
 
 \begin{document}
 \conferenceinfo{WOODSTOCK}{'97 El Paso, Texas USA}
@@ -685,27 +691,21 @@ DoodleDebug is a strange bland of concepts and touches on almost every part of m
 In a previous paper\cite{Schw11b}, we analyzed generally used patterns for textual representation of open source projects and showed basic conceptual issues preventing useful representations of certain data types. 
 Following that, we outlined a concept automatically including information mostly used in custom textual representations and supporting ``difficult'' data types that prevent powerful renderings in textual form.
 
-\nes{I don't think we can keep nested-matrix-idea. 
-This is a paper about the really-existing DoodleDebug. 
-If we don't have a rendering, we don't have it. 
-Don't mention it.}
-\meta{But we have a special rendering for matrices/tables: Rectangular 2D-Arrays and 2D-Collections are rendered specially. 
-If they contain numbers only, those get aligned by decimal point.}
 \nes{Ahh! So … could you show their doodle, instead of the mockup? Up in the nutshell section, code and drawing.}
 
-\subsection{Whyline for Java}
 Whyline\cite{Ko04a} is a Java library that should answer why and why not questions about a program's behavior. 
 Developers  click on a piece of either graphical or textual output and ask questions about the cause of its properties. 
-Whyline then tracks back the program execution to the line of code where this particular field has been changed for the last time and visually reports it to the user, including the causal chain leading to it. 
-Whyline aims on connecting properties of output to code snippets. 
-In other words, it answers the "why" question. 
-DoodleDebug visualizes objects and helps to understand what properties objects have and how they evolve over time. 
-It answers the "what" question. 
 By now, Whyline only supports output on \texttt{java.awt.Graphics}and \texttt{java.io.PrintStream} objects and is developed with closed source only, but from a conceptual point of view, those two technologies could be combined and eventually enhance each other.
 
 Compass\cite{Lien09a} offers the user to trace objects back in time. 
 Whereas DoodleDebug keeps the old states of objects that were doodled, Compass keeps a database of expired stack frames. 
 While Compass must pre-emptively store stack frames that may or may not be relevant, DoodleDebug only keeps snapshots that the developer specifically marked as interesting.
+
+GNU DDD, the Data Display Debugger\cite{Zell96a} uses visual metaphors to give insight into the state of a program. To that, LIVE\cite{Camp03a} adds metaphors with animations, although empirical results as to the helpfulness of animation in understanding algorithm is mixed\cite{Hund02a}. JGRASP\cite{Cros08a} and Travis\cite{Korn98a} provide automatic mappings between data and its visualization.
+
+Cheng \etal provide the xDIVA tool\cite{Chen08a}, which provides a number of mappings from data types to ``visualization metaphors'' that render  data. Since data types can be nested, visualization metaphors can be composed. xDIVA is a separate tool rather than integrated into the IDE. Further, the visualizations are configured in a graphical interface, rather than in the code of a class, and thus cannot readily be exchanged. Last, the visualizations are a great deal more complex than we think is necessary. The visualization in xDIVA is 3D, allowing for circling around objects of interests. This complexity likely increases the complexity of creating new visualizations.
+
+Mathematica\footnote{\url{www.wolfram.com/mathematica/}} ships with some data layouts for tables, matrices, and curves. However, as Mathematica is not object-oriented, objects cannot define their own behavior, and using any but the predefined commands for viewing data is uncommon. Further, Mathematica does not allow data layouts to be composed.
 
 \section{Future Work}
 The \texttt.Doodleable. interface contains two methods for object representation, one for a detailed and another one for a summarized variant. 
