@@ -111,6 +111,7 @@ Developers can choose how objects of a class are to be doodled on a virtual canv
 \end{figure}
 
 As a more complex example, an entire address book is doodled by the developer as follows.
+\begin{figure}
 \begin{verbatim}
 public class AddressBook implements Doodleable {
     ...
@@ -128,6 +129,7 @@ public class AddressBook implements Doodleable {
     }
 }
 \end{verbatim}
+\end{figure}
 \meta{Should I add the code of \texttt{Contact} and \texttt{Address} as well? I'm afraid it'll grow too big with that...}
 The resulting rendering is seen in Figure~\ref{addressbook_whole}.
 Note that not all the state of the address book is visible in its doodle. However, all of it is available. Once the user clicks on any entry of the address book, an object inspector is opened, as seen in Figure~\ref{addressbook_contact}, that reveals a more detailed rendering of the clicked address. 
@@ -136,6 +138,46 @@ Note that not all the state of the address book is visible in its doodle. Howeve
 
 DoodleDebug allows to track the state of an object over a period of time by doodling it periodically. As an example, six players participate in a game with the goal to reduce other player's life point. Players with 0 points die, the last one standing wins.
 
+\begin{figure}
+\meta{Not sure if we need this...}
+\begin{verbatim}
+public class Player implements Doodleable {
+    ...
+    
+    public void doodleOn(DoodleCanvas c) {
+        c.draw(name);
+        c.newLine();
+        c.draw("Alive?");
+        c.draw(isAlive);
+        c.newColumn();
+        c.draw("Life points:");
+        c.draw(lifePoints);
+    }
+
+    public void summarizeOn(DoodleCanvas c) {
+        c.draw(name);
+        c.draw(isAlive);
+    }
+}
+\end{verbatim}
+\end{figure}
+
+Figure~\ref{game_long-list} shows  a GameRoom instance which has been repeatingly doodled at different points in time. Boxes beside each player are the small representation of booleans and indicate if the respective player is alive. Changes in the state of the gameRoom object or the live/death state of each player in particular can be localized quickly since they build a homogeneous sequence.
+
+Further information can still be fetched after the program has terminated. Every doodled object remains inspectable in the state where it was rendered. In terms of our example, the current life points of a Player can be reproduced at any point in time where a doodle was produced by clicking on the corresponding player list. Figure~\ref{game_last-state} shows the pop-up displayed after clicking on the last output where the game is finished and Tommy won with 2 life points left.
+
+\begin{figure}[h]
+	\includegraphics[width=\linewidth]{img/game_long-list.png}
+	\caption[Example of a chronological sequence: Game]{This sequence of game states over time immediately shows in which order players died.}
+	\label{game_long-list}
+\end{figure}
+\todo{include sceenshots and explain using them}
+
+\begin{figure}[h]
+	\includegraphics[width=\linewidth]{img/game_last-state.png}
+	\caption[Example of a chronological sequence: Detailed player list]{Inspecting a particular doodle exposes information about the state of that object at a particular point in time. In this example, it shows that Tommy was the last player to live with 2 points remaining.}
+	\label{game_last-state}
+\end{figure}
 \todo{include sceenshots and explain using them}
 
 \begin{figure}[h]
