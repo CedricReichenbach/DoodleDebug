@@ -153,9 +153,7 @@ The green i-beam indicates the final position of the canvas' imaginary cursor.}
 As a more complex example, an entire address book is doodled by the developer as follows.
 \begin{figure}
 \begin{verbatim}
-public class AddressBook implements Doodleable {
-    ...
-
+public class AddressBook implements Doodleable { …
     public void doodleOn(DoodleCanvas c) {
         for (Contact contact : contacts) {
             c.draw(contact);
@@ -186,9 +184,7 @@ Players with 0 points die, the last one standing wins.
 
 \begin{figure}
 \begin{verbatim}
-public class Player implements Doodleable {
-    ...
-    
+public class Player implements Doodleable { …  
     public void doodleOn(DoodleCanvas c) {
         c.draw(name);
         c.newLine();
