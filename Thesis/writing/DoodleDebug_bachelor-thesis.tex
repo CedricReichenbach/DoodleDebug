@@ -257,82 +257,67 @@ Instead of immediately starting to implement, we followed several well-proven pl
 The implementation followed Buxton's imperative to separate the design from the engineering processes\cite[pp.73--75]{Buxt07a}. 
 Before writing a line of code, we designed the entire API and the resulting renderings on paper, involving numerous iterations of drawings.
 
-\subsection{Sketching the Features}
-In a previous paper, we had shown that textual output lacks features in cases of complex data structures, like matrices, that require accurate multidimensional arrangement for a good human perception, especially if they are nested. 
-We also showed that custom textual object representations tend to exhibit a couple of frequently observable traits. 
-Based on this information, we started to gather commonly used data types and sketch them to paper with a simple, meaningful appearance. 
-Beside every sketched candidate rendering, we tried to think of a simple-as-possible but yet modular code snippet, that would imaginary render this image. 
-Over time, while painting more and more candidates, we tried to converge our imaginary API, so we threw away outliers and repainted their object type in a more consistent way. 
-When we had a consistent (still imaginary) API, we would take a step forward and consult third-party programmers for some feedback.
-\nes{This entire subsection is useless. 
-Show the sketches, show the code, be specific. 
-This is just a poor summary of Buxt07a. 
-Just reference Buxt07a, and explain what we did.} 
+\subsection{Default renderings}
+We knew from previous work that 77 \% of \texttt{toString()} methods print out the class name \cite{Schw11b}. We therefore tried to find renderings that always show the class name, but do so in a space-efficient way. \nes{Cedric: this needs pictures …}
 
-\subsection{Feedback For Hand-Made Sketches}
-As soon as we had a consistent imaginary API and enough sample sketches, we stuck them to a wall and eventually asked other programmers to quickly look at those drawings and explain what they believe to see (figure~\ref{sketch-discussion}). 
-If they immediately anticipated the virtual situation, it was a good example and we kept it. 
-If most people failed to understand what a particular drawing meant, or even wrong conclusions were made out of it (figure~\ref{bad-sketch_left-right}), we either threw it away or tried to redesign, based on people's statements and then loop and ask them others about it. 
-\nes{Too general to be useful. 
-Examples, specifics. 
-Which API was refined? What was the old version, what's the new?}
-\todo{Loop back to the book.}
+\nes{Can I get screenshots of all rendering plugins?!}
+
+\subsection{API design process}
+As soon as we had a consistent imaginary API and enough sample sketches, we stuck them to a wall and asked colleagues and other passing by programmers for feedback, as was captured in \Figref{sketch-discussion}. To illustrate the design process, we show some sketches and the feedback that they triggered.
+
+
+\begin{figure}[h]
+	\includegraphics[width=\linewidth]{img/design-sketches_thinker.jpg}
+	\caption[Confronting people with design sketches]{Programmer reacting to our sketches.}
+	\label{fig:sketch-discussion}
+\end{figure}
+
+Though most asked programmers managed to quickly understand the sketch in \Figref{bad-sketch_align-h-v}, they immediately asked about further 2D structuring. 
+One pointed out that horizontal alignment would almost be equivalent to text printing, because it only supports one dimension. 
+Another recognized the similarity with Swing's flow layout manager and found it overly complex, because it requires endless nesting of layouts.
+
+\begin{figure}[h]
+	\includegraphics[width=\linewidth]{img/sketches/032.jpg}
+	\caption[Bad sketch example: Horizontal and vertical alignment]{Inspired by Swing's FlowLayout, all objects are aligned horizontally.}
+	\label{fig:bad-sketch_align-h-v}
+\end{figure}
+
+In \Figref{bad-sketch_left-right}, we tried a design that would allow to draw objects either on the left or the right part of its line, or just to take the line's full width. 
+People mainly didn't understand the automatic creation of new lines.
 
 \begin{figure}[h]
 	\includegraphics[width=\linewidth]{img/sketches/026.jpg}
 	\caption[Bad sketch example: Left-right pattern]{One of the proposed types of API was traversing the canvas from top to bottom, divided into virtual lines. 
-Users would be allowed to draw objects either on the left or the right part of its line, or just to take the line's full width. 
-People mainly didn't understand the automatic creation of new lines. 
-\texttt{drawLeft(object)} was mainly understood to take the left side of a bigger instance, e.g. 
-the whole canvas.}
-	\label{bad-sketch_left-right}
+However, people misunderstood \texttt{drawLeft(object)} to take the left side of a bigger instance, e.g. the whole canvas. \nes{Eh? Don't understand.}}
+	\label{fig:bad-sketch_left-right}
 \end{figure}
 
-\begin{figure}
-	\includegraphics[width=\linewidth]{img/sketches/032.jpg}
-	\caption[Bad sketch example: Horizontal and vertical alignment]{Another proposed API type was aligning all printed objects either horizontally or vertically, dependent on the user's choice. 
-Though most asked programmers managed to quickly understand what the pattern on this sketch is, they immediately asked about further 2D structuring. 
-One pointed out, that horizontal alignment would almost be equivalent to text printing, because it only supports one dimension.}
-	\label{bad-sketch_align-h-v}
-\end{figure}
+Since UML specifies object instance visualizations\footnote{\url{http://www.omg.org/spec/UML/2.4.1/}} \nes{Better way to cite UML?}, we considered using or at least supporting UML doodles that are valid UML drawings. A sketch is seen in \Figref{bad-sketch_uml}.
+No one of the asked programmers supported this idea. 
+None had ever used UML object visualizations (although they had used UML class visualizations), and were unconvinced of the aesthetic value of the UML-prescribed layout. 
 
 \begin{figure}[h]
 	\includegraphics[width=\linewidth]{img/sketches/006.jpg}
-	\caption[Bad sketch example: UML]{We considered using or at least supporting UML as an output format through the Doodleable interface. 
-No one of the asked programmers supported this idea. 
-The reasoning behind their refusal was that they had never actually used UML for any real project, since it would be too complicated for quick anticipation.}
-	\label{bad-sketch_uml}
+	\caption[Bad sketch example: UML]{Code that produces valid UML object visualizations.}
+	\label{fig:bad-sketch_uml}
 \end{figure}
 
-\begin{figure}[h]
-	\includegraphics[width=\linewidth]{img/design-sketches_thinker.jpg}
-	\caption[Confronting people with design sketches]{Programmers were confronted with our code snippets and corresponding design sketches, verbosely explaining their personal interpretation.}
-	\label{sketch-discussion}
-\end{figure}
+In a sketch that came close to the final DoodleDebug, objects from one column could trespass over into other columns to use the screen estate efficiently, see \Figref{good-sketch_cursor}. While people understood the cursor concept readily and were enthusiastic about it, the non-strictness of columns confused them. 
+As a consequence, the final Canvas API adopted the traditional textbook pattern and strictly separates columns, which made the separator method obsolete as well.
 
 \begin{figure}
 	\includegraphics[width=\linewidth]{img/sketches/003.jpg}
-	\caption[Good sketch: Cursor paradigm]{An API using the paradigm of a text cursor was adapted quickly by programmers. 
-One asked question about this was why the second column would somehow float into the first one, since in common text blocks they're always separated. 
-As a consequence, we adapted the traditional textbook pattern and strictly separate columns, which made the separator method obsolete as well.}
-	\label{good-sketch_cursor}
+	\caption[Good sketch: Cursor paradigm]{An successor of the final Canvas API.}
+	\label{fig:good-sketch_cursor}
 \end{figure}
 
-\subsection{Cursor Model for Canvas Painting}
-For spacial navigation on a virtual canvas, a mechanism adapting the cursor paradigm of a simple text editor proved to be most intuitive for humans (figure~\ref{good-sketch_cursor}).
-\nes{In conflict with the "nutshell" section. 
-Move contents up, or delete.} Initially, the virtual cursor is placed on top left of a virtual canvas. 
-Printed objects are aligned side by side like words in a text until the user creates a new line and the virtual cursor jumps back to the left, vertically shifted of course. 
-After a couple of lines, a user may want to continue their painting beside of the already printed parts instead of constantly appending content to the bottom. 
-For this, they can create a new column, which is attaches to the right side of previous one (figure~\ref{canvas-illustration}).
-
-We attribute the supremacy of this method to the principle of standardization\cite[pp. 
-200--203]{Norm88a}. 
-This means that similar usage patterns make life easier for users, since they only need to learn it once and then apply everywhere. 
-Virtually traversing an area from top-left to bottom-right, separated in lines and eventually in columns, is the way how text is written in western languages. 
-Especially programmers, who use text editors on a daily basis, can therefore quickly adapt and apply this principle. 
-Other technologies have adopted this paradigm as well: \texttt{System.out.println()} uses a cursor position and text flow, divided into lines. 
-Java's AWT package uses canvas coordinates that originate on the top-left corner.
+% We attribute the supremacy of this method to the principle of standardization\cite[pp. 
+% 200--203]{Norm88a}. 
+% This means that similar usage patterns make life easier for users, since they only need to learn it once and then apply everywhere. 
+% Virtually traversing an area from top-left to bottom-right, separated in lines and eventually in columns, is the way how text is written in western languages. 
+% Especially programmers, who use text editors on a daily basis, can therefore quickly adapt and apply this principle. 
+% Other technologies have adopted this paradigm as well: \texttt{System.out.println()} uses a cursor position and text flow, divided into lines. 
+% Java's AWT package uses canvas coordinates that originate on the top-left corner.
 
 \subsection{Smart Behaviour versus Configuration Hell}
 When designing user interfaces, one basic decision must be taken: How much configuration options should it contain? Either a lot of settings are left to the user let them take part on the design process. 
@@ -342,7 +327,7 @@ We decided not to treat everyone as designer
 \cite[p155]{Norm88a}
 but take away design decisions from them by creating sophisticated defaults.
 As a result, there is no settings dialogue or file for DoodleDebug. 
-\nes{Nice!}
+
 \subsubsection{Smart Scrolling}
 DoodleDebug implements the scrolling behavior of MUSHClient\footnote{\url{http://www.gammon.com.au/mushclient/}} and mIRC\footnote{\url{http://www.mirc.com}}. 
 That is, when the most recent doodles are currently in view and a new doodle appears, the view port will scroll to keep the newest doodles in view. 
@@ -368,8 +353,6 @@ A candidate manually disabled the console's focus gathering because they were wo
 \section{Implementation}
 \nes{Niko: The intro paragraph needs a complete re-write. 
 I will probably do it once I've read the rest of the section.}
-The efforts made in analyzing classical debugging tools and how programmers behave when interacting with them all aimed on implementing a tool which would actually fill the mentioned problematic gaps. 
-Though the implementation part is not the main theme of this paper, we will point out a couple of general conceptual patterns as well as relevant technical aspects in this section; further descriptions can be found in the appendix.
 
 \subsection{Rendering algorithm}
 If the user clicks on a doodle, DoodleDebug \emph{Semantically Zooms}\cite{Wood98a} into the doodle he clicked on.
@@ -417,6 +400,7 @@ Among plugins, user-provided ones are used for rendering in case of a conflict w
 \end{figure}
 
 \todo{Gosh, we never mentioned the FieldDoodler thing: As a result of our study, just rendering all fields (if they're not too many) is very powerful. If there are too many (> 7), we fall back to the string representation. However, if one would like to force field doodling, they can use the FieldDoodler interface.}
+\nes{Eeeeeek. Do mention it!}
 
 \paragraph{Rendering the Output}
 For displaying and handling HTML code and related web technologies, Eclipse provides the package \texttt{org.eclipse.swt.browser}, which among others includes the \texttt{Browser} class to render and integrate into the Eclipse UI. 
@@ -714,11 +698,7 @@ They're the outcomes of the study, the things that last.
 They're the answers to the questions asked in the introduction. 
 The section should be short.}
 
-\section{Appendix}
-\meta{Do we write an introduction to appendix as well?}
-
-\subsection{Download}
-The DoodleDebug Eclipse plugin and additional documents can be downloaded from \url{http://scg.unibe.ch/wiki/projects/DoodleDebug}.
+The DoodleDebug Eclipse plugin, all source code a demo video are available on \url{http://scg.unibe.ch/wiki/projects/DoodleDebug}. \nes{Cedric: please make it so :)}
 
 \bibliographystyle{plain}
 \bibliography{/usr/local/scgbib/scg}
