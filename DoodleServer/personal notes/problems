@@ -20,3 +20,7 @@
 	-> current approach not working (write location of instance to file)
 
 - Had to step back from JSON, it destroyed order of arrays
+
+- CSS of deeply nested objects not used/transferred.
+	See package "nesting" in DemoExamples, *only* doodle world (but with level and player inside)
+	-> boolean black instead of green
