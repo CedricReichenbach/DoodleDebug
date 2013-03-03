@@ -59,6 +59,7 @@ public class ColorRendering implements Rendering<Color> {
 				+ (((double) alpha) / 255) + ")";
 	}
 
+	@SuppressWarnings("unused")
 	private String size2(String hexString) {
 		return hexString.length() < 2 ? "0" + hexString : hexString;
 	}

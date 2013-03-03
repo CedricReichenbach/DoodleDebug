@@ -1,6 +1,5 @@
 package ch.unibe.scg.doodle.server;
 
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 

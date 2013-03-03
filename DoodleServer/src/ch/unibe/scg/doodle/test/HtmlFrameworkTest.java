@@ -12,6 +12,7 @@ public class HtmlFrameworkTest {
 	private Tag div;
 	private Tag div2;
 
+	@SuppressWarnings("unchecked")
 	@Before
 	public void init() {
 		div = new Tag("div");

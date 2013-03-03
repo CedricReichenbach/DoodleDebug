@@ -17,6 +17,7 @@ public class FieldDoodlerRendering implements Rendering<Object> {
 	@Inject
 	Doodler doodler;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void render(Object object, Tag tag) throws DoodleRenderException {
 		// Tag title = new Tag("h3", "class=title");
@@ -36,6 +37,7 @@ public class FieldDoodlerRendering implements Rendering<Object> {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void renderField(Object object, Field field, Tag tag)
 			throws DoodleRenderException {
 		// don't render static ones
@@ -71,6 +73,7 @@ public class FieldDoodlerRendering implements Rendering<Object> {
 		renderScopeOnObject(c, tag);
 	}
 
+	@SuppressWarnings("unchecked")
 	private static void renderScopeOnObject(Object object, Tag tag) {
 		Tag scope = new Tag("div", "class=scope");
 

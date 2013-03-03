@@ -34,7 +34,6 @@ public class SmallScratch extends RealScratch {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	protected void renderUsingPlugin(Tag tag, RenderingPlugin plugin)
 			throws DoodleRenderException {

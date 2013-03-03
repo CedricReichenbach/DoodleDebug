@@ -7,8 +7,6 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import com.thoughtworks.xstream.core.util.Primitives;
-
 import ch.unibe.scg.doodle.plugins.ArrayPlugin;
 import ch.unibe.scg.doodle.plugins.FieldDoodlerPlugin;
 import ch.unibe.scg.doodle.plugins.PrimitivesPlugin;

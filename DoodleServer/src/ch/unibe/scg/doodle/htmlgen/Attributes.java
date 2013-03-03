@@ -2,6 +2,7 @@ package ch.unibe.scg.doodle.htmlgen;
 
 import java.util.*;
 
+@SuppressWarnings("serial")
 public class Attributes extends LinkedList<Attribute> {
 
 	public Attributes() {
@@ -159,6 +160,7 @@ public class Attributes extends LinkedList<Attribute> {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	public String toString() {
 		StringBuffer out = new StringBuffer(" ");
 		ListIterator iterator = this.listIterator();

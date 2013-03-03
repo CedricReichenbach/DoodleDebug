@@ -70,11 +70,4 @@ public class RealDoodleCanvas implements DoodleCanvas {
 	public List<List<List<Object>>> getColumns() {
 		return this.columns;
 	}
-
-	private String getSuffix(String mimeType) {
-		if (mimeType.equals("image/png")) {
-			return ".png";
-		}
-		throw new RuntimeException();
-	}
 }

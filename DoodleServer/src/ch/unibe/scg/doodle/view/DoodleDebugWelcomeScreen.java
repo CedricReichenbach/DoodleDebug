@@ -24,6 +24,7 @@ public class DoodleDebugWelcomeScreen extends HtmlDocument {
 		body.addAttribute("style", "background-image:url(" + texPath + ")");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected Tag makeHead() {
 		Tag head = super.makeHead();

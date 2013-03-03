@@ -12,6 +12,7 @@ public class CollectionRendering implements Rendering<Collection<?>> {
 	@Inject
 	Doodler doodler;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void render(Collection<?> collection, Tag tag) {
 		if (checkIfElementsSameType(collection)) {
@@ -31,11 +32,13 @@ public class CollectionRendering implements Rendering<Collection<?>> {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void renderSimplified(Collection<?> collection, Tag tag) {
 		int threshold = 10;
 		int painted = 0;
-		for (Object o : collection) {
+		for (@SuppressWarnings("unused")
+		Object o : collection) {
 			if (painted >= threshold) {
 				Tag dot = new Tag("div", "class=collectionDot");
 				dot.addCSSClass("collectionElement");

@@ -4,6 +4,7 @@ import ch.unibe.scg.doodle.htmlgen.Tag;
 
 public class BooleanRendering implements Rendering<Boolean> {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void render(Boolean bool, Tag tag) {
 		Tag value = new Tag("div", "class=boolean");
@@ -17,6 +18,7 @@ public class BooleanRendering implements Rendering<Boolean> {
 		tag.add(value);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void renderSimplified(Boolean bool, Tag tag) {
 		Tag value = new Tag("div", "class=boolean");

@@ -16,6 +16,7 @@ import org.eclipse.swt.graphics.ImageLoader;
 
 import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 
+@SuppressWarnings("restriction")
 public class EclipseIconUtil {
 
 	public static final String PUBLIC_FIELD = org.eclipse.jdt.ui.ISharedImages.IMG_FIELD_PUBLIC;

@@ -16,6 +16,7 @@ public class ClassRendering implements Rendering<Class<?>> {
 	@Inject
 	Doodler doodler;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void render(Class<?> classObject, Tag tag) {
 		List<Field> fields = Arrays.asList(classObject.getDeclaredFields());
@@ -32,7 +33,7 @@ public class ClassRendering implements Rendering<Class<?>> {
 		}
 		List<Class<?>> innerClasses = Arrays.asList(classObject
 				.getDeclaredClasses());
-		for (Class c : innerClasses) {
+		for (Class<?> c : innerClasses) {
 			Tag wrapper = new Tag("div", "class=wrapper");
 			renderInnerClass(c, wrapper);
 			tag.add(wrapper);
@@ -42,6 +43,7 @@ public class ClassRendering implements Rendering<Class<?>> {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void renderField(Field field, Tag tag) {
 		FieldDoodlerRendering.renderScope(field, tag);
 		Tag element = new Tag("div", "class=element");
@@ -57,6 +59,7 @@ public class ClassRendering implements Rendering<Class<?>> {
 		tag.add(element);
 	}
 
+	@SuppressWarnings("unchecked")
 	private void renderMethod(Method method, Tag tag) {
 		FieldDoodlerRendering.renderScope(method, tag);
 		Tag element = new Tag("div", "class=element");
@@ -88,6 +91,7 @@ public class ClassRendering implements Rendering<Class<?>> {
 		tag.add(element);
 	}
 
+	@SuppressWarnings("unchecked")
 	private void renderInnerClass(Class<?> c, Tag tag) {
 		FieldDoodlerRendering.renderScope(c, tag);
 		Tag element = new Tag("div", "class=element");
@@ -95,6 +99,7 @@ public class ClassRendering implements Rendering<Class<?>> {
 		tag.add(element);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void renderSimplified(Class<?> classObject, Tag tag) {
 		tag.add(classObject.getName());

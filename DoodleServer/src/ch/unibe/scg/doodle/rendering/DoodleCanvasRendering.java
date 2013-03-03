@@ -14,6 +14,7 @@ public class DoodleCanvasRendering implements Rendering<RealDoodleCanvas> {
 	@Inject
 	Doodler doodler;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void render(RealDoodleCanvas canvas, Tag tag) {
 		List<List<List<Object>>> columns = canvas.getColumns();
@@ -31,6 +32,7 @@ public class DoodleCanvasRendering implements Rendering<RealDoodleCanvas> {
 									// Doodleable
 	}
 
+	@SuppressWarnings("unchecked")
 	private void renderColumn(List<List<Object>> column, Tag tag) {
 		for (List<Object> line : column) {
 			Tag div = new Tag("div", "class=line");
@@ -39,6 +41,7 @@ public class DoodleCanvasRendering implements Rendering<RealDoodleCanvas> {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void renderLine(List<Object> line, Tag tag) {
 		for (Object o : line) {
 			Tag div = new Tag("div");

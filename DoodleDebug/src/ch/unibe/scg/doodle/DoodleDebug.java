@@ -1,7 +1,6 @@
 package ch.unibe.scg.doodle;
 
 import java.util.Collection;
-import java.util.Set;
 
 import ch.unibe.scg.doodle.plugins.AbstractPlugin;
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
@@ -24,14 +23,5 @@ public class DoodleDebug {
 	 */
 	public static void addRenderingPlugins(Collection<RenderingPlugin> plugins) {
 		DoodleClient.instance().addPlugins(plugins);
-	}
-
-	/**
-	 * Clear the output tab and leave a blank page. Suggestion: Use this method
-	 * very carefully since the history is cleared anyway at the beginning of
-	 * each run.
-	 */
-	public static void clearHistory() {
-		DoodleClient.instance().clearOutput();
 	}
 }

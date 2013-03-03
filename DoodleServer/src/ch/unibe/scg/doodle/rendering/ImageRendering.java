@@ -13,6 +13,7 @@ import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 
 public class ImageRendering implements Rendering<Image> {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void render(Image image, Tag tag) throws DoodleRenderException {
 		File imgDir = DoodleDebugProperties.tempDirForImages();
@@ -36,7 +37,8 @@ public class ImageRendering implements Rendering<Image> {
 	}
 
 	@Override
-	public void renderSimplified(Image image, Tag tag) throws DoodleRenderException {
+	public void renderSimplified(Image image, Tag tag)
+			throws DoodleRenderException {
 		this.render(image, tag); // different css only
 	}
 

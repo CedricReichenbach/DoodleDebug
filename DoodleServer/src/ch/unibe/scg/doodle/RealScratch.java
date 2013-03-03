@@ -2,7 +2,6 @@ package ch.unibe.scg.doodle;
 
 import javax.inject.Inject;
 
-import ch.unibe.scg.doodle.api.DoodleCanvas;
 import ch.unibe.scg.doodle.api.Doodleable;
 import ch.unibe.scg.doodle.api.RealDoodleCanvas;
 import ch.unibe.scg.doodle.helperClasses.ErrorDrawer;
@@ -131,6 +130,7 @@ public class RealScratch implements Scratch {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void writeClassName(String name, Tag tag) {
 		Tag div = new Tag("div", "class=ClassName");
 		Tag classNameWrapper = new Tag("div", "class=classNameText");
@@ -167,7 +167,6 @@ public class RealScratch implements Scratch {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	protected void renderUsingPlugin(Tag tag, RenderingPlugin plugin)
 			throws DoodleRenderException {
 		// plugin.getClass().getMethod("render", Object.class,

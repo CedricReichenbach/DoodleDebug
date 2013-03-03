@@ -15,6 +15,7 @@ public class BreadcrumbsBuilder {
 	@Inject
 	ScratchFactory scratchFactory;
 
+	@SuppressWarnings("unchecked")
 	public void renderBreadcrumbs(LightboxStack stack, Tag tag) {
 		Tag breadcrumbs = new Tag("div", "id=breadcrumbs");
 		List<Object> objects = stack.bottomUpList();
@@ -44,6 +45,7 @@ public class BreadcrumbsBuilder {
 		tag.add(breadcrumbsWrapper);
 	}
 
+	@SuppressWarnings("unchecked")
 	private void renderBreadcrumb(Tag breadcrumbs, int depth, Object o,
 			String cssClass) {
 		Tag breadcrumb = new Tag("div", "class=breadcrumb");
@@ -57,6 +59,7 @@ public class BreadcrumbsBuilder {
 		breadcrumbs.add(breadcrumb);
 	}
 
+	@SuppressWarnings("unchecked")
 	private void renderBetweenArrow(Tag breadcrumbs) {
 		Tag between = new Tag("div", "class=betweenBreadcrumbs");
 		between.add("&#x25B6;"); // Unicode: BLACK RIGHT-POINTING TRIANGLE
@@ -67,6 +70,7 @@ public class BreadcrumbsBuilder {
 		renderBreadcrumb(breadcrumbs, 0, o, "activeBreadcrumb");
 	}
 
+	@SuppressWarnings("unchecked")
 	private void renderCutHeads(Tag breadcrumbs, List<Object> cutHeadList) {
 		int depth = 0;
 		Tag deadBreadcrumbs = new Tag("div", "class=deadBreadcrumbs");

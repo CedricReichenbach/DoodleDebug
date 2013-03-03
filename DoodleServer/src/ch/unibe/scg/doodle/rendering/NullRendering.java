@@ -5,6 +5,7 @@ import ch.unibe.scg.doodle.htmlgen.Tag;
 
 public class NullRendering implements Rendering<NullObject> {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void render(NullObject object, Tag tag) {
 		tag.add("null");

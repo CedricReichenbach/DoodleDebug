@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.ui.texteditor.ImageUtilities;
-
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.server.util.DoodleImages;
 
@@ -34,6 +32,7 @@ public class StringRendering implements Rendering<String> {
 		tag.add(p);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void renderSimplified(String string, Tag tag) {
 		Tag p = new Tag("p", "class=StringRendering");

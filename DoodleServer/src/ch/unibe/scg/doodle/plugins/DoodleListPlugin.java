@@ -21,6 +21,7 @@ public class DoodleListPlugin extends CollectionPlugin {
 		return hs;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void render(Object list, Tag tag) {
 		DoodleList doodleList = (DoodleList) list;
@@ -66,8 +67,8 @@ public class DoodleListPlugin extends CollectionPlugin {
 	@Override
 	public String getCSS() {
 		return super.getCSS()
-				+ ".CollectionPlugin .verticalDelimiter {padding: 0; width: 1px; background-color: #ddd;} " +
-				".CollectionPlugin .doodleListTable td {vertical-align: top; float: none;} " +
-				".CollectionPlugin .doodleListTable .paddingCell {padding: 1px;} ";
+				+ ".CollectionPlugin .verticalDelimiter {padding: 0; width: 1px; background-color: #ddd;} "
+				+ ".CollectionPlugin .doodleListTable td {vertical-align: top; float: none;} "
+				+ ".CollectionPlugin .doodleListTable .paddingCell {padding: 1px;} ";
 	}
 }

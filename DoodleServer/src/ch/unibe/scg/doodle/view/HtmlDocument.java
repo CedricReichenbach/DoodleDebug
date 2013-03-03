@@ -62,6 +62,7 @@ public class HtmlDocument {
 		return CSSCollection.flushAllCSS();
 	}
 
+	@SuppressWarnings("unchecked")
 	private void makeJavascript(Tag head) {
 		List<String> jsFiles = getJSFiles();
 		for (String file : jsFiles) {

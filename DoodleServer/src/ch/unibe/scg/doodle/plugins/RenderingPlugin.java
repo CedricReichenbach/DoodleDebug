@@ -12,7 +12,7 @@ import ch.unibe.scg.doodle.rendering.Rendering;
  * @author Cedric Reichenbach
  * 
  */
-public interface RenderingPlugin extends Rendering {
+public interface RenderingPlugin extends Rendering<Object> {
 
 	public Set<Class<?>> getDrawableClasses();
 
@@ -33,6 +33,7 @@ public interface RenderingPlugin extends Rendering {
 
 	/**
 	 * Provide a name to be displayed beside the rendering.
+	 * 
 	 * @param o
 	 * @return
 	 */

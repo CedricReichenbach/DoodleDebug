@@ -1,7 +1,5 @@
 package ch.unibe.scg.doodle;
 
-import java.util.Arrays;
-
 import ch.unibe.scg.doodle.helperClasses.DoodleList;
 import ch.unibe.scg.doodle.inject.DoodleModule;
 

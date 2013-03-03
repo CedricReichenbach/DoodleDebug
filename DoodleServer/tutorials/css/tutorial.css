@@ -234,3 +234,18 @@ ul, ol {
 .result img {
 	box-shadow: 0 5px 10px rgba(0,0,0,0.5);
 }
+img.icon {
+	vertical-align: middle;
+}
+img.left, img.right {
+	border: 1px solid #bbb;
+	margin: 0.5em;
+}
+img.left {
+	float: left;
+	margin-left: 0;
+}
+img.right {
+	float: right;
+	margin-right: 0;
+}

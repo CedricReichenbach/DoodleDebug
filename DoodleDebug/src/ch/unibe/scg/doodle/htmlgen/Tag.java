@@ -2,6 +2,7 @@ package ch.unibe.scg.doodle.htmlgen;
 
 import java.util.*;
 
+@SuppressWarnings({ "rawtypes", "serial" })
 public class Tag extends LinkedList {
 
 	private Attributes attributes; // tag attributes
@@ -40,6 +41,7 @@ public class Tag extends LinkedList {
 		this.close = close;
 	}
 
+	@SuppressWarnings("unchecked")
 	public Tag(String name, Attributes attr, List content) {
 		super(content);
 		this.name = name.toLowerCase();

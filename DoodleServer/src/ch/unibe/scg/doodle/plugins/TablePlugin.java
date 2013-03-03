@@ -46,6 +46,7 @@ public class TablePlugin extends ArrayPlugin {
 		tableRenderingProvider.get().render(arrays, tag);
 	}
 
+	@SuppressWarnings("unchecked")
 	private Collection<Collection<?>> convertTo2DCollection(Object table)
 			throws DoodleRenderException {
 		try {

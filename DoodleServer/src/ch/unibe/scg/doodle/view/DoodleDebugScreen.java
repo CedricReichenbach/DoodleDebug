@@ -12,6 +12,7 @@ public class DoodleDebugScreen {
 	private String doctype;
 	private Tag html;
 
+	@SuppressWarnings("unchecked")
 	public DoodleDebugScreen() {
 		this.doctype = doctype();
 		this.html = new Tag("html");
@@ -23,6 +24,7 @@ public class DoodleDebugScreen {
 		return "<!DOCTYPE html>\n";
 	}
 
+	@SuppressWarnings("unchecked")
 	protected Tag head() {
 		Tag head = new Tag("head");
 		head.add("<meta charset=\"utf-8\">");
@@ -34,6 +36,7 @@ public class DoodleDebugScreen {
 		return head;
 	}
 
+	@SuppressWarnings("unchecked")
 	protected Tag css() {
 		Tag css = new Tag("style", "type=text/css");
 		css.add("body {background-color: #ddd;}");

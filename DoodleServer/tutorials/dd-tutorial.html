@@ -89,13 +89,13 @@
 		From a field's visualization, a programmer can see its scope, declared
 		variable name and, of course, its content. Scope modifiers are
 		visualize with a sign in UML style and color for faster perception.<br>
-		<img src="img/screenshots/FooBar-fields.png"
-			style="float: left; margin-right: 0.5em;" /> <b>- (<span
-			style="background-color: #FCC">red</span>):
-		</b> private<br> <b>+ (<span style="background-color: #8F8">green</span>):
-		</b> public<br> <b># (<span style="background-color: #FF4">yellow</span>):
-		</b> protected<br> <b>~ (<span style="background-color: #0DF">blue</span>):
-		</b> default (package)<br> <br style="clear: both;">
+		<img src="img/screenshots/FooBar-fields.png" class="left"
+			style="margin-top: 0; margin-bottom: 0;" /> <img class="icon"
+			alt="Private scope" src="img/icons/private-scope.png" />: private<br>
+		<img class="icon" alt="Public scope" src="img/icons/public-scope.png" />:
+		public<br>
+		<img class="icon" alt="Protected scope"
+			src="img/icons/protected-scope.png" />: protected<br> <img class="icon" alt="Default scope" src="img/icons/default-scope.png" />: default (package)<br> <br style="clear: both;">
 		<div class="image">
 			<a href="javascript:switchExpand('rendering-pipeline')">DoodleDebug
 				rendering pipeline</a> <span class="smallNote">(click to
@@ -131,8 +131,6 @@
 		<code class="code">c.draw(Object o)</code>
 		: Render an object (e.g. a field of this object) at the current cursor
 		position.<br>
-		<code class="code">c.drawSimplified(Object o)</code>
-		: Render an object at the current cursor position with fewer details.<br>
 		<code class="code">c.newLine()</code>
 		: Jump to a new line with the virtual cursor, staying in the same
 		column.<br>

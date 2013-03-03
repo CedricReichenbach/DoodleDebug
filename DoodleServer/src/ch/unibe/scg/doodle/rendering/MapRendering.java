@@ -15,6 +15,7 @@ public class MapRendering implements Rendering<Map<?, ?>> {
 	@Inject
 	Doodler doodler;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void render(Map<?, ?> map, Tag tag) {
 		boolean sameKeyTypes = sameTypes(map.keySet());

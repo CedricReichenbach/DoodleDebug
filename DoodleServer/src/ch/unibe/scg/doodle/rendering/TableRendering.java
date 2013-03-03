@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import javax.inject.Inject;
-import javax.swing.text.NumberFormatter;
 
 import ch.unibe.scg.doodle.Doodler;
 import ch.unibe.scg.doodle.htmlgen.Tag;
@@ -16,6 +15,7 @@ public class TableRendering implements Rendering<Collection<Collection<?>>> {
 	Doodler doodler;
 	private boolean numberTable = false;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void render(Collection<Collection<?>> collections, Tag tag) {
 		if (numberTable(collections)) {
@@ -39,6 +39,7 @@ public class TableRendering implements Rendering<Collection<Collection<?>>> {
 		tag.add(table);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void renderSimplified(Collection<Collection<?>> collections, Tag tag) {
 		int rows = collections.size();
@@ -82,6 +83,7 @@ public class TableRendering implements Rendering<Collection<Collection<?>>> {
 	// }
 	// }
 
+	@SuppressWarnings("unchecked")
 	private void renderRow(Collection<?> collection, Tag row) {
 		for (Object element : collection) {
 			if (numberTable) {
@@ -95,6 +97,7 @@ public class TableRendering implements Rendering<Collection<Collection<?>>> {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void renderNumber(Number number, Tag row) {
 		Tag before = new Tag("td", "class=beforeDecimalPoint");
 		if (number.doubleValue() < 0) {

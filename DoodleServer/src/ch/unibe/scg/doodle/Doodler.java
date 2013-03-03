@@ -1,8 +1,5 @@
 package ch.unibe.scg.doodle;
 
-import java.net.URL;
-import java.util.List;
-
 import javax.inject.Inject;
 
 import org.eclipse.swt.widgets.Display;
@@ -49,7 +46,6 @@ public class Doodler {
 	/**
 	 * Creates a new Doodler for visualizing objects 1 Doodler = 1 window
 	 */
-	@SuppressWarnings("unchecked")
 	protected Doodler() {
 		HtmlDocument htmlDocument = new HtmlDocument();
 		body = new Tag("body");
@@ -91,6 +87,7 @@ public class Doodler {
 		tag.add(wrapper);
 	}
 
+	@SuppressWarnings("unchecked")
 	private void prepareLightbox() {
 		Tag lighboxWrapper = new Tag("div", "id=lightboxWrapper");
 		lighboxWrapper.addAttribute("style", "visibility:hidden");
@@ -114,7 +111,6 @@ public class Doodler {
 	 * @param Object
 	 * 
 	 */
-	@SuppressWarnings("unchecked")
 	void visualize(Object o) {
 		if (o == null) {
 			o = new NullObject();
@@ -179,6 +175,7 @@ public class Doodler {
 	 * @param stack
 	 * @param tag
 	 */
+	@SuppressWarnings("unchecked")
 	public synchronized void renderIntoLightbox(LightboxStack stack, Tag tag) {
 		level--;
 		breadcrumbsBuilder.renderBreadcrumbs(stack, tag);
