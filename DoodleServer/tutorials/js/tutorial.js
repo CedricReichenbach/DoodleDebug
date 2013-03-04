@@ -4,6 +4,7 @@ function initMenu() {
 	var titles = $$('.title');
 	titles.each( insertLink );
 	//Effect.BlindDown('contents');
+	$$('img.logo').each(function(e){e.style.maxHeight = Element.getHeight($$('#contents').first())+"px";});
 }
 
 var idCount = 0;
@@ -27,6 +28,7 @@ function insertLink(title) {
 function insertTopLink(title) {
 	var a = new Element('a', {'href': '#contents'});
 	a.insert('&uarr;');
+	a.setAttribute('title', 'Back to top');
 	title.insert('&nbsp;');
 	title.insert(a);
 }

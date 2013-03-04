@@ -66,13 +66,15 @@ a:hover{
 	overflow: hidden;
 	margin-bottom: -20px;
 }
+#contents, img.logo {
+	box-shadow: 8px 8px 10px -4px rgba(0,0,0,0.5);
+}
 #contents {
 	background-color: #2bf;
 	color: white;
 	padding: 1em;
 	max-width: 600px;
 	float: left;
-	box-shadow: 8px 8px 10px -4px rgba(0,0,0,0.5);
 	margin-bottom: 20px;
 }
 #contents b {
@@ -237,9 +239,12 @@ ul, ol {
 img.icon {
 	vertical-align: middle;
 }
-img.left, img.right {
+img.left, img.right, img.center {
 	border: 1px solid #bbb;
 	margin: 0.5em;
+}
+img.center {
+	max-width: 940px;
 }
 img.left {
 	float: left;
@@ -248,4 +253,8 @@ img.left {
 img.right {
 	float: right;
 	margin-right: 0;
+}
+img.logo {
+	float: left;
+	margin-right: 1em;
 }

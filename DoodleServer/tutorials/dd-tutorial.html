@@ -19,6 +19,7 @@
 	<div id="wrapper">
 		<h1 id="mainTitle">DoodleDebug tutorial</h1>
 		<div id="contents-wrapper">
+			<img src="img/DoodleDebug-logo.png" class="logo"/>
 			<div id="contents">
 				<b>Contents:</b><br>
 			</div>
@@ -55,6 +56,7 @@
 			.
 		</div>
 		<h3 class="title">Navigation</h3>
+		<img src="img/screenshots/lightbox.png" class="right" />
 		<div class="tip">
 			Use keys
 			<code class="key">j</code>
@@ -63,7 +65,7 @@
 			to navigate to the next or the last doodled object, respectively.
 		</div>
 		Some objects inside the doodled ones are clickable, this can be seen
-		from their fine shadow and their color change to blue when hovering
+		from their fine shadow and their color changing to blue when hovering
 		them with the cursor. As they are clicked, a more detailed rendering
 		is doodled into a lightbox, which can contain clickables itself. This
 		mechanism allows users to inspect their objects in a arbitrary deep
@@ -107,10 +109,10 @@
 		DoodleDebug provides two ways to define custom renderings:
 		<ul>
 			<li>Implementing the <code class="code">Doodleable</code>
-				interface <a href="#doodleable">&darr;</a>
+				interface <a href="#doodleable" title="Jump to Doodleable">&darr;</a>
 			</li>
 			<li>Providing a <code class="code">RenderingPlugin</code> <a
-				href="#renderingplugin">&darr;</a>
+				href="#renderingplugin" title="Jump to RenderingPlugin">&darr;</a>
 			</li>
 		</ul>
 		Doodleables are easy and fast to implement, but provide only a simple
@@ -137,6 +139,7 @@
 		<code class="code">c.newColumn()</code>
 		: Jump to a new column with the virtual cursor, i.e. create a new
 		column on the right side of the last one.
+		<img src="img/doodleable-example.png" class="center" />
 		<div class="example-wrapper">
 			<div class="example">
 				<a href="examples/contact-example.html">Contact</a>
