@@ -2,7 +2,10 @@ package demo.model;
 
 import java.awt.Image;
 
-public class Contact {
+import ch.unibe.scg.doodle.api.DoodleCanvas;
+import ch.unibe.scg.doodle.api.Doodleable;
+
+public class Contact implements Doodleable {
 	private String name;
 	private Address address;
 	private PhoneNumber phoneNumber;
@@ -34,7 +37,23 @@ public class Contact {
 	}
 
 	public String toString() {
-		return "\n("  + name + ", " + address + ", "
-				+ phoneNumber + ")";
+		return "\n(" + name + ", " + address + ", " + phoneNumber + ")";
 	}
+
+	@Override
+	public void doodleOn(DoodleCanvas c) {
+		c.draw(picture);
+		c.newColumn();
+		c.draw(name);
+		c.newLine();
+		c.draw(phoneNumber);
+		c.newColumn();
+		c.draw(address);
+	}
+
+	@Override
+	public void summarizeOn(DoodleCanvas c) {
+		c.draw(name);
+	}
+
 }

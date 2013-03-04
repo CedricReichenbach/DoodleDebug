@@ -3,7 +3,10 @@ package demo.model;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Directory {
+import ch.unibe.scg.doodle.api.DoodleCanvas;
+import ch.unibe.scg.doodle.api.Doodleable;
+
+public class Directory implements Doodleable {
 	private Collection<Contact> contacts;
 
 	public Directory() {
@@ -20,12 +23,25 @@ public class Directory {
 
 	public String toString() {
 		return contacts.toString();
-//		String result = "";
-//		result += "Directory: (";
-//		for (Contact contact : contacts) {
-//			result += contact+", ";
-//		}
-//		result += ")";
+		// String result = "";
+		// result += "Directory: (";
+		// for (Contact contact : contacts) {
+		// result += contact+", ";
+		// }
+		// result += ")";
 	}
-	
+
+	@Override
+	public void doodleOn(DoodleCanvas c) {
+		for (Contact contact : contacts) {
+			c.draw(contact);
+			c.newLine();
+		}
+	}
+
+	@Override
+	public void summarizeOn(DoodleCanvas c) {
+		c.draw("Directory with " + numberOfContacts() + " contacts");
+	}
+
 }
