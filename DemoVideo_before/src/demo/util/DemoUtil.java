@@ -1,4 +1,4 @@
-package doodle.util;
+package demo.util;
 
 import java.awt.Image;
 import java.io.IOException;
@@ -7,9 +7,9 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-import doodle.model.Address;
-import doodle.model.Contact;
-import doodle.model.PhoneNumber;
+import demo.model.Address;
+import demo.model.Contact;
+import demo.model.PhoneNumber;
 
 public class DemoUtil {
 	private static final String[] firstNames = { "John", "Benjamin", "Hannah",

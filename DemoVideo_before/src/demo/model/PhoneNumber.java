@@ -1,4 +1,4 @@
-package doodle.model;
+package demo.model;
 
 public class PhoneNumber {
 	private String areaCode;

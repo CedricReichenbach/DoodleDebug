@@ -24,3 +24,5 @@
 - CSS of deeply nested objects not used/transferred.
 	See package "nesting" in DemoExamples, *only* doodle world (but with level and player inside)
 	-> boolean black instead of green
+
+- If a workspace contains two classes with the same full name, DoodleDubug might choose the wrong one.

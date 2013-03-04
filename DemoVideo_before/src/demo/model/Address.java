@@ -1,4 +1,4 @@
-package doodle.model;
+package demo.model;
 
 import ch.unibe.scg.doodle.api.DoodleCanvas;
 import ch.unibe.scg.doodle.api.Doodleable;

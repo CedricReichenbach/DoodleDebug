@@ -1,9 +1,11 @@
-package doodle;
+package demo;
 
 import java.io.IOException;
 
-import doodle.model.Directory;
-import doodle.util.DemoUtil;
+import ch.unibe.scg.doodle.Doo;
+
+import demo.model.Directory;
+import demo.util.DemoUtil;
 
 public class DemoMain {
 
@@ -19,7 +21,8 @@ public class DemoMain {
 		while (directory.numberOfContacts() < MAX_CONTACTS) {
 			directory.addContact(DemoUtil.randomContact());
 		}
-
+		
+		Doo.dle(directory);
 		System.out.println(directory);
 	}
 }

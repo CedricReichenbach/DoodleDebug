@@ -1,4 +1,4 @@
-package doodle.model;
+package demo.model;
 
 import java.util.ArrayList;
 import java.util.Collection;

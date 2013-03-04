@@ -1,4 +1,4 @@
-package doodle.model;
+package demo.model;
 
 import java.awt.Image;
 
