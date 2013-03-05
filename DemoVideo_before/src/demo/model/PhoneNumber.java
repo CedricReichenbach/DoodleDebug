@@ -18,4 +18,15 @@ public class PhoneNumber {
 		return rest;
 	}
 
+	// @Override
+	// public void doodleOn(DoodleCanvas c) {
+	// c.draw(areaCode);
+	// c.draw(rest);
+	// }
+	//
+	// @Override
+	// public void summarizeOn(DoodleCanvas c) {
+	// doodleOn(c);
+	// }
+
 }
