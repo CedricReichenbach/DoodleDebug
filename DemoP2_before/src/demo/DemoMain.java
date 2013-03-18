@@ -2,6 +2,8 @@ package demo;
 
 import java.io.IOException;
 
+import ch.unibe.scg.doodle.Doo;
+
 import demo.model.Directory;
 import demo.util.DemoUtil;
 
@@ -20,6 +22,7 @@ public class DemoMain {
 			directory.addContact(DemoUtil.randomContact());
 		}
 
-		System.out.println(directory);
+		 System.out.println(directory);
+		 Doo.dle(directory);
 	}
 }
