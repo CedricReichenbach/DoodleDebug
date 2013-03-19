@@ -22,7 +22,6 @@ public class DemoSimpleMain {
 		colors.add(randomColor());
 
 		System.out.println(colors);
-		Doo.dle(colors);
 	}
 
 	private static Color randomColor() {

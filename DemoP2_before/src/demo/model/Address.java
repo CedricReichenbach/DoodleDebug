@@ -36,7 +36,7 @@ public class Address {
 	// c.newLine();
 	// c.draw(zipCode);
 	// c.draw(city);
-	// c.newColumn();
+	// c.newLine();
 	// c.draw(country);
 	// }
 	//
