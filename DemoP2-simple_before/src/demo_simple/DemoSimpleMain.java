@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
 
-import ch.unibe.scg.doodle.Doo;
-
 public class DemoSimpleMain {
 
 	/**
