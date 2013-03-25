@@ -152,4 +152,8 @@ public class RenderingRegistry {
 					.mapFromPlugins(plugins));
 		}
 	}
+
+	public static void clearUserPlugins() {
+		userPlugins = null;
+	}
 }

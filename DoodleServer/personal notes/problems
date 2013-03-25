@@ -27,6 +27,4 @@
 
 - If a workspace contains two classes with the same full name, DoodleDubug might choose the wrong one.
 
-- Doo.class can't be doodled.
-
 - Custom RenderingPlugins can't be provided (Exception)

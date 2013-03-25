@@ -22,6 +22,7 @@ import ch.unibe.scg.doodle.DooMockup;
 import ch.unibe.scg.doodle.Doodler;
 import ch.unibe.scg.doodle.IndexedObjectStorage;
 import ch.unibe.scg.doodle.htmlgen.Tag;
+import ch.unibe.scg.doodle.rendering.RenderingRegistry;
 import ch.unibe.scg.doodle.server.views.DoodleDebugView;
 import ch.unibe.scg.doodle.server.views.HtmlShow;
 import ch.unibe.scg.doodle.server.views.JavascriptExecuter;
@@ -94,6 +95,7 @@ public class DoodleServer {
 		SimonServer.instance.refreshClientClassloading();
 		CSSCollection.reset();
 		this.clientClassLoader = DoodleClientWorkspace.getClientClassLoader();
+		RenderingRegistry.clearUserPlugins();
 	}
 
 	private void resetFocusTimer() {
