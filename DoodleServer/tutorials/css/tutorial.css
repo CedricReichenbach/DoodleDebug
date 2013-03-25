@@ -58,8 +58,11 @@ a:hover{
 	text-decoration: underline;
 }
 #mainTitle {
-	color: #444;
-	text-shadow: 1px 1px 0 rgba(0, 200, 0, 0.5);
+	color: #666;
+	text-shadow: 1px 1px 0 white;
+	/*text-shadow: 1px 1px 0 rgba(0, 200, 0, 0.5);*/
+	font-weight: normal;
+	font-size: 2.5em;
 }
 #contents-wrapper {
 	margin-top: 3em;
@@ -90,10 +93,12 @@ a:hover{
 	text-decoration: underline;
 }
 .title {
-	font-size: 1.3em;
+	font-weight: normal;
+	font-size: 1.5em;
 	margin-top: 2em;
-	color: darkgreen;
-	text-shadow: 0 0 3px white;
+	color: #666;
+	/*text-shadow: 0 0 3px white;*/
+	text-shadow: 1px 1px 0 white;
 }
 .subtitle {
 	margin: 0.5em 0;
@@ -102,16 +107,16 @@ a:hover{
 .code,
 .codeBlock,
 .key {
-	font-family: monospace, Courier New, "Roboto", sans-serif;
-	font-weight: bold;
-	background-color: #fff;
-	color: darkblue;
+	font-family: 'andale mono', 'lucida console', monospace, Courier New, "Roboto", sans-serif;
+	background-color: white;
+	color: #448;
 	border: solid rgba(0, 0, 0, 0.2);
 	border-width: 1px 0 0 1px;
 }
 .code {
 	padding: 1px 2px;
 	display: inline-block;
+	font-size: 0.95em;
 }
 .codeBlock, .tip, .example, .download, .exercise, .result {
 	padding: .5em;
@@ -124,8 +129,9 @@ a:hover{
 	background-color: #fed;
 	border-radius: 3px;
 	border: 1px solid;
-	padding: 1px;
+	padding: 2px;
 	box-shadow: 0 1px;
+	font-size: 0.95em;
 }
 .tip, .example, .download, .exercise, .result {
 	border-radius: 4px;
@@ -204,11 +210,14 @@ ul, ol {
 	overflow: hidden;
 }
 .example-file {
-	background-color: #eef7ff;
+	background-color: rgba(255,255,255,0.5);
 	padding: .5em;
 	float: left;
 	margin: 1em;
 	border: 1px dashed #8af;
+}
+.example-file pre, .example-file xmp {
+	margin: 0;
 }
 .download-wrapper, .float-wrapper {
 	overflow: hidden;

@@ -13,8 +13,12 @@
 - Nice way to show canonical name instead of only simple name of class
 	(e.g. by right-click, tool tip or hover)
 
-(Mail by Mircea, coming from some blog):
-"Visualization tools. At the one end of the spectrum are Bret Victor-esque methods for interactively exploring a problem space. On a more basic level, it's tremendously useful to have graphing facilities available at all times. How often are zeros occurring in this data?
-What are the typical lengths of strings going through this function?
-Does displaying a matrix as a grid of rectangles, with each unique element mapped to a separate color, show any hidden patterns?"
-	
+- (Mail by Mircea, coming from some blog):
+	"Visualization tools. At the one end of the spectrum are Bret Victor-esque methods for interactively exploring a problem space. On a more basic level, it's tremendously useful to have graphing facilities available at all times. How often are zeros occurring in this data?
+	What are the typical lengths of strings going through this function?
+	Does displaying a matrix as a grid of rectangles, with each unique element mapped to a separate color, show any hidden patterns?"
+
+- Integrate into Eclipse debugger: Debugger shows doodles instead of textual representation
+
+- Link doodles to code: Button on top-level doodle causes Eclipse to open file and code line where
+	the corresponding Doo.dle() call was made

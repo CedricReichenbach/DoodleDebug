@@ -2,7 +2,7 @@
 <feature
       id="DoodleDebug"
       label="DoodleDebug"
-      version="1.0.0.qualifier">
+      version="1.0.1.qualifier">
    <install-handler library=""/>
 
    <description url="http://scg.unibe.ch/wiki/projects/DoodleDebug">

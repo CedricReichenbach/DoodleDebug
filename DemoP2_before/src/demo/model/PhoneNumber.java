@@ -1,6 +1,5 @@
 package demo.model;
 
-
 public class PhoneNumber {
 	private String areaCode;
 	private String rest;

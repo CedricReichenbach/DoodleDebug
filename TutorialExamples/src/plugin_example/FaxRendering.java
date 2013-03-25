@@ -7,6 +7,7 @@ import ch.unibe.scg.doodle.rendering.Rendering;
 
 public class FaxRendering implements Rendering<Fax> {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void render(Fax fax, Tag tag) throws DoodleRenderException {
 		tag.add("A Fax: ");
@@ -15,9 +16,9 @@ public class FaxRendering implements Rendering<Fax> {
 		tag.add(number);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public void renderSmall(Fax fax, Tag tag) throws DoodleRenderException {
+	public void renderSimplified(Fax fax, Tag tag) throws DoodleRenderException {
 		tag.add(fax.getNumber());
 	}
-
 }

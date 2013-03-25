@@ -35,20 +35,20 @@ public class TelePlugin extends AbstractPlugin {
 	}
 
 	@Override
-	public void renderSmall(Object object, Tag tag)
+	public void renderSimplified(Object object, Tag tag)
 			throws DoodleRenderException {
 		if (object instanceof Phone) {
-			new PhoneRendering().renderSmall((Phone) object, tag);
+			new PhoneRendering().renderSimplified((Phone) object, tag);
 		} else if (object instanceof Fax) {
-			new FaxRendering().renderSmall((Fax) object, tag);
+			new FaxRendering().renderSimplified((Fax) object, tag);
 		}
 	}
 
-	// Optional. Standard implementation returns an empty string (= no css).
+	// Optional. Standard implementation returns an empty string (= no custom
+	// css).
 	@Override
 	public String getCSS() {
-		return ".TelePlugin .fax-number {background-color: #fdb} "
+		return ".TelePlugin .fax-number {background-color: #fdb; vertical-align: middle;} "
 				+ ".TelePlugin .phone-number {background-color: #cfd}";
 	}
-
 }

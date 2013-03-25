@@ -6,6 +6,7 @@ import ch.unibe.scg.doodle.rendering.Rendering;
 
 public class PhoneRendering implements Rendering<Phone> {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void render(Phone phone, Tag tag) throws DoodleRenderException {
 		tag.add("A Phone: ");
@@ -15,9 +16,10 @@ public class PhoneRendering implements Rendering<Phone> {
 		tag.add(number);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public void renderSmall(Phone phone, Tag tag) throws DoodleRenderException {
+	public void renderSimplified(Phone phone, Tag tag)
+			throws DoodleRenderException {
 		tag.add(phone.getPre() + phone.getNumber());
 	}
-
 }

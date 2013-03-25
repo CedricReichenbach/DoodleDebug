@@ -21,8 +21,7 @@
 			<i>(Click to expand)</i> <br>
 			<div class="example-file">
 				<a href="javascript:switchExpand('example_main')">Main.java</a>
-				<pre id="example_main" style="display: none">
-					<xmp>
+				<pre id="example_main" style="display: none"><xmp>
 public class Main {
 	public static void main(String[] args) {
 		Phone phone = new Phone(41, "331234567");
@@ -38,13 +37,11 @@ public class Main {
 		Doo.dle(fax);
 	}
 
-}</xmp>
-				</pre>
+}</xmp></pre>
 			</div>
 			<div class="example-file">
 				<a href="javascript:switchExpand('example_teleplugin')">TelePlugin.java</a>
-				<pre id="example_teleplugin" style="display: none">
-					<xmp>
+				<pre id="example_teleplugin" style="display: none"><xmp>
 public class TelePlugin extends AbstractPlugin {
 
 	private PhoneRendering phoneRendering;
@@ -73,32 +70,30 @@ public class TelePlugin extends AbstractPlugin {
 	}
 
 	@Override
-	public void renderSmall(Object object, Tag tag)
+	public void renderSimplified(Object object, Tag tag)
 			throws DoodleRenderException {
 		if (object instanceof Phone) {
-			new PhoneRendering().renderSmall((Phone) object, tag);
+			new PhoneRendering().renderSimplified((Phone) object, tag);
 		} else if (object instanceof Fax) {
-			new FaxRendering().renderSmall((Fax) object, tag);
+			new FaxRendering().renderSimplified((Fax) object, tag);
 		}
 	}
 
-	// Optional. Standard implementation returns an empty string (= no css).
+	// Optional. Standard implementation returns an empty string (= no custom
+	// css).
 	@Override
 	public String getCSS() {
-		return ".TelePlugin .fax-number {background-color: #fdb} "
+		return ".TelePlugin .fax-number {background-color: #fdb; vertical-align: middle;} "
 				+ ".TelePlugin .phone-number {background-color: #cfd}";
 	}
-
-}
-				</xmp>
-				</pre>
+}</xmp></pre>
 			</div>
 			<div class="example-file">
 				<a href="javascript:switchExpand('example_phonerendering')">PhoneRendering.java</a>
-				<pre id="example_phonerendering" style="display: none">
-					<xmp>
+				<pre id="example_phonerendering" style="display: none"><xmp>
 public class PhoneRendering implements Rendering<Phone> {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void render(Phone phone, Tag tag) throws DoodleRenderException {
 		tag.add("A Phone: ");
@@ -108,20 +103,20 @@ public class PhoneRendering implements Rendering<Phone> {
 		tag.add(number);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public void renderSmall(Phone phone, Tag tag) throws DoodleRenderException {
+	public void renderSimplified(Phone phone, Tag tag)
+			throws DoodleRenderException {
 		tag.add(phone.getPre() + phone.getNumber());
 	}
-
-}</xmp>
-				</pre>
+}</xmp></pre>
 			</div>
 			<div class="example-file">
 				<a href="javascript:switchExpand('example_faxrendering')">FaxRendering.java</a>
-				<pre id="example_faxrendering" style="display: none">
-					<xmp>
+				<pre id="example_faxrendering" style="display: none"><xmp>
 public class FaxRendering implements Rendering<Fax> {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void render(Fax fax, Tag tag) throws DoodleRenderException {
 		tag.add("A Fax: ");
@@ -130,18 +125,16 @@ public class FaxRendering implements Rendering<Fax> {
 		tag.add(number);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public void renderSmall(Fax fax, Tag tag) throws DoodleRenderException {
+	public void renderSimplified(Fax fax, Tag tag) throws DoodleRenderException {
 		tag.add(fax.getNumber());
 	}
-
-}</xmp>
-				</pre>
+}</xmp></pre>
 			</div>
 			<div class="example-file">
 				<a href="javascript:switchExpand('example_phone')">Phone.java</a>
-				<pre id="example_phone" style="display: none">
-					<xmp>
+				<pre id="example_phone" style="display: none"><xmp>
 public class Phone {
 
 	private int pre;
@@ -160,13 +153,11 @@ public class Phone {
 		return number;
 	}
 
-}</xmp>
-				</pre>
+}</xmp></pre>
 			</div>
 			<div class="example-file">
 				<a href="javascript:switchExpand('example_fax')">Fax.java</a>
-				<pre id="example_fax" style="display: none">
-					<xmp>
+				<pre id="example_fax" style="display: none"><xmp>
 public class Fax {
 
 	private String number;
@@ -179,8 +170,7 @@ public class Fax {
 		return number;
 	}
 
-}</xmp>
-				</pre>
+}</xmp></pre>
 			</div>
 		</div>
 		<div class="float-wrapper">

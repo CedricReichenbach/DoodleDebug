@@ -18,7 +18,7 @@ public class TicTacToe implements Doodleable {
 
 	@Override
 	public void summarizeOn(DoodleCanvas c) {
-		c.drawSimplified(state);
+		c.draw(state);
 	}
 
 }

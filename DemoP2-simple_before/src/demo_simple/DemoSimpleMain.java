@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
 
+import ch.unibe.scg.doodle.Doo;
+
 public class DemoSimpleMain {
 
 	/**
@@ -19,7 +21,8 @@ public class DemoSimpleMain {
 		colors.add(randomColor());
 		colors.add(randomColor());
 
-		System.out.println(colors);
+//		System.out.println(colors);
+		Doo.dle(colors);
 	}
 
 	private static Color randomColor() {
