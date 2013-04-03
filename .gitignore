@@ -6,7 +6,7 @@ output.html
 *.log
 *.dvi
 *.ps
-Thesis/writing/DoodleDebug_bachelor-thesis.pdf
+Thesis/writing/Bachelors-Thesis_Cedric.pdf
 Thesis/writing/bib
 DDUpdateSite/features/
 DDUpdateSite/plugins/
@@ -15,7 +15,7 @@ DoodleDebug/bin
 DoodleServer/bin
 _git-pull-push.command
 Thesis/writing/.DS_Store
-Thesis/writing/DoodleDebug_bachelor-thesis.blg
+Thesis/writing/Bachelors-Thesis_Cedric.blg
 DemoVideo_before/bin/doodle/util/baby-tux.png
 DemoVideo_before/bin/doodle/util/bird-green.png
 DemoVideo_before/bin/doodle/util/bird.png
