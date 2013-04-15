@@ -66,6 +66,7 @@
 % ============================================================
 
 \newcommand{\DD}{Dood\-le\-De\-bug\xspace}
+\newcommand{\Doodle}{\texttt{Doo.\-dle}\xspace}
 \newcommand{\println}{\texttt{Sys\-tem.\-out.\-println}\xspace}
 
 % ============================================================
@@ -85,10 +86,28 @@ We introduce \DD and present the results of a usability study that shows that \D
 
 \section{Introduction}
 
-\subsection{DoodleDebug In a Nutshell}
+For understanding and debugging a program, developers rely on tools to track its runtime states during execution.
+One method is to insert print statements like \println in Java.
+This method is quick and allows its users to compare different states in time of a specific object, represented by a textual output item.
+However, this output is static and comes with a couple of conceptual restrictions. On the one hand, the level of detail is hardcoded through the textual representations of objects.
+If a developer decides for a simple and clear way of representation, they will need to rewrite their code for any further inspection and re-run the program after every change.
+If they initially choose a detailed and verbose object representation, the output will grow and become tedious to read.
+Another drawback of textual representation is caused by the simplicity of plain text.
+It's one-dimensional and contains no information about graphical features like advanced formatting or colors.
 
-\subsection{Classical Debugging Tools}
+The other half of the two most widely used debugging tools is the family of debuggers.
+When utilizing a debugger, a program can be stopped at a specific point of its execution, allowing developers to inspect any detail of this very state.
+A clear advantage over textual output is the ability to inspect objects on demand.
+Information is only displayed as soon as the user asks for it, nevertheless available without re-running the program.
+The drawbacks of debuggers arise from the fact that their inspector is always bound to a specific point in time and therefore makes it impossible to directly compare different states of the same object.
 
+\DD combines the power of the above mentioned tools, erasing the conceptual problems coming with them.
+Its output is is generated through an API taking its cue from \println's paradigms.
+A developer simply needs to call \Doodle(object) to doodle any object type.
+For simple customization of object representations, a class can implement the \texttt{Doodleable} interface which contains 2 methods, \texttt{doodleOn} and \texttt{summarizeOn}.
+In contrast to Java's \texttt{toString}, there are two methods, allowing developers to create two levels of detail for representation.
+This distinction takes effect in the principle of Semantic Zoom \cite{semantic-zoom}.
+Also, they do not generate plain text but draw content on a virtual canvas.
 
 \section{Existing Debugging Tools}
 
@@ -115,8 +134,31 @@ We introduce \DD and present the results of a usability study that shows that \D
 
 \subsection{The Doodleable Interface}
 
-\subsection{Plugins}
+The \texttt{Doodleable} interface features two methods: \texttt{doodleOn(DoodleCanvas)} for a regular representation and \texttt{summarizeOn(DoodleCanvas)} for a simplified and compact version.
+Distinguishing between them enables semantic zoom \cite{semantic-zoom} when inspecting doodles.
 
+\subsubsection{The DoodleCanvas}
+Instead of creating a string like in \println, both methods receive a \texttt{DoodleCanvas} object for drawing contents on it.
+The paradigm behind \texttt{DoodleCanvas} adopts the formatting of text in terms of lines and columns.
+A virtual cursor starts at the upper-left corner of the canvas.
+Drawn objects align one beside each other until a new line is created, which causes the cursor to jump back to the left which one line height offset.
+The second formatting option is to create new columns, moving the cursor to a position on top, to the right of the right-most previous object.
+\texttt{DoodleCanvas} therefore has three public methods: \texttt{draw(Object)}, \texttt{newLine()} and \texttt{newColumn()}.
+
+\todo{Image here}
+
+\subsection{Plugins}
+There are cases where implementing the \texttt{Doodleable} canvas is not a satisfying option for developers.
+If they don't have access to the source code, there is no (clean) way to add an interface.
+Also, the \texttt{Doodleable} API only provides rough formatting options.
+
+\subsubsection{Implementing Plugins}
+For advanced arrangement or additional features like coloring, \DD includes the option to provide plugins.
+They must implement \texttt{RenderingPlugin}, which is most easily done by extending the built-in \texttt{AbstractPlugin}.
+Each plugin holds information about the object types it is able to render.
+Instead of drawing to a virtual canvas, a plugin receives a html \texttt{Tag} object and renders its own HTML code into this tag.
+The principle of semantic zoom is again retained through two different methods for different detail levels.
+In addition to HTML code generation, plugins have the option to cleanly provide CSS rules and individually adjust class attributes assigned to object doodles.
 
 \section{User Study}
 
