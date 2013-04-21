@@ -114,7 +114,9 @@ Also, they do not generate plain text but draw content on a virtual canvas.
 \subsection{Textual Output}
 
 \subsubsection{Best Practice For Textual Output}
-\todo{Describe the outcome of our SqueakSource mining}
+For a detailed comprehension of how programmers use textual output for debugging, we wrote a script that searches for such methods in open source project.
+It analysed SqueakSource, a hosting service for Smalltalk projects, searching for \texttt{printOn} methods, Smalltalk's equivalent to Java's \println.
+\todo{Results}
 
 \subsubsection{Missing Features On Textual Output}
 
@@ -124,8 +126,18 @@ Also, they do not generate plain text but draw content on a virtual canvas.
 
 
 \section{Design}
+For the design of \DD's output, we consulted literature to carefully plan the different project cycles.
+The most important rule we obeyed was to not mix up design and implementation\cite{?}, which could lead to expensive refactorings or remaining design flaws.	
 
 \subsection{The Sketching Cycle}
+One simple and powerful way to evaluate drafted user interfaces is to confront future users with them.
+We took pen and paper and sketched many possible renderings for data types or other UI elements that came to our mind.
+As soon as we had accumulated a good amount of them, we internally discussed them to initially get rid of those that obviously contained usability problems.
+The other ones were presented to programmers we called over and they had to look at some pictures and explain what they intuitively believed to see.
+\todo{images: sketeches and person staring at them}
+If people failed to understand the correct meaning of a sketch, we either improved problematic parts of it or completely refused it.
+After improvements or complete re-designs, sketches were presented to other programmers to avoid influencing through the last session.
+Sketches that were eventually perceived correctly by most of the people would be accepted for later implementation.
 
 \subsection{Inspecting Doodled Objects}
 
