@@ -4,12 +4,10 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import ch.unibe.scg.doodle.Doo;
 import ch.unibe.scg.doodle.DoodleDebug;
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
-
 import demo_scg.model.Directory;
-import demo_scg.plugin.PhoneNumberPlugin;
+import demo_scg.plugin.StringPlugin;
 import demo_scg.util.DemoUtil;
 
 public class DemoMain {
@@ -27,13 +25,13 @@ public class DemoMain {
 			directory.addContact(DemoUtil.randomContact());
 		}
 
-		Doo.dle(directory);
-//		System.out.println(directory);
-		
-		Doo.dle("asdf");
-		
+		System.out.println(directory);
+	}
+
+	@SuppressWarnings("unused")
+	private static void addStringPlugin() {
 		Collection<RenderingPlugin> plugins = new LinkedList<>();
-		plugins.add(new PhoneNumberPlugin());
+		plugins.add(new StringPlugin());
 		DoodleDebug.addRenderingPlugins(plugins);
 	}
 }

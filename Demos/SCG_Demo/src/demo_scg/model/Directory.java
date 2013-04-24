@@ -3,10 +3,7 @@ package demo_scg.model;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import ch.unibe.scg.doodle.api.DoodleCanvas;
-import ch.unibe.scg.doodle.api.Doodleable;
-
-public class Directory implements Doodleable {
+public class Directory {
 	private Collection<Contact> contacts;
 
 	public Directory() {
@@ -23,19 +20,6 @@ public class Directory implements Doodleable {
 
 	public String toString() {
 		return contacts.toString();
-	}
-
-	@Override
-	public void doodleOn(DoodleCanvas c) {
-		for (Contact contact : contacts) {
-			c.draw(contact);
-			c.newLine();
-		}
-	}
-
-	@Override
-	public void summarizeOn(DoodleCanvas c) {
-		c.draw("Directory with " + contacts.size() + " contacts");
 	}
 
 }
