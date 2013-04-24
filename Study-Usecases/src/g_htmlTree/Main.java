@@ -1,5 +1,7 @@
 package g_htmlTree;
 
+import ch.unibe.scg.doodle.Doo;
+
 public class Main {
 
 	/**

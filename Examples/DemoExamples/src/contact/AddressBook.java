@@ -20,7 +20,7 @@ public class AddressBook implements Doodleable {
 	public int numberOfContacts() {
 		return contacts.size();
 	}
-	
+
 	@Override
 	public void doodleOn(DoodleCanvas c) {
 		for (Contact contact : contacts) {
@@ -32,5 +32,14 @@ public class AddressBook implements Doodleable {
 	@Override
 	public void summarizeOn(DoodleCanvas c) {
 		c.draw("AddressBook with " + numberOfContacts() + " entries");
+	}
+
+	public String toString() {
+		String result = "-- Addressbook --\n";
+		for (Contact contact : contacts) {
+			result += contact + "\n";
+		}
+		result += "-----------------";
+		return result;
 	}
 }

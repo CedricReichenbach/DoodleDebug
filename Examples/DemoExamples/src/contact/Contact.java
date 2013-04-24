@@ -10,7 +10,7 @@ public class Contact implements Doodleable {
 	private String name;
 	private Address address;
 	private Image image;
-	
+
 	public String getName() {
 		return name;
 	}
@@ -32,7 +32,7 @@ public class Contact implements Doodleable {
 		this.address = address;
 		this.image = image;
 	}
-	
+
 	@Override
 	public void doodleOn(DoodleCanvas c) {
 		c.draw(image);
@@ -41,10 +41,16 @@ public class Contact implements Doodleable {
 		c.newLine();
 		c.draw(address);
 	}
-	
+
 	@Override
 	public void summarizeOn(DoodleCanvas c) {
 		c.draw(name);
+	}
+
+	public String toString() {
+		String result = "* Contact: " + name+"\n";
+		result += address;
+		return result;
 	}
 
 }

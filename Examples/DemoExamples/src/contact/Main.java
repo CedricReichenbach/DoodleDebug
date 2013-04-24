@@ -18,6 +18,7 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		AddressBook addressBook = generateAddressBook();
 		Doo.dle(addressBook);
+		System.out.println(addressBook);
 	}
 
 	private static AddressBook generateAddressBook() throws IOException {

@@ -1,6 +1,5 @@
 package demo_scg.model;
 
-
 public class Address {
 	private String street;
 	private int zipCode;

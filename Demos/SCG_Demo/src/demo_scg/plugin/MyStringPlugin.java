@@ -7,7 +7,7 @@ import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.plugins.AbstractPlugin;
 import ch.unibe.scg.doodle.rendering.DoodleRenderException;
 
-public class StringPlugin extends AbstractPlugin {
+public class MyStringPlugin extends AbstractPlugin {
 
 	@Override
 	public Set<Class<?>> getDrawableClasses() {
@@ -36,6 +36,7 @@ public class StringPlugin extends AbstractPlugin {
 		tag.add(string.toString());
 	}
 
+	@Override
 	public String getCSS() {
 		String classAttribute = this.getClassAttribute();
 		return "."
