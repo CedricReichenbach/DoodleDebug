@@ -6,7 +6,7 @@
 
 - Groovy-like command line for rendered object (see eclipse's "inspect" in debugger)
 
-- Inspector on rendered objects (like a debugger)
+- (Full) inspector on rendered objects (like a debugger)
 
 - Dynamic update of objects / Diffs
 

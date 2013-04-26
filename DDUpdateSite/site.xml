@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/DoodleDebug_1.0.1.201304250917.jar" id="DoodleDebug" version="1.0.1.201304250917">
+      <category name="doodledebug"/>
+   </feature>
+   <category-def name="doodledebug" label="DoodleDebug">
+      <description>
+         DoodleDebug allows to graphically visualize objects directly from calls inside Java code.
+      </description>
+   </category-def>
+</site>
