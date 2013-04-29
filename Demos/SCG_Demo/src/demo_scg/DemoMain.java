@@ -24,7 +24,7 @@ public class DemoMain {
 		while (directory.numberOfContacts() < MAX_CONTACTS) {
 			directory.addContact(DemoUtil.randomContact());
 		}
-
+		
 		System.out.println(directory);
 	}
 

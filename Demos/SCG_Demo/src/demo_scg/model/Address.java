@@ -1,5 +1,6 @@
 package demo_scg.model;
 
+
 public class Address {
 	private String street;
 	private int zipCode;
@@ -30,18 +31,18 @@ public class Address {
 		return country;
 	}
 
-	// @Override
-	// public void doodleOn(DoodleCanvas c) {
-	// c.draw(street);
-	// c.newLine();
-	// c.draw(zipCode);
-	// c.draw(city);
-	// c.newLine();
-	// c.draw(country);
-	// }
-	//
-	// @Override
-	// public void summarizeOn(DoodleCanvas c) {
-	// c.draw(city);
-	// }
+//	@Override
+//	public void doodleOn(DoodleCanvas c) {
+//		c.draw(street);
+//		c.newLine();
+//		c.draw(zipCode);
+//		c.draw(city);
+//		c.newLine();
+//		c.draw(country);
+//	}
+//
+//	@Override
+//	public void summarizeOn(DoodleCanvas c) {
+//		c.draw(city);
+//	}
 }
