@@ -21,7 +21,7 @@ public class MyStringPlugin extends AbstractPlugin {
 	public void render(Object object, Tag tag) throws DoodleRenderException {
 		String string = (String) object;
 
-		tag.add(string.toString());
+		tag.add(string);
 		Tag charNumber = new Tag("span", "class=charNumber");
 		charNumber.add(string.length());
 		tag.add(charNumber);
@@ -33,7 +33,7 @@ public class MyStringPlugin extends AbstractPlugin {
 			throws DoodleRenderException {
 		String string = (String) object;
 
-		tag.add(string.toString());
+		tag.add(string);
 	}
 
 	@Override
