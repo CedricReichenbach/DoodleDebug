@@ -212,6 +212,23 @@ In addition to HTML code generation, plugins have the option to cleanly provide 
 
 \subsection{Results}
 
+\section{Future Work}
+There are a couple of ideas that might enhance debugging experience and efficiency.
+However, they'd need to be tested to verify their usefulness, possibly before implementing them.
+
+\subsection{Highlighting Object Diffs}
+When tracking and object over time, the most important information is located where properties of an object have changed.
+Therefore, a mechanism comparing objects when they are doodled multiple times could be a powerful feature.
+
+\subsection{Clickable Doodles}
+One problem of using \println over a long period of time is, that it's indeed clear which object is printed, but not where the \println class has been made.
+To find it, some tedious text search over the whole project is needed in the worst case.
+As a solution in \DD, doodles could include a link pointing to the line in source code where the \Doodle call was triggered, similar to the way Throwables are tracked.
+
+\subsection{Debugger Integration}
+Since the eclipse debugger only uses textual representations and doesn't allow any customization, a way to enhance it could be to include doodles.
+A user would be allowed to switch from the standard textual mode to \DD mode, where an object would be inspected using \DD's rendering.
+Or a button beside the textual representation would create a popup with the doodled version of it.
 
 \section{Conclusion}
 
