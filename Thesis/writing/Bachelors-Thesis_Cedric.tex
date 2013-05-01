@@ -143,13 +143,43 @@ Sketches that were eventually perceived correctly by most of the people would be
 
 
 \section{Implementation}
+This section outlines the architecture and mechanisms \DD uses in order to perceive data, process them and display the results.
 
-\subsection{The Doodleable Interface}
+\subsection{Data Transport}
+Since \DD is an Eclipse plugin, it's always running in a different Java VM than the project to be debugged itself.
+As a consequence, object data needs to be transported after each \Doodle call.
+\DD uses a third-party library\cite{xstream} to serialize doodled objects to XML, then transports the result as string over a connection on localhost using SIMON\cite{simon}.
+
+\subsection{Rendering}
+After a request for doodling an object has been received, \DD analyses its type and searches for a fitting rendering in the different customization layers.
+If none is available, a default rendering is used.
+
+\subsubsection{Traversing Object Types}
+Renderings are iteratively searched for all types and supertypes of an object, starting at the innermost type, defined through the object's class name.
+As long as no rendering has been found, the algorithm traverses the inheritance tree in a layer-wise manner, always preferring the class type over interface types inside a layer.
+In other words, this algorithm starts searching on the object's direct class and interface types, then goes on for the class' and interface's direct ancestors and repeats until a match was found or all leaves were reached.
+The only type excluded from this search is the \texttt{Object} type, since it might be reached before some interface types.
+
+\subsubsection{Output}
+As output format, we decided to use HTML.
+This enables great formatting possibilities with moderate implementation effort.
+Eclipse provides the package \texttt{org.eclipse.swt.browser}, which includes a browser that easily blends into the Eclipse UI.
+The rendering used for this browser's content is always the one from the OS's built-in browser and cannot be changed.
+On Windows systems, for instace, Eclipse uses the Internet Explorer rendering engine.
+As a consequence, we had to be careful when creating HTML output and always test them in different browsers to prevent differences in design on different systems.
+
+\subsection{API}
+\DD's API features two API layers for customization.
+One layer, the Doodleable interface, utilizes a similar paradigm as Java's \texttt{toString()} method and targets most use cases since it's a simple and quick solution.
+For more power and flexibility, users may also provide \texttt{RenderingPlugin}s, which are also used internally for \DD's built-in renderings.
+However, \texttt{Doodleable} customizations are always preferred over plugins when both are available for a type.
+
+\subsubsection{The Doodleable Interface}
 
 The \texttt{Doodleable} interface features two methods: \texttt{doodleOn(DoodleCanvas)} for a regular representation and \texttt{summarizeOn(DoodleCanvas)} for a simplified and compact version.
 Distinguishing between them enables semantic zoom \cite{semantic-zoom} when inspecting doodles.
 
-\subsubsection{The DoodleCanvas}
+\paragraph{DoodleCanvas}
 Instead of creating a string like in \println, both methods receive a \texttt{DoodleCanvas} object for drawing contents on it.
 The paradigm behind \texttt{DoodleCanvas} adopts the formatting of text in terms of lines and columns.
 A virtual cursor starts at the upper-left corner of the canvas.
@@ -159,12 +189,12 @@ The second formatting option is to create new columns, moving the cursor to a po
 
 \todo{Image here}
 
-\subsection{Plugins}
+\subsubsection{Plugins}
 There are cases where implementing the \texttt{Doodleable} canvas is not a satisfying option for developers.
 If they don't have access to the source code, there is no (clean) way to add an interface.
 Also, the \texttt{Doodleable} API only provides rough formatting options.
 
-\subsubsection{Implementing Plugins}
+\paragraph{Implementing Plugins}
 For advanced arrangement or additional features like coloring, \DD includes the option to provide plugins.
 They must implement \texttt{RenderingPlugin}, which is most easily done by extending the built-in \texttt{AbstractPlugin}.
 Each plugin holds information about the object types it is able to render.
