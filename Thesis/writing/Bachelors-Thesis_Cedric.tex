@@ -114,6 +114,10 @@ In the world of programming languages, there are two classes of widely used debu
 Textual output like Java's \println and Debuggers.
 
 \subsection{Textual Output}
+Java's \println provides a default textual representation for any object, though only primitives and Strings render to a complete (and useful) output in terms of information.
+Default renderings are kept lean for other objects, but can be easily improved by overriding \texttt{toString}.
+Debugging by directly writing into source code may be easier and quicker than having to equip other debugging tools for a session\ref{some guy}.
+Also, objects can be tracked over time, always receiving a copy of it a precisely defined points of execution.
 
 \subsubsection{Best Practice For Textual Output}
 For a detailed comprehension of how programmers use textual output for debugging, we wrote a script that searches for such methods in open source project.
@@ -121,11 +125,26 @@ It analysed SqueakSource, a hosting service for Smalltalk projects, searching fo
 \todo{Results}
 
 \subsubsection{Missing Features On Textual Output}
+Textual output is static.
+As a consequence, users always face a trade-off between detail level and compactness.
+If the output misses a bit of information, they will need to go back to the code, edit its rendering and re-run the whole program.
+
+Formatting text-only output is restricted to the usage of text characters, tabs and line breaks.
+Also, already printed text or line breaks cannot be reverted.
+In particular, nesting complex objects in a consistent way is not possible in a trivial way without breaking the whole pattern of \println. \todo{nice img example here}
 
 \subsection{Debuggers}
+Debuggers allow to stop a program's execution at any line of source code.
+When stopped, any detail of the current state is inspectable.
+Unlike \println, debuggers allow to put additional or remove existing break points when the program is already running, which allows users to change the target piece of code to debug, or to start debugging only after a big amount of time has passed.
 
 \subsubsection{Drawbacks Of Using A Debugger}
+Since a debugger only shows the program's state at one point in time, comparison of two time slices is hardly possible.
+Important details may only be memorized and mentally compared to the ones at a later point in time.
 
+Eclipse's built-in Java debugger brings no options to customize its output.
+When inspecting an object, all its fields are listed by name, coming along with a textual representation.
+An object with many for a programmer unimportant fields may suffer the loss of its clarity from that.
 
 \section{Design}
 For the design of \DD's output, we consulted literature to carefully plan the different project cycles.
