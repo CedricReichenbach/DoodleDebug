@@ -224,14 +224,61 @@ The principle of semantic zoom is again retained through two different methods f
 In addition to HTML code generation, plugins have the option to cleanly provide CSS rules and individually adjust class attributes assigned to object doodles.
 
 \section{User Study}
+As we had implemented a new debugging system completely from scratch, we wanted to gather some feedback from potential real world user to verify its usefulness in terms of API and design.
+Another goal of such a study would be to reveal problems we might have never found due to our lack of objectivity\cite{the guy that says: "you're not the average user"}.
 
 \subsection{Study Session Setup}
+A completely functional release candidate of \DD was used in a fresh Eclipse 4.2 Classic installation, running inside Windows 7 x64 on a ThinkPad T410 with an external mouse.
+
+Since our resources were not unlimited, we decided to do a qualitative study with 7 people as subjects.
+We posed 3 different problems to every subject, some of them to be solved with and some without \DD, but with any classical debugging tool they desired.
+At the end of the study, we had equally many documentations on problems solved with and without \DD.
+
+Before heading on the study problems, every user had 15-30 minutes to work through a tutorial, play around with \DD in a sandbox and ask questions to the instructor.
+When the actual study problems had been revealed, the instructor cancelled their support.
 
 \subsection{Posed Problems}
+The 3 different problems aimed on different aspects of debugging in Java.
+In the first two problems, the subject was told that a test is failing and they need to find out what the problem is in particular and how to solve it.
+For those problems, subjects had full source code access and were allowed to edit anything.
+
+\subsubsection{Sorting}
+A couple of gray-scale Color objects are stored in a List.
+Some SortingUtil uses a custom comparator with the goal to sort colors by their brightness.
+However, sorting the initial color list and comparing it to a hand-built ground-truth list fails.
+
+Solution: The used comparator wrongly treats completely black \texttt{Color} objects as completely white ones.
+
+\subsubsection{Serialization}
+A \texttt{SerializingUtil} is used to serialize and de-serialize \texttt{Contact} objects.
+Comparison of one particular contact before and after serialization fails.
+
+Solution: The \texttt{long} field \texttt{phoneNumber} in \texttt{Address} as part of \texttt{Contact} changes.
+The reason for this is a temporal cast of any \texttt{long} object into an \texttt{int} inside the \texttt{SerializingUtil}.
 
 \subsection{Subjects}
+The subjects were convenience-sampled and assured of their anonymity. We informed them about the purpose of our study beforehand, and neither promised nor gave any reward for participating. The participants are enumerated in order of their participation.
+
+\todo{Todo: reduce white space, use a table.}
+\begin{description}
+% Oskar Truffer
+\item [{Alpha}] B.Sc in Mathematics, Minor in computer science. Now master student in computer science. % 60 ECTS
+% Remo Diethelm
+\item [{Bravo}] B.Sc. in Computer Science. Master Student  in Computer Science.
+% Andrei Chis
+\item [{Charlie}] M.Sc. in Computer Science. Ph.D. Student in Computer Science.
+% Julian Schelker
+\item [{Delta}] B.Sc. in Computer Science. Master Student  in Computer Science.
+% Raffael Krebs
+\item [{Echo}] M.Sc. in Computer Science. B.Sc. Working as Software Engineer, 1 year of industry experience. Experience in Eclipse plugin development
+% Roger Kohler
+\item [{Foxtrot}] B.Sc. in Computer Science. Master Student  in Computer Science.
+% Ueli Scheidegger
+\item [{Golf}] Lic.rer.pol. in Economics, Minor Computer Science. Working as Software Engineer, 15 years of industry experience. % 60 ECTS
+\end{description}
 
 \subsection{Results}
+
 
 \section{Future Work}
 There are a couple of ideas that might enhance debugging experience and efficiency.
