@@ -7,6 +7,8 @@
 \usepackage{amssymb}
 \usepackage{fancyvrb}
 \usepackage{xspace}
+\usepackage{refstyle}
+\usepackage{listings}
 
 % ============================================================
 % Markup macros for proof-reading
@@ -161,7 +163,16 @@ After improvements or complete re-designs, sketches were presented to other prog
 Sketches that were eventually perceived correctly by most of the people would be accepted for later implementation.
 
 \subsection{Inspecting Doodled Objects}
+One of the main problems of textual output is the universal fact that it's static.
+To avoid the trade-off between detail level and compactness, we implemented the principle of \emph{semantic zoom} along with \DD:
+Every object features two levels of detail for its rendering.
+Objects that are nested into others are not graphically scaled down nor removed, but rendered in its summarized, less detailed  version.
 
+In \DD, objects rendered to nesting levels 0 (doodled ones) and 1 are rendered with full detail; objects of nesting level 2 (inside level 1) show their summarized version.
+Clicking on a level 1 object opens a popup window only showing this very object, but with more detail since it's on nesting level 0 then.
+Level 1 object in this window can again be clicked in order to move into focus.
+This can be repeated until any leaf of the object tree is reached.
+\todo{image here}
 
 \section{Implementation}
 This section outlines the architecture and mechanisms \DD uses in order to perceive data, process them and display the results.
@@ -278,7 +289,50 @@ The subjects were convenience-sampled and assured of their anonymity. We informe
 \end{description}
 
 \subsection{Results}
+This study revealed information about how programmers come along with \DD, but also how they use classical debugging tools.
 
+\subsubsection{System.out.println}
+5 out of 7 subjects used \println for problem solving without \DD.
+One argument coming from Alpha was that they were too lazy to change to debug mode.
+Furthermore, they stated that comparison between objects was rather helpful for the serialization problem and could not have been done that way with a debugger.
+
+\paragraph{Homogeneous Output}
+For finding the problem in the sorting task, Beta printed every color element of the wrongly sorted list to the console.
+Afterwards, they stared at the output with numerical color components until they found out the black color is on the wrong end of the list.
+
+In contrast to that, \DD features sophisticated renderings for Collection and Color types, so doodling the list without any customization immediately made the problem obvious.
+
+\paragraph{Uninspectable and Useless Output}
+The default implementation of \println prints an object's class name and object hash.
+Bravo and Golf cycled between running the program, observing the output and adjusting \println statements to finally reach the part of the object graph they were interested in.
+
+The only subject to override \texttt{toString} methods was Charlie.
+They switched from the in this case useless default representation to a solution that lists all fields of an object (\figref{charlie}).
+
+Alpha produced a similar output as Charlie did, but without overriding \texttt{toString}.
+Instead, they utilized all getter methods to visualize all fields from outside.
+
+\begin{figure}[h]
+\begin{lstlisting}
+public class Contact { ...
+  public String toString() { 
+    return "name: " + name 
+        + ", address: " + address;
+  }
+}
+public class Address { ...
+  public String toString() {
+    return "street: " + street
+      + ", phoneNumber: " + phoneNumber
+      + ", city: " + city;
+  }
+}
+\end{lstlisting}
+  \caption{Custom \texttt{toString()} implementations of a study subject.}
+  \figlabel{charlie}
+\end{figure}
+
+Another reaction to insufficient output of \println was to immediately switch to a debugger, observed with Bravo and Foxtrott.
 
 \section{Future Work}
 There are a couple of ideas that might enhance debugging experience and efficiency.
