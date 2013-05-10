@@ -111,6 +111,7 @@ In contrast to Java's \texttt{toString}, there are two methods, allowing develop
 This distinction takes effect in the principle of Semantic Zoom \cite{semantic-zoom}.
 Also, they do not generate plain text but draw content on a virtual canvas.
 
+
 \section{Existing Debugging Tools}
 In the world of programming languages, there are two classes of widely used debugging tools:
 Textual output like Java's \println and Debuggers.
@@ -148,19 +149,19 @@ Eclipse's built-in Java debugger brings no options to customize its output.
 When inspecting an object, all its fields are listed by name, coming along with a textual representation.
 An object with many for a programmer unimportant fields may suffer the loss of its clarity from that.
 
-\section{Design}
-For the design of \DD's output, we consulted literature to carefully plan the different project cycles.
-The most important rule we obeyed was to not mix up design and implementation\cite{?}, which could lead to expensive refactorings or remaining design flaws.	
 
-\subsection{The Sketching Cycle}
-One simple and powerful way to evaluate drafted user interfaces is to confront future users with them.
-We took pen and paper and sketched many possible renderings for data types or other UI elements that came to our mind.
-As soon as we had accumulated a good amount of them, we internally discussed them to initially get rid of those that obviously contained usability problems.
-The other ones were presented to programmers we called over and they had to look at some pictures and explain what they intuitively believed to see.
-\todo{images: sketeches and person staring at them}
-If people failed to understand the correct meaning of a sketch, we either improved problematic parts of it or completely refused it.
-After improvements or complete re-designs, sketches were presented to other programmers to avoid influencing through the last session.
-Sketches that were eventually perceived correctly by most of the people would be accepted for later implementation.
+\section{Features}
+\todo{text}
+
+\subsection{Built-in Renderings}
+
+\subsection{Usability}
+
+\subsubsection{Configuration-Free}
+
+\subsubsection{Smart Scrolling}
+
+\subsubsection{Notifications}
 
 \subsection{Inspecting Doodled Objects}
 One of the main problems of textual output is the universal fact that it's static.
@@ -173,32 +174,6 @@ Clicking on a level 1 object opens a popup window only showing this very object,
 Level 1 object in this window can again be clicked in order to move into focus.
 This can be repeated until any leaf of the object tree is reached.
 \todo{image here}
-
-\section{Implementation}
-This section outlines the architecture and mechanisms \DD uses in order to perceive data, process them and display the results.
-
-\subsection{Data Transport}
-Since \DD is an Eclipse plugin, it's always running in a different Java VM than the project to be debugged itself.
-As a consequence, object data needs to be transported after each \Doodle call.
-\DD uses a third-party library\cite{xstream} to serialize doodled objects to XML, then transports the result as string over a connection on localhost using SIMON\cite{simon}.
-
-\subsection{Rendering}
-After a request for doodling an object has been received, \DD analyses its type and searches for a fitting rendering in the different customization layers.
-If none is available, a default rendering is used.
-
-\subsubsection{Traversing Object Types}
-Renderings are iteratively searched for all types and supertypes of an object, starting at the innermost type, defined through the object's class name.
-As long as no rendering has been found, the algorithm traverses the inheritance tree in a layer-wise manner, always preferring the class type over interface types inside a layer.
-In other words, this algorithm starts searching on the object's direct class and interface types, then goes on for the class' and interface's direct ancestors and repeats until a match was found or all leaves were reached.
-The only type excluded from this search is the \texttt{Object} type, since it might be reached before some interface types.
-
-\subsubsection{Output}
-As output format, we decided to use HTML.
-This enables great formatting possibilities with moderate implementation effort.
-Eclipse provides the package \texttt{org.eclipse.swt.browser}, which includes a browser that easily blends into the Eclipse UI.
-The rendering used for this browser's content is always the one from the OS's built-in browser and cannot be changed.
-On Windows systems, for instace, Eclipse uses the Internet Explorer rendering engine.
-As a consequence, we had to be careful when creating HTML output and always test them in different browsers to prevent differences in design on different systems.
 
 \subsection{API}
 \DD's API features two API layers for customization.
@@ -233,6 +208,49 @@ Each plugin holds information about the object types it is able to render.
 Instead of drawing to a virtual canvas, a plugin receives a html \texttt{Tag} object and renders its own HTML code into this tag.
 The principle of semantic zoom is again retained through two different methods for different detail levels.
 In addition to HTML code generation, plugins have the option to cleanly provide CSS rules and individually adjust class attributes assigned to object doodles.
+
+
+
+\section{Design}
+For the design of \DD's output, we consulted literature to carefully plan the different project cycles.
+The most important rule we obeyed was to not mix up design and implementation\cite{?}, which could lead to expensive refactorings or remaining design flaws.	
+
+\subsection{The Sketching Cycle}
+One simple and powerful way to evaluate drafted user interfaces is to confront future users with them.
+We took pen and paper and sketched many possible renderings for data types or other UI elements that came to our mind.
+As soon as we had accumulated a good amount of them, we internally discussed them to initially get rid of those that obviously contained usability problems.
+The other ones were presented to programmers we called over and they had to look at some pictures and explain what they intuitively believed to see.
+\todo{images: sketeches and person staring at them}
+If people failed to understand the correct meaning of a sketch, we either improved problematic parts of it or completely refused it.
+After improvements or complete re-designs, sketches were presented to other programmers to avoid influencing through the last session.
+Sketches that were eventually perceived correctly by most of the people would be accepted for later implementation.
+
+
+\section{Implementation}
+This section outlines the architecture and mechanisms \DD uses in order to perceive data, process them and display the results.
+
+\subsection{Data Transport}
+Since \DD is an Eclipse plugin, it's always running in a different Java VM than the project to be debugged itself.
+As a consequence, object data needs to be transported after each \Doodle call.
+\DD uses a third-party library\cite{xstream} to serialize doodled objects to XML, then transports the result as string over a connection on localhost using SIMON\cite{simon}.
+
+\subsection{Rendering}
+After a request for doodling an object has been received, \DD analyses its type and searches for a fitting rendering in the different customization layers.
+If none is available, a default rendering is used.
+
+\subsubsection{Traversing Object Types}
+Renderings are iteratively searched for all types and supertypes of an object, starting at the innermost type, defined through the object's class name.
+As long as no rendering has been found, the algorithm traverses the inheritance tree in a layer-wise manner, always preferring the class type over interface types inside a layer.
+In other words, this algorithm starts searching on the object's direct class and interface types, then goes on for the class' and interface's direct ancestors and repeats until a match was found or all leaves were reached.
+The only type excluded from this search is the \texttt{Object} type, since it might be reached before some interface types.
+
+\subsubsection{Output}
+As output format, we decided to use HTML.
+This enables great formatting possibilities with moderate implementation effort.
+Eclipse provides the package \texttt{org.eclipse.swt.browser}, which includes a browser that easily blends into the Eclipse UI.
+The rendering used for this browser's content is always the one from the OS's built-in browser and cannot be changed.
+On Windows systems, for instace, Eclipse uses the Internet Explorer rendering engine.
+As a consequence, we had to be careful when creating HTML output and always test them in different browsers to prevent differences in design on different systems.
 
 \section{User Study}
 As we had implemented a new debugging system completely from scratch, we wanted to gather some feedback from potential real world user to verify its usefulness in terms of API and design.
@@ -356,6 +374,42 @@ In cases of big classes this can lead to a much more verbose output than the use
 In our study, we observed this problem in relation to the sorting problem.
 Bravo tried to perceive the structure of the color \texttt{List}, which was implemented as an \texttt{ArrayList}.
 The resulting representation in the debugger lead Bravo to close the debugger and instead write a for loop, sequentially printing all elements in this list using \println.
+
+\subsubsection{DoodleDebug}
+With \DD, none of the problems experienced with other tools were found.
+However, we documented a couple of other problems and eventually vanished them during or after the study.
+
+\paragraph{Two Methods in Doodleable Interface}
+Echo brought up confusion about the semantic meaning of the two methods in the \texttt{Doodleable} interface.
+After going back to the tutorial, he understood.
+Without mentioning it, Alpha obviously misunderstood their meaning as well when implementing \texttt{Doodleable} for the first time.
+For the smaller representation, they just delegated the zoom by replacing every \texttt{c.draw(object)} method in \texttt{doodleOn} by \texttt{c.drawSmall(object)} in \texttt{summarizeOn}.
+Following this observation we removed the \texttt{Canvas.drawSmall} method from the API.
+
+\paragraph{Console Keeps Stealing Focus}
+When content is printed to the Eclipse console, it gains focus by default.
+The same applied to the \DD output view during the study.
+In the initial state of the study problems, they threw an Exception to signal the problem is still unsolved.
+When a subject worked with \DD, those two consoles therefore alternatively gathered focus and the view frequently jumped from one to the other.
+Every subject experienced this or a similar problem at least once, but only Echo managed to disable this behaviour by clicking a button on the Eclipse console's toolbar menu.
+
+After the study, we implemented a smarter policy to define whether focus should be obtained or not\ref{smart-focus}\todo{refer to "Notification" here}.
+
+\paragraph{Default Doodles Useless}
+When investigating an object, study subjects were greatly interested in its instance variables.
+Bravo wrote a custom \texttt{toString} method that prints every field of an object labelled with the corresponding field name.
+Golf iteratively re-ran the program, each time printing another field of the same object.
+
+After observing this behaviour on the first three subjects, we modified the default object rendering of \DD.
+Instead of just utilizing the \texttt{toString} method of an object, the object's fields are listed in its representation unless there are more than 7 declared fields.
+
+\paragraph{Problem Immediately Obvious}
+For solving the sorting problem, Charlie doodled both the wrongly sorted list and the manually built ground truth list.
+Since they were directly one below each other in the output, he instantly noticed their similarity and their small difference, namely one black element on the wrong end.
+
+Two subjects using \DD on the serialization problem (Delta, Foxtrott) instantly found the problematic field after doodling the contact object before and after serialization.
+The reason for this success was that \DD's default object rendering was changed to list all fields of an object, similar to a debugger.
+
 
 \section{Future Work}
 There are a couple of ideas that might enhance debugging experience and efficiency.
