@@ -334,6 +334,29 @@ public class Address { ...
 
 Another reaction to insufficient output of \println was to immediately switch to a debugger, observed with Bravo and Foxtrott.
 
+\subsubsection{Debugger}
+4 out of 7 subjects (Bravo, Delta, Echo, Foxtrott) used the Eclipse debugger for problem solving without \DD, Delta and Echo used it exclusively.
+As an advantage over \println, Echo mentioned the inspection features as valuable for comparing two objects like in the serialization problem.
+As a second plus, Echo found the simple improvements of textual representations in the debugger useful.
+For instance, collections and arrays are rendered as a sequence of their contained elements instead of class name and hash.
+
+\paragraph{Comparison Between Objects}
+Directly comparing two objects to approach the source of the serialization problem was done by all subjects except Golf, who immediately started looking at the \texttt{SerializationUtil} source code.
+
+The built-in Eclipse debugger only allows users to inspect one object at a time when using the editor view.
+Thus, comparing two objects can become tedious, since one always needs to switch between them and navigate to the relevant part in its graph.
+This problem was explicitly pointed out by Echo.
+
+\paragraph{Non-Selective Output}
+When inspecting an object, Eclipse's debugger lists all field of an object, since there is no information about their particular relevance.
+In particular an object may be referred to through a simple interface in the user-related code.
+However, since the debugger is working at runtime, it does not know about the declared type and simply visualizes the instantiated type.
+In cases of big classes this can lead to a much more verbose output than the user had expected and therefore complicate inspection.
+
+In our study, we observed this problem in relation to the sorting problem.
+Bravo tried to perceive the structure of the color \texttt{List}, which was implemented as an \texttt{ArrayList}.
+The resulting representation in the debugger lead Bravo to close the debugger and instead write a for loop, sequentially printing all elements in this list using \println.
+
 \section{Future Work}
 There are a couple of ideas that might enhance debugging experience and efficiency.
 However, they'd need to be tested to verify their usefulness, possibly before implementing them.
