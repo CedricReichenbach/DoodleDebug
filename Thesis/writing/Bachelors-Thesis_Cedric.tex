@@ -8,7 +8,9 @@
 \usepackage{fancyvrb}
 \usepackage{xspace}
 \usepackage{refstyle}
+\usepackage{hyperref}
 \usepackage{listings}
+\usepackage{enumitem}
 
 % ============================================================
 % Markup macros for proof-reading
@@ -152,16 +154,64 @@ An object with many for a programmer unimportant fields may suffer the loss of i
 
 \section{Features}
 \todo{text}
+This section summarizes the most important features coming with \DD.
 
 \subsection{Built-in Renderings}
+\DD comes with predefined renderings for a number of commonly used data types in Java.
+Those include:
+\begin{itemize}[noitemsep]
+\item Primitives
+\item Arrays
+\item Booleans
+\item Classes
+\item Collections
+\item Colors
+\item Images (various types)
+\item Maps
+\item Nulls
+\item Objects (default)
+\item Strings
+\item Tables (rectangular two-dimensional arrays and collections)
+\item Trowables
+\end{itemize}
 
 \subsection{Usability}
+For better debugging experience and efficiency, \DD implements several techniques that should take away non-productive workload from the user.
 
 \subsubsection{Configuration-Free}
+A key question in the design of a user interface is the level of configurability exposed to users.
+Highly customizable solutions may be better for power users that are very familiar to the software in question.
+Other users may always remain on default settings, independent of their fittingness.
+We followed the advice of Norman\cite{?} and Buxton\cite{?}, which says not to treat everyone as a designer, but rather take away design decisions from users by creating sophisticated defaults.
+As a consequence, there is no settings dialogue or file for \DD.
 
 \subsubsection{Smart Scrolling}
+In general, an output console can either move its view port to the bottom when new content is appended or stay where it was before.
+\DD implements the scrolling behavior of MUSHClient\footnote{\url{http://www.gammon.com.au/mushclient/}} and mIRC\footnote{\url{http://www.mirc.com}}:
+The view port will only be moved to the bottom if it already was before new content was added.
+If the user doesn't scroll away from the bottom, they will benefit from notifications about new doodles.
+On the other hand, users can scroll up to an old doodle without being bounced away when new objects are doodled.
 
 \subsubsection{Notifications}
+When new objects are doodled, \DD autonomously decides whether to set focus to the \DD output view for user notification or not.
+The crucial factor for this decision is the elapsed time since the last doodling.
+Focus is gained if more than 4 seconds have passed and always for the first doodle of a program run.
+
+When debugging a program with many output events per second, like a game, there is no sense in always notifying the user.
+Either they keep their attention on the output as they see it's rapidly changing, or they work somewhere else in the UI and don't want to be pulled back every time.
+
+Users that debug a program that rarely produces output, like caught exceptions, they probably want to be notified about this event and maybe inspect the new doodle.
+
+\subsubsection{Lean API}
+\meta{Does this belong in here?}
+The \DD API is lean.
+It features three ends for developers to interact with it, though most will only ever use the first two.
+\begin{itemize}
+\item The \texttt{Doo.dle(Object)} method as a drop-in replacement for \println
+\item The \texttt{Doodleable} interface and the associated interface \texttt{DoodleCanvas}, in which objects can define simple custom representations
+\item The \texttt{RenderingPlugin} interface, which allows developers to provide powerful custom renderings for any type, based on HTML and CSS; source code access is not required here.
+\end{itemize}
+Altogether, \DD features no more than 10 public methods.
 
 \subsection{Inspecting Doodled Objects}
 One of the main problems of textual output is the universal fact that it's static.
