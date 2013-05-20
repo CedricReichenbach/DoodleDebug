@@ -11,6 +11,7 @@
 \usepackage{hyperref}
 \usepackage{listings}
 \usepackage{enumitem}
+\usepackage{graphicx}
 
 % ============================================================
 % Markup macros for proof-reading
@@ -136,12 +137,27 @@ If the output misses a bit of information, they will need to go back to the code
 
 Formatting text-only output is restricted to the usage of text characters, tabs and line breaks.
 Also, already printed text or line breaks cannot be reverted.
-In particular, nesting complex objects in a consistent way is not possible in a trivial way without breaking the whole pattern of \println. \todo{nice img example here}
+In particular, nesting complex objects in a consistent way is not possible in a trivial way without breaking the whole pattern of \println.
+
+\begin{figure}[h]
+	\begin{lstlisting}
+    an Array(
+    MatrixTransform2x3(
+        2.0 0.0 0.0
+        0.0 2.0 0.0
+    ) MatrixTransform2x3(
+        1 -0.707107 0.0
+        0.707107 0.707107 0.0
+    ))
+	\end{lstlisting}
+	\caption{Textual visualization of an array of 2D-matrices, without DoodleDebug.}
+	\figlabel{nested-matrix-problem}
+\end{figure}
 
 \subsection{Debuggers}
-Debuggers allow to stop a program's execution at any line of source code.
+Debuggers allow users to stop a program's execution at any line of source code.
 When stopped, any detail of the current state is inspectable.
-Unlike \println, debuggers allow to put additional or remove existing break points when the program is already running, which allows users to change the target piece of code to debug, or to start debugging only after a big amount of time has passed.
+Unlike \println, debuggers allow their users to put additional or remove existing break points at runtime, which makes changing the target piece of code to debug quicker, especially because the current program state doesn't need to be re-created like on a new run.
 
 \subsubsection{Drawbacks Of Using A Debugger}
 Since a debugger only shows the program's state at one point in time, comparison of two time slices is hardly possible.
@@ -153,7 +169,7 @@ An object with many for a programmer unimportant fields may suffer the loss of i
 
 
 \section{Features}
-\todo{text}
+\todo{more introduction text}
 This section summarizes the most important features coming with \DD.
 
 \subsection{Built-in Renderings}
@@ -223,7 +239,19 @@ In \DD, objects rendered to nesting levels 0 (doodled ones) and 1 are rendered w
 Clicking on a level 1 object opens a popup window only showing this very object, but with more detail since it's on nesting level 0 then.
 Level 1 object in this window can again be clicked in order to move into focus.
 This can be repeated until any leaf of the object tree is reached.
-\todo{image here}
+\todo{Refer to image from text}
+
+\begin{figure}[h]
+	\includegraphics{img/AddressBook_whole.png}
+	\caption[AddressBook visualization]{An address book only showing the summaries of its addresses. Clicking reveals the details in \Figref{addressbook_contact}.}
+	\figlabel{addressbook_whole}
+\end{figure}
+
+\begin{figure}[h]
+	\includegraphics{img/AddressBook_contact.png}
+	\caption[Contact visualization]{A popup showing the details of an address.}
+	\figlabel{addressbook_contact}
+\end{figure}
 
 \subsection{API}
 \DD's API features two API layers for customization.
