@@ -100,7 +100,7 @@ If they initially choose a detailed and verbose object representation, the outpu
 Another drawback of textual representation is caused by the simplicity of plain text.
 It's one-dimensional and contains no information about graphical features like advanced formatting or colors.
 
-The other half of the two most widely used debugging tools is the family of debuggers.
+The other half of the two most widely used debugging tools is the family of debuggers~\cite{Kras88a}.
 When utilizing a debugger, a program can be stopped at a specific point of its execution, allowing developers to inspect any detail of this very state.
 A clear advantage over textual output is the ability to inspect objects on demand.
 Information is only displayed as soon as the user asks for it, nevertheless available without re-running the program.
@@ -209,6 +209,7 @@ If the user doesn't scroll away from the bottom, they will benefit from notifica
 On the other hand, users can scroll up to an old doodle without being bounced away when new objects are doodled.
 
 \subsubsection{Notifications}
+\seclabel{smart-focus}
 When new objects are doodled, \DD autonomously decides whether to set focus to the \DD output view for user notification or not.
 The crucial factor for this decision is the elapsed time since the last doodling.
 Focus is gained if more than 4 seconds have passed and always for the first doodle of a program run.
@@ -236,10 +237,10 @@ Every object features two levels of detail for its rendering.
 Objects that are nested into others are not graphically scaled down nor removed, but rendered in its summarized, less detailed  version.
 
 In \DD, objects rendered to nesting levels 0 (doodled ones) and 1 are rendered with full detail; objects of nesting level 2 (inside level 1) show their summarized version.
-Clicking on a level 1 object opens a popup window only showing this very object, but with more detail since it's on nesting level 0 then.
-Level 1 object in this window can again be clicked in order to move into focus.
+Clicking on a level 1 object opens a popup window only showing this very object, but with more detail since it's on the new nesting level 0 now.
+Level 1 object in this window can again be clicked in order to inspect those.
 This can be repeated until any leaf of the object tree is reached.
-\todo{Refer to image from text}
+\Figref{addressbook_whole} shows a doodled address book (on level 0) containing several contacts (on level 1). Clicking on one of them creates a pop-up window, moving the respective contact object to new level 0 (\Figref{addressbook_contact}).
 
 \begin{figure}[h]
 	\includegraphics{img/AddressBook_whole.png}
@@ -271,8 +272,15 @@ A virtual cursor starts at the upper-left corner of the canvas.
 Drawn objects align one beside each other until a new line is created, which causes the cursor to jump back to the left which one line height offset.
 The second formatting option is to create new columns, moving the cursor to a position on top, to the right of the right-most previous object.
 \texttt{DoodleCanvas} therefore has three public methods: \texttt{draw(Object)}, \texttt{newLine()} and \texttt{newColumn()}.
+\Figref{canvas-illustration} shows an example of how the \texttt{Doodleable} interface could be used on a \texttt{Contact} object.
 
-\todo{Image here}
+\begin{figure}[h]
+	\includegraphics[width=\linewidth]{img/doodleable-example.png}
+	\caption[Usage of the \texttt{Doodleable} interface]{Example of a \texttt{Contact} class' \texttt{doodleOn()} method. 
+Dotted lines visualize the effect of the structuring methods \texttt{newLine()} (orange) and \texttt{newColumn()} (purple). 
+The green i-beam indicates the final position of the canvas' imaginary cursor.}
+	\figlabel{canvas-illustration}
+\end{figure}
 
 \subsubsection{Plugins}
 There are cases where implementing the \texttt{Doodleable} canvas is not a satisfying option for developers.
@@ -297,8 +305,26 @@ The most important rule we obeyed was to not mix up design and implementation\ci
 One simple and powerful way to evaluate drafted user interfaces is to confront future users with them.
 We took pen and paper and sketched many possible renderings for data types or other UI elements that came to our mind.
 As soon as we had accumulated a good amount of them, we internally discussed them to initially get rid of those that obviously contained usability problems.
-The other ones were presented to programmers we called over and they had to look at some pictures and explain what they intuitively believed to see.
-\todo{images: sketeches and person staring at them}
+The other ones were presented to programmers we called over and they had to look at some pictures and explain what they intuitively believed to see (\figref{sketch-discussion}).
+
+\begin{figure}[h]
+	\includegraphics[width=\linewidth]{img/design-sketches_thinker.jpg}
+	\caption[Confronting people with design sketches]{Programmer reacting to our sketches.}
+	\figlabel{sketch-discussion}
+\end{figure}
+
+\begin{figure}[h]
+	\includegraphics[width=\linewidth]{img/sketches/032.jpg}
+	\caption[Bad sketch example: Horizontal and vertical alignment]{Inspired by Swing's FlowLayout, all objects are aligned horizontally.}
+	\figlabel{bad-sketch_align-h-v}
+\end{figure}
+
+\begin{figure}[h]
+	\includegraphics[width=\linewidth]{img/sketches/026.jpg}
+	\caption[Bad sketch example: Left-right pattern]{A proposed canvas API that traverses the canvas from top to bottom, dividing it into virtual lines.}
+	\figlabel{bad-sketch_left-right}
+\end{figure}
+
 If people failed to understand the correct meaning of a sketch, we either improved problematic parts of it or completely refused it.
 After improvements or complete re-designs, sketches were presented to other programmers to avoid influencing through the last session.
 Sketches that were eventually perceived correctly by most of the people would be accepted for later implementation.
@@ -367,6 +393,7 @@ The reason for this is a temporal cast of any \texttt{long} object into an \text
 The subjects were convenience-sampled and assured of their anonymity. We informed them about the purpose of our study beforehand, and neither promised nor gave any reward for participating. The participants are enumerated in order of their participation.
 
 \todo{Todo: reduce white space, use a table.}
+\meta{Is this still necessary?}
 \begin{description}
 % Oskar Truffer
 \item [{Alpha}] B.Sc in Mathematics, Minor in computer science. Now master student in computer science. % 60 ECTS
@@ -471,7 +498,7 @@ In the initial state of the study problems, they threw an Exception to signal th
 When a subject worked with \DD, those two consoles therefore alternatively gathered focus and the view frequently jumped from one to the other.
 Every subject experienced this or a similar problem at least once, but only Echo managed to disable this behaviour by clicking a button on the Eclipse console's toolbar menu.
 
-After the study, we implemented a smarter policy to define whether focus should be obtained or not\ref{smart-focus}\todo{refer to "Notification" here}.
+After the study, we implemented a smarter policy to define whether focus should be obtained or not (cf.~\secref{smart-focus}).
 
 \paragraph{Default Doodles Useless}
 When investigating an object, study subjects were greatly interested in its instance variables.
@@ -521,5 +548,8 @@ Any IDE-related actions can be implemented because a stable communication betwee
 
 \section{Acknowledgements}
 
+\bibliographystyle{plain}
+\bibliography{/bib/scg}
+\todo{I can't get it to work... -.-}
 
 \end{document}
