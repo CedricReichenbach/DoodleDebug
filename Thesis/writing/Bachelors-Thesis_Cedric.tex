@@ -242,6 +242,55 @@ Level 1 object in this window can again be clicked in order to inspect those.
 This can be repeated until any leaf of the object tree is reached.
 \Figref{addressbook_whole} shows a doodled address book (on level 0) containing several contacts (on level 1). Clicking on one of them creates a pop-up window, moving the respective contact object to new level 0 (\Figref{addressbook_contact}).
 
+\meta{Is the following paragraph clear enough?}
+Navigation between nesting layers inside a pop-up is aided with bread crumbs~\cite{Krug00a}, which traces the currently inspected branch of the object graph (\figref{breadcrumbs}).
+Any parent doodle in this trace can be clicked to jump to it directly.
+When zooming out of the graph this way, the just visited branch is still visible in the breadcrumbs area until the user turns into a new path.
+
+\begin{figure}[h]
+	\includegraphics[width=\linewidth]{img/breadcrumbs.png}
+	\caption{The labels at the top are \emph{bread crumbs}. The developer is currently looking at a \texttt{Level} object, which is the member of an ArrayList, which is the member of a \texttt{GameWorld}. The object that was doodled was the \texttt{GameWorld} object. The developer was previously zoomed in to player but zoomed out again to Level.}
+	\figlabel{breadcrumbs}
+\end{figure}
+
+\subsubsection{Tracking an Object Over Time}
+
+Thanks \DD's inspection feature, the summarized representation of an object can be held rather terse.
+As an example, the state of a game can be doodled on every update cycle like in \figref{game_long-list}.
+A developer observing this output might be interested in more detail of one particular state, which can be done by clicking on parts of it, resulting in a pop-up (\figref{game_last-state}).
+
+The program code defining a \texttt{Player}'s rendering looks as follows:
+\begin{lstlisting}
+public class Player implements Doodleable {
+    public void doodleOn(DoodleCanvas c) {
+        c.draw(name);
+        c.newLine();
+        c.draw("Alive?");
+        c.draw(isAlive);
+        c.newColumn();
+        c.draw("Life points:");
+        c.draw(lifePoints);
+    }
+
+    public void summarizeOn(DoodleCanvas c) {
+        c.draw(name);
+        c.draw(isAlive);
+    }
+}
+\end{lstlisting}
+
+\begin{figure}[h]
+	\includegraphics[width=\linewidth]{img/game_long-list.png}
+	\caption[Example of a chronological sequence: Game]{A DoodleDebug console showing the doodles of \texttt{GameRoom}s. The boxes beside each are summarized booleans and indicate if the player is alive.}
+	\figlabel{game_long-list}
+\end{figure}
+
+\begin{figure}[h]
+	\includegraphics[width=\linewidth]{img/game_last-state.png}
+	\caption[Example of a chronological sequence: Detailed player list]{Details of a \texttt{GameRoom} from \Figref{game_long-list}.}
+	\figlabel{game_last-state}
+\end{figure}
+
 \begin{figure}[h]
 	\includegraphics{img/AddressBook_whole.png}
 	\caption[AddressBook visualization]{An address book only showing the summaries of its addresses. Clicking reveals the details in \Figref{addressbook_contact}.}
