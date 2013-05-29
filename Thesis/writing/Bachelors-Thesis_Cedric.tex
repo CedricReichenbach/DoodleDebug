@@ -93,41 +93,42 @@ We introduce \DD and present the results of a usability study that shows that \D
 
 For understanding and debugging a program, developers rely on tools to track its runtime states during execution.
 One method is to insert print statements like \println in Java.
-This method is quick and allows its users to compare different states in time of a specific object, represented by a textual output item.
+This method is quick and allows \del{its users} to compare different states in time of a specific object, \ugh{represented by a textual output item}.
 However, this output is static and comes with a couple of conceptual restrictions. On the one hand, the level of detail is hardcoded through the textual representations of objects.
-If a developer decides for a simple and clear way of representation, they will need to rewrite their code for any further inspection and re-run the program after every change.
+If a developer decides for a simple and clear way of representation, they will need to rewrite their code for any further inspection and re-run the program after every change. \nes{That's be a problem in a long-running program.}
 If they initially choose a detailed and verbose object representation, the output will grow and become tedious to read.
 Another drawback of textual representation is caused by the simplicity of plain text.
-It's one-dimensional and contains no information about graphical features like advanced formatting or colors.
+It's one-dimensional and contains no information about graphical features like advanced formatting or colors. \nes{Obscure. Colors are a side-dish. What you want to advertise is *nesting*.}
 
 The other half of the two most widely used debugging tools is the family of debuggers~\cite{Kras88a}.
 When utilizing a debugger, a program can be stopped at a specific point of its execution, allowing developers to inspect any detail of this very state.
 A clear advantage over textual output is the ability to inspect objects on demand.
 Information is only displayed as soon as the user asks for it, nevertheless available without re-running the program.
-The drawbacks of debuggers arise from the fact that their inspector is always bound to a specific point in time and therefore makes it impossible to directly compare different states of the same object.
+The drawbacks of debuggers arise from the fact that their inspector is always bound to a specific point in time and therefore makes it impossible to directly compare different states of the same object.\nes{Nice.}
 
 \DD combines the power of the above mentioned tools, erasing the conceptual problems coming with them.
 Its output is is generated through an API taking its cue from \println's paradigms.
 A developer simply needs to call \Doodle(object) to doodle any object type.
 For simple customization of object representations, a class can implement the \texttt{Doodleable} interface which contains 2 methods, \texttt{doodleOn} and \texttt{summarizeOn}.
 In contrast to Java's \texttt{toString}, there are two methods, allowing developers to create two levels of detail for representation.
-This distinction takes effect in the principle of Semantic Zoom \cite{semantic-zoom}.
-Also, they do not generate plain text but draw content on a virtual canvas.
+This distinction \ugh{takes effect in the principle of Semantic Zoom} \cite{semantic-zoom}.
+\ugh{Also, they do not generate plain text but draw content on a virtual canvas.}
 
 
 \section{Existing Debugging Tools}
+\nes{Move to the back, like it was in the paper. I'm a big fan of "related work" in the back of a paper.}
 In the world of programming languages, there are two classes of widely used debugging tools:
 Textual output like Java's \println and Debuggers.
 
 \subsection{Textual Output}
-Java's \println provides a default textual representation for any object, though only primitives and Strings render to a complete (and useful) output in terms of information.
-Default renderings are kept lean for other objects, but can be easily improved by overriding \texttt{toString}.
+Java's \println provides a default textual representation for any object, though only primitives and Strings render to a complete (and useful) output in terms of information. \nes{Unnecessarily vague. The rules are no longer than what you're writing: primitives look good; everything else, including arrays!, just gets classname+hashvalue}
+\del{Default renderings are kept lean for other objects, but can be easily improved by overriding \texttt{toString}.}
 Debugging by directly writing into source code may be easier and quicker than having to equip other debugging tools for a session\ref{some guy}.
-Also, objects can be tracked over time, always receiving a copy of it a precisely defined points of execution.
+Also, objects can be tracked over time, always \ugh{receiving a copy of it} a precisely defined points of execution.
 
 \subsubsection{Best Practice For Textual Output}
 For a detailed comprehension of how programmers use textual output for debugging, we wrote a script that searches for such methods in open source project.
-It analysed SqueakSource, a hosting service for Smalltalk projects, searching for \texttt{printOn} methods, Smalltalk's equivalent to Java's \println.
+It analysed \nes{Unless you have strong opinions about this, use the "z" form in words ending on "-ize". It's acceptable in both BE and AE.} SqueakSource, a hosting service for Smalltalk projects, searching for \texttt{printOn} methods, Smalltalk's equivalent to Java's \println.
 \todo{Results}
 
 \subsubsection{Missing Features On Textual Output}
@@ -135,9 +136,9 @@ Textual output is static.
 As a consequence, users always face a trade-off between detail level and compactness.
 If the output misses a bit of information, they will need to go back to the code, edit its rendering and re-run the whole program.
 
-Formatting text-only output is restricted to the usage of text characters, tabs and line breaks.
-Also, already printed text or line breaks cannot be reverted.
-In particular, nesting complex objects in a consistent way is not possible in a trivial way without breaking the whole pattern of \println.
+Formatting text-only output is restricted to the usage of text characters, tabs and line breaks. \nes{I think we had that nicer in the paper. Why's this a problem? Because it makes it hard to nest layouts. Evidence? We looked at a bunch of system.out.println, and so no nesting going on. This whole paragraph is a re-write of a paragraph in the paper. Maybe steal that one? You're an author after all …}
+\ugh{Also, already printed text or line breaks cannot be reverted.
+In particular, nesting complex objects in a consistent way is not possible in a trivial way without breaking the whole pattern of \println.}
 
 \begin{figure}[h]
 	\begin{lstlisting}
@@ -155,6 +156,8 @@ In particular, nesting complex objects in a consistent way is not possible in a 
 \end{figure}
 
 \subsection{Debuggers}
+\nes{It's starting to feel very repetitive. DD is positioned between println and Debuggers - fine. Why does that need so many headings and paragraphs?
+There's no need to repeat the introduction.}
 Debuggers allow users to stop a program's execution at any line of source code.
 When stopped, any detail of the current state is inspectable.
 Unlike \println, debuggers allow their users to put additional or remove existing break points at runtime, which makes changing the target piece of code to debug quicker, especially because the current program state doesn't need to be re-created like on a new run.
@@ -171,6 +174,25 @@ An object with many for a programmer unimportant fields may suffer the loss of i
 \section{Features}
 \todo{more introduction text}
 This section summarizes the most important features coming with \DD.
+\nes{Sorry for the rant. You can skip it if you want. You're probably best served not reading all of it. But do follow the link by the end!}
+
+\nes{The word "feature" is used correctly here - the things that you describe really are features.
+A bit further down, you ask "'Lean API' - does this belong here?". Why, of course. A feature is "a distinctive attribute or aspect of something". Surely, we worked very hard to keep the API simple, so that's our most distinctive attribute. It's also println's most distinctive attribute, so we are competing with println in terms of leanness - this is not only a feature of DD, it is maybe the most important.}
+
+\nes{Given how clear the answer is - why weren't you sure if this belongs here?}
+
+\nes{There's some kind of confusion there, and I see it every time I walk thru an electronics store and the stickers on the items list features -- the longer the list, the higher the price. And the mindset of the sales staff is: "Every customer is different. Some are more demanding than others. You have to ask yourself -- do you need this feature or don't you? If you need it, better take the bigger version that can do more!" Note how "leanness" is never on those stickers. Neither is simplicity.}
+
+\nes{So, these people don't live on the moon, they heard about design, usability and simplicity. But they just think of them as something you can add later, as one more feature. They hear that people want usable stuff. "Very well," they say, "usable it is. Let's build something, and then have a usability expert make it usable."}
+
+\nes{And now you're already going down the wrong direction. We couldn't have made DD as nice as it is without *designing* it to be nice first.}
+
+\nes{Good design and simplicity aren't things you can bolt on late in the game. You either design for them up front, or they'll never be there.}
+
+\nes{So, none of what you say is wrong, but there are a couple of words which betray if a person feels the need for design or not. Designy folks use words like "beautiful" and "simple" -- because that's what their after. Others use the words "usable" and "easy" -- because they think it's the same, and those words are more to the point. But they're not the same. As important as usability is -- it isn't quite the same as beautiful.}
+
+\nes{And simplicity - now, if you suffered thru my boring and longish rant, there's a reeeeally nice talk about the difference that I believe you may enjoy a lot. It's called "simple made easy." www.infoq.com/presentations/Simple-Made-Easy}
+
 
 \subsection{Built-in Renderings}
 \DD comes with predefined renderings for a number of commonly used data types in Java.
@@ -192,6 +214,7 @@ Those include:
 \end{itemize}
 
 \subsection{Usability}
+\nes{Maybe there's a latex plugin that can play tv advertisement music while the pdf shows this sentence?}
 For better debugging experience and efficiency, \DD implements several techniques that should take away non-productive workload from the user.
 
 \subsubsection{Configuration-Free}
@@ -217,7 +240,7 @@ Focus is gained if more than 4 seconds have passed and always for the first dood
 When debugging a program with many output events per second, like a game, there is no sense in always notifying the user.
 Either they keep their attention on the output as they see it's rapidly changing, or they work somewhere else in the UI and don't want to be pulled back every time.
 
-Users that debug a program that rarely produces output, like caught exceptions, they probably want to be notified about this event and maybe inspect the new doodle.
+Users that debug a program that rarely produces output, like caught exceptions, they probably want to be notified about this event and maybe inspect the new doodle. \nes{Connect with the study.}
 
 \subsubsection{Lean API}
 \meta{Does this belong in here?}
@@ -232,6 +255,7 @@ Altogether, \DD features no more than 10 public methods.
 
 \subsection{Inspecting Doodled Objects}
 One of the main problems of textual output is the universal fact that it's static.
+\nes{Again?! This is literally the 4th time that you assert that textual output is static.}
 To avoid the trade-off between detail level and compactness, we implemented the principle of \emph{semantic zoom} along with \DD:
 Every object features two levels of detail for its rendering.
 Objects that are nested into others are not graphically scaled down nor removed, but rendered in its summarized, less detailed  version.
@@ -243,7 +267,7 @@ This can be repeated until any leaf of the object tree is reached.
 \Figref{addressbook_whole} shows a doodled address book (on level 0) containing several contacts (on level 1). Clicking on one of them creates a pop-up window, moving the respective contact object to new level 0 (\Figref{addressbook_contact}).
 
 \meta{Is the following paragraph clear enough?}
-Navigation between nesting layers inside a pop-up is aided with bread crumbs~\cite{Krug00a}, which traces the currently inspected branch of the object graph (\figref{breadcrumbs}).
+Navigation between nesting layers inside a pop-up is aided with bread crumbs~\cite{Krug00a} \nes{Page?}, which traces the currently inspected branch of the object graph (\figref{breadcrumbs}).
 Any parent doodle in this trace can be clicked to jump to it directly.
 When zooming out of the graph this way, the just visited branch is still visible in the breadcrumbs area until the user turns into a new path.
 
@@ -255,7 +279,7 @@ When zooming out of the graph this way, the just visited branch is still visible
 
 \subsubsection{Tracking an Object Over Time}
 
-Thanks \DD's inspection feature, the summarized representation of an object can be held rather terse.
+Thanks \ins{to} \DD's inspection feature, the summarized representation of an object can be held rather terse.
 As an example, the state of a game can be doodled on every update cycle like in \figref{game_long-list}.
 A developer observing this output might be interested in more detail of one particular state, which can be done by clicking on parts of it, resulting in a pop-up (\figref{game_last-state}).
 
@@ -325,8 +349,8 @@ The second formatting option is to create new columns, moving the cursor to a po
 
 \begin{figure}[h]
 	\includegraphics[width=\linewidth]{img/doodleable-example.png}
-	\caption[Usage of the \texttt{Doodleable} interface]{Example of a \texttt{Contact} class' \texttt{doodleOn()} method. 
-Dotted lines visualize the effect of the structuring methods \texttt{newLine()} (orange) and \texttt{newColumn()} (purple). 
+	\caption[Usage of the \texttt{Doodleable} interface]{Example of a \texttt{Contact} class' \texttt{doodleOn()} method.
+Dotted lines visualize the effect of the structuring methods \texttt{newLine()} (orange) and \texttt{newColumn()} (purple).
 The green i-beam indicates the final position of the canvas' imaginary cursor.}
 	\figlabel{canvas-illustration}
 \end{figure}
@@ -345,12 +369,13 @@ The principle of semantic zoom is again retained through two different methods f
 In addition to HTML code generation, plugins have the option to cleanly provide CSS rules and individually adjust class attributes assigned to object doodles.
 
 
-
 \section{Design}
+\nes{Actually ... Buxton does suggest to mix implementation and design ---- after the initial design is done. He suggests a fading out of design work, as implementation work fades in.}
 For the design of \DD's output, we consulted literature to carefully plan the different project cycles.
 The most important rule we obeyed was to not mix up design and implementation\cite{?}, which could lead to expensive refactorings or remaining design flaws.	
 
 \subsection{The Sketching Cycle}
+\nes{Merge this paragraph with the previous. Outline how this methodology is exactly what Buxton suggests.}
 One simple and powerful way to evaluate drafted user interfaces is to confront future users with them.
 We took pen and paper and sketched many possible renderings for data types or other UI elements that came to our mind.
 As soon as we had accumulated a good amount of them, we internally discussed them to initially get rid of those that obviously contained usability problems.
@@ -388,7 +413,7 @@ As a consequence, object data needs to be transported after each \Doodle call.
 \DD uses a third-party library\cite{xstream} to serialize doodled objects to XML, then transports the result as string over a connection on localhost using SIMON\cite{simon}.
 
 \subsection{Rendering}
-After a request for doodling an object has been received, \DD analyses its type and searches for a fitting rendering in the different customization layers.
+After a request for doodling an object has been received, \DD analyses \nes{Use the z.} its type and searches for a fitting rendering in the different customization layers.
 If none is available, a default rendering is used.
 
 \subsubsection{Traversing Object Types}
