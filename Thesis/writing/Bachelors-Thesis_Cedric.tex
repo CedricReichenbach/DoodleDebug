@@ -127,8 +127,8 @@ Debugging by directly writing into source code may be easier and quicker than ha
 Also, objects can be tracked over time, always \ugh{receiving a copy of it} a precisely defined points of execution.
 
 \subsubsection{Best Practice For Textual Output}
-For a detailed comprehension of how programmers use textual output for debugging, we wrote a script that searches for such methods in open source project.
-It analysed \nes{Unless you have strong opinions about this, use the "z" form in words ending on "-ize". It's acceptable in both BE and AE.} SqueakSource, a hosting service for Smalltalk projects, searching for \texttt{printOn} methods, Smalltalk's equivalent to Java's \println.
+For a detailed comprehension of how programmers use textual output for debugging, we wrote a script that searches for such methods in open source projects.
+It analyzed SqueakSource, a hosting service for Smalltalk projects, searching for \texttt{printOn} methods, Smalltalk's equivalent to Java's \println.
 \todo{Results}
 
 \subsubsection{Missing Features On Textual Output}
@@ -193,6 +193,10 @@ A bit further down, you ask "'Lean API' - does this belong here?". Why, of cours
 
 \nes{And simplicity - now, if you suffered thru my boring and longish rant, there's a reeeeally nice talk about the difference that I believe you may enjoy a lot. It's called "simple made easy." www.infoq.com/presentations/Simple-Made-Easy}
 
+\meta{Well, what you describe here is the fact that aesthetics are only a small part of design. This was explicitly mentioned in the books I worked through. So when talking about design, I never meant shiny good-looking things, but usability. Where is this used wrongly?}
+
+\meta{If not "Features", how should this section be called? Properties? DoodleDebug in a Nutshell?}
+
 
 \subsection{Built-in Renderings}
 \DD comes with predefined renderings for a number of commonly used data types in Java.
@@ -215,6 +219,7 @@ Those include:
 
 \subsection{Usability}
 \nes{Maybe there's a latex plugin that can play tv advertisement music while the pdf shows this sentence?}
+\meta{You are apple user, right?}
 For better debugging experience and efficiency, \DD implements several techniques that should take away non-productive workload from the user.
 
 \subsubsection{Configuration-Free}
@@ -413,7 +418,7 @@ As a consequence, object data needs to be transported after each \Doodle call.
 \DD uses a third-party library\cite{xstream} to serialize doodled objects to XML, then transports the result as string over a connection on localhost using SIMON\cite{simon}.
 
 \subsection{Rendering}
-After a request for doodling an object has been received, \DD analyses \nes{Use the z.} its type and searches for a fitting rendering in the different customization layers.
+After a request for doodling an object has been received, \DD analyzes its type and searches for a fitting rendering in the different customization layers.
 If none is available, a default rendering is used.
 
 \subsubsection{Traversing Object Types}
