@@ -20,7 +20,7 @@
 \usepackage{xcolor}
 \newcommand{\ra}{$\rightarrow$}
 \newboolean{showedits}
-\setboolean{showedits}{false} % toggle to show or hide edits
+\setboolean{showedits}{true} % toggle to show or hide edits
 %\setboolean{showedits}{false} % toggle to show or hide edits
 \ifthenelse{\boolean{showedits}}
 {
@@ -82,7 +82,6 @@
 \maketitle
 
 \begin{abstract}
-\meta{Only copied for now.}
 Developers need effective ways to inspect and explore the run-time state of programs they are developing and debugging.  Modern debuggers and object inspectors are powerful tools, but they can only be used to explore specific points in the execution where breakpoints have been set. As a result, developers often resort to inserting ``print statements'' in code to log the state at multiple points in the execution. Print statements, however are a `poor man's debugger'', since their output is static and cannot be further explored.
 We propose to combine the simplicity of print statements with the graphical sophistication and interaction of modern debugging tools.
 \DD is a simple API modeled loosely after Java's \println. Objects that are ``printed'' generate graphical views that can be further explored, and can also be used to navigate back to source code in the IDE.
@@ -93,7 +92,7 @@ We introduce \DD and present the results of a usability study that shows that \D
 
 For understanding and debugging a program, developers rely on tools to track its runtime states during execution.
 One method is to insert print statements like \println in Java.
-This method is quick and allows \del{its users} to compare different states in time of a specific object, \ugh{represented by a textual output item}.
+This method is quick and allows \del{its users}\meta{"allow" doesn't work without a dative} to compare different states in time of a specific object.
 However, this output is static and comes with a couple of conceptual restrictions. On the one hand, the level of detail is hardcoded through the textual representations of objects.
 If a developer decides for a simple and clear way of representation, they will need to rewrite their code for any further inspection and re-run the program after every change. \nes{That's be a problem in a long-running program.}
 If they initially choose a detailed and verbose object representation, the output will grow and become tedious to read.
@@ -172,57 +171,20 @@ An object with many for a programmer unimportant fields may suffer the loss of i
 
 
 \section{Features}
-\todo{more introduction text}
-This section summarizes the most important features coming with \DD.
-\nes{Sorry for the rant. You can skip it if you want. You're probably best served not reading all of it. But do follow the link by the end!}
+\meta{Completely rearranged this section. Smart implementation examples are now nested in "Configuration-free". Also, subsections are ordered by importance (my opinion).}
+\todo{introduction text}
 
-\nes{The word "feature" is used correctly here - the things that you describe really are features.
-A bit further down, you ask "'Lean API' - does this belong here?". Why, of course. A feature is "a distinctive attribute or aspect of something". Surely, we worked very hard to keep the API simple, so that's our most distinctive attribute. It's also println's most distinctive attribute, so we are competing with println in terms of leanness - this is not only a feature of DD, it is maybe the most important.}
-
-\nes{Given how clear the answer is - why weren't you sure if this belongs here?}
-
-\nes{There's some kind of confusion there, and I see it every time I walk thru an electronics store and the stickers on the items list features -- the longer the list, the higher the price. And the mindset of the sales staff is: "Every customer is different. Some are more demanding than others. You have to ask yourself -- do you need this feature or don't you? If you need it, better take the bigger version that can do more!" Note how "leanness" is never on those stickers. Neither is simplicity.}
-
-\nes{So, these people don't live on the moon, they heard about design, usability and simplicity. But they just think of them as something you can add later, as one more feature. They hear that people want usable stuff. "Very well," they say, "usable it is. Let's build something, and then have a usability expert make it usable."}
-
-\nes{And now you're already going down the wrong direction. We couldn't have made DD as nice as it is without *designing* it to be nice first.}
-
-\nes{Good design and simplicity aren't things you can bolt on late in the game. You either design for them up front, or they'll never be there.}
-
-\nes{So, none of what you say is wrong, but there are a couple of words which betray if a person feels the need for design or not. Designy folks use words like "beautiful" and "simple" -- because that's what their after. Others use the words "usable" and "easy" -- because they think it's the same, and those words are more to the point. But they're not the same. As important as usability is -- it isn't quite the same as beautiful.}
-
-\nes{And simplicity - now, if you suffered thru my boring and longish rant, there's a reeeeally nice talk about the difference that I believe you may enjoy a lot. It's called "simple made easy." www.infoq.com/presentations/Simple-Made-Easy}
-
-\meta{Well, what you describe here is the fact that aesthetics are only a small part of design. This was explicitly mentioned in the books I worked through. So when talking about design, I never meant shiny good-looking things, but usability. Where is this used wrongly?}
-
-\meta{If not "Features", how should this section be called? Properties? DoodleDebug in a Nutshell?}
-
-
-\subsection{Built-in Renderings}
-\DD comes with predefined renderings for a number of commonly used data types in Java.
-Those include:
-\begin{itemize}[noitemsep]
-\item Primitives
-\item Arrays
-\item Booleans
-\item Classes
-\item Collections
-\item Colors
-\item Images (various types)
-\item Maps
-\item Nulls
-\item Objects (default)
-\item Strings
-\item Tables (rectangular two-dimensional arrays and collections)
-\item Trowables
+\subsection{Lean API}
+The \DD API is lean.
+It features three ends for developers to interact with it, though most will only ever use the first two.
+\begin{itemize}
+\item The \texttt{Doo.dle(Object)} method as a drop-in replacement for \println
+\item The \texttt{Doodleable} interface and the associated interface \texttt{DoodleCanvas}, in which objects can define simple custom representations
+\item The \texttt{RenderingPlugin} interface, which allows developers to provide powerful custom renderings for any type, based on HTML and CSS; source code access is not required here.
 \end{itemize}
+Altogether, \DD features no more than 10 public methods.
 
-\subsection{Usability}
-\nes{Maybe there's a latex plugin that can play tv advertisement music while the pdf shows this sentence?}
-\meta{You are apple user, right?}
-For better debugging experience and efficiency, \DD implements several techniques that should take away non-productive workload from the user.
-
-\subsubsection{Configuration-Free}
+\subsection{Configuration-Free}
 A key question in the design of a user interface is the level of configurability exposed to users.
 Highly customizable solutions may be better for power users that are very familiar to the software in question.
 Other users may always remain on default settings, independent of their fittingness.
@@ -247,20 +209,8 @@ Either they keep their attention on the output as they see it's rapidly changing
 
 Users that debug a program that rarely produces output, like caught exceptions, they probably want to be notified about this event and maybe inspect the new doodle. \nes{Connect with the study.}
 
-\subsubsection{Lean API}
-\meta{Does this belong in here?}
-The \DD API is lean.
-It features three ends for developers to interact with it, though most will only ever use the first two.
-\begin{itemize}
-\item The \texttt{Doo.dle(Object)} method as a drop-in replacement for \println
-\item The \texttt{Doodleable} interface and the associated interface \texttt{DoodleCanvas}, in which objects can define simple custom representations
-\item The \texttt{RenderingPlugin} interface, which allows developers to provide powerful custom renderings for any type, based on HTML and CSS; source code access is not required here.
-\end{itemize}
-Altogether, \DD features no more than 10 public methods.
 
-\subsection{Inspecting Doodled Objects}
-One of the main problems of textual output is the universal fact that it's static.
-\nes{Again?! This is literally the 4th time that you assert that textual output is static.}
+\subsection{Inspection of Doodled Objects}
 To avoid the trade-off between detail level and compactness, we implemented the principle of \emph{semantic zoom} along with \DD:
 Every object features two levels of detail for its rendering.
 Objects that are nested into others are not graphically scaled down nor removed, but rendered in its summarized, less detailed  version.
@@ -271,7 +221,6 @@ Level 1 object in this window can again be clicked in order to inspect those.
 This can be repeated until any leaf of the object tree is reached.
 \Figref{addressbook_whole} shows a doodled address book (on level 0) containing several contacts (on level 1). Clicking on one of them creates a pop-up window, moving the respective contact object to new level 0 (\Figref{addressbook_contact}).
 
-\meta{Is the following paragraph clear enough?}
 Navigation between nesting layers inside a pop-up is aided with bread crumbs~\cite{Krug00a} \nes{Page?}, which traces the currently inspected branch of the object graph (\figref{breadcrumbs}).
 Any parent doodle in this trace can be clicked to jump to it directly.
 When zooming out of the graph this way, the just visited branch is still visible in the breadcrumbs area until the user turns into a new path.
@@ -284,7 +233,7 @@ When zooming out of the graph this way, the just visited branch is still visible
 
 \subsubsection{Tracking an Object Over Time}
 
-Thanks \ins{to} \DD's inspection feature, the summarized representation of an object can be held rather terse.
+Thanks to \DD's inspection feature, the summarized representation of an object can be held rather terse.
 As an example, the state of a game can be doodled on every update cycle like in \figref{game_long-list}.
 A developer observing this output might be interested in more detail of one particular state, which can be done by clicking on parts of it, resulting in a pop-up (\figref{game_last-state}).
 
@@ -332,7 +281,27 @@ public class Player implements Doodleable {
 	\figlabel{addressbook_contact}
 \end{figure}
 
-\subsection{API}
+\subsection{Built-in Renderings}
+\DD comes with predefined renderings for a number of commonly used data types in Java.
+Those include:
+\begin{itemize}[noitemsep]
+\item Primitives
+\item Arrays
+\item Booleans
+\item Classes
+\item Collections
+\item Colors
+\item Images (various types)
+\item Maps
+\item Nulls
+\item Objects (default)
+\item Strings
+\item Tables (rectangular two-dimensional arrays and collections)
+\item Trowables
+\end{itemize}
+
+
+\subsection{Customization API}
 \DD's API features two API layers for customization.
 One layer, the Doodleable interface, utilizes a similar paradigm as Java's \texttt{toString()} method and targets most use cases since it's a simple and quick solution.
 For more power and flexibility, users may also provide \texttt{RenderingPlugin}s, which are also used internally for \DD's built-in renderings.
