@@ -344,16 +344,15 @@ In addition to HTML code generation, plugins have the option to cleanly provide 
 
 
 \section{Design}
-\nes{Actually ... Buxton does suggest to mix implementation and design ---- after the initial design is done. He suggests a fading out of design work, as implementation work fades in.}
 For the design of \DD's output, we consulted literature to carefully plan the different project cycles.
-The most important rule we obeyed was to not mix up design and implementation\cite{?}, which could lead to expensive refactorings or remaining design flaws.	
+As suggested by Buxton\cite{?}\todo{citation}, we decided to start with an initial design phase, which later fades into implementation as soon as a reasonable concept is available.
+In particular, we started off by sketching parts of the future user interface with pen and paper and confronted possible users with them.
+They were not told what a specific picture would represent, but directly had to state their intuition of what they believed it to be (\figref{sketch-discussion}).
+Based on their feedback, we had an estimation of every sketch's quality in terms of intelligibility and could either keep, improve or dismiss it.
+This cycle was repeated until our sketches reached a form where they were easily understood by people and we could start implementing.
 
-\subsection{The Sketching Cycle}
-\nes{Merge this paragraph with the previous. Outline how this methodology is exactly what Buxton suggests.}
-One simple and powerful way to evaluate drafted user interfaces is to confront future users with them.
-We took pen and paper and sketched many possible renderings for data types or other UI elements that came to our mind.
-As soon as we had accumulated a good amount of them, we internally discussed them to initially get rid of those that obviously contained usability problems.
-The other ones were presented to programmers we called over and they had to look at some pictures and explain what they intuitively believed to see (\figref{sketch-discussion}).
+Since the pen and paper sketches were rough and drafted quickly, the implementation phase initially revealed minor usability problems that had not been obvious in the design phase.
+Those were vanished dynamically, still following Buxtons idea of gradually reducing design while implementation slowly starts.
 
 \begin{figure}[h]
 	\includegraphics[width=\linewidth]{img/design-sketches_thinker.jpg}
@@ -372,10 +371,6 @@ The other ones were presented to programmers we called over and they had to look
 	\caption[Bad sketch example: Left-right pattern]{A proposed canvas API that traverses the canvas from top to bottom, dividing it into virtual lines.}
 	\figlabel{bad-sketch_left-right}
 \end{figure}
-
-If people failed to understand the correct meaning of a sketch, we either improved problematic parts of it or completely refused it.
-After improvements or complete re-designs, sketches were presented to other programmers to avoid influencing through the last session.
-Sketches that were eventually perceived correctly by most of the people would be accepted for later implementation.
 
 
 \section{Implementation}
