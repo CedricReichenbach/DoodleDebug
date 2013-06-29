@@ -400,8 +400,25 @@ On Windows systems, for instace, Eclipse uses the Internet Explorer rendering en
 As a consequence, we had to be careful when creating HTML output and always test them in different browsers to prevent differences in design on different systems.
 
 \section{User Study}
+
+\meta{unsorted new stuff}
+
+\begin{tabular}{l | c c c}
+ & \textbf{Sorting} & \textbf{Serialization} & \textbf{Table} \\
+\hline
+Alpha & DD & Classic & - \\
+Bravo & Classic & DD & - \\
+Charlie & DD & Classic & DD \\
+Delta & Classic & DD & Classic \\
+Echo & DD & Classic & DD \\
+Foxtrot & Classic & DD & Classic \\
+Golf & DD & Classic & DD \\
+\end{tabular}
+
+\meta{previous stuff}
+
 As we had implemented a new debugging system completely from scratch, we wanted to gather some feedback from potential real world user to verify its usefulness in terms of API and design.
-Another goal of such a study would be to reveal problems we might have never found due to our lack of objectivity\cite{the guy that says: "you're not the average user"}.
+Another goal of such a study would be to reveal problems we might never have found due to our lack of objectivity\cite{the guy that says: "you're not the average user"}.
 
 \subsection{Study Session Setup}
 A completely functional release candidate of \DD was used in a fresh Eclipse 4.2 Classic installation, running inside Windows 7 x64 on a ThinkPad T410 with an external mouse.
