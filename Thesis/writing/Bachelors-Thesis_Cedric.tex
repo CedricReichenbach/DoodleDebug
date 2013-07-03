@@ -142,14 +142,14 @@ In particular, nesting complex objects in a consistent way is not possible in a 
 
 \begin{figure}[h]
 	\begin{lstlisting}
-    an Array(
-    MatrixTransform2x3(
-        2.0 0.0 0.0
-        0.0 2.0 0.0
-    ) MatrixTransform2x3(
-        1 -0.707107 0.0
-        0.707107 0.707107 0.0
-    ))
+	an Array(
+	MatrixTransform2x3(
+		2.0 0.0 0.0
+		0.0 2.0 0.0
+	) MatrixTransform2x3(
+		1 -0.707107 0.0
+		0.707107 0.707107 0.0
+	))
 	\end{lstlisting}
 	\caption{Textual visualization of an array of 2D-matrices, without DoodleDebug.}
 	\figlabel{nested-matrix-problem}
@@ -286,20 +286,20 @@ A developer observing this output might be interested in more detail of one part
 The program code defining a \texttt{Player}'s rendering looks as follows:
 \begin{lstlisting}
 public class Player implements Doodleable {
-    public void doodleOn(DoodleCanvas c) {
-        c.draw(name);
-        c.newLine();
-        c.draw("Alive?");
-        c.draw(isAlive);
-        c.newColumn();
-        c.draw("Life points:");
-        c.draw(lifePoints);
-    }
+	public void doodleOn(DoodleCanvas c) {
+		c.draw(name);
+		c.newLine();
+		c.draw("Alive?");
+		c.draw(isAlive);
+		c.newColumn();
+		c.draw("Life points:");
+		c.draw(lifePoints);
+	}
 
-    public void summarizeOn(DoodleCanvas c) {
-        c.draw(name);
-        c.draw(isAlive);
-    }
+	public void summarizeOn(DoodleCanvas c) {
+		c.draw(name);
+		c.draw(isAlive);
+	}
 }
 \end{lstlisting}
 
@@ -426,9 +426,12 @@ The only type excluded from this search is the \texttt{Object} type, since it mi
 As output format, we decided to use HTML.
 This enables great formatting possibilities with moderate implementation effort.
 Eclipse provides the package \texttt{org.eclipse.swt.browser}, which includes a browser that easily blends into the Eclipse UI.
+\nes{Previous sentence is advertisement. Rewrite.}
 The rendering used for this browser's content is always the one from the OS's built-in browser and cannot be changed.
-On Windows systems, for instace, Eclipse uses the Internet Explorer rendering engine.
+On Windows systems, for instace\nes{instance.}, Eclipse uses the Internet Explorer rendering engine.
+\nes{Maybe spend a second or two talking about compatibility modes.}
 As a consequence, we had to be careful when creating HTML output and always test them in different browsers to prevent differences in design on different systems.
+\nes{More detail.}
 
 \section{User Study}
 As we had implemented a new debugging system completely from scratch, we wanted to gather some feedback from potential real world user to verify its usefulness in terms of API and design.
@@ -438,12 +441,14 @@ Another goal of such a study would be to reveal problems we might have never fou
 A completely functional release candidate of \DD was used in a fresh Eclipse 4.2 Classic installation, running inside Windows 7 x64 on a ThinkPad T410 with an external mouse.
 
 Since our resources were not unlimited, we decided to do a qualitative study with 7 people as subjects.
+\nes{The word is "convenience sampling". Don't explain "were not unlimited" -- it's not a proper trade-off discussion. Kill or expand.}
 We posed 3 different problems to every subject, some of them to be solved with and some without \DD, but with any classical debugging tool they desired.
 At the end of the study, we had equally many documentations on problems solved with and without \DD.
 
-Before heading on the study problems, every user had 15-30 minutes to work through a tutorial, play around with \DD in a sandbox and ask questions to the instructor.
-When the actual study problems had been revealed, the instructor cancelled their support.
+Before \ugh{heading on the study problems}, every user had 15-30 minutes to work through a tutorial, play around with \DD in a sandbox and ask questions to the instructor.
+When the actual study problems had been revealed, the instructor \ugh{cancelled}\nes{Careful: this is British spelling again. Also: it's the wrong word to use here.} their support.
 
+\nes{One thing we should mention, both here and in the paper, is that while some problems might not be especially fair, they nonetheless show that DD has strong points.}
 \subsection{Posed Problems}
 The 3 different problems aimed on different aspects of debugging in Java.
 In the first two problems, the subject was told that a test is failing and they need to find out what the problem is in particular and how to solve it.
@@ -452,6 +457,7 @@ For those problems, subjects had full source code access and were allowed to edi
 \subsubsection{Sorting}
 A couple of gray-scale Color objects are stored in a List.
 Some SortingUtil uses a custom comparator with the goal to sort colors by their brightness.
+\nes{Insufficient detail.}
 However, sorting the initial color list and comparing it to a hand-built ground-truth list fails.
 
 Solution: The used comparator wrongly treats completely black \texttt{Color} objects as completely white ones.
@@ -464,6 +470,7 @@ Solution: The \texttt{long} field \texttt{phoneNumber} in \texttt{Address} as pa
 The reason for this is a temporal cast of any \texttt{long} object into an \texttt{int} inside the \texttt{SerializingUtil}.
 
 \subsection{Subjects}
+\nes{Move this up.}
 The subjects were convenience-sampled and assured of their anonymity. We informed them about the purpose of our study beforehand, and neither promised nor gave any reward for participating. The participants are enumerated in order of their participation.
 
 \todo{Todo: reduce white space, use a table.}
@@ -512,16 +519,16 @@ Instead, they utilized all getter methods to visualize all fields from outside.
 \begin{figure}[h]
 \begin{lstlisting}
 public class Contact { ...
-  public String toString() { 
-    return "name: " + name 
-        + ", address: " + address;
+  public String toString() {
+	return "name: " + name
+		+ ", address: " + address;
   }
 }
 public class Address { ...
   public String toString() {
-    return "street: " + street
-      + ", phoneNumber: " + phoneNumber
-      + ", city: " + city;
+	return "street: " + street
+	  + ", phoneNumber: " + phoneNumber
+	  + ", city: " + city;
   }
 }
 \end{lstlisting}
@@ -531,6 +538,7 @@ public class Address { ...
 
 Another reaction to insufficient output of \println was to immediately switch to a debugger, observed with Bravo and Foxtrott.
 
+\nes{Both here and in the paper, the study needs some more outlining, and more structure.}
 \subsubsection{Debugger}
 4 out of 7 subjects (Bravo, Delta, Echo, Foxtrott) used the Eclipse debugger for problem solving without \DD, Delta and Echo used it exclusively.
 As an advantage over \println, Echo mentioned the inspection features as valuable for comparing two objects like in the serialization problem.
