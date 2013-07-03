@@ -407,8 +407,6 @@ As a consequence, we had to be careful when creating HTML output and always test
 
 \section{User Study}
 
-\meta{----- new stuff, ordered -----}
-
 \seclabel{study}
 We carried out a usability study \cite{Krug00a} to validate the design of \DD.
 Usability studies are qualitative rather than quantitative, offering deeper semantic insights~\cite[pp. 13--15]{Lang09b} than a quantitative study while simultaneously being easier to set up.
@@ -418,7 +416,8 @@ Seven developers solved 3 tasks each.
 
 \subsection{Study Session Setup}
 A fully functional release candidate of DoodleDebug was used.
-\meta{You wanted to mention the build number here. Well, I didn't really have a structured versioning before 1.0. Also, those are not publicly available (unless we move the whole git repo to github or whatever).}
+\nes{Build number}
+\meta{Well, I didn't really have a structured versioning before 1.0. Also, those are not publicly available (unless we move the whole git repo to github or whatever).}
 It ran inside Eclipse 4.2 (Classic edition), using a ThinkPad T410 with Windows 7 (x64) and an external mouse.
 The screen was captured during the whole session and one instructor sitting beside the test subject for problem explanation and protocol.
 Before the actual testing, the user had 15--30 minutes to work through a tutorial and play around with DoodleDebug inside a sandbox.
@@ -459,8 +458,6 @@ Subjects are informed that in the returned table there are duplicated tuples and
 \subsection{Subjects}
 The subjects were convenience-sampled and assured of their anonymity. We informed them about the purpose of our study beforehand, and neither promised nor gave any reward for participating. The participants are enumerated in order of their participation.
 
-\todo{Todo: reduce white space, use a table.}
-\meta{Is this still necessary?}
 \begin{description}
 % Oskar Truffer
 \item [{Alpha}] B.Sc in Mathematics, Minor in computer science. Now master student in computer science. % 60 ECTS
@@ -496,7 +493,6 @@ Golf & DD & Classic & DD \\
 \end{tabular}
 
 \subsubsection{Observations using System.out.println}
-\todo{adjust introduction (was copied from somewhere else}
 5 out of 7 subjects (all except Delta and Echo) made use of this mechanism to visualize runtime data. 
 Alpha argued with laziness to open a debugger or to stare at foreign code. 
 When quizzed, alpha said they can compare things, either two different objects as posed in the sorting problem or the same object at different points in time, as in the Serialization problem. 
@@ -540,10 +536,9 @@ public class Address { ...
 Another approach to solve insufficient output was to switch from \println to the debugger, observed with Bravo and Foxtrot.
 
 \subsubsection{Observations using a Debugger}
-\todo{adjust introduction (was copied from somewhere else}
 Four subjects (Bravo, Delta, Echo and Foxtrot) used the Eclipse debugger to inspect objects, only Delta and Echo using it exclusively. 
-Echo's argumentation for this usage was that debuggers are more powerful in comparison to \println, because they allow one to inspect objects dynamically and additionally provide simple improvements of standard textual representations (\eg arrays are represented in the form of \texttt{[objectA, objectB, ...]}instead of \texttt{[Ljava.lang.Object;@4cb162d5}. 
-Echo mentioned that he missed the feature to compare two objects from different points in time.
+Echo's argumentation for this usage was that debuggers are more powerful in comparison to \println, because they allow one to inspect objects dynamically and additionally provide simple improvements of standard textual representations (\eg arrays are represented in the form of \texttt{[objectA, objectB, ...]}instead of \texttt{[Ljava.lang.Object;@4cb162d5}.
+Echo mentioned that they missed the feature to compare two objects from different points in time.
 
 \paragraph{Comparison Between Objects}
 The built-in Eclipse debugger only allows you to inspect one object at one point in time. 
@@ -597,7 +592,10 @@ On other sessions, Golf iteratively re-ran the program, each time printing anoth
 Based on this finding, we modified DoodleDebug's standard rendering: Instead of falling back to the object's \texttt{toString()} method, its fields are listed, containing field name and field content as a clickable sub-doodle in \Figref{fielddoodler-player}.
 
 \subsubsection{Observations Without Any Debugging Tool}
-\todo{re-write "source code staring"}
+Subject Gold was the only one to solve a problem without using any debugging tool.
+On the serialization problem, they tried to comprehend the logic of the problem's \texttt{SerializingUtil}.
+Unlike others, they found the problem source at the same time as the nature of the problem itself.
+They fixed the bug and verified the result using \println.
 
 \subsection{Summary}
 Our study showed that \DD is clearly superior to both, \println and debuggers in certain debugging situations.
