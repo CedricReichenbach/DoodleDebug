@@ -1,7 +1,6 @@
 package ch.unibe.scg.doodle;
 
-import java.util.HashMap;
-import java.util.Map;
+import ch.unibe.scg.doodle.helperClasses.Nullable;
 
 /**
  * Storage for objects to be possibly rendered later (clickables). Every stored
@@ -11,20 +10,25 @@ import java.util.Map;
  * 
  */
 public final class IndexedObjectStorage {
-	private Map<Integer, Object> map;
-	int nextID;
+	static final int CAPACITY = 10000;
+	private final Object[] ringBuffer;
+	private int nextID;
 
 	public IndexedObjectStorage() {
-		map = new HashMap<Integer, Object>();
-		nextID = 0;
+		this.nextID = 0;
+		this.ringBuffer = new Object[CAPACITY];
 	}
 
+	/** @return Id of stored object. */
 	public int store(Object o) {
-		map.put(nextID, o);
+		ringBuffer[nextID % CAPACITY] = o;
 		return nextID++;
 	}
 
-	public Object get(int id) {
-		return map.get(id);
+	public @Nullable Object get(int id) {
+		if (id < nextID - CAPACITY || id >= nextID)
+			return null;
+		
+		return ringBuffer[id % CAPACITY];
 	}
 }

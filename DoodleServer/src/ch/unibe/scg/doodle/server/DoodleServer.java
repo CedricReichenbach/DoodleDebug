@@ -33,33 +33,26 @@ import ch.unibe.scg.doodle.view.CSSCollection;
 import ch.unibe.scg.doodle.view.DoodleDebugScreen;
 
 public class DoodleServer {
-	private static DoodleServer instance;
+	private static final DoodleServer instance = new DoodleServer();
 	private URLClassLoader clientClassLoader;
 
+	private final IndexedObjectStorage storage = new IndexedObjectStorage();
+	private LightboxStack stack;
+
 	public static DoodleServer instance() {
-		if (instance == null) {
-			instance = new DoodleServer();
-		}
 		return instance;
 	}
 
 	protected DoodleServer() {
-
-	}
-
-	private IndexedObjectStorage storage;
-	private LightboxStack stack;
-
-	public void setStorage(IndexedObjectStorage storage) {
-		this.storage = storage;
 	}
 
 	public void drawObjectWithID(int id) {
-		if (this.storage == null) {
-			DooMockup.dle("Sorry, don't know that object.");
+		Object o = this.storage.get(id);
+		if (o == null) {
+			// TODO: Show message that object is not available anymore
 			return;
 		}
-		Object o = this.storage.get(id);
+		
 		drawIntoLightbox(o);
 	}
 
@@ -183,5 +176,9 @@ public class DoodleServer {
 		IWorkbenchWindow win = wb.getActiveWorkbenchWindow();
 		IWorkbenchPage page = win.getActivePage();
 		return page;
+	}
+
+	public int store(Object object) {
+		return storage.store(object);
 	}
 }

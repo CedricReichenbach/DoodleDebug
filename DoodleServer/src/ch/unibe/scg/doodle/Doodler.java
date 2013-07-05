@@ -39,8 +39,6 @@ public class Doodler {
 
 	private int level;
 
-	private IndexedObjectStorage clickables;
-
 	private static Doodler instance; // XXX Sorry, Guice...
 
 	/**
@@ -61,7 +59,6 @@ public class Doodler {
 		Runnable htmlShow = new HtmlShow(htmlDocument.toString());
 		Display.getDefault().syncExec(htmlShow);
 
-		clickables = new IndexedObjectStorage();
 		instance = this;
 	}
 
@@ -127,8 +124,6 @@ public class Doodler {
 		Tag printOutWrapper = new Tag("div", "class=printOutWrapper");
 		printOutWrapper.addAttribute(new Attribute("class", "rendering"));
 		scratch.drawWholeWithName(printOutWrapper);
-
-		DoodleServer.instance().setStorage(clickables);
 
 		String css = CSSCollection.flushAllCSS();
 		Runnable jsExecuterForCSS = new JavascriptExecuter(
@@ -201,7 +196,7 @@ public class Doodler {
 		scratch.addCSSClass("level" + level);
 		scratch.setLevel(level);
 		if (level == 1)
-			scratch.setObjectID(clickables.store(object));
+			scratch.setObjectID(DoodleServer.instance().store(object));
 		if (withClassName) {
 			scratch.drawWholeWithName(tag);
 		} else {
