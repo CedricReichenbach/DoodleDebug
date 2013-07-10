@@ -1,0 +1,220 @@
+From e3a9d401a5ec9c2f6d1368be83f33e1cb6a922cc Mon Sep 17 00:00:00 2001
+From: Cedric Reichenbach <didu@gmx.ch>
+Date: Fri, 5 Jul 2013 21:04:30 +0200
+Subject: [PATCH] implemented capacity for indexed object storage and created test for it
+
+---
+ DoodleServer/.classpath                            |    1 +
+ DoodleServer/src/ch/unibe/scg/doodle/Doodler.java  |    7 +----
+ .../ch/unibe/scg/doodle/IndexedObjectStorage.java  |   22 +++++++++------
+ .../unibe/scg/doodle/helperClasses/Nullable.java   |   11 ++++++++
+ .../ch/unibe/scg/doodle/server/DoodleServer.java   |   27 +++++++++-----------
+ .../unibe/scg/doodle/IndexedObjectStorageTest.java |   26 +++++++++++++++++++
+ 6 files changed, 64 insertions(+), 30 deletions(-)
+ create mode 100644 DoodleServer/src/ch/unibe/scg/doodle/helperClasses/Nullable.java
+ create mode 100644 DoodleServer/tests/ch/unibe/scg/doodle/IndexedObjectStorageTest.java
+
+diff --git a/DoodleServer/.classpath b/DoodleServer/.classpath
+index ad32c83..3e28c6b 100644
+--- a/DoodleServer/.classpath
++++ b/DoodleServer/.classpath
+@@ -3,5 +3,6 @@
+ 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+ 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+ 	<classpathentry kind="src" path="src"/>
++	<classpathentry kind="src" path="tests"/>
+ 	<classpathentry kind="output" path="bin"/>
+ </classpath>
+diff --git a/DoodleServer/src/ch/unibe/scg/doodle/Doodler.java b/DoodleServer/src/ch/unibe/scg/doodle/Doodler.java
+index a0d0725..512b9d4 100644
+--- a/DoodleServer/src/ch/unibe/scg/doodle/Doodler.java
++++ b/DoodleServer/src/ch/unibe/scg/doodle/Doodler.java
+@@ -39,8 +39,6 @@ public class Doodler {
+ 
+ 	private int level;
+ 
+-	private IndexedObjectStorage clickables;
+-
+ 	private static Doodler instance; // XXX Sorry, Guice...
+ 
+ 	/**
+@@ -61,7 +59,6 @@ public class Doodler {
+ 		Runnable htmlShow = new HtmlShow(htmlDocument.toString());
+ 		Display.getDefault().syncExec(htmlShow);
+ 
+-		clickables = new IndexedObjectStorage();
+ 		instance = this;
+ 	}
+ 
+@@ -128,8 +125,6 @@ public class Doodler {
+ 		printOutWrapper.addAttribute(new Attribute("class", "rendering"));
+ 		scratch.drawWholeWithName(printOutWrapper);
+ 
+-		DoodleServer.instance().setStorage(clickables);
+-
+ 		String css = CSSCollection.flushAllCSS();
+ 		Runnable jsExecuterForCSS = new JavascriptExecuter(
+ 				JavascriptCallsUtil.addCSS(css));
+@@ -201,7 +196,7 @@ public class Doodler {
+ 		scratch.addCSSClass("level" + level);
+ 		scratch.setLevel(level);
+ 		if (level == 1)
+-			scratch.setObjectID(clickables.store(object));
++			scratch.setObjectID(DoodleServer.instance().store(object));
+ 		if (withClassName) {
+ 			scratch.drawWholeWithName(tag);
+ 		} else {
+diff --git a/DoodleServer/src/ch/unibe/scg/doodle/IndexedObjectStorage.java b/DoodleServer/src/ch/unibe/scg/doodle/IndexedObjectStorage.java
+index a201633..26ca040 100644
+--- a/DoodleServer/src/ch/unibe/scg/doodle/IndexedObjectStorage.java
++++ b/DoodleServer/src/ch/unibe/scg/doodle/IndexedObjectStorage.java
+@@ -1,7 +1,6 @@
+ package ch.unibe.scg.doodle;
+ 
+-import java.util.HashMap;
+-import java.util.Map;
++import ch.unibe.scg.doodle.helperClasses.Nullable;
+ 
+ /**
+  * Storage for objects to be possibly rendered later (clickables). Every stored
+@@ -11,20 +10,25 @@ import java.util.Map;
+  * 
+  */
+ public final class IndexedObjectStorage {
+-	private Map<Integer, Object> map;
+-	int nextID;
++	static final int CAPACITY = 10000;
++	private final Object[] ringBuffer;
++	private int nextID;
+ 
+ 	public IndexedObjectStorage() {
+-		map = new HashMap<Integer, Object>();
+-		nextID = 0;
++		this.nextID = 0;
++		this.ringBuffer = new Object[CAPACITY];
+ 	}
+ 
++	/** @return Id of stored object. */
+ 	public int store(Object o) {
+-		map.put(nextID, o);
++		ringBuffer[nextID % CAPACITY] = o;
+ 		return nextID++;
+ 	}
+ 
+-	public Object get(int id) {
+-		return map.get(id);
++	public @Nullable Object get(int id) {
++		if (id < nextID - CAPACITY || id >= nextID)
++			return null;
++		
++		return ringBuffer[id % CAPACITY];
+ 	}
+ }
+diff --git a/DoodleServer/src/ch/unibe/scg/doodle/helperClasses/Nullable.java b/DoodleServer/src/ch/unibe/scg/doodle/helperClasses/Nullable.java
+new file mode 100644
+index 0000000..8a7b587
+--- /dev/null
++++ b/DoodleServer/src/ch/unibe/scg/doodle/helperClasses/Nullable.java
+@@ -0,0 +1,11 @@
++package ch.unibe.scg.doodle.helperClasses;
++
++import java.lang.annotation.Documented;
++import java.lang.annotation.Retention;
++import java.lang.annotation.RetentionPolicy;
++
++@Documented
++@Retention(RetentionPolicy.RUNTIME)
++public @interface Nullable {
++
++}
+\ No newline at end of file
+diff --git a/DoodleServer/src/ch/unibe/scg/doodle/server/DoodleServer.java b/DoodleServer/src/ch/unibe/scg/doodle/server/DoodleServer.java
+index 327e5b9..c11f8cb 100644
+--- a/DoodleServer/src/ch/unibe/scg/doodle/server/DoodleServer.java
++++ b/DoodleServer/src/ch/unibe/scg/doodle/server/DoodleServer.java
+@@ -33,33 +33,26 @@ import ch.unibe.scg.doodle.view.CSSCollection;
+ import ch.unibe.scg.doodle.view.DoodleDebugScreen;
+ 
+ public class DoodleServer {
+-	private static DoodleServer instance;
++	private static final DoodleServer instance = new DoodleServer();
+ 	private URLClassLoader clientClassLoader;
+ 
++	private final IndexedObjectStorage storage = new IndexedObjectStorage();
++	private LightboxStack stack;
++
+ 	public static DoodleServer instance() {
+-		if (instance == null) {
+-			instance = new DoodleServer();
+-		}
+ 		return instance;
+ 	}
+ 
+ 	protected DoodleServer() {
+-
+-	}
+-
+-	private IndexedObjectStorage storage;
+-	private LightboxStack stack;
+-
+-	public void setStorage(IndexedObjectStorage storage) {
+-		this.storage = storage;
+ 	}
+ 
+ 	public void drawObjectWithID(int id) {
+-		if (this.storage == null) {
+-			DooMockup.dle("Sorry, don't know that object.");
++		Object o = this.storage.get(id);
++		if (o == null) {
++			// TODO: Show message that object is not available anymore
+ 			return;
+ 		}
+-		Object o = this.storage.get(id);
++		
+ 		drawIntoLightbox(o);
+ 	}
+ 
+@@ -184,4 +177,8 @@ public class DoodleServer {
+ 		IWorkbenchPage page = win.getActivePage();
+ 		return page;
+ 	}
++
++	public int store(Object object) {
++		return storage.store(object);
++	}
+ }
+diff --git a/DoodleServer/tests/ch/unibe/scg/doodle/IndexedObjectStorageTest.java b/DoodleServer/tests/ch/unibe/scg/doodle/IndexedObjectStorageTest.java
+new file mode 100644
+index 0000000..862888e
+--- /dev/null
++++ b/DoodleServer/tests/ch/unibe/scg/doodle/IndexedObjectStorageTest.java
+@@ -0,0 +1,26 @@
++package ch.unibe.scg.doodle;
++
++import static org.hamcrest.CoreMatchers.is;
++import static org.junit.Assert.assertThat;
++
++import org.junit.Assert;
++import org.junit.Test;
++
++public class IndexedObjectStorageTest {
++	@Test
++	public void testStore() {
++		IndexedObjectStorage storage = new IndexedObjectStorage();
++		for (int i = 0; i <= 2 * IndexedObjectStorage.CAPACITY; i++) {
++			storage.store(i);
++		}
++		for (int i = 0; i <= IndexedObjectStorage.CAPACITY; i++) {
++			Assert.assertNull(storage.get(i));
++		}
++		for (int i = IndexedObjectStorage.CAPACITY + 1; i <= 2 * IndexedObjectStorage.CAPACITY; i++) {
++			assertThat(storage.get(i), is((Object) i));
++		}
++		for (int i = 2 * IndexedObjectStorage.CAPACITY + 1; i <= 3 * IndexedObjectStorage.CAPACITY; i++) {
++			Assert.assertNull(storage.get(i));
++		}
++	}
++}
+-- 
+1.7.0.2.msysgit.0
+
