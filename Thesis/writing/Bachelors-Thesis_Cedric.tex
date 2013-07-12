@@ -123,61 +123,6 @@ This distinction allows inspection of objects directly in the output window.
 As output format, \DD uses the web standards HTML and CSS to enhance formatting possibilities over simple text.
 
 
-\section{Existing Debugging Tools}
-\nes{Move to the back, like it was in the paper. I'm a big fan of "related work" in the back of a paper.}
-In the world of programming languages, there are two classes of widely used debugging tools:
-Textual output like Java's \println and Debuggers.
-
-\subsection{Textual Output}
-Java's \println provides a default textual representation for any object.
-Primitives and Strings are rendered in a trivial way; all other objects, including arrays, are represented with their class name and object hash.
-Any object's representation can be changed by overriding its \texttt{toString} method.
-
-Debugging by directly writing into source code may be easier and quicker than having to equip other debugging tools for a session\ref{some guy}.
-Also, objects can be tracked over time by printing them at different points of execution and comparing the resulting outputs.
-
-\subsubsection{Best Practice For Textual Output}
-For a detailed comprehension of how programmers use textual output for debugging, we wrote a script that searches for such methods in open source projects.
-It analyzed SqueakSource, a hosting service for Smalltalk projects, searching for \texttt{printOn} methods, Smalltalk's equivalent to Java's \println.
-\todo{Results}
-
-\subsubsection{Missing Features On Textual Output}
-To achieve two-dimensional renderings in text, the developer only has the newline character as an option.
-Since a line can have only one new-line character, putting two 2-dimensional structures next to each other requires coordination. In practice, developers instead refrain from printing 2-dimensional structures next to each other~\cite{Schw11b}, and instead print them below each other, as illustrated in \Figref{nested-matrix-problem}.
-Furthermore, the resulting output is purely static, and offers no possibility to navigate to related objects or back to the source code.
-
-\begin{figure}[h]
-	\begin{lstlisting}
-	an Array(
-	MatrixTransform2x3(
-		2.0 0.0 0.0
-		0.0 2.0 0.0
-	) MatrixTransform2x3(
-		1 -0.707107 0.0
-		0.707107 0.707107 0.0
-	))
-	\end{lstlisting}
-	\caption{Textual visualization of an array of 2D-matrices, without DoodleDebug.}
-	\figlabel{nested-matrix-problem}
-\end{figure}
-
-\subsection{Debuggers}
-\nes{It's starting to feel very repetitive. DD is positioned between println and Debuggers - fine. Why does that need so many headings and paragraphs?
-There's no need to repeat the introduction.}
-\meta{What if it's in the "Related Work" section?}
-Debuggers allow users to stop a program's execution at any line of source code.
-When stopped, any detail of the current state is inspectable.
-Unlike \println, debuggers allow their users to put additional or remove existing break points at runtime, which makes changing the target piece of code to debug quicker, especially because the current program state doesn't need to be re-created like on a new run.
-
-\subsubsection{Drawbacks Of Using A Debugger}
-Since a debugger only shows the program's state at one point in time, comparison of two time slices is hardly possible.
-Important details may only be memorized and mentally compared to the ones at a later point in time.
-
-Eclipse's built-in Java debugger brings no options to customize its output.
-When inspecting an object, all its fields are listed by name, coming along with a textual representation.
-An object with many for a programmer unimportant fields may suffer the loss of its clarity from that.
-
-
 \section{Features}
 \meta{Completely rearranged this section. Smart implementation examples are now nested in "Configuration-free". Also, subsections are ordered by importance (my opinion).}
 \todo{introduction text}
@@ -643,6 +588,62 @@ Any IDE-related actions can be implemented because a stable communication betwee
 The DoodleDebug Eclipse plugin, all source code and a demo video are available at \url{http://scg.unibe.ch/wiki/projects/DoodleDebug}.
 
 \section{Acknowledgements}
+
+\section{Appendix}
+\subsection{Existing Debugging Tools}
+\nes{Move to the back, like it was in the paper. I'm a big fan of "related work" in the back of a paper.}
+In the world of programming languages, there are two classes of widely used debugging tools:
+Textual output like Java's \println and Debuggers.
+
+\subsubsection{Textual Output}
+Java's \println provides a default textual representation for any object.
+Primitives and Strings are rendered in a trivial way; all other objects, including arrays, are represented with their class name and object hash.
+Any object's representation can be changed by overriding its \texttt{toString} method.
+
+Debugging by directly writing into source code may be easier and quicker than having to equip other debugging tools for a session\ref{some guy}.
+Also, objects can be tracked over time by printing them at different points of execution and comparing the resulting outputs.
+
+\paragraph{Best Practice For Textual Output}
+For a detailed comprehension of how programmers use textual output for debugging, we wrote a script that searches for such methods in open source projects.
+It analyzed SqueakSource, a hosting service for Smalltalk projects, searching for \texttt{printOn} methods, Smalltalk's equivalent to Java's \println.
+\todo{Results}
+
+\paragraph{Missing Features On Textual Output}
+To achieve two-dimensional renderings in text, the developer only has the newline character as an option.
+Since a line can have only one new-line character, putting two 2-dimensional structures next to each other requires coordination. In practice, developers instead refrain from printing 2-dimensional structures next to each other~\cite{Schw11b}, and instead print them below each other, as illustrated in \Figref{nested-matrix-problem}.
+Furthermore, the resulting output is purely static, and offers no possibility to navigate to related objects or back to the source code.
+
+\begin{figure}[h]
+	\begin{lstlisting}
+	an Array(
+	MatrixTransform2x3(
+		2.0 0.0 0.0
+		0.0 2.0 0.0
+	) MatrixTransform2x3(
+		1 -0.707107 0.0
+		0.707107 0.707107 0.0
+	))
+	\end{lstlisting}
+	\caption{Textual visualization of an array of 2D-matrices, without DoodleDebug.}
+	\figlabel{nested-matrix-problem}
+\end{figure}
+
+\subsubsection{Debuggers}
+\nes{It's starting to feel very repetitive. DD is positioned between println and Debuggers - fine. Why does that need so many headings and paragraphs?
+There's no need to repeat the introduction.}
+\meta{What if it's in the "Related Work" section?}
+Debuggers allow users to stop a program's execution at any line of source code.
+When stopped, any detail of the current state is inspectable.
+Unlike \println, debuggers allow their users to put additional or remove existing break points at runtime, which makes changing the target piece of code to debug quicker, especially because the current program state doesn't need to be re-created like on a new run.
+
+\paragraph{Drawbacks Of Using A Debugger}
+Since a debugger only shows the program's state at one point in time, comparison of two time slices is hardly possible.
+Important details may only be memorized and mentally compared to the ones at a later point in time.
+
+Eclipse's built-in Java debugger brings no options to customize its output.
+When inspecting an object, all its fields are listed by name, coming along with a textual representation.
+An object with many for a programmer unimportant fields may suffer the loss of its clarity from that.
+
 
 \bibliographystyle{plain}
 \bibliography{/bib/scg}
