@@ -100,24 +100,27 @@ For understanding and debugging a program, developers rely on tools to track its
 One method is to insert print statements like \println in Java.
 This method is quick and allows \del{its users}\meta{"allow" doesn't work without a dative} to compare different states in time of a specific object.
 However, this output is static and comes with a couple of conceptual restrictions. On the one hand, the level of detail is hardcoded through the textual representations of objects.
-If a developer decides for a simple and clear way of representation, they will need to rewrite their code for any further inspection and re-run the program after every change. \nes{That's be a problem in a long-running program.}
+If a developer decides for a simple and clear way of representation, they will need to rewrite their code for any further inspection and re-run the program after every change, which is particularly a problem in a long-running program.
 If they initially choose a detailed and verbose object representation, the output will grow and become tedious to read.
+
 Another drawback of textual representation is caused by the simplicity of plain text.
-It's one-dimensional and contains no information about graphical features like advanced formatting or colors. \nes{Obscure. Colors are a side-dish. What you want to advertise is *nesting*.}
+Its one-dimensional nature prevents the user from encapsulating multidimensional object representations.
+In other words, objects using line breaks in their \texttt{toString} representation cannot be nested consistently, since switching to a new line is always a final operation.
 
 The other half of the two most widely used debugging tools is the family of debuggers~\cite{Kras88a}.
 When utilizing a debugger, a program can be stopped at a specific point of its execution, allowing developers to inspect any detail of this very state.
 A clear advantage over textual output is the ability to inspect objects on demand.
 Information is only displayed as soon as the user asks for it, nevertheless available without re-running the program.
-The drawbacks of debuggers arise from the fact that their inspector is always bound to a specific point in time and therefore makes it impossible to directly compare different states of the same object.\nes{Nice.}
+The drawbacks of debuggers arise from the fact that their inspector is always bound to a specific point in time and therefore makes it impossible to directly compare different states of the same object.
 
 \DD combines the power of the above mentioned tools, erasing the conceptual problems coming with them.
 Its output is is generated through an API taking its cue from \println's paradigms.
 A developer simply needs to call \Doodle(object) to doodle any object type.
 For simple customization of object representations, a class can implement the \texttt{Doodleable} interface which contains 2 methods, \texttt{doodleOn} and \texttt{summarizeOn}.
-In contrast to Java's \texttt{toString}, there are two methods, allowing developers to create two levels of detail for representation.
-This distinction \ugh{takes effect in the principle of Semantic Zoom} \cite{semantic-zoom}.
-\ugh{Also, they do not generate plain text but draw content on a virtual canvas.}
+In contrast to Java's \texttt{toString}, there are two methods, allowing developers to define representations on two levels of detail.
+This distinction allows inspection of objects directly in the output window.
+
+As output format, \DD uses the web standards HTML and CSS to enhance formatting possibilities over simple text.
 
 
 \section{Existing Debugging Tools}
@@ -126,10 +129,12 @@ In the world of programming languages, there are two classes of widely used debu
 Textual output like Java's \println and Debuggers.
 
 \subsection{Textual Output}
-Java's \println provides a default textual representation for any object, though only primitives and Strings render to a complete (and useful) output in terms of information. \nes{Unnecessarily vague. The rules are no longer than what you're writing: primitives look good; everything else, including arrays!, just gets classname+hashvalue}
-\del{Default renderings are kept lean for other objects, but can be easily improved by overriding \texttt{toString}.}
+Java's \println provides a default textual representation for any object.
+Primitives and Strings are rendered in a trivial way; all other objects, including arrays, are represented with their class name and object hash.
+Any object's representation can be changed by overriding its \texttt{toString} method.
+
 Debugging by directly writing into source code may be easier and quicker than having to equip other debugging tools for a session\ref{some guy}.
-Also, objects can be tracked over time, always \ugh{receiving a copy of it} a precisely defined points of execution.
+Also, objects can be tracked over time by printing them at different points of execution and comparing the resulting outputs.
 
 \subsubsection{Best Practice For Textual Output}
 For a detailed comprehension of how programmers use textual output for debugging, we wrote a script that searches for such methods in open source projects.
@@ -137,13 +142,9 @@ It analyzed SqueakSource, a hosting service for Smalltalk projects, searching fo
 \todo{Results}
 
 \subsubsection{Missing Features On Textual Output}
-Textual output is static.
-As a consequence, users always face a trade-off between detail level and compactness.
-If the output misses a bit of information, they will need to go back to the code, edit its rendering and re-run the whole program.
-
-Formatting text-only output is restricted to the usage of text characters, tabs and line breaks. \nes{I think we had that nicer in the paper. Why's this a problem? Because it makes it hard to nest layouts. Evidence? We looked at a bunch of system.out.println, and so no nesting going on. This whole paragraph is a re-write of a paragraph in the paper. Maybe steal that one? You're an author after all …}
-\ugh{Also, already printed text or line breaks cannot be reverted.
-In particular, nesting complex objects in a consistent way is not possible in a trivial way without breaking the whole pattern of \println.}
+To achieve two-dimensional renderings in text, the developer only has the newline character as an option.
+Since a line can have only one new-line character, putting two 2-dimensional structures next to each other requires coordination. In practice, developers instead refrain from printing 2-dimensional structures next to each other~\cite{Schw11b}, and instead print them below each other, as illustrated in \Figref{nested-matrix-problem}.
+Furthermore, the resulting output is purely static, and offers no possibility to navigate to related objects or back to the source code.
 
 \begin{figure}[h]
 	\begin{lstlisting}
@@ -163,6 +164,7 @@ In particular, nesting complex objects in a consistent way is not possible in a 
 \subsection{Debuggers}
 \nes{It's starting to feel very repetitive. DD is positioned between println and Debuggers - fine. Why does that need so many headings and paragraphs?
 There's no need to repeat the introduction.}
+\meta{What if it's in the "Related Work" section?}
 Debuggers allow users to stop a program's execution at any line of source code.
 When stopped, any detail of the current state is inspectable.
 Unlike \println, debuggers allow their users to put additional or remove existing break points at runtime, which makes changing the target piece of code to debug quicker, especially because the current program state doesn't need to be re-created like on a new run.
@@ -212,8 +214,9 @@ Focus is gained if more than 4 seconds have passed and always for the first dood
 
 When debugging a program with many output events per second, like a game, there is no sense in always notifying the user.
 Either they keep their attention on the output as they see it's rapidly changing, or they work somewhere else in the UI and don't want to be pulled back every time.
+During our study (\secref{study}), subject Echo manually disabled such notifications of the Eclipse console, complaining about it stealing the focus of the UI part where they were working in.
 
-Users that debug a program that rarely produces output, like caught exceptions, they probably want to be notified about this event and maybe inspect the new doodle. \nes{Connect with the study.}
+Users that debug a program that rarely produces output, like caught exceptions, they probably want to be notified about this event and maybe inspect the new doodle.
 
 
 \subsection{Inspection of Doodled Objects}
@@ -398,17 +401,17 @@ In other words, this algorithm starts searching on the object's direct class and
 The only type excluded from this search is the \texttt{Object} type, since it might be reached before some interface types.
 
 \subsubsection{Output}
-As output format, we decided to use HTML.
-This enables great formatting possibilities with moderate implementation effort.
-Eclipse provides the package \texttt{org.eclipse.swt.browser}, which includes a browser that easily blends into the Eclipse UI.
-\nes{Previous sentence is advertisement. Rewrite.}
+As output format, we decided to use HTML, which enables more powerful formatting than plain text with moderate implementation effort.
+Eclipse provides the package \texttt{org.eclipse.swt.browser}, which includes a web browser in the form of an Eclipse UI component.
 The rendering used for this browser's content is always the one from the OS's built-in browser and cannot be changed.
-On Windows systems, for instace\nes{instance.}, Eclipse uses the Internet Explorer rendering engine.
-\nes{Maybe spend a second or two talking about compatibility modes.}
 As a consequence, we had to be careful when creating HTML output and always test them in different browsers to prevent differences in design on different systems.
-\nes{More detail.}
+All major changes or extensions affecting the output were tested in four Browsers with different rendering engines: Gecko (Firefox), Presto (Opera), Webkit (Chrome) and Trident (Internet Explorer).
+On Windows systems, for instance, Eclipse uses the Internet Explorer rendering engine.
+Thus, a \texttt{meta} tag needed to be set in order to suppress compatibility modes and make sure the newest installed rendering engine is used for best-possible support, especially for CSS3 features.
+
 
 \section{User Study}
+\todo{Get stuff from paper}
 
 \seclabel{study}
 We carried out a usability study \cite{Krug00a} to validate the design of \DD.
