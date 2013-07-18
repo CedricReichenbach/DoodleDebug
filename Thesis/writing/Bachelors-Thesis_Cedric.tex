@@ -581,25 +581,10 @@ Since the eclipse debugger only uses textual representations and doesn't allow a
 A user would be allowed to switch from the standard textual mode to \DD mode, where an object would be inspected using \DD's rendering.
 Or a button beside the textual representation would create a popup with the doodled version of it.
 
-\section{Conclusion}
-\meta{Was a bit lost in this section, didn't really know what to write.}
-
-\DD is a valuable drop-in replacement for Java's \println.
-It introduces techniques to enhance debugging output by adopting well-proven mechanisms from debuggers and console printing on the one hand and introducing simple new ones on the other hand.
-Getting started is rather easy since the setup work is mainly done by Eclipse and the API is simple; knowing one single method already enables the core features of \DD.
-Continuous migration from classical tools to \DD is not a problem, since parallel usage works flawlessly.
-
-Since the output is held in HTML and \DD is bound to be an Eclipse plugin, the possibilities for additional features are infinite.
-The output view with JavaScript running in it is Turing-complete and supports any graphical output a monitor can display.
-Any IDE-related actions can be implemented because a stable communication between output and plugin code is already running.
-
-The DoodleDebug Eclipse plugin, all source code and a demo video are available at \url{http://scg.unibe.ch/wiki/projects/DoodleDebug}.
-
-\section{Acknowledgements}
-
-\section{Appendix}
+\section{Related Work}
 \subsection{Existing Debugging Tools}
 \nes{Move to the back, like it was in the paper. I'm a big fan of "related work" in the back of a paper.}
+\meta{Like that? Looks a bit strange to me... Delete (parts of it)?}
 In the world of programming languages, there are two classes of widely used debugging tools:
 Textual output like Java's \println and Debuggers.
 
@@ -651,6 +636,25 @@ Important details may only be memorized and mentally compared to the ones at a l
 Eclipse's built-in Java debugger brings no options to customize its output.
 When inspecting an object, all its fields are listed by name, coming along with a textual representation.
 An object with many for a programmer unimportant fields may suffer the loss of its clarity from that.
+
+
+\section{Conclusion}
+\meta{Was a bit lost in this section, didn't really know what to write.}
+\meta{Update: It's a conclusion, not a summary, right? Or should I summarize like in the study summary?}
+
+\DD is a valuable drop-in replacement for Java's \println.
+It introduces techniques to enhance debugging output by adopting well-proven mechanisms from debuggers and console printing on the one hand and introducing simple new ones on the other hand.
+Getting started is rather easy since the setup work is mainly done by Eclipse and the API is simple; knowing one single method already enables the core features of \DD.
+Continuous migration from classical tools to \DD is not a problem, since parallel usage works flawlessly.
+
+Since the output is held in HTML and \DD is bound to be an Eclipse plugin, the possibilities for additional features are infinite.
+The output view with JavaScript running in it is Turing-complete and supports any graphical output a monitor can display.
+Any IDE-related actions can be implemented because a stable communication between output and plugin code is already running.
+
+The DoodleDebug Eclipse plugin, all source code and a demo video are available at \url{http://scg.unibe.ch/wiki/projects/DoodleDebug}.
+
+\section{Acknowledgements}
+
 
 
 \bibliographystyle{plain}
