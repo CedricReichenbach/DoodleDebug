@@ -124,8 +124,8 @@ As output format, \DD uses the web standards HTML and CSS to enhance formatting 
 
 
 \section{Features}
-\meta{Completely rearranged this section. Smart implementation examples are now nested in "Configuration-free". Also, subsections are ordered by importance (my opinion).}
-\todo{introduction text}
+This section outlines the major features and properties of DoodleDebug from a user's perspective.
+Different parts are ordered by importance we gave them during development.
 
 \subsection{Lean API}
 The \DD API is lean.
@@ -606,7 +606,7 @@ Also, objects can be tracked over time by printing them at different points of e
 \paragraph{Best Practice For Textual Output}
 For a detailed comprehension of how programmers use textual output for debugging, we wrote a script that searches for such methods in open source projects.
 It analyzed SqueakSource, a hosting service for Smalltalk projects, searching for \texttt{printOn} methods, Smalltalk's equivalent to Java's \println.
-\todo{Results}
+Achieved results\cite{first_dd-paper} gave us hints on how to design default renderings on the one hand and showed short-comings of text-only output.
 
 \paragraph{Missing Features On Textual Output}
 To achieve two-dimensional renderings in text, the developer only has the newline character as an option.
