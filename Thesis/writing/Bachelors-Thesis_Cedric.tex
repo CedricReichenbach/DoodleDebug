@@ -98,7 +98,7 @@ We introduce \DD and present the results of a usability study that shows that \D
 
 For understanding and debugging a program, developers rely on tools to track its runtime states during execution.
 One method is to insert print statements like \println in Java.
-This method is quick and allows \del{its users}\meta{"allow" doesn't work without a dative} to compare different states in time of a specific object.
+This method is quick and allows programmers to compare different states in time of a specific object.
 However, this output is static and comes with a couple of conceptual restrictions. On the one hand, the level of detail is hardcoded through the textual representations of objects.
 If a developer decides for a simple and clear way of representation, they will need to rewrite their code for any further inspection and re-run the program after every change, which is particularly a problem in a long-running program.
 If they initially choose a detailed and verbose object representation, the output will grow and become tedious to read.
@@ -369,12 +369,8 @@ A fully functional release candidate of DoodleDebug (version 0.9.0 for Alpha and
 It ran inside Eclipse 4.2 (Classic edition), using a ThinkPad T410 with Windows 7 (x64) and an external mouse.
 The screen was captured during the whole session and one instructor sitting beside the test subject for problem explanation and protocol.
 Before the actual testing, the user had 15--30 minutes to work through a tutorial and play around with DoodleDebug inside a sandbox.
-At this time, the instructor was allowed to answer questions and support the subject.
-\nes{Both, DD and debuggger?}
-\meta{When going through the tutorial, you don't use the debugger. No one did. Or what do you mean?}
-\nes{So it wasn't a fair setup. You provided training for your tool, but not for the alternative.}
-\meta{I beg to differ. All of them already had experience with Eclipse and debugging. They were free to use *any* way of debugging except DD, so experienced programmers should rather take advantages from this (null hypothesis). The whole point of letting them go through the DD tutorial was to somehow equalize the chances, i.e. teach them the mechanics of DD they should already know by heart for their favorite tool.
-Do we need to explicitly explain this in the text?}
+At this time, the instructor was allowed to answer questions and support the subject, both on DoodleDebug and standard tools.
+However, since System.out.println is a fairly basic tool, no question regarding its use came up.
 
 For the actual session, there were 3 different small programs containing some manually inserted bug, which they had to find and eliminate.
 For one or two of them, they were allowed to use DoodleDebug and for the other one or two respectively, they had to fall back to classical tools.
@@ -383,11 +379,7 @@ The reason for letting some subjects only use classical debugging tools was to h
 
 Subjects worked on a problem until it was completely solved, none of them needing more than 30 minutes for any particular problem.
 
-\nes{One thing we should mention, both here and in the paper, is that while some problems might not be especially fair, they nonetheless show that DD has strong points.}
-\meta{Last senctence of the "Posed Problems" introduction. Something like this?}
-
 \subsection{Subjects}
-\nes{Move this up.}\meta{Here?}
 The subjects were convenience-sampled and assured of their anonymity. We informed them about the purpose of our study beforehand, and neither promised nor gave any reward for participating. The participants are enumerated in order of their participation.
 
 \begin{description}
@@ -409,8 +401,7 @@ The subjects were convenience-sampled and assured of their anonymity. We informe
 
 \subsection{Posed Problems}
 In the first two tasks, the participants are given a failing unit-like test. They are informed that the test is correct, and asked to fix the bug and thus have the test pass. Subjects have access to all of the source code and are allowed to manipulate it.
-
-The selection of tasks intends to expose problem situations where \DD is superior to classical debugging tools rather than trying to cover most common debugging cases.
+While the posed problems might seem biases towards \DD, that doesn't distract from their demonstration that \DD \emph{can} vastly outperform \println. \DD, being a generalization of \println, at worst performs on par with \println.
 
 \subsubsection{Sorting}
 A couple of gray scale \texttt{Color} objects are put into a \texttt{List}
@@ -454,7 +445,8 @@ When quizzed, alpha said they can compare things, either two different objects a
 Both are not directly possible with a classical debugger like the one built into Eclipse classic.
 
 \paragraph{Homogenous Output}
-Ad-hoc textual prints of the subjects were unstructured for all subjects except Charlie \nes{Wtf is "unstructured"?} \meta{His structure is mentioned in the next paragraph, should we refer to that?}.
+Apart from Charlie, none of the subjects spent time customizing their ad-hoc textual prints by overriding \texttt{toString} on objects to be visualized.
+If any, they utilized in-line string concatenation for formatting purposes, like inserting delimiters between different objects.
 Beta printed each element of the wrongly sorted color list and then stared at the (unaligned) numerical values of red, green and blue color components.
 Once he found out that a black element was at the end instead of the beginning, he went on to investigate the cause, leading to the problem.
 
@@ -464,7 +456,7 @@ In contrast, subjects using DoodleDebug already had built-in renderings for \tex
 The standard implementation of \println prints only the class name and object hash.
 Bravo and Golf resorted to a compile-run cycle, where they would explore the object graph by re-running the program, adapting the print statement to explore the parts of the object graph they were interested in.
 
-Charlie was the only subject to override \texttt{toString()} methods, after being dissatisfied with the standard printout of class name plus hash. He implemented \texttt{toString()}  to print out all fields of an object, as seen in \Figref{charlie}.
+Charlie was the only subject to override \texttt{toString} methods, after being dissatisfied with the standard printout of class name plus hash. He implemented \texttt{toString}  to print out all fields of an object, as seen in \Figref{charlie}.
 
 Alpha produced a very similar output, but instead of overriding \texttt{toString()}, he extracted all fields from outside using getter methods directly inside the \println method.
 
@@ -509,7 +501,7 @@ The debugger is working at runtime and therefore only knows the instantiated typ
 We observed this on the color list problem, where \texttt{ArrayList}
 was used as implementation for the interface \texttt{List}.
 Subject Bravo initially tried to perceive the structure of a list right after sorting by pausing the program  using the debugger and inspecting the mentioned list (\Figref{debugger_color-list}), but instantly gave up and switched to writing a \texttt{for} loop which sequentially prints out all elements using \println.
-\todo{Screenshot of \texttt{Doodleable} usage}
+
 \begin{figure}[h]
 	\includegraphics[width=\linewidth]{img/debugger_color-list_remo.png}
 	\caption[Bravo using the debugger for a color list]{Eclipse's debugger visualizes all fields of an object's runtime type (ArrayList)}
