@@ -590,13 +590,35 @@ Based on their implementation and \texttt{toString} implementations of other sub
 As a consequence, subjects found relevant information directly after doodling an object, making any customization unnecessary.
 
 \paragraph{Two methods in \texttt{Doodleable} interface}
-Echo bespoke confusion \nes{Oscar marked this, I believe. Please rephrase.} about the difference between the two methods in the \texttt{Doodleable} interface. After going back to the documentation of the interface, he understood.
-Alpha did not show any reaction when implementing the \texttt{Doodleable} interface for the first time, but simply delegated the zoom mechanism by replacing \texttt{c.draw(object)}from their \texttt{doodleOn.(Canvas)}
-by \texttt{c.drawSmall(object)} in their \texttt{summarizeOn.(Canvas)}.
+Echo was confused about the difference between the two methods in the \texttt{Doodleable} interface. After going back to the documentation of the interface, he understood.
+Alpha did not show any reaction when implementing the \texttt{Doodleable} interface, but misunderstood the meaning of its two methods: Instead of reducing the number of objects on the canvas, he simply delegated the zoom mechanism to each one by using the \texttt{Canvas.drawSmall} method (\figref{wrong-doodleable-usage}).
+
+Since none of the other subjects ever made used of \texttt{Canvas.drawSmall} and Alpha misunderstood its purpose, we removed this method from the API.
+
+\begin{figure}[h]
+\begin{lstlisting}
+public void doodleOn(Canvas c) {
+	c.draw(name);
+	c.newLine();
+	c.draw(phoneNumber);
+	c.newColumn();
+	c.draw(address);
+}
+public void summarizeOn(Canvas c) {
+	c.drawSmall(name);
+	c.newLine();
+	c.drawSmall(phoneNumber);
+	c.newColumn();
+	c.drawSmall(address);
+}
+\end{lstlisting}
+  \caption{Alpha misleadingly delegated the zooming mechanism to each printed object.}
+  \figlabel{wrong-doodleable-usage}
+\end{figure}
 
 \paragraph{Console Keeps Stealing Focus}
 \seclabel{console-focus-problem}
-When certain output is printed onto the console \nes{Eclipse console}, it gains the UI's focus by default. \nes{You're talking about Eclipse things. Please make clear.}
+When certain output is printed onto the Eclipse console, it gains the UI's focus by default.
 Due to the problem setup, every program initially threw an exception at the end of its execution, signaling the problem had not been solved yet.
 Every user experienced the following problem at least once: They were using DoodleDebug and therefore had this view tab opened when the exception was thrown and Eclipse switched to the console.
 Only Echo managed to disable its focus-on-change setting, while the other subjects just switched back to the DoodleDebug view tab after a few seconds.
@@ -607,7 +629,7 @@ Charlie doodled both the wrongly sorted color list and the correctly sorted one.
 On the serialization problem, all three subjects (Bravo, Delta, Foxtrot) using DoodleDebug managed to find the changed field instantly after calling \texttt{Doo.dle()} once before and once after the de-/serialization step. That's because DoodleDebug's \texttt{ObjectPlugin} shows all instance variables, which was enough to immediately see the problem.
 
 \paragraph{Default doodles were useless}
-If the standard output of DoodleDebug does not fit a users \nes{grammar.} needs, it can be adjusted through one of the two described methods; the simpler \texttt{Doodleable} interface was used in this context by Alpha while solving the sorting problem.
+If the standard output of DoodleDebug does not fit a user's needs, it can be adjusted through one of the two described methods; the simpler \texttt{Doodleable} interface was used in this context by Alpha while solving the sorting problem.
 They included all instance variables of the questioned object for its representation.
 On other sessions, Golf iteratively re-ran the program, each time printing another field of the same object and Bravo wrote a custom textual representation, printing all fields labelled with their names.
 
@@ -631,19 +653,17 @@ For the given problem set, no situation could be reported where \DD would fall b
 
 
 \section{Future Work}
-There are a couple of ideas that might enhance debugging experience and efficiency.
-However, they'd need to be tested to verify their usefulness, possibly before implementing them. \nes{Delete this prologue.}
 
-\subsection{Highlighting Object Diffs} \nes{Section too small for subsections. Downgrade to paragraphs.}
+\paragraph{Highlighting Object Diffs}
 When tracking and object over time, the most important information is located where properties of an object have changed.
 Therefore, a mechanism comparing objects when they are doodled multiple times could be a powerful feature.
 
-\subsection{Clickable Doodles}
+\paragraph{Clickable Doodles}
 One problem of using \println over a long period of time is, that it's indeed clear which object is printed, but not where the \println class has been made.
 To find it, some tedious text search over the whole project is needed in the worst case.
 As a solution in \DD, doodles could include a link pointing to the line in source code where the \Doodle call was triggered, similar to the way Throwables are tracked.
 
-\subsection{Debugger Integration}
+\paragraph{Debugger Integration}
 Since the eclipse debugger only uses textual representations and doesn't allow any customization, a way to enhance it could be to include doodles.
 A user would be allowed to switch from the standard textual mode to \DD mode, where an object would be inspected using \DD's rendering.
 Or a button beside the textual representation would create a popup with the doodled version of it.
@@ -691,10 +711,6 @@ Furthermore, the resulting output is purely static, and offers no possibility to
 \end{figure}
 
 \subsubsection{Debuggers}
-\nes{It's starting to feel very repetitive. DD is positioned between println and Debuggers - fine. Why does that need so many headings and paragraphs?
-There's no need to repeat the introduction.}
-\meta{What if it's in the "Related Work" section?}
-\nes{Much better.}
 Debuggers allow users to stop a program's execution at any line of source code.
 When stopped, any detail of the current state is inspectable.
 Unlike \println, debuggers allow their users to put additional or remove existing break points at runtime, which makes changing the target piece of code to debug quicker, especially because the current program state doesn't need to be re-created like on a new run.
@@ -709,17 +725,13 @@ An object with many for a programmer unimportant fields may suffer the loss of i
 
 
 \section{Conclusion}
-\meta{Was a bit lost in this section, didn't really know what to write.}
-\meta{Update: It's a conclusion, not a summary, right? Or should I summarize like in the study summary?}
-\nes{Yea, it should be a conclusion.}
-
 \DD is a valuable drop-in replacement for Java's \println.
 It introduces techniques to enhance debugging output by adopting well-proven mechanisms from debuggers and console printing on the one hand and introducing simple new ones on the other hand.
-Getting started is rather easy since the setup work is mainly done by Eclipse and the API is simple; \nes{Don't raise new points in the conclusion. Only pick out things that were said before. Either prepare for "easy setup", or delete.} knowing one single method already enables the core features of \DD.
-Continuous migration from classical tools to \DD is not a problem, since parallel usage works flawlessly. \nes{I'm not sure what this means. re-write sentence.}
+Getting started is rather easy since one single API method already enables the core features of \DD.
+Previous \println statements can be directly replaced by \Doodle calls without losing any ground.
 
 Since the output is held in HTML and \DD is bound to be an Eclipse plugin, the possibilities for additional features are infinite.
-The output view with JavaScript running in it is Turing-complete and supports any graphical output a monitor can display. \nes{:)}
+The output view with JavaScript running in it is Turing-complete and supports any graphical output a monitor can display.
 Any IDE-related actions can be implemented because a stable communication between output and plugin code is already running.
 
 The DoodleDebug Eclipse plugin, all source code and a demo video are available at \url{http://scg.unibe.ch/wiki/projects/DoodleDebug}.
