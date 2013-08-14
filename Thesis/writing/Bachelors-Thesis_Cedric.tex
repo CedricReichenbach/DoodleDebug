@@ -527,12 +527,14 @@ Once he found out that a black element was at the end instead of the beginning, 
 In contrast, subjects using \DD already had built-in renderings for \texttt{Collection}  and \texttt{Color}, making the problem immediately obvious.
 
 \paragraph{Uninspectable and Useless Output}
-The standard implementation of \println prints only the class name and object hash.
+The standard implementation of \println prints only the class name and object hash, for example:
+\begin{lstlisting}
+ch.unibe.scg.spacepirates.Player@ece88d2
+\end{lstlisting}
 Bravo and Golf resorted to a compile-run cycle, where they would explore the object graph by re-running the program, adapting the print statement to explore the parts of the object graph they were interested in.
 
-Charlie was the only subject to override \texttt{toString} methods, after being dissatisfied with the standard printout of class name plus hash. He implemented \texttt{toString}  to print out all fields of an object, as seen in \Figref{charlie}.
-
-Alpha produced a very similar output, but instead of overriding \texttt{toString()}, he extracted all fields from outside using getter methods directly inside the \println method.
+Charlie was the only subject to override \texttt{toString} methods, after being dissatisfied with the standard printout of class name plus hash. He implemented \texttt{toString}  to print out all fields of an object, as seen in \Figref{charlie-toString}.
+He argued that the difference between two states of an object should be visible when seeing all its field, recursively including fields of referenced objects.
 
 \begin{figure}[h]
 \begin{lstlisting}
@@ -550,8 +552,21 @@ public class Address { ...
   }
 }
 \end{lstlisting}
-  \caption{Participant overwrote \texttt{toString()} to aid debugging.}
-  \figlabel{charlie}
+  \caption{Charlie overwrote \texttt{toString()} to aid debugging.}
+  \figlabel{charlie-toString}
+\end{figure}
+
+Alpha produced a very similar output, but instead of overriding \texttt{toString()}, he extracted all fields from outside using getter methods directly inside the \println method (\figref{alpha-println}).
+
+\begin{figure}[h]
+\begin{lstlisting}
+System.out.println("name: " + contact.getName()
+		+ ", street: " + contact.getAddress().getStreet()
+		+ ", phoneNumber: " + contact.getAddress().getPhoneNumber()
+		+ ", city: " + contact.getAddress().getCity();
+\end{lstlisting}
+  \caption{Alpha overwrote \texttt{toString()} to aid debugging.}
+  \figlabel{alpha-println}
 \end{figure}
 
 Another approach to solve insufficient output was to switch from \println to the debugger, observed with Bravo and Foxtrot.
@@ -617,7 +632,7 @@ public void summarizeOn(Canvas c) {
 
 \paragraph{Console Keeps Stealing Focus}
 \seclabel{console-focus-problem}
-When certain output is printed onto the console, it gains the UI's focus by default.
+When certain output is printed onto the Eclipse console, it gains the UI's focus by default.
 Due to the problem setup, every program initially threw an exception at the end of its execution, signaling the problem had not been solved yet.
 Every user experienced the following problem at least once: They were using \DD and therefore had this view tab opened when the exception was thrown and Eclipse switched to the console.
 Only Echo managed to disable its focus-on-change setting, while the other subjects just switched back to the \DD view tab after a few seconds.
@@ -646,7 +661,7 @@ He fixed the bug and verified the result using \println.
 \section{Future Work}
 
 \paragraph{Highlighting Object Diffs}
-When tracking and object over time, the most important information is located where properties of an object have changed.
+When tracking an object over time, the most important information is located where properties of an object have changed.
 Therefore, a mechanism comparing objects when they are doodled multiple times could be a powerful feature.
 
 \paragraph{Clickable Doodles}
