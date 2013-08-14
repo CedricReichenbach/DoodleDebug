@@ -125,7 +125,19 @@ This distinction allows inspection of objects directly in the output window.
 
 As output format, \DD uses the web standards HTML and CSS to enhance formatting possibilities over simple text.
 
-\nes{I'm missing a pithy summary of what Doodledebug offers. (1) a log of past state, (2) zoom into the log, (3) a decent API for doodling. Should be offered as a list. Here and in the paper.}
+\todo{Put into paper.}
+The functionality \DD offers consists of the following main points:
+\begin{enumerate}
+\item A log of all states of an object when it was doodled in the past
+\item Zooming into one particular state in the log for more detail
+\item A decent API for doodling objects
+\end{enumerate}
+
+\begin{figure}[h]
+	\includegraphics[width=0.5\linewidth]{img/Plugin_Map-Color.png}
+	\caption{Doodle of a map from strings to colors with built-in renderings only.}
+	\figlabel{plugin_map-color}
+\end{figure}
 
 \section{Features}
 This section outlines the major features and properties of DoodleDebug from a user's perspective.
@@ -165,7 +177,8 @@ When debugging a program with many output events per second, like a game, there 
 Either they keep their attention on the output as they see it's rapidly changing, or they work somewhere else in the UI and don't want to be pulled back every time.
 During our study (\secref{study}), subject Echo manually disabled such notifications of the Eclipse console, complaining about it stealing the focus of the UI part where they were working in.
 
-Users that debug a program that rarely produces output, like caught exceptions, \ugh{they} probably want to be notified about this event and maybe inspect the new doodle. \nes{Needlessly fuzzy. Make stronger.}
+For a program expected to be silent in general, there's no need for suppressing eventual output notifications.
+One use case could be an unplanned exception that's caught, but doodled in order to inform the programmer about a possible problem.
 
 
 \subsection{Inspection of Doodled Objects}
@@ -173,10 +186,14 @@ To avoid the trade-off between detail level and compactness, we implemented the 
 Every object features two levels of detail for its rendering.
 Objects that are nested into others are not graphically scaled down, nor removed, but rendered in their summarized, less detailed  version.
 
-In \DD, objects rendered to nesting levels 0 \ugh{(doodled ones)} and 1 \nes{Level numbering not explained.} are rendered with full detail; objects of nesting level 2 (inside level 1) show their summarized version.
+Object doodles are divided into levels, based on their nesting depth.
+An object provided in the \Doodle call has level 0.
+Every object directly referenced inside this one renders to level 1, those referenced from level 1 render to level 2 and so on.
+
+In \DD, objects rendered to nesting levels 0 and 1 are rendered with full detail; objects of nesting level 2 show their summarized version.
 Clicking on a level 1 object opens a popup window only showing this very object, but with more detail since it's on the new nesting level 0 now.
 Level 1 object in this window can again be clicked in order to inspect those.
-This can be repeated until any leaf of the object tree is reached. \nes{Objects are not tree-shaped. Their general graphs.}
+This can be repeated until any end node of the doodling graph is reached, \ie one that has no references.
 \Figref{addressbook_whole} shows a doodled address book (on level 0) containing several contacts (on level 1). Clicking on one of them creates a pop-up window, moving the respective contact object to new level 0 (\Figref{addressbook_contact}).
 
 Navigation between nesting layers inside a pop-up is aided with bread crumbs~\cite{Krug00a} \nes{Page?} \nes{Well? What page?}, which traces the currently inspected branch of the object graph (\figref{breadcrumbs}).
@@ -242,23 +259,58 @@ public class Player implements Doodleable {
 \subsection{Built-in Renderings}
 \DD comes with predefined renderings for a number of commonly used data types in Java.
 Those include:
-\nes{Where can I see them?}
+\nes{Where can I see them?}\todo{Maybe links to figures into paper?}
 \begin{itemize}[noitemsep]
 \item Primitives
-\item Arrays
-\item Booleans
-\item Classes
-\item Collections
-\item Colors
+\item Arrays (same layout as Collections)
+\item Booleans (\figref{plugin_boolean})
+\item Classes (\figref{plugin_class})
+\item Collections (\figref{game_long-list} and \figref{plugin_collections-small})
+\item Colors (\figref{plugin_map-color})
 \item Images (various types)
-\item Maps
-\item Nulls
-\item Objects (default)
+\item Maps (\figref{plugin_map-color})
+\item Nulls (\figref{plugin_boolean})
+\item Objects (default, \figref{fielddoodler-player})
 \item Strings
-\item Tables (rectangular two-dimensional arrays and collections)
-\item Trowables
+\item Tables (rectangular two-dimensional arrays and collections, \figref{nested-matrix-doodle-debug})
+\item Trowables (\figref{plugin_throwable})
 \end{itemize}
 
+\begin{figure}[h]
+	\includegraphics{img/Plugin_Boolean.png}
+	\caption{Summarized and detailed renderings of booleans.}
+	\figlabel{plugin_boolean}
+\end{figure}
+
+\begin{figure}[h]
+	\includegraphics[width=0.5\linewidth]{img/Plugin_Class.png}
+	\caption{Rendering of a class object.}
+	\figlabel{plugin_class}
+\end{figure}
+
+\begin{figure}[h]
+	\includegraphics[width=\linewidth]{img/Plugin_Collections-small.png}
+	\caption{A doodled array of maps from strings to collections. The collections are rendered as summarized.}
+	\figlabel{plugin_collections-small}
+\end{figure}
+
+\begin{figure}[h]
+	\includegraphics[width=0.4\linewidth]{img/FieldDoodler_player.png}
+	\caption{The standard rendering of an object, visualizing all of its fields.}
+	\figlabel{fielddoodler-player}
+\end{figure}
+
+\begin{figure}[h]
+	\includegraphics[width=0.8\linewidth]{img/matrix-array.png}
+	\caption{\DD's rendering of the same array as shown in \Figref{nested-matrix-problem}}
+	\figlabel{nested-matrix-doodle-debug}
+\end{figure}
+
+\begin{figure}[h]
+	\includegraphics[width=\linewidth]{img/Plugin_Throwable-outermost.png}
+	\caption{Rendering of an exception.}
+	\figlabel{plugin_throwable}
+\end{figure}
 
 \subsection{Customization API}
 \DD's API features two API layers for customization.

@@ -19,7 +19,16 @@ public class Main {
 	}
 
 	private static void playWithMatrices() {
-		Float[][] scaleMatrix = { { 3.5f, 0f, 0f}, { 0f, 3.5f, 0f }, { 0f, 0f, 3.5f} };
+		Float[][] example1 = { { 2f, 0f, 0f }, { 0f, 2f, 0f } };
+		Float[][] example2 = { { 1f, -.707107f, 0f },
+				{ .707107f, .707107f, 0f } };
+		List<Float[][]> examples = new ArrayList<>();
+		examples.add(example1);
+		examples.add(example2);
+		Doo.dle(examples);
+
+		Float[][] scaleMatrix = { { 3.5f, 0f, 0f }, { 0f, 3.5f, 0f },
+				{ 0f, 0f, 3.5f } };
 		Float[][] rotationMatrix = {
 				{ (float) Math.cos(Math.PI / 3), (float) -Math.sin(Math.PI / 3) },
 				{ (float) Math.sin(Math.PI / 3), (float) Math.cos(Math.PI / 3) } };
