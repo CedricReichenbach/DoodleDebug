@@ -210,7 +210,7 @@ When zooming out of the graph this way, the just visited branch is still visible
 
 Thanks to \DD's inspection feature, the summarized representation of an object can be held rather terse.
 As an example, the state of a game can be doodled on every update cycle like in \figref{game_long-list}.
-A developer observing this output \ugh{might} be interested in more detail of one particular state, which can be done by clicking on parts of it, resulting in a pop-up (\figref{game_last-state}).
+A developer observing this output may be interested in more detail of one particular state, which can be done by clicking on parts of it, resulting in a pop-up (\figref{game_last-state}).
 
 The program code defining a \texttt{Player}'s rendering looks as follows:
 \begin{lstlisting}
@@ -315,11 +315,9 @@ Those include:
 \subsection{Customization API}
 \DD's API features two API layers for customization.
 One layer, the Doodleable interface, utilizes a similar paradigm as Java's \texttt{toString()} method and targets most use cases since it's a simple and quick solution.
-For more power and flexibility,
-\nes{terrible way of phrasing it. When I read stuff like that, I imagine a horribly over-engineered crappy framework, worse than Apache io.
-Tone this down a lot. `At the plugin level, the user can directly control the generation of html, css, and Javascript.`}
-users may \ugh{also} provide \texttt{RenderingPlugin}s, which are also used internally for \DD's built-in renderings.
-\ugh{However}, \texttt{Doodleable} customizations are always preferred over plugins when both are available for a type.
+The second layer hooks in on a lower level by allowing users to provide \texttt{RenderingPlugin}s, which are also used internally for \DD's built-in renderings.
+At the plugin level, the user can directly control the generation of HTML, CSS, and JavaScript.
+\texttt{Doodleable} customizations are always preferred over plugins when both are available for a type.
 
 \subsubsection{The Doodleable Interface}
 
