@@ -117,6 +117,7 @@ The drawbacks of debuggers arise from the fact that their inspector is always bo
 
 \DD combines the power of the above mentioned tools, erasing the conceptual problems coming with them.
 \nes{In a sense, DoodleDebug is *orthogonal* to the control flow features of debuggers. (Please adapt here and in the paper.)}
+\meta{Wha-}
 Its output is is generated through an API taking its cue from \println's paradigms.
 A developer simply needs to call \Doodle(object) to doodle any object type.
 For simple customization of object representations, a class can implement the \texttt{Doodleable} interface which contains 2 methods, \texttt{doodleOn} and \texttt{summarizeOn}.
@@ -125,7 +126,6 @@ This distinction allows inspection of objects directly in the output window.
 
 As output format, \DD uses the web standards HTML and CSS to enhance formatting possibilities over simple text.
 
-\todo{Put into paper.}
 The functionality \DD offers consists of the following main points:
 \begin{enumerate}
 \item A log of all states of an object when it was doodled in the past
@@ -259,7 +259,7 @@ public class Player implements Doodleable {
 \subsection{Built-in Renderings}
 \DD comes with predefined renderings for a number of commonly used data types in Java.
 Those include:
-\nes{Where can I see them?}\todo{Maybe links to figures into paper?}
+\todo{Maybe links to figures into paper?}
 \begin{itemize}[noitemsep]
 \item Primitives
 \item Arrays (same layout as Collections)
@@ -413,7 +413,7 @@ The rendering used for this browser's content is always the one from the OS's bu
 As a consequence, we had to be careful when creating HTML output and always test in different browsers to prevent layout disparities on different systems.
 All major changes or extensions affecting the output were tested in four Browsers with different rendering engines: Gecko (tested in Firefox), Presto (tested in Opera), Webkit (tested in Chrome) and Trident (tested in Internet Explorer).
 On Windows systems, for instance, Eclipse uses the Internet Explorer rendering engine.
-Thus, a \texttt{meta} tag needed to be set in order to suppress quirks or any other compatibility mode\footnote{\url{http://msdn.microsoft.com/en-us/library/jj676915\%28v=vs.85\%29.aspx}} and make sure the newest installed rendering engine is used for best-possible support, especially for CSS3 features.
+Thus, a \texttt{meta} tag needed to be set in order to suppress quirks or any other compatibility mode\footnote{\url{http://msdn.microsoft.com/en-us/library/jj676915\%28v=vs.85\%29.aspx}} \meta{You told me to also add this note to the paper. But we don't talk about this at all there...} and make sure the newest installed rendering engine is used for best-possible support, especially for CSS3 features.
 
 
 \section{Study}
