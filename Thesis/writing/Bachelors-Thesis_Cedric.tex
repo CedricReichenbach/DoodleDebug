@@ -325,6 +325,7 @@ Distinguishing between them enables semantic zoom \cite{semantic-zoom} when insp
 \paragraph{DoodleCanvas}
 Instead of creating a string like in \println, both methods receive a \texttt{DoodleCanvas} object for drawing contents on it.
 \nes{Why discuss in the abstract? Show the code, or reference it. Here and in the paper.}
+\meta{I don't understand this comment. An example is refenced (see last sentence). Which abstract do you mean? The one above talks about \texttt{Doodleable}, this paragraph about \texttt{DoodleCanvas}.}
 The paradigm behind \texttt{DoodleCanvas} adopts the formatting of text in terms of lines and columns.
 A virtual cursor starts at the upper-left corner of the canvas.
 Drawn objects align one beside each other until a new line is created, which causes the cursor to jump back to the left which one line height offset.
@@ -353,7 +354,7 @@ For advanced arrangement or additional features like coloring, \DD includes the 
 They must implement \texttt{RenderingPlugin}, which is most easily done by extending the built-in \texttt{AbstractPlugin}.
 Each plugin holds information about the object types it is able to render.
 Instead of drawing to a virtual canvas, a plugin receives a html \texttt{Tag} object and renders its own HTML code into this tag.
-The principle of semantic zoom is \ugh{again} retained through two different methods for different detail levels.
+The principle of semantic zoom is retained through two different methods for different detail levels.
 In addition to HTML code generation, plugins have the option to cleanly provide CSS rules and individually adjust class attributes assigned to object doodles.
 
 
@@ -409,10 +410,10 @@ The only type excluded from this search is the \texttt{Object} type, since it mi
 As output format, \DD uses HTML.
 Eclipse provides the package \texttt{org.eclipse.swt.browser}, which includes a web browser in the form of an Eclipse UI component.
 The rendering used for this browser's content is always the one from the OS's built-in browser and cannot be changed.
-As a consequence, we had to be careful when creating HTML output and always test \ugh{them} \nes{grammar} in different browsers to prevent differences in design on different systems.
-All major changes or extensions affecting the output were tested in four Browsers with different rendering engines: Gecko (Firefox), Presto (Opera), Webkit (Chrome) \nes{Webkit is actually at home in Safari.} and Trident (Internet Explorer).
+As a consequence, we had to be careful when creating HTML output and always test in different browsers to prevent layout disparities on different systems.
+All major changes or extensions affecting the output were tested in four Browsers with different rendering engines: Gecko (tested in Firefox), Presto (tested in Opera), Webkit (tested in Chrome) and Trident (tested in Internet Explorer).
 On Windows systems, for instance, Eclipse uses the Internet Explorer rendering engine.
-Thus, a \texttt{meta} tag needed to be set in order to suppress compatibility \nes{It's called `quirks mode', I think. Please add a reference. Here and in the paper.} modes and make sure the newest installed rendering engine is used for best-possible support, especially for CSS3 features.
+Thus, a \texttt{meta} tag needed to be set in order to suppress quirks or any other compatibility mode\footnote{\url{http://msdn.microsoft.com/en-us/library/jj676915\%28v=vs.85\%29.aspx}} and make sure the newest installed rendering engine is used for best-possible support, especially for CSS3 features.
 
 
 \section{Study}
@@ -430,11 +431,11 @@ It ran inside Eclipse 4.2 (Classic edition), using a ThinkPad T410 with Windows 
 The screen was captured during the whole session and one instructor sitting beside the test subject for problem explanation and protocol.
 Before the actual testing, the user had 15--30 minutes to work through a tutorial and play around with DoodleDebug inside a sandbox.
 At this time, the instructor was allowed to answer questions and support the subject, both on DoodleDebug and standard tools.
-However, since System.out.println is a fairly basic tool, no question regarding its use came up. \nes{Nice.}
+However, since System.out.println is a fairly basic tool, no question regarding its use came up.
 
 For the actual session, there were 3 different small programs containing some manually inserted bug, which they had to find and eliminate.
 For one or two of them, they were allowed to use DoodleDebug and for the other one or two respectively, they had to fall back to classical tools.
-The permission to use DoodleDebug on a particular problem changed with every study session, i.e. \nes{Please look up how to write i.e. in latex. The paper might have a template called "\ie".}  if subject 1 was allowed to use DoodleDebug on problem A, then subject 2 would not be allowed, but subject 3 would.
+The permission to use DoodleDebug on a particular problem changed with every study session, \ie if subject 1 was allowed to use DoodleDebug on problem A, then subject 2 would not be allowed, but subject 3 would.
 The reason for letting some subjects only use classical debugging tools was to have a reference of behavior in order to show that they are not trivial and detect what particular sub-problems they pose in detail, so we would see if DoodleDebug enables better approaches to solve them.
 
 Subjects worked on a problem until it was completely solved, none of them needing more than 30 minutes for any particular problem.
@@ -513,13 +514,14 @@ Once he found out that a black element was at the end instead of the beginning, 
 In contrast, subjects using DoodleDebug already had built-in renderings for \texttt{Collection}  and \texttt{Color}, making the problem immediately obvious.
 
 \paragraph{Uninspectable and Useless Output}
-The standard implementation of \println prints only the class name and object hash. \nes{Example?}
+The standard implementation of \println prints only the class name and object hash, for example:
+\begin{lstlisting}
+ch.unibe.scg.spacepirates.Player@ece88d2
+\end{lstlisting}
 Bravo and Golf resorted to a compile-run cycle, where they would explore the object graph by re-running the program, adapting the print statement to explore the parts of the object graph they were interested in.
 
-Charlie was the only subject to override \texttt{toString} methods, after being dissatisfied with the standard printout of class name plus hash. He implemented \texttt{toString}  to print out all fields of an object, as seen in \Figref{charlie}.
-\nes{It would be mildly interesting to know how he justified that.}
-
-Alpha produced a very similar output, but instead of overriding \texttt{toString()}, he extracted all fields from outside using getter methods directly inside the \println method. \nes{Reference the figure.}
+Charlie was the only subject to override \texttt{toString} methods, after being dissatisfied with the standard printout of class name plus hash. He implemented \texttt{toString}  to print out all fields of an object, as seen in \Figref{charlie-toString}.
+He argued that the difference between two states of an object should be visible when seeing all its field, recursively including fields of referenced objects.
 
 \begin{figure}[h]
 \begin{lstlisting}
@@ -537,8 +539,21 @@ public class Address { ...
   }
 }
 \end{lstlisting}
-  \caption{Participant overwrote \texttt{toString()} to aid debugging.}
-  \figlabel{charlie}
+  \caption{Charlie overwrote \texttt{toString()} to aid debugging.}
+  \figlabel{charlie-toString}
+\end{figure}
+
+Alpha produced a very similar output, but instead of overriding \texttt{toString()}, he extracted all fields from outside using getter methods directly inside the \println method (\figref{alpha-println}).
+
+\begin{figure}[h]
+\begin{lstlisting}
+System.out.println("name: " + contact.getName()
+		+ ", street: " + contact.getAddress().getStreet()
+		+ ", phoneNumber: " + contact.getAddress().getPhoneNumber()
+		+ ", city: " + contact.getAddress().getCity();
+\end{lstlisting}
+  \caption{Alpha overwrote \texttt{toString()} to aid debugging.}
+  \figlabel{alpha-println}
 \end{figure}
 
 Another approach to solve insufficient output was to switch from \println to the debugger, observed with Bravo and Foxtrot.
