@@ -313,14 +313,12 @@ Those include:
 \end{figure}
 
 \subsection{Customization API}
-\DD's API features two API layers for customization.
-One layer, the Doodleable interface, utilizes a similar paradigm as Java's \texttt{toString()} method and targets most use cases since it's a simple and quick solution.
-The second layer hooks in on a lower level by allowing users to provide \texttt{RenderingPlugin}s, which are also used internally for \DD's built-in renderings.
-At the plugin level, the user can directly control the generation of HTML, CSS, and JavaScript.
+\DD's API features two API layers for customization, Doodleables and Plugins.
 \texttt{Doodleable} customizations are always preferred over plugins when both are available for a type.
 
 \subsubsection{The Doodleable Interface}
 
+As high-level customization layer, \texttt{Doodleable} utilizes a similar paradigm as Java's \texttt{toString()} method and targets most use cases since it's a simple and quick solution.
 The \texttt{Doodleable} interface features two methods: \texttt{doodleOn(DoodleCanvas)} for a regular representation and \texttt{summarizeOn(DoodleCanvas)} for a simplified and compact version.
 Distinguishing between them enables semantic zoom \cite{semantic-zoom} when inspecting doodles.
 
@@ -343,10 +341,12 @@ The green i-beam indicates the final position of the canvas' imaginary cursor.}
 \end{figure}
 
 \subsubsection{Plugins}
-\nes{You discussed plugins above. Don't do it again. Do it in one place only.}
 There are cases where implementing the \texttt{Doodleable} canvas is not a satisfying option for developers.
 If they don't have access to the source code, there is no (clean) way to add an interface.
 Also, the \texttt{Doodleable} API only provides rough formatting options.
+
+The second layer hooks in on a lower level by allowing users to provide \texttt{RenderingPlugin}s, which are also used internally for \DD's built-in renderings.
+At the plugin level, the user can directly control the generation of HTML, CSS, and JavaScript.
 
 \paragraph{Implementing Plugins}
 For advanced arrangement or additional features like coloring, \DD includes the option to provide plugins.
