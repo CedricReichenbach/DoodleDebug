@@ -171,7 +171,7 @@ Users that debug a program that rarely produces output, like caught exceptions, 
 \subsection{Inspection of Doodled Objects}
 To avoid the trade-off between detail level and compactness, we implemented the principle of \emph{semantic zoom} along with \DD:
 Every object features two levels of detail for its rendering.
-Objects that are nested into others are not graphically scaled down\ins{,} nor removed, but rendered in its \nes{grammar} summarized, less detailed  version.
+Objects that are nested into others are not graphically scaled down, nor removed, but rendered in their summarized, less detailed  version.
 
 In \DD, objects rendered to nesting levels 0 \ugh{(doodled ones)} and 1 \nes{Level numbering not explained.} are rendered with full detail; objects of nesting level 2 (inside level 1) show their summarized version.
 Clicking on a level 1 object opens a popup window only showing this very object, but with more detail since it's on the new nesting level 0 now.
@@ -356,7 +356,7 @@ In other words, this algorithm starts searching on the object's direct class and
 The only type excluded from this search is the \texttt{Object} type, since it might be reached before some interface types.
 
 \subsubsection{Output}
-As output format, we decided \nes{No one cares what we decide.} to use HTML, which enables more powerful\nes{Again, `powerful` is just not the class of word you can use here. What do  you mean?} formatting than plain text with moderate implementation effort. \nes{Probably, delete entire sentence.}
+As output format, \DD uses HTML.
 Eclipse provides the package \texttt{org.eclipse.swt.browser}, which includes a web browser in the form of an Eclipse UI component.
 The rendering used for this browser's content is always the one from the OS's built-in browser and cannot be changed.
 As a consequence, we had to be careful when creating HTML output and always test \ugh{them} \nes{grammar} in different browsers to prevent differences in design on different systems.
@@ -588,6 +588,7 @@ Or a button beside the textual representation would create a popup with the dood
 \nes{Move to the back, like it was in the paper. I'm a big fan of "related work" in the back of a paper.}
 \meta{Like that? Looks a bit strange to me... Delete (parts of it)?}
 \nes{Yes.}
+\meta{"Yes, leave it here" or, "yes, delete"? =)}
 In the world of programming languages, there are two classes of widely used debugging tools:
 Textual output like Java's \println and Debuggers.
 
