@@ -118,6 +118,7 @@ The drawbacks of debuggers arise from the fact that their inspector is always bo
 \DD combines the power of the above mentioned tools, erasing the conceptual problems coming with them.
 \nes{In a sense, DoodleDebug is *orthogonal* to the control flow features of debuggers. (Please adapt here and in the paper.)}
 \meta{Wha-}
+\nes{A discussion that Doodledebug is orthogonal.}
 Its output is is generated through an API taking its cue from \println's paradigms.
 A developer simply needs to call \Doodle(object) to doodle any object type.
 For simple customization of object representations, a class can implement the \texttt{Doodleable} interface which contains 2 methods, \texttt{doodleOn} and \texttt{summarizeOn}.
@@ -326,6 +327,7 @@ Distinguishing between them enables semantic zoom \cite{semantic-zoom} when insp
 Instead of creating a string like in \println, both methods receive a \texttt{DoodleCanvas} object for drawing contents on it.
 \nes{Why discuss in the abstract? Show the code, or reference it. Here and in the paper.}
 \meta{I don't understand this comment. An example is refenced (see last sentence). Which abstract do you mean? The one above talks about \texttt{Doodleable}, this paragraph about \texttt{DoodleCanvas}.}
+\nes{What you're saying is: `receive a DoodleCanvas' object.' That's too abstract a level of discussion. Show the code.}
 The paradigm behind \texttt{DoodleCanvas} adopts the formatting of text in terms of lines and columns.
 A virtual cursor starts at the upper-left corner of the canvas.
 Drawn objects align one beside each other until a new line is created, which causes the cursor to jump back to the left which one line height offset.
@@ -413,7 +415,7 @@ The rendering used for this browser's content is always the one from the OS's bu
 As a consequence, we had to be careful when creating HTML output and always test in different browsers to prevent layout disparities on different systems.
 All major changes or extensions affecting the output were tested in four Browsers with different rendering engines: Gecko (tested in Firefox), Presto (tested in Opera), Webkit (tested in Chrome) and Trident (tested in Internet Explorer).
 On Windows systems, for instance, Eclipse uses the Internet Explorer rendering engine.
-Thus, a \texttt{meta} tag needed to be set in order to suppress quirks or any other compatibility mode\footnote{\url{http://msdn.microsoft.com/en-us/library/jj676915\%28v=vs.85\%29.aspx}} \meta{You told me to also add this note to the paper. But we don't talk about this at all there...} and make sure the newest installed rendering engine is used for best-possible support, especially for CSS3 features.
+Thus, a \texttt{meta} tag needed to be set in order to suppress quirks or any other compatibility mode\footnote{\url{http://msdn.microsoft.com/en-us/library/jj676915\%28v=vs.85\%29.aspx}} \meta{You told me to also add this note to the paper. But we don't talk about this at all there...} \nes{Oh, ok then. Footnotes should be more than a link, though. What will I see when clicking?} and make sure the newest installed rendering engine is used for best-possible support, especially for CSS3 features.
 
 
 \section{Study}
@@ -680,6 +682,7 @@ Or a button beside the textual representation would create a popup with the dood
 \meta{Like that? Looks a bit strange to me... Delete (parts of it)?}
 \nes{Yes.}
 \meta{"Yes, leave it here" or, "yes, delete"? =)}
+\nes{This is the right place.}
 In the world of programming languages, there are two classes of widely used debugging tools:
 Textual output like Java's \println and Debuggers.
 
