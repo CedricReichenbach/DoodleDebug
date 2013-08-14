@@ -421,73 +421,86 @@ Thus, a \texttt{meta} tag needed to be set in order to suppress quirks or any ot
 \seclabel{study}
 We carried out a usability study \cite{Krug00a} to validate the design of \DD.
 Usability studies are qualitative rather than quantitative, offering deeper semantic insights~\cite[pp. 13--15]{Lang09b} than a quantitative study while simultaneously being easier to set up.
-We pose three different problems to each test subject to be alternately solved with or without DoodleDebug, recording with screen capture videos and think aloud protocol.~\cite{Krug00a,Lang09b}
+We pose three different problems to each test subject to be alternately solved with or without \DD, recording with screen capture videos and think aloud protocol.~\cite{Krug00a,Lang09b}
 We search for problematic situations experienced with one tool and see if they've been solved more easily using other tools.
 Seven developers solved 3 tasks each.
 
 \subsection{Study Session Setup}
-A fully functional release candidate of DoodleDebug (version 0.9.0 for Alpha and Bravo, 0.9.1 for others) was used.
+A fully functional release candidate of \DD (version 0.9.0 for Alpha and Bravo, 0.9.1 for others) was used.
 It ran inside Eclipse 4.2 (Classic edition), using a ThinkPad T410 with Windows 7 (x64) and an external mouse.
 The screen was captured during the whole session and one instructor sitting beside the test subject for problem explanation and protocol.
-Before the actual testing, the user had 15--30 minutes to work through a tutorial and play around with DoodleDebug inside a sandbox.
-At this time, the instructor was allowed to answer questions and support the subject, both on DoodleDebug and standard tools.
+Before the actual testing, the user had 15--30 minutes to work through a tutorial and play around with \DD inside a sandbox.
+At this time, the instructor was allowed to answer questions and support the subject, both on \DD and standard tools.
 However, since System.out.println is a fairly basic tool, no question regarding its use came up.
 
-For the actual session, there were 3 different small programs containing some manually inserted bug, which they had to find and eliminate.
-For one or two of them, they were allowed to use DoodleDebug and for the other one or two respectively, they had to fall back to classical tools.
-The permission to use DoodleDebug on a particular problem changed with every study session, \ie if subject 1 was allowed to use DoodleDebug on problem A, then subject 2 would not be allowed, but subject 3 would.
-The reason for letting some subjects only use classical debugging tools was to have a reference of behavior in order to show that they are not trivial and detect what particular sub-problems they pose in detail, so we would see if DoodleDebug enables better approaches to solve them.
+For the actual session, there were 3 different small programs containing some manually inserted bug, which the subjects had to find and eliminate.
+For one or two of those problems, subjects were allowed to use \DD and for the other one or two respectively, they had to fall back to classical tools (table in \ref{tool-usage-table}).
+The reason for letting some subjects only use classical debugging tools was to have a reference of behavior in order to show that they are not trivial and detect what particular sub-problems they pose in detail, so we would see if \DD enables better approaches to solve them.
 
 Subjects worked on a problem until it was completely solved, none of them needing more than 30 minutes for any particular problem.
 
 \subsection{Subjects}
-The subjects were convenience-sampled and assured of their anonymity. We informed them about the purpose of our study beforehand, and neither promised nor gave any reward for participating. The participants are enumerated in order of their participation.
+The subjects were convenience-sampled; programmers from our university and work environment were asked for participation if they had free time available. Further, they were assured of their anonymity. We informed them about the purpose of our study beforehand, and neither promised nor gave any reward for participating. The participants are enumerated in order of their participation.
 
-\begin{description}
+\begin{tabular}{l | l | l}
+Alias & Degree & Current activity \\
+\hline
 % Oskar Truffer
-\item [{Alpha}] B.Sc in Mathematics, Minor in computer science. Now master student in computer science. % 60 ECTS
+Alpha & BSc in Mathematics & Master student in CS  \\
 % Remo Diethelm
-\item [{Bravo}] B.Sc. in Computer Science. Master Student  in Computer Science.
+Bravo & BSc in CS & Master student in CS \\
 % Andrei Chis
-\item [{Charlie}] M.Sc. in Computer Science. Ph.D. Student in Computer Science.
+Charlie & MSc in CS & PhD student in CS \\
 % Julian Schelker
-\item [{Delta}] B.Sc. in Computer Science. Master Student  in Computer Science.
+Delta & BSc in CS & Master student in CS \\
 % Raffael Krebs
-\item [{Echo}] M.Sc. in Computer Science. B.Sc. Working as Software Engineer, 1 year of industry experience. Experience in Eclipse plugin development
+Echo* & MSc in CS & Industry (1 year)\\
 % Roger Kohler
-\item [{Foxtrot}] B.Sc. in Computer Science. Master Student  in Computer Science.
+Foxtrot & BSc in CS & Master student in CS \\
 % Ueli Scheidegger
-\item [{Golf}] Lic.rer.pol. in Economics, Minor Computer Science. Working as Software Engineer, 15 years of industry experience. % 60 ECTS
-\end{description}
+Golf & Lic.rer.pol. in Economics & Industry (15 years)\\
+\end{tabular}
+
+*Experience with Eclipse plugin development. \\
+CS: Computer Science
 
 \subsection{Posed Problems}
 In the first two tasks, the participants are given a failing unit-like test. They are informed that the test is correct, and asked to fix the bug and thus have the test pass. Subjects have access to all of the source code and are allowed to manipulate it.
-While the posed problems might seem biases towards \DD, that doesn't distract from their demonstration that \DD \emph{can} vastly outperform \println. \DD, being a generalization of \println, at worst performs on par with \println.
+While the posed problems might seem biased towards \DD, that doesn't distract from their demonstration that \DD \emph{can} vastly outperform \println. \DD, being a generalization of \println, at worst performs on par with \println.
+\meta{(added comment from pdf:)}
+\on{Well, I think it is fair to say that the tasks have been designed specifically to see whether DD is indeed better than println for certain kinds of problems. A very different question is whether these problems are representative of usual programming tasks.}
 
 \subsubsection{Sorting}
 A couple of gray scale \texttt{Color} objects are put into a \texttt{List}
 and then sorted using a custom \texttt{ColorComparator}, which should sort by brightness.
-The result then is compared in a unit test to a hand-built \texttt{List} which initially has the expected order.\\
-Solution: In the comparator, completely black colors are wrongly treated as complete white.
+The result then is compared in a unit test to a hand-built \texttt{List} which initially has the expected order.
+
+\paragraph{Bug and Solution}
+In the comparator, completely black colors are wrongly treated as complete white.
+It's an in-line case distinction that has to be adjusted.
 
 \subsubsection{Serialization}
 Phone book contacts are modeled using \texttt{Con\-tact} and \texttt{Address}  objects.
 They should be serialized using a \texttt{Ser\-ializ\-ing\-Util} (simulated serialization only) and de-serialized afterwards.
 In a unit test, comparison of a contact object before and after serialization fails.\\
-Solution: In the \texttt{SerializingUtil}, every field of type \texttt{long} is cast % NB: not "casted"
+
+\paragraph{Bug and Solution}
+In the \texttt{SerializingUtil}, every field of type \texttt{long} is cast % NB: not "casted"
 into an \texttt{integer} before serialization and back into a \texttt{long} afterwards.
 This causes a field called \texttt{phoneNumber} of \texttt{Address} to be changed into some negative value.
 
 \subsubsection{Decimal Alignment}
 In the third and last task, a class \texttt{DatabaseUtil} is given without source code, as a black box simulating access to an imaginary database by returning a two-dimensional array of \texttt{float}s when calling its only method \texttt{getData()}.
-Subjects are informed that in the returned table there are duplicated tuples and have to name them.
+Subjects are informed that in the returned table there are duplicated tuples and have to identify them.
+Finding the bug is not part of this task.
 
 \subsection{Observed behavior}
 For four study subjects, \texttt{toString()} was used as the default rendering.
-Two of them, Bravo and Delta, were allowed to use DoodleDebug for solving the serialization problem and both implemented \texttt{Doodleable} with \texttt{Contact} and \texttt{Address}.
+Two of them, Bravo and Delta, were allowed to use \DD for solving the serialization problem and both implemented \texttt{Doodleable} with \texttt{Contact} and \texttt{Address}.
 For three subjects, the ObjectDoodler (which shows all instance variables) was the standard rendering.
 
 \begin{tabular}{l | c c c}
+\label{tool-usage-table}
  & \textbf{Sorting} & \textbf{Serialization} & \textbf{Table} \\
 \hline
 Alpha & DD & Classic & - \\
@@ -501,8 +514,8 @@ Golf & DD & Classic & DD \\
 
 \subsubsection{Observations using System.out.println}
 5 out of 7 subjects (all except Delta and Echo) made use of this mechanism to visualize runtime data.
-Alpha argued with laziness to open a debugger or to stare at foreign code.
-When quizzed, alpha said they can compare things, either two different objects as posed in the sorting problem or the same object at different points in time, as in the Serialization problem.
+Alpha brought forward the argument of laziness to open a debugger or to stare at foreign code.
+When quizzed, Alpha said they can compare things, either two different objects as posed in the sorting problem or the same object at different points in time, as in the Serialization problem.
 Both are not directly possible with a classical debugger like the one built into Eclipse classic.
 
 \paragraph{Homogenous Output}
@@ -511,17 +524,15 @@ If any, they utilized in-line string concatenation for formatting purposes, like
 Beta printed each element of the wrongly sorted color list and then stared at the (unaligned) numerical values of red, green and blue color components.
 Once he found out that a black element was at the end instead of the beginning, he went on to investigate the cause, leading to the problem.
 
-In contrast, subjects using DoodleDebug already had built-in renderings for \texttt{Collection}  and \texttt{Color}, making the problem immediately obvious.
+In contrast, subjects using \DD already had built-in renderings for \texttt{Collection}  and \texttt{Color}, making the problem immediately obvious.
 
 \paragraph{Uninspectable and Useless Output}
-The standard implementation of \println prints only the class name and object hash, for example:
-\begin{lstlisting}
-ch.unibe.scg.spacepirates.Player@ece88d2
-\end{lstlisting}
+The standard implementation of \println prints only the class name and object hash.
 Bravo and Golf resorted to a compile-run cycle, where they would explore the object graph by re-running the program, adapting the print statement to explore the parts of the object graph they were interested in.
 
-Charlie was the only subject to override \texttt{toString} methods, after being dissatisfied with the standard printout of class name plus hash. He implemented \texttt{toString}  to print out all fields of an object, as seen in \Figref{charlie-toString}.
-He argued that the difference between two states of an object should be visible when seeing all its field, recursively including fields of referenced objects.
+Charlie was the only subject to override \texttt{toString} methods, after being dissatisfied with the standard printout of class name plus hash. He implemented \texttt{toString}  to print out all fields of an object, as seen in \Figref{charlie}.
+
+Alpha produced a very similar output, but instead of overriding \texttt{toString()}, he extracted all fields from outside using getter methods directly inside the \println method.
 
 \begin{figure}[h]
 \begin{lstlisting}
@@ -539,21 +550,8 @@ public class Address { ...
   }
 }
 \end{lstlisting}
-  \caption{Charlie overwrote \texttt{toString()} to aid debugging.}
-  \figlabel{charlie-toString}
-\end{figure}
-
-Alpha produced a very similar output, but instead of overriding \texttt{toString()}, he extracted all fields from outside using getter methods directly inside the \println method (\figref{alpha-println}).
-
-\begin{figure}[h]
-\begin{lstlisting}
-System.out.println("name: " + contact.getName()
-		+ ", street: " + contact.getAddress().getStreet()
-		+ ", phoneNumber: " + contact.getAddress().getPhoneNumber()
-		+ ", city: " + contact.getAddress().getCity();
-\end{lstlisting}
-  \caption{Alpha overwrote \texttt{toString()} to aid debugging.}
-  \figlabel{alpha-println}
+  \caption{Participant overwrote \texttt{toString()} to aid debugging.}
+  \figlabel{charlie}
 \end{figure}
 
 Another approach to solve insufficient output was to switch from \println to the debugger, observed with Bravo and Foxtrot.
@@ -568,13 +566,14 @@ The built-in Eclipse debugger only allows you to inspect one object at one point
 As the serialization problem consists of two objects unexpectedly  being unequal, part of the debugging process was somehow comparing them in order to find their difference.
 Every subject except Golf did this --- Golf only tried to understand the serialization and de-serialization process to find out where the implementation has mistakes.
 Echo never used \println, but attempted to compare objects before and after serialization using the debugger.
-Even though the debugger supported simple and fast inspection to any point inside the object, Echo explicitly pointed out that he missed the feature to inspect two objects simultaneously instead of memorizing small pieces and going to the other one for comparison.
+Even though the debugger supported simple and fast inspection to any point inside the object, Echo explicitly pointed out that he missed the feature to inspect two objects simultaneously.
 
 \paragraph{Non-Selective Output}
 Eclipse's Java debugger simply lists all contents of an object, since there is no information about relevance of its respective parts.
-In particular, interfaces may specify an imaginary concept and be used in the declaration context for better overview, but for creation of an instance, a full class implementing this interface is needed.
 The debugger is working at runtime and therefore only knows the instantiated type of an object, so it will visualize all properties and contents of this, potentially resulting in a overly verbose output.
-We observed this on the color list problem, where \texttt{ArrayList} was used as implementation for the interface \texttt{List}.
+In particular, programmers only interacting with an object over some super type may have a much simpler mental model of an it than represented in the debugger on the basis of its runtime type.
+We observed this on the color list problem, where \texttt{ArrayList}
+was used as implementation for the interface \texttt{List}.
 Subject Bravo initially tried to perceive the structure of a list right after sorting by pausing the program  using the debugger and inspecting the mentioned list (\Figref{debugger_color-list}), but instantly gave up and switched to writing a \texttt{for} loop which sequentially prints out all elements using \println.
 
 \begin{figure}[h]
@@ -583,7 +582,7 @@ Subject Bravo initially tried to perceive the structure of a list right after so
 	\figlabel{debugger_color-list}
 \end{figure}
 
-\subsubsection{Observations using DoodleDebug}
+\subsubsection{Observations using \DD}
 When allowed (but not forced) to use \DD, every subject stuck to this strategy until the problem was solved without making use of any other tool.
 Only two subjects ever implemented the \texttt{Doodleable} interface for solving a problem.
 Based on their implementation and \texttt{toString} implementations of other subjects, we changed the default object rendering from using \texttt{toString} to listing all instance variables.
@@ -618,38 +617,30 @@ public void summarizeOn(Canvas c) {
 
 \paragraph{Console Keeps Stealing Focus}
 \seclabel{console-focus-problem}
-When certain output is printed onto the Eclipse console, it gains the UI's focus by default.
+When certain output is printed onto the console, it gains the UI's focus by default.
 Due to the problem setup, every program initially threw an exception at the end of its execution, signaling the problem had not been solved yet.
-Every user experienced the following problem at least once: They were using DoodleDebug and therefore had this view tab opened when the exception was thrown and Eclipse switched to the console.
-Only Echo managed to disable its focus-on-change setting, while the other subjects just switched back to the DoodleDebug view tab after a few seconds.
+Every user experienced the following problem at least once: They were using \DD and therefore had this view tab opened when the exception was thrown and Eclipse switched to the console.
+Only Echo managed to disable its focus-on-change setting, while the other subjects just switched back to the \DD view tab after a few seconds.
 
 \paragraph{Problem immediately obvious}
 Charlie doodled both the wrongly sorted color list and the correctly sorted one. Since they were both on-screen immediately, he instantly noticed both their similarity and the difference, which was that the black color was on the wrong side of one list.
 
-On the serialization problem, all three subjects (Bravo, Delta, Foxtrot) using DoodleDebug managed to find the changed field instantly after calling \texttt{Doo.dle()} once before and once after the de-/serialization step. That's because DoodleDebug's \texttt{ObjectPlugin} shows all instance variables, which was enough to immediately see the problem.
+On the serialization problem, all three subjects (Bravo, Delta, Foxtrot) using \DD managed to find the changed field instantly after calling \texttt{Doo.dle()} once before and once after the de-/serialization step. That's because \DD's \texttt{ObjectPlugin} shows all instance variables, which was enough to immediately see the problem.
 
 \paragraph{Default doodles were useless}
-If the standard output of DoodleDebug does not fit a user's needs, it can be adjusted through one of the two described methods; the simpler \texttt{Doodleable} interface was used in this context by Alpha while solving the sorting problem.
-They included all instance variables of the questioned object for its representation.
-On other sessions, Golf iteratively re-ran the program, each time printing another field of the same object and Bravo wrote a custom textual representation, printing all fields labelled with their names.
+When Alpha used the default visualization without implementing the \texttt{Doodleable} interface, \DD simply defaulted to printing
+the output of the \texttt{toString()} method. This was entirely useless, as it only printed the name of class plus an object hash.
+Thus, Alpha implemented the \texttt{Doodleable} interface, and included all instance variables of the questioned object for its representation.
 
-Based on this finding, we modified DoodleDebug's standard rendering: Instead of falling back to the object's \texttt{toString()} method, its fields are listed, containing field name and field content as a clickable sub-doodle in \Figref{fielddoodler-player}.
+On sessions without \DD, Golf iteratively re-ran the program, each time printing another field of the same object and Bravo wrote a custom textual representation, printing all fields labelled with their names.
+
+Based on these findings, we modified \DD's standard rendering: Instead of falling back to the object's \texttt{toString()} method, the new default rendering prints all fields, including field name, as seen in \Figref{fielddoodler-player}.
 
 \subsubsection{Observations Without Any Debugging Tool}
-Subject Gold was the only one to solve a problem without using any debugging tool.
-On the serialization problem, they tried to comprehend the logic of the problem's \texttt{SerializingUtil}.
-Unlike others, they found the problem source at the same time as the nature of the problem itself.
-They fixed the bug and verified the result using \println.
-
-\subsection{Summary}
-A qualitative study confronting 7 subjects with 3 problems was organized in order to compare \DD to classical debugging tools.
-Each problem held one bug to be revealed alternatively with or without the help of \DD.
-
-When disallowed to use \DD, subjects fell back to \println (5 out of 7) and debuggers (4 out of 7).
-Situations where subjects made an effort for visualizing an object, like listing all of its fields manually with \println, could be mapped to \DD one-liner calls that immediately brought the desired results.
-One subject regretted the fact that the eclipse debugger is not capable of simultaneously displaying two objects at a time, while subjects using \DD doodled exactly those objects and compared the output.
-
-For the given problem set, no situation could be reported where \DD would fall behind any of the used classical debugging tools.
+Subject Golf was the only one to solve a problem without using any debugging tool.
+On the serialization problem, he tried to comprehend the logic of the problem's \texttt{SerializingUtil}.
+Unlike others, he found the problem source at the same time as the nature of the problem itself.
+He fixed the bug and verified the result using \println.
 
 
 \section{Future Work}
