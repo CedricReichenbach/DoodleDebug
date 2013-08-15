@@ -119,6 +119,7 @@ The drawbacks of debuggers arise from the fact that their inspector is always bo
 \nes{In a sense, DoodleDebug is *orthogonal* to the control flow features of debuggers. (Please adapt here and in the paper.)}
 \meta{Wha-}
 \nes{A discussion that Doodledebug is orthogonal.}
+\meta{Damn, I forgot to finish the previous sentece... What do you mean by orthagonal? I'm trying to understand a program as a multidimensional room, say n+1 dimensions. Then you would have one dimension for time (i.e. program flow) and at each point in time (where you stop the debugger), there's an n-dimensional slice of program content. DoodleDebug can keep those slices alive whereas a debugger only shows one at a time. But how is this orthagonal?}
 Its output is is generated through an API taking its cue from \println's paradigms.
 A developer simply needs to call \Doodle(object) to doodle any object type.
 For simple customization of object representations, a class can implement the \texttt{Doodleable} interface which contains 2 methods, \texttt{doodleOn} and \texttt{summarizeOn}.
@@ -415,7 +416,7 @@ The rendering used for this browser's content is always the one from the OS's bu
 As a consequence, we had to be careful when creating HTML output and always test in different browsers to prevent layout disparities on different systems.
 All major changes or extensions affecting the output were tested in four Browsers with different rendering engines: Gecko (tested in Firefox), Presto (tested in Opera), Webkit (tested in Chrome) and Trident (tested in Internet Explorer).
 On Windows systems, for instance, Eclipse uses the Internet Explorer rendering engine.
-Thus, a \texttt{meta} tag needed to be set in order to suppress quirks or any other compatibility mode\footnote{\url{http://msdn.microsoft.com/en-us/library/jj676915\%28v=vs.85\%29.aspx}} \meta{You told me to also add this note to the paper. But we don't talk about this at all there...} \nes{Oh, ok then. Footnotes should be more than a link, though. What will I see when clicking?} and make sure the newest installed rendering engine is used for best-possible support, especially for CSS3 features.
+Thus, a \texttt{meta} tag needed to be set in order to suppress quirks or any other compatibility mode\footnote{MSDN documentation about legacy document modes for Internet Explorer: \url{http://msdn.microsoft.com/en-us/library/jj676915\%28v=vs.85\%29.aspx}} and make sure the newest installed rendering engine is used for best-possible support, especially for CSS3 features.
 
 
 \section{Study}
@@ -678,11 +679,6 @@ Or a button beside the textual representation would create a popup with the dood
 
 \section{Related Work}
 \subsection{Existing Debugging Tools}
-\nes{Move to the back, like it was in the paper. I'm a big fan of "related work" in the back of a paper.}
-\meta{Like that? Looks a bit strange to me... Delete (parts of it)?}
-\nes{Yes.}
-\meta{"Yes, leave it here" or, "yes, delete"? =)}
-\nes{This is the right place.}
 In the world of programming languages, there are two classes of widely used debugging tools:
 Textual output like Java's \println and Debuggers.
 
