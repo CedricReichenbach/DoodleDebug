@@ -12,6 +12,8 @@
 \usepackage{listings}
 \usepackage{enumitem}
 \usepackage{graphicx}
+\usepackage{placeins}
+\usepackage{subcaption}
 
 % ============================================================
 % Markup macros for proof-reading
@@ -136,6 +138,7 @@ The functionality \DD offers consists of the following main points:
 \end{enumerate}
 
 \begin{figure}[h]
+	\centering
 	\includegraphics[width=0.5\linewidth]{img/Plugin_Map-Color.png}
 	\caption{Doodle of a map from strings to colors with built-in renderings only.}
 	\figlabel{plugin_map-color}
@@ -241,21 +244,27 @@ public class Player implements Doodleable {
 \end{figure}
 
 \begin{figure}[h]
-	\includegraphics[width=\linewidth]{img/game_last-state.png}
+	\centering
+	\includegraphics{img/game_last-state.png}
 	\caption[Example of a chronological sequence: Detailed player list]{Details of a \texttt{GameRoom} from \Figref{game_long-list}.}
 	\figlabel{game_last-state}
 \end{figure}
 
 \begin{figure}[h]
+\begin{subfigure}{0.42\linewidth}
+	\centering
 	\includegraphics{img/AddressBook_whole.png}
-	\caption[AddressBook visualization]{An address book only showing the summaries of its addresses. Clicking reveals the details in \Figref{addressbook_contact}.}
+	\caption[AddressBook visualization]{An address book only showing the summaries of its addresses. Clicking reveals the details in \figref{addressbook_contact}.}
 	\figlabel{addressbook_whole}
-\end{figure}
-
-\begin{figure}[h]
+\end{subfigure}
+\hspace{0.03\linewidth}
+\begin{subfigure}{0.55\linewidth}
+	\centering
 	\includegraphics{img/AddressBook_contact.png}
 	\caption[Contact visualization]{A popup showing the details of an address.}
 	\figlabel{addressbook_contact}
+\end{subfigure}
+\caption{Exposure of a contact object at two different levels of detail.}
 \end{figure}
 
 \subsection{Built-in Renderings}
@@ -279,33 +288,41 @@ Those include:
 \end{itemize}
 
 \begin{figure}[h]
+\begin{minipage}[t]{0.4\linewidth}
+	\centering
 	\includegraphics{img/Plugin_Boolean.png}
 	\caption{Summarized and detailed renderings of booleans.}
 	\figlabel{plugin_boolean}
+\end{minipage}
+\hspace{0.03\linewidth}
+\begin{minipage}[t]{0.57\linewidth}
+	\centering
+	\includegraphics[width=\linewidth]{img/Plugin_Collections-small.png}
+	\caption{A doodled array of maps from strings to collections. The collections are rendered as summarized.}
+	\figlabel{plugin_collections-small}
+\end{minipage}
 \end{figure}
 
 \begin{figure}[h]
+	\centering
 	\includegraphics[width=0.5\linewidth]{img/Plugin_Class.png}
 	\caption{Rendering of a class object.}
 	\figlabel{plugin_class}
 \end{figure}
 
 \begin{figure}[h]
-	\includegraphics[width=\linewidth]{img/Plugin_Collections-small.png}
-	\caption{A doodled array of maps from strings to collections. The collections are rendered as summarized.}
-	\figlabel{plugin_collections-small}
-\end{figure}
-
-\begin{figure}[h]
-	\includegraphics[width=0.4\linewidth]{img/FieldDoodler_player.png}
+\begin{minipage}{.5\linewidth}
+	\centering
+	\includegraphics{img/FieldDoodler_player.png}
 	\caption{The standard rendering of an object, visualizing all of its fields.}
 	\figlabel{fielddoodler-player}
-\end{figure}
-
-\begin{figure}[h]
-	\includegraphics[width=0.8\linewidth]{img/matrix-array.png}
+\end{minipage}
+\begin{minipage}{.5\linewidth}
+	\centering
+	\includegraphics{img/matrix-array.png}
 	\caption{\DD's rendering of the same array as shown in \Figref{nested-matrix-problem}}
 	\figlabel{nested-matrix-doodle-debug}
+\end{minipage}
 \end{figure}
 
 \begin{figure}[h]
@@ -326,6 +343,19 @@ Distinguishing between them enables semantic zoom \cite{semantic-zoom} when insp
 
 \paragraph{DoodleCanvas}
 Instead of creating a string like in \println, both methods receive a \texttt{DoodleCanvas} object for drawing contents on it.
+\begin{lstlisting}
+public void doodleOn(DoodleCanvas c) {
+	c.draw(firstName);
+	c.draw(lastName);
+	c.newLine();
+	c.draw(address);
+	c.newColumn();
+	c.draw(phoneNumber);	
+}
+public void summarizeOn(DoodleCanvas c) {
+	c.draw(firstName);
+}
+\end{lstlisting}
 \nes{Why discuss in the abstract? Show the code, or reference it. Here and in the paper.}
 \meta{I don't understand this comment. An example is refenced (see last sentence). Which abstract do you mean? The one above talks about \texttt{Doodleable}, this paragraph about \texttt{DoodleCanvas}.}
 \nes{What you're saying is: `receive a DoodleCanvas' object.' That's too abstract a level of discussion. Show the code.}
