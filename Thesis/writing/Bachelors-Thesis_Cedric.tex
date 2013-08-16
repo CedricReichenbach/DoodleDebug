@@ -86,6 +86,7 @@
 
 \begin{document}
 \title{DoodleDebug}
+\author{Cedric Reichenbach}
 \subtitle{A shot-gun marriage between System.out.println and object inspectors}
 \maketitle
 
@@ -162,7 +163,7 @@ Altogether, \DD features no more than 10 public methods.
 A key question in the design of a user interface is the level of configurability exposed to users.
 Highly customizable solutions may be better for power users that are very familiar to the software in question.
 Other users may always remain on default settings, independent of their fittingness.
-We followed the advice of Norman\cite{?} and Buxton\cite{?}, which says not to treat everyone as a designer, but rather take away design decisions from users by creating sophisticated defaults.
+We followed the advice of Norman\cite[p. 199-200]{Norm88a} and Buxton\cite[p. 102]{Buxt07a}, which says not to treat everyone as a designer, but rather take away design decisions from users by creating sophisticated defaults.
 As a consequence, there is no settings dialogue or file for \DD.
 
 \subsubsection{Smart Scrolling}
@@ -201,7 +202,7 @@ Level 1 object in this window can again be clicked in order to inspect those.
 This can be repeated until any end node of the doodling graph is reached, \ie one that has no references.
 \Figref{addressbook_whole} shows a doodled address book (on level 0) containing several contacts (on level 1). Clicking on one of them creates a pop-up window, moving the respective contact object to new level 0 (\Figref{addressbook_contact}).
 
-Navigation between nesting layers inside a pop-up is aided with bread crumbs~\cite{Krug00a} \nes{Page?} \nes{Well? What page?}, which traces the currently inspected branch of the object graph (\figref{breadcrumbs}).
+Navigation between nesting layers inside a pop-up is aided with bread crumbs~\cite{Krug00a} \nes{Page?} \nes{Well? What page?} \meta{Sorry, I never touched that book. Who made the reference?}, which traces the currently inspected branch of the object graph (\figref{breadcrumbs}).
 Any parent doodle in this trace can be clicked to jump to it directly.
 When zooming out of the graph this way, the just visited branch is still visible in the breadcrumbs area until the user turns into a new path.
 
@@ -338,7 +339,7 @@ Those include:
 
 As high-level customization layer, \texttt{Doodleable} utilizes a similar paradigm as Java's \texttt{toString()} method and targets most use cases since it's a simple and quick solution.
 The \texttt{Doodleable} interface features two methods: \texttt{doodleOn(DoodleCanvas)} for a regular representation and \texttt{summarizeOn(DoodleCanvas)} for a simplified and compact version.
-Distinguishing between them enables semantic zoom \cite{semantic-zoom} when inspecting doodles.
+Distinguishing between them enables semantic zoom \cite{semantic-zoom} \meta{Where/when was semantic zoom first mentioned? Is it in the SCG bib?} when inspecting doodles.
 
 \paragraph{DoodleCanvas}
 Instead of creating a string like in \println, both methods receive a \texttt{DoodleCanvas} object for drawing contents on it.
@@ -391,7 +392,7 @@ In addition to HTML code generation, plugins have the option to cleanly provide 
 
 \section{Design}
 For the design of \DD's output, we consulted literature to carefully plan the different project cycles.
-As suggested by Buxton\cite{?}\todo{citation: P. 73-76}, we decided to start with an initial design phase, which later fades into implementation as soon as a reasonable concept is available.
+As suggested by Buxton\cite[p. 73-76]{Buxt07a}, we decided to start with an initial design phase, which later fades into implementation as soon as a reasonable concept is available.
 In particular, we started off by sketching parts of the future user interface with pen and paper and confronted possible users with them.
 They were not told what a specific picture would represent, but directly had to state their intuition of what they believed it to be (\figref{sketch-discussion}).
 Based on their feedback, we had an estimation of every sketch's quality in terms of intelligibility and could either keep, improve or dismiss it.
@@ -425,7 +426,7 @@ This section outlines the architecture and mechanisms \DD uses in order to perce
 \subsection{Data Transport}
 Since \DD is an Eclipse plugin, it's always running in a different Java VM than the project to be debugged itself.
 As a consequence, object data needs to be transported after each \Doodle call.
-\DD uses a third-party library\cite{xstream} to serialize doodled objects to XML, then transports the result as string over a connection on localhost using SIMON\cite{simon}.
+\DD uses a third-party library\footnote{XStream, XML serializing library: \url{http://xstream.codehaus.org/}} to serialize doodled objects to XML, then transports the result as string over a connection on localhost using SIMON\footnote{SIMON, Simple Invocation of Methods Over Network: \url{http://dev.root1.de/projects/simon}}.
 
 \subsection{Rendering}
 After a request for doodling an object has been received, \DD analyzes its type and searches for a fitting rendering in the different customization layers.
@@ -721,7 +722,7 @@ Also, objects can be tracked over time by printing them at different points of e
 \paragraph{Best Practice For Textual Output}
 For a detailed comprehension of how programmers use textual output for debugging, we wrote a script that searches for such methods in open source projects.
 It analyzed SqueakSource, a hosting service for Smalltalk projects, searching for \texttt{printOn} methods, Smalltalk's equivalent to Java's \println.
-Achieved results\cite{first_dd-paper} gave us hints on how to design default renderings on the one hand and showed short-comings of text-only output.
+Achieved results\cite{Schw11b} gave us hints on how to design default renderings on the one hand and showed short-comings of text-only output.
 
 \paragraph{Missing Features On Textual Output}
 To achieve two-dimensional renderings in text, the developer only has the newline character as an option.
@@ -772,9 +773,7 @@ The DoodleDebug Eclipse plugin, all source code and a demo video are available a
 \section{Acknowledgements}
 
 
-
 \bibliographystyle{plain}
-\bibliography{/bib/scg}
-\todo{I can't get it to work... -.-}
+\bibliography{bib/scg}{}
 
 \end{document}
