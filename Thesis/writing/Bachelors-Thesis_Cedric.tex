@@ -343,6 +343,7 @@ Distinguishing between them enables semantic zoom \cite{semantic-zoom} when insp
 
 \paragraph{DoodleCanvas}
 Instead of creating a string like in \println, both methods receive a \texttt{DoodleCanvas} object for drawing contents on it.
+A \texttt{Contact} class could implement its \texttt{Doodleable} methods as follows:
 \begin{lstlisting}
 public void doodleOn(DoodleCanvas c) {
 	c.draw(firstName);
@@ -354,17 +355,15 @@ public void doodleOn(DoodleCanvas c) {
 }
 public void summarizeOn(DoodleCanvas c) {
 	c.draw(firstName);
+	c.draw(lastName);
 }
 \end{lstlisting}
-\nes{Why discuss in the abstract? Show the code, or reference it. Here and in the paper.}
-\meta{I don't understand this comment. An example is refenced (see last sentence). Which abstract do you mean? The one above talks about \texttt{Doodleable}, this paragraph about \texttt{DoodleCanvas}.}
-\nes{What you're saying is: `receive a DoodleCanvas' object.' That's too abstract a level of discussion. Show the code.}
+\Figref{canvas-illustration} illustrates how the output resulting from this code is generated.
 The paradigm behind \texttt{DoodleCanvas} adopts the formatting of text in terms of lines and columns.
 A virtual cursor starts at the upper-left corner of the canvas.
 Drawn objects align one beside each other until a new line is created, which causes the cursor to jump back to the left which one line height offset.
 The second formatting option is to create new columns, moving the cursor to a position on top, to the right of the right-most previous object.
 \texttt{DoodleCanvas} therefore has three public methods: \texttt{draw(Object)}, \texttt{newLine()} and \texttt{newColumn()}.
-\Figref{canvas-illustration} shows an example of how the \texttt{Doodleable} interface could be used on a \texttt{Contact} object.
 
 \begin{figure}[h]
 	\includegraphics[width=\linewidth]{img/doodleable-example.png}
