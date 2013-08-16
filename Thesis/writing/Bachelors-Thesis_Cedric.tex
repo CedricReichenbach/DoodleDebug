@@ -120,6 +120,7 @@ The drawbacks of debuggers arise from the fact that their inspector is always bo
 \meta{Wha-}
 \nes{A discussion that Doodledebug is orthogonal.}
 \meta{Damn, I forgot to finish the previous sentece... What do you mean by orthagonal? I'm trying to understand a program as a multidimensional room, say n+1 dimensions. Then you would have one dimension for time (i.e. program flow) and at each point in time (where you stop the debugger), there's an n-dimensional slice of program content. DoodleDebug can keep those slices alive whereas a debugger only shows one at a time. But how is this orthagonal?}
+\nes{By orthogonal I mean that they are independent. That is, the user experience of flow control in a debugger does not depend on the user experience of logging and showing state, and vice versa. Thus, our code can be plugged into a debugger, and a debugger can be plugged into DD.}
 Its output is is generated through an API taking its cue from \println's paradigms.
 A developer simply needs to call \Doodle(object) to doodle any object type.
 For simple customization of object representations, a class can implement the \texttt{Doodleable} interface which contains 2 methods, \texttt{doodleOn} and \texttt{summarizeOn}.
