@@ -116,13 +116,12 @@ Information is only displayed as soon as the user asks for it, nevertheless avai
 The drawbacks of debuggers arise from the fact that their inspector is always bound to a specific point in time and therefore makes it impossible to directly compare different states of the same object.
 
 \DD combines the power of the above mentioned tools, erasing the conceptual problems coming with them.
-\nes{In a sense, DoodleDebug is *orthogonal* to the control flow features of debuggers. (Please adapt here and in the paper.)}
-\meta{Wha-}
-\nes{A discussion that Doodledebug is orthogonal.}
-\meta{Damn, I forgot to finish the previous sentece... What do you mean by orthagonal? I'm trying to understand a program as a multidimensional room, say n+1 dimensions. Then you would have one dimension for time (i.e. program flow) and at each point in time (where you stop the debugger), there's an n-dimensional slice of program content. DoodleDebug can keep those slices alive whereas a debugger only shows one at a time. But how is this orthagonal?}
-\nes{By orthogonal I mean that they are independent. That is, the user experience of flow control in a debugger does not depend on the user experience of logging and showing state, and vice versa. Thus, our code can be plugged into a debugger, and a debugger can be plugged into DD.}
 Its output is is generated through an API taking its cue from \println's paradigms.
 A developer simply needs to call \Doodle(object) to doodle any object type.
+Hence, \DD's usage, as well as the one of \println, is orthagonal to the control flow of debuggers; they can be used in combination.
+A debugger can step over one \Doodle statement at a time and new doodles instantly appear.
+On the other hand, when a program is held still by a debugger, the user can make it evaluate any custom expression, including \Doodle statements.
+
 For simple customization of object representations, a class can implement the \texttt{Doodleable} interface which contains 2 methods, \texttt{doodleOn} and \texttt{summarizeOn}.
 In contrast to Java's \texttt{toString}, there are two methods, allowing developers to define representations on two levels of detail.
 This distinction allows inspection of objects directly in the output window.
