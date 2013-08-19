@@ -14,6 +14,7 @@
 \usepackage{graphicx}
 \usepackage{placeins}
 \usepackage{subcaption}
+\usepackage{caption}
 
 % ============================================================
 % Markup macros for proof-reading
@@ -343,35 +344,21 @@ Distinguishing between them enables semantic zoom \cite{semantic-zoom} \meta{Whe
 
 \paragraph{DoodleCanvas}
 Instead of creating a string like in \println, both methods receive a \texttt{DoodleCanvas} object for drawing contents on it.
-A \texttt{Contact} class could implement its \texttt{Doodleable} methods as follows:
-\begin{lstlisting}
-public void doodleOn(DoodleCanvas c) {
-	c.draw(firstName);
-	c.draw(lastName);
-	c.newLine();
-	c.draw(address);
-	c.newColumn();
-	c.draw(phoneNumber);	
-}
-public void summarizeOn(DoodleCanvas c) {
-	c.draw(firstName);
-	c.draw(lastName);
-}
-\end{lstlisting}
-\Figref{canvas-illustration} illustrates how the output resulting from this code is generated.
+
+\begin{center}
+	\includegraphics[width=\linewidth]{img/doodleable-example.png}
+	\captionof{figure}{Example of a \texttt{Contact} class' \texttt{doodleOn()} method.
+Dotted lines visualize the effect of the structuring methods \texttt{newLine()} (orange) and \texttt{newColumn()} (purple).
+The green i-beam indicates the final position of the canvas' imaginary cursor.}
+	\figlabel{canvas-illustration}
+\end{center}
+
+\Figref{canvas-illustration} illustrates how output isgenerated from a code sample.
 The paradigm behind \texttt{DoodleCanvas} adopts the formatting of text in terms of lines and columns.
 A virtual cursor starts at the upper-left corner of the canvas.
 Drawn objects align one beside each other until a new line is created, which causes the cursor to jump back to the left which one line height offset.
 The second formatting option is to create new columns, moving the cursor to a position on top, to the right of the right-most previous object.
 \texttt{DoodleCanvas} therefore has three public methods: \texttt{draw(Object)}, \texttt{newLine()} and \texttt{newColumn()}.
-
-\begin{figure}[h]
-	\includegraphics[width=\linewidth]{img/doodleable-example.png}
-	\caption[Usage of the \texttt{Doodleable} interface]{Example of a \texttt{Contact} class' \texttt{doodleOn()} method.
-Dotted lines visualize the effect of the structuring methods \texttt{newLine()} (orange) and \texttt{newColumn()} (purple).
-The green i-beam indicates the final position of the canvas' imaginary cursor.}
-	\figlabel{canvas-illustration}
-\end{figure}
 
 \subsubsection{Plugins}
 There are cases where implementing the \texttt{Doodleable} canvas is not a satisfying option for developers.
