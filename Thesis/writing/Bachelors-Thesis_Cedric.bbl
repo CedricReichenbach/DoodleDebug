@@ -36,4 +36,10 @@ Niko Schwarz.
 \newblock In {\em Proceedings of the TOOLS 2011, 5th Workshop on Dynamic
   Languages and Applications (DYLA'11).}, 2011.
 
+\bibitem{Wood98a}
+Allison Woodruff, James Landay, and Michael Stonebraker.
+\newblock Goal-directed zoom.
+\newblock In {\em CHI 98 conference summary on Human factors in computing
+  systems}, CHI '98, pages 305--306, New York, NY, USA, 1998. ACM.
+
 \end{thebibliography}

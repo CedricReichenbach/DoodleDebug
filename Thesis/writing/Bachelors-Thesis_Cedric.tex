@@ -203,7 +203,7 @@ Level 1 object in this window can again be clicked in order to inspect those.
 This can be repeated until any end node of the doodling graph is reached, \ie one that has no references.
 \Figref{addressbook_whole} shows a doodled address book (on level 0) containing several contacts (on level 1). Clicking on one of them creates a pop-up window, moving the respective contact object to new level 0 (\Figref{addressbook_contact}).
 
-Navigation between nesting layers inside a pop-up is aided with bread crumbs~\cite{Krug00a} \nes{Page?} \nes{Well? What page?} \meta{Sorry, I never touched that book. Who made the reference?}, which traces the currently inspected branch of the object graph (\figref{breadcrumbs}).
+Navigation between nesting layers inside a pop-up is aided with bread crumbs~\cite[p. 76-78]{Krug00a}, which traces the currently inspected branch of the object graph (\figref{breadcrumbs}).
 Any parent doodle in this trace can be clicked to jump to it directly.
 When zooming out of the graph this way, the just visited branch is still visible in the breadcrumbs area until the user turns into a new path.
 
@@ -340,7 +340,7 @@ Those include:
 
 As high-level customization layer, \texttt{Doodleable} utilizes a similar paradigm as Java's \texttt{toString()} method and targets most use cases since it's a simple and quick solution.
 The \texttt{Doodleable} interface features two methods: \texttt{doodleOn(DoodleCanvas)} for a regular representation and \texttt{summarizeOn(DoodleCanvas)} for a simplified and compact version.
-Distinguishing between them enables semantic zoom \cite{semantic-zoom} \meta{Where/when was semantic zoom first mentioned? Is it in the SCG bib?} when inspecting doodles.
+Distinguishing between them enables semantic zoom \cite{Wood98a} when inspecting doodles.
 
 \paragraph{DoodleCanvas}
 Instead of creating a string like in \println, both methods receive a \texttt{DoodleCanvas} object for drawing contents on it.
