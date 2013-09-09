@@ -15,6 +15,13 @@
 \usepackage{placeins}
 \usepackage{subcaption}
 \usepackage{caption}
+\usepackage{courier}
+\usepackage{microtype}
+\usepackage[htt]{hyphenat}
+
+% ============================================================
+% Style for monospace text
+\lstset{basicstyle=\ttfamily,breaklines=true}
 
 % ============================================================
 % Markup macros for proof-reading
@@ -92,7 +99,7 @@
 \maketitle
 
 \begin{abstract}
-Developers need effective ways to inspect and explore the run-time state of programs they are developing and debugging.  Modern debuggers and object inspectors are powerful tools, but they can only be used to explore specific points in the execution where breakpoints have been set. As a result, developers often resort to inserting ``print statements'' in code to log the state at multiple points in the execution. Print statements, however are a `poor man's debugger'', since their output is static and cannot be further explored.
+Developers need effective ways to inspect and explore the run-time state of programs they are developing and debugging.  Modern debuggers and object inspectors are powerful tools, but they can only be used to explore specific points in the execution where breakpoints have been set. As a result, developers often resort to inserting ``print statements'' in code to log the state at multiple points in the execution. Print statements, however are a ``poor man's debugger'', since their output is static and cannot be further explored.
 We propose to combine the simplicity of print statements with the graphical sophistication and interaction of modern debugging tools.
 \DD is a simple API modeled loosely after Java's \println. Objects that are ``printed'' generate graphical views that can be further explored, and can also be used to navigate back to source code in the IDE.
 We introduce \DD and present the results of a usability study that shows that \DD can be very effective for common debugging tasks.
@@ -100,7 +107,7 @@ We introduce \DD and present the results of a usability study that shows that \D
 
 \section{Introduction}
 
-For understanding and debugging a program, developers rely on tools to track its runtime states during execution.
+To understand and debug a program, developers rely on tools to track its runtime states during execution.
 One method is to insert print statements like \println in Java.
 This method is quick and allows programmers to compare different states in time of a specific object.
 However, this output is static and comes with a couple of conceptual restrictions. On the one hand, the level of detail is hardcoded through the textual representations of objects.
@@ -120,9 +127,9 @@ Information is only displayed as soon as the user asks for it, nevertheless avai
 The drawbacks of debuggers arise from the fact that their inspector is always bound to a specific point in time and therefore makes it impossible to directly compare different states of the same object.
 
 \DD combines the power of the above mentioned tools, erasing the conceptual problems coming with them.
-Its output is is generated through an API taking its cue from \println's paradigms.
+Its output is generated through an API taking its cue from \println.
 A developer simply needs to call \Doodle(object) to doodle any object type.
-Hence, \DD's usage, as well as the one of \println, is orthagonal to the control flow of debuggers; they can be used in combination.
+Hence, \DD's usage, as well as that of \println, is orthogonal to the control flow of debuggers; they can be used in combination.
 A debugger can step over one \Doodle statement at a time and new doodles instantly appear.
 On the other hand, when a program is held still by a debugger, the user can make it evaluate any custom expression, including \Doodle statements.
 
@@ -136,7 +143,7 @@ The functionality \DD offers consists of the following main points:
 \begin{enumerate}
 \item A log of all states of an object when it was doodled in the past
 \item Zooming into one particular state in the log for more detail
-\item A decent API for doodling objects
+\item A lean API for doodling objects
 \end{enumerate}
 
 \begin{figure}[h]
@@ -152,7 +159,7 @@ Different parts are ordered by importance we gave them during development.
 
 \subsection{Lean API}
 The \DD API is lean.
-It features three ends for developers to interact with it, though most will only ever use the first two.
+It features three ways for developers to interact with it, though most will only ever use the first two.
 \begin{itemize}
 \item The \texttt{Doo.dle(Object)} method as a drop-in replacement for \println
 \item The \texttt{Doodleable} interface and the associated interface \texttt{DoodleCanvas}, in which objects can define simple custom representations
@@ -162,15 +169,15 @@ Altogether, \DD features no more than 10 public methods.
 
 \subsection{Configuration-Free}
 A key question in the design of a user interface is the level of configurability exposed to users.
-Highly customizable solutions may be better for power users that are very familiar to the software in question.
-Other users may always remain on default settings, independent of their fittingness.
+Highly customizable solutions may be better for power users who are very familiar with the software in question.
+Other users may always remain on default settings, independent of their suitability.
 We followed the advice of Norman\cite[p. 199-200]{Norm88a} and Buxton\cite[p. 102]{Buxt07a}, which says not to treat everyone as a designer, but rather take away design decisions from users by creating sophisticated defaults.
 As a consequence, there is no settings dialogue or file for \DD.
 
 \subsubsection{Smart Scrolling}
 In general, an output console can either move its view port to the bottom when new content is appended or stay where it was before.
 \DD implements the scrolling behavior of MUSHClient\footnote{\url{http://www.gammon.com.au/mushclient/}} and mIRC\footnote{\url{http://www.mirc.com}}:
-The view port will only be moved to the bottom if it already was before new content was added.
+The viewport will only be moved to the bottom if it already was there before new content was added.
 If the user doesn't scroll away from the bottom, they will benefit from notifications about new doodles.
 On the other hand, users can scroll up to an old doodle without being bounced away when new objects are doodled.
 
@@ -182,7 +189,7 @@ Focus is gained if more than 4 seconds have passed and always for the first dood
 
 When debugging a program with many output events per second, like a game, there is no sense in always notifying the user.
 Either they keep their attention on the output as they see it's rapidly changing, or they work somewhere else in the UI and don't want to be pulled back every time.
-During our study (\secref{study}), subject Echo manually disabled such notifications of the Eclipse console, complaining about it stealing the focus of the UI part where they were working in.
+During our study (\secref{study}), subject Echo manually disabled such notifications of the Eclipse console, complaining about it stealing the focus of the UI part they were working in.
 
 For a program expected to be silent in general, there's no need for suppressing eventual output notifications.
 One use case could be an unplanned exception that's caught, but doodled in order to inform the programmer about a possible problem.
@@ -195,13 +202,13 @@ Objects that are nested into others are not graphically scaled down, nor removed
 
 Object doodles are divided into levels, based on their nesting depth.
 An object provided in the \Doodle call has level 0.
-Every object directly referenced inside this one renders to level 1, those referenced from level 1 render to level 2 and so on.
+Every object directly referenced inside this one renders at level 1, those referenced from level 1 render at level 2 and so on.
 
-In \DD, objects rendered to nesting levels 0 and 1 are rendered with full detail; objects of nesting level 2 show their summarized version.
-Clicking on a level 1 object opens a popup window only showing this very object, but with more detail since it's on the new nesting level 0 now.
-Level 1 object in this window can again be clicked in order to inspect those.
+In \DD, objects rendered at nesting levels 0 and 1 are rendered with full detail; objects at nesting level 2 show their summarized version.
+Clicking on a level 1 object opens a popup window only showing this very object, but with more detail since it's at the new nesting level 0 now.
+Level 1 objects in this window can again be clicked in order to inspect those.
 This can be repeated until any end node of the doodling graph is reached, \ie one that has no references.
-\Figref{addressbook_whole} shows a doodled address book (on level 0) containing several contacts (on level 1). Clicking on one of them creates a pop-up window, moving the respective contact object to new level 0 (\Figref{addressbook_contact}).
+\Figref{addressbook_whole} shows a doodled address book (at level 0) containing several contacts (at level 1). Clicking on one of them creates a pop-up window, moving the respective contact object to new level 0 (\Figref{addressbook_contact}).
 
 Navigation between nesting layers inside a pop-up is aided with bread crumbs~\cite[p. 76-78]{Krug00a}, which traces the currently inspected branch of the object graph (\figref{breadcrumbs}).
 Any parent doodle in this trace can be clicked to jump to it directly.
@@ -215,7 +222,7 @@ When zooming out of the graph this way, the just visited branch is still visible
 
 \subsubsection{Tracking an Object Over Time}
 
-Thanks to \DD's inspection feature, the summarized representation of an object can be held rather terse.
+Thanks to \DD's inspection feature, the summarized representation of an object can be kept rather terse.
 As an example, the state of a game can be doodled on every update cycle like in \figref{game_long-list}.
 A developer observing this output may be interested in more detail of one particular state, which can be done by clicking on parts of it, resulting in a pop-up (\figref{game_last-state}).
 
@@ -338,12 +345,13 @@ Those include:
 
 \subsubsection{The Doodleable Interface}
 
-As high-level customization layer, \texttt{Doodleable} utilizes a similar paradigm as Java's \texttt{toString()} method and targets most use cases since it's a simple and quick solution.
+As a high-level customization layer, \texttt{Doodleable} utilizes an approach similar to Java's \texttt{toString()} method and targets most use cases since it's a simple and quick solution.
 The \texttt{Doodleable} interface features two methods: \texttt{doodleOn(DoodleCanvas)} for a regular representation and \texttt{summarizeOn(DoodleCanvas)} for a simplified and compact version.
-Distinguishing between them enables semantic zoom \cite{Wood98a} when inspecting doodles.
+Distinguishing between them enables semantic zoom\cite{Wood98a} when inspecting doodles:
+instead of geometrically scaling items, they gain more detail when zooming in.
 
 \paragraph{DoodleCanvas}
-Instead of creating a string like in \println, both methods receive a \texttt{DoodleCanvas} object for drawing contents on it.
+Instead of creating a string like in \println, both methods receive a \texttt{DoodleCanvas} object for drawing contents on.
 
 \begin{center}
 	\includegraphics[width=\linewidth]{img/doodleable-example.png}
@@ -353,7 +361,7 @@ The green i-beam indicates the final position of the canvas' imaginary cursor.}
 	\figlabel{canvas-illustration}
 \end{center}
 
-\Figref{canvas-illustration} illustrates how output isgenerated from a code sample.
+\Figref{canvas-illustration} illustrates how output is generated from a code sample.
 The paradigm behind \texttt{DoodleCanvas} adopts the formatting of text in terms of lines and columns.
 A virtual cursor starts at the upper-left corner of the canvas.
 Drawn objects align one beside each other until a new line is created, which causes the cursor to jump back to the left which one line height offset.
@@ -363,7 +371,7 @@ The second formatting option is to create new columns, moving the cursor to a po
 \subsubsection{Plugins}
 There are cases where implementing the \texttt{Doodleable} canvas is not a satisfying option for developers.
 If they don't have access to the source code, there is no (clean) way to add an interface.
-Also, the \texttt{Doodleable} API only provides rough formatting options.
+Also, the \texttt{Doodleable} API only provides primitive formatting options.
 
 The second layer hooks in on a lower level by allowing users to provide \texttt{RenderingPlugin}s, which are also used internally for \DD's built-in renderings.
 At the plugin level, the user can directly control the generation of HTML, CSS, and JavaScript.
@@ -386,7 +394,7 @@ Based on their feedback, we had an estimation of every sketch's quality in terms
 This cycle was repeated until our sketches reached a form where they were easily understood by people and we could start implementing.
 
 Since the pen and paper sketches were rough and drafted quickly, the implementation phase initially revealed minor usability problems that had not been obvious in the design phase.
-Those were vanished dynamically, still following Buxtons idea of gradually reducing design while implementation slowly starts.
+Those were eliminated dynamically, still following Buxtons idea of gradually reducing design while implementation slowly starts.
 
 \begin{figure}[h]
 	\includegraphics[width=\linewidth]{img/design-sketches_thinker.jpg}
@@ -396,7 +404,7 @@ Those were vanished dynamically, still following Buxtons idea of gradually reduc
 
 \begin{figure}[h]
 	\includegraphics[width=\linewidth]{img/sketches/032.jpg}
-	\caption[Bad sketch example: Horizontal and vertical alignment]{Inspired by Swing's FlowLayout, all objects are aligned horizontally.}
+	\caption[Bad sketch example: Horizontal and vertical alignment]{Inspired by AWT's FlowLayout, all objects are aligned horizontally.}
 	\figlabel{bad-sketch_align-h-v}
 \end{figure}
 
@@ -413,7 +421,7 @@ This section outlines the architecture and mechanisms \DD uses in order to perce
 \subsection{Data Transport}
 Since \DD is an Eclipse plugin, it's always running in a different Java VM than the project to be debugged itself.
 As a consequence, object data needs to be transported after each \Doodle call.
-\DD uses a third-party library\footnote{XStream, XML serializing library: \url{http://xstream.codehaus.org/}} to serialize doodled objects to XML, then transports the result as string over a connection on localhost using SIMON\footnote{SIMON, Simple Invocation of Methods Over Network: \url{http://dev.root1.de/projects/simon}}.
+\DD uses a third-party library\footnote{XStream, XML serializing library: \url{http://xstream.codehaus.org/}} to serialize doodled objects to XML, then transports the result as a string over a connection on localhost using SIMON\footnote{SIMON, Simple Invocation of Methods Over Network: \url{http://dev.root1.de/projects/simon}}.
 
 \subsection{Rendering}
 After a request for doodling an object has been received, \DD analyzes its type and searches for a fitting rendering in the different customization layers.
@@ -427,12 +435,12 @@ The only type excluded from this search is the \texttt{Object} type, since it mi
 
 \subsubsection{Output}
 As output format, \DD uses HTML.
-Eclipse provides the package \texttt{org.eclipse.swt.browser}, which includes a web browser in the form of an Eclipse UI component.
+Eclipse provides the package \texttt{org.ec\-lipse.swt.brow\-ser}, which includes a web browser in the form of an Eclipse UI component.
 The rendering used for this browser's content is always the one from the OS's built-in browser and cannot be changed.
 As a consequence, we had to be careful when creating HTML output and always test in different browsers to prevent layout disparities on different systems.
 All major changes or extensions affecting the output were tested in four Browsers with different rendering engines: Gecko (tested in Firefox), Presto (tested in Opera), Webkit (tested in Chrome) and Trident (tested in Internet Explorer).
 On Windows systems, for instance, Eclipse uses the Internet Explorer rendering engine.
-Thus, a \texttt{meta} tag needed to be set in order to suppress quirks or any other compatibility mode\footnote{MSDN documentation about legacy document modes for Internet Explorer: \url{http://msdn.microsoft.com/en-us/library/jj676915\%28v=vs.85\%29.aspx}} and make sure the newest installed rendering engine is used for best-possible support, especially for CSS3 features.
+As a consequence, a \texttt{meta} tag needed to be set in order to suppress quirks or any other compatibility mode\footnote{MSDN documentation about legacy document modes for Internet Explorer: \url{http://msdn.microsoft.com/en-us/library/jj676915\%28v=vs.85\%29.aspx}} and make sure the newest installed rendering engine is used for best-possible support, especially for CSS3 features.
 
 
 \section{Study}
@@ -440,8 +448,8 @@ Thus, a \texttt{meta} tag needed to be set in order to suppress quirks or any ot
 \seclabel{study}
 We carried out a usability study \cite{Krug00a} to validate the design of \DD.
 Usability studies are qualitative rather than quantitative, offering deeper semantic insights~\cite[pp. 13--15]{Lang09b} than a quantitative study while simultaneously being easier to set up.
-We pose three different problems to each test subject to be alternately solved with or without \DD, recording with screen capture videos and think aloud protocol.~\cite{Krug00a,Lang09b}
-We search for problematic situations experienced with one tool and see if they've been solved more easily using other tools.
+We posed three different problems to each test subject to be alternately solved with or without \DD, recording with screen capture videos and think aloud protocol.~\cite{Krug00a,Lang09b}
+We searched for problematic situations experienced with one tool to see if they'd been solved more easily using other tools.
 Seven developers solved 3 tasks each.
 
 \subsection{Study Session Setup}
@@ -506,7 +514,8 @@ In a unit test, comparison of a contact object before and after serialization fa
 \paragraph{Bug and Solution}
 In the \texttt{SerializingUtil}, every field of type \texttt{long} is cast % NB: not "casted"
 into an \texttt{integer} before serialization and back into a \texttt{long} afterwards.
-This causes a field called \texttt{phoneNumber} of \texttt{Address} to be changed into some negative value.
+This causes a field called \texttt{phoneNumber} of \texttt{Address} to be changed into a negative value.
+The solution is to remove those casting operations from the code.
 
 \subsubsection{Decimal Alignment}
 In the third and last task, a class \texttt{DatabaseUtil} is given without source code, as a black box simulating access to an imaginary database by returning a two-dimensional array of \texttt{float}s when calling its only method \texttt{getData()}.
@@ -580,11 +589,14 @@ Alpha produced a very similar output, but instead of overriding \texttt{toString
 \begin{figure}[h]
 \begin{lstlisting}
 System.out.println("name: " + contact.getName()
-		+ ", street: " + contact.getAddress().getStreet()
-		+ ", phoneNumber: " + contact.getAddress().getPhoneNumber()
-		+ ", city: " + contact.getAddress().getCity();
+		+ ", street: "
+		+ contact.getAddress().getStreet()
+		+ ", phoneNumber: "
+		+ contact.getAddress().getPhoneNumber()
+		+ ", city: "
+		+ contact.getAddress().getCity();
 \end{lstlisting}
-  \caption{Alpha overwrote \texttt{toString()} to aid debugging.}
+  \caption{Alpha used \texttt{\println} to aid debugging.}
   \figlabel{alpha-println}
 \end{figure}
 
@@ -605,8 +617,8 @@ Even though the debugger supported simple and fast inspection to any point insid
 \paragraph{Non-Selective Output}
 Eclipse's Java debugger simply lists all contents of an object, since there is no information about relevance of its respective parts.
 The debugger is working at runtime and therefore only knows the instantiated type of an object, so it will visualize all properties and contents of this, potentially resulting in a overly verbose output.
-In particular, programmers only interacting with an object over some super type may have a much simpler mental model of an it than represented in the debugger on the basis of its runtime type.
-We observed this on the color list problem, where \texttt{ArrayList}
+In particular, programmers only interacting with an object over some super type may have a much simpler mental model of what it is than represented in the debugger on the basis of its runtime type.
+We observed this in the color list problem, where \texttt{ArrayList}
 was used as implementation for the interface \texttt{List}.
 Subject Bravo initially tried to perceive the structure of a list right after sorting by pausing the program  using the debugger and inspecting the mentioned list (\Figref{debugger_color-list}), but instantly gave up and switched to writing a \texttt{for} loop which sequentially prints out all elements using \println.
 
@@ -617,7 +629,7 @@ Subject Bravo initially tried to perceive the structure of a list right after so
 \end{figure}
 
 \subsubsection{Observations using \DD}
-When allowed (but not forced) to use \DD, every subject stuck to this strategy until the problem was solved without making use of any other tool.
+When allowed (but not forced) to use \DD, every subject solved the problem without making use of any other tool.
 Only two subjects ever implemented the \texttt{Doodleable} interface for solving a problem.
 Based on their implementation and \texttt{toString} implementations of other subjects, we changed the default object rendering from using \texttt{toString} to listing all instance variables.
 As a consequence, subjects found relevant information directly after doodling an object, making any customization unnecessary.
@@ -645,7 +657,7 @@ public void summarizeOn(Canvas c) {
 	c.drawSmall(address);
 }
 \end{lstlisting}
-  \caption{Alpha misleadingly delegated the zooming mechanism to each printed object.}
+  \caption{Alpha mistakenly delegated the zooming mechanism to each printed object.}
   \figlabel{wrong-doodleable-usage}
 \end{figure}
 
@@ -684,7 +696,7 @@ When tracking an object over time, the most important information is located whe
 Therefore, a mechanism comparing objects when they are doodled multiple times could be a powerful feature.
 
 \paragraph{Clickable Doodles}
-One problem of using \println over a long period of time is, that it's indeed clear which object is printed, but not where the \println class has been made.
+One problem of using \println over a long period of time is that it's indeed clear which object is printed, but not where the \println call has been made.
 To find it, some tedious text search over the whole project is needed in the worst case.
 As a solution in \DD, doodles could include a link pointing to the line in source code where the \Doodle call was triggered, similar to the way Throwables are tracked.
 
@@ -703,13 +715,13 @@ Java's \println provides a default textual representation for any object.
 Primitives and Strings are rendered in a trivial way; all other objects, including arrays, are represented with their class name and object hash.
 Any object's representation can be changed by overriding its \texttt{toString} method.
 
-Debugging by directly writing into source code may be easier and quicker than having to equip other debugging tools for a session\ref{some guy}.
+Debugging by directly writing into source code may be easier and quicker than having to equip other debugging tools for a session\cite{some guy}\todo{WHO?}.
 Also, objects can be tracked over time by printing them at different points of execution and comparing the resulting outputs.
 
 \paragraph{Best Practice For Textual Output}
-For a detailed comprehension of how programmers use textual output for debugging, we wrote a script that searches for such methods in open source projects.
+To understand in detail how programmers use textual output for debugging, we wrote a script that searches for such methods in open source projects.
 It analyzed SqueakSource, a hosting service for Smalltalk projects, searching for \texttt{printOn} methods, Smalltalk's equivalent to Java's \println.
-Achieved results\cite{Schw11b} gave us hints on how to design default renderings on the one hand and showed short-comings of text-only output.
+Achieved results\cite{Schw11b} gave us hints on how to design default renderings on the one hand and showed shortcomings of text-only output.
 
 \paragraph{Missing Features On Textual Output}
 To achieve two-dimensional renderings in text, the developer only has the newline character as an option.
@@ -741,8 +753,8 @@ Since a debugger only shows the program's state at one point in time, comparison
 Important details may only be memorized and mentally compared to the ones at a later point in time.
 
 Eclipse's built-in Java debugger brings no options to customize its output.
-When inspecting an object, all its fields are listed by name, coming along with a textual representation.
-An object with many for a programmer unimportant fields may suffer the loss of its clarity from that.
+When inspecting an object, all its fields are listed by name, together with a textual representation.
+An object containing many fields may be costly to inspect if only few of them are relevant to the current user.
 
 
 \section{Conclusion}
