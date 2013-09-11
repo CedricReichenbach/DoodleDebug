@@ -118,12 +118,11 @@ Another drawback of textual representation is caused by the simplicity of plain 
 Its one-dimensional nature prevents the user from encapsulating multidimensional object representations.
 In other words, objects using line breaks in their \texttt{toString} representation cannot be nested consistently, since switching to a new line is always a final operation.
 
-\nes{The book `Code complete` has a nice section on debugging that may be worth quoting. Also relevant: The practice of programming, http://cm.bell-labs.com/cm/cs/tpop/debugging.html}
-
 The other half of the two most widely used debugging tools is the family of debuggers~\cite{Kras88a}.
 When utilizing a debugger, a program can be stopped at a specific point of its execution, allowing developers to inspect any detail of this very state.
 A clear advantage over textual output is the ability to inspect objects on demand.
 Information is only displayed as soon as the user asks for it, nevertheless available without re-running the program.
+As McConnell states in Code Complete\cite[p. 539]{code complete}\meta{I couldn't find "Code Complete" in the SCG bib file, but I'm pretty sure it must be there...}, debuggers help to avoid bad practices caused by debugging with \println, like scattering print statements randomly throughout a program.
 The drawbacks of debuggers arise from the fact that their inspector is always bound to a specific point in time and therefore makes it impossible to directly compare different states of the same object.
 
 \DD combines the power of the above mentioned tools, erasing the conceptual problems coming with them.
