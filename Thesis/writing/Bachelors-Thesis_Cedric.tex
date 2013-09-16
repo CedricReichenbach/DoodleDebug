@@ -493,10 +493,7 @@ CS: Computer Science
 \subsection{Posed Problems}
 In the first two tasks, the participants are given a failing unit-like test. They are informed that the test is correct, and asked to fix the bug and thus have the test pass. Subjects have access to all of the source code and are allowed to manipulate it.
 While the posed problems might seem biased towards \DD, that doesn't distract from their demonstration that \DD \emph{can} vastly outperform \println. \DD, being a generalization of \println, at worst performs on par with \println.
-\meta{The following sentence might be a bit bumpy...}
 Furthermore, not claiming that those problems are certainly best representatives of usual programming tasks, we still assume they're realistic enough to potentially occur once in a while during a programmers life.
-\meta{(original comment from pdf:)}
-\on{Well, I think it is fair to say that the tasks have been designed specifically to see whether DD is indeed better than println for certain kinds of problems. A very different question is whether these problems are representative of usual programming tasks.}
 
 \subsubsection{Sorting}
 A couple of gray scale \texttt{Color} objects are put into a \texttt{List}
@@ -716,7 +713,7 @@ Java's \println provides a default textual representation for any object.
 Primitives and Strings are rendered in a trivial way; all other objects, including arrays, are represented with their class name and object hash.
 Any object's representation can be changed by overriding its \texttt{toString} method.
 
-Debugging by directly writing into source code may be easier and quicker than having to equip other debugging tools for a session\cite{some guy}\todo{WHO?}.
+Debugging by directly writing into source code may be easier and quicker than having to equip other debugging tools for a session\cite[p. 119]{The Practice of Programming}\todo{Resolve}.
 Also, objects can be tracked over time by printing them at different points of execution and comparing the resulting outputs.
 
 \paragraph{Best Practice For Textual Output}
