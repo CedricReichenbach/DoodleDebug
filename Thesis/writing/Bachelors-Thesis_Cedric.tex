@@ -122,7 +122,7 @@ The other half of the two most widely used debugging tools is the family of debu
 When utilizing a debugger, a program can be stopped at a specific point of its execution, allowing developers to inspect any detail of this very state.
 A clear advantage over textual output is the ability to inspect objects on demand.
 Information is only displayed as soon as the user asks for it, nevertheless available without re-running the program.
-As McConnell states in Code Complete\cite[p. 539]{code complete}\meta{I couldn't find "Code Complete" in the SCG bib file, but I'm pretty sure it must be there...}, debuggers help to avoid bad practices caused by debugging with \println, like scattering print statements randomly throughout a program.
+As McConnell states in Code Complete\cite[p. 539]{McCo04a}, debuggers help to avoid bad practices caused by debugging with \println, like scattering print statements randomly throughout a program.
 The drawbacks of debuggers arise from the fact that their inspector is always bound to a specific point in time and therefore makes it impossible to directly compare different states of the same object.
 
 \DD combines the power of the above mentioned tools, erasing the conceptual problems coming with them.
@@ -713,7 +713,7 @@ Java's \println provides a default textual representation for any object.
 Primitives and Strings are rendered in a trivial way; all other objects, including arrays, are represented with their class name and object hash.
 Any object's representation can be changed by overriding its \texttt{toString} method.
 
-Debugging by directly writing into source code may be easier and quicker than having to equip other debugging tools for a session\cite[p. 119]{The Practice of Programming}\todo{Resolve}.
+Debugging by directly writing into source code may be easier and quicker than having to equip other debugging tools for a session\cite[p. 119]{Kern99a}.
 Also, objects can be tracked over time by printing them at different points of execution and comparing the resulting outputs.
 
 \paragraph{Best Practice For Textual Output}

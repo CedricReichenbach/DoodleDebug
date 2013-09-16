@@ -6,6 +6,12 @@ Bill Buxton.
   Right Design (Interactive Technologies)}.
 \newblock Morgan Kaufmann, 1 edition, April 2007.
 
+\bibitem{Kern99a}
+Brian~W. Kernighan and Rob Pike.
+\newblock {\em The Practice of Programming ({Addison-Wesley} Professional
+  Computing Series)}.
+\newblock Addison-Wesley, 1 edition, February 1999.
+
 \bibitem{Kras88a}
 Glenn~E. Krasner and Stephen~T. Pope.
 \newblock A cookbook for using the model-view-controller user interface
@@ -23,6 +29,12 @@ Darren Langdridge and Gareth Hagger-johnson.
 \newblock {\em Introduction to Research Methods and Data Analysis in
   Psychology}.
 \newblock Prentice Hall, 2 ill edition, June 2009.
+
+\bibitem{McCo04a}
+Steve McConnell.
+\newblock {\em Code Complete: A Practical Handbook of Software Construction,
+  Second Edition}.
+\newblock Microsoft Press, 2nd edition, July 2004.
 
 \bibitem{Norm88a}
 Donald~A. Norman.
