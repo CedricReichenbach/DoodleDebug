@@ -1,0 +1,29 @@
+~ DoodleDebug 2 ~
+=================
+
+Technical
+---------
+
+CLEAN UP
+- Move to a new git repo (2GB is enough)
+- Simplify project setup: 3 plugins can be vanished and be included as a simple jar
+
+Functionality
+-------------
+
+CLEAN UP API
+Providing user plugins to DD is pretty confusing right now, especially if it's only one.
+- Maybe just add methods (like "DoodleDebug.addPlugin(RenderingPlugin)") for single plugins
+
+CLUSTERED LOGGING
+- Think of a useful format for logged DD output
+- Mechanism to send data to logging instance (without server or localhost?)
+- Distinguish between logging and direct output format? Avoid lightboxes for logging?
+
+DOODLE DIFFS
+If the same object is doodled multiple times, show some kind of diff information.
+- How to calculate diff? Based on raw HTML code?
+- How to display diff?
+ - Yellow border/shadow/overlay for changed HTML elements
+ - Green for new ones
+ - Red as a placeholder where a deleted part was
