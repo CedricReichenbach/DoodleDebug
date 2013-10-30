@@ -18,6 +18,7 @@
 \usepackage{courier}
 \usepackage{microtype}
 \usepackage[htt]{hyphenat}
+\usepackage{pdfpages}
 
 % ============================================================
 % Style for monospace text
@@ -93,10 +94,17 @@
 % ============================================================
 
 \begin{document}
-\title{DoodleDebug}
-\author{Cedric Reichenbach}
-\subtitle{A shot-gun marriage between System.out.println and object inspectors}
-\maketitle
+\begin{titlepage}
+
+\includepdf{doc/title-page.pdf}
+
+%\includegraphics[scale=1]{images/title-logo.png}
+%\title{\Huge DoodleDebug}
+%\author{Cedric Reichenbach}
+%\subtitle{A shot-gun marriage between System.out.println and object inspectors}
+%\maketitle
+
+\end{titlepage}
 
 \begin{abstract}
 Developers need effective ways to inspect and explore the run-time state of programs they are developing and debugging.  Modern debuggers and object inspectors are powerful tools, but they can only be used to explore specific points in the execution where breakpoints have been set. As a result, developers often resort to inserting ``print statements'' in code to log the state at multiple points in the execution. Print statements, however are a ``poor man's debugger'', since their output is static and cannot be further explored.
@@ -104,6 +112,8 @@ We propose to combine the simplicity of print statements with the graphical soph
 \DD is a simple API modeled loosely after Java's \println. Objects that are ``printed'' generate graphical views that can be further explored, and can also be used to navigate back to source code in the IDE.
 We introduce \DD and present the results of a usability study that shows that \DD can be very effective for common debugging tasks.
 \end{abstract}
+
+\newpage
 
 \section{Introduction}
 
