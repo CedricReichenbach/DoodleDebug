@@ -1,5 +1,6 @@
 package ch.unibe.scg.doodle;
 
+import ch.unibe.scg.doodle.hbase.HBaseMap;
 import ch.unibe.scg.doodle.helperClasses.Nullable;
 
 /**
@@ -14,20 +15,26 @@ public final class IndexedObjectStorage {
 	private final Object[] ringBuffer;
 	private int nextID;
 
+	private HBaseMap hBaseMap;
+
 	public IndexedObjectStorage() {
 		this.nextID = 0;
 		this.ringBuffer = new Object[CAPACITY];
+		
+		this.hBaseMap = new HBaseMap();
 	}
 
 	/** @return Id of stored object. */
 	public int store(Object o) {
+		hBaseMap.put(nextID, o);
+		
 		ringBuffer[nextID % CAPACITY] = o;
 		return nextID++;
 	}
 
 	public @Nullable Object get(int id) {
 		if (id < nextID - CAPACITY || id >= nextID)
-			return null;
+			return hBaseMap.get(nextID);
 		
 		return ringBuffer[id % CAPACITY];
 	}
