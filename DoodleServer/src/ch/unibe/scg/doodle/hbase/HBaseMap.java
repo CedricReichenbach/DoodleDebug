@@ -29,7 +29,7 @@ public class HBaseMap implements Map<Integer, Object> {
 
 			assureTableExistence();
 		} catch (IOException e) {
-			System.err.println("Connection to HBase failed!");
+			System.out.println("Connection to HBase failed!");
 			throw new RuntimeException(e);
 		}
 	}
