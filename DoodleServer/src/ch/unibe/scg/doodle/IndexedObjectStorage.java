@@ -16,12 +16,13 @@ public final class IndexedObjectStorage {
 	private int nextID;
 
 	private HBaseMap hBaseMap;
-	private static final String TABLE_NAME = "objects";
+	private static final String TABLE_NAME = "clickables";
 
 	public IndexedObjectStorage() {
 		this.nextID = 0;
 		this.ringBuffer = new Object[CAPACITY];
 		
+		// XXX: Should we really store clickables?
 		this.hBaseMap = new HBaseMap(TABLE_NAME);
 	}
 

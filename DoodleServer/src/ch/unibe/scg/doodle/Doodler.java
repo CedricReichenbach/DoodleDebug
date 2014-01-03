@@ -4,6 +4,9 @@ import javax.inject.Inject;
 
 import org.eclipse.swt.widgets.Display;
 
+import com.thoughtworks.xstream.XStream;
+
+import ch.unibe.scg.doodle.hbase.HBaseMap;
 import ch.unibe.scg.doodle.helperClasses.CannotRenderMessage;
 import ch.unibe.scg.doodle.helperClasses.NullObject;
 import ch.unibe.scg.doodle.htmlgen.Attribute;
@@ -40,6 +43,10 @@ public class Doodler {
 	private int level;
 
 	private static Doodler instance; // XXX Sorry, Guice...
+
+	private static final String TABLE_NAME = "objects";
+	private final HBaseMap hbaseMap = new HBaseMap(TABLE_NAME);
+	private final XStream xstream = new XStream();
 
 	/**
 	 * Creates a new Doodler for visualizing objects 1 Doodler = 1 window
@@ -112,6 +119,8 @@ public class Doodler {
 		if (o == null) {
 			o = new NullObject();
 		}
+
+		hbaseMap.put(o.hashCode(), xstream.toXML(o));
 
 		Scratch scratch = scratchFactory.create(o);
 		scratch.addCSSClass("printOut");
