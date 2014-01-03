@@ -11,10 +11,14 @@ import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
 import org.apache.hadoop.hbase.TableName;
+import org.apache.hadoop.hbase.client.Delete;
+import org.apache.hadoop.hbase.client.Get;
 import org.apache.hadoop.hbase.client.HBaseAdmin;
 import org.apache.hadoop.hbase.client.HTable;
 import org.apache.hadoop.hbase.client.Put;
+import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.RetriesExhaustedWithDetailsException;
+import org.apache.hadoop.hbase.util.Bytes;
 
 import static org.apache.hadoop.hbase.util.Bytes.toBytes;
 
@@ -65,8 +69,7 @@ public class HBaseMap implements Map<Integer, Object> {
 
 	@Override
 	public boolean containsKey(Object key) {
-		// TODO Auto-generated method stub
-		return false;
+		return this.get(key) != null;
 	}
 
 	@Override
@@ -83,8 +86,28 @@ public class HBaseMap implements Map<Integer, Object> {
 
 	@Override
 	public Object get(Object key) {
-		// TODO Auto-generated method stub
-		return null;
+		if (!(key instanceof Integer)) {
+			System.err.println("WARNING: HBaseMap key needs to be an integer");
+			return null;
+		}
+
+		Get get = new Get(toBytes((int) key));
+		Get existenceGet = new Get(toBytes((int) key)); // XXX: Why?
+		try {
+			if (!table.exists(existenceGet))
+				return null;
+
+			Result result = table.get(get);
+
+			byte[] valueBytes = result.getValue(toBytes(OBJECT_COL_TITLE),
+					toBytes(OBJECT_COL_TITLE));
+			String valueXML = Bytes.toString(valueBytes);
+			return xstream.fromXML(valueXML);
+		} catch (IOException e) {
+			System.out.println("Failed to load object from HBase. Key: " + key);
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
@@ -100,12 +123,12 @@ public class HBaseMap implements Map<Integer, Object> {
 	}
 
 	@Override
-	public Object put(Integer index, Object value) {
-		Object previous = this.get(index);
+	public Object put(Integer key, Object value) {
+		Object previous = this.get(key);
 
-		Put put = new Put(toBytes(index));
+		Put put = new Put(toBytes(key));
 		// XXX: Why do we need a "qualifier" here (second argument)?
-		put.add(toBytes(ID_COL_TITLE), toBytes(ID_COL_TITLE), toBytes(index));
+		put.add(toBytes(ID_COL_TITLE), toBytes(ID_COL_TITLE), toBytes(key));
 		put.add(toBytes(OBJECT_COL_TITLE), toBytes(OBJECT_COL_TITLE),
 				toBytes(xstream.toXML(value)));
 		try {
@@ -126,8 +149,22 @@ public class HBaseMap implements Map<Integer, Object> {
 
 	@Override
 	public Object remove(Object key) {
-		// TODO Auto-generated method stub
-		return null;
+		if (!this.containsKey(key))
+			return null;
+
+		Object oldValue = this.get(key);
+
+		Delete delete = new Delete(toBytes((int) key));
+		try {
+			table.delete(delete);
+		} catch (IOException e) {
+			System.out.println("Failed to delete object from HBase. Key: "
+					+ key);
+			e.printStackTrace();
+			return null;
+		}
+
+		return oldValue;
 	}
 
 	@Override
