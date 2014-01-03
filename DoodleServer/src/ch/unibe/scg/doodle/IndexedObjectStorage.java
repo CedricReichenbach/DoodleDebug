@@ -16,12 +16,13 @@ public final class IndexedObjectStorage {
 	private int nextID;
 
 	private HBaseMap hBaseMap;
+	private static final String TABLE_NAME = "objects";
 
 	public IndexedObjectStorage() {
 		this.nextID = 0;
 		this.ringBuffer = new Object[CAPACITY];
 		
-		this.hBaseMap = new HBaseMap();
+		this.hBaseMap = new HBaseMap(TABLE_NAME);
 	}
 
 	/** @return Id of stored object. */
