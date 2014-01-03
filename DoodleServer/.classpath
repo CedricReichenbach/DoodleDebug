@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="lib" path="libs/hbase/rest/commons-codec-1.7.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/hbase/rest/jackson-core-asl-1.8.8.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/hbase/rest/jackson-jaxrs-1.8.8.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/hbase/rest/jackson-xc-1.8.8.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/hbase/rest/jackson-mapper-asl-1.8.8.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/hbase/netty-3.6.6.Final.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/hbase/htrace-core-2.01.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/hbase/hbase-protocol-0.96.1-hadoop2.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/hbase/hadoop-auth-2.2.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/hbase/commons-configuration-1.6.jar"/>
