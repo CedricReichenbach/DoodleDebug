@@ -34,4 +34,17 @@ public class HBaseMapTest {
 		assertFalse(hbaseMap.containsKey(key));
 	}
 
+	@Test
+	public void testClearAndFill() {
+		hbaseMap.clear();
+		assertTrue(hbaseMap.isEmpty());
+
+		hbaseMap.put(321, "test");
+		hbaseMap.put(456, "another");
+		assertEquals(2, hbaseMap.size());
+		
+		hbaseMap.clear();
+		assertTrue(hbaseMap.isEmpty());
+	}
+
 }

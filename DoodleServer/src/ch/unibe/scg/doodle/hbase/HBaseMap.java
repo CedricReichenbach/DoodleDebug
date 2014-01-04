@@ -2,6 +2,7 @@ package ch.unibe.scg.doodle.hbase;
 
 import java.io.IOException;
 import java.io.InterruptedIOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -17,7 +18,9 @@ import org.apache.hadoop.hbase.client.HBaseAdmin;
 import org.apache.hadoop.hbase.client.HTable;
 import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.client.Result;
+import org.apache.hadoop.hbase.client.ResultScanner;
 import org.apache.hadoop.hbase.client.RetriesExhaustedWithDetailsException;
+import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.util.Bytes;
 
 import static org.apache.hadoop.hbase.util.Bytes.toBytes;
@@ -63,8 +66,17 @@ public class HBaseMap implements Map<Integer, Object> {
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-
+		try {
+			HTableDescriptor descriptor = table.getTableDescriptor();
+			
+			hbaseAdmin.disableTable(table.getName());
+			hbaseAdmin.deleteTable(table.getName());
+			
+			hbaseAdmin.createTable(descriptor);
+		} catch (IOException e) {
+			System.out.println("Failed to reset table: " + table);
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -112,8 +124,7 @@ public class HBaseMap implements Map<Integer, Object> {
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.size() == 0;
 	}
 
 	@Override
@@ -169,13 +180,29 @@ public class HBaseMap implements Map<Integer, Object> {
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getRowResults().size();
 	}
 
 	@Override
 	public Collection<Object> values() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	private Collection<Result> getRowResults() {
+		Collection<Result> list = new ArrayList<>();
+		try {
+			ResultScanner scanner = table.getScanner(new Scan());
+
+			Result result = scanner.next();
+			while (result != null) {
+				list.add(result);
+				result = scanner.next();
+			}
+		} catch (IOException e) {
+			System.out.println("Could not list elements of table: " + table);
+			e.printStackTrace();
+		}
+		return list;
 	}
 }
