@@ -1,9 +1,14 @@
 package ch.unibe.scg.doodle.hbase;
 
+import static org.apache.hadoop.hbase.util.Bytes.toBytes;
+
 import java.io.IOException;
 import java.io.InterruptedIOException;
+import java.util.AbstractMap;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -23,8 +28,6 @@ import org.apache.hadoop.hbase.client.RetriesExhaustedWithDetailsException;
 import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.util.Bytes;
 
-import static org.apache.hadoop.hbase.util.Bytes.toBytes;
-
 import com.thoughtworks.xstream.XStream;
 
 public class HBaseMap implements Map<Integer, Object> {
@@ -33,7 +36,7 @@ public class HBaseMap implements Map<Integer, Object> {
 	private static final String OBJECT_COL_TITLE = "object";
 
 	private final HBaseAdmin hbaseAdmin;
-	private final HTable table;
+	private HTable table;
 
 	private final XStream xstream = new XStream();
 
@@ -68,11 +71,13 @@ public class HBaseMap implements Map<Integer, Object> {
 	public void clear() {
 		try {
 			HTableDescriptor descriptor = table.getTableDescriptor();
-			
+
 			hbaseAdmin.disableTable(table.getName());
 			hbaseAdmin.deleteTable(table.getName());
-			
+
 			hbaseAdmin.createTable(descriptor);
+
+			this.table = new HTable(table.getConfiguration(), table.getName());
 		} catch (IOException e) {
 			System.out.println("Failed to reset table: " + table);
 			e.printStackTrace();
@@ -86,14 +91,21 @@ public class HBaseMap implements Map<Integer, Object> {
 
 	@Override
 	public boolean containsValue(Object value) {
-		// TODO Auto-generated method stub
-		return false;
+		return values().contains(value);
 	}
 
 	@Override
-	public Set<java.util.Map.Entry<Integer, Object>> entrySet() {
-		// TODO Auto-generated method stub
-		return null;
+	public Set<Entry<Integer, Object>> entrySet() {
+		HashSet<Entry<Integer, Object>> set = new HashSet<>();
+
+		for (Integer key : keySet()) {
+			Object value = get(key);
+			SimpleEntry<Integer, Object> entry = new AbstractMap.SimpleEntry<>(
+					key, value);
+			set.add(entry);
+		}
+
+		return set;
 	}
 
 	@Override
@@ -129,8 +141,15 @@ public class HBaseMap implements Map<Integer, Object> {
 
 	@Override
 	public Set<Integer> keySet() {
-		// TODO Auto-generated method stub
-		return null;
+		Set<Integer> set = new HashSet<>();
+
+		Collection<Result> results = getRowResults();
+		for (Result result : results) {
+			int rowId = Bytes.toInt(result.getRow());
+			set.add(rowId);
+		}
+
+		return set;
 	}
 
 	@Override
@@ -185,8 +204,17 @@ public class HBaseMap implements Map<Integer, Object> {
 
 	@Override
 	public Collection<Object> values() {
-		// TODO Auto-generated method stub
-		return null;
+		Collection<Object> values = new ArrayList<>();
+
+		Collection<Result> results = getRowResults();
+		for (Result result : results) {
+			String valueXML = Bytes.toString(result.getValue(
+					toBytes(OBJECT_COL_TITLE), toBytes(OBJECT_COL_TITLE)));
+			Object value = xstream.fromXML(valueXML);
+			values.add(value);
+		}
+
+		return values;
 	}
 
 	private Collection<Result> getRowResults() {
