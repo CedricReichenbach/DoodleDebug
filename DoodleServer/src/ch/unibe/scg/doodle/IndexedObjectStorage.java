@@ -11,9 +11,9 @@ import ch.unibe.scg.doodle.helperClasses.Nullable;
  * 
  */
 public final class IndexedObjectStorage {
-	static final int CAPACITY = 10000;
+	static final int CAPACITY = 2;//XXX 10000;
 	private final Object[] ringBuffer;
-	private int nextID;
+	private int nextID; // TODO: Use long to prevent overflow
 
 	private HBaseMap hBaseMap;
 	private static final String TABLE_NAME = "clickables";
@@ -36,7 +36,7 @@ public final class IndexedObjectStorage {
 
 	public @Nullable Object get(int id) {
 		if (id < nextID - CAPACITY || id >= nextID)
-			return hBaseMap.get(nextID);
+			return hBaseMap.get(id);
 		
 		return ringBuffer[id % CAPACITY];
 	}
