@@ -48,9 +48,11 @@ public class DoodleDatabase {
 	 */
 	public List<Pair<String, String>> loadNewDoodles() {
 		List<Pair<String, String>> scripts = new ArrayList<Pair<String, String>>();
-		while (hasNewDoodles())
+		while (hasNewDoodles()) {
 			scripts.add(new Pair<String, String>((String) htmlMap
 					.get(nextLoadID), (String) cssMap.get(nextLoadID)));
+			nextLoadID++;
+		}
 		return scripts;
 	}
 

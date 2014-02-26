@@ -6,6 +6,7 @@ import org.eclipse.swt.widgets.Display;
 
 import com.thoughtworks.xstream.XStream;
 
+import ch.unibe.scg.doodle.hbase.BusyReader;
 import ch.unibe.scg.doodle.hbase.DoodleDatabase;
 import ch.unibe.scg.doodle.hbase.HBaseMap;
 import ch.unibe.scg.doodle.helperClasses.CannotRenderMessage;
@@ -20,6 +21,7 @@ import ch.unibe.scg.doodle.server.views.HtmlShow;
 import ch.unibe.scg.doodle.server.views.JavascriptExecuter;
 import ch.unibe.scg.doodle.util.BreadcrumbsBuilder;
 import ch.unibe.scg.doodle.util.JavascriptCallsUtil;
+import ch.unibe.scg.doodle.util.OutputUtil;
 import ch.unibe.scg.doodle.view.CSSCollection;
 import ch.unibe.scg.doodle.view.HtmlDocument;
 
@@ -48,7 +50,7 @@ public class Doodler {
 	private static final String TABLE_NAME = "objects";
 	private final HBaseMap hbaseMap = new HBaseMap(TABLE_NAME);
 	private final XStream xstream = new XStream();
-	
+
 	DoodleDatabase doodleDatabase = new DoodleDatabase();
 
 	/**
@@ -139,14 +141,12 @@ public class Doodler {
 
 		String css = CSSCollection.flushAllCSS();
 		String cssAddingScript = JavascriptCallsUtil.addCSS(css);
-		Runnable jsExecuterForCSS = new JavascriptExecuter(cssAddingScript);
-		Display.getDefault().syncExec(jsExecuterForCSS);
+		OutputUtil.executeJSInOutput(cssAddingScript);
 
 		String htmlAddingScript = JavascriptCallsUtil
 				.addToBodyCall(printOutWrapper.toString());
-		Runnable jsExecuterForHtml = new JavascriptExecuter(htmlAddingScript);
-		Display.getDefault().syncExec(jsExecuterForHtml);
-		
+		OutputUtil.executeJSInOutput(htmlAddingScript);
+
 		doodleDatabase.store(htmlAddingScript, cssAddingScript);
 	}
 
