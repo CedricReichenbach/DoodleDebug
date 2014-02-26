@@ -6,6 +6,7 @@ import org.eclipse.swt.widgets.Display;
 
 import com.thoughtworks.xstream.XStream;
 
+import ch.unibe.scg.doodle.hbase.DoodleDatabase;
 import ch.unibe.scg.doodle.hbase.HBaseMap;
 import ch.unibe.scg.doodle.helperClasses.CannotRenderMessage;
 import ch.unibe.scg.doodle.helperClasses.NullObject;
@@ -47,6 +48,8 @@ public class Doodler {
 	private static final String TABLE_NAME = "objects";
 	private final HBaseMap hbaseMap = new HBaseMap(TABLE_NAME);
 	private final XStream xstream = new XStream();
+	
+	DoodleDatabase doodleDatabase = new DoodleDatabase();
 
 	/**
 	 * Creates a new Doodler for visualizing objects 1 Doodler = 1 window
@@ -135,13 +138,16 @@ public class Doodler {
 		scratch.drawWholeWithName(printOutWrapper);
 
 		String css = CSSCollection.flushAllCSS();
-		Runnable jsExecuterForCSS = new JavascriptExecuter(
-				JavascriptCallsUtil.addCSS(css));
+		String cssAddingScript = JavascriptCallsUtil.addCSS(css);
+		Runnable jsExecuterForCSS = new JavascriptExecuter(cssAddingScript);
 		Display.getDefault().syncExec(jsExecuterForCSS);
 
-		Runnable jsExecuterForHtml = new JavascriptExecuter(
-				JavascriptCallsUtil.addToBodyCall(printOutWrapper.toString()));
+		String htmlAddingScript = JavascriptCallsUtil
+				.addToBodyCall(printOutWrapper.toString());
+		Runnable jsExecuterForHtml = new JavascriptExecuter(htmlAddingScript);
 		Display.getDefault().syncExec(jsExecuterForHtml);
+		
+		doodleDatabase.store(htmlAddingScript, cssAddingScript);
 	}
 
 	/**

@@ -28,7 +28,7 @@ public class DoodleDebugScreen {
 	protected Tag head() {
 		Tag head = new Tag("head");
 		head.add("<meta charset=\"utf-8\">");
-		head.add("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=100\" >"); // for
+		head.add("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" >"); // for
 																				// IE9
 																				// compatibility
 		head.add(css());
