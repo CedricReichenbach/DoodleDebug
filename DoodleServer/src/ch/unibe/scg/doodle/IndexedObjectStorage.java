@@ -16,10 +16,16 @@ public final class IndexedObjectStorage {
 	private int nextID; // TODO: Use long to prevent overflow
 
 	private HBaseMap hBaseMap;
+	private HBaseMap persistenceMap;
 	private static final String TABLE_NAME = "clickables";
+	private static final String PERSISTENCE_TABLE_NAME = "clickables_persistence";
+	private static final int NEXT_ID_KEY = 0;
 
 	public IndexedObjectStorage() {
-		this.nextID = 0;
+		this.persistenceMap = new HBaseMap(PERSISTENCE_TABLE_NAME);
+
+		this.nextID = persistenceMap.containsKey(NEXT_ID_KEY) ? (int) persistenceMap
+				.get(NEXT_ID_KEY) : 0;
 		this.ringBuffer = new Object[CAPACITY];
 
 		// XXX: Should we really store clickables?
@@ -33,7 +39,13 @@ public final class IndexedObjectStorage {
 			hBaseMap.put(nextID, o);
 
 		ringBuffer[nextID % CAPACITY] = o;
-		return nextID++;
+		increaseNextID();
+		return nextID - 1;
+	}
+
+	private void increaseNextID() {
+		nextID++;
+		persistenceMap.put(NEXT_ID_KEY, (Integer) nextID);
 	}
 
 	public @Nullable

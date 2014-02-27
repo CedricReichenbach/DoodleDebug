@@ -16,14 +16,22 @@ public class DoodleDatabase {
 
 	private static final String HTML_TABLE_NAME = "doodles_html";
 	private static final String CSS_TABLE_NAME = "doodles_css";
+	private static final String PERSISTENCE_TABLE_NAME = "doodles_persistence";
+	private static final int NEXT_ID_KEY = 0;
 
 	HBaseMap htmlMap = new HBaseMap(HTML_TABLE_NAME);
 	HBaseMap cssMap = new HBaseMap(CSS_TABLE_NAME);
+	HBaseMap persistenceMap = new HBaseMap(PERSISTENCE_TABLE_NAME);
 
 	// TODO: Maybe make ID persistent, e.g. store into DB
 	// XXX: Problem: Uncoordinated access to DB from multiple applications
-	private int nextID = 0; // TODO: Use long to prevent overflow
+	private int nextID; // TODO: Use long to prevent overflow
 	private int nextLoadID = 0;
+
+	public DoodleDatabase() {
+		this.nextID = persistenceMap.containsKey(NEXT_ID_KEY) ? (int) persistenceMap
+				.get(NEXT_ID_KEY) : 0;
+	}
 
 	/**
 	 * Store a doodle, i.e. its two JS scripts inserting data into a running
@@ -37,7 +45,12 @@ public class DoodleDatabase {
 	public void store(String htmlAddingScript, String cssAddingScript) {
 		htmlMap.put(nextID, htmlAddingScript);
 		cssMap.put(nextID, cssAddingScript);
+		increaseNextID();
+	}
+
+	private void increaseNextID() {
 		nextID++;
+		persistenceMap.put(NEXT_ID_KEY, (Integer) nextID);
 	}
 
 	/**
