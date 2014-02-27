@@ -4,26 +4,27 @@ import javax.inject.Inject;
 
 import org.eclipse.swt.widgets.Display;
 
-import com.thoughtworks.xstream.XStream;
-
-import ch.unibe.scg.doodle.hbase.BusyReader;
 import ch.unibe.scg.doodle.hbase.DoodleDatabase;
 import ch.unibe.scg.doodle.hbase.HBaseMap;
 import ch.unibe.scg.doodle.helperClasses.CannotRenderMessage;
 import ch.unibe.scg.doodle.helperClasses.NullObject;
 import ch.unibe.scg.doodle.htmlgen.Attribute;
 import ch.unibe.scg.doodle.htmlgen.Tag;
+import ch.unibe.scg.doodle.inject.DoodleModule;
 import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 import ch.unibe.scg.doodle.server.DoodleServer;
 import ch.unibe.scg.doodle.server.LightboxStack;
 import ch.unibe.scg.doodle.server.util.DoodleImages;
 import ch.unibe.scg.doodle.server.views.HtmlShow;
-import ch.unibe.scg.doodle.server.views.JavascriptExecuter;
 import ch.unibe.scg.doodle.util.BreadcrumbsBuilder;
 import ch.unibe.scg.doodle.util.JavascriptCallsUtil;
 import ch.unibe.scg.doodle.util.OutputUtil;
 import ch.unibe.scg.doodle.view.CSSCollection;
 import ch.unibe.scg.doodle.view.HtmlDocument;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.thoughtworks.xstream.XStream;
 
 /**
  * Class used for visualizing any Object
@@ -45,13 +46,24 @@ public class Doodler {
 
 	private int level;
 
-	private static Doodler instance; // XXX Sorry, Guice...
-
 	private static final String TABLE_NAME = "objects";
 	private final HBaseMap hbaseMap = new HBaseMap(TABLE_NAME);
 	private final XStream xstream = new XStream();
 
 	DoodleDatabase doodleDatabase = new DoodleDatabase();
+
+	static Injector injector;
+
+	static Injector injectorInstance() {
+		if (injector == null) {
+			injector = Guice.createInjector(new DoodleModule());
+		}
+		return injector;
+	}
+
+	public static void resetInjector() {
+		injector = null;
+	}
 
 	/**
 	 * Creates a new Doodler for visualizing objects 1 Doodler = 1 window
@@ -70,12 +82,10 @@ public class Doodler {
 
 		Runnable htmlShow = new HtmlShow(htmlDocument.toString());
 		Display.getDefault().syncExec(htmlShow);
-
-		instance = this;
 	}
 
 	public static Doodler instance() {
-		return instance;
+		return injectorInstance().getInstance(Doodler.class);
 	}
 
 	private void setBackgroundImage() {

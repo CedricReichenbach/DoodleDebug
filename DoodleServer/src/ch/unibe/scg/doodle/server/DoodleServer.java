@@ -18,7 +18,6 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 
-import ch.unibe.scg.doodle.DooMockup;
 import ch.unibe.scg.doodle.Doodler;
 import ch.unibe.scg.doodle.IndexedObjectStorage;
 import ch.unibe.scg.doodle.htmlgen.Tag;
@@ -76,7 +75,7 @@ public class DoodleServer {
 	}
 
 	public void clearOutput() {
-		DooMockup.resetInjector();
+		Doodler.resetInjector();
 		Runnable emptyShow = new HtmlShow(new DoodleDebugScreen().toString());
 		Display.getDefault().asyncExec(emptyShow);
 	}

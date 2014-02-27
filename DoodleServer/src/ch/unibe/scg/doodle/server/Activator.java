@@ -95,6 +95,6 @@ public class Activator extends AbstractUIPlugin implements IStartup {
 	@Override
 	public void earlyStartup() {
 		startSimonServer();
-		new BusyReader(new DoodleDatabase(), 2000);
+		new BusyReader(new DoodleDatabase(), 1000);
 	}
 }

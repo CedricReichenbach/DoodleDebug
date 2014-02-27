@@ -3,6 +3,7 @@ package ch.unibe.scg.doodle.hbase;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import ch.unibe.scg.doodle.Doodler;
 import ch.unibe.scg.doodle.server.DoodleServer;
 import ch.unibe.scg.doodle.util.OutputUtil;
 import ch.unibe.scg.doodle.util.Pair;
@@ -37,7 +38,8 @@ public class BusyReader {
 		public void run() {
 			for (Pair<String, String> pair : database.loadNewDoodles()) {
 				if (!firstRunOver) {
-					DoodleServer.instance().firstRun(); // FIXME: Leads to gray, empty page
+					DoodleServer.instance().firstRun();
+					Doodler.instance(); // XXX: Hack to assure initiation
 					firstRunOver = true;
 				}
 
