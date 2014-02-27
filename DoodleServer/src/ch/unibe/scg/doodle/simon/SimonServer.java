@@ -9,6 +9,7 @@ import java.util.Collection;
 import org.eclipse.core.resources.ResourcesPlugin;
 
 import ch.unibe.scg.doodle.DooMockup;
+import ch.unibe.scg.doodle.DoodleDebugConfig;
 import ch.unibe.scg.doodle.Doodler;
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
 import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
@@ -147,7 +148,8 @@ public class SimonServer implements SimonServerInterface {
 
 	@Override
 	public void firstRun() {
-		DoodleServer.instance().firstRun();
+		if (!DoodleDebugConfig.CLUSTER_MODE)
+			DoodleServer.instance().firstRun();
 	}
 
 	@Override

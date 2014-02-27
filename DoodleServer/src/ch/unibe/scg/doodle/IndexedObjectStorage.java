@@ -11,7 +11,7 @@ import ch.unibe.scg.doodle.helperClasses.Nullable;
  * 
  */
 public final class IndexedObjectStorage {
-	static final int CAPACITY = 2;//XXX 10000;
+	static final int CAPACITY = 10000;
 	private final Object[] ringBuffer;
 	private int nextID; // TODO: Use long to prevent overflow
 
@@ -21,23 +21,26 @@ public final class IndexedObjectStorage {
 	public IndexedObjectStorage() {
 		this.nextID = 0;
 		this.ringBuffer = new Object[CAPACITY];
-		
+
 		// XXX: Should we really store clickables?
-		this.hBaseMap = new HBaseMap(TABLE_NAME);
+		if (DoodleDebugConfig.CLUSTER_MODE)
+			this.hBaseMap = new HBaseMap(TABLE_NAME);
 	}
 
 	/** @return Id of stored object. */
 	public int store(Object o) {
-		hBaseMap.put(nextID, o);
-		
+		if (DoodleDebugConfig.CLUSTER_MODE)
+			hBaseMap.put(nextID, o);
+
 		ringBuffer[nextID % CAPACITY] = o;
 		return nextID++;
 	}
 
-	public @Nullable Object get(int id) {
+	public @Nullable
+	Object get(int id) {
 		if (id < nextID - CAPACITY || id >= nextID)
-			return hBaseMap.get(id);
-		
+			return DoodleDebugConfig.CLUSTER_MODE ? hBaseMap.get(id) : null;
+
 		return ringBuffer[id % CAPACITY];
 	}
 }

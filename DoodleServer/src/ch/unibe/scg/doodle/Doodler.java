@@ -151,13 +151,16 @@ public class Doodler {
 
 		String css = CSSCollection.flushAllCSS();
 		String cssAddingScript = JavascriptCallsUtil.addCSS(css);
-		OutputUtil.executeJSInOutput(cssAddingScript);
+		if (!DoodleDebugConfig.CLUSTER_MODE)
+			OutputUtil.executeJSInOutput(cssAddingScript);
 
 		String htmlAddingScript = JavascriptCallsUtil
 				.addToBodyCall(printOutWrapper.toString());
-		OutputUtil.executeJSInOutput(htmlAddingScript);
+		if (!DoodleDebugConfig.CLUSTER_MODE)
+			OutputUtil.executeJSInOutput(htmlAddingScript);
 
-		doodleDatabase.store(htmlAddingScript, cssAddingScript);
+		if (DoodleDebugConfig.CLUSTER_MODE)
+			doodleDatabase.store(htmlAddingScript, cssAddingScript);
 	}
 
 	/**
