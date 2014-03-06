@@ -50,7 +50,7 @@ public final class IndexedObjectStorage {
 
 	public @Nullable
 	Object get(int id) {
-		if (id < nextID - CAPACITY || id >= nextID)
+		if (id < nextID - CAPACITY || id >= nextID || ringBuffer[id % CAPACITY] == null)
 			return DoodleDebugConfig.CLUSTER_MODE ? hBaseMap.get(id) : null;
 
 		return ringBuffer[id % CAPACITY];
