@@ -5,6 +5,9 @@ import org.eclipse.ui.IStartup;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import ch.unibe.scg.doodle.DoodleDebugConfig;
+import ch.unibe.scg.doodle.hbase.BusyReader;
+import ch.unibe.scg.doodle.hbase.DoodleDatabase;
 import ch.unibe.scg.doodle.simon.SimonServer;
 
 /**
@@ -93,5 +96,7 @@ public class Activator extends AbstractUIPlugin implements IStartup {
 	@Override
 	public void earlyStartup() {
 		startSimonServer();
+		if (DoodleDebugConfig.CLUSTER_MODE)
+			new BusyReader(new DoodleDatabase(), 1000);
 	}
 }

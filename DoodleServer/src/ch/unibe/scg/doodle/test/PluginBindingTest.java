@@ -1,12 +1,12 @@
 package ch.unibe.scg.doodle.test;
 
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.junit.Assert.assertThat;
 
 import java.util.Vector;
 
 import org.junit.Test;
-
 
 import ch.unibe.scg.doodle.inject.DoodleModule;
 import ch.unibe.scg.doodle.plugins.CollectionPlugin;
@@ -15,7 +15,6 @@ import ch.unibe.scg.doodle.rendering.RenderingRegistry;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-
 public class PluginBindingTest {
 
 	@Test
@@ -23,7 +22,11 @@ public class PluginBindingTest {
 		Injector injector = Guice.createInjector(new DoodleModule());
 		RenderingRegistry registry = injector
 				.getInstance(RenderingRegistry.class);
-		assertThat(registry.lookup(Vector.class), is(CollectionPlugin.class));
+		// assertThat(registry.lookup(Vector.class),
+		// isA(CollectionPlugin.class));
+		// XXX: Why isn't above version working?
+		assertThat(registry.lookup(Vector.class),
+				is(instanceOf(CollectionPlugin.class)));
 	}
 
 	@Test
@@ -46,5 +49,3 @@ public class PluginBindingTest {
 	}
 
 }
-
-

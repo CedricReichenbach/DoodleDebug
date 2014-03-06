@@ -28,7 +28,7 @@ public class HtmlDocument {
 	protected Tag makeHead() {
 		Tag head = new Tag("head");
 		head.add("<meta charset=\"utf-8\">");
-		head.add("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=100\" >"); // for
+		head.add("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" >"); // for
 																				// IE9
 																				// compatibility
 		Tag title = new Tag("title");
