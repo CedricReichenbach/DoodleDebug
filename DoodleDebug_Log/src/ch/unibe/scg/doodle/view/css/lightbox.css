@@ -1,0 +1,154 @@
+#lightbox {
+	position: fixed;
+	box-shadow: 0 4px 30px black;
+	z-index: 3;
+	padding: 4px;
+	background-color: rgba(150,150,150,0.5);
+	border: 1px outset #666;
+	width: 90%;
+	left: 5%;
+	top: 30px;
+}
+
+#closeButton {
+	top: 30px;
+	left: 95%;
+	position: fixed;
+	margin-top: -6px;
+	z-index: 4;
+	cursor: pointer;
+}
+
+#closeButton:hover {
+	
+}
+
+#overlay {
+	background-color: black;
+	opacity: 0.7;
+	position: fixed;
+	z-index: 2;
+}
+
+#lightboxWrapper {
+	height: 0;
+}
+
+/* lightbox content ************************************* */
+
+#lightboxContentWrapper {
+	border: 1px inset #666;
+	padding: 4px;
+	display: block;
+	overflow-y: auto;
+}
+
+#breadcrumbsWrapper {
+	display: block;
+	position: relative;
+	left: -4px;
+	top: -4px;
+	background-color: #EEE;
+	width: 100%;
+	padding: 6px 4px;
+	box-shadow: 0 -2px 6px -2px rgba(0, 0, 0, 0.5) inset;
+}
+
+#breadcrumbs {
+	background-color: #eee;
+	/*border: 1px solid #ccc;*/
+	padding: 2px 2px 0 2px;
+	border-radius: 1px;
+	display: inline-block;
+}
+
+#dd-home {
+	display: inline-block;
+	height: 1em;
+	vertical-align: top;
+}
+
+#dd-home img {
+	cursor: pointer;
+	opacity: 0.7;
+}
+
+#dd-home img:hover {
+	opacity: 1;
+}
+
+.breadcrumb {
+	display: inline-block;
+	background-color: #aaa;
+	color: white;
+	border: 1px solid #888;
+	/*box-shadow: 0 0 2px #666 inset;*/
+	padding: 0 2px;
+	font-weight: 500;
+	border-radius: 1px;
+	margin-bottom: 2px;
+}
+
+.betweenBreadcrumbs {
+	display: inline-block;
+}
+
+.activeBreadcrumb {
+	background-color: #00d600;
+	/*box-shadow: 0 0 4px 3px #383 inset;*/
+	border-color: #00bb00;
+}
+
+.inactiveBreadcrumb:hover,
+.deadBreadcrumb:hover {
+	color: white;
+	background-color: #00CBF1;
+	border-color: #8bb;
+	cursor: pointer;
+	opacity: 1;
+}
+
+.inactiveBreadcrumb:active {
+    box-shadow: none;
+	background-color: #00BADD;
+	border-color: #7aa;
+}
+
+.deadBreadcrumbs {
+	display: inline;
+}
+
+.deadBreadcrumbs * {
+	opacity: 0.5;
+}
+
+/* where objects are rendered into */
+#lightboxRendering {
+	background-color: #eee;
+	padding: 4px;
+	float: left;
+	margin: 2px;
+}
+/* nice css3 gradient */
+#lightboxRendering {
+	background-image: linear-gradient(bottom, rgb(238,238,238) 100%, rgb(221,221,221) 0%);
+	background-image: -o-linear-gradient(bottom, rgb(238,238,238) 100%, rgb(221,221,221) 0%);
+	background-image: -moz-linear-gradient(bottom, rgb(238,238,238) 100%, rgb(221,221,221) 0%);
+	background-image: -webkit-linear-gradient(bottom, rgb(238,238,238) 100%, rgb(221,221,221) 0%);
+	background-image: -ms-linear-gradient(bottom, rgb(238,238,238) 100%, rgb(221,221,221) 0%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(1, rgb(238,238,238)),
+		color-stop(0, rgb(221,221,221))
+	);
+}
+#lightboxRendering > .ClassName {
+	margin-bottom: 3px;
+}
+#lightboxRendering > .ClassName .classNameText {
+	border-radius: 3px;
+	box-shadow: 0 0 2px rgba(0, 72, 54, 0.3);
+}

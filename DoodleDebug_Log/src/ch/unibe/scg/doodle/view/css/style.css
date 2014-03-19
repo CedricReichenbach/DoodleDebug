@@ -1,0 +1,179 @@
+@font-face {
+    font-family: "Roboto";
+    font-style: italic;
+    font-weight: 500;
+    src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/OLffGBTaF0XFOW1gnuHF0YbN6UDyHWBl620a-IRfuBk.woff") format("woff");
+}
+@font-face {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 500;
+    src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/RxZJdnzeo3R5zSexge8UUT8E0i7KZn-EPnyo3HZu7kw.woff") format("woff");
+}
+@font-face {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 100;
+    src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/vzIUHo9z-oJ4WgkpPOtg1_esZW2xOQ-xsNqO47m55DA.woff") format("woff");
+}
+@font-face {
+    font-family: "Roboto";
+    font-style: italic;
+    font-weight: 400;
+    src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/1pO9eUAp8pSF8VnRTP3xnvesZW2xOQ-xsNqO47m55DA.woff") format("woff");
+}
+@font-face {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/2UX7WLTfW3W8TclTUvlFyQ.woff") format("woff");
+}
+body {
+    background-color: #DDDDDD;
+    font-family: "Roboto",Verdana,Tahoma,sans-serif;
+    font-size: 0.8em;
+}
+table {
+	font-size: 1em;
+}
+hr {
+    clear: both;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    visibility: hidden;
+    width: 100%;
+}
+.rendering {
+    /*float: left;*/
+	display: inline-block;
+    padding: 2px;
+	overflow: hidden;
+}
+table .rendering {
+	float: none;
+}
+.printOutWrapper {
+    display: block;
+    margin-bottom: 4px;
+}
+.printOut, #lightboxContentWrapper, .level1 {
+    background-color: #FFFFFF;
+	border-width: 0;
+    box-shadow: 0 0 2px #AAAAAA;
+    overflow: hidden;
+	display: inline-block;
+}
+.printOut {
+	box-shadow: 0 1px 3px 1px #999;
+	padding: 2px;
+	float: none;
+}
+/* nice css3 gradient */
+.printOut, #lightboxContentWrapper {
+	background-image: linear-gradient(bottom, whitesmoke 0%, rgb(255,255,255) 100%);
+	background-image: -o-linear-gradient(bottom, whitesmoke 0%, rgb(255,255,255) 100%);
+	background-image: -moz-linear-gradient(bottom, whitesmoke 0%, rgb(255,255,255) 100%);
+	background-image: -webkit-linear-gradient(bottom, whitesmoke 0%, rgb(255,255,255) 100%);
+	background-image: -ms-linear-gradient(bottom, whitesmoke 0%, rgb(255,255,255) 100%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0, whitesmoke),
+		color-stop(1, rgb(255,255,255))
+	);
+}
+.level1 {
+	cursor: pointer;
+}
+.level1:hover {
+    background-color: lightskyblue;
+    box-shadow: 0 0 2px blue;
+}
+.level1:active {
+	background-color: #58f;
+	box-shadow: 0 0 2px black inset;
+}
+.ClassName {
+	z-index: 1;
+	height: 13px;
+    color: #0a8;
+    font-size: 8pt;
+	margin-bottom: -2px;
+	position: relative; /* Important to bring text in front of respective content box */
+	/*text-shadow: -1px 1px 1px #FFF;*/
+	/*filter: glow(color=#dddddd,strength=1);*/ /* IE; ugly rendering, not useful at all */
+}
+.ClassName .classNameText {
+	background-color: rgba(255,255,255,0.75);
+	display: inline-block;
+	box-shadow: 0 -1px 2px rgba(0, 72, 54, 0.3);
+	border-radius: 3px 3px 0 0;
+	padding: 0 1px;
+}
+.column {
+    float: left;
+}
+.line {
+	overflow: hidden;
+}
+.error {
+	background-color: red;
+	color: yellow;
+	max-width: 400px;
+	max-height: 200px;
+	overflow: scroll;
+}
+.couldNotRenderMessage * {
+	background-color: red;
+	color: yellow;
+	box-shadow: none;
+}
+::selection {
+	background-color: #3d0;
+	color: white;
+}
+::-moz-selection {
+	background-color: #3d0;
+	color: white;
+}
+
+/* beta info part at top */
+
+#betaInfoWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    text-align: right;
+    width: 100%;
+	z-index: 10;
+}
+
+#betaInfo {
+	display: inline-block;
+	background-color: rgba(255, 215, 0, 0.6);
+    padding: 4px;
+	box-shadow: -1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+#betaInfo:hover {
+	background-color: rgba(255, 215, 0, 1);
+	box-shadow: -1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* osterei */
+
+.osterei {
+	background-color: #faf;
+	height:129px;
+	width:100%;
+	background-repeat: repeat-x;
+	background-position: 0 10px;
+	padding: 10px 0 !important;
+}
+.osterei:hover {
+	cursor: pointer;
+	background-color: #aff;
+}

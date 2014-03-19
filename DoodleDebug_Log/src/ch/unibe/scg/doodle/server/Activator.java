@@ -96,7 +96,7 @@ public class Activator extends AbstractUIPlugin implements IStartup {
 	@Override
 	public void earlyStartup() {
 		startSimonServer();
-		if (DoodleDebugConfig.CLUSTER_MODE && false)
+		if (DoodleDebugConfig.CLUSTER_MODE && false) // XXX
 			new BusyReader(new DoodleDatabase(), 1000);
 	}
 }

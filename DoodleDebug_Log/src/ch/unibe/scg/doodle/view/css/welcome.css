@@ -1,0 +1,124 @@
+body {
+	text-align: center;
+	padding-top: 30px;
+}
+
+hr {
+	height: 30px;
+}
+
+#welcomeTitle, #tutorial, #shortTut, #info/*, #background*/ {
+	display: inline;
+	padding: 4px;
+	border-radius: 3px;
+	box-shadow: 1px 2px 2px rgba(0,0,0,0.5);
+}
+
+#background {
+	/*background-color: #def;*/
+    display: inline-block;
+    overflow: hidden;
+    padding: 30px;
+}
+
+#welcomeTitle {
+	text-shadow: 1px 2px 1px #222;
+	color: #ff4;
+	filter: progid:DXImageTransform.Microsoft.DropShadow(OffX=1, OffY=2, Color=#222);
+	background-color: #0af;
+}
+
+#shortTut {
+	display: inline-block;
+	background-color: #0fa;
+}
+#shortTut h3 {
+	margin: 2pt;
+}
+#shortTut code {
+	font-size: 12pt;
+	background-color: rgba(255, 255, 255, 0.7);
+	padding: 1pt;
+	margin: 2pt;
+}
+
+#tutorial {
+	background-color: #df0;
+}
+
+#info {
+	background-color: #fc4;
+}
+#info a {
+	color: #333;
+	text-decoration: none;
+}
+#info a:hover {
+	text-decoration: underline;
+}
+
+/* some nice gradients */
+
+#welcomeTitle {
+	background-image: linear-gradient(bottom, rgb(34,189,255) 100%, rgb(0,135,238) 0%);
+	background-image: -o-linear-gradient(bottom, rgb(0,135,238) 0%, rgb(34,189,255) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(0,135,238) 0%, rgb(34,189,255) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(34,189,255) 100%, rgb(0,135,238) 0%);
+	background-image: -ms-linear-gradient(bottom, rgb(0,135,238) 0%, rgb(34,189,255) 100%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(1, rgb(34,189,255)),
+		color-stop(0, rgb(0,135,238))
+	);
+}
+
+#shortTut {
+	background-image: linear-gradient(bottom, rgb(34,255,203) 100%, rgb(0,238,155) 0%);
+	background-image: -o-linear-gradient(bottom, rgb(0,238,155) 0%, rgb(34,255,203) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(0,238,155) 0%, rgb(34,255,203) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(34,255,203) 100%, rgb(0,238,155) 0%);
+	background-image: -ms-linear-gradient(bottom, rgb(0,238,155) 0%, rgb(34,255,203) 100%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(1, rgb(34,255,203)),
+		color-stop(0, rgb(0,238,155))
+	);
+}
+
+#tutorial {
+	background-image: linear-gradient(bottom, #ef0 100%, #ed0 0%);
+	background-image: -o-linear-gradient(bottom, #ed0 0%, #ef0 100%);
+	background-image: -moz-linear-gradient(bottom, #ed0 0%, #ef0 100%);
+	background-image: -webkit-linear-gradient(bottom, #ef0 100%, #ed0 0%);
+	background-image: -ms-linear-gradient(bottom, #ed0 0%, #ef0 100%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(1, #ef0),
+		color-stop(0, #ed0)
+	);
+}
+
+#info {
+	background-image: linear-gradient(bottom, rgb(255,221,85) 100%, rgb(255,189,34) 0%);
+	background-image: -o-linear-gradient(bottom, rgb(255,189,34) 0%, rgb(255,221,85) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(255,189,34) 0%, rgb(255,221,85) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(255,221,85) 100%, rgb(255,189,34) 0%);
+	background-image: -ms-linear-gradient(bottom, rgb(255,189,34) 0%, rgb(255,221,85) 100%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(1, rgb(255,221,85)),
+		color-stop(0, rgb(255,189,34))
+	);
+}
