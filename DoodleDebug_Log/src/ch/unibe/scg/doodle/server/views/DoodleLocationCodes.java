@@ -1,5 +1,6 @@
 package ch.unibe.scg.doodle.server.views;
 
+
 public class DoodleLocationCodes {
 	public static final String DOODLE_DEBUG_PREFIX = "doodledebug:";
 	public static final String JAVA_FILE_LINK_PREFIX = "javafile:";

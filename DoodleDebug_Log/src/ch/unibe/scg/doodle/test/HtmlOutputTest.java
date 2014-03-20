@@ -1,7 +1,6 @@
 package ch.unibe.scg.doodle.test;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 import java.awt.Color;
 
@@ -15,16 +14,14 @@ import ch.unibe.scg.doodle.inject.DoodleModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-
 public class HtmlOutputTest {
-	
+
 	private ScratchFactory scratchFactory;
 
 	@Before
 	public void init() {
 		Injector injector = Guice.createInjector(new DoodleModule());
-		scratchFactory = injector
-				.getInstance(ScratchFactory.class);
+		scratchFactory = injector.getInstance(ScratchFactory.class);
 	}
 
 	@Test
@@ -32,9 +29,9 @@ public class HtmlOutputTest {
 		Tag testTag = new Tag("test");
 		scratchFactory.create(Color.RED).drawWhole(testTag);
 
-		assertThat(
+		assertEquals(
 				testTag.toString(),
-				is("<test style=\"width:100; background-color:#ff0000\">java.awt.Color[r=255,g=0,b=0]</test>\n"));
+				"<test style=\"width:100; background-color:#ff0000\">java.awt.Color[r=255,g=0,b=0]</test>\n");
 
 	}
 }

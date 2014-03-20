@@ -2,8 +2,6 @@ package ch.unibe.scg.doodle;
 
 import javax.inject.Inject;
 
-import org.eclipse.swt.widgets.Display;
-
 import ch.unibe.scg.doodle.hbase.DoodleDatabase;
 import ch.unibe.scg.doodle.hbase.HBaseMap;
 import ch.unibe.scg.doodle.helperClasses.CannotRenderMessage;
@@ -15,10 +13,8 @@ import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 import ch.unibe.scg.doodle.server.DoodleServer;
 import ch.unibe.scg.doodle.server.LightboxStack;
 import ch.unibe.scg.doodle.server.util.DoodleImages;
-import ch.unibe.scg.doodle.server.views.HtmlShow;
 import ch.unibe.scg.doodle.util.BreadcrumbsBuilder;
 import ch.unibe.scg.doodle.util.JavascriptCallsUtil;
-import ch.unibe.scg.doodle.util.OutputUtil;
 import ch.unibe.scg.doodle.view.CSSCollection;
 import ch.unibe.scg.doodle.view.HtmlDocument;
 
@@ -80,8 +76,10 @@ public class Doodler {
 
 		prepareLightbox();
 
-		Runnable htmlShow = new HtmlShow(htmlDocument.toString());
-		Display.getDefault().syncExec(htmlShow);
+		// TODO: Instead of the following snippet, implement some kind of
+		// notification for readers
+		// Runnable htmlShow = new HtmlShow(htmlDocument.toString());
+		// Display.getDefault().syncExec(htmlShow);
 	}
 
 	public static Doodler instance() {
@@ -151,13 +149,9 @@ public class Doodler {
 
 		String css = CSSCollection.flushAllCSS();
 		String cssAddingScript = JavascriptCallsUtil.addCSS(css);
-		if (!DoodleDebugConfig.CLUSTER_MODE)
-			OutputUtil.executeJSInOutput(cssAddingScript);
 
 		String htmlAddingScript = JavascriptCallsUtil
 				.addToBodyCall(printOutWrapper.toString());
-		if (!DoodleDebugConfig.CLUSTER_MODE)
-			OutputUtil.executeJSInOutput(htmlAddingScript);
 
 		if (DoodleDebugConfig.CLUSTER_MODE)
 			doodleDatabase.store(htmlAddingScript, cssAddingScript);

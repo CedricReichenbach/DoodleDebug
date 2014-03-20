@@ -1,22 +1,15 @@
 package ch.unibe.scg.doodle.simon;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URLClassLoader;
 import java.net.UnknownHostException;
 import java.util.Collection;
 
-import org.eclipse.core.resources.ResourcesPlugin;
-
 import ch.unibe.scg.doodle.DooMockup;
-import ch.unibe.scg.doodle.DoodleDebugConfig;
 import ch.unibe.scg.doodle.Doodler;
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
-import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 import ch.unibe.scg.doodle.rendering.RenderingRegistry;
-import ch.unibe.scg.doodle.server.DoodleClientWorkspace;
-import ch.unibe.scg.doodle.server.DoodleServer;
-import ch.unibe.scg.doodle.util.FileUtil;
+import ch.unibe.scg.doodle.server.DoodleClientClassManager;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -29,7 +22,6 @@ import de.root1.simon.exceptions.NameBindingException;
 @SimonRemote(value = { SimonServerInterface.class })
 public class SimonServer implements SimonServerInterface {
 
-	private static final String INFO_FILE_NAME = "connection-info";
 	/**
 	 * Just working for one single instance
 	 */
@@ -64,29 +56,11 @@ public class SimonServer implements SimonServerInterface {
 		refreshClientClassloading();
 	}
 
-	@SuppressWarnings("unused")
-	private String generateId() {
-		File root = ResourcesPlugin.getWorkspace().getRoot().getLocation()
-				.toFile();
-		File tempDir = DoodleDebugProperties.mainTempDir();
-		String id = "DoodleDebug_" + root.getAbsolutePath();
-		String info = root.getAbsolutePath() + "\n" + id + "\n";
-
-		File file = new File(tempDir, INFO_FILE_NAME);
-		try {
-			file.createNewFile();
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-		FileUtil.writeToFile(file, info);
-		return id;
-	}
-
 	/**
 	 * Refresh remote classes by creating a new XStream and a new Classloader.
 	 */
 	public void refreshClientClassloading() {
-		URLClassLoader classLoader = DoodleClientWorkspace
+		URLClassLoader classLoader = DoodleClientClassManager
 				.getClientClassLoader();
 
 		// this.jstream = new XStream(new JettisonMappedXmlDriver());
@@ -143,13 +117,10 @@ public class SimonServer implements SimonServerInterface {
 
 	@Override
 	public void clearOutput() {
-		DoodleServer.instance().clearOutput();
 	}
 
 	@Override
 	public void firstRun() {
-		if (!DoodleDebugConfig.CLUSTER_MODE)
-			DoodleServer.instance().firstRun();
 	}
 
 	@Override
