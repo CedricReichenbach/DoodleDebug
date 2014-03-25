@@ -5,10 +5,9 @@ import org.eclipse.ui.IStartup;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import ch.unibe.scg.doodle.DoodleDebugConfig;
+import ch.unibe.scg.doodle.OutputManager;
 import ch.unibe.scg.doodle.hbase.BusyReader;
 import ch.unibe.scg.doodle.hbase.DoodleDatabase;
-import ch.unibe.scg.doodle.simon.SimonServer;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -20,8 +19,6 @@ public class Activator extends AbstractUIPlugin implements IStartup {
 
 	// The shared instance
 	private static Activator plugin;
-
-	private SimonServer simonServer;
 
 	/**
 	 * The constructor
@@ -52,24 +49,8 @@ public class Activator extends AbstractUIPlugin implements IStartup {
 	 * )
 	 */
 	public void stop(BundleContext context) throws Exception {
-		stopSimonServer();
 		plugin = null;
 		super.stop(context);
-	}
-
-	private void startSimonServer() {
-		try {
-			System.out.println("Starting SIMON server...");
-			simonServer = new SimonServer();
-			System.out.println("Server started successfully.");
-		} catch (Exception e) {
-			System.out.println("Server could not be started.");
-			e.printStackTrace();
-		}
-	}
-
-	private void stopSimonServer() {
-		simonServer.stop();
 	}
 
 	/**
@@ -95,8 +76,7 @@ public class Activator extends AbstractUIPlugin implements IStartup {
 
 	@Override
 	public void earlyStartup() {
-		startSimonServer();
-		if (DoodleDebugConfig.CLUSTER_MODE)
-			new BusyReader(new DoodleDatabase(), 1000);
+		new OutputManager();
+		new BusyReader(new DoodleDatabase(), 1000);
 	}
 }

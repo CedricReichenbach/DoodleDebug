@@ -29,14 +29,12 @@ public final class IndexedObjectStorage {
 		this.ringBuffer = new Object[CAPACITY];
 
 		// XXX: Should we really store clickables?
-		if (DoodleDebugConfig.CLUSTER_MODE)
-			this.hBaseMap = new HBaseMap(TABLE_NAME);
+		this.hBaseMap = new HBaseMap(TABLE_NAME);
 	}
 
 	/** @return Id of stored object. */
 	public int store(Object o) {
-		if (DoodleDebugConfig.CLUSTER_MODE)
-			hBaseMap.put(nextID, o);
+		hBaseMap.put(nextID, o);
 
 		ringBuffer[nextID % CAPACITY] = o;
 		increaseNextID();
@@ -50,8 +48,9 @@ public final class IndexedObjectStorage {
 
 	public @Nullable
 	Object get(int id) {
-		if (id < nextID - CAPACITY || id >= nextID || ringBuffer[id % CAPACITY] == null)
-			return DoodleDebugConfig.CLUSTER_MODE ? hBaseMap.get(id) : null;
+		if (id < nextID - CAPACITY || id >= nextID
+				|| ringBuffer[id % CAPACITY] == null)
+			return hBaseMap.get(id);
 
 		return ringBuffer[id % CAPACITY];
 	}

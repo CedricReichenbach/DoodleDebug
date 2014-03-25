@@ -20,6 +20,7 @@ import org.eclipse.ui.ide.IDE;
 
 import ch.unibe.scg.doodle.Doodler;
 import ch.unibe.scg.doodle.IndexedObjectStorage;
+import ch.unibe.scg.doodle.OutputManager;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.rendering.RenderingRegistry;
 import ch.unibe.scg.doodle.server.views.DoodleDebugView;
@@ -67,7 +68,7 @@ public class DoodleServer {
 
 	private void drawStack() {
 		Tag lightboxContentWrapper = new Tag("div", "id=lightboxContentWrapper");
-		Doodler.instance().renderIntoLightbox(stack, lightboxContentWrapper);
+		OutputManager.instance().renderIntoLightbox(stack, lightboxContentWrapper);
 		String toRender = lightboxContentWrapper.toString();
 		Runnable javascriptExecuter = new JavascriptExecuter(
 				JavascriptCallsUtil.showInLightboxCall(toRender));
