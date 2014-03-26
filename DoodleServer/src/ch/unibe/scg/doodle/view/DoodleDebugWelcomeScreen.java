@@ -1,13 +1,9 @@
 package ch.unibe.scg.doodle.view;
 
-import java.net.URL;
 import java.util.List;
 
 import ch.unibe.scg.doodle.htmlgen.Tag;
-import ch.unibe.scg.doodle.server.util.DoodleFiles;
-import ch.unibe.scg.doodle.server.util.DoodleImages;
 import ch.unibe.scg.doodle.server.views.DoodleLocationCodes;
-import ch.unibe.scg.doodle.view.css.CSSUtil;
 
 public class DoodleDebugWelcomeScreen extends HtmlDocument {
 
@@ -20,7 +16,8 @@ public class DoodleDebugWelcomeScreen extends HtmlDocument {
 	}
 
 	private void setBackgroundImage() {
-		String texPath = DoodleImages.getDoodleTextureImageFilePath();
+		// TODO
+		String texPath = "";// DoodleImages.getDoodleTextureImageFilePath();
 		body.addAttribute("style", "background-image:url(" + texPath + ")");
 	}
 
@@ -59,9 +56,10 @@ public class DoodleDebugWelcomeScreen extends HtmlDocument {
 
 		Tag fullTutorial = new Tag("h3", "id=tutorial", "style=display:none");
 		Tag tutLink = new Tag("a");
-		tutLink.addAttribute("href", DoodleLocationCodes.EXTERNAL_LINK_PREFIX
-				+ DoodleFiles.getResolvedFileURL("tutorials/dd-tutorial.html")
-						.toExternalForm());
+		// TODO
+		// tutLink.addAttribute("href", DoodleLocationCodes.EXTERNAL_LINK_PREFIX
+		// + DoodleFiles.getResolvedFileURL("tutorials/dd-tutorial.html")
+		// .toExternalForm());
 		tutLink.add("Complete Tutorial");
 		fullTutorial.addAttribute("style", "display:none");
 		fullTutorial.add(tutLink);
@@ -85,10 +83,7 @@ public class DoodleDebugWelcomeScreen extends HtmlDocument {
 	@Override
 	protected void makeStyle(Tag head) {
 		super.makeStyle(head);
-		URL welcomeCSS = CSSUtil.getCSSURLFromFile("welcome.css");
-		Tag main = new Tag("link", "rel=stylesheet", "type=text/css");
-		main.addAttribute("href", welcomeCSS.toExternalForm());
-		head.add(main);
+		head.add(createCSSTag("welcome.css"));
 	}
 
 	@Override

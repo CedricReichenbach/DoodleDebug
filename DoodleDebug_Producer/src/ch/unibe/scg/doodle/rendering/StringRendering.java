@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import ch.unibe.scg.doodle.htmlgen.Tag;
-import ch.unibe.scg.doodle.server.util.DoodleImages;
 
 public class StringRendering implements Rendering<String> {
 
@@ -17,17 +16,17 @@ public class StringRendering implements Rendering<String> {
 		// osterei
 		if ("realnyanpls".equals(string)) {
 			tag.addCSSClass("osterei");
-			tag.addAttribute(
-					"style",
-					"background-image:url('"
-							+ DoodleImages.getOeImageFilePath() + "');");
+			tag.addAttribute("style", "background-image:url('"
+			// TODO
+			// + DoodleImages.getOeImageFilePath()
+					+ "');");
 			tag.addAttribute("onclick",
 					"window.open('http://lolkitten.org/','_blank')");
 			return;
 		}
 
 		Tag p = new Tag("p", "class=StringRendering");
-		
+
 		p.add(replaceEscapeSeq(string));
 		tag.add(p);
 	}

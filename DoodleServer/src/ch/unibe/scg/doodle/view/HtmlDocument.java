@@ -1,10 +1,10 @@
 package ch.unibe.scg.doodle.view;
 
-import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 
 import ch.unibe.scg.doodle.htmlgen.Tag;
+import ch.unibe.scg.doodle.util.FileUtil;
 import ch.unibe.scg.doodle.view.css.CSSUtil;
 import ch.unibe.scg.doodle.view.js.JSUtil;
 
@@ -41,20 +41,20 @@ public class HtmlDocument {
 
 	@SuppressWarnings("unchecked")
 	protected void makeStyle(Tag head) {
-		// from file "style.css"
-		URL mainStyle = CSSUtil.getCSSURLFromFile("style.css");
-		Tag main = new Tag("link", "rel=stylesheet", "type=text/css");
-		main.addAttribute("href", mainStyle.toExternalForm());
-		head.add(main);
-		// from lightbox.css
-		URL lightboxStyle = CSSUtil.getCSSURLFromFile("lightbox.css");
-		Tag lightbox = new Tag("link", "rel=stylesheet", "type=text/css");
-		lightbox.addAttribute("href", lightboxStyle.toExternalForm());
-		head.add(lightbox);
+		head.add(createCSSTag("style.css"));
+		head.add(createCSSTag("lightbox.css"));
 
 		Tag pluginStyle = new Tag("style", "type=text/css");
 		pluginStyle.add(makePluginStyle());
 		head.add(pluginStyle);
+	}
+
+	@SuppressWarnings("unchecked")
+	protected Tag createCSSTag(String filename) {
+		// XXX: Link only?
+		Tag style = new Tag("style", "type=text/css");
+		style.add(FileUtil.readFile(CSSUtil.getCSSURLFromFile(filename)));
+		return style;
 	}
 
 	protected String makePluginStyle() {
@@ -69,6 +69,7 @@ public class HtmlDocument {
 			Tag js = new Tag("script", "type=text/javascript");
 			js.addAttribute("src", JSUtil.getJSURLFromFile(file)
 					.toExternalForm());
+			// XXX Write it inline into tag (instead of linking)?
 			head.add(js);
 		}
 	}

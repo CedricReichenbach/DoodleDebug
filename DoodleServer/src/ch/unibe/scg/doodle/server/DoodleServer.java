@@ -26,7 +26,6 @@ import ch.unibe.scg.doodle.rendering.RenderingRegistry;
 import ch.unibe.scg.doodle.server.views.DoodleDebugView;
 import ch.unibe.scg.doodle.server.views.HtmlShow;
 import ch.unibe.scg.doodle.server.views.JavascriptExecuter;
-import ch.unibe.scg.doodle.simon.SimonServer;
 import ch.unibe.scg.doodle.util.JavascriptCallsUtil;
 import ch.unibe.scg.doodle.util.PluginUtil;
 import ch.unibe.scg.doodle.view.CSSCollection;
@@ -85,7 +84,6 @@ public class DoodleServer {
 		this.clearOutput();
 		this.resetFocusTimer();
 		this.lightboxClosed();
-		SimonServer.instance.refreshClientClassloading();
 		CSSCollection.reset();
 		this.clientClassLoader = DoodleClientWorkspace.getClientClassLoader();
 		RenderingRegistry.clearUserPlugins();

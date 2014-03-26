@@ -7,5 +7,45 @@
 	<classpathentry kind="lib" path="/DoodleDebugClient/libs/xstream-1.4.2/lib/xstream-1.4.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="/GuicePlugin/guice-3.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="/GuicePlugin/guice-assistedinject-3.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="/DoodleDebugServer-Plugin/libs/hbase/hbase-client-0.96.1-hadoop2.jar"/>
+	<classpathentry exported="true" kind="lib" path="/DoodleDebugServer-Plugin/libs/hbase/hbase-common-0.96.1-hadoop2.jar"/>
+	<classpathentry exported="true" kind="lib" path="/DoodleDebugServer-Plugin/libs/hbase/hadoop-common-2.2.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="/GuicePlugin/guice-multibindings-3.0.jar"/>
+	<classpathentry kind="lib" path="/opt/eclipse/eclipse_4.3_se/plugins/org.junit_4.11.0.v201303080030/junit.jar" sourcepath="/opt/eclipse/eclipse_4.3_se/plugins/org.junit.source_4.11.0.v201303080030.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://junit-team.github.io/junit/javadoc/latest/"/>
+		</attributes>
+		<accessrules>
+			<accessrule kind="accessible" pattern="junit/extensions/*"/>
+			<accessrule kind="accessible" pattern="junit/framework/*"/>
+			<accessrule kind="accessible" pattern="junit/runner/*"/>
+			<accessrule kind="accessible" pattern="junit/textui/*"/>
+			<accessrule kind="accessible" pattern="org/junit/*"/>
+			<accessrule kind="accessible" pattern="org/junit/experimental/*"/>
+			<accessrule kind="accessible" pattern="org/junit/experimental/categories/*"/>
+			<accessrule kind="accessible" pattern="org/junit/experimental/max/*"/>
+			<accessrule kind="accessible" pattern="org/junit/experimental/results/*"/>
+			<accessrule kind="accessible" pattern="org/junit/experimental/runners/*"/>
+			<accessrule kind="accessible" pattern="org/junit/experimental/theories/*"/>
+			<accessrule kind="discouraged" pattern="org/junit/experimental/theories/internal/*"/>
+			<accessrule kind="accessible" pattern="org/junit/experimental/theories/suppliers/*"/>
+			<accessrule kind="discouraged" pattern="org/junit/internal/*"/>
+			<accessrule kind="discouraged" pattern="org/junit/internal/builders/*"/>
+			<accessrule kind="discouraged" pattern="org/junit/internal/matchers/*"/>
+			<accessrule kind="discouraged" pattern="org/junit/internal/requests/*"/>
+			<accessrule kind="discouraged" pattern="org/junit/internal/runners/*"/>
+			<accessrule kind="discouraged" pattern="org/junit/internal/runners/model/*"/>
+			<accessrule kind="discouraged" pattern="org/junit/internal/runners/rules/*"/>
+			<accessrule kind="discouraged" pattern="org/junit/internal/runners/statements/*"/>
+			<accessrule kind="accessible" pattern="org/junit/matchers/*"/>
+			<accessrule kind="accessible" pattern="org/junit/rules/*"/>
+			<accessrule kind="accessible" pattern="org/junit/runner/*"/>
+			<accessrule kind="accessible" pattern="org/junit/runner/manipulation/*"/>
+			<accessrule kind="accessible" pattern="org/junit/runner/notification/*"/>
+			<accessrule kind="accessible" pattern="org/junit/runners/*"/>
+			<accessrule kind="accessible" pattern="org/junit/runners/model/*"/>
+			<accessrule ignoreifbetter="true" kind="nonaccessible" pattern="**/*"/>
+		</accessrules>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

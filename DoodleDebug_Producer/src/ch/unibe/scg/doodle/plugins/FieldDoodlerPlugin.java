@@ -9,7 +9,6 @@ import ch.unibe.scg.doodle.api.FieldDoodler;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.rendering.DoodleRenderException;
 import ch.unibe.scg.doodle.rendering.FieldDoodlerRendering;
-import ch.unibe.scg.doodle.server.util.EclipseIconUtil;
 
 /**
  * Plugin to print all fields of a class.
@@ -83,20 +82,24 @@ public class FieldDoodlerPlugin extends AbstractPlugin {
 				+ pluginClass
 				+ " .scope p {position: relative; bottom: 0.75em; margin-right: 1px;}";
 	}
+	
+	// TODO: Use non-Eclipse icons
 
 	private static String publicScopeCSS(String pluginClass) {
 		return "."
 				+ pluginClass
 				+ " .scope.field.public {background-image: url('"
-				+ EclipseIconUtil.getIcon(EclipseIconUtil.PUBLIC_FIELD).toURI()
-				+ "')}"
-				+ "."
+				// +
+				// EclipseIconUtil.getIcon(EclipseIconUtil.PUBLIC_FIELD).toURI()
+				+ "')}" + "."
 				+ pluginClass
 				+ " .scope.method.public {background-image: url('"
-				+ EclipseIconUtil.getIcon(EclipseIconUtil.PUBLIC_METHOD)
-						.toURI() + "')}" + "." + pluginClass
+				// + EclipseIconUtil.getIcon(EclipseIconUtil.PUBLIC_METHOD)
+				// .toURI()
+				+ "')}" + "." + pluginClass
 				+ " .scope.class.public {background-image: url('"
-				+ EclipseIconUtil.getIcon(EclipseIconUtil.PUBLIC_CLASS).toURI()
+				// +
+				// EclipseIconUtil.getIcon(EclipseIconUtil.PUBLIC_CLASS).toURI()
 				+ "')}";
 	}
 
@@ -104,68 +107,62 @@ public class FieldDoodlerPlugin extends AbstractPlugin {
 		return "."
 				+ pluginClass
 				+ " .scope.field.protected {background-image:url('"
-				+ EclipseIconUtil.getIcon(EclipseIconUtil.PROTECTED_FIELD)
-						.toURI()
-				+ "')}"
-				+ "."
+				// + EclipseIconUtil.getIcon(EclipseIconUtil.PROTECTED_FIELD)
+				// .toURI()
+				+ "')}" + "."
 				+ pluginClass
 				+ " .scope.method.protected {background-image:url('"
-				+ EclipseIconUtil.getIcon(EclipseIconUtil.PROTECTED_METHOD)
-						.toURI()
-				+ "')}"
-				+ "."
-				+ pluginClass
+				// + EclipseIconUtil.getIcon(EclipseIconUtil.PROTECTED_METHOD)
+				// .toURI()
+				+ "')}" + "." + pluginClass
 				+ " .scope.class.protected {background-image:url('"
-				+ EclipseIconUtil.getIcon(EclipseIconUtil.PROTECTED_CLASS)
-						.toURI() + "')}";
+				// + EclipseIconUtil.getIcon(EclipseIconUtil.PROTECTED_CLASS)
+				// .toURI()
+				+ "')}";
 	}
 
 	private static String privateScopeCSS(String pluginClass) {
 		return "."
 				+ pluginClass
 				+ " .scope.field.private {background-image:url('"
-				+ EclipseIconUtil.getIcon(EclipseIconUtil.PRIVATE_FIELD)
-						.toURI()
-				+ "')}"
-				+ "."
+				// + EclipseIconUtil.getIcon(EclipseIconUtil.PRIVATE_FIELD)
+				// .toURI()
+				+ "')}" + "."
 				+ pluginClass
 				+ " .scope.method.private {background-image:url('"
-				+ EclipseIconUtil.getIcon(EclipseIconUtil.PRIVATE_METHOD)
-						.toURI()
-				+ "')}"
-				+ "."
-				+ pluginClass
+				// + EclipseIconUtil.getIcon(EclipseIconUtil.PRIVATE_METHOD)
+				// .toURI()
+				+ "')}" + "." + pluginClass
 				+ " .scope.class.private {background-image:url('"
-				+ EclipseIconUtil.getIcon(EclipseIconUtil.PRIVATE_CLASS)
-						.toURI() + "')}";
+				// + EclipseIconUtil.getIcon(EclipseIconUtil.PRIVATE_CLASS)
+				// .toURI()
+				+ "')}";
 	}
 
 	private static String defaultScopeCSS(String pluginClass) {
 		return "."
 				+ pluginClass
 				+ " .scope.field.default {background-image:url('"
-				+ EclipseIconUtil.getIcon(EclipseIconUtil.DEFAULT_FIELD)
-						.toURI()
-				+ "')}"
-				+ "."
+				// + EclipseIconUtil.getIcon(EclipseIconUtil.DEFAULT_FIELD)
+				// .toURI()
+				+ "')}" + "."
 				+ pluginClass
 				+ " .scope.method.default {background-image:url('"
-				+ EclipseIconUtil.getIcon(EclipseIconUtil.DEFAULT_METHOD)
-						.toURI()
-				+ "')}"
-				+ "."
-				+ pluginClass
+				// + EclipseIconUtil.getIcon(EclipseIconUtil.DEFAULT_METHOD)
+				// .toURI()
+				+ "')}" + "." + pluginClass
 				+ " .scope.class.default {background-image:url('"
-				+ EclipseIconUtil.getIcon(EclipseIconUtil.DEFAULT_CLASS)
-						.toURI() + "')}";
+				// + EclipseIconUtil.getIcon(EclipseIconUtil.DEFAULT_CLASS)
+				// .toURI()
+				+ "')}";
 	}
 
 	private static String staticPropertyCSS(String pluginClass) {
 		return "."
 				+ pluginClass
 				+ " .scope .static {background-image:url('"
-				+ EclipseIconUtil
-						.getIcon(EclipseIconUtil.STATIC_MEMBER_OVERLAY).toURI()
+				// + EclipseIconUtil
+				// .getIcon(EclipseIconUtil.STATIC_MEMBER_OVERLAY).toURI()
 				+ "'); background-repeat: no-repeat; background-position: top right;"
 				+ "height: 100%; width: 6px; position: relative; left: 70%;}";
 		// XXX: width is a hack for black line in static icon

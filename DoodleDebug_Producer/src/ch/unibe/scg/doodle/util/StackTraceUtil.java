@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import ch.unibe.scg.doodle.server.DoodleServer;
 import ch.unibe.scg.doodle.server.views.DoodleLocationCodes;
 
 public class StackTraceUtil {
@@ -60,8 +59,10 @@ public class StackTraceUtil {
 	}
 
 	private static boolean isInWorkspace(String classAndLine) {
-		return DoodleServer.instance().getJavaFileURL(
-				classAndLine.split(":")[0]) != null;
+		return true;
+		// XXX: Is there a smarter solution for this?
+		// return DoodleServer.instance().getJavaFileURL(
+		// classAndLine.split(":")[0]) != null;
 	}
 
 	/**

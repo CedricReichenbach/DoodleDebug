@@ -8,7 +8,6 @@ import javax.inject.Provider;
 
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.rendering.BooleanRendering;
-import ch.unibe.scg.doodle.view.fonts.FontUtil;
 
 public class BooleanPlugin extends AbstractPlugin {
 
@@ -47,29 +46,34 @@ public class BooleanPlugin extends AbstractPlugin {
 				+ falseSmall;
 	}
 
+	// FIXME
+
 	String getFontFace() {
 		return "@font-face { " // ff ************
-				+ "font-family: \"OpenSymbol\"; " + "src: " + "url(\""
-				+ FontUtil.getFontFileURL("openSymbol.ttf")
+				+ "font-family: \"OpenSymbol\"; "
+				+ "src: "
+				+ "url(\""
+				// + FontUtil.getFontFileURL("openSymbol.ttf")
 				+ "\") format(\"truetype\"); "
 				+ "font-weight: normal; font-style: normal;} "
 				+ "@font-face { " // ff ************
 				+ "font-family: \"OpenSymbolEOT\"; "
 				+ "src: "
 				+ "url(\""
-				+ FontUtil.getFontFileURL("openSymbol.eot")
+				// + FontUtil.getFontFileURL("openSymbol.eot")
 				+ "?#iefix\") format(\"embedded-opentype\"); "
 				+ "font-weight: normal; font-style: normal;} "
 				+ "@font-face { " // ff ************
 				+ "font-family: \"OpenSymbolWOFF\"; "
 				+ "src: "
 				+ "url(\""
-				+ FontUtil.getFontFileURL("openSymbol.woff")
+				// + FontUtil.getFontFileURL("openSymbol.woff")
 				+ "\") format(\"woff\"); "
 				+ "font-weight: normal; font-style: normal;} "
 				+ "@font-face { " // ff ************
-				+ "font-family: \"OpenSymbolSVG\"; " + "src: " + "url(\""
-				+ FontUtil.getFontFileURL("openSymbol.svg")
+				+ "font-family: \"OpenSymbolSVG\"; " + "src: "
+				+ "url(\""
+				// + FontUtil.getFontFileURL("openSymbol.svg")
 				+ "#OpenSymbolRegular\") format(\"svg\"); "
 				+ "font-weight: normal; font-style: normal;} ";
 	}
