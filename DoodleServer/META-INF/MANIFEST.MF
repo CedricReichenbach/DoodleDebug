@@ -33,7 +33,8 @@ Bundle-ClassPath: .,
  libs/hbase/rest/jackson-core-asl-1.8.8.jar,
  libs/hbase/rest/jackson-jaxrs-1.8.8.jar,
  libs/hbase/rest/jackson-xc-1.8.8.jar,
- libs/hbase/rest/commons-codec-1.7.jar
+ libs/hbase/rest/commons-codec-1.7.jar,
+ libs/dd/DoodleDebug-Producer_with-dependencies.jar
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.eclipse.jdt.core,
  org.eclipse.jdt.core.compiler,

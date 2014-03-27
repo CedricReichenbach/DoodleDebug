@@ -18,18 +18,15 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 
-import ch.unibe.scg.doodle.Doodler;
 import ch.unibe.scg.doodle.IndexedObjectStorage;
 import ch.unibe.scg.doodle.OutputManager;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.rendering.RenderingRegistry;
 import ch.unibe.scg.doodle.server.views.DoodleDebugView;
-import ch.unibe.scg.doodle.server.views.HtmlShow;
 import ch.unibe.scg.doodle.server.views.JavascriptExecuter;
 import ch.unibe.scg.doodle.util.JavascriptCallsUtil;
 import ch.unibe.scg.doodle.util.PluginUtil;
 import ch.unibe.scg.doodle.view.CSSCollection;
-import ch.unibe.scg.doodle.view.DoodleDebugScreen;
 
 public class DoodleServer {
 	private static final DoodleServer instance = new DoodleServer();
@@ -75,9 +72,11 @@ public class DoodleServer {
 	}
 
 	public void clearOutput() {
-		Doodler.resetInjector();
-		Runnable emptyShow = new HtmlShow(new DoodleDebugScreen().toString());
-		Display.getDefault().asyncExec(emptyShow);
+		OutputManager.reset();
+
+		// XXX: Why? Can we delete this?
+//		Runnable emptyShow = new HtmlShow(new DoodleDebugScreen().toString());
+//		Display.getDefault().asyncExec(emptyShow);
 	}
 
 	public void firstRun() {

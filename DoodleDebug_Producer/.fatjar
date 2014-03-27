@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Thu Mar 27 14:24:57 CET 2014
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=DoodleDebug-Producer_with-dependencies.jar
+manifest.mergeall=true
+manifest.mainclass=
+manifest.file=<createnew>
+jarname.isextern=false
+onejar.expand=
+excludes=
+includes=

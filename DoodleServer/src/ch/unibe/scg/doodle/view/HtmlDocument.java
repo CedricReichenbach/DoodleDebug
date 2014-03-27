@@ -51,9 +51,13 @@ public class HtmlDocument {
 
 	@SuppressWarnings("unchecked")
 	protected Tag createCSSTag(String filename) {
-		// XXX: Link only?
-		Tag style = new Tag("style", "type=text/css");
-		style.add(FileUtil.readFile(CSSUtil.getCSSURLFromFile(filename)));
+		boolean linkOnly = true;
+		Tag style = new Tag(linkOnly ? "link" : "style", "type=text/css");
+		if (linkOnly)
+			style.addAttribute("href", CSSUtil.getCSSURLFromFile(filename)
+					.toExternalForm());
+		else
+			style.add(FileUtil.readFile(CSSUtil.getCSSURLFromFile(filename)));
 		return style;
 	}
 

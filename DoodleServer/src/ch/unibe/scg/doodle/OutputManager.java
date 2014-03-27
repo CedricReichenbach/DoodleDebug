@@ -45,6 +45,10 @@ public class OutputManager {
 		return instance;
 	}
 
+	public static void reset() {
+		instance = null;
+	}
+
 	public OutputManager() {
 		initOutput();
 	}

@@ -42,8 +42,8 @@ public class DoodleDebugProperties {
 
 	public static File tempFileForOutput() {
 		// Win7: C:\Users\<user>\AppData\Local\Temp\doodledebug\output.html
-		File file = new File(tempDir() + "/output.html");
-		file.mkdirs();
+		File file = new File(tempDir(), "output.html");
+		file.getParentFile().mkdirs();
 		return file;
 	}
 
