@@ -3,6 +3,7 @@ package ch.unibe.scg.doodle.view;
 import java.util.List;
 
 import ch.unibe.scg.doodle.htmlgen.Tag;
+import ch.unibe.scg.doodle.server.util.DoodleImages;
 import ch.unibe.scg.doodle.server.views.DoodleLocationCodes;
 
 public class DoodleDebugWelcomeScreen extends HtmlDocument {
@@ -16,8 +17,7 @@ public class DoodleDebugWelcomeScreen extends HtmlDocument {
 	}
 
 	private void setBackgroundImage() {
-		// TODO
-		String texPath = "";// DoodleImages.getDoodleTextureImageFilePath();
+		String texPath = DoodleImages.getDoodleTextureImageFilePath();
 		body.addAttribute("style", "background-image:url(" + texPath + ")");
 	}
 

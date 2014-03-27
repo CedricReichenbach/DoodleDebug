@@ -76,7 +76,7 @@ public class Activator extends AbstractUIPlugin implements IStartup {
 
 	@Override
 	public void earlyStartup() {
-		new OutputManager();
+		OutputManager.instance();
 		new BusyReader(new DoodleDatabase(), 1000);
 	}
 }

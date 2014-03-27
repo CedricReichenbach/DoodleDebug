@@ -4,7 +4,11 @@ import javax.inject.Inject;
 
 import org.eclipse.swt.widgets.Display;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+
 import ch.unibe.scg.doodle.htmlgen.Tag;
+import ch.unibe.scg.doodle.inject.DoodleModule;
 import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 import ch.unibe.scg.doodle.server.LightboxStack;
 import ch.unibe.scg.doodle.server.util.DoodleImages;
@@ -31,42 +35,50 @@ public class OutputManager {
 
 	@Inject
 	BreadcrumbsBuilder breadcrumbsBuilder;
-	@Inject
-	Doodler doodler;
+
+	Doodler doodler = Doodler.instance();
 
 	private Tag body;
+	
+	static Injector injector;
 
+	private static Injector injectorInstance() {
+		if (injector == null) {
+			injector = Guice.createInjector(new DoodleModule());
+		}
+		return injector;
+	}
+	
 	private static OutputManager instance;
 
+	// XXX There was some strange behaviour with injector only
 	public static OutputManager instance() {
 		if (instance == null)
-			instance = new OutputManager();
-
+			instance = injectorInstance().getInstance(OutputManager.class);
 		return instance;
 	}
-
-	public static void reset() {
+	
+	public static void resetInstance() {
 		instance = null;
 	}
 
-	public OutputManager() {
-		initOutput();
+	protected OutputManager() {
 	}
 
-	private void initOutput() {
+	public void initOutput() {
 		HtmlDocument htmlDocument = new HtmlDocument();
 		body = new Tag("body");
 		htmlDocument.setBody(body);
 
 		setBackgroundImage();
 
-		Runnable htmlShow = new HtmlShow(htmlDocument.toString());
-		Display.getDefault().syncExec(htmlShow);
-
 		if (DoodleDebugProperties.betaMode())
 			this.createBetaInfo(body);
 
 		prepareLightbox();
+		
+		Runnable htmlShow = new HtmlShow(htmlDocument.toString());
+		Display.getDefault().syncExec(htmlShow);
 	}
 
 	private void setBackgroundImage() {

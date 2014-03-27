@@ -48,7 +48,7 @@ public class DoodleServer {
 			// TODO: Show message that object is not available anymore
 			return;
 		}
-		
+
 		drawIntoLightbox(o);
 	}
 
@@ -64,7 +64,8 @@ public class DoodleServer {
 
 	private void drawStack() {
 		Tag lightboxContentWrapper = new Tag("div", "id=lightboxContentWrapper");
-		OutputManager.instance().renderIntoLightbox(stack, lightboxContentWrapper);
+		OutputManager.instance().renderIntoLightbox(stack,
+				lightboxContentWrapper);
 		String toRender = lightboxContentWrapper.toString();
 		Runnable javascriptExecuter = new JavascriptExecuter(
 				JavascriptCallsUtil.showInLightboxCall(toRender));
@@ -72,11 +73,12 @@ public class DoodleServer {
 	}
 
 	public void clearOutput() {
-		OutputManager.reset();
+		OutputManager.instance().initOutput();
 
 		// XXX: Why? Can we delete this?
-//		Runnable emptyShow = new HtmlShow(new DoodleDebugScreen().toString());
-//		Display.getDefault().asyncExec(emptyShow);
+		// Runnable emptyShow = new HtmlShow(new
+		// DoodleDebugScreen().toString());
+		// Display.getDefault().asyncExec(emptyShow);
 	}
 
 	public void firstRun() {
@@ -89,7 +91,8 @@ public class DoodleServer {
 	}
 
 	private void resetFocusTimer() {
-		DoodleDebugView view = (DoodleDebugView) PluginUtil.findDoodleDebugView();
+		DoodleDebugView view = (DoodleDebugView) PluginUtil
+				.findDoodleDebugView();
 		view.resetFocusTimer();
 	}
 
