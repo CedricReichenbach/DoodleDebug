@@ -5,6 +5,8 @@ import ch.unibe.scg.doodle.helperClasses.DoodleList;
 /**
  * Mockup on server side for <code>Doo</code> on client side.
  * 
+ * TODO: Is not necessary anymore since we have fat clients now.
+ * 
  * @author Cedric Reichenbach
  * 
  */

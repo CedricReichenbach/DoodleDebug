@@ -6,7 +6,7 @@ package ch.unibe.scg.doodle;
  * @author Cedric Reichenbach
  * 
  */
-public final class Doo { // Don't delete this, it's needed here to be doodleable.
+public final class Doo {
 
 	/**
 	 * This class should not be implemented.
@@ -25,7 +25,7 @@ public final class Doo { // Don't delete this, it's needed here to be doodleable
 	 *            o
 	 */
 	public static void dle(Object o) {
-//		DoodleClient.instance().sendToServer(o);
+		DooMockup.dle(o); // This redirection has historical reasons. See DooMockup doc for details.
 	}
 
 	/**
@@ -36,6 +36,6 @@ public final class Doo { // Don't delete this, it's needed here to be doodleable
 	 *            o
 	 */
 	public static void dle(Object o, Object... objects) {
-//		DoodleClient.instance().sendToServer(o, objects);
+		DooMockup.dle(o, objects);
 	}
 }
