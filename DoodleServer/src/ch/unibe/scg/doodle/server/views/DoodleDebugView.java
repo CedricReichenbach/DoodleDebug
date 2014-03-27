@@ -1,5 +1,7 @@
 package ch.unibe.scg.doodle.server.views;
 
+import java.awt.AWTException;
+import java.awt.Robot;
 import java.util.Date;
 
 import org.eclipse.jface.action.Action;
@@ -72,7 +74,11 @@ public class DoodleDebugView extends ViewPart {
 		boolean sucessful = browser.execute(script);
 		if (!sucessful)
 			System.err.println("WARNING: Could not execute a javascript");
-		htmlObserver.htmlChangedTo(browser.getText());
+
+		boolean jsMethod = true; // FIXME: Why is browser.getText() broken?
+		htmlObserver.htmlChangedTo(jsMethod ? "<!DOCTYPE html>"
+				+ browser.evaluate("return $$('html')[0].outerHTML") : browser
+				.getText());
 
 		this.activate();
 	}

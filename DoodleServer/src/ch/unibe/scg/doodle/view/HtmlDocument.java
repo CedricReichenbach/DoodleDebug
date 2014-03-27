@@ -52,11 +52,13 @@ public class HtmlDocument {
 	@SuppressWarnings("unchecked")
 	protected Tag createCSSTag(String filename) {
 		boolean linkOnly = true;
-		Tag style = new Tag(linkOnly ? "link" : "style", "type=text/css");
-		if (linkOnly)
+		Tag style = new Tag(linkOnly ? "link" : "style", "type=text/css",
+				!linkOnly);
+		if (linkOnly) {
+			style.addAttribute("rel", "stylesheet");
 			style.addAttribute("href", CSSUtil.getCSSURLFromFile(filename)
 					.toExternalForm());
-		else
+		} else
 			style.add(FileUtil.readFile(CSSUtil.getCSSURLFromFile(filename)));
 		return style;
 	}
@@ -106,7 +108,11 @@ public class HtmlDocument {
 		this.body = body;
 	}
 
+	@SuppressWarnings("unchecked")
 	public String toString() {
-		return "" + doctype + head + body;
+		Tag html = new Tag("html");
+		html.add(head);
+		html.add(body);
+		return doctype + html;
 	}
 }
