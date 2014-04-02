@@ -73,6 +73,7 @@ public class Doodler {
 			o = new NullObject();
 		}
 
+		// XXX: Do we still need this?
 		hbaseMap.put(o.hashCode(), xstream.toXML(o));
 
 		Scratch scratch = scratchFactory.create(o);
