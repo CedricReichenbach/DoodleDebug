@@ -37,4 +37,13 @@ public class ImageManager {
 
 		return Base64.encodeBytes(bytes);
 	}
+	
+	/**
+	 * Loads an image from storage.
+	 * @param index
+	 * @return Base64 representation of image
+	 */
+	public String load(int index) {
+		return storage.load(index).toString();
+	}
 }

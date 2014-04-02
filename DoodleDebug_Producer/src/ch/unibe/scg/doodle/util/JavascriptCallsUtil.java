@@ -22,7 +22,12 @@ public class JavascriptCallsUtil {
 	private static String escape(String html) {
 		String escaped = html.replace("\\", "\\\\").replace("\t", "\\t")
 				.replace("\b", "\\b").replace("\n", "\\n").replace("\r", "\\r")
-				.replace("\f", "\\f").replace("\'", "\\'").replace("\"", "\\\"");
+				.replace("\f", "\\f").replace("\'", "\\'")
+				.replace("\"", "\\\"");
 		return escaped;
+	}
+
+	public static String insertImgSrc(int id, String base64) {
+		return "insertImageSrc(" + id + ",'" + base64 + "')";
 	}
 }

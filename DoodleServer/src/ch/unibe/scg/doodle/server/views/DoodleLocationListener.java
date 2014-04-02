@@ -1,10 +1,7 @@
 package ch.unibe.scg.doodle.server.views;
 
-import static ch.unibe.scg.doodle.server.views.DoodleLocationCodes.DOODLE_DEBUG_PREFIX;
-import static ch.unibe.scg.doodle.server.views.DoodleLocationCodes.JAVA_FILE_LINK_PREFIX;
-import static ch.unibe.scg.doodle.server.views.DoodleLocationCodes.EXTERNAL_LINK_PREFIX;
-import static ch.unibe.scg.doodle.server.views.DoodleLocationCodes.LIGHTBOX_CLOSE;
-import static ch.unibe.scg.doodle.server.views.DoodleLocationCodes.LIGHTBOX_STACK_OFFSET;
+import ch.unibe.scg.doodle.OutputManager;
+import ch.unibe.scg.doodle.server.views.DoodleLocationCodes;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -28,18 +25,24 @@ public class DoodleLocationListener implements LocationListener {
 
 	@Override
 	public void changing(LocationEvent event) {
-		if (event.location.startsWith(EXTERNAL_LINK_PREFIX)) {
+		if (event.location.startsWith(DoodleLocationCodes.EXTERNAL_LINK_PREFIX))
 			handleExternalLink(event);
-		} else if (event.location.startsWith(DOODLE_DEBUG_PREFIX))
+		else if (event.location
+				.startsWith(DoodleLocationCodes.DOODLE_DEBUG_PREFIX))
 			handleDoodledebugLocationEvent(event);
-		else if (event.location.startsWith(JAVA_FILE_LINK_PREFIX))
+		else if (event.location
+				.startsWith(DoodleLocationCodes.JAVA_FILE_LINK_PREFIX))
 			handleJavaFileLocationEvent(event);
+		else if (event.location
+				.startsWith(DoodleLocationCodes.LOAD_IMAGE_PREFIX))
+			handleLoadImageEvent(event.location);// TODO
 	}
 
 	void handleExternalLink(LocationEvent event) {
 		URL url;
 		try {
-			url = new URL(event.location.replaceFirst(EXTERNAL_LINK_PREFIX, ""));
+			url = new URL(event.location.replaceFirst(
+					DoodleLocationCodes.EXTERNAL_LINK_PREFIX, ""));
 		} catch (MalformedURLException e) {
 			throw new RuntimeException();
 		}
@@ -52,17 +55,17 @@ public class DoodleLocationListener implements LocationListener {
 			DoodleServer doodleServer = DoodleServer.instance();
 
 			int id = Integer.parseInt(event.location.replaceFirst(
-					DOODLE_DEBUG_PREFIX, ""));
+					DoodleLocationCodes.DOODLE_DEBUG_PREFIX, ""));
 			if (DoodleDebugProperties.developMode())
 				System.out.println("SERVER: Received message from javascript: "
 						+ id);
 			event.doit = false; // prevent any actual changing of location
 
-			if (id == LIGHTBOX_CLOSE) {
+			if (id == DoodleLocationCodes.LIGHTBOX_CLOSE) {
 				doodleServer.lightboxClosed();
 				return;
 			} else if (id < 0) {
-				int fromZero = (-id + LIGHTBOX_STACK_OFFSET);
+				int fromZero = (-id + DoodleLocationCodes.LIGHTBOX_STACK_OFFSET);
 				int toCutOff = fromZero * -(fromZero % 2 * 2 - 1) / 2;
 				doodleServer.cutoffFromStack(toCutOff);
 				return;
@@ -84,6 +87,12 @@ public class DoodleLocationListener implements LocationListener {
 		event.doit = false;
 
 		doodleServer.openJavaFile(className, lineNumber);
+	}
+
+	private void handleLoadImageEvent(String location) {
+		String[] parts = location.split(":");
+		int id = Integer.parseInt(parts[parts.length - 2]);
+		OutputManager.instance().loadImage(id);
 	}
 
 	@Override

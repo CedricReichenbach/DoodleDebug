@@ -5,17 +5,34 @@ var LIGHTBOX_CLOSE = -1;
 function addCode(code) {
 	document.body.innerHTML += code;
 	scrollToLast();
+	loadImages();
 }
 
-/* Add CSS to current one */
+function loadImages() {
+	$$('img.not-loaded').each(function() {
+		imageLoadMessage($(this).readAttribute('data-image-id'));
+		$(this).removeClassName('not-loaded').addClassName('loading');
+	});
+}
+
+function imageLoadMessage(id) {
+	window.location = 'loadimage:' + id;
+}
+
+function insertImgSrc(id, base64) {
+	$$('img.loading[data-image-id="' + id + '"').writeAttribute('src',
+			'data:image/gif;base64,' + base64);
+}
+
+/** Add CSS to current one */
 function addCSS(css) {
 	var style = document.createElement('style');
-	style.setAttribute('type','text/css');
+	style.setAttribute('type', 'text/css');
 	style.innerHTML = css;
 	document.head.appendChild(style);
 }
 
-/* Renders given code inside a lightbox (creates one if necessary). */
+/** Renders given code inside a lightbox (creates one if necessary). */
 function showInLightbox(code) {
 	var lightbox = document.getElementById('lightbox');
 	lightbox.innerHTML = code;
@@ -27,7 +44,9 @@ function showLightbox() {
 	document.getElementById('lightboxWrapper').style.visibility = 'visible';
 	document.getElementById('lightboxWrapper').style.height = 'auto';
 	adjustLightboxHeight();
-	window.onresize = function(event) { adjustLightboxHeight() };
+	window.onresize = function(event) {
+		adjustLightboxHeight()
+	};
 }
 
 function hideLightbox() {
@@ -37,8 +56,9 @@ function hideLightbox() {
 }
 
 function adjustLightboxHeight() {
-	var lightboxContentWrapper = document.getElementById('lightboxContentWrapper');
-	lightboxContentWrapper.style.height = (window.innerHeight - 68)+'px';
+	var lightboxContentWrapper = document
+			.getElementById('lightboxContentWrapper');
+	lightboxContentWrapper.style.height = (window.innerHeight - 68) + 'px';
 }
 
 function renderObjectInLightbox(id) {
@@ -46,7 +66,7 @@ function renderObjectInLightbox(id) {
 }
 
 function breadcrumbsBack(depth) {
-	if (depth > 0){
+	if (depth > 0) {
 		// navigate backwards (up in nesting tree)
 		messageToJavaPlugin(LIGHTBOX_STACK_OFFSET - depth * 2);
 	} else {
@@ -63,14 +83,14 @@ function lightboxCloseMessage() {
  * Send a message to DoodleDebug plugin. Message should be a number.
  */
 function messageToJavaPlugin(message) {
-	window.location = 'doodledebug:'+message;
+	window.location = 'doodledebug:' + message;
 }
 
 function scrollToLast() {
 	if (!atBottom())
 		return;
 	var elements = document.getElementsByClassName('printOutWrapper');
-	var last = elements[elements.length-1];
+	var last = elements[elements.length - 1];
 	last.scrollTo();
 }
 
@@ -78,8 +98,8 @@ function atBottom() {
 	var elements = document.getElementsByClassName('printOutWrapper');
 	if (elements.length < 2)
 		return true;
-	var oldLast = elements[elements.length-2];
-	var last = elements[elements.length-1];
+	var oldLast = elements[elements.length - 2];
+	var last = elements[elements.length - 1];
 	// for small elements
 	if (window.pageYOffset + window.innerHeight >= last.offsetTop)
 		return true;
@@ -95,7 +115,7 @@ function keyPressEvent(event) {
 	if (event.which) {
 		var code = event.which;
 	} else if (event.keyCode) {
-    	var code = event.keyCode;
+		var code = event.keyCode;
 	}
 	if (keyPressed(code)) {
 		event.preventDefault();
@@ -103,15 +123,15 @@ function keyPressEvent(event) {
 }
 
 /**
- * Checks code and initiates actions if necessary.
- * Returns true if custom action was triggered and false if default should be executed.
+ * Checks code and initiates actions if necessary. Returns true if custom action
+ * was triggered and false if default should be executed.
  */
 function keyPressed(code) {
 	var j = 106;
 	var k = 107;
 	var esc = 27;
 	var backspace = 8;
-	
+
 	switch (code) {
 	case j:
 		toNextElement();
@@ -132,8 +152,8 @@ function keyPressed(code) {
 }
 
 /**
- * Scroll to next object element in rendering output.
- * Returns true if any scrolling was done and false if not.
+ * Scroll to next object element in rendering output. Returns true if any
+ * scrolling was done and false if not.
  */
 function toNextElement() {
 	var blocks = document.getElementsByClassName('printOutWrapper');
@@ -149,12 +169,12 @@ function toNextElement() {
 }
 
 /**
- * Scroll to last object element in rendering output.
- * Returns true if any scrolling was done and false if not.
+ * Scroll to last object element in rendering output. Returns true if any
+ * scrolling was done and false if not.
  */
 function toPrevElement() {
 	var blocks = document.getElementsByClassName('printOutWrapper');
-	for (i = blocks.length-1; i >= 0; i--) {
+	for (i = blocks.length - 1; i >= 0; i--) {
 		var block = blocks[i];
 		var offset = block.offsetTop;
 		if (window.pageYOffset > offset) {

@@ -19,6 +19,7 @@ public class ImageRendering implements Rendering<Image> {
 		Tag imgTag = new Tag("img");
 		try {
 			imgTag.addAttribute("data-image-id", imageManager.store(image) + "");
+			imgTag.addCSSClass("not-loaded");
 		} catch (IOException e) {
 			imgTag.addCSSClass("error");
 		}

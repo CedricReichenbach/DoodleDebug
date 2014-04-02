@@ -13,7 +13,9 @@ import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 import ch.unibe.scg.doodle.server.LightboxStack;
 import ch.unibe.scg.doodle.server.util.DoodleImages;
 import ch.unibe.scg.doodle.server.views.HtmlShow;
+import ch.unibe.scg.doodle.server.views.JavascriptExecuter;
 import ch.unibe.scg.doodle.util.BreadcrumbsBuilder;
+import ch.unibe.scg.doodle.util.JavascriptCallsUtil;
 import ch.unibe.scg.doodle.view.HtmlDocument;
 
 /**
@@ -36,10 +38,13 @@ public class OutputManager {
 	@Inject
 	BreadcrumbsBuilder breadcrumbsBuilder;
 
+	@Inject
+	ImageManager imageManager;
+
 	Doodler doodler = Doodler.instance();
 
 	private Tag body;
-	
+
 	static Injector injector;
 
 	private static Injector injectorInstance() {
@@ -48,7 +53,7 @@ public class OutputManager {
 		}
 		return injector;
 	}
-	
+
 	private static OutputManager instance;
 
 	// XXX There was some strange behaviour with injector only
@@ -57,7 +62,7 @@ public class OutputManager {
 			instance = injectorInstance().getInstance(OutputManager.class);
 		return instance;
 	}
-	
+
 	public static void resetInstance() {
 		instance = null;
 	}
@@ -76,7 +81,7 @@ public class OutputManager {
 			this.createBetaInfo(body);
 
 		prepareLightbox();
-		
+
 		Runnable htmlShow = new HtmlShow(htmlDocument.toString());
 		Display.getDefault().syncExec(htmlShow);
 	}
@@ -131,5 +136,12 @@ public class OutputManager {
 		doodler.renderInline(stack.top(), lightboxRendering, true, false);
 		tag.add(lightboxRendering);
 		doodler.level++;
+	}
+
+	// XXX: Does this belong here?
+	public void loadImage(int index) {
+		String base64 = imageManager.load(index);
+		String insertScript = JavascriptCallsUtil.insertImgSrc(index, base64);
+		new JavascriptExecuter(insertScript).run();
 	}
 }
