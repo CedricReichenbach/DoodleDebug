@@ -35,7 +35,7 @@ public class DoodleLocationListener implements LocationListener {
 			handleJavaFileLocationEvent(event);
 		else if (event.location
 				.startsWith(DoodleLocationCodes.LOAD_IMAGE_PREFIX))
-			handleLoadImageEvent(event.location);// TODO
+			handleLoadImageEvent(event);
 	}
 
 	void handleExternalLink(LocationEvent event) {
@@ -89,9 +89,12 @@ public class DoodleLocationListener implements LocationListener {
 		doodleServer.openJavaFile(className, lineNumber);
 	}
 
-	private void handleLoadImageEvent(String location) {
+	private void handleLoadImageEvent(LocationEvent event) {
+		event.doit = false;
+
+		String location = event.location;
 		String[] parts = location.split(":");
-		int id = Integer.parseInt(parts[parts.length - 2]);
+		int id = Integer.parseInt(parts[parts.length - 1]);
 		OutputManager.instance().loadImage(id);
 	}
 

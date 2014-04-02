@@ -28,6 +28,6 @@ public class JavascriptCallsUtil {
 	}
 
 	public static String insertImgSrc(int id, String base64) {
-		return "insertImageSrc(" + id + ",'" + base64 + "')";
+		return "insertImgSrc(" + id + ",'" + base64.replace("\n", "") + "')";
 	}
 }

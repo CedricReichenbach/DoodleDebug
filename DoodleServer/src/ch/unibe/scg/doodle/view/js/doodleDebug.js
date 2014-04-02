@@ -9,9 +9,9 @@ function addCode(code) {
 }
 
 function loadImages() {
-	$$('img.not-loaded').each(function() {
-		imageLoadMessage($(this).readAttribute('data-image-id'));
-		$(this).removeClassName('not-loaded').addClassName('loading');
+	$$('img.not-loaded').each(function(item) {
+		imageLoadMessage($(item).readAttribute('data-image-id'));
+		$(item).removeClassName('not-loaded').addClassName('loading');
 	});
 }
 
@@ -20,8 +20,9 @@ function imageLoadMessage(id) {
 }
 
 function insertImgSrc(id, base64) {
-	$$('img.loading[data-image-id="' + id + '"').writeAttribute('src',
-			'data:image/gif;base64,' + base64);
+	var img = $$('img.loading[data-image-id="' + id + '"')[0];
+	if (img)
+		img.writeAttribute('src', 'data:image/gif;base64,' + base64);
 }
 
 /** Add CSS to current one */
