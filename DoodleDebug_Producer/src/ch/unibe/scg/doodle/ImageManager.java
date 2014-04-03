@@ -34,7 +34,7 @@ public class ImageManager {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		ImageIO.write(bufferedImage, "PNG", out);
 		byte[] bytes = out.toByteArray();
-
+		
 		return Base64.encodeBytes(bytes);
 	}
 	
