@@ -1,5 +1,6 @@
 package ch.unibe.scg.doodle;
 
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -31,15 +32,19 @@ public class ImageManager {
 	private String asBase64(Image image) throws IOException {
 		BufferedImage bufferedImage = new BufferedImage(image.getWidth(null),
 				image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+		Graphics graphics = bufferedImage.getGraphics();
+		graphics.drawImage(image, 0, 0, null);
+		graphics.dispose();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		ImageIO.write(bufferedImage, "PNG", out);
 		byte[] bytes = out.toByteArray();
-		
-		return Base64.encodeBytes(bytes);
+
+		return Base64.encodeBytes(bytes, Base64.DONT_BREAK_LINES);
 	}
-	
+
 	/**
 	 * Loads an image from storage.
+	 * 
 	 * @param index
 	 * @return Base64 representation of image
 	 */
