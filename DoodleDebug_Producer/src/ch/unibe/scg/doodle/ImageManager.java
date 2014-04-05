@@ -12,6 +12,7 @@ import javax.inject.Singleton;
 import org.apache.hadoop.hbase.util.Base64;
 
 import ch.unibe.scg.doodle.hbase.PersistentIndexedStorage;
+import ch.unibe.scg.doodle.plugins.ImagePlugin;
 
 @Singleton
 public class ImageManager {
@@ -26,7 +27,17 @@ public class ImageManager {
 	}
 
 	public int store(Image image) throws IOException {
-		return storage.store(asBase64(image));
+		return storage.store(asBase64(scale(image)));
+	}
+
+	private Image scale(Image image) {
+		int width = image.getWidth(null), height = image.getHeight(null);
+		if (width > height)
+			return image.getScaledInstance(ImagePlugin.MAX_SIDE_LENGTH, -1,
+					Image.SCALE_SMOOTH);
+		else
+			return image.getScaledInstance(-1, ImagePlugin.MAX_SIDE_LENGTH,
+					Image.SCALE_SMOOTH);
 	}
 
 	private String asBase64(Image image) throws IOException {

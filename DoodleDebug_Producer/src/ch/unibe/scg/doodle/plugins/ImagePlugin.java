@@ -20,7 +20,7 @@ public class ImagePlugin extends AbstractPlugin {
 	@Inject
 	Provider<ImageIconRendering> imageIconRenderingProvider;
 
-	static final int MAX_SIDE_LENGTH = 120;
+	public static final int MAX_SIDE_LENGTH = 120;
 
 	@Override
 	public Set<Class<?>> getDrawableClasses() {
