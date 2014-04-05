@@ -3,7 +3,6 @@ package ch.unibe.scg.doodle;
 import javax.inject.Inject;
 
 import ch.unibe.scg.doodle.hbase.DoodleDatabase;
-import ch.unibe.scg.doodle.hbase.HBaseMap;
 import ch.unibe.scg.doodle.helperClasses.CannotRenderMessage;
 import ch.unibe.scg.doodle.helperClasses.NullObject;
 import ch.unibe.scg.doodle.htmlgen.Attribute;
@@ -14,7 +13,6 @@ import ch.unibe.scg.doodle.view.CSSCollection;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.thoughtworks.xstream.XStream;
 
 /**
  * Class used for visualizing any Object
@@ -29,9 +27,6 @@ public class Doodler {
 	@Inject
 	SmallScratchFactory smallScratchFactory;
 
-	private static final String TABLE_NAME = "objects";
-	private final HBaseMap hbaseMap = new HBaseMap(TABLE_NAME);
-	private final XStream xstream = new XStream();
 	private final IndexedObjectStorage storage = new IndexedObjectStorage();
 
 	int level = 0;
@@ -72,9 +67,6 @@ public class Doodler {
 		if (o == null) {
 			o = new NullObject();
 		}
-
-		// XXX: Do we still need this?
-		hbaseMap.put(o.hashCode(), xstream.toXML(o));
 
 		Scratch scratch = scratchFactory.create(o);
 		scratch.addCSSClass("printOut");

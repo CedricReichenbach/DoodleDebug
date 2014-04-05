@@ -2,6 +2,7 @@ package ch.unibe.scg.doodle;
 
 import ch.unibe.scg.doodle.hbase.HBaseMap;
 import ch.unibe.scg.doodle.helperClasses.Nullable;
+import ch.unibe.scg.doodle.util.ClassUtil;
 
 /**
  * Storage for objects to be possibly rendered later (clickables). Every stored
@@ -16,8 +17,10 @@ public final class IndexedObjectStorage {
 	private int nextID; // TODO: Use long to prevent overflow
 
 	private HBaseMap hBaseMap;
+	private HBaseMap classesMap;
 	private HBaseMap persistenceMap;
 	private static final String TABLE_NAME = "clickables";
+	private static final String CLASSES_TABLE_NAME = "clickables_classes";
 	private static final String PERSISTENCE_TABLE_NAME = "clickables_persistence";
 	private static final int NEXT_ID_KEY = 0;
 
@@ -30,11 +33,14 @@ public final class IndexedObjectStorage {
 
 		// XXX: Should we really store clickables?
 		this.hBaseMap = new HBaseMap(TABLE_NAME);
+		this.classesMap = new HBaseMap(CLASSES_TABLE_NAME);
 	}
 
 	/** @return Id of stored object. */
 	public int store(Object o) {
 		hBaseMap.put(nextID, o);
+		if (ClassUtil.isThirdParty(o.getClass()))
+			classesMap.put(nextID, ClassUtil.getBinary(o.getClass()));
 
 		ringBuffer[nextID % CAPACITY] = o;
 		increaseNextID();
