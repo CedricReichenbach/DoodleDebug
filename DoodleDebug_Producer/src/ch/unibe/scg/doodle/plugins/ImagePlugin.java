@@ -20,6 +20,8 @@ public class ImagePlugin extends AbstractPlugin {
 	@Inject
 	Provider<ImageIconRendering> imageIconRenderingProvider;
 
+	static final int MAX_SIDE_LENGTH = 120;
+
 	@Override
 	public Set<Class<?>> getDrawableClasses() {
 		HashSet<Class<?>> hs = new HashSet<Class<?>>();
@@ -60,7 +62,13 @@ public class ImagePlugin extends AbstractPlugin {
 
 	@Override
 	public String getCSS() {
-		return ".ImagePlugin img " + "{ max-height: 120px; max-width: 120px;} "
+		return ".ImagePlugin img "
+				+ "{ max-height: "
+				+ MAX_SIDE_LENGTH
+				+ "px; max-width: "
+				+ MAX_SIDE_LENGTH
+				+ "px; pointer-events: none;"
+				+ "-moz-user-select: none; -webkit-user-select: none; -ms-user-select: none; user-select: none;} "
 				+ ".ImagePlugin.smallRendering img "
 				+ "{ max-height: 40px; max-width: 40px;}";
 	}

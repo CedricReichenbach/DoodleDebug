@@ -70,12 +70,14 @@ public class DoodleDebugView extends ViewPart {
 
 	public void runJavascript(String script) {
 		boolean sucessful = browser.execute(script);
+		if (script.contains("insertImgSrc"))
+			System.out.println(script);
 		if (!sucessful) {
 			System.err.println("WARNING: Could not execute a javascript");
 			System.out.println(browser.evaluate(script));
 		}
 
-		boolean jsMethod = false; // FIXME: Why is browser.getText() broken?
+		boolean jsMethod = true; // FIXME: Why is browser.getText() broken?
 		htmlObserver.htmlChangedTo(jsMethod ? "<!DOCTYPE html>"
 				+ browser.evaluate("return $$('html')[0].outerHTML") : browser
 				.getText());

@@ -20,7 +20,7 @@ function imageLoadMessage(id) {
 }
 
 function insertImgSrc(id, base64) {
-	var img = $$('img.loading[data-image-id="' + id + '"')[0];
+	var img = $$('img.loading[data-image-id="' + id + '"]')[0];
 	if (img)
 		img.writeAttribute('src', 'data:image/gif;base64,' + base64);
 }
