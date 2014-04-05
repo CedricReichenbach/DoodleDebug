@@ -39,6 +39,7 @@ public final class IndexedObjectStorage {
 	/** @return Id of stored object. */
 	public int store(Object o) {
 		hBaseMap.put(nextID, o);
+		// FIXME: Will store class everytime an object is doodled
 		if (ClassUtil.isThirdParty(o.getClass()))
 			classesMap.put(nextID, ClassUtil.getBinary(o.getClass()));
 
@@ -59,5 +60,9 @@ public final class IndexedObjectStorage {
 			return hBaseMap.get(id);
 
 		return ringBuffer[id % CAPACITY];
+	}
+
+	public boolean hasClassFile(int id) {
+		return classesMap.containsKey(id);
 	}
 }
