@@ -24,6 +24,7 @@ function insertImgSrc(id, base64) {
 	if (img) {
 		img.writeAttribute('src', 'data:image/gif;base64,' + base64);
 		img.removeClassName('loading');
+		img.setAttribute('alt', 'image fully loaded');
 	}
 }
 

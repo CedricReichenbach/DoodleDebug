@@ -19,9 +19,10 @@ public class ImageRendering implements Rendering<Image> {
 		Tag imgTag = new Tag("img");
 		try {
 			imgTag.addAttribute("data-image-id", imageManager.store(image) + "");
+			imgTag.addAttribute("alt", "loading...");
 			imgTag.addCSSClass("not-loaded");
 		} catch (IOException e) {
-			imgTag.addCSSClass("error");
+			throw new DoodleRenderException(e);
 		}
 		tag.add(imgTag);
 	}

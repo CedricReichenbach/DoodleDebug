@@ -69,8 +69,8 @@ public class ImagePlugin extends AbstractPlugin {
 				+ MAX_SIDE_LENGTH
 				+ "px; pointer-events: none;"
 				+ "-moz-user-select: none; -webkit-user-select: none; -ms-user-select: none; user-select: none;} "
-				+ ".ImagePlugin img.not-loaded {} " // TODO
-				+ ".ImagePlugin img.loading {} " // TODO
+				+ ".ImagePlugin img.not-loaded, "
+				+ ".ImagePlugin img.loading {background-color:#bbb; color:#eee; padding:0.5em;} "
 				+ ".ImagePlugin.smallRendering img "
 				+ "{ max-height: 40px; max-width: 40px;}";
 	}
