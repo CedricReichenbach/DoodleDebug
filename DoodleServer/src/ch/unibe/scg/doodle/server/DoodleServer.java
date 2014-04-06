@@ -43,9 +43,7 @@ public class DoodleServer {
 	}
 
 	public void drawObjectWithID(int id) {
-		if (this.storage.hasClassFile(id))
-			;// TODO: Get class and add to xstream classloader
-		Object o = this.storage.get(id);
+		Object o = storage.get(id);
 		if (o == null) {
 			// TODO: Show message that object is not available anymore
 			return;

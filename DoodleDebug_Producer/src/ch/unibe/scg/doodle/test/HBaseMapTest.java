@@ -10,15 +10,15 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
-import ch.unibe.scg.doodle.hbase.HBaseMap;
+import ch.unibe.scg.doodle.hbase.HBaseIntMap;
 
 public class HBaseMapTest {
 
-	private HBaseMap hbaseMap;
+	private HBaseIntMap hbaseMap;
 
 	@Before
 	public void init() {
-		hbaseMap = new HBaseMap("junit_test_table");
+		hbaseMap = new HBaseIntMap("junit_test_table");
 	}
 
 	@Test

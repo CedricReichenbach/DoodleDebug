@@ -19,9 +19,9 @@ public class DoodleDatabase {
 	private static final String PERSISTENCE_TABLE_NAME = "doodles_persistence";
 	private static final int NEXT_ID_KEY = 0;
 
-	HBaseMap htmlMap = new HBaseMap(HTML_TABLE_NAME);
-	HBaseMap cssMap = new HBaseMap(CSS_TABLE_NAME);
-	HBaseMap persistenceMap = new HBaseMap(PERSISTENCE_TABLE_NAME);
+	HBaseIntMap htmlMap = new HBaseIntMap(HTML_TABLE_NAME);
+	HBaseIntMap cssMap = new HBaseIntMap(CSS_TABLE_NAME);
+	HBaseIntMap persistenceMap = new HBaseIntMap(PERSISTENCE_TABLE_NAME);
 
 	// TODO: Maybe make ID persistent, e.g. store into DB
 	// XXX: Problem: Uncoordinated access to DB from multiple applications

@@ -2,14 +2,14 @@ package ch.unibe.scg.doodle.hbase;
 
 public class PersistentIndexedStorage {
 
-	private final HBaseMap hBaseMap;
+	private final HBaseIntMap hBaseMap;
 	/** Entry 0 is used for persistence. */
 	private static final int NEXT_ID_KEY = 0;
 
 	private int nextId = 1;
 
 	public PersistentIndexedStorage(String tableName) {
-		this.hBaseMap = new HBaseMap(tableName);
+		this.hBaseMap = new HBaseIntMap(tableName);
 
 		if (hBaseMap.containsKey(NEXT_ID_KEY))
 			nextId = (int) hBaseMap.get(NEXT_ID_KEY);
