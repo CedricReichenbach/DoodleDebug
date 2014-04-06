@@ -16,10 +16,12 @@ public class FileUtil {
 		try {
 			BufferedReader in = new BufferedReader(new InputStreamReader(
 					url.openStream()));
-			String inputLine = "";
+			String inputLine = in.readLine();
 			while (inputLine != null) {
-				result += inputLine + "\n";
+				result += inputLine;
 				inputLine = in.readLine();
+				if (inputLine != null)
+					result += "\n";
 			}
 			in.close();
 		} catch (IOException e) {
