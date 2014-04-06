@@ -47,12 +47,23 @@ public class DoodleDebugProperties {
 		return file;
 	}
 
+	/**
+	 * Temp dir for binaries (doodled non-JDK objects' classes)
+	 * 
+	 * @return
+	 */
+	public static File tempDirForClasses() {
+		File dir = new File(tempDir() + "/bin/");
+		dir.mkdirs();
+		return dir;
+	}
+
 	public static File tempDirForImages() {
 		File dir = new File(tempDir() + "/img/");
 		dir.mkdirs();
 		return dir;
 	}
-	
+
 	public static File mainTempDir() {
 		File dir = new File(tempDir());
 		dir.mkdirs();

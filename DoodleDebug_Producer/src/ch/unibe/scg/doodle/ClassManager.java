@@ -1,8 +1,6 @@
 package ch.unibe.scg.doodle;
 
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import ch.unibe.scg.doodle.hbase.HBaseStringMap;
 import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
@@ -20,17 +18,17 @@ public class ClassManager {
 		return key;
 	}
 
-	public URL loadToFile(String className) {
-		String binary = (String) classMap.get(className);
-		File file = new File(DoodleDebugProperties.mainTempDir(), className
-				+ ".class");
+	/**
+	 * Loads into DD's temp directory for binaries
+	 * 
+	 * @param fullClassName
+	 */
+	public void loadToFile(String fullClassName) {
+		String binary = (String) classMap.get(fullClassName);
+		File file = new File(DoodleDebugProperties.tempDirForClasses(),
+				fullClassName.replace(".", "/") + ".class");
 		file.getParentFile().mkdirs();
 		FileUtil.writeToFile(file, binary);
-		try {
-			return file.toURI().toURL(); // FIXME: Only parent one should be enough
-		} catch (MalformedURLException e) {
-			throw new RuntimeException(e);
-		}
 	}
 
 }

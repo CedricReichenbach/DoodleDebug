@@ -1,7 +1,5 @@
 package ch.unibe.scg.doodle;
 
-import java.net.URL;
-
 import ch.unibe.scg.doodle.hbase.HBaseIntMap;
 import ch.unibe.scg.doodle.helperClasses.Nullable;
 import ch.unibe.scg.doodle.util.ClassUtil;
@@ -64,8 +62,8 @@ public final class IndexedObjectStorage {
 	public @Nullable
 	Object get(int id) {
 		if (this.hasClassName(id))
-			loadClass(this.getClassName(id));// TODO: Get class and add to xstream classloader
-		
+			loadClass(this.getClassName(id));
+
 		if (id < nextID - CAPACITY || id >= nextID
 				|| ringBuffer[id % CAPACITY] == null)
 			return hBaseMap.get(id);
@@ -74,8 +72,7 @@ public final class IndexedObjectStorage {
 	}
 
 	private void loadClass(String className) {
-		URL url = classManager.loadToFile(className);
-		hBaseMap.addToClassLoader(url);
+		classManager.loadToFile(className);
 	}
 
 	public boolean hasClassName(int id) {

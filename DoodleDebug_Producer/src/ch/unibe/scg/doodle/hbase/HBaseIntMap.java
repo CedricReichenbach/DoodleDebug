@@ -1,6 +1,5 @@
 package ch.unibe.scg.doodle.hbase;
 
-import java.net.URL;
 import java.util.AbstractMap;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Collection;
@@ -100,10 +99,6 @@ public class HBaseIntMap implements Map<Integer, Object> {
 	@Override
 	public Collection<Object> values() {
 		return stringMap.values();
-	}
-
-	public void addToClassLoader(URL url) {
-		stringMap.addToClassLoader(url);
 	}
 
 }

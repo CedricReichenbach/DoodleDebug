@@ -4,6 +4,7 @@ import static org.apache.hadoop.hbase.util.Bytes.toBytes;
 
 import java.io.IOException;
 import java.io.InterruptedIOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.AbstractMap;
@@ -30,6 +31,8 @@ import org.apache.hadoop.hbase.client.RetriesExhaustedWithDetailsException;
 import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.util.Bytes;
 
+import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
+
 import com.thoughtworks.xstream.XStream;
 
 public class HBaseStringMap implements Map<String, Object> {
@@ -54,6 +57,21 @@ public class HBaseStringMap implements Map<String, Object> {
 		} catch (IOException e) {
 			System.out.println("Connection to HBase failed!");
 			throw new RuntimeException(e);
+		}
+
+		addBinDirToClassLoader();
+	}
+
+	private void addBinDirToClassLoader() {
+		try {
+			URL url = DoodleDebugProperties.tempDirForClasses().toURI().toURL();
+			URL[] urls = { url };
+			URLClassLoader extended = new URLClassLoader(urls,
+					xstream.getClassLoader());
+			xstream.setClassLoader(extended);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+			return;
 		}
 	}
 
@@ -234,12 +252,5 @@ public class HBaseStringMap implements Map<String, Object> {
 			e.printStackTrace();
 		}
 		return list;
-	}
-
-	public void addToClassLoader(URL url) {
-		URL[] urls = { url };
-		URLClassLoader extended = new URLClassLoader(urls,
-				xstream.getClassLoader());
-		xstream.setClassLoader(extended);
 	}
 }
