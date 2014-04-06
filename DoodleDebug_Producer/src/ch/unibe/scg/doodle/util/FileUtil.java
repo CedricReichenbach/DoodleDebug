@@ -29,9 +29,9 @@ public class FileUtil {
 		return result;
 	}
 
-	public static void writeToFile(File file, String content) {
+	public static void writeToFile(File file, String content, boolean append) {
 		try {
-			FileWriter fstream = new FileWriter(file, true);
+			FileWriter fstream = new FileWriter(file, append);
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write(content);
 			out.close();
