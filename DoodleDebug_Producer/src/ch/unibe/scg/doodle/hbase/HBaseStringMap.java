@@ -31,9 +31,11 @@ import org.apache.hadoop.hbase.client.RetriesExhaustedWithDetailsException;
 import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.util.Bytes;
 
+import ch.unibe.scg.doodle.api.Doodleable;
 import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.core.util.CompositeClassLoader;
 
 public class HBaseStringMap implements Map<String, Object> {
 
@@ -59,20 +61,21 @@ public class HBaseStringMap implements Map<String, Object> {
 			throw new RuntimeException(e);
 		}
 
-		addBinDirToClassLoader();
+		extendClassLoader();
 	}
 
-	private void addBinDirToClassLoader() {
+	private void extendClassLoader() {
+		CompositeClassLoader extended = new CompositeClassLoader();
+		ClassLoader ddClassLoader = Doodleable.class.getClassLoader();
 		try {
 			URL url = DoodleDebugProperties.tempDirForClasses().toURI().toURL();
 			URL[] urls = { url };
-			URLClassLoader extended = new URLClassLoader(urls,
-					xstream.getClassLoader());
-			xstream.setClassLoader(extended);
+			extended.add(new URLClassLoader(urls, ddClassLoader));
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
-			return;
 		}
+		extended.add(xstream.getClassLoader());
+		xstream.setClassLoader(extended);
 	}
 
 	private void assureTableExistence(String tableName) throws IOException {
