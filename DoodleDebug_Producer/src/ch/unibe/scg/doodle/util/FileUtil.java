@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 
+import com.google.common.io.ByteStreams;
+import com.google.common.io.Files;
+
 public class FileUtil {
 
 	public static String readFile(URL url) {
@@ -37,6 +40,22 @@ public class FileUtil {
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write(content);
 			out.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public static byte[] readBinaryFile(URL url) {
+		try {
+			return ByteStreams.toByteArray(url.openStream());
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public static void writeBinaryFile(File file, byte[] binary) {
+		try {
+			Files.write(binary, file);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

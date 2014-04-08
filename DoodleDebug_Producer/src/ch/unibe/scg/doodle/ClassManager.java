@@ -25,12 +25,12 @@ public class ClassManager {
 	 * @param fullClassName
 	 */
 	public void loadToFile(String fullClassName) {
-		String binary = EncodingUtil.fromBase64((String) classMap
+		byte[] binary = EncodingUtil.bytesFromBase64((String) classMap
 				.get(fullClassName));
 		File file = new File(DoodleDebugProperties.tempDirForClasses(),
 				fullClassName.replace(".", "/") + ".class");
 		file.getParentFile().mkdirs();
-		FileUtil.writeToFile(file, binary, false);
+		FileUtil.writeBinaryFile(file, binary);
 	}
 
 }

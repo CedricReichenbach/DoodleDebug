@@ -1,6 +1,5 @@
 package ch.unibe.scg.doodle.util;
 
-
 public class ClassUtil {
 
 	public static boolean isThirdParty(Class<?> clazz) {
@@ -9,8 +8,8 @@ public class ClassUtil {
 				& !clazz.getName().startsWith("java.");
 	}
 
-	public static String getBinary(Class<? extends Object> clazz) {
-		return FileUtil.readFile(clazz.getResource(clazz.getSimpleName()
+	public static byte[] getBinary(Class<? extends Object> clazz) {
+		return FileUtil.readBinaryFile(clazz.getResource(clazz.getSimpleName()
 				+ ".class"));
 	}
 
