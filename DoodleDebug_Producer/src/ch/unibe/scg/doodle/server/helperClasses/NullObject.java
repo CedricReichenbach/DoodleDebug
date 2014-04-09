@@ -7,5 +7,5 @@ package ch.unibe.scg.doodle.server.helperClasses;
  * 
  */
 public class NullObject {
-
+	// FIXME: Can we remove this? Same class available in ch.unibe.scg.doodle.helperClasses
 }

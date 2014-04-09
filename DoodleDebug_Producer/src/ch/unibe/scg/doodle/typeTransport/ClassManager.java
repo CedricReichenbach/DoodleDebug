@@ -1,4 +1,4 @@
-package ch.unibe.scg.doodle;
+package ch.unibe.scg.doodle.typeTransport;
 
 import java.io.File;
 

@@ -98,5 +98,7 @@
 			<accessrule ignoreifbetter="true" kind="nonaccessible" pattern="**/*"/>
 		</accessrules>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/asm-5.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/asm-commons-5.0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

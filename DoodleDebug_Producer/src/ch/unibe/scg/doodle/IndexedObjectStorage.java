@@ -2,6 +2,7 @@ package ch.unibe.scg.doodle;
 
 import ch.unibe.scg.doodle.hbase.HBaseIntMap;
 import ch.unibe.scg.doodle.helperClasses.Nullable;
+import ch.unibe.scg.doodle.typeTransport.ClassManager;
 import ch.unibe.scg.doodle.util.ClassUtil;
 
 /**
