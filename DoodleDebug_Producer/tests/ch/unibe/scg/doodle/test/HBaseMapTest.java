@@ -14,11 +14,11 @@ import ch.unibe.scg.doodle.hbase.HBaseIntMap;
 
 public class HBaseMapTest {
 
-	private HBaseIntMap hbaseMap;
+	private HBaseIntMap<String> hbaseMap;
 
 	@Before
 	public void init() {
-		hbaseMap = new HBaseIntMap("junit_test_table");
+		hbaseMap = new HBaseIntMap<>("junit_test_table");
 	}
 
 	@Test
@@ -54,7 +54,7 @@ public class HBaseMapTest {
 	@Test
 	public void testKeysValues() {
 		int key1 = -1, key2 = 256;
-		Object val1 = "Hell, no!", val2 = "Uhm, yes...";
+		String val1 = "Hell, no!", val2 = "Uhm, yes...";
 
 		hbaseMap.clear();
 		hbaseMap.put(key1, val1);
@@ -65,7 +65,7 @@ public class HBaseMapTest {
 		assertTrue(keys.contains(key1));
 		assertTrue(keys.contains(key2));
 
-		Collection<Object> values = hbaseMap.values();
+		Collection<String> values = hbaseMap.values();
 		assertEquals(2, values.size());
 		assertTrue(values.contains(val1));
 		assertTrue(values.contains(val2));

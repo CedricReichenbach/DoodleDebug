@@ -30,8 +30,11 @@ public class HtmlOutputTest {
 		scratchFactory.create(Color.RED).drawWhole(testTag);
 
 		assertEquals(
-				testTag.toString(),
-				"<test style=\"width:100; background-color:#ff0000\">java.awt.Color[r=255,g=0,b=0]</test>\n");
+				"<test><div class=\" ColorPlugin\" style=\"background-color:rgba(255,0,0,1.0)\">"
+						+ "<div class=\"colorText\">RGB&alpha;: (<span class=\"redPart\">255</span>, "
+						+ "<span class=\"greenPart\">0</span>, <span class=\"bluePart\">0</span>, "
+						+ "<span class=\"alphaPart\">255</span>)</div>\n</div>\n</test>\n",
+				testTag.toString());
 
 	}
 }

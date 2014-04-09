@@ -4,14 +4,13 @@ import java.io.File;
 
 import ch.unibe.scg.doodle.hbase.HBaseStringMap;
 import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
-import ch.unibe.scg.doodle.util.ClassUtil;
 import ch.unibe.scg.doodle.util.EncodingUtil;
 import ch.unibe.scg.doodle.util.FileUtil;
 
 public class ClassManager {
 
 	private final String MAP_NAME = "classbinaries";
-	HBaseStringMap classMap = new HBaseStringMap(MAP_NAME);
+	HBaseStringMap<String> classMap = new HBaseStringMap<>(MAP_NAME);
 
 	public String store(Class<?> clazz) {
 		String key = clazz.getName();

@@ -5,6 +5,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Assert;
 import org.junit.Test;
 
+import ch.unibe.scg.doodle.IndexedObjectStorage;
+
 public class IndexedObjectStorageTest {
 	@Test
 	public void testStore() {

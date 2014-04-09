@@ -37,7 +37,7 @@ import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.core.util.CompositeClassLoader;
 
-public class HBaseStringMap implements Map<String, Object> {
+public class HBaseStringMap<T> implements Map<String, T> {
 
 	private static final String ID_COL_TITLE = "id";
 	private static final String OBJECT_COL_TITLE = "object";
@@ -118,13 +118,13 @@ public class HBaseStringMap implements Map<String, Object> {
 	}
 
 	@Override
-	public Set<Entry<String, Object>> entrySet() {
-		HashSet<Entry<String, Object>> set = new HashSet<>();
+	public Set<Entry<String, T>> entrySet() {
+		HashSet<Entry<String, T>> set = new HashSet<>();
 
 		for (String key : keySet()) {
-			Object value = get(key);
-			SimpleEntry<String, Object> entry = new AbstractMap.SimpleEntry<>(
-					key, value);
+			T value = get(key);
+			SimpleEntry<String, T> entry = new AbstractMap.SimpleEntry<>(key,
+					value);
 			set.add(entry);
 		}
 
@@ -132,7 +132,7 @@ public class HBaseStringMap implements Map<String, Object> {
 	}
 
 	@Override
-	public Object get(Object key) {
+	public T get(Object key) {
 		if (!(key instanceof String)) {
 			System.err.println("WARNING: HBaseMap key needs to be a String");
 			return null;
@@ -149,7 +149,7 @@ public class HBaseStringMap implements Map<String, Object> {
 			byte[] valueBytes = result.getValue(toBytes(OBJECT_COL_TITLE),
 					toBytes(OBJECT_COL_TITLE));
 			String valueXML = Bytes.toString(valueBytes);
-			return xstream.fromXML(valueXML);
+			return (T) xstream.fromXML(valueXML); // XXX: Is there a better way?
 		} catch (IOException e) {
 			System.out.println("Failed to load object from HBase. Key: " + key);
 			e.printStackTrace();
@@ -176,8 +176,8 @@ public class HBaseStringMap implements Map<String, Object> {
 	}
 
 	@Override
-	public Object put(String key, Object value) {
-		Object previous = this.get(key);
+	public T put(String key, T value) {
+		T previous = this.get(key);
 
 		Put put = new Put(toBytes(key));
 		// XXX: Why do we need a "qualifier" here (second argument)?
@@ -195,19 +195,19 @@ public class HBaseStringMap implements Map<String, Object> {
 	}
 
 	@Override
-	public void putAll(Map<? extends String, ? extends Object> otherMap) {
+	public void putAll(Map<? extends String, ? extends T> otherMap) {
 		for (String key : otherMap.keySet())
 			this.put(key, otherMap.get(key));
 	}
 
 	@Override
-	public Object remove(Object key) {
+	public T remove(Object key) {
 		if (!this.containsKey(key))
 			return null;
 
-		Object oldValue = this.get(key);
+		T oldValue = this.get(key);
 
-		Delete delete = new Delete(toBytes((int) key));
+		Delete delete = new Delete(toBytes((String) key));
 		try {
 			table.delete(delete);
 		} catch (IOException e) {
@@ -226,14 +226,14 @@ public class HBaseStringMap implements Map<String, Object> {
 	}
 
 	@Override
-	public Collection<Object> values() {
-		Collection<Object> values = new ArrayList<>();
+	public Collection<T> values() {
+		Collection<T> values = new ArrayList<>();
 
 		Collection<Result> results = getRowResults();
 		for (Result result : results) {
 			String valueXML = Bytes.toString(result.getValue(
 					toBytes(OBJECT_COL_TITLE), toBytes(OBJECT_COL_TITLE)));
-			Object value = xstream.fromXML(valueXML);
+			T value = (T) xstream.fromXML(valueXML); // XXX: Better solution?
 			values.add(value);
 		}
 

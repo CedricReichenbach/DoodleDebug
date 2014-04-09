@@ -1,4 +1,4 @@
-package ch.unibe.scg.doodle;
+package ch.unibe.scg.doodle.test;
 
 import java.io.File;
 import java.net.MalformedURLException;
