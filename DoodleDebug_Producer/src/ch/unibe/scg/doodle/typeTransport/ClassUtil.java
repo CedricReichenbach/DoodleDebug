@@ -15,6 +15,7 @@ public class ClassUtil {
 	 * <li>primitive</li>
 	 * <li>part of a package in <code>java.*</code></li>
 	 * <li>part of a package in <code>javax.*</code></li>
+	 * <li>part of a (sub-)package in <code>ch.unibe.scg.doodle</code></li>
 	 * </ul>
 	 * 
 	 * @param clazz
@@ -24,7 +25,8 @@ public class ClassUtil {
 		// FIXME: Find a smarter way
 		return !clazz.isArray() & !clazz.isPrimitive()
 				& !clazz.getName().startsWith("java.")
-				& !clazz.getName().startsWith("javax.");
+				& !clazz.getName().startsWith("javax.")
+				& !clazz.getName().startsWith("ch.unibe.scg.doodle.");
 	}
 
 	public static byte[] getBinary(Class<? extends Object> clazz) {
@@ -34,7 +36,7 @@ public class ClassUtil {
 
 	/**
 	 * Finds and returns all non-JDK dependencies (types) of a given type. The
-	 * provided type itself is not part of the returned set.
+	 * provided type itself is included in the returned set.
 	 * 
 	 * @param clazz
 	 * @return
@@ -46,8 +48,8 @@ public class ClassUtil {
 			Iterator<Class<?>> iterator = dependencies.iterator();
 			while (iterator.hasNext()) {
 				Class<?> dependency = iterator.next();
-				if (isThirdParty(dependency))
-					dependencies.remove(dependency);
+				if (!isThirdParty(dependency))
+					iterator.remove();
 			}
 			return dependencies;
 		} catch (IOException e) {

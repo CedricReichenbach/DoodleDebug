@@ -49,9 +49,7 @@ public final class IndexedObjectStorage {
 		hBaseMap.put(nextID, o);
 		// FIXME: Will store classes everytime an object is doodled
 		if (ClassUtil.isThirdParty(o.getClass())) {
-			String name = classManager.store(o.getClass());
 			Set<String> nameSet = new HashSet<String>();
-			nameSet.add(name);
 			for (Class<?> clazz : ClassUtil.getThirdPartyDependencies(o
 					.getClass())) {
 				String clazzName = classManager.store(clazz);
