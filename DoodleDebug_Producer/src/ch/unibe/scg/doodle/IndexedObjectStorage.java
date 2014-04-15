@@ -48,7 +48,9 @@ public final class IndexedObjectStorage {
 	public int store(Object o) {
 		hBaseMap.put(nextID, o);
 		// FIXME: Will store classes everytime an object is doodled
-		if (ClassUtil.isThirdParty(o.getClass())) {
+		// FIXME: What about arrays (containing third-party types)?
+		if (ClassUtil.isThirdParty(o.getClass())
+				& !DoodleDebugConfig.inReadingMode()) {
 			Set<String> nameSet = new HashSet<String>();
 			for (Class<?> clazz : ClassUtil.getThirdPartyDependencies(o
 					.getClass())) {

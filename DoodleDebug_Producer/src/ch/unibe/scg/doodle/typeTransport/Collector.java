@@ -84,7 +84,7 @@ public class Collector extends Remapper {
 		final ClassVisitor inner = new EmptyVisitor();
 		final RemappingClassAdapter visitor = new RemappingClassAdapter(inner,
 				remapper);
-		reader.accept(visitor, 0);
+		reader.accept(visitor, ClassReader.EXPAND_FRAMES);
 		return classes;
 	}
 }

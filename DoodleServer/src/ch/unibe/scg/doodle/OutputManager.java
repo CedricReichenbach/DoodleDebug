@@ -59,8 +59,13 @@ public class OutputManager {
 	// XXX There was some strange behaviour with injector only
 	public static OutputManager instance() {
 		if (instance == null)
-			instance = injectorInstance().getInstance(OutputManager.class);
+			instance = init();
 		return instance;
+	}
+
+	private static OutputManager init() {
+		DoodleDebugConfig.setReadingMode(true);
+		return injectorInstance().getInstance(OutputManager.class);
 	}
 
 	public static void resetInstance() {
