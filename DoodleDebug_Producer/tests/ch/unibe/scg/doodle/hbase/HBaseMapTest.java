@@ -1,4 +1,4 @@
-package ch.unibe.scg.doodle.test;
+package ch.unibe.scg.doodle.hbase;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ch.unibe.scg.doodle.hbase.HBaseIntMap;
+import ch.unibe.scg.doodle.util.ApplicationUtil;
 
 public class HBaseMapTest {
 
@@ -18,7 +19,7 @@ public class HBaseMapTest {
 
 	@Before
 	public void init() {
-		hbaseMap = new HBaseIntMap<>("junit_test_table");
+		hbaseMap = new HBaseIntMap<>(ApplicationUtil.getApplicationName(), "junit_test_table");
 	}
 
 	@Test

@@ -1,12 +1,12 @@
-package ch.unibe.scg.doodle;
+package ch.unibe.scg.doodle.hbase;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import ch.unibe.scg.doodle.hbase.HBaseIntMap;
+import ch.unibe.scg.doodle.DoodleDebugConfig;
 import ch.unibe.scg.doodle.helperClasses.Nullable;
-import ch.unibe.scg.doodle.typeTransport.ClassManager;
 import ch.unibe.scg.doodle.typeTransport.ClassUtil;
+import ch.unibe.scg.doodle.util.ApplicationUtil;
 
 /**
  * Storage for objects to be possibly rendered later (clickables). Every stored
@@ -31,15 +31,18 @@ public final class IndexedObjectStorage {
 	private ClassManager classManager;
 
 	public IndexedObjectStorage() {
-		this.persistenceMap = new HBaseIntMap<>(PERSISTENCE_TABLE_NAME);
+		this.persistenceMap = new HBaseIntMap<>(
+				ApplicationUtil.getApplicationName(), PERSISTENCE_TABLE_NAME);
 
 		this.nextID = persistenceMap.containsKey(NEXT_ID_KEY) ? persistenceMap
 				.get(NEXT_ID_KEY) : 0;
 		this.ringBuffer = new Object[CAPACITY];
 
 		// XXX: Should we really store clickables?
-		this.hBaseMap = new HBaseIntMap<>(TABLE_NAME);
-		this.classesMap = new HBaseIntMap<>(CLASSNAME_TABLE_NAME);
+		this.hBaseMap = new HBaseIntMap<>(ApplicationUtil.getApplicationName(),
+				TABLE_NAME);
+		this.classesMap = new HBaseIntMap<>(
+				ApplicationUtil.getApplicationName(), CLASSNAME_TABLE_NAME);
 
 		classManager = new ClassManager();
 	}

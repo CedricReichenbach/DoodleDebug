@@ -37,7 +37,7 @@ import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.core.util.CompositeClassLoader;
 
-public class HBaseStringMap<T> implements Map<String, T> {
+class HBaseStringMap<T> implements Map<String, T> {
 
 	private static final String ID_COL_TITLE = "id";
 	private static final String OBJECT_COL_TITLE = "object";
@@ -47,15 +47,16 @@ public class HBaseStringMap<T> implements Map<String, T> {
 
 	private final XStream xstream = new XStream();
 
-	public HBaseStringMap(String tableName) {
+	public HBaseStringMap(String applicationName, String tableName) {
+		String tableFullName = applicationName + "-" + tableName;
 		Configuration hbaseConfiguration = HBaseConfiguration.create();
 		try {
 			System.out.println("Connecting to HBase...");
 			hbaseAdmin = new HBaseAdmin(hbaseConfiguration);
 			System.out.println("Connection to HBase established.");
 
-			assureTableExistence(tableName);
-			this.table = new HTable(hbaseConfiguration, tableName);
+			assureTableExistence(tableFullName);
+			this.table = new HTable(hbaseConfiguration, tableFullName);
 		} catch (IOException e) {
 			System.out.println("Connection to HBase failed!");
 			throw new RuntimeException(e);

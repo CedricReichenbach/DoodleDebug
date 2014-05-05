@@ -3,6 +3,7 @@ package ch.unibe.scg.doodle.hbase;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.unibe.scg.doodle.util.ApplicationUtil;
 import ch.unibe.scg.doodle.util.Pair;
 
 /**
@@ -19,13 +20,16 @@ public class DoodleDatabase {
 	private static final String PERSISTENCE_TABLE_NAME = "doodles_persistence";
 	private static final int NEXT_ID_KEY = 0;
 
-	HBaseIntMap<String> htmlMap = new HBaseIntMap<>(HTML_TABLE_NAME);
-	HBaseIntMap<String> cssMap = new HBaseIntMap<>(CSS_TABLE_NAME);
-	HBaseIntMap<Integer> persistenceMap = new HBaseIntMap<>(PERSISTENCE_TABLE_NAME);
+	HBaseIntMap<String> htmlMap = new HBaseIntMap<>(
+			ApplicationUtil.getApplicationName(), HTML_TABLE_NAME);
+	HBaseIntMap<String> cssMap = new HBaseIntMap<>(
+			ApplicationUtil.getApplicationName(), CSS_TABLE_NAME);
+	HBaseIntMap<Integer> persistenceMap = new HBaseIntMap<>(
+			ApplicationUtil.getApplicationName(), PERSISTENCE_TABLE_NAME);
 
-	// TODO: Maybe make ID persistent, e.g. store into DB
 	// XXX: Problem: Uncoordinated access to DB from multiple applications
-	private int nextID; // TODO: Use long to prevent overflow
+	// TODO: Use long to prevent overflow
+	private int nextID;
 	private int nextLoadID = 0;
 
 	public DoodleDatabase() {

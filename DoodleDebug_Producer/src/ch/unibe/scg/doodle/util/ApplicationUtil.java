@@ -2,9 +2,12 @@ package ch.unibe.scg.doodle.util;
 
 public class ApplicationUtil {
 	
+	// No, don't assign it here (main thread needs to be started first).
+	private static String applicationName;
+	
 	private static final String UNKNOWN_CLASS = "ch.unibe.scg.doodle.UNKNOWN_APP_PLACEHOLDER";
 	
-	public static String getMainClassName() {
+	private static String getMainClassName() {
 		for (StackTraceElement[] stackTrace : Thread.getAllStackTraces()
 				.values()) {
 			if (stackTrace.length == 0)
@@ -16,5 +19,15 @@ public class ApplicationUtil {
 				return lastElement.getClassName();
 		}
 		return UNKNOWN_CLASS;
+	}
+	
+	public static String getApplicationName() {
+		if (applicationName == null)
+			setApplicationName(getMainClassName());
+		return applicationName;
+	}
+	
+	public static void setApplicationName(String newName) {
+		applicationName = newName;
 	}
 }

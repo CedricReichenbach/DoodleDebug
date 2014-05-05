@@ -1,4 +1,4 @@
-package ch.unibe.scg.doodle;
+package ch.unibe.scg.doodle.hbase;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -11,8 +11,8 @@ import javax.inject.Singleton;
 
 import org.apache.hadoop.hbase.util.Base64;
 
-import ch.unibe.scg.doodle.hbase.PersistentIndexedStorage;
 import ch.unibe.scg.doodle.plugins.ImagePlugin;
+import ch.unibe.scg.doodle.util.ApplicationUtil;
 
 @Singleton
 public class ImageManager {
@@ -23,7 +23,7 @@ public class ImageManager {
 	/** Entry 0 is used for persistence. */
 
 	protected ImageManager() {
-		this.storage = new PersistentIndexedStorage(TABLE_NAME);
+		this.storage = new PersistentIndexedStorage(ApplicationUtil.getApplicationName(), TABLE_NAME);
 	}
 
 	public int store(Image image) throws IOException {

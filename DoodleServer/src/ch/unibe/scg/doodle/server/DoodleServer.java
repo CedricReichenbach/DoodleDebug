@@ -18,8 +18,8 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 
-import ch.unibe.scg.doodle.IndexedObjectStorage;
 import ch.unibe.scg.doodle.OutputManager;
+import ch.unibe.scg.doodle.hbase.IndexedObjectStorage;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.rendering.RenderingRegistry;
 import ch.unibe.scg.doodle.server.views.DoodleDebugView;

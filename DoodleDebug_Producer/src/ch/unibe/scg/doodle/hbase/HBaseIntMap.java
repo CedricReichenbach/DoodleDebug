@@ -7,12 +7,12 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class HBaseIntMap<T> implements Map<Integer, T> {
+class HBaseIntMap<T> implements Map<Integer, T> {
 
 	HBaseStringMap<T> stringMap;
 
-	public HBaseIntMap(String tableName) {
-		this.stringMap = new HBaseStringMap<>(tableName);
+	public HBaseIntMap(String applicationName, String tableName) {
+		this.stringMap = new HBaseStringMap<>(applicationName, tableName);
 	}
 
 	@Override
