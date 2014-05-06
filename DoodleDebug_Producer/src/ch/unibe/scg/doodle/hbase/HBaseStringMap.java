@@ -48,21 +48,25 @@ class HBaseStringMap<T> implements Map<String, T> {
 	private final XStream xstream = new XStream();
 
 	public HBaseStringMap(String applicationName, String tableName) {
-		String tableFullName = applicationName + "-" + tableName;
+		this(applicationName + "-" + tableName);
+		MetaInfo.addApplicationName(applicationName);
+	}
+	
+	public HBaseStringMap(String tableFullName) {
 		Configuration hbaseConfiguration = HBaseConfiguration.create();
 		try {
 			System.out.println("Connecting to HBase...");
 			hbaseAdmin = new HBaseAdmin(hbaseConfiguration);
 			System.out.println("Connection to HBase established.");
-
+			
 			assureTableExistence(tableFullName);
 			this.table = new HTable(hbaseConfiguration, tableFullName);
 		} catch (IOException e) {
 			System.out.println("Connection to HBase failed!");
 			throw new RuntimeException(e);
 		}
-
-		extendClassLoader();
+		
+		extendClassLoader();		
 	}
 
 	private void extendClassLoader() {

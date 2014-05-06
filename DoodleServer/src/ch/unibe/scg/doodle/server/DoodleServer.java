@@ -74,11 +74,6 @@ public class DoodleServer {
 
 	public void clearOutput() {
 		OutputManager.instance().initOutput();
-
-		// XXX: Why? Can we delete this?
-		// Runnable emptyShow = new HtmlShow(new
-		// DoodleDebugScreen().toString());
-		// Display.getDefault().asyncExec(emptyShow);
 	}
 
 	public void firstRun() {
