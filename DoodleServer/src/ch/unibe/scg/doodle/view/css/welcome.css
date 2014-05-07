@@ -7,16 +7,41 @@ hr {
 	height: 30px;
 }
 
-#welcomeTitle, #tutorial, #shortTut, #info/*, #background*/ {
+#welcomeTitle, #tutorial, #shortTut, #info, #appLogSelector/*, #background*/ {
 	display: inline;
 	padding: 4px;
 	border-radius: 3px;
 	box-shadow: 1px 2px 2px rgba(0,0,0,0.5);
 }
 
+#appLogSelector {
+	color: black;
+	background-color: #eee;
+	display: inline-block;
+}
+#appLogSelector h2 {
+	margin: 0.25em 0.5em;
+	font-weight: 400;
+	font-size: 24px;
+}
+#appLogSelector a {
+	display: block;
+	text-decoration: none;
+	color: #444;
+	background-color: whitesmoke;
+	font-size: 15px;
+	padding: 0.2em;
+	text-align: left;
+	border-radius: 2px;
+}
+#appLogSelector a:hover {
+	color: black;
+	background-color: white;
+}
+
 #background {
 	/*background-color: #def;*/
-    display: inline-block;
+    display: block;
     overflow: hidden;
     padding: 30px;
 }

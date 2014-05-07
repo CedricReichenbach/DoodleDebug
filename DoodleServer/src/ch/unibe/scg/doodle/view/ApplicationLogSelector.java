@@ -5,25 +5,23 @@ import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.server.views.DoodleLocationCodes;
 
 // TODO: Integrate into eclipse view (to be able to change anytime) and update periodically
-public class ApplicationLogSelector extends HtmlDocument {
+public class ApplicationLogSelector extends DoodleDebugWelcomeScreen {
 
 	public ApplicationLogSelector() {
 		super();
-		this.body = createBody();
+		fillBody();
 	}
 
 	@SuppressWarnings("unchecked")
-	private Tag createBody() {
-		Tag body = new Tag("body");
-		Tag content = new Tag("div");
-		Tag title = new Tag("h1");
+	private void fillBody() {
+		Tag content = new Tag("div", "id=appLogSelector");
+		Tag title = new Tag("h2");
 		title.add("Select application log to read");
 		content.add(title);
 		Tag appList = new Tag("div");
 		fillAppList(appList);
 		content.add(appList);
-		body.add(content);
-		return body;
+		body.push(content);
 	}
 
 	@SuppressWarnings("unchecked")

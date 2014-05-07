@@ -1,9 +1,14 @@
+var ids = [ 'appLogSelector', 'welcomeTitle', 'shortTut', 'tutorial', 'info' ];
+
 function appearWelcome() {
-	var title = document.getElementById('welcomeTitle');
-	var e = new Effect.Grow(title);
-	setTimeout("appear('shortTut')", 500);
-	setTimeout("appear('tutorial')", 1000);
-	setTimeout("appear('info')", 1500);
+	for ( var i = 0; i < ids.length; i++) {
+		try {
+		$(ids[i]).hide();
+		} catch (e) {
+			continue;
+		}
+		setTimeout("appear('" + ids[i] + "')", 500 * i);
+	}
 }
 
 function appear(name) {
