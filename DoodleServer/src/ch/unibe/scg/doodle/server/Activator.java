@@ -5,9 +5,8 @@ import org.eclipse.ui.IStartup;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import ch.unibe.scg.doodle.OutputManager;
-import ch.unibe.scg.doodle.hbase.BusyReader;
-import ch.unibe.scg.doodle.hbase.DoodleDatabase;
+import ch.unibe.scg.doodle.server.views.HtmlShow;
+import ch.unibe.scg.doodle.view.ApplicationLogSelector;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -76,7 +75,6 @@ public class Activator extends AbstractUIPlugin implements IStartup {
 
 	@Override
 	public void earlyStartup() {
-		OutputManager.instance();
-		new BusyReader(new DoodleDatabase(), 1000);
+		new HtmlShow(new ApplicationLogSelector()).asyncExec();
 	}
 }

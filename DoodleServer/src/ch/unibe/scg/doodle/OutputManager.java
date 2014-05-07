@@ -76,7 +76,6 @@ public class OutputManager {
 	protected OutputManager() {
 	}
 
-	// TODO: Let user choose applicationName to read off and set ApplicationUtil.SetApplicationName(...)
 	public void initOutput() {
 		HtmlDocument htmlDocument = new HtmlDocument();
 		body = new Tag("body");

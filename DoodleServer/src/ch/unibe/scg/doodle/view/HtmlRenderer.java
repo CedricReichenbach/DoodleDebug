@@ -4,6 +4,7 @@ import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
+@Deprecated
 public class HtmlRenderer {
 
 	JFrame frame;
@@ -15,6 +16,10 @@ public class HtmlRenderer {
 		pane = new JEditorPane("text/html", "");
 		scrollPane = new JScrollPane(pane);
 		frame.getContentPane().add(scrollPane);
+	}
+
+	public void render(HtmlDocument htmlDocument) {
+		this.render(htmlDocument.toString());
 	}
 
 	public void render(String html) {

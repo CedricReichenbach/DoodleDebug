@@ -1,16 +1,17 @@
 package ch.unibe.scg.doodle.server.views;
 
-import ch.unibe.scg.doodle.OutputManager;
-import ch.unibe.scg.doodle.server.views.DoodleLocationCodes;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.eclipse.swt.browser.LocationEvent;
 import org.eclipse.swt.browser.LocationListener;
 
+import ch.unibe.scg.doodle.OutputManager;
+import ch.unibe.scg.doodle.hbase.BusyReader;
+import ch.unibe.scg.doodle.hbase.DoodleDatabase;
 import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 import ch.unibe.scg.doodle.server.DoodleServer;
+import ch.unibe.scg.doodle.util.ApplicationUtil;
 import ch.unibe.scg.doodle.util.SystemUtil;
 
 /**
@@ -25,17 +26,17 @@ public class DoodleLocationListener implements LocationListener {
 
 	@Override
 	public void changing(LocationEvent event) {
-		if (event.location.startsWith(DoodleLocationCodes.EXTERNAL_LINK_PREFIX))
+		String location = event.location;
+		if (location.startsWith(DoodleLocationCodes.EXTERNAL_LINK_PREFIX))
 			handleExternalLink(event);
-		else if (event.location
-				.startsWith(DoodleLocationCodes.DOODLE_DEBUG_PREFIX))
+		else if (location.startsWith(DoodleLocationCodes.DOODLE_DEBUG_PREFIX))
 			handleDoodledebugLocationEvent(event);
-		else if (event.location
-				.startsWith(DoodleLocationCodes.JAVA_FILE_LINK_PREFIX))
+		else if (location.startsWith(DoodleLocationCodes.JAVA_FILE_LINK_PREFIX))
 			handleJavaFileLocationEvent(event);
-		else if (event.location
-				.startsWith(DoodleLocationCodes.LOAD_IMAGE_PREFIX))
+		else if (location.startsWith(DoodleLocationCodes.LOAD_IMAGE_PREFIX))
 			handleLoadImageEvent(event);
+		else if (location.startsWith(DoodleLocationCodes.APP_LOG_PREFIX))
+			handleAppLogChosenEvent(event);
 	}
 
 	void handleExternalLink(LocationEvent event) {
@@ -96,6 +97,16 @@ public class DoodleLocationListener implements LocationListener {
 		String[] parts = location.split(":");
 		int id = Integer.parseInt(parts[parts.length - 1]);
 		OutputManager.instance().loadImage(id);
+	}
+
+	private void handleAppLogChosenEvent(LocationEvent event) {
+		event.doit = false;
+		
+		String appName = event.location.split(":", 2)[1];
+		ApplicationUtil.setApplicationName(appName);
+		
+		OutputManager.instance();
+		new BusyReader(new DoodleDatabase(), 1000);
 	}
 
 	@Override

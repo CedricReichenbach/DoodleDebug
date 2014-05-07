@@ -75,6 +75,8 @@ public final class IndexedObjectStorage {
 
 	public @Nullable
 	Object get(int id) {
+		// XXX: Loads classes multiple times
+		// XXX: Classes are not versioned (they might change)
 		if (this.hasClassName(id))
 			loadClasses(classesMap.get(id));
 
