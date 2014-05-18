@@ -7,7 +7,6 @@ Bundle-Activator: ch.unibe.scg.doodle.server.Activator
 Eclipse-BundleShape: dir
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- SimonPlugin;bundle-version="1.0.0",
  org.eclipse.core.resources,
  XStreamPlugin;bundle-version="1.0.0",
  org.junit,
