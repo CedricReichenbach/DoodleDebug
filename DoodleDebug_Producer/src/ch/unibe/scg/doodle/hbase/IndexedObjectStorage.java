@@ -28,8 +28,6 @@ public final class IndexedObjectStorage {
 	private static final String PERSISTENCE_TABLE_NAME = "clickables_persistence";
 	private static final int NEXT_ID_KEY = 0;
 
-	private ClassManager classManager;
-
 	public IndexedObjectStorage() {
 		this.persistenceMap = new HBaseIntMap<>(
 				ApplicationUtil.getApplicationName(), PERSISTENCE_TABLE_NAME);
@@ -43,8 +41,6 @@ public final class IndexedObjectStorage {
 				TABLE_NAME);
 		this.classesMap = new HBaseIntMap<>(
 				ApplicationUtil.getApplicationName(), CLASSNAME_TABLE_NAME);
-
-		classManager = new ClassManager();
 	}
 
 	/** @return Id of stored object. */
@@ -57,7 +53,7 @@ public final class IndexedObjectStorage {
 			Set<String> nameSet = new HashSet<String>();
 			for (Class<?> clazz : ClassUtil.getThirdPartyDependencies(o
 					.getClass())) {
-				String clazzName = classManager.store(clazz);
+				String clazzName = ClassManager.store(clazz);
 				nameSet.add(clazzName);
 			}
 			classesMap.put(nextID, nameSet);
@@ -89,7 +85,7 @@ public final class IndexedObjectStorage {
 
 	private void loadClasses(Set<String> classNames) {
 		for (String className : classNames)
-			classManager.loadToFile(className);
+			ClassManager.loadToFile(className);
 	}
 
 	public boolean hasClassName(int id) {

@@ -10,10 +10,10 @@ import ch.unibe.scg.doodle.util.FileUtil;
 
 public class ClassManager {
 
-	private final String MAP_NAME = "classbinaries";
-	HBaseStringMap<String> classMap = new HBaseStringMap<>(ApplicationUtil.getApplicationName(), MAP_NAME);
+	private static final String MAP_NAME = "classbinaries";
+	static HBaseStringMap<String> classMap = new HBaseStringMap<>(ApplicationUtil.getApplicationName(), MAP_NAME);
 
-	public String store(Class<?> clazz) {
+	public static String store(Class<?> clazz) {
 		String key = clazz.getName();
 		classMap.put(key, EncodingUtil.toBase64(ClassUtil.getBinary(clazz)));
 		return key;
@@ -24,7 +24,7 @@ public class ClassManager {
 	 * 
 	 * @param fullClassName
 	 */
-	public void loadToFile(String fullClassName) {
+	public static void loadToFile(String fullClassName) {
 		byte[] binary = EncodingUtil.bytesFromBase64((String) classMap
 				.get(fullClassName));
 		File file = new File(DoodleDebugProperties.tempDirForClasses(),

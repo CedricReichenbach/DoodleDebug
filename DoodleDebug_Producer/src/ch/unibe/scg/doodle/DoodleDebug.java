@@ -2,9 +2,9 @@ package ch.unibe.scg.doodle;
 
 import java.util.Collection;
 
-import ch.unibe.scg.doodle.hbase.MetaInfo;
 import ch.unibe.scg.doodle.plugins.AbstractPlugin;
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
+import ch.unibe.scg.doodle.rendering.RenderingRegistry;
 import ch.unibe.scg.doodle.util.ApplicationUtil;
 
 /**
@@ -24,9 +24,9 @@ public class DoodleDebug {
 	 * @param plugins
 	 */
 	public static void addRenderingPlugins(Collection<RenderingPlugin> plugins) {
-		// FIXME: Make this work again in clustered setup. Probably create
-		// PluginManager, similar to ClassManager
-		// DoodleClient.instance().addPlugins(plugins);
+		// FIXME: Providing plugin classes (instead of objects) would probably make more sense.
+		// FIXME: A Set would make more sense than a Collection
+		RenderingRegistry.addPlugins(plugins);
 	}
 
 	/**

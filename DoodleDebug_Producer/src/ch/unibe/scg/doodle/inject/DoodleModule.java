@@ -42,7 +42,6 @@ public class DoodleModule extends AbstractModule {
 				RealScratch.class).build(ScratchFactory.class));
 		install(new FactoryModuleBuilder().implement(Scratch.class,
 				SmallScratch.class).build(SmallScratchFactory.class));
-
 	}
 
 	private void addPlugins(Multibinder<RenderingPlugin> uriBinder) {
