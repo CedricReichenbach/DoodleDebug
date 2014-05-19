@@ -49,7 +49,6 @@ public class OutputManager {
 	static Injector injector;
 
 	private static Injector injectorInstance() {
-		// FIXME: Guice errors in newest Eclipse (4.3.2)
 		if (injector == null) {
 			injector = Guice.createInjector(new DoodleModule());
 		}
