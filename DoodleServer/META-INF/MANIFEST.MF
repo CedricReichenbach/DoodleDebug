@@ -10,7 +10,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.resources,
  XStreamPlugin;bundle-version="1.0.0",
  org.junit,
- GuicePlugin;bundle-version="1.0.0",
  org.eclipse.ui.editors,
  org.eclipse.jdt.ui;bundle-version="3.7.1"
 Bundle-ActivationPolicy: lazy
@@ -33,7 +32,8 @@ Bundle-ClassPath: .,
  libs/hbase/rest/jackson-jaxrs-1.8.8.jar,
  libs/hbase/rest/jackson-xc-1.8.8.jar,
  libs/hbase/rest/commons-codec-1.7.jar,
- libs/dd/DoodleDebug-Producer_with-dependencies.jar
+ libs/dd/DoodleDebug-Producer_with-dependencies.jar,
+ libs/guice-4.0-beta4.jar
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.eclipse.jdt.core,
  org.eclipse.jdt.core.compiler,

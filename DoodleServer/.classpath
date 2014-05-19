@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="lib" path="libs/guice-4.0-beta4.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/hbase/rest/commons-codec-1.7.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/hbase/rest/jackson-core-asl-1.8.8.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/hbase/rest/jackson-jaxrs-1.8.8.jar"/>
