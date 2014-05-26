@@ -20,4 +20,9 @@ public class HBaseAdminProvider {
 		}
 		return hbaseAdmin;
 	}
+
+	public static void setConfiguration(Configuration configuration) {
+		hbaseConfiguration = configuration;
+		hbaseAdmin = null; // reset it
+	}
 }
