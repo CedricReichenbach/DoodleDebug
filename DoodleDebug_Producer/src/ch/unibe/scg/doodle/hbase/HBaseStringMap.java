@@ -15,8 +15,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
 import org.apache.hadoop.hbase.TableName;
@@ -42,7 +40,7 @@ class HBaseStringMap<T> implements Map<String, T> {
 	private static final String ID_COL_TITLE = "id";
 	private static final String OBJECT_COL_TITLE = "object";
 
-	private final HBaseAdmin hbaseAdmin;
+	private static HBaseAdmin hbaseAdmin; // XXX: Why not final?
 	private HTable table;
 
 	private final XStream xstream = new XStream();
@@ -51,22 +49,19 @@ class HBaseStringMap<T> implements Map<String, T> {
 		this(applicationName + "-" + tableName);
 		MetaInfo.addApplicationName(applicationName);
 	}
-	
+
 	public HBaseStringMap(String tableFullName) {
-		Configuration hbaseConfiguration = HBaseConfiguration.create();
 		try {
-			System.out.println("Connecting to HBase...");
-			hbaseAdmin = new HBaseAdmin(hbaseConfiguration);
-			System.out.println("Connection to HBase established.");
-			
+			hbaseAdmin = HBaseAdminProvider.get();
 			assureTableExistence(tableFullName);
-			this.table = new HTable(hbaseConfiguration, tableFullName);
+			this.table = new HTable(hbaseAdmin.getConfiguration(),
+					tableFullName);
 		} catch (IOException e) {
 			System.out.println("Connection to HBase failed!");
 			throw new RuntimeException(e);
 		}
-		
-		extendClassLoader();		
+
+		extendClassLoader();
 	}
 
 	private void extendClassLoader() {
