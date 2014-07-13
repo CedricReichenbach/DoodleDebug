@@ -1,1 +1,3 @@
 - Reset: Clear log, plugins etc.
+- Big objects: Heap space error after a couple of seconds. However, further doodling after that seems possible.
+- Icons in output (e.g. class rendering) are broken
