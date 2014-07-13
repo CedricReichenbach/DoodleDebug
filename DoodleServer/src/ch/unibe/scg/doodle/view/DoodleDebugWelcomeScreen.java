@@ -3,6 +3,7 @@ package ch.unibe.scg.doodle.view;
 import java.util.List;
 
 import ch.unibe.scg.doodle.htmlgen.Tag;
+import ch.unibe.scg.doodle.server.util.DoodleFiles;
 import ch.unibe.scg.doodle.server.util.DoodleImages;
 import ch.unibe.scg.doodle.server.views.DoodleLocationCodes;
 
@@ -56,10 +57,9 @@ public class DoodleDebugWelcomeScreen extends HtmlDocument {
 
 		Tag fullTutorial = new Tag("h3", "id=tutorial", "style=display:none");
 		Tag tutLink = new Tag("a");
-		// TODO
-		// tutLink.addAttribute("href", DoodleLocationCodes.EXTERNAL_LINK_PREFIX
-		// + DoodleFiles.getResolvedFileURL("tutorials/dd-tutorial.html")
-		// .toExternalForm());
+		tutLink.addAttribute("href", DoodleLocationCodes.EXTERNAL_LINK_PREFIX
+				+ DoodleFiles.getResolvedFileURL("tutorials/dd-tutorial.html")
+						.toExternalForm());
 		tutLink.add("Complete Tutorial");
 		fullTutorial.addAttribute("style", "display:none");
 		fullTutorial.add(tutLink);
