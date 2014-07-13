@@ -80,92 +80,44 @@ public class FieldDoodlerPlugin extends AbstractPlugin {
 				+ staticPropertyCSS(pluginClass)
 				+ "."
 				+ pluginClass
-				+ " .scope p {position: relative; bottom: 0.75em; margin-right: 1px;}";
+				+ " .scope p {position: relative; bottom: 0.75em; margin-right: 1px;}"
+				+ " .scope:before {position:absolute; top:50%; left:50%;"
+				+ "margin:-0.5em 0 0 -0.5em; font-size: 1em; line-height: 1em}";
 	}
-	
-	// TODO: Use non-Eclipse icons
 
 	private static String publicScopeCSS(String pluginClass) {
-		return "."
-				+ pluginClass
-				+ " .scope.field.public {background-image: url('"
-				// +
-				// EclipseIconUtil.getIcon(EclipseIconUtil.PUBLIC_FIELD).toURI()
-				+ "')}" + "."
-				+ pluginClass
-				+ " .scope.method.public {background-image: url('"
-				// + EclipseIconUtil.getIcon(EclipseIconUtil.PUBLIC_METHOD)
-				// .toURI()
-				+ "')}" + "." + pluginClass
-				+ " .scope.class.public {background-image: url('"
-				// +
-				// EclipseIconUtil.getIcon(EclipseIconUtil.PUBLIC_CLASS).toURI()
-				+ "')}";
+		return ".scope.public:before {color: green} ." + pluginClass
+				+ " .scope.field.public:before {content:'○'} ." + pluginClass
+				+ " .scope.method.public:before {content:'●'} ." + pluginClass
+				+ " .scope.class.public:before {content:''}";
 	}
 
 	private static String protectedScopeCSS(String pluginClass) {
-		return "."
-				+ pluginClass
-				+ " .scope.field.protected {background-image:url('"
-				// + EclipseIconUtil.getIcon(EclipseIconUtil.PROTECTED_FIELD)
-				// .toURI()
-				+ "')}" + "."
-				+ pluginClass
-				+ " .scope.method.protected {background-image:url('"
-				// + EclipseIconUtil.getIcon(EclipseIconUtil.PROTECTED_METHOD)
-				// .toURI()
-				+ "')}" + "." + pluginClass
-				+ " .scope.class.protected {background-image:url('"
-				// + EclipseIconUtil.getIcon(EclipseIconUtil.PROTECTED_CLASS)
-				// .toURI()
-				+ "')}";
+		return ".scope.protected:before {color:gold} ." + pluginClass
+				+ " .scope.field.protected:before {content:'◇'}." + pluginClass
+				+ " .scope.method.protected:before {content:'◆'}."
+				+ pluginClass + " .scope.class.protected:before {content:''}";
 	}
 
 	private static String privateScopeCSS(String pluginClass) {
-		return "."
-				+ pluginClass
-				+ " .scope.field.private {background-image:url('"
-				// + EclipseIconUtil.getIcon(EclipseIconUtil.PRIVATE_FIELD)
-				// .toURI()
-				+ "')}" + "."
-				+ pluginClass
-				+ " .scope.method.private {background-image:url('"
-				// + EclipseIconUtil.getIcon(EclipseIconUtil.PRIVATE_METHOD)
-				// .toURI()
-				+ "')}" + "." + pluginClass
-				+ " .scope.class.private {background-image:url('"
-				// + EclipseIconUtil.getIcon(EclipseIconUtil.PRIVATE_CLASS)
-				// .toURI()
-				+ "')}";
+		return ".scope.private:before {color:#e04} ." + pluginClass
+				+ " .scope.field.private:before {content:'□'} ." + pluginClass
+				+ " .scope.method.private:before {content:'◼'} ." + pluginClass
+				+ " .scope.class.private:before {content:''}";
 	}
 
 	private static String defaultScopeCSS(String pluginClass) {
-		return "."
-				+ pluginClass
-				+ " .scope.field.default {background-image:url('"
-				// + EclipseIconUtil.getIcon(EclipseIconUtil.DEFAULT_FIELD)
-				// .toURI()
-				+ "')}" + "."
-				+ pluginClass
-				+ " .scope.method.default {background-image:url('"
-				// + EclipseIconUtil.getIcon(EclipseIconUtil.DEFAULT_METHOD)
-				// .toURI()
-				+ "')}" + "." + pluginClass
-				+ " .scope.class.default {background-image:url('"
-				// + EclipseIconUtil.getIcon(EclipseIconUtil.DEFAULT_CLASS)
-				// .toURI()
-				+ "')}";
+		return ".scope.default:before {color:#04e} ." + pluginClass
+				+ " .scope.field.default:before {content:'△'} ." + pluginClass
+				+ " .scope.method.default:before {content:'▲'} ." + pluginClass
+				+ " .scope.class.default:before {content:''}";
 	}
 
 	private static String staticPropertyCSS(String pluginClass) {
-		return "."
-				+ pluginClass
-				+ " .scope .static {background-image:url('"
-				// + EclipseIconUtil
-				// .getIcon(EclipseIconUtil.STATIC_MEMBER_OVERLAY).toURI()
-				+ "'); background-repeat: no-repeat; background-position: top right;"
-				+ "height: 100%; width: 6px; position: relative; left: 70%;}";
-		// XXX: width is a hack for black line in static icon
+		return "." + pluginClass
+				+ " .scope .static:before {content: 'S'; color: gray;"
+				+ "font-size: 0.6em; position: absolute; right: 2px;"
+				+ "text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2); top: 0;}";
 	}
 
 	private String smallCSS() {
