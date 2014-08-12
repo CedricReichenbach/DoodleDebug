@@ -1,17 +1,16 @@
 package ch.unibe.scg.doodle.database;
 
-import ch.unibe.scg.doodle.database.hbase.HBaseIntMap;
 
 class PersistentIndexedStorage {
 
-	private final HBaseIntMap<Object> hBaseMap;
+	private final DatabaseIntMap<Object> hBaseMap;
 	/** Entry 0 is used for persistence. */
 	private static final int NEXT_ID_KEY = 0;
 
 	private int nextId = 1;
 
 	public PersistentIndexedStorage(String applicationName, String tableName) {
-		this.hBaseMap = new HBaseIntMap<>(applicationName, tableName);
+		this.hBaseMap = new DatabaseIntMap<>(applicationName, tableName);
 
 		if (hBaseMap.containsKey(NEXT_ID_KEY))
 			nextId = (int) hBaseMap.get(NEXT_ID_KEY);

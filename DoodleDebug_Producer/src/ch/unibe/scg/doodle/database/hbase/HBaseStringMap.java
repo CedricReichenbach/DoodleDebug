@@ -7,12 +7,9 @@ import java.io.InterruptedIOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.AbstractMap;
-import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import org.apache.hadoop.hbase.HColumnDescriptor;
@@ -30,13 +27,14 @@ import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.util.Bytes;
 
 import ch.unibe.scg.doodle.api.Doodleable;
+import ch.unibe.scg.doodle.database.DoodleDatabaseMap;
 import ch.unibe.scg.doodle.database.MetaInfo;
 import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.core.util.CompositeClassLoader;
 
-public class HBaseStringMap<T> implements Map<String, T> {
+public class HBaseStringMap<T> extends DoodleDatabaseMap<T> {
 
 	private static final String ID_COL_TITLE = "id";
 	private static final String OBJECT_COL_TITLE = "object";
@@ -52,6 +50,7 @@ public class HBaseStringMap<T> implements Map<String, T> {
 	}
 
 	public HBaseStringMap(String tableFullName) {
+		super(tableFullName);
 		try {
 			hbaseAdmin = HBaseAdminProvider.get();
 			assureTableExistence(tableFullName);
@@ -62,6 +61,7 @@ public class HBaseStringMap<T> implements Map<String, T> {
 			throw new RuntimeException(e);
 		}
 
+		// XXX: Why is this here? This class shouldn't know about xstream stuff.
 		extendClassLoader();
 	}
 
@@ -109,30 +109,6 @@ public class HBaseStringMap<T> implements Map<String, T> {
 	}
 
 	@Override
-	public boolean containsKey(Object key) {
-		return this.get(key) != null;
-	}
-
-	@Override
-	public boolean containsValue(Object value) {
-		return values().contains(value);
-	}
-
-	@Override
-	public Set<Entry<String, T>> entrySet() {
-		HashSet<Entry<String, T>> set = new HashSet<>();
-
-		for (String key : keySet()) {
-			T value = get(key);
-			SimpleEntry<String, T> entry = new AbstractMap.SimpleEntry<>(key,
-					value);
-			set.add(entry);
-		}
-
-		return set;
-	}
-
-	@Override
 	public T get(Object key) {
 		if (!(key instanceof String)) {
 			System.err.println("WARNING: HBaseMap key needs to be a String");
@@ -156,11 +132,6 @@ public class HBaseStringMap<T> implements Map<String, T> {
 			e.printStackTrace();
 			return null;
 		}
-	}
-
-	@Override
-	public boolean isEmpty() {
-		return this.size() == 0;
 	}
 
 	@Override
@@ -193,12 +164,6 @@ public class HBaseStringMap<T> implements Map<String, T> {
 		}
 
 		return previous;
-	}
-
-	@Override
-	public void putAll(Map<? extends String, ? extends T> otherMap) {
-		for (String key : otherMap.keySet())
-			this.put(key, otherMap.get(key));
 	}
 
 	@Override

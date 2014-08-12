@@ -3,7 +3,6 @@ package ch.unibe.scg.doodle.database;
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.unibe.scg.doodle.database.hbase.HBaseIntMap;
 import ch.unibe.scg.doodle.util.ApplicationUtil;
 import ch.unibe.scg.doodle.util.Pair;
 
@@ -21,11 +20,11 @@ public class DoodleDatabase {
 	private static final String PERSISTENCE_TABLE_NAME = "doodles_persistence";
 	private static final int NEXT_ID_KEY = 0;
 
-	HBaseIntMap<String> htmlMap = new HBaseIntMap<>(
+	DatabaseIntMap<String> htmlMap = new DatabaseIntMap<>(
 			ApplicationUtil.getApplicationName(), HTML_TABLE_NAME);
-	HBaseIntMap<String> cssMap = new HBaseIntMap<>(
+	DatabaseIntMap<String> cssMap = new DatabaseIntMap<>(
 			ApplicationUtil.getApplicationName(), CSS_TABLE_NAME);
-	HBaseIntMap<Integer> persistenceMap = new HBaseIntMap<>(
+	DatabaseIntMap<Integer> persistenceMap = new DatabaseIntMap<>(
 			ApplicationUtil.getApplicationName(), PERSISTENCE_TABLE_NAME);
 
 	// XXX: Problem: Uncoordinated access to DB from multiple applications

@@ -1,4 +1,4 @@
-package ch.unibe.scg.doodle.database.hbase;
+package ch.unibe.scg.doodle.database;
 
 import java.util.AbstractMap;
 import java.util.AbstractMap.SimpleEntry;
@@ -7,12 +7,12 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class HBaseIntMap<T> implements Map<Integer, T> {
+public class DatabaseIntMap<T> implements Map<Integer, T> {
 
-	HBaseStringMap<T> stringMap;
+	DoodleDatabaseMap<T> stringMap;
 
-	public HBaseIntMap(String applicationName, String tableName) {
-		this.stringMap = new HBaseStringMap<>(applicationName, tableName);
+	public DatabaseIntMap(String applicationName, String tableName) {
+		this.stringMap = DoodleDatabaseMapFactory.get(applicationName, tableName);
 	}
 
 	@Override
@@ -23,7 +23,7 @@ public class HBaseIntMap<T> implements Map<Integer, T> {
 	@Override
 	public boolean containsKey(Object key) {
 		if (!(key instanceof Integer)) {
-			System.err.println("WARNING: HBaseMap key needs to be an integer");
+			System.err.println("WARNING: HBaseIntMap key needs to be an integer");
 			return false;
 		}
 
@@ -52,7 +52,7 @@ public class HBaseIntMap<T> implements Map<Integer, T> {
 	@Override
 	public T get(Object key) {
 		if (!(key instanceof Integer)) {
-			System.err.println("WARNING: HBaseMap key needs to be an integer");
+			System.err.println("WARNING: HBaseIntMap key needs to be an integer");
 			return null;
 		}
 

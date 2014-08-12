@@ -2,7 +2,6 @@ package ch.unibe.scg.doodle.database;
 
 import java.io.File;
 
-import ch.unibe.scg.doodle.database.hbase.HBaseStringMap;
 import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 import ch.unibe.scg.doodle.typeTransport.ClassUtil;
 import ch.unibe.scg.doodle.util.ApplicationUtil;
@@ -12,7 +11,8 @@ import ch.unibe.scg.doodle.util.FileUtil;
 public class ClassManager {
 
 	private static final String MAP_NAME = "classbinaries";
-	static HBaseStringMap<String> classMap = new HBaseStringMap<>(ApplicationUtil.getApplicationName(), MAP_NAME);
+	static DoodleDatabaseMap<String> classMap = DoodleDatabaseMapFactory.get(
+			ApplicationUtil.getApplicationName(), MAP_NAME);
 
 	public static String store(Class<?> clazz) {
 		String key = clazz.getName();

@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import ch.unibe.scg.doodle.DoodleDebugConfig;
-import ch.unibe.scg.doodle.database.hbase.HBaseIntMap;
 import ch.unibe.scg.doodle.helperClasses.Nullable;
 import ch.unibe.scg.doodle.typeTransport.ClassUtil;
 import ch.unibe.scg.doodle.util.ApplicationUtil;
@@ -21,16 +20,16 @@ public final class IndexedObjectStorage {
 	private final Object[] ringBuffer;
 	private int nextID; // TODO: Use long to prevent overflow
 
-	private HBaseIntMap<Object> hBaseMap;
-	private HBaseIntMap<Set<String>> classesMap;
-	private HBaseIntMap<Integer> persistenceMap;
+	private DatabaseIntMap<Object> hBaseMap;
+	private DatabaseIntMap<Set<String>> classesMap;
+	private DatabaseIntMap<Integer> persistenceMap;
 	private static final String TABLE_NAME = "clickables";
 	private static final String CLASSNAME_TABLE_NAME = "clickables_classnames";
 	private static final String PERSISTENCE_TABLE_NAME = "clickables_persistence";
 	private static final int NEXT_ID_KEY = 0;
 
 	public IndexedObjectStorage() {
-		this.persistenceMap = new HBaseIntMap<>(
+		this.persistenceMap = new DatabaseIntMap<>(
 				ApplicationUtil.getApplicationName(), PERSISTENCE_TABLE_NAME);
 
 		this.nextID = persistenceMap.containsKey(NEXT_ID_KEY) ? persistenceMap
@@ -38,9 +37,9 @@ public final class IndexedObjectStorage {
 		this.ringBuffer = new Object[CAPACITY];
 
 		// XXX: Should we really store clickables?
-		this.hBaseMap = new HBaseIntMap<>(ApplicationUtil.getApplicationName(),
+		this.hBaseMap = new DatabaseIntMap<>(ApplicationUtil.getApplicationName(),
 				TABLE_NAME);
-		this.classesMap = new HBaseIntMap<>(
+		this.classesMap = new DatabaseIntMap<>(
 				ApplicationUtil.getApplicationName(), CLASSNAME_TABLE_NAME);
 	}
 

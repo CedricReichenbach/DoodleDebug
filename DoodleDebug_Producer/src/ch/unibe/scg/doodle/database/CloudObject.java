@@ -1,7 +1,5 @@
 package ch.unibe.scg.doodle.database;
 
-import ch.unibe.scg.doodle.database.hbase.HBaseStringMap;
-
 /**
  * Abstraction layer for objects that should always be in sync with HBase
  * (cloud).
@@ -14,7 +12,7 @@ public class CloudObject<T> {
 	private static final String TABLE_NAME = "cloud-objects";
 	private final String id;
 	private T object;
-	private final HBaseStringMap<T> map;
+	private final DoodleDatabaseMap<T> map;
 
 	/**
 	 * 
@@ -26,7 +24,7 @@ public class CloudObject<T> {
 	public CloudObject(T object, String id) {
 		this.object = object;
 		this.id = id;
-		this.map = new HBaseStringMap<T>(TABLE_NAME);
+		this.map = DoodleDatabaseMapFactory.get(TABLE_NAME);
 		this.save();
 	}
 
@@ -34,7 +32,7 @@ public class CloudObject<T> {
 		object = map.get(id);
 		return object;
 	}
-	
+
 	public void save() {
 		map.put(id, object);
 	}
