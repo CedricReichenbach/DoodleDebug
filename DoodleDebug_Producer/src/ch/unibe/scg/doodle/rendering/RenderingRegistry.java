@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import ch.unibe.scg.doodle.api.FieldDoodler;
-import ch.unibe.scg.doodle.hbase.ClassManager;
-import ch.unibe.scg.doodle.hbase.CloudObject;
+import ch.unibe.scg.doodle.database.ClassManager;
+import ch.unibe.scg.doodle.database.CloudObject;
 import ch.unibe.scg.doodle.plugins.ArrayPlugin;
 import ch.unibe.scg.doodle.plugins.FieldDoodlerPlugin;
 import ch.unibe.scg.doodle.plugins.PrimitivesPlugin;

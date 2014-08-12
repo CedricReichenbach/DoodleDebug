@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import org.apache.hadoop.conf.Configuration;
 
-import ch.unibe.scg.doodle.hbase.HBaseAdminProvider;
+import ch.unibe.scg.doodle.database.hbase.HBaseAdminProvider;
 import ch.unibe.scg.doodle.plugins.AbstractPlugin;
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
 import ch.unibe.scg.doodle.rendering.RenderingRegistry;

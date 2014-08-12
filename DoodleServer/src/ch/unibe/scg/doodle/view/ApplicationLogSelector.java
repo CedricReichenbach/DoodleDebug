@@ -1,6 +1,6 @@
 package ch.unibe.scg.doodle.view;
 
-import ch.unibe.scg.doodle.hbase.MetaInfo;
+import ch.unibe.scg.doodle.database.MetaInfo;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.server.views.DoodleLocationCodes;
 

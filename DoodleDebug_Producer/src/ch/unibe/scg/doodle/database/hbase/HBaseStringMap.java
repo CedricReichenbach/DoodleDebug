@@ -1,4 +1,4 @@
-package ch.unibe.scg.doodle.hbase;
+package ch.unibe.scg.doodle.database.hbase;
 
 import static org.apache.hadoop.hbase.util.Bytes.toBytes;
 
@@ -30,12 +30,13 @@ import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.util.Bytes;
 
 import ch.unibe.scg.doodle.api.Doodleable;
+import ch.unibe.scg.doodle.database.MetaInfo;
 import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.core.util.CompositeClassLoader;
 
-class HBaseStringMap<T> implements Map<String, T> {
+public class HBaseStringMap<T> implements Map<String, T> {
 
 	private static final String ID_COL_TITLE = "id";
 	private static final String OBJECT_COL_TITLE = "object";

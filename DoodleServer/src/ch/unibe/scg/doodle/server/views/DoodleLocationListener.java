@@ -7,8 +7,8 @@ import org.eclipse.swt.browser.LocationEvent;
 import org.eclipse.swt.browser.LocationListener;
 
 import ch.unibe.scg.doodle.OutputManager;
+import ch.unibe.scg.doodle.database.DoodleDatabase;
 import ch.unibe.scg.doodle.hbase.BusyReader;
-import ch.unibe.scg.doodle.hbase.DoodleDatabase;
 import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 import ch.unibe.scg.doodle.server.DoodleServer;
 import ch.unibe.scg.doodle.util.ApplicationUtil;

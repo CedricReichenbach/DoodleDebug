@@ -1,4 +1,6 @@
-package ch.unibe.scg.doodle.hbase;
+package ch.unibe.scg.doodle.database;
+
+import ch.unibe.scg.doodle.database.hbase.HBaseStringMap;
 
 /**
  * Abstraction layer for objects that should always be in sync with HBase

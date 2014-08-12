@@ -1,4 +1,4 @@
-package ch.unibe.scg.doodle.hbase;
+package ch.unibe.scg.doodle.database.hbase;
 
 import java.io.IOException;
 

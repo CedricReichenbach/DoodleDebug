@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import ch.unibe.scg.doodle.Doodler;
+import ch.unibe.scg.doodle.database.DoodleDatabase;
 import ch.unibe.scg.doodle.server.DoodleServer;
 import ch.unibe.scg.doodle.util.OutputUtil;
 import ch.unibe.scg.doodle.util.Pair;

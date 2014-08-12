@@ -7,7 +7,7 @@ import org.eclipse.swt.widgets.Display;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-import ch.unibe.scg.doodle.hbase.ImageManager;
+import ch.unibe.scg.doodle.database.ImageManager;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.inject.DoodleModule;
 import ch.unibe.scg.doodle.properties.DoodleDebugProperties;

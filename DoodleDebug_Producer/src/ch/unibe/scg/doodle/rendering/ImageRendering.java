@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import javax.inject.Inject;
 
-import ch.unibe.scg.doodle.hbase.ImageManager;
+import ch.unibe.scg.doodle.database.ImageManager;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 
 public class ImageRendering implements Rendering<Image> {

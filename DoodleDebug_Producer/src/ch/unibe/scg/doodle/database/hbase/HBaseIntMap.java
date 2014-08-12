@@ -1,4 +1,4 @@
-package ch.unibe.scg.doodle.hbase;
+package ch.unibe.scg.doodle.database.hbase;
 
 import java.util.AbstractMap;
 import java.util.AbstractMap.SimpleEntry;
@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-class HBaseIntMap<T> implements Map<Integer, T> {
+public class HBaseIntMap<T> implements Map<Integer, T> {
 
 	HBaseStringMap<T> stringMap;
 

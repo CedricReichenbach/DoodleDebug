@@ -1,4 +1,6 @@
-package ch.unibe.scg.doodle.hbase;
+package ch.unibe.scg.doodle.database;
+
+import ch.unibe.scg.doodle.database.hbase.HBaseIntMap;
 
 class PersistentIndexedStorage {
 

@@ -1,9 +1,10 @@
-package ch.unibe.scg.doodle.hbase;
+package ch.unibe.scg.doodle.database;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import ch.unibe.scg.doodle.DoodleDebugConfig;
+import ch.unibe.scg.doodle.database.hbase.HBaseIntMap;
 import ch.unibe.scg.doodle.helperClasses.Nullable;
 import ch.unibe.scg.doodle.typeTransport.ClassUtil;
 import ch.unibe.scg.doodle.util.ApplicationUtil;

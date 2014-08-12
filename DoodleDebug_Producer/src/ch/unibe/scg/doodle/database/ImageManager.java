@@ -1,4 +1,4 @@
-package ch.unibe.scg.doodle.hbase;
+package ch.unibe.scg.doodle.database;
 
 import java.awt.Graphics;
 import java.awt.Image;

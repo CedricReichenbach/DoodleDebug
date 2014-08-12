@@ -1,8 +1,9 @@
-package ch.unibe.scg.doodle.hbase;
+package ch.unibe.scg.doodle.database;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.unibe.scg.doodle.database.hbase.HBaseIntMap;
 import ch.unibe.scg.doodle.util.ApplicationUtil;
 import ch.unibe.scg.doodle.util.Pair;
 

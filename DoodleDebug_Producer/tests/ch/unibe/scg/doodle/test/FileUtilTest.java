@@ -1,12 +1,13 @@
 package ch.unibe.scg.doodle.test;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 import java.net.MalformedURLException;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
 import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 import ch.unibe.scg.doodle.util.FileUtil;
 

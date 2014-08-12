@@ -1,4 +1,4 @@
-package ch.unibe.scg.doodle.hbase;
+package ch.unibe.scg.doodle.database;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -10,7 +10,7 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
-import ch.unibe.scg.doodle.hbase.HBaseIntMap;
+import ch.unibe.scg.doodle.database.hbase.HBaseIntMap;
 import ch.unibe.scg.doodle.util.ApplicationUtil;
 
 public class HBaseMapTest {

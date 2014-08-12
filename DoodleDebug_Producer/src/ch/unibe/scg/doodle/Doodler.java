@@ -2,8 +2,8 @@ package ch.unibe.scg.doodle;
 
 import javax.inject.Inject;
 
-import ch.unibe.scg.doodle.hbase.DoodleDatabase;
-import ch.unibe.scg.doodle.hbase.IndexedObjectStorage;
+import ch.unibe.scg.doodle.database.DoodleDatabase;
+import ch.unibe.scg.doodle.database.IndexedObjectStorage;
 import ch.unibe.scg.doodle.helperClasses.CannotRenderMessage;
 import ch.unibe.scg.doodle.helperClasses.NullObject;
 import ch.unibe.scg.doodle.htmlgen.Attribute;

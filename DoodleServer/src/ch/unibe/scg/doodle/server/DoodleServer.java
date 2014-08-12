@@ -19,7 +19,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 
 import ch.unibe.scg.doodle.OutputManager;
-import ch.unibe.scg.doodle.hbase.IndexedObjectStorage;
+import ch.unibe.scg.doodle.database.IndexedObjectStorage;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.rendering.RenderingRegistry;
 import ch.unibe.scg.doodle.server.views.DoodleDebugView;

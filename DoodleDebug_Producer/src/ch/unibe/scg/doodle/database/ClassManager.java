@@ -1,7 +1,8 @@
-package ch.unibe.scg.doodle.hbase;
+package ch.unibe.scg.doodle.database;
 
 import java.io.File;
 
+import ch.unibe.scg.doodle.database.hbase.HBaseStringMap;
 import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 import ch.unibe.scg.doodle.typeTransport.ClassUtil;
 import ch.unibe.scg.doodle.util.ApplicationUtil;

@@ -1,7 +1,9 @@
-package ch.unibe.scg.doodle.hbase;
+package ch.unibe.scg.doodle.database;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import ch.unibe.scg.doodle.database.hbase.HBaseStringMap;
 
 public class MetaInfo {
 	private static String TABLE_FULL_NAME = "meta_info";
@@ -9,7 +11,8 @@ public class MetaInfo {
 	private static HBaseStringMap<Set<String>> metaInfo = new HBaseStringMap<Set<String>>(
 			TABLE_FULL_NAME);
 
-	static void addApplicationName(String applicationName) {
+	// XXX: had to make public instead of package scope due to chipping of hbase part
+	public static void addApplicationName(String applicationName) {
 		Set<String> appNames = getAllApplicationNames();
 		if (appNames.contains(applicationName))
 			return;

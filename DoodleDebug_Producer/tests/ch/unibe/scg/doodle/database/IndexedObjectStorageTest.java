@@ -1,11 +1,9 @@
-package ch.unibe.scg.doodle.hbase;
+package ch.unibe.scg.doodle.database;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Assert;
 import org.junit.Test;
-
-import ch.unibe.scg.doodle.hbase.IndexedObjectStorage;
 
 public class IndexedObjectStorageTest {
 	// XXX: This test may not be valid anymore (with HBase behind ringbuffer)
