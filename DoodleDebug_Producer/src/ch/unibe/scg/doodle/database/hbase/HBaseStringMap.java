@@ -126,7 +126,9 @@ public class HBaseStringMap<T> extends DoodleDatabaseMap<T> {
 			byte[] valueBytes = result.getValue(toBytes(OBJECT_COL_TITLE),
 					toBytes(OBJECT_COL_TITLE));
 			String valueXML = Bytes.toString(valueBytes);
-			return (T) xstream.fromXML(valueXML); // XXX: Is there a better way?
+			@SuppressWarnings("unchecked")
+			T t = (T) xstream.fromXML(valueXML); // XXX: Is there a better way?
+			return t;
 		} catch (IOException e) {
 			System.out.println("Failed to load object from HBase. Key: " + key);
 			e.printStackTrace();
@@ -199,6 +201,7 @@ public class HBaseStringMap<T> extends DoodleDatabaseMap<T> {
 		for (Result result : results) {
 			String valueXML = Bytes.toString(result.getValue(
 					toBytes(OBJECT_COL_TITLE), toBytes(OBJECT_COL_TITLE)));
+			@SuppressWarnings("unchecked")
 			T value = (T) xstream.fromXML(valueXML); // XXX: Better solution?
 			values.add(value);
 		}

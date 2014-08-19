@@ -6,9 +6,12 @@ import ch.unibe.scg.doodle.database.hbase.HBaseStringMap;
 
 public class DoodleDatabaseMapFactory {
 
-	// FIXME: Generics jungle
+	@SuppressWarnings("rawtypes") // eclipse/compiler is not smart enough
 	private static Class<? extends DoodleDatabaseMap> mapClass = HBaseStringMap.class;
+	
+	Class<?> x = DoodleDatabaseMap.class;
 
+	@SuppressWarnings("rawtypes")
 	public static void setClass(Class<? extends DoodleDatabaseMap> newMapClass) {
 		mapClass = newMapClass;
 	}
