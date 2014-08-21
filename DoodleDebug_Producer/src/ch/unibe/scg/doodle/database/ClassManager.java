@@ -11,7 +11,7 @@ import ch.unibe.scg.doodle.util.FileUtil;
 public class ClassManager {
 
 	private static final String MAP_NAME = "classbinaries";
-	static DoodleDatabaseMap<String> classMap = DoodleDatabaseMapFactory.get(
+	static DoodleDatabaseMap<String> classMap = DoodleDatabaseMapProvider.get(
 			ApplicationUtil.getApplicationName(), MAP_NAME);
 
 	public static String store(Class<?> clazz) {

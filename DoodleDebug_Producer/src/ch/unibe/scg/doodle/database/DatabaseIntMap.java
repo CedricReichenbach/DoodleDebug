@@ -12,7 +12,7 @@ public class DatabaseIntMap<T> implements Map<Integer, T> {
 	DoodleDatabaseMap<T> stringMap;
 
 	public DatabaseIntMap(String applicationName, String tableName) {
-		this.stringMap = DoodleDatabaseMapFactory.get(applicationName, tableName);
+		this.stringMap = DoodleDatabaseMapProvider.get(applicationName, tableName);
 	}
 
 	@Override

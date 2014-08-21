@@ -11,9 +11,12 @@ import java.util.Set;
  * crucial that <code>mapName</code> is used for grouping data, i.e. several
  * instances of this class will be created with different mapNames (similar to
  * database tables).
+ * <br>
+ * Objects of this class are not guaranteed to persist over any time span. Thus,
+ * changes should be passed to underlying database on every action. Caching may lead to inconsistency.
  * 
  * @author Cedric Reichenbach
- *
+ * 
  * @param <T>
  */
 public abstract class DoodleDatabaseMap<T> implements Map<String, T> {

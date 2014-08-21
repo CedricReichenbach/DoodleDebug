@@ -24,7 +24,7 @@ public class CloudObject<T> {
 	public CloudObject(T object, String id) {
 		this.object = object;
 		this.id = id;
-		this.map = DoodleDatabaseMapFactory.get(TABLE_NAME);
+		this.map = DoodleDatabaseMapProvider.get(TABLE_NAME);
 		this.save();
 	}
 

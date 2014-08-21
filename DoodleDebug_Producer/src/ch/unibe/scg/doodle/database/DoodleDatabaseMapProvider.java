@@ -4,11 +4,12 @@ import java.lang.reflect.InvocationTargetException;
 
 import ch.unibe.scg.doodle.database.hbase.HBaseStringMap;
 
-public class DoodleDatabaseMapFactory {
+public class DoodleDatabaseMapProvider {
 
-	@SuppressWarnings("rawtypes") // eclipse/compiler is not smart enough
+	@SuppressWarnings("rawtypes")
+	// eclipse/compiler is not smart enough
 	private static Class<? extends DoodleDatabaseMap> mapClass = HBaseStringMap.class;
-	
+
 	Class<?> x = DoodleDatabaseMap.class;
 
 	@SuppressWarnings("rawtypes")
