@@ -1,10 +1,13 @@
 package ch.unibe.scg.doodle.server;
 
+import javax.activation.FileDataSource;
+
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.IStartup;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import ch.unibe.scg.doodle.DoodleDebug;
 import ch.unibe.scg.doodle.server.views.HtmlShow;
 import ch.unibe.scg.doodle.view.ApplicationLogSelector;
 

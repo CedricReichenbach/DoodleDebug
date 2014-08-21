@@ -4,6 +4,8 @@ import java.util.Collection;
 
 import org.apache.hadoop.conf.Configuration;
 
+import ch.unibe.scg.doodle.database.DoodleDatabaseMap;
+import ch.unibe.scg.doodle.database.DoodleDatabaseMapProvider;
 import ch.unibe.scg.doodle.database.hbase.HBaseAdminProvider;
 import ch.unibe.scg.doodle.plugins.AbstractPlugin;
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
@@ -11,8 +13,8 @@ import ch.unibe.scg.doodle.rendering.RenderingRegistry;
 import ch.unibe.scg.doodle.util.ApplicationUtil;
 
 /**
- * This Class contains methods for controlling the output of DoodleDebug. It's
- * intended for users only.
+ * This Class contains methods for controlling behavior and output of
+ * DoodleDebug. It's intended for users only.
  * 
  * @author Cedric Reichenbach
  * 
@@ -44,6 +46,22 @@ public class DoodleDebug {
 	 */
 	public static void setApplicationName(String applicationName) {
 		ApplicationUtil.setApplicationName(applicationName);
+	}
+
+	/**
+	 * Registers a custom map for connecting doodledebug to any kind of
+	 * database. If not called, DoodleDebug will default to its built-in HBase
+	 * connection. To just configure the HBase connection, see
+	 * <code>{@link #setHBaseConfiguration(Configuration)}</code>. <br>
+	 * <br>
+	 * This method should be called before doodling any objects to ensure
+	 * consistency.
+	 * 
+	 * @param databaseMap
+	 */
+	public static void setDatabaseMap(
+			@SuppressWarnings("rawtypes") Class<? extends DoodleDatabaseMap> databaseMap) {
+		DoodleDatabaseMapProvider.setClass(databaseMap);
 	}
 
 	/**
