@@ -38,15 +38,15 @@ body {
 	overflow-y: scroll;
 }
 #wrapper {
-    background-color: #def;
-	background-image: url("../img/tile_hex.png");
+    background-color: white;
+	/*background-image: url("../img/tile_hex.png");*/
 	top: 0;
-	max-width: 970px;
+	max-width: 920px;
 	margin: 0 auto;
-	padding: 15px;
+	padding: 50px;
 	border-width: 0 1px;
 	border-style: solid;
-	border-color: #7ad;
+	border-color: #ccc;
 	box-shadow: 0 2px 8px 2px rgba(0, 0, 0, 0.5);
 }
 .title a,
@@ -108,10 +108,8 @@ a:hover{
 .codeBlock,
 .key {
 	font-family: 'andale mono', 'lucida console', monospace, Courier New, "Roboto", sans-serif;
-	background-color: white;
-	color: #448;
-	border: solid rgba(0, 0, 0, 0.2);
-	border-width: 1px 0 0 1px;
+	background-color: #f4f4f4;
+	color: #333;
 }
 .code {
 	padding: 1px 2px;
@@ -121,7 +119,6 @@ a:hover{
 .codeBlock, .tip, .example, .download, .exercise, .result {
 	padding: .5em;
 	margin: .5em 0;
-	max-width: 610px;
 	overflow: auto;
 }
 .key {
@@ -133,9 +130,11 @@ a:hover{
 	box-shadow: 0 1px;
 	font-size: 0.95em;
 }
-.tip, .example, .download, .exercise, .result {
-	border-radius: 4px;
-	border: 1px solid;
+.codeBlock, .tip, .example, .download, .exercise, .result, .image {
+	border-left: 4px solid;
+}
+.codeBlock {
+	border-color: #ccc;
 }
 .tip {
 	background-color: #FFFFC4;
@@ -148,7 +147,7 @@ a:hover{
 .example {
 	background-color: #cfc;
 	border-color: #7e2;
-	float: left;
+	display: inline-block;
 }
 .example-wrapper {
 	overflow: hidden;
@@ -175,12 +174,13 @@ ul, ol {
 }
 .image {
 	margin: 0.5em 0;
-	background-color: #cde;
-	padding: 4px;
+	background-color: #def;
+	border-color: #bdf;
+	padding: 0.5em;
 	font-style: italic;
 }
 .image img {
-	max-width: 962px; /* 970 - 2*4 */
+	max-width: 100%;
 }
 #footer {
 	padding-top: 2em;
@@ -215,6 +215,11 @@ ul, ol {
 	float: left;
 	margin: 1em;
 	border: 1px dashed #8af;
+}
+.tutorial-main .example-file {
+	float: none;
+	display: inline-block;
+	margin: 0 0.25em;
 }
 .example-file pre, .example-file xmp {
 	margin: 0;

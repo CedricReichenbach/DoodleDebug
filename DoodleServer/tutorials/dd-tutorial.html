@@ -15,15 +15,16 @@
 <code class="key"></code>
 <div class="tip"></div>
  -->
-<body>
+<body class="tutorial-main">
 	<div id="wrapper">
 		<h1 id="mainTitle">DoodleDebug tutorial</h1>
 		<div id="contents-wrapper">
-			<img src="img/DoodleDebug-logo.png" class="logo"/>
+			<img src="img/DoodleDebug-logo.png" class="logo" />
 			<div id="contents">
 				<b>Contents:</b><br>
 			</div>
 		</div>
+
 		<h3 class="title">Visualize an object</h3>
 		DoodleDebug's usage works similar to
 		<code class="code">System.out.println()</code>
@@ -55,6 +56,7 @@
 			<code class="code">Doo.dle(array)</code>
 			.
 		</div>
+
 		<h3 class="title">Navigation</h3>
 		<img src="img/screenshots/lightbox.png" class="right" />
 		<div class="tip">
@@ -72,6 +74,7 @@
 		manner. To navigate back out, breadcrumbs are displayed at top of the
 		lightbox, or, if desired, the lightbox can be fully closed by clicking
 		in the dark background beside it.
+
 		<h3 class="title">Built-in and standard renderings</h3>
 		DoodleDebug includes numerous <a href="#built-in">predefined
 			renderings</a> for commonly used data types like collections, arrays,
@@ -95,9 +98,10 @@
 			style="margin-top: 0; margin-bottom: 0;" /> <img class="icon"
 			alt="Private scope" src="img/icons/private-scope.png" />: private<br>
 		<img class="icon" alt="Public scope" src="img/icons/public-scope.png" />:
-		public<br>
-		<img class="icon" alt="Protected scope"
-			src="img/icons/protected-scope.png" />: protected<br> <img class="icon" alt="Default scope" src="img/icons/default-scope.png" />: default (package)<br> <br style="clear: both;">
+		public<br> <img class="icon" alt="Protected scope"
+			src="img/icons/protected-scope.png" />: protected<br> <img
+			class="icon" alt="Default scope" src="img/icons/default-scope.png" />:
+		default (package)<br> <br style="clear: both;">
 		<div class="image">
 			<a href="javascript:switchExpand('rendering-pipeline')">DoodleDebug
 				rendering pipeline</a> <span class="smallNote">(click to
@@ -105,6 +109,7 @@
 				id="rendering-pipeline" src="img/rendering-pipeline.png"
 				style="display: none" /></a>
 		</div>
+
 		<h3 class="title">Custom renderings</h3>
 		DoodleDebug provides two ways to define custom renderings:
 		<ul>
@@ -119,7 +124,9 @@
 		API, whereas RenderingPlugins leave room for any rendering an
 		individual developer desires, still preserving the modularity of
 		DoodleDebug.
-		<h3 id="doodleable" class="title">Custom rendering thru the Doodleable interface</h3>
+
+		<h3 id="doodleable" class="title">Custom rendering thru the
+			Doodleable interface</h3>
 		Implement the interface
 		<code class="code">Doodleable</code>
 		, which contains the methods
@@ -137,8 +144,8 @@
 		column.<br>
 		<code class="code">c.newColumn()</code>
 		: Jump to a new column with the virtual cursor, i.e. create a new
-		column on the right side of the last one.
-		<img src="img/doodleable-example.png" class="center" />
+		column on the right side of the last one. <img
+			src="img/doodleable-example.png" class="center" />
 		<div class="example-wrapper">
 			<div class="example">
 				<a href="examples/contact-example.html">Contact</a>
@@ -160,6 +167,7 @@
 			</ol>
 
 		</div>
+
 		<h3 id="renderingplugin" class="title">Create custom
 			RenderingPlugins</h3>
 		DoodleDebug comes with a plug-in structure for software developers to
@@ -202,6 +210,7 @@
 					Fax types</a>
 			</div>
 		</div>
+
 		<h3 id="built-in" class="title">List of built-in type renderings</h3>
 		The following data types already have predefined (non-default)
 		renderings in DoodleDebug:
@@ -219,6 +228,126 @@
 			<li>Tables and Matrices: 2-dimensional Collections and Arrays</li>
 			<li>java.lang.Throwable (Errors & Exceptions)</li>
 		</ul>
+
+		<h3 id="hbase" class="title">HBase</h3>
+		DoodleDebug connects to an HBase by default. If not configured
+		differently, it will search for an instance running on localhost on
+		the default port.
+		<h4 class="subtitle">Configure HBase connection</h4>
+		HBase works with a class
+		<code class="code">org.apache.hadoop.conf.Configuration</code>
+		, which is directly adapted by DoodleDebug. By calling
+		<code class="code">DoodleDebug.setHBaseConfiguration(Configuration)</code>
+		, you can directly provide a custom instance of that object. If used,
+		this method should be called before doodling any objects to ensure
+		consistency. Also, don't forget to do this configuration on producing
+		(writing) and reading setups.
+
+		<h3 id="custom-database" class="title">Custom database connection</h3>
+		When HBase is not a desirable option for storing DoodleDebug data, you
+		can implement a custom database connection. For this, simply write a
+		class extending
+		<code class="code">DoodleDatabaseMap</code>
+		and provide it through
+		<code class="code">DoodleDebug.setDatabaseMap(Class&lt; extends
+			DoodleDatabaseMap&gt;)</code>
+		. As well as for the HBase configuration, this method should be called
+		at the very beginning before doodling anything. <br>
+		<div class="example">
+			<div class="example-file">
+				<a href="javascript:switchExpand('example_filedatabasemap')">FileDatabaseMap.java</a>
+				<pre id="example_filedatabasemap" style="display: none">
+				<xmp>
+public class FileDatabaseMap<T> extends DoodleDatabaseMap<T> {
+
+	File file;
+	Map<String , T> map;
+
+	@SuppressWarnings("unchecked")
+	public FileDatabaseMap(String mapName) {
+		super(mapName);
+		try {
+			file = new File(System.getProperty("java.io.tmpdir"), mapName
+					+ ".dddbtbl");
+			this.map = (Map<String , T>) load(file);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	private static void save(File file, Map<String, ?> map) {
+		try (FileOutputStream fop = new FileOutputStream(file);
+				ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+						fop)) {
+			objectOutputStream.writeObject(map);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private static Map<String, ?> load(File file) throws FileNotFoundException {
+		if (!file.exists())
+			return new HashMap<>();
+		try (FileInputStream fip = new FileInputStream(file);
+				ObjectInputStream objectInputStream = new ObjectInputStream(fip)) {
+			return (Map<String, ?>) objectInputStream.readObject();
+		} catch (EOFException e) {
+			return new HashMap<>();
+		} catch (IOException | ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	private void save() {
+		save(file, map);
+	}
+
+	@Override
+	public void clear() {
+		map.clear();
+		save();
+	}
+
+	@Override
+	public T get(Object key) {
+		return map.get(key);
+	}
+
+	@Override
+	public Set<String> keySet() {
+		return map.keySet();
+	}
+
+	@Override
+	public T put(String key, T value) {
+		T t = map.put(key, value);
+		save();
+		return t;
+	}
+
+	@Override
+	public T remove(Object value) {
+		T t = map.remove(value);
+		save();
+		return t;
+	}
+
+	@Override
+	public int size() {
+		return map.size();
+	}
+
+	@Override
+	public Collection<T> values() {
+		return map.values();
+	}
+
+}</xmp>
+			</pre>
+			</div>
+		</div>
+
 		<div id="footer">
 			Cedric Reichenbach, <a
 				href="http://scg.unibe.ch/wiki/projects/DoodleDebug" target="_blank">Software
