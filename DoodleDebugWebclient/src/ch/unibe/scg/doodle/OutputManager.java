@@ -2,22 +2,19 @@ package ch.unibe.scg.doodle;
 
 import javax.inject.Inject;
 
-import org.eclipse.swt.widgets.Display;
-
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-
 import ch.unibe.scg.doodle.database.ImageManager;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.inject.DoodleModule;
+import ch.unibe.scg.doodle.jetty.WebSocketUtil;
 import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 import ch.unibe.scg.doodle.server.LightboxStack;
 import ch.unibe.scg.doodle.server.util.DoodleImages;
-import ch.unibe.scg.doodle.server.views.HtmlShow;
-import ch.unibe.scg.doodle.server.views.JavascriptExecuter;
 import ch.unibe.scg.doodle.util.BreadcrumbsBuilder;
 import ch.unibe.scg.doodle.util.JavascriptCallsUtil;
 import ch.unibe.scg.doodle.view.HtmlDocument;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 /**
  * This object initializes and the output view, prints doodles and handles
@@ -76,7 +73,7 @@ public class OutputManager {
 	protected OutputManager() {
 	}
 
-	public void initOutput() {
+	public String initOutput() {
 		HtmlDocument htmlDocument = new HtmlDocument();
 		body = new Tag("body");
 		htmlDocument.setBody(body);
@@ -88,8 +85,7 @@ public class OutputManager {
 
 		prepareLightbox();
 
-		Runnable htmlShow = new HtmlShow(htmlDocument.toString());
-		Display.getDefault().syncExec(htmlShow);
+		return htmlDocument.toString();
 	}
 
 	private void setBackgroundImage() {
@@ -147,7 +143,7 @@ public class OutputManager {
 	// XXX: Does this belong here?
 	public void loadImage(int index) {
 		String base64 = imageManager.load(index);
-		String insertScript = JavascriptCallsUtil.insertImgSrc(index, base64);
-		new JavascriptExecuter(insertScript).run();
+		WebSocketUtil.executeJavascript(JavascriptCallsUtil.insertImgSrc(index,
+				base64));
 	}
 }
