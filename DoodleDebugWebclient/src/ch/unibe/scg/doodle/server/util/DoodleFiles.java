@@ -22,7 +22,7 @@ public class DoodleFiles {
 	public static URL getResolvedFileURL(String file) {
 		// TODO
 		try {
-			return new URL("/");
+			return new URL("http://www.notimplemented.org/");
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
