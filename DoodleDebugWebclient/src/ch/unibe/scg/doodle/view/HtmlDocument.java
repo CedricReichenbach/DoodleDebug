@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import ch.unibe.scg.doodle.htmlgen.Tag;
-import ch.unibe.scg.doodle.util.FileUtil;
 import ch.unibe.scg.doodle.view.css.CSSUtil;
 import ch.unibe.scg.doodle.view.js.JSUtil;
 
@@ -51,15 +50,9 @@ public class HtmlDocument {
 
 	@SuppressWarnings("unchecked")
 	protected Tag createCSSTag(String filename) {
-		boolean linkOnly = true;
-		Tag style = new Tag(linkOnly ? "link" : "style", "type=text/css",
-				!linkOnly);
-		if (linkOnly) {
-			style.addAttribute("rel", "stylesheet");
-			style.addAttribute("href", CSSUtil.getCSSURLFromFile(filename)
-					.toExternalForm());
-		} else
-			style.add(FileUtil.readFile(CSSUtil.getCSSURLFromFile(filename)));
+		Tag style = new Tag("link", "type=text/css", false);
+		style.addAttribute("rel", "stylesheet");
+		style.addAttribute("href", CSSUtil.getCSSPathFromFile(filename));
 		return style;
 	}
 
@@ -73,8 +66,7 @@ public class HtmlDocument {
 		List<String> jsFiles = getJSFiles();
 		for (String file : jsFiles) {
 			Tag js = new Tag("script", "type=text/javascript");
-			js.addAttribute("src", JSUtil.getJSURLFromFile(file)
-					.toExternalForm());
+			js.addAttribute("src", JSUtil.getJSPathFromFile(file));
 			// XXX Write it inline into tag (instead of linking)?
 			head.add(js);
 		}
