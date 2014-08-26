@@ -2,7 +2,7 @@ package ch.unibe.scg.doodle.view;
 
 import ch.unibe.scg.doodle.database.MetaInfo;
 import ch.unibe.scg.doodle.htmlgen.Tag;
-import ch.unibe.scg.doodle.server.views.DoodleLocationCodes;
+import ch.unibe.scg.doodle.jetty.WebsiteHandler;
 
 // TODO: Integrate into eclipse view (to be able to change anytime) and update periodically
 public class ApplicationLogSelector extends DoodleDebugWelcomeScreen {
@@ -28,8 +28,8 @@ public class ApplicationLogSelector extends DoodleDebugWelcomeScreen {
 	private void fillAppList(Tag appList) {
 		for (String appName : MetaInfo.getAllApplicationNames()) {
 			Tag link = new Tag("a");
-			link.addAttribute("href", DoodleLocationCodes.APP_LOG_PREFIX
-					+ appName);
+			link.addAttribute("href", "?" + WebsiteHandler.APPLOG_GET_ARGNAME
+					+ "=" + appName);
 			link.add(appName);
 			appList.add(link);
 		}

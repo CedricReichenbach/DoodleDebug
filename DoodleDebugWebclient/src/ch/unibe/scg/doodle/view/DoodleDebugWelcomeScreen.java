@@ -5,7 +5,6 @@ import java.util.List;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.server.util.DoodleFiles;
 import ch.unibe.scg.doodle.server.util.DoodleImages;
-import ch.unibe.scg.doodle.server.views.DoodleLocationCodes;
 
 public class DoodleDebugWelcomeScreen extends HtmlDocument {
 

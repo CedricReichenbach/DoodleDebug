@@ -11,9 +11,14 @@ import org.eclipse.jetty.server.handler.AbstractHandler;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 
 import ch.unibe.scg.doodle.OutputManager;
-import ch.unibe.scg.doodle.view.DoodleDebugWelcomeScreen;
+import ch.unibe.scg.doodle.database.BusyReader;
+import ch.unibe.scg.doodle.database.DoodleDatabase;
+import ch.unibe.scg.doodle.util.ApplicationUtil;
+import ch.unibe.scg.doodle.view.ApplicationLogSelector;
 
 public class WebsiteHandler extends AbstractHandler {
+
+	public static final String APPLOG_GET_ARGNAME = "applog";
 
 	private ResourceHandler resourceHandler;
 
@@ -40,8 +45,17 @@ public class WebsiteHandler extends AbstractHandler {
 		response.setContentType("text/html;charset=utf-8");
 		response.setStatus(HttpServletResponse.SC_OK);
 		baseRequest.setHandled(true);
-		String welcome = new DoodleDebugWelcomeScreen().toString();
-		// String baseHtml = OutputManager.instance().initOutput();
+
+		String applog = request.getParameter(APPLOG_GET_ARGNAME);
+		if (applog != null) {
+			ApplicationUtil.setApplicationName(applog);
+			String applogHtml = OutputManager.instance().initOutput();
+			response.getWriter().println(applogHtml);
+			new BusyReader(new DoodleDatabase(), 1000);
+			return;
+		}
+
+		String welcome = new ApplicationLogSelector().toString();
 		response.getWriter().println(welcome);
 	}
 

@@ -71,6 +71,7 @@ public class DoodleMessageListener {
 		OutputManager.instance().loadImage(id);
 	}
 
+	@Deprecated
 	private void handleAppLogChosenEvent(String message) {
 		ApplicationUtil.setApplicationName(message);
 
