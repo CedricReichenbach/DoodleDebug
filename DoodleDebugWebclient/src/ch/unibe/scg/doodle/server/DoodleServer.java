@@ -3,7 +3,7 @@ package ch.unibe.scg.doodle.server;
 import ch.unibe.scg.doodle.OutputManager;
 import ch.unibe.scg.doodle.database.IndexedObjectStorage;
 import ch.unibe.scg.doodle.htmlgen.Tag;
-import ch.unibe.scg.doodle.jetty.websocket.WebSocketUtil;
+import ch.unibe.scg.doodle.jetty.websocket.WebSocketSupervisor;
 import ch.unibe.scg.doodle.rendering.RenderingRegistry;
 import ch.unibe.scg.doodle.util.JavascriptCallsUtil;
 import ch.unibe.scg.doodle.view.CSSCollection;
@@ -46,7 +46,7 @@ public class DoodleServer {
 		OutputManager.instance().renderIntoLightbox(stack,
 				lightboxContentWrapper);
 		String toRender = lightboxContentWrapper.toString();
-		WebSocketUtil.executeJavascript(JavascriptCallsUtil
+		WebSocketSupervisor.executeJavascript(JavascriptCallsUtil
 				.showInLightboxCall(toRender));
 	}
 

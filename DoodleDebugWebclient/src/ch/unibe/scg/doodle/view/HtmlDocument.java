@@ -48,7 +48,6 @@ public class HtmlDocument {
 		head.add(pluginStyle);
 	}
 
-	@SuppressWarnings("unchecked")
 	protected Tag createCSSTag(String filename) {
 		Tag style = new Tag("link", "type=text/css", false);
 		style.addAttribute("rel", "stylesheet");
@@ -79,7 +78,6 @@ public class HtmlDocument {
 	 */
 	protected List<String> getJSFiles() {
 		List<String> js = new LinkedList<String>();
-		js.add("doodleDebug.js");
 		js.add("prototype.js"); // uncompressed
 								// too slow! (>
 								// 1s)
@@ -91,6 +89,7 @@ public class HtmlDocument {
 		js.add("dragdrop.js");
 		js.add("slider.js");
 		js.add("sound.js");
+		js.add("doodleDebug.js");
 		js.add("testExamples.js"); // XXX Only when
 									// developing
 		return js;

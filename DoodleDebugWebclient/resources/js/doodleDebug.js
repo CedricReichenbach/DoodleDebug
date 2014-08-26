@@ -1,5 +1,15 @@
 var LIGHTBOX_STACK_OFFSET = -10;
 var LIGHTBOX_CLOSE = -1;
+var EXECUTE_JS_PREFIX = 'executejs:';
+
+document.observe('dom:loaded', function() {
+	var wsUrl = ((window.location.protocol === "https:") ? "wss://" : "ws://")
+			+ window.location.host;
+	var webSocket = new WebSocket(wsUrl);
+	webSocket.onmessage = function(event) {
+		shizzle = event;
+	}
+});
 
 /* Add code at the end of the html body. */
 function addCode(code) {

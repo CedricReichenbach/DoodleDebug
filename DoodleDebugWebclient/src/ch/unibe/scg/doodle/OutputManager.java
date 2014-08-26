@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import ch.unibe.scg.doodle.database.ImageManager;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.inject.DoodleModule;
-import ch.unibe.scg.doodle.jetty.websocket.WebSocketUtil;
+import ch.unibe.scg.doodle.jetty.websocket.WebSocketSupervisor;
 import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 import ch.unibe.scg.doodle.server.LightboxStack;
 import ch.unibe.scg.doodle.server.util.DoodleImages;
@@ -143,7 +143,7 @@ public class OutputManager {
 	// XXX: Does this belong here?
 	public void loadImage(int index) {
 		String base64 = imageManager.load(index);
-		WebSocketUtil.executeJavascript(JavascriptCallsUtil.insertImgSrc(index,
+		WebSocketSupervisor.executeJavascript(JavascriptCallsUtil.insertImgSrc(index,
 				base64));
 	}
 }

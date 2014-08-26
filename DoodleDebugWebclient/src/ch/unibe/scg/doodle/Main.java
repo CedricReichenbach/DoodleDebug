@@ -8,11 +8,13 @@ import ch.unibe.scg.doodle.jetty.WebsiteHandler;
 import ch.unibe.scg.doodle.jetty.websocket.DoodleSocket;
 
 public class Main {
+	
+	public static WebSocketHandler webSocketHandler;
 
 	public static void main(String[] args) throws Exception {
 		Server server = new Server(8080);
 
-		WebSocketHandler webSocketHandler = new WebSocketHandler() {
+		webSocketHandler = new WebSocketHandler() {
 			@Override
 			public void configure(WebSocketServletFactory factory) {
 				factory.register(DoodleSocket.class);

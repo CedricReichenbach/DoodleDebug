@@ -4,7 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import ch.unibe.scg.doodle.Doodler;
-import ch.unibe.scg.doodle.jetty.websocket.WebSocketUtil;
+import ch.unibe.scg.doodle.jetty.websocket.WebSocketSupervisor;
 import ch.unibe.scg.doodle.server.DoodleServer;
 import ch.unibe.scg.doodle.util.Pair;
 
@@ -43,8 +43,8 @@ public class BusyReader {
 					firstRunOver = true;
 				}
 
-				WebSocketUtil.executeJavascript(pair.second);
-				WebSocketUtil.executeJavascript(pair.first);
+				WebSocketSupervisor.executeJavascript(pair.second);
+				WebSocketSupervisor.executeJavascript(pair.first);
 			}
 		}
 	}
