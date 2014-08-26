@@ -11,21 +11,11 @@ public class DoodleFiles {
 
 	public static final String PLUGIN_ID = "ch.unibe.scg.doodledebug";
 
-	public static URI getFileURI(String file) {
-		try {
-			return getResolvedFileURL(file).toURI();
-		} catch (URISyntaxException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	public static URL getResolvedFileURL(String file) {
-		// TODO
-		try {
-			return new URL("http://www.notimplemented.org/");
-		} catch (MalformedURLException e) {
-			throw new RuntimeException(e);
-		}
+	// TODO: Test this
+	public static String getLink(String file) {
+		// Nothing to do at the moment, since resources handler roots in
+		// "resources"
+		return file;
 	}
 
 }

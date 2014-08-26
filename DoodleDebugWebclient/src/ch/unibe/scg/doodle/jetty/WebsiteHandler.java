@@ -46,8 +46,9 @@ public class WebsiteHandler extends AbstractHandler {
 	}
 
 	private boolean isResource(String target) {
+		// TODO: Cleaner way?
 		return target.startsWith("/js/") | target.startsWith("/css/")
-				| target.startsWith("/img/");
+				| target.startsWith("/img/") | target.startsWith("/tutorials/");
 	}
 
 }

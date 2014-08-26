@@ -56,10 +56,9 @@ public class DoodleDebugWelcomeScreen extends HtmlDocument {
 		background.add(Tag.hr());
 
 		Tag fullTutorial = new Tag("h3", "id=tutorial", "style=display:none");
-		Tag tutLink = new Tag("a");
-		tutLink.addAttribute("href", DoodleLocationCodes.EXTERNAL_LINK_PREFIX
-				+ DoodleFiles.getResolvedFileURL("tutorials/dd-tutorial.html")
-						.toExternalForm());
+		Tag tutLink = new Tag("a", "href="
+				+ DoodleFiles.getLink("tutorials/dd-tutorial.html"),
+				"target=_blank");
 		tutLink.add("Complete Tutorial");
 		fullTutorial.addAttribute("style", "display:none");
 		fullTutorial.add(tutLink);
@@ -68,8 +67,7 @@ public class DoodleDebugWelcomeScreen extends HtmlDocument {
 		background.add(Tag.hr());
 
 		Tag info = new Tag("div", "id=info");
-		Tag infoLink = new Tag("a", "href="
-				+ DoodleLocationCodes.EXTERNAL_LINK_PREFIX + DD_WIKI);
+		Tag infoLink = new Tag("a", "href=" + DD_WIKI, "target=_blank");
 		infoLink.add(DD_WIKI);
 		info.add(infoLink);
 		info.addAttribute("style", "display:none");
