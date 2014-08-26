@@ -3,7 +3,7 @@ package ch.unibe.scg.doodle.server;
 import ch.unibe.scg.doodle.OutputManager;
 import ch.unibe.scg.doodle.database.IndexedObjectStorage;
 import ch.unibe.scg.doodle.htmlgen.Tag;
-import ch.unibe.scg.doodle.jetty.WebSocketUtil;
+import ch.unibe.scg.doodle.jetty.websocket.WebSocketUtil;
 import ch.unibe.scg.doodle.rendering.RenderingRegistry;
 import ch.unibe.scg.doodle.util.JavascriptCallsUtil;
 import ch.unibe.scg.doodle.view.CSSCollection;

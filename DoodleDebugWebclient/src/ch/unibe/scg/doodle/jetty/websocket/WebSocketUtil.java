@@ -1,4 +1,4 @@
-package ch.unibe.scg.doodle.jetty;
+package ch.unibe.scg.doodle.jetty.websocket;
 
 public class WebSocketUtil {
 

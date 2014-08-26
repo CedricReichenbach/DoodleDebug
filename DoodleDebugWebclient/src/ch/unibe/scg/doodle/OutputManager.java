@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import ch.unibe.scg.doodle.database.ImageManager;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.inject.DoodleModule;
-import ch.unibe.scg.doodle.jetty.WebSocketUtil;
+import ch.unibe.scg.doodle.jetty.websocket.WebSocketUtil;
 import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 import ch.unibe.scg.doodle.server.LightboxStack;
 import ch.unibe.scg.doodle.server.util.DoodleImages;

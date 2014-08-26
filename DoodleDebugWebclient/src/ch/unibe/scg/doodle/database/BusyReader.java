@@ -4,7 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import ch.unibe.scg.doodle.Doodler;
-import ch.unibe.scg.doodle.jetty.WebSocketUtil;
+import ch.unibe.scg.doodle.jetty.websocket.WebSocketUtil;
 import ch.unibe.scg.doodle.server.DoodleServer;
 import ch.unibe.scg.doodle.util.Pair;
 

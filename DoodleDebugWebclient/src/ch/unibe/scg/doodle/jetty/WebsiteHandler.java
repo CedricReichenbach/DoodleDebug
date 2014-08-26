@@ -21,6 +21,7 @@ public class WebsiteHandler extends AbstractHandler {
 	public static final String APPLOG_GET_ARGNAME = "applog";
 
 	private ResourceHandler resourceHandler;
+//	private WebSocketHandler webSocketHandler;
 
 	// FIXME: Really hardcode?
 	private static final String RESOURCES_PATH = "resources";
@@ -28,7 +29,6 @@ public class WebsiteHandler extends AbstractHandler {
 	public WebsiteHandler() {
 		resourceHandler = new ResourceHandler();
 		resourceHandler.setDirectoriesListed(true);
-		// resource_handler.setWelcomeFiles(new String[]{ "index.html" });
 		resourceHandler.setResourceBase(RESOURCES_PATH);
 	}
 
@@ -41,6 +41,11 @@ public class WebsiteHandler extends AbstractHandler {
 			resourceHandler.handle(target, baseRequest, request, response);
 			return;
 		}
+
+//		if (target.startsWith("/doodle")) {
+//			webSocketHandler.handle(target, baseRequest, request, response);
+//			return;
+//		}
 
 		response.setContentType("text/html;charset=utf-8");
 		response.setStatus(HttpServletResponse.SC_OK);
