@@ -35,6 +35,17 @@ function addCode(code) {
 	document.body.innerHTML += code;
 	scrollToLast();
 	loadImages();
+
+	flashNewest();
+}
+
+function flashNewest() {
+	$$('.printOutWrapper').last().addClassName('new');
+	setTimeout(function() {
+		$$('.printOutWrapper').each(function(element) {
+			element.removeClassName('new');
+		});
+	}, 100);
 }
 
 function loadImages() {

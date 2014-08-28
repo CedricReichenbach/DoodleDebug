@@ -11,8 +11,6 @@ import org.eclipse.jetty.server.handler.AbstractHandler;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 
 import ch.unibe.scg.doodle.OutputManager;
-import ch.unibe.scg.doodle.database.BusyReader;
-import ch.unibe.scg.doodle.database.DoodleDatabase;
 import ch.unibe.scg.doodle.util.ApplicationUtil;
 import ch.unibe.scg.doodle.view.ApplicationLogSelector;
 
@@ -21,7 +19,7 @@ public class WebsiteHandler extends AbstractHandler {
 	public static final String APPLOG_GET_ARGNAME = "applog";
 
 	private ResourceHandler resourceHandler;
-//	private WebSocketHandler webSocketHandler;
+	// private WebSocketHandler webSocketHandler;
 
 	// FIXME: Really hardcode?
 	private static final String RESOURCES_PATH = "resources";
@@ -42,10 +40,10 @@ public class WebsiteHandler extends AbstractHandler {
 			return;
 		}
 
-//		if (target.startsWith("/doodle")) {
-//			webSocketHandler.handle(target, baseRequest, request, response);
-//			return;
-//		}
+		// if (target.startsWith("/doodle")) {
+		// webSocketHandler.handle(target, baseRequest, request, response);
+		// return;
+		// }
 
 		response.setContentType("text/html;charset=utf-8");
 		response.setStatus(HttpServletResponse.SC_OK);
@@ -56,7 +54,7 @@ public class WebsiteHandler extends AbstractHandler {
 			ApplicationUtil.setApplicationName(applog);
 			String applogHtml = OutputManager.instance().initOutput();
 			response.getWriter().println(applogHtml);
-			new BusyReader(new DoodleDatabase(), 1000);
+			// new BusyReader(new DoodleDatabase(), 1000); XXX
 			return;
 		}
 

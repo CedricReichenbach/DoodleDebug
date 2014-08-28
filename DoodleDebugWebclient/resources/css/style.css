@@ -69,21 +69,19 @@ table .rendering {
 	padding: 2px;
 	float: none;
 }
-/* nice css3 gradient */
 .printOut, #lightboxContentWrapper {
 	background-image: linear-gradient(bottom, whitesmoke 0%, rgb(255,255,255) 100%);
-	background-image: -o-linear-gradient(bottom, whitesmoke 0%, rgb(255,255,255) 100%);
-	background-image: -moz-linear-gradient(bottom, whitesmoke 0%, rgb(255,255,255) 100%);
-	background-image: -webkit-linear-gradient(bottom, whitesmoke 0%, rgb(255,255,255) 100%);
-	background-image: -ms-linear-gradient(bottom, whitesmoke 0%, rgb(255,255,255) 100%);
-	
-	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0, whitesmoke),
-		color-stop(1, rgb(255,255,255))
-	);
+}
+.printOutWrapper .printOut {
+	transition: background 1s, box-shadow 2s;
+	transition-timing-function: cubic-bezier(-0.5,-1,0.5,1);
+}	
+.printOutWrapper.new .printOut {
+	background-image: none;
+	background-color: gold;
+	transition: none;
+	box-shadow: 0 0 10px 5px gold;
+	left: 100px;
 }
 .level1 {
 	cursor: pointer;

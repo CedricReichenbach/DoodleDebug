@@ -1,5 +1,6 @@
 package ch.unibe.scg.doodle.jetty.websocket;
 
+import ch.unibe.scg.doodle.database.BusyReader;
 import ch.unibe.scg.doodle.database.DoodleDatabase;
 import ch.unibe.scg.doodle.util.Pair;
 
@@ -12,19 +13,20 @@ import ch.unibe.scg.doodle.util.Pair;
  */
 public class ClientCustodian {
 
-	private DoodleSocket doodleSocket;
+	private DoodleSocket socket;
 	private DoodleDatabase database;
 
 	public ClientCustodian(DoodleSocket doodleSocket) {
-		this.doodleSocket = doodleSocket;
+		this.socket = doodleSocket;
 
 		this.database = new DoodleDatabase();
 	}
 
 	public void listFullHistory() {
 		for (Pair<String, String> javascripts : database.loadNewDoodles()) {
-			doodleSocket.executeJSOnClient(javascripts.first);
-			doodleSocket.executeJSOnClient(javascripts.second);
+			socket.executeJSOnClient(javascripts.first);
+			socket.executeJSOnClient(javascripts.second);
 		}
+		new BusyReader(socket, database, 1000);
 	}
 }

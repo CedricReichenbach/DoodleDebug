@@ -4,7 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import ch.unibe.scg.doodle.Doodler;
-import ch.unibe.scg.doodle.jetty.websocket.WebSocketSupervisor;
+import ch.unibe.scg.doodle.jetty.websocket.DoodleSocket;
 import ch.unibe.scg.doodle.server.DoodleServer;
 import ch.unibe.scg.doodle.util.Pair;
 
@@ -16,6 +16,7 @@ import ch.unibe.scg.doodle.util.Pair;
  */
 public class BusyReader {
 
+	private DoodleSocket socket;
 	private DoodleDatabase database;
 	private Timer timer;
 	private boolean firstRunOver;
@@ -25,7 +26,9 @@ public class BusyReader {
 	 * @param updateInterval
 	 *            (in ms)
 	 */
-	public BusyReader(DoodleDatabase database, int updateInterval) {
+	public BusyReader(DoodleSocket socket, DoodleDatabase database,
+			int updateInterval) {
+		this.socket = socket;
 		this.database = database;
 
 		firstRunOver = false;
@@ -43,8 +46,8 @@ public class BusyReader {
 					firstRunOver = true;
 				}
 
-				WebSocketSupervisor.executeJavascript(pair.second);
-				WebSocketSupervisor.executeJavascript(pair.first);
+				socket.executeJSOnClient(pair.second);
+				socket.executeJSOnClient(pair.first);
 			}
 		}
 	}

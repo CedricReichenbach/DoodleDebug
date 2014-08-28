@@ -2,12 +2,9 @@ package ch.unibe.scg.doodle.jetty.websocket;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import ch.unibe.scg.doodle.OutputManager;
-import ch.unibe.scg.doodle.database.BusyReader;
-import ch.unibe.scg.doodle.database.DoodleDatabase;
 import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 import ch.unibe.scg.doodle.server.DoodleServer;
 import ch.unibe.scg.doodle.server.views.DoodleLocationCodes;
-import ch.unibe.scg.doodle.util.ApplicationUtil;
 
 /**
  * Listener for browser which DoodleDebug renders into. Listens to location
@@ -98,10 +95,11 @@ public class DoodleMessageListener {
 
 	@Deprecated
 	private void handleAppLogChosenEvent(String message) {
-		ApplicationUtil.setApplicationName(message);
-
-		OutputManager.instance();
-		new BusyReader(new DoodleDatabase(), 1000);
+		throw new NotImplementedException();
+		// ApplicationUtil.setApplicationName(message);
+		//
+		// OutputManager.instance();
+		// new BusyReader(new DoodleDatabase(), 1000);
 	}
 
 }
