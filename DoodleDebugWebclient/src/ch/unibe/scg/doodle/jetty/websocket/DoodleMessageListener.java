@@ -1,4 +1,4 @@
-package ch.unibe.scg.doodle.server.views;
+package ch.unibe.scg.doodle.jetty.websocket;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import ch.unibe.scg.doodle.OutputManager;
@@ -6,6 +6,7 @@ import ch.unibe.scg.doodle.database.BusyReader;
 import ch.unibe.scg.doodle.database.DoodleDatabase;
 import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 import ch.unibe.scg.doodle.server.DoodleServer;
+import ch.unibe.scg.doodle.server.views.DoodleLocationCodes;
 import ch.unibe.scg.doodle.util.ApplicationUtil;
 
 /**
@@ -18,16 +19,40 @@ import ch.unibe.scg.doodle.util.ApplicationUtil;
  */
 public class DoodleMessageListener {
 
-	public void handle(String type, String message) {
-		if (type.equals(DoodleLocationCodes.EXTERNAL_LINK_PREFIX))
+	private static final String DOODLE_DEBUG_TYPE = "doodledebug";
+	private static final String JAVA_FILE_LINK_TYPE = "javafile";
+	private static final String EXTERNAL_LINK_TYPE = "extlink";
+	private static final String LOAD_IMAGE_TYPE = "loadimage";
+	private static final String APP_LOG_TYPE = "applog";
+
+	private static final String HISTORY_REQUEST = "dd:gethistory";
+
+	private DoodleSocket socket;
+	private ClientCustodian clientCustodian;
+
+	public DoodleMessageListener(DoodleSocket socket,
+			ClientCustodian clientCustodian) {
+		this.socket = socket;
+		this.clientCustodian = clientCustodian;
+	}
+
+	public void handle(String message) {
+		if (HISTORY_REQUEST.equals(message))
+			clientCustodian.listFullHistory();
+		else
+			handlePrefixed(message.split(":", 2)[0], message.split(":", 2)[1]);
+	}
+
+	public void handlePrefixed(String type, String message) {
+		if (type.equals(EXTERNAL_LINK_TYPE))
 			handleExternalLink(message);
-		else if (type.equals(DoodleLocationCodes.DOODLE_DEBUG_PREFIX))
+		else if (type.equals(DOODLE_DEBUG_TYPE))
 			handleDoodledebugLocationEvent(message);
-		else if (type.equals(DoodleLocationCodes.JAVA_FILE_LINK_PREFIX))
+		else if (type.equals(JAVA_FILE_LINK_TYPE))
 			handleJavaFileLocationEvent(message);
-		else if (type.equals(DoodleLocationCodes.LOAD_IMAGE_PREFIX))
+		else if (type.equals(LOAD_IMAGE_TYPE))
 			handleLoadImageEvent(message);
-		else if (type.equals(DoodleLocationCodes.APP_LOG_PREFIX))
+		else if (type.equals(APP_LOG_TYPE))
 			handleAppLogChosenEvent(message);
 	}
 
@@ -68,7 +93,7 @@ public class DoodleMessageListener {
 
 	private void handleLoadImageEvent(String message) {
 		int id = Integer.parseInt(message);
-		OutputManager.instance().loadImage(id);
+		socket.executeJSOnClient(OutputManager.instance().loadImage(id));
 	}
 
 	@Deprecated

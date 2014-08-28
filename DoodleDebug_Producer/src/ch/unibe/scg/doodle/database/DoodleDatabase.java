@@ -60,8 +60,8 @@ public class DoodleDatabase {
 	/**
 	 * Load new (not printed yet) doodles from DB.
 	 * 
-	 * @return Pair Tuple of two JS script strings: One to insert HTML, another
-	 *         one to insert CSS into a running page.
+	 * @return List of Pairs of two JS script strings each: One to insert HTML,
+	 *         another one to insert CSS into a running page.
 	 */
 	public List<Pair<String, String>> loadNewDoodles() {
 		List<Pair<String, String>> scripts = new ArrayList<Pair<String, String>>();

@@ -93,9 +93,11 @@ public class StackTraceUtil {
 		return result;
 	}
 
+	@Deprecated
 	private static String link(String part, String fullClassName) {
-		return "<a href=\"" + DoodleLocationCodes.JAVA_FILE_LINK_PREFIX
-				+ fullClassName + "\">" + part + "</a>";
+		return part;
+		// "<a href=\"" + DoodleLocationCodes.JAVA_FILE_LINK_PREFIX +
+		// fullClassName + "\">" + part + "</a>";
 	}
 
 	public static String getStackTraceWithoutCause(Throwable throwable) {

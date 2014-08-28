@@ -1,15 +1,34 @@
 var LIGHTBOX_STACK_OFFSET = -10;
 var LIGHTBOX_CLOSE = -1;
-var EXECUTE_JS_PREFIX = 'executejs:';
+var EXECUTE_JS_TYPE = 'executejs';
+var HISTORY_REQUEST = 'dd:gethistory';
+
+var webSocket;
 
 document.observe('dom:loaded', function() {
 	var wsUrl = ((window.location.protocol === "https:") ? "wss://" : "ws://")
 			+ window.location.host;
-	var webSocket = new WebSocket(wsUrl);
+	webSocket = new WebSocket(wsUrl);
 	webSocket.onmessage = function(event) {
-		shizzle = event;
-	}
+		decodeMessage(event.data);
+	};
+	webSocket.onopen = function() {
+		webSocket.send(HISTORY_REQUEST);
+	};
 });
+
+function decodeMessage(message) {
+	var delimiterPos = message.indexOf(':');
+	var type = message.substring(0, delimiterPos);
+	var content = message.substring(delimiterPos + 1);
+	switch (type) {
+	case EXECUTE_JS_TYPE:
+		eval(content);
+		break;
+	default:
+		break;
+	}
+}
 
 /* Add code at the end of the html body. */
 function addCode(code) {
@@ -26,7 +45,7 @@ function loadImages() {
 }
 
 function imageLoadMessage(id) {
-	window.location = 'loadimage:' + id;
+	webSocket.send('loadimage:' + id);
 }
 
 function insertImgSrc(id, base64) {

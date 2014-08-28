@@ -18,6 +18,10 @@ public class WebSocketSupervisor {
 		sockets.add(socket);
 	}
 
+	static void remove(DoodleSocket socket) {
+		sockets.remove(socket);
+	}
+
 	/**
 	 * @deprecated Should not be generic, but client-specific.
 	 * @param javascript
@@ -29,7 +33,7 @@ public class WebSocketSupervisor {
 
 	public static void executeJavascriptForAll(String javascript) {
 		for (DoodleSocket socket : sockets)
-			socket.sendMessage(DoodleSocket.EXECUTE_JS_PREFIX + javascript);
+			socket.executeJSOnClient(javascript);
 	}
 
 }

@@ -141,9 +141,13 @@ public class OutputManager {
 	}
 
 	// XXX: Does this belong here?
-	public void loadImage(int index) {
+	/**
+	 * 
+	 * @param index
+	 * @return Javascript to execute on client
+	 */
+	public String loadImage(int index) {
 		String base64 = imageManager.load(index);
-		WebSocketSupervisor.executeJavascript(JavascriptCallsUtil.insertImgSrc(index,
-				base64));
+		return JavascriptCallsUtil.insertImgSrc(index, base64);
 	}
 }
