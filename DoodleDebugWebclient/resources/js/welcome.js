@@ -1,3 +1,5 @@
+var isWelcomePage = true;
+
 var ids = [ 'appLogSelector', 'welcomeTitle', 'shortTut', 'tutorial', 'info' ];
 
 function appearWelcome() {

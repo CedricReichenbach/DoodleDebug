@@ -7,8 +7,6 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import ch.unibe.scg.doodle.server.views.DoodleLocationCodes;
-
 public class StackTraceUtil {
 	public static String linkClasses(String string) {
 		List<String> parts1 = Arrays.asList(string.split("\\)"));

@@ -25,8 +25,8 @@ public class DoodleDebugWelcomeScreen extends HtmlDocument {
 	@Override
 	protected Tag makeHead() {
 		Tag head = super.makeHead();
-		Tag js = new Tag("script", "src=js/tutorial.js");
-		head.add(js);
+//		Tag js = new Tag("script", "src=js/tutorial.js");
+//		head.add(js);
 		return head;
 	}
 

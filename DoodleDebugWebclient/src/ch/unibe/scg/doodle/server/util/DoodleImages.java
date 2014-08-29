@@ -3,7 +3,7 @@ package ch.unibe.scg.doodle.server.util;
 public class DoodleImages {
 
 	public static String getDDIconPath() {
-		return DoodleFiles.getLink("/icons/doodledebug-icon.png");
+		return DoodleFiles.getLink("/img/doodledebug-icon.png");
 	}
 
 	public static String getCloseWindowImageFilePath() {

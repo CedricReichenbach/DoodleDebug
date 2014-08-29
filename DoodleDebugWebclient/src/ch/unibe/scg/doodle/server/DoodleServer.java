@@ -3,7 +3,6 @@ package ch.unibe.scg.doodle.server;
 import ch.unibe.scg.doodle.OutputManager;
 import ch.unibe.scg.doodle.database.IndexedObjectStorage;
 import ch.unibe.scg.doodle.htmlgen.Tag;
-import ch.unibe.scg.doodle.jetty.websocket.WebSocketSupervisor;
 import ch.unibe.scg.doodle.rendering.RenderingRegistry;
 import ch.unibe.scg.doodle.util.JavascriptCallsUtil;
 import ch.unibe.scg.doodle.view.CSSCollection;
@@ -21,33 +20,32 @@ public class DoodleServer {
 	protected DoodleServer() {
 	}
 
-	public void drawObjectWithID(int id) {
+	public String drawObjectWithID(int id) {
 		Object o = storage.get(id);
 		if (o == null) {
 			// TODO: Show message that object is not available anymore
-			return;
+			return "";
 		}
 
-		drawIntoLightbox(o);
+		return drawIntoLightbox(o);
 	}
 
-	private void drawIntoLightbox(Object o) {
+	private String drawIntoLightbox(Object o) {
 		if (stack == null) {
 			stack = new LightboxStack(o);
 		} else {
 			stack.push(o);
 		}
 
-		drawStack();
+		return drawStack();
 	}
 
-	private void drawStack() {
+	private String drawStack() {
 		Tag lightboxContentWrapper = new Tag("div", "id=lightboxContentWrapper");
 		OutputManager.instance().renderIntoLightbox(stack,
 				lightboxContentWrapper);
 		String toRender = lightboxContentWrapper.toString();
-		WebSocketSupervisor.executeJavascript(JavascriptCallsUtil
-				.showInLightboxCall(toRender));
+		return JavascriptCallsUtil.showInLightboxCall(toRender);
 	}
 
 	public void clearOutput() {
@@ -70,9 +68,9 @@ public class DoodleServer {
 		this.stack = null;
 	}
 
-	public void cutoffFromStack(int num) {
+	public String cutoffFromStack(int num) {
 		stack.cutOffTop(num);
-		drawStack();
+		return drawStack();
 	}
 
 	public int store(Object object) {

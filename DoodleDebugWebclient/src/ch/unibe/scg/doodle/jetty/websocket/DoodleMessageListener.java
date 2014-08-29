@@ -3,8 +3,6 @@ package ch.unibe.scg.doodle.jetty.websocket;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import ch.unibe.scg.doodle.OutputManager;
 import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
-import ch.unibe.scg.doodle.server.DoodleServer;
-import ch.unibe.scg.doodle.server.views.DoodleLocationCodes;
 
 /**
  * Listener for browser which DoodleDebug renders into. Listens to location
@@ -21,6 +19,9 @@ public class DoodleMessageListener {
 	private static final String EXTERNAL_LINK_TYPE = "extlink";
 	private static final String LOAD_IMAGE_TYPE = "loadimage";
 	private static final String APP_LOG_TYPE = "applog";
+
+	private static int LIGHTBOX_CLOSE = -1;
+	private static final int LIGHTBOX_STACK_OFFSET = -10;
 
 	private static final String HISTORY_REQUEST = "dd:gethistory";
 
@@ -60,24 +61,22 @@ public class DoodleMessageListener {
 
 	private void handleDoodledebugLocationEvent(String message) {
 		try {
-			DoodleServer doodleServer = DoodleServer.instance();
-
 			int id = Integer.parseInt(message);
 			if (DoodleDebugProperties.developMode())
 				System.out.println("SERVER: Received message from javascript: "
 						+ id);
 
-			if (id == DoodleLocationCodes.LIGHTBOX_CLOSE) {
-				doodleServer.lightboxClosed();
+			if (id == LIGHTBOX_CLOSE) {
+				clientCustodian.lightboxClosed();
 				return;
 			} else if (id < 0) {
-				int fromZero = (-id + DoodleLocationCodes.LIGHTBOX_STACK_OFFSET);
+				int fromZero = (-id + LIGHTBOX_STACK_OFFSET);
 				int toCutOff = fromZero * -(fromZero % 2 * 2 - 1) / 2;
-				doodleServer.cutoffFromStack(toCutOff);
+				clientCustodian.cutFromStack(toCutOff);
 				return;
 			}
 
-			doodleServer.drawObjectWithID(id);
+			clientCustodian.drawInLightbox(id);
 		} catch (NumberFormatException e) {
 			// nothing to do here (must have been a real link)
 		}

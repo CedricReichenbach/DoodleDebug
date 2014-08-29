@@ -6,6 +6,9 @@ var HISTORY_REQUEST = 'dd:gethistory';
 var webSocket;
 
 document.observe('dom:loaded', function() {
+	if (typeof isWelcomePage !== 'undefined' && isWelcomePage)
+		return;
+
 	var wsUrl = ((window.location.protocol === "https:") ? "wss://" : "ws://")
 			+ window.location.host;
 	webSocket = new WebSocket(wsUrl);
@@ -127,7 +130,7 @@ function lightboxCloseMessage() {
  * Send a message to DoodleDebug plugin. Message should be a number.
  */
 function messageToJavaPlugin(message) {
-	window.location = 'doodledebug:' + message;
+	webSocket.send('doodledebug:' + message);
 }
 
 function scrollToLast() {
