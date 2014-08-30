@@ -24,6 +24,8 @@ public class DoodleMessageListener {
 	private static final int LIGHTBOX_STACK_OFFSET = -10;
 
 	private static final String HISTORY_REQUEST = "dd:gethistory";
+	private static final String PING = "ping";
+	private static final String PONG = "pong";
 
 	private DoodleSocket socket;
 	private ClientCustodian clientCustodian;
@@ -35,7 +37,9 @@ public class DoodleMessageListener {
 	}
 
 	public void handle(String message) {
-		if (HISTORY_REQUEST.equals(message))
+		if (PING.equals(message))
+			socket.sendMessage(PONG);
+		else if (HISTORY_REQUEST.equals(message))
 			clientCustodian.listFullHistory();
 		else
 			handlePrefixed(message.split(":", 2)[0], message.split(":", 2)[1]);

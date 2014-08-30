@@ -2,6 +2,8 @@ var LIGHTBOX_STACK_OFFSET = -10;
 var LIGHTBOX_CLOSE = -1;
 var EXECUTE_JS_TYPE = 'executejs';
 var HISTORY_REQUEST = 'dd:gethistory';
+var PING = 'ping';
+var PONG = 'pong';
 
 var webSocket;
 
@@ -18,9 +20,18 @@ document.observe('dom:loaded', function() {
 	webSocket.onopen = function() {
 		webSocket.send(HISTORY_REQUEST);
 	};
+	webSocket.onclose = function() {
+	};
+	// prevent timeout
+	setInterval(function() {
+		webSocket.send(PING);
+	}, 30000);
 });
 
 function decodeMessage(message) {
+	if (PONG == message)
+		return;
+
 	var delimiterPos = message.indexOf(':');
 	var type = message.substring(0, delimiterPos);
 	var content = message.substring(delimiterPos + 1);

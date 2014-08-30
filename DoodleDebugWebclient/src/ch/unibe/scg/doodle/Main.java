@@ -17,6 +17,7 @@ public class Main {
 		webSocketHandler = new WebSocketHandler() {
 			@Override
 			public void configure(WebSocketServletFactory factory) {
+				factory.getPolicy().setIdleTimeout(600000);
 				factory.register(DoodleSocket.class);
 			}
 		};
