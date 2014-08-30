@@ -52,6 +52,7 @@ public class BreadcrumbsBuilder {
 		breadcrumb.addCSSClass(cssClass);
 		breadcrumb.addAttribute("onclick", "javascript:breadcrumbsBack("
 				+ depth + ")");
+		// FIXME: Fails when custom classes are around
 		String name = scratchFactory.create(o).getObjectTypeName();
 		if (o instanceof NullObject)
 			name = "?";
