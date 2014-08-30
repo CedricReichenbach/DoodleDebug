@@ -21,6 +21,8 @@ import ch.unibe.scg.doodle.util.ApplicationUtil;
  */
 public class DoodleDebug {
 
+	private static final String APP_NAME_REGEX = "[a-zA-Z_0-9][a-zA-Z_0-9\\.\\-]*";
+
 	/**
 	 * Add custom plugins containing information for custom type renderings. For
 	 * creating such a plugin, inheritance of {@link AbstractPlugin} is
@@ -45,6 +47,10 @@ public class DoodleDebug {
 	 * @param applicationName
 	 */
 	public static void setApplicationName(String applicationName) {
+		if (!applicationName.matches(APP_NAME_REGEX))
+			throw new IllegalArgumentException(
+					"Application name needs to match " + APP_NAME_REGEX);
+
 		ApplicationUtil.setApplicationName(applicationName);
 	}
 
