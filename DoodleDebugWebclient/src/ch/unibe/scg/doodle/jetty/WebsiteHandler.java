@@ -59,8 +59,12 @@ public class WebsiteHandler extends AbstractHandler {
 
 	private boolean isResource(String target) {
 		// TODO: Cleaner way?
-		return target.startsWith("/js/") | target.startsWith("/css/")
-				| target.startsWith("/img/") | target.startsWith("/tutorials/");
+		String[] resourcePaths = { "js/", "css/", "img/", "tutorials/" };
+		for (String resourcePath : resourcePaths)
+			if (target.startsWith(resourcePath)
+					| target.startsWith("/" + resourcePath))
+				return true;
+		return false;
 	}
 
 }

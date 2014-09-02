@@ -8,6 +8,11 @@ var PONG = 'pong';
 var webSocket;
 
 document.observe('dom:loaded', function() {
+	initWebsocket();
+	initLightswitch();
+});
+
+function initWebsocket() {
 	if (typeof isWelcomePage !== 'undefined' && isWelcomePage)
 		return;
 
@@ -26,7 +31,14 @@ document.observe('dom:loaded', function() {
 	setInterval(function() {
 		webSocket.send(PING);
 	}, 30000);
-});
+	webSocket.onerror = function(error) {
+		alert('An error occured' + (error ? error : ''));
+	};
+	webSocket.onclose = function(closeEvent) {
+		if (!closeEvent.wasClean)
+			alert('Server connection closed uncleanly. Code: ' + closeEvent.code);
+	};
+}
 
 function decodeMessage(message) {
 	if (PONG == message)
@@ -44,9 +56,16 @@ function decodeMessage(message) {
 	}
 }
 
+function initLightswitch() {
+	// FIXME: Not working after doodles have been inserted
+	$('lightswitch').observe('click', function(){
+		$$('body')[0].toggleClassName('dark');
+	});
+}
+
 /* Add code at the end of the html body. */
 function addCode(code) {
-	document.body.innerHTML += code;
+	$$('body')[0].insert(code);
 	scrollToLast();
 	loadImages();
 

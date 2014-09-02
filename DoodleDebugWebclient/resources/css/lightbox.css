@@ -29,6 +29,9 @@
 	position: fixed;
 	z-index: 2;
 }
+.dark #overlay {
+	background-color: white;
+}
 
 #lightboxWrapper {
 	height: 0;
@@ -48,15 +51,16 @@
 	position: relative;
 	left: -4px;
 	top: -4px;
-	background-color: #EEE;
+	background-color: #eee;
 	width: 100%;
 	padding: 6px 4px;
 	box-shadow: 0 -2px 6px -2px rgba(0, 0, 0, 0.5) inset;
 }
+.dark #breadcrumbsWrapper {
+	background-color: #555;
+}
 
 #breadcrumbs {
-	background-color: #eee;
-	/*border: 1px solid #ccc;*/
 	padding: 2px 2px 0 2px;
 	border-radius: 1px;
 	display: inline-block;
@@ -88,6 +92,10 @@
 	border-radius: 1px;
 	margin-bottom: 2px;
 }
+.dark .breadcrumb {
+	color: #333;
+	background-color: #999;
+}
 
 .betweenBreadcrumbs {
 	display: inline-block;
@@ -98,6 +106,10 @@
 	/*box-shadow: 0 0 4px 3px #383 inset;*/
 	border-color: #00bb00;
 }
+.dark .activeBreadcrumb {
+	background-color: #00c600;
+	border-color: #0a0;
+}
 
 .inactiveBreadcrumb:hover,
 .deadBreadcrumb:hover {
@@ -106,6 +118,11 @@
 	border-color: #8bb;
 	cursor: pointer;
 	opacity: 1;
+}
+.dark .inactiveBreadcrumb:hover,
+.dark .deadBreadcrumb:hover {
+	color: #333;
+	background-color: #0bd;
 }
 
 .inactiveBreadcrumb:active {
@@ -124,26 +141,13 @@
 
 /* where objects are rendered into */
 #lightboxRendering {
-	background-color: #eee;
 	padding: 4px;
 	float: left;
 	margin: 2px;
 }
 /* nice css3 gradient */
 #lightboxRendering {
-	background-image: linear-gradient(bottom, rgb(238,238,238) 100%, rgb(221,221,221) 0%);
-	background-image: -o-linear-gradient(bottom, rgb(238,238,238) 100%, rgb(221,221,221) 0%);
-	background-image: -moz-linear-gradient(bottom, rgb(238,238,238) 100%, rgb(221,221,221) 0%);
-	background-image: -webkit-linear-gradient(bottom, rgb(238,238,238) 100%, rgb(221,221,221) 0%);
-	background-image: -ms-linear-gradient(bottom, rgb(238,238,238) 100%, rgb(221,221,221) 0%);
-	
-	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(1, rgb(238,238,238)),
-		color-stop(0, rgb(221,221,221))
-	);
+	background-image: linear-gradient(rgba(153,153,153,0.17), rgba(153,153,153,0.33));
 }
 #lightboxRendering > .ClassName {
 	margin-bottom: 3px;

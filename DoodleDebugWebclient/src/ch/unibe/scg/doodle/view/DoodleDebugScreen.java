@@ -6,8 +6,10 @@ import ch.unibe.scg.doodle.htmlgen.Tag;
  * Html file for initial displaying in DoodleDebug tab.
  * 
  * @author Cedric Reichenbach
- * 
+ * @deprecated Not used anymore (and not in hierarchy with other HTML page
+ *             classes)
  */
+@Deprecated
 public class DoodleDebugScreen {
 	private String doctype;
 	private Tag html;
@@ -47,7 +49,7 @@ public class DoodleDebugScreen {
 		Tag js = new Tag("script", "type=text/javascript");
 		return js;
 	}
-	
+
 	protected Tag body() {
 		Tag body = new Tag("body");
 		return body;

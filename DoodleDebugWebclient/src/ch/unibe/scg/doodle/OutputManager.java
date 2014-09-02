@@ -5,9 +5,7 @@ import javax.inject.Inject;
 import ch.unibe.scg.doodle.database.ImageManager;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.inject.DoodleModule;
-import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
 import ch.unibe.scg.doodle.server.LightboxStack;
-import ch.unibe.scg.doodle.server.util.DoodleImages;
 import ch.unibe.scg.doodle.util.BreadcrumbsBuilder;
 import ch.unibe.scg.doodle.util.JavascriptCallsUtil;
 import ch.unibe.scg.doodle.view.HtmlDocument;
@@ -39,8 +37,6 @@ public class OutputManager {
 	ImageManager imageManager;
 
 	Doodler doodler = Doodler.instance();
-
-	private Tag body;
 
 	static Injector injector;
 
@@ -74,52 +70,8 @@ public class OutputManager {
 
 	public String initOutput() {
 		HtmlDocument htmlDocument = new HtmlDocument();
-		body = new Tag("body");
-		htmlDocument.setBody(body);
-
-		setBackgroundImage();
-
-		if (DoodleDebugProperties.betaMode())
-			this.createBetaInfo(body);
-
-		prepareLightbox();
 
 		return htmlDocument.toString();
-	}
-
-	private void setBackgroundImage() {
-		String texPath = DoodleImages.getDoodleTextureImageFilePath();
-		body.addAttribute("style", "background-image:url(" + texPath + ")");
-	}
-
-	@SuppressWarnings("unchecked")
-	private void createBetaInfo(Tag tag) {
-		Tag wrapper = new Tag("div", "id=betaInfoWrapper");
-		Tag info = new Tag("div", "id=betaInfo");
-		String email = DoodleDebugProperties.getFeedbackMailAddress();
-		Tag mailto = new Tag("a", "href=mailto:" + email);
-		mailto.add(email);
-		info.add("<b>DoodleDebug <i>beta</i></b> - bugs & feedback to ");
-		info.add(mailto);
-		wrapper.add(info);
-		tag.add(wrapper);
-	}
-
-	@SuppressWarnings("unchecked")
-	private void prepareLightbox() {
-		Tag lighboxWrapper = new Tag("div", "id=lightboxWrapper");
-		lighboxWrapper.addAttribute("style", "visibility:hidden");
-		Tag overlay = new Tag("div", "id=overlay");
-		overlay.addAttribute("onclick", "javascript:hideLightbox()");
-		lighboxWrapper.add(overlay);
-		Tag lightbox = new Tag("div", "id=lightbox");
-		lighboxWrapper.add(lightbox);
-		String closeImgFilePath = DoodleImages.getCloseWindowImageFilePath();
-		Tag closeImg = new Tag("img", "id=closeButton");
-		closeImg.addAttribute("src", closeImgFilePath);
-		closeImg.addAttribute("onclick", "javascript:hideLightbox()");
-		lighboxWrapper.add(closeImg);
-		body.add(lighboxWrapper);
 	}
 
 	/**

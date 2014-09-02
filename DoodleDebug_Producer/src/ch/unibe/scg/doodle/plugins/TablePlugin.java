@@ -75,13 +75,16 @@ public class TablePlugin extends ArrayPlugin {
 		String table = ".TablePlugin table, .CollectionPlugin table {empty-cells:show;}";
 		String elements = ".TablePlugin td, .CollectionPlugin td {float:none; padding: 2px;} ";
 		String numberElements = ".TablePlugin.numberTable td, .CollectionPlugin.numberTable td {float:none; padding: 1px 0;} ";
-		String nonOddRows = ".TablePlugin, .CollectionPlugin {background-color: white;}";
-		String oddRows = ".TablePlugin .oddRow, .CollectionPlugin .oddRow {background-color:#eee}";
+		String oddRows = ".TablePlugin .oddRow, .CollectionPlugin .oddRow {background-color:rgba(153,153,153,0.17)}";
 		String before = ".TablePlugin.numberTable .beforeDecimalPoint, .CollectionPlugin.numberTable .beforeDecimalPoint {text-align:right; padding-left: 8px;} ";
 		String point = ".TablePlugin.numberTable .decimalPoint, .CollectionPlugin.numberTable .decimalPoint {text-align:center;}";
-		String after = ".TablePlugin.numberTable .afterDecimalPoint, .CollectionPlugin.numberTable .afterDecimalPoint {text-align:left; padding-right: 8px; border-right: 1px solid #eee;} ";
-		String oddAfter = ".TablePlugin.numberTable .oddRow .afterDecimalPoint, .CollectionPlugin.numberTable .oddRow .afterDecimalPoint {border-right: 1px solid #fff;}";
-		return table + elements + numberElements + nonOddRows + oddRows
+		String after = ".TablePlugin.numberTable .afterDecimalPoint, .CollectionPlugin.numberTable .afterDecimalPoint "
+				+ "{text-align:left; padding-right: 8px; border-right: 1px solid rgba(153,153,153,0.17);} ";
+		String oddAfter = ".TablePlugin.numberTable .oddRow .afterDecimalPoint, .CollectionPlugin.numberTable .oddRow .afterDecimalPoint "
+				+ "{border-right: 1px solid white;}"
+				+ ".dark .TablePlugin.numberTable .oddRow .afterDecimalPoint, .dark .CollectionPlugin.numberTable .oddRow .afterDecimalPoint "
+				+ "{border-right: 1px solid #333;}";
+		return table + elements + numberElements + oddRows
 				+ before + point + after + oddAfter;
 	}
 }

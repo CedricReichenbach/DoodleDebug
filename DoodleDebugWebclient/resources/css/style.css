@@ -29,9 +29,30 @@
     src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/2UX7WLTfW3W8TclTUvlFyQ.woff") format("woff");
 }
 body {
-    background-color: #DDDDDD;
+    background-color: #ddd;
+    background-image: url('../img/dd-tex.png');
     font-family: "Roboto",Verdana,Tahoma,sans-serif;
     font-size: 0.8em;
+    color: black;
+}
+body.dark {
+    background-color: #333;
+    background-image: url('../img/dd-tex_dark.png');	
+    color: white;
+}
+#lightswitch {
+	position: fixed;
+	top: 0;
+	right: 0;
+	background-color: rgba(255,255,255, 0.5);
+	font-size: 30px;
+	padding: 0.125em 0.25em;
+	border-bottom-left-radius: 0.25em;
+	cursor: pointer;
+	z-index: 20;
+}
+.dark #lightswitch {
+	background-color: rgba(0,0,0,0.5);
 }
 table {
 	font-size: 1em;
@@ -57,12 +78,20 @@ table .rendering {
     display: block;
     margin-bottom: 4px;
 }
-.printOut, #lightboxContentWrapper, .level1 {
-    background-color: #FFFFFF;
+.printOut,
+#lightboxContentWrapper,
+.level1 {
+    background-color: white;
 	border-width: 0;
-    box-shadow: 0 0 2px #AAAAAA;
+    box-shadow: 0 0 2px rgba(0,0,0,0.67);
     overflow: hidden;
 	display: inline-block;
+}
+.dark .printOut,
+.dark #lightboxContentWrapper,
+.dark .level1 {
+	background-color: #333;
+    box-shadow: 0 0 4px rgba(255,255,255,0.67);
 }
 .printOut {
 	box-shadow: 0 1px 3px 1px #999;
@@ -87,12 +116,15 @@ table .rendering {
 	cursor: pointer;
 }
 .level1:hover {
-    background-color: lightskyblue;
-    box-shadow: 0 0 2px blue;
+    background-color: #44e2ff;
+    box-shadow: 0 0 2px #069;
+}
+.dark .level1:hover {
+    background-color: #09c;
 }
 .level1:active {
-	background-color: #58f;
-	box-shadow: 0 0 2px black inset;
+	background-color: #5ce;
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.67) inset;
 }
 .ClassName {
 	z-index: 1;
@@ -104,12 +136,19 @@ table .rendering {
 	/*text-shadow: -1px 1px 1px #FFF;*/
 	/*filter: glow(color=#dddddd,strength=1);*/ /* IE; ugly rendering, not useful at all */
 }
+.dark .ClassName {
+	color: #0c9;
+}
 .ClassName .classNameText {
 	background-color: rgba(255,255,255,0.75);
 	display: inline-block;
 	box-shadow: 0 -1px 2px rgba(0, 72, 54, 0.3);
 	border-radius: 3px 3px 0 0;
 	padding: 0 1px;
+}
+.dark .ClassName .classNameText {
+	background-color: rgba(51,51,51,0.75);
+	box-shadow: 0 -1px 2px rgba(183, 255, 237, 0.3);
 }
 .column {
     float: left;

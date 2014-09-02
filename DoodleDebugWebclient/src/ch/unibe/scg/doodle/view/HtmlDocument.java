@@ -4,19 +4,67 @@ import java.util.LinkedList;
 import java.util.List;
 
 import ch.unibe.scg.doodle.htmlgen.Tag;
+import ch.unibe.scg.doodle.properties.DoodleDebugProperties;
+import ch.unibe.scg.doodle.server.util.DoodleImages;
 import ch.unibe.scg.doodle.view.css.CSSUtil;
 import ch.unibe.scg.doodle.view.js.JSUtil;
 
 public class HtmlDocument {
 
-	private Tag head;
-	private String doctype;
-	protected Tag body;
+	private final Tag head;
+	private final String doctype;
+	protected final Tag body;
 
 	public HtmlDocument() {
 		this.head = makeHead();
 		this.doctype = makeDoctype();
-		this.body = new Tag("body");
+		this.body = makeBody();
+	}
+
+	@SuppressWarnings("unchecked")
+	protected Tag makeBody() {
+		Tag body = new Tag("body");
+
+		Tag lightswitch = new Tag("div", "id=lightswitch");
+		lightswitch.add("&#x2600;"); // ☀
+		body.add(lightswitch);
+
+		if (DoodleDebugProperties.betaMode())
+			this.createBetaInfo(body);
+
+		prepareLightbox(body);
+
+		return body;
+	}
+
+	@SuppressWarnings("unchecked")
+	private void createBetaInfo(Tag body) {
+		Tag wrapper = new Tag("div", "id=betaInfoWrapper");
+		Tag info = new Tag("div", "id=betaInfo");
+		String email = DoodleDebugProperties.getFeedbackMailAddress();
+		Tag mailto = new Tag("a", "href=mailto:" + email);
+		mailto.add(email);
+		info.add("<b>DoodleDebug <i>beta</i></b> - bugs & feedback to ");
+		info.add(mailto);
+		wrapper.add(info);
+		body.add(wrapper);
+	}
+
+	@SuppressWarnings("unchecked")
+	private void prepareLightbox(Tag body) {
+		Tag lighboxWrapper = new Tag("div", "id=lightboxWrapper");
+		lighboxWrapper.addAttribute("style", "visibility:hidden");
+		Tag overlay = new Tag("div", "id=overlay");
+		overlay.addAttribute("onclick", "javascript:hideLightbox()");
+		lighboxWrapper.add(overlay);
+		Tag lightbox = new Tag("div", "id=lightbox");
+		lighboxWrapper.add(lightbox);
+		String closeImgFilePath = DoodleImages.getCloseWindowImageFilePath();
+		Tag closeImg = new Tag("img", "id=closeButton");
+		closeImg.addAttribute("src", closeImgFilePath);
+		closeImg.addAttribute("onclick", "javascript:hideLightbox()");
+		lighboxWrapper.add(closeImg);
+		body.add(lighboxWrapper);
 	}
 
 	private String makeDoctype() {
@@ -93,10 +141,6 @@ public class HtmlDocument {
 		js.add("testExamples.js"); // XXX Only when
 									// developing
 		return js;
-	}
-
-	public void setBody(Tag body) {
-		this.body = body;
 	}
 
 	@SuppressWarnings("unchecked")

@@ -12,7 +12,6 @@ public class DoodleDebugWelcomeScreen extends HtmlDocument {
 
 	public DoodleDebugWelcomeScreen() {
 		super();
-		this.body = makeBody();
 		this.setBackgroundImage();
 	}
 
@@ -21,17 +20,15 @@ public class DoodleDebugWelcomeScreen extends HtmlDocument {
 		body.addAttribute("style", "background-image:url(" + texPath + ")");
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	protected Tag makeHead() {
 		Tag head = super.makeHead();
-//		Tag js = new Tag("script", "src=js/tutorial.js");
-//		head.add(js);
 		return head;
 	}
 
 	@SuppressWarnings("unchecked")
-	private Tag makeBody() {
+	@Override
+	protected Tag makeBody() {
 		Tag body = new Tag("body");
 		body.addAttribute("onload", "appearWelcome()");
 		Tag background = new Tag("div", "id=background");

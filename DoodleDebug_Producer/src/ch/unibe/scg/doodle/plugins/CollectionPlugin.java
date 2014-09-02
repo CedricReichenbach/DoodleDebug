@@ -88,7 +88,7 @@ public class CollectionPlugin extends AbstractPlugin {
 
 	@Override
 	public String getCSS() {
-		String element = ".CollectionPlugin .collectionElement {float:left; border-right: 1px solid #ddd}";
+		String element = ".CollectionPlugin .collectionElement {float:left; border-right: 1px solid rgba(153,153,153,0.33)}";
 		String lastElement = ".CollectionPlugin .collectionElement:last-child {border: none;}";
 		String smallElement = ".CollectionPlugin.smallRendering .collectionElement "
 				+ "{float:left; background-color:black; height: 6px; width:6px; margin: 0 1px;}";
