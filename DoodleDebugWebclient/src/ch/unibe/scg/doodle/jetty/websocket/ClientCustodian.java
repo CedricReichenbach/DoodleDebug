@@ -16,10 +16,12 @@ public class ClientCustodian {
 
 	private DoodleSocket socket;
 	private DoodleDatabase database;
+	private DoodleServer doodleServer;
 
 	public ClientCustodian(DoodleSocket doodleSocket) {
 		this.socket = doodleSocket;
 
+		this.doodleServer = new DoodleServer();
 		this.database = new DoodleDatabase();
 	}
 
@@ -28,23 +30,20 @@ public class ClientCustodian {
 			socket.executeJSOnClient(javascripts.first);
 			socket.executeJSOnClient(javascripts.second);
 		}
-		new BusyReader(socket, database, 1000);
+		new BusyReader(socket, doodleServer, database, 1000);
 	}
 
 	public void lightboxClosed() {
-		// TODO: DoodleServer instance for each client
-		DoodleServer.instance().lightboxClosed();
+		doodleServer.lightboxClosed();
 	}
 
 	public void cutFromStack(int toCutOff) {
-		// TODO: DoodleServer instance for each client
-		String javascript = DoodleServer.instance().cutoffFromStack(toCutOff);
+		String javascript = doodleServer.cutoffFromStack(toCutOff);
 		socket.executeJSOnClient(javascript);
 	}
 
 	public void drawInLightbox(int id) {
-		// TODO: DoodleServer instance for each client
-		String javascript = DoodleServer.instance().drawObjectWithID(id);
+		String javascript = doodleServer.drawObjectWithID(id);
 		socket.executeJSOnClient(javascript);
 	}
 }

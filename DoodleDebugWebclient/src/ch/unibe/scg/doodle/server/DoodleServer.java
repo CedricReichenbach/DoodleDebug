@@ -8,16 +8,11 @@ import ch.unibe.scg.doodle.util.JavascriptCallsUtil;
 import ch.unibe.scg.doodle.view.CSSCollection;
 
 public class DoodleServer {
-	private static final DoodleServer instance = new DoodleServer();
 
 	private final IndexedObjectStorage storage = new IndexedObjectStorage();
 	private LightboxStack stack;
 
-	public static DoodleServer instance() {
-		return instance;
-	}
-
-	protected DoodleServer() {
+	public DoodleServer() {
 	}
 
 	public String drawObjectWithID(int id) {

@@ -20,15 +20,18 @@ public class BusyReader {
 	private DoodleDatabase database;
 	private Timer timer;
 	private boolean firstRunOver;
+	private DoodleServer doodleServer;
 
 	/**
 	 * 
+	 * @param doodleServer 
 	 * @param updateInterval
 	 *            (in ms)
 	 */
-	public BusyReader(DoodleSocket socket, DoodleDatabase database,
+	public BusyReader(DoodleSocket socket, DoodleServer doodleServer, DoodleDatabase database,
 			int updateInterval) {
 		this.socket = socket;
+		this.doodleServer = doodleServer;
 		this.database = database;
 
 		firstRunOver = false;
@@ -41,7 +44,7 @@ public class BusyReader {
 		public void run() {
 			for (Pair<String, String> pair : database.loadNewDoodles()) {
 				if (!firstRunOver) {
-					DoodleServer.instance().firstRun();
+					doodleServer.firstRun();
 					Doodler.instance(); // XXX: Hack to assure initiation
 					firstRunOver = true;
 				}

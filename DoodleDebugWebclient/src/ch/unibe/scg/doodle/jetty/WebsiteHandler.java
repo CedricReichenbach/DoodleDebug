@@ -40,21 +40,16 @@ public class WebsiteHandler extends AbstractHandler {
 			return;
 		}
 
-		// if (target.startsWith("/doodle")) {
-		// webSocketHandler.handle(target, baseRequest, request, response);
-		// return;
-		// }
-
 		response.setContentType("text/html;charset=utf-8");
 		response.setStatus(HttpServletResponse.SC_OK);
 		baseRequest.setHandled(true);
 
 		String applog = request.getParameter(APPLOG_GET_ARGNAME);
 		if (applog != null) {
+			// TODO: Make this session specific
 			ApplicationUtil.setApplicationName(applog);
 			String applogHtml = OutputManager.instance().initOutput();
 			response.getWriter().println(applogHtml);
-			// new BusyReader(new DoodleDatabase(), 1000); XXX
 			return;
 		}
 
