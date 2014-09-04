@@ -32,15 +32,15 @@ body {
     background-color: #ddd;
     /*background-image: url('../img/dd-tex.png');*/
     background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAL0lEQVQYlWN49+7df2T8/Pnz/+hijx8//s8wgAqfP3/+nxAeaDcSrfDx48f/icEA2pZ2vDqJarkAAAAASUVORK5CYII=");
-    /*background-image: url("../img/hex-pattern.png");
-    background-size: 30px;*/
+    background-image: url("../img/hex-pattern.png");
     font-family: "Roboto",Verdana,Tahoma,sans-serif;
     font-size: 0.8em;
     color: black;
 }
 body.dark {
     background-color: #333;
-    background-image: url('../img/dd-tex_dark.png');
+    /*background-image: url('../img/dd-tex_dark.png');*/
+    background-image: url("../img/hex-pattern_dark.png");
     color: white;
 }
 #lightswitch {
