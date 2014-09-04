@@ -24,13 +24,13 @@
 }
 
 #overlay {
-	background-color: black;
+	background-color: #333;
 	opacity: 0.7;
 	position: fixed;
 	z-index: 2;
 }
 .dark #overlay {
-	background-color: white;
+	background-color: #333;
 }
 
 #lightboxWrapper {
@@ -44,6 +44,7 @@
 	padding: 4px;
 	display: block;
 	overflow-y: auto;
+	box-shadow: none;
 }
 
 #breadcrumbsWrapper {
@@ -145,14 +146,11 @@
 	float: left;
 	margin: 2px;
 }
-/* nice css3 gradient */
 #lightboxRendering {
-	background-image: linear-gradient(rgba(153,153,153,0.17), rgba(153,153,153,0.33));
 }
 #lightboxRendering > .ClassName {
 	margin-bottom: 3px;
 }
 #lightboxRendering > .ClassName .classNameText {
-	border-radius: 3px;
-	box-shadow: 0 0 2px rgba(0, 72, 54, 0.3);
+	box-shadow: none;
 }
