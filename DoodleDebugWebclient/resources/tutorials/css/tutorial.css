@@ -1,40 +1,14 @@
-@font-face {
-    font-family: "Roboto";
-    font-style: italic;
-    font-weight: 500;
-    src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/OLffGBTaF0XFOW1gnuHF0YbN6UDyHWBl620a-IRfuBk.woff") format("woff");
-}
-@font-face {
-    font-family: "Roboto";
-    font-style: normal;
-    font-weight: 500;
-    src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/RxZJdnzeo3R5zSexge8UUT8E0i7KZn-EPnyo3HZu7kw.woff") format("woff");
-}
-@font-face {
-    font-family: "Roboto";
-    font-style: normal;
-    font-weight: 100;
-    src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/vzIUHo9z-oJ4WgkpPOtg1_esZW2xOQ-xsNqO47m55DA.woff") format("woff");
-}
-@font-face {
-    font-family: "Roboto";
-    font-style: italic;
-    font-weight: 400;
-    src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/1pO9eUAp8pSF8VnRTP3xnvesZW2xOQ-xsNqO47m55DA.woff") format("woff");
-}
-@font-face {
-    font-family: "Roboto";
-    font-style: normal;
-    font-weight: 400;
-    src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/2UX7WLTfW3W8TclTUvlFyQ.woff") format("woff");
-}
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900,400italic,500italic);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700);
+
 body {
     font-family: "Roboto",Verdana,Tahoma,sans-serif;
     font-size: 11pt;
 	line-height: 1.3em;
 	margin: 0;
 	background-color: #abc;
-	background-image: url('../../img/dd-tex.png');
+	/*background-image: url('../../img/dd-tex.png');*/
+	background-image: url("../../img/hex-pattern.png");
 	overflow-y: scroll;
 }
 #wrapper {
@@ -59,10 +33,10 @@ a:hover{
 }
 #mainTitle {
 	color: #666;
-	text-shadow: 1px 1px 0 white;
-	/*text-shadow: 1px 1px 0 rgba(0, 200, 0, 0.5);*/
-	font-weight: normal;
-	font-size: 2.5em;
+	font-weight: 300;
+	font-size: 3.5em;
+	margin: 0;
+	padding: 0.5em 0;
 }
 #contents-wrapper {
 	margin-top: 3em;

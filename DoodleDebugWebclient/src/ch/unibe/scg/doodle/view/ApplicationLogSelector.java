@@ -4,7 +4,6 @@ import ch.unibe.scg.doodle.database.MetaInfo;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.jetty.WebsiteHandler;
 
-// TODO: Integrate into eclipse view (to be able to change anytime) and update periodically
 public class ApplicationLogSelector extends DoodleDebugWelcomeScreen {
 
 	public ApplicationLogSelector() {
@@ -21,7 +20,7 @@ public class ApplicationLogSelector extends DoodleDebugWelcomeScreen {
 		Tag appList = new Tag("div");
 		fillAppList(appList);
 		content.add(appList);
-		body.push(content);
+		body.add(content);
 	}
 
 	@SuppressWarnings("unchecked")

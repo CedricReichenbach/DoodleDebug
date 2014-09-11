@@ -1,37 +1,9 @@
-@font-face {
-    font-family: "Roboto";
-    font-style: italic;
-    font-weight: 500;
-    src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/OLffGBTaF0XFOW1gnuHF0YbN6UDyHWBl620a-IRfuBk.woff") format("woff");
-}
-@font-face {
-    font-family: "Roboto";
-    font-style: normal;
-    font-weight: 500;
-    src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/RxZJdnzeo3R5zSexge8UUT8E0i7KZn-EPnyo3HZu7kw.woff") format("woff");
-}
-@font-face {
-    font-family: "Roboto";
-    font-style: normal;
-    font-weight: 100;
-    src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/vzIUHo9z-oJ4WgkpPOtg1_esZW2xOQ-xsNqO47m55DA.woff") format("woff");
-}
-@font-face {
-    font-family: "Roboto";
-    font-style: italic;
-    font-weight: 400;
-    src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/1pO9eUAp8pSF8VnRTP3xnvesZW2xOQ-xsNqO47m55DA.woff") format("woff");
-}
-@font-face {
-    font-family: "Roboto";
-    font-style: normal;
-    font-weight: 400;
-    src: url("http://themes.googleusercontent.com/static/fonts/roboto/v2/2UX7WLTfW3W8TclTUvlFyQ.woff") format("woff");
-}
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900,400italic,500italic);
+
 body {
     background-color: #ddd;
     /*background-image: url('../img/dd-tex.png');*/
-    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAL0lEQVQYlWN49+7df2T8/Pnz/+hijx8//s8wgAqfP3/+nxAeaDcSrfDx48f/icEA2pZ2vDqJarkAAAAASUVORK5CYII=");
+    /*background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAL0lEQVQYlWN49+7df2T8/Pnz/+hijx8//s8wgAqfP3/+nxAeaDcSrfDx48f/icEA2pZ2vDqJarkAAAAASUVORK5CYII=");*/
     background-image: url("../img/hex-pattern.png");
     font-family: "Roboto",Verdana,Tahoma,sans-serif;
     font-size: 0.8em;
@@ -94,7 +66,7 @@ table .rendering {
 .dark .printOut,
 .dark #lightboxContentWrapper,
 .dark .level1 {
-	background-color: #383838;
+	background-color: #454545;
     /*box-shadow: 0 0 4px rgba(255,255,255,0.67)*/;
 }
 .printOut {
