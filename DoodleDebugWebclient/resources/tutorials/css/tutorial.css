@@ -81,14 +81,14 @@ a:hover{
 .code,
 .codeBlock,
 .key {
-	font-family: 'andale mono', 'lucida console', monospace, Courier New, "Roboto", sans-serif;
+	font-family: "Ubuntu Mono", monospace;
+	font-size: 16px;
 	background-color: #f4f4f4;
 	color: #333;
 }
 .code {
 	padding: 1px 2px;
 	display: inline-block;
-	font-size: 0.95em;
 }
 .codeBlock, .tip, .example, .download, .exercise, .result {
 	padding: .5em;
