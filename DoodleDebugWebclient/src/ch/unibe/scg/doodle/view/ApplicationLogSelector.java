@@ -1,5 +1,7 @@
 package ch.unibe.scg.doodle.view;
 
+import java.util.Set;
+
 import ch.unibe.scg.doodle.database.MetaInfo;
 import ch.unibe.scg.doodle.htmlgen.Tag;
 import ch.unibe.scg.doodle.jetty.WebsiteHandler;
@@ -25,12 +27,18 @@ public class ApplicationLogSelector extends DoodleDebugWelcomeScreen {
 
 	@SuppressWarnings("unchecked")
 	private void fillAppList(Tag appList) {
-		for (String appName : MetaInfo.getAllApplicationNames()) {
+		Set<String> allApplicationNames = MetaInfo.getAllApplicationNames();
+		for (String appName : allApplicationNames) {
 			Tag link = new Tag("a");
 			link.addAttribute("href", "?" + WebsiteHandler.APPLOG_GET_ARGNAME
 					+ "=" + appName);
 			link.add(appName);
 			appList.add(link);
+		}
+		if (allApplicationNames.isEmpty()) {
+			Tag div = new Tag("div", "class=no-logs-info");
+			div.add("no application logs yet");
+			appList.add(div);
 		}
 	}
 }
