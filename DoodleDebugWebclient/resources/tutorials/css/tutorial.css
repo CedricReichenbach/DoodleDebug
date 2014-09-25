@@ -47,7 +47,7 @@ a:hover{
 	box-shadow: 8px 8px 10px -4px rgba(0,0,0,0.5);
 }
 #contents {
-	background-color: #2bf;
+	background-color: #4cf;
 	color: white;
 	padding: 1em;
 	max-width: 600px;
@@ -73,6 +73,15 @@ a:hover{
 	color: #666;
 	/*text-shadow: 0 0 3px white;*/
 	text-shadow: 1px 1px 0 white;
+}
+.title .back-to-top {
+	color: #4cf;
+	display: inline-block;
+	transform: rotate(-90deg);
+}
+.title .back-to-top:hover {
+	color: #2bf;
+	text-decoration: none;
 }
 .subtitle {
 	margin: 0.5em 0;
@@ -240,7 +249,7 @@ img.left {
 }
 img.right {
 	float: right;
-	margin-right: 0;
+	margin: 0 0 0.5em 1em;
 }
 img.logo {
 	float: left;

@@ -26,8 +26,8 @@ function insertLink(title) {
 }
 
 function insertTopLink(title) {
-	var a = new Element('a', {'href': '#contents'});
-	a.insert('&uarr;');
+	var a = new Element('a', {'href': '#contents', 'class': 'back-to-top'});
+	a.insert('➟');
 	a.setAttribute('title', 'Back to top');
 	title.insert('&nbsp;');
 	title.insert(a);

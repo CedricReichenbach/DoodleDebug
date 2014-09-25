@@ -25,6 +25,19 @@
 			</div>
 		</div>
 
+		<h3 class="title">Overview</h3>
+		Since 2.0, DoodleDebug uses a connected database to store and persist
+		doodles for reading and inspection at any time later. By default, this
+		is a locally running HBase, but any other kind of database can be <a
+			href="#custom-database">plugged in</a> as well. Applications doodle
+		objects, which are instantly stored to said database by the
+		DoodleDebug library. Independently of that, DoodleDebug's web
+		application can be started and configured towards the same database in
+		order to view produced doodles. <br> As the reading web
+		application needs little to no programmatic interaction, this tutorial
+		mainly applies to the producing part (left-hand side in below image).
+		<img alt="Clustered nature of DD" src="img/clustered-setup.svg">
+
 		<h3 class="title">Visualize an object</h3>
 		DoodleDebug's usage works similar to
 		<code class="code">System.out.println()</code>
@@ -94,13 +107,13 @@
 		From a field's visualization, a programmer can see its scope, declared
 		variable name and, of course, its content. Scope modifiers are
 		visualize with a sign in UML style and color for faster perception.<br>
-		<img src="img/screenshots/FooBar-fields.png" class="left"
-			style="margin-top: 0; margin-bottom: 0;" /> <img class="icon"
-			alt="Private scope" src="img/icons/private-scope.png" />: private<br>
-		<img class="icon" alt="Public scope" src="img/icons/public-scope.png" />:
-		public<br> <img class="icon" alt="Protected scope"
-			src="img/icons/protected-scope.png" />: protected<br> <img
-			class="icon" alt="Default scope" src="img/icons/default-scope.png" />:
+		<img src="img/screenshots/FooBar-fields.png" class="left"> <br> <img
+			class="icon" alt="Private scope" src="img/icons/private-scope.png">:
+		private<br> <img class="icon" alt="Public scope"
+			src="img/icons/public-scope.png">: public<br> <img
+			class="icon" alt="Protected scope"
+			src="img/icons/protected-scope.png">: protected<br> <img
+			class="icon" alt="Default scope" src="img/icons/default-scope.png">:
 		default (package)<br> <br style="clear: both;">
 		<div class="image">
 			<a href="javascript:switchExpand('rendering-pipeline')">DoodleDebug
