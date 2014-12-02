@@ -14,8 +14,10 @@ public class DoodleDebugWebapp {
 
 	public static void main(String[] args) throws Exception {
 		if (args.length > 0) {
-			if ("--help".equals(args[0]))
+			if ("--help".equals(args[0])) {
 				printHelp();
+				return;
+			}
 			startServer(Integer.parseInt(args[0]));
 		} else
 			startServer();
@@ -23,14 +25,12 @@ public class DoodleDebugWebapp {
 
 	private static void printHelp() {
 		System.out.println("~~ DoodleDebug web application ~~");
-		System.out.println();
-		System.out.println("Without arguments: Start server on default port ("
+		System.out.println("With no arguments: Start server on default port ("
 				+ DEFAULT_PORT + ")");
 		System.out.println("With one argument: Argument is server port");
-		System.out.println();
 		System.out
 				.println("For further configuration, e.g. a custom database connection, "
-						+ "you need embed this application into another and do any configuration "
+						+ "you need to embed this application into another and do any configuration "
 						+ "before calling DoodleDebugWebapp.startServer([port]). More info: http://scg.unibe.ch/wiki/projects/DoodleDebug");
 	}
 
