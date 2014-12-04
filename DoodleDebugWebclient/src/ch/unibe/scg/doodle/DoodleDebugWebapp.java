@@ -34,11 +34,11 @@ public class DoodleDebugWebapp {
 						+ "before calling DoodleDebugWebapp.startServer([port]). More info: http://scg.unibe.ch/wiki/projects/DoodleDebug");
 	}
 
-	private static void startServer() throws Exception {
+	public static void startServer() throws Exception {
 		startServer(DEFAULT_PORT);
 	}
 
-	private static void startServer(int port) throws Exception {
+	public static void startServer(int port) throws Exception {
 		Server server = new Server(port);
 
 		webSocketHandler = new WebSocketHandler() {
@@ -52,6 +52,8 @@ public class DoodleDebugWebapp {
 
 		server.setHandler(webSocketHandler);
 		server.start();
+		System.out.println("DoodleDebug server running at http://localhost:"
+				+ port);
 		server.join();
 	}
 

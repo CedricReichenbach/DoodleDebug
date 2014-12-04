@@ -6,6 +6,7 @@ import org.apache.hadoop.conf.Configuration;
 
 import ch.unibe.scg.doodle.database.DoodleDatabaseMap;
 import ch.unibe.scg.doodle.database.DoodleDatabaseMapProvider;
+import ch.unibe.scg.doodle.database.TempFileDatabaseMap;
 import ch.unibe.scg.doodle.database.hbase.HBaseAdminProvider;
 import ch.unibe.scg.doodle.plugins.AbstractPlugin;
 import ch.unibe.scg.doodle.plugins.RenderingPlugin;
@@ -68,6 +69,14 @@ public class DoodleDebug {
 	public static void setDatabaseMap(
 			@SuppressWarnings("rawtypes") Class<? extends DoodleDatabaseMap> databaseMap) {
 		DoodleDatabaseMapProvider.setClass(databaseMap);
+	}
+
+	/**
+	 * Make DoodleDebug use a simple database storing to temporary files only.
+	 * Doodles and other data will vanish on an OS reboot.
+	 */
+	public static void useTempFileDatabase() {
+		setDatabaseMap(TempFileDatabaseMap.class);
 	}
 
 	/**
