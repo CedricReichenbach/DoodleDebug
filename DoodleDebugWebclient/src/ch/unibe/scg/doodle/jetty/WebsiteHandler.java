@@ -10,6 +10,7 @@ import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 
+import resources.ResourceBase;
 import ch.unibe.scg.doodle.OutputManager;
 import ch.unibe.scg.doodle.util.ApplicationUtil;
 import ch.unibe.scg.doodle.view.ApplicationLogSelector;
@@ -21,13 +22,10 @@ public class WebsiteHandler extends AbstractHandler {
 	private ResourceHandler resourceHandler;
 	// private WebSocketHandler webSocketHandler;
 
-	// FIXME: Really hardcode?
-	private static final String RESOURCES_PATH = "resources";
-
 	public WebsiteHandler() {
 		resourceHandler = new ResourceHandler();
 		resourceHandler.setDirectoriesListed(true);
-		resourceHandler.setResourceBase(RESOURCES_PATH);
+		resourceHandler.setResourceBase(ResourceBase.getLocation());
 	}
 
 	@Override
@@ -37,6 +35,7 @@ public class WebsiteHandler extends AbstractHandler {
 		// XXX: Is this ok?
 		if (isResource(target)) {
 			resourceHandler.handle(target, baseRequest, request, response);
+			System.out.println(this.getClass().getResource("."));
 			return;
 		}
 
