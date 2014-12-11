@@ -15,6 +15,8 @@ package ch.unibe.scg.doodle.plugins;
  * 
  */
 public abstract class AbstractPlugin implements RenderingPlugin {
+	
+	// TODO: Create feature to fall back to "parent"/default rendering.
 
 	/**
 	 * {@inheritDoc} Default is java class name of the implementing plugin class
