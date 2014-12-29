@@ -35,6 +35,7 @@ public class TempFileDatabaseMap<T> extends DoodleDatabaseMap<T> {
 		return tempFile;
 	}
 
+	// XXX: Cache?
 	@SuppressWarnings("unchecked")
 	private Map<String, T> loadMap() {
 		File file = tempFile();
@@ -44,6 +45,7 @@ public class TempFileDatabaseMap<T> extends DoodleDatabaseMap<T> {
 			return new HashMap<>();
 	}
 
+	// TODO: Make async
 	private void saveMap(Map<String, T> map) {
 		try {
 			xstream.toXML(map, new FileOutputStream(tempFile()));
