@@ -104,6 +104,7 @@ function showInLightbox(code) {
 	lightbox.innerHTML = code;
 	updateLightbox();
 	showLightbox();
+	loadImages();
 }
 
 function showLightbox() {
