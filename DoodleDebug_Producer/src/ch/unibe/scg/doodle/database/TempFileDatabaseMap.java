@@ -1,9 +1,12 @@
 package ch.unibe.scg.doodle.database;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,8 +42,13 @@ public class TempFileDatabaseMap<T> extends DoodleDatabaseMap<T> {
 	@SuppressWarnings("unchecked")
 	private Map<String, T> loadMap() {
 		File file = tempFile();
-		if (tempFile().exists())
-			return (Map<String, T>) xstream.fromXML(file);
+		if (file.exists())
+			try {
+				return (Map<String, T>) xstream.fromXML(new InputStreamReader(
+						new FileInputStream(file)));
+			} catch (FileNotFoundException e) {
+				throw new RuntimeException(e);
+			}
 		else
 			return new HashMap<>();
 	}
@@ -48,7 +56,8 @@ public class TempFileDatabaseMap<T> extends DoodleDatabaseMap<T> {
 	// TODO: Make async
 	private void saveMap(Map<String, T> map) {
 		try {
-			xstream.toXML(map, new FileOutputStream(tempFile()));
+			xstream.toXML(map, new OutputStreamWriter(new FileOutputStream(
+					tempFile())));
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException(e);
 		}
