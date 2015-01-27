@@ -45,7 +45,6 @@
 	<classpathentry kind="lib" path="/DoodleDebugServer-Plugin/libs/hbase/netty-3.6.6.Final.jar"/>
 	<classpathentry kind="lib" path="/DoodleDebugServer-Plugin/libs/hbase/protobuf-java-2.5.0.jar"/>
 	<classpathentry kind="lib" path="/DoodleDebugServer-Plugin/libs/hbase/zookeeper-3.4.5.jar"/>
-	<classpathentry kind="lib" path="lib/slf4j-api-1.7.6.jar"/>
 	<classpathentry kind="lib" path="/DoodleDebugServer-Plugin/libs/hbase/rest/commons-codec-1.7.jar"/>
 	<classpathentry kind="lib" path="/DoodleDebugServer-Plugin/libs/hbase/rest/jackson-core-asl-1.8.8.jar"/>
 	<classpathentry kind="lib" path="/DoodleDebugServer-Plugin/libs/hbase/rest/jackson-jaxrs-1.8.8.jar"/>
@@ -53,6 +52,7 @@
 	<classpathentry kind="lib" path="/DoodleDebugServer-Plugin/libs/hbase/rest/jackson-xc-1.8.8.jar"/>
 	<classpathentry kind="lib" path="lib/asm-5.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/asm-commons-5.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-1.7.6.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
