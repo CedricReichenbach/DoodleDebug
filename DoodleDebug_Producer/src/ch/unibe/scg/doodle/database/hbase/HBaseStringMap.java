@@ -3,7 +3,6 @@ package ch.unibe.scg.doodle.database.hbase;
 import static org.apache.hadoop.hbase.util.Bytes.toBytes;
 
 import java.io.IOException;
-import java.io.InterruptedIOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -14,7 +13,6 @@ import java.util.Set;
 
 import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
-import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.Delete;
 import org.apache.hadoop.hbase.client.Get;
 import org.apache.hadoop.hbase.client.HBaseAdmin;
@@ -22,7 +20,6 @@ import org.apache.hadoop.hbase.client.HTable;
 import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.ResultScanner;
-import org.apache.hadoop.hbase.client.RetriesExhaustedWithDetailsException;
 import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.util.Bytes;
 
@@ -83,8 +80,7 @@ public class HBaseStringMap<T> extends DoodleDatabaseMap<T> {
 		if (hbaseAdmin.tableExists(tableName))
 			return;
 
-		HTableDescriptor tableDescriptor = new HTableDescriptor(
-				TableName.valueOf(tableName)); // XXX: That's weird...
+		HTableDescriptor tableDescriptor = new HTableDescriptor(tableName);
 		tableDescriptor.addFamily(new HColumnDescriptor(ID_COL_TITLE));
 		tableDescriptor.addFamily(new HColumnDescriptor(OBJECT_COL_TITLE));
 
@@ -96,12 +92,12 @@ public class HBaseStringMap<T> extends DoodleDatabaseMap<T> {
 		try {
 			HTableDescriptor descriptor = table.getTableDescriptor();
 
-			hbaseAdmin.disableTable(table.getName());
-			hbaseAdmin.deleteTable(table.getName());
+			hbaseAdmin.disableTable(table.getTableName());
+			hbaseAdmin.deleteTable(table.getTableName());
 
 			hbaseAdmin.createTable(descriptor);
 
-			this.table = new HTable(table.getConfiguration(), table.getName());
+			this.table = new HTable(table.getConfiguration(), table.getTableName());
 		} catch (IOException e) {
 			System.out.println("Failed to reset table: " + table);
 			e.printStackTrace();
@@ -160,7 +156,7 @@ public class HBaseStringMap<T> extends DoodleDatabaseMap<T> {
 				toBytes(xstream.toXML(value)));
 		try {
 			this.table.put(put);
-		} catch (RetriesExhaustedWithDetailsException | InterruptedIOException e) {
+		} catch (IOException e) {
 			System.out.println("Failed to save object to HBase: " + value);
 			e.printStackTrace();
 		}
