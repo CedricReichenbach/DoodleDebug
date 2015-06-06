@@ -56,5 +56,7 @@ public class DoodleDebugWebapp {
 				+ port);
 		server.join();
 	}
+	
+	// TODO: Create method for stopping the server
 
 }
