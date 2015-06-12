@@ -11,6 +11,7 @@ public class DoodleDebugWebapp {
 
 	private static final int DEFAULT_PORT = 8080;
 	public static WebSocketHandler webSocketHandler;
+	private static Server server;
 
 	public static void main(String[] args) throws Exception {
 		if (args.length > 0) {
@@ -39,7 +40,7 @@ public class DoodleDebugWebapp {
 	}
 
 	public static void startServer(int port) throws Exception {
-		Server server = new Server(port);
+		server = new Server(port);
 
 		webSocketHandler = new WebSocketHandler() {
 			@Override
@@ -57,6 +58,8 @@ public class DoodleDebugWebapp {
 		server.join();
 	}
 	
-	// TODO: Create method for stopping the server
+	public static void stopServer() throws Exception {
+		server.stop();
+	}
 
 }

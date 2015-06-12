@@ -12,6 +12,6 @@ public class ResourceBase {
 
 		// if inside jar
 		return ResourceBase.class.getResource(CLASS_FILE_NAME).getFile()
-				.replace(CLASS_FILE_NAME, "");
+				.replace("/" + CLASS_FILE_NAME, "");
 	}
 }

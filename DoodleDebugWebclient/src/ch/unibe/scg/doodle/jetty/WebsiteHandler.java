@@ -35,7 +35,6 @@ public class WebsiteHandler extends AbstractHandler {
 		// XXX: Is this ok?
 		if (isResource(target)) {
 			resourceHandler.handle(target, baseRequest, request, response);
-			System.out.println(this.getClass().getResource("."));
 			return;
 		}
 
