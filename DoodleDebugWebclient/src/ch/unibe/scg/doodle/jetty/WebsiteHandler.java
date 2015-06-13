@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
-import org.eclipse.jetty.server.handler.ResourceHandler;
 
 import resources.ResourceBase;
 import ch.unibe.scg.doodle.OutputManager;
@@ -18,14 +17,10 @@ import ch.unibe.scg.doodle.view.ApplicationLogSelector;
 public class WebsiteHandler extends AbstractHandler {
 
 	public static final String APPLOG_GET_ARGNAME = "applog";
-
-	private ResourceHandler resourceHandler;
-	// private WebSocketHandler webSocketHandler;
+	private final JarResourceHandler jarResourceHandler;
 
 	public WebsiteHandler() {
-		resourceHandler = new ResourceHandler();
-		resourceHandler.setDirectoriesListed(true);
-		resourceHandler.setResourceBase(ResourceBase.getLocation());
+		jarResourceHandler = new JarResourceHandler(ResourceBase.getLocation());
 	}
 
 	@Override
@@ -34,7 +29,7 @@ public class WebsiteHandler extends AbstractHandler {
 			throws IOException, ServletException {
 		// XXX: Is this ok?
 		if (isResource(target)) {
-			resourceHandler.handle(target, baseRequest, request, response);
+			jarResourceHandler.handle(target, baseRequest, request, response);
 			return;
 		}
 
