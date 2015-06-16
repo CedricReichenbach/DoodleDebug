@@ -70,7 +70,7 @@ public class DoodleDebugWebapp {
 					e.printStackTrace();
 				}
 			}
-		});
+		}).start();
 	}
 
 	public static void stopServer() {
@@ -83,7 +83,7 @@ public class DoodleDebugWebapp {
 					e.printStackTrace();
 				}
 			}
-		});
+		}).start();
 	}
 
 }
