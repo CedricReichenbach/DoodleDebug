@@ -20,6 +20,8 @@ public class DoodleDatabase {
 	private static final String PERSISTENCE_TABLE_NAME = "doodles_persistence";
 	private static final int NEXT_ID_KEY = 0;
 
+	// FIXME: Maps stay after initialization,
+	// i.e. do not react to DB switching (after first doodle)
 	DatabaseIntMap<String> htmlMap = new DatabaseIntMap<>(
 			ApplicationUtil.getApplicationName(), HTML_TABLE_NAME);
 	DatabaseIntMap<String> cssMap = new DatabaseIntMap<>(
